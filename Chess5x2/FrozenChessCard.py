@@ -1,14 +1,14 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.FrozenChessCard')
-def gem():
-    require_gem('Chess5x2.ChessBishop')
-    require_gem('Chess5x2.ChessKing')
-    require_gem('Chess5x2.ChessKnight')
-    require_gem('Chess5x2.ChessPawn')
-    require_gem('Chess5x2.ChessRook')
-    require_gem('Chess5x2.FrozenCardRoot')
+@module('Chess5x2.FrozenChessCard')
+def module():
+    require_module('Chess5x2.ChessBishop')
+    require_module('Chess5x2.ChessKing')
+    require_module('Chess5x2.ChessKnight')
+    require_module('Chess5x2.ChessPawn')
+    require_module('Chess5x2.ChessRook')
+    require_module('Chess5x2.FrozenCardRoot')
 
 
     class FrozenAllyChessBishop(FrozenCardRoot):

@@ -1,12 +1,12 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.Core')
-def gem():
-    require_gem('Gem.Cache')
+@module('Chess5x2.Core')
+def module():
+    require_module('Capital.Cache')
 
 
-    from Gem import produce_conjure_dual, produce_conjure_triple, produce_conjure_triple__312
+    from Capital import produce_conjure_dual, produce_conjure_triple, produce_conjure_triple__312
 
 
     share(

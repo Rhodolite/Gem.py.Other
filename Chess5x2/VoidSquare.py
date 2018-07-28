@@ -1,8 +1,8 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.VoidSquare')
-def gem():
+@module('Chess5x2.VoidSquare')
+def module():
     class VoidSquare(Object):
         ally            = false
         enemy           = false

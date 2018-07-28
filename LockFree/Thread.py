@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Thread')
-def gem():
-    require_gem('LockFree.Core')
+@module('LockFree.Thread')
+def module():
+    require_module('LockFree.Core')
 
 
     @export

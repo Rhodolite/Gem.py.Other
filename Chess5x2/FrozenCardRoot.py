@@ -1,8 +1,8 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.FrozenCardRoot')
-def gem():
+@module('Chess5x2.FrozenCardRoot')
+def module():
     @share
     class FrozenCardRoot(Object):
         __slots__ = ((

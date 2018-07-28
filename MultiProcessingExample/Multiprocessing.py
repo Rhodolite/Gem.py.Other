@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('MultiProcessingExample.Multiprocessing')
-def gem():
-    require_gem('MultiProcessingExample.Core')
+@module('MultiProcessingExample.Multiprocessing')
+def module():
+    require_module('MultiProcessingExample.Core')
 
 
     @privileged

@@ -1,8 +1,8 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.Deck_7')
-def gem():
+@module('Chess5x2.Deck_7')
+def module():
     @export
     class Deck_7(Object):
         __slots__ = ((

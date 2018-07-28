@@ -16,16 +16,16 @@ def boot():
     path_0 = module_path[0]
 
     module_path.insert(0, path_absolute(path_join(path_0, '../')))
-    module_path.insert(1, path_absolute(path_join(path_0, '../../Gem')))
+    module_path.insert(1, path_absolute(path_join(path_0, '../../Capital')))
 
 
-    import Gem
+    import Capital
 
 
-@gem('Chess5x2.Main')
-def gem():
-    require_gem('Chess5x2.Core')
-    require_gem('Chess5x2.Game')
+@module('Chess5x2.Main')
+def module():
+    require_module('Chess5x2.Core')
+    require_module('Chess5x2.Game')
 
 
     @share

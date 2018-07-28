@@ -1,10 +1,10 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Counter')
-def gem():
-    require_gem('LockFree.Core')
-    require_gem('LockFree.Interval')
+@module('LockFree.Counter')
+def module():
+    require_module('LockFree.Core')
+    require_module('LockFree.Interval')
 
 
     class FibonacciAtom(Object):

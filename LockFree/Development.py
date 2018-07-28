@@ -1,14 +1,14 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Development')
-def gem():
-    require_gem('LockFree.Chore')
-    require_gem('LockFree.Core')
-    require_gem('LockFree.Fibonacci')
-    require_gem('LockFree.Interval')
-    require_gem('LockFree.Shared')
-    require_gem('LockFree.Thread')
+@module('LockFree.Development')
+def module():
+    require_module('LockFree.Chore')
+    require_module('LockFree.Core')
+    require_module('LockFree.Fibonacci')
+    require_module('LockFree.Interval')
+    require_module('LockFree.Shared')
+    require_module('LockFree.Thread')
 
 
     class DevelopmentThread(BaseThread):

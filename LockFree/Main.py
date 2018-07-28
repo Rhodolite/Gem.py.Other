@@ -16,16 +16,16 @@ def boot():
     path_0 = module_path[0]
 
     module_path.insert(0, path_absolute(path_join(path_0, '../')))
-    module_path.insert(1, path_absolute(path_join(path_0, '../../Gem')))
+    module_path.insert(1, path_absolute(path_join(path_0, '../../Capital')))
 
 
-    import Gem
+    import Capital
 
 
-@gem('LockFree.Main')
-def gem():
-    require_gem('LockFree.Core')
-    require_gem('LockFree.Development')
+@module('LockFree.Main')
+def module():
+    require_module('LockFree.Core')
+    require_module('LockFree.Development')
 
 
     @share

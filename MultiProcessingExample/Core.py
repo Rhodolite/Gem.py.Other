@@ -1,14 +1,14 @@
 #
 #   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
 #
-@gem('MultiProcessingExample.Core')
-def gem():
-    require_gem('Gem.Exception')
-    require_gem('Gem.Traceback')
-    require_gem('Gem.System')
+@module('MultiProcessingExample.Core')
+def module():
+    require_module('Capital.Exception')
+    require_module('Capital.Traceback')
+    require_module('Capital.System')
 
 
-    from Gem import execute, Exception, print_exception_chain, program_exit
+    from Capital import execute, Exception, print_exception_chain, program_exit
 
 
     share(

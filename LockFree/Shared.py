@@ -1,11 +1,11 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Shared')
-def gem():
-    require_gem('LockFree.Core')
-    require_gem('LockFree.Interval')
-    require_gem('LockFree.LifeCycle')
+@module('LockFree.Shared')
+def module():
+    require_module('LockFree.Core')
+    require_module('LockFree.Interval')
+    require_module('LockFree.LifeCycle')
 
 
     class DiamondShared(Object):
