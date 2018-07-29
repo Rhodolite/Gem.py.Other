@@ -12,9 +12,7 @@ def module():
 
 
     class FrozenAllyChessBishop(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZWB'
         ally           = true
         card_name      = 'Frozen-Ally-Chess-Bishop'
@@ -23,9 +21,7 @@ def module():
 
 
     class FrozenAllyChessKing(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZWK'
         ally           = true
         card_name      = 'Frozen-Ally-Chess-King'
@@ -34,9 +30,7 @@ def module():
 
 
     class FrozenAllyChessKnight(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZWN'
         ally           = true
         card_name      = 'Frozen-Ally-Chess-Knight'
@@ -45,9 +39,7 @@ def module():
 
 
     class FrozenAllyChessPawn(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZWP'
         ally           = true
         card_name      = 'Frozen-Ally-Chess-Pawn'
@@ -56,9 +48,7 @@ def module():
 
 
     class FrozenAllyChessRook(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZWR'
         ally           = true
         card_name      = 'Frozen-Ally-Chess-Rook'
@@ -67,9 +57,7 @@ def module():
 
 
     class FrozenEnemyChessBishop(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZBB'
         ally           = false
         card_name      = 'Frozen-Enemy-Chess-Bishop'
@@ -78,9 +66,7 @@ def module():
 
 
     class FrozenEnemyChessKing(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZBK'
         ally           = false
         card_name      = 'Frozen-Enemy-Chess-King'
@@ -90,9 +76,7 @@ def module():
 
 
     class FrozenEnemyChessKnight(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZBN'
         ally           = false
         card_name      = 'Frozen-Enemy-Chess-Knight'
@@ -101,9 +85,7 @@ def module():
 
 
     class FrozenEnemyChessPawn(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZBP'
         ally           = false
         card_name      = 'Frozen-Enemy-Chess-Pawn'
@@ -113,9 +95,7 @@ def module():
 
 
     class FrozenEnemyChessRook(FrozenCardRoot):
-        __slots__ = (())
-
-
+        __slots__      = (())
         abbreviation   = 'ZBR'
         ally           = false
         card_name      = 'Frozen-Enemy-Chess-Rook'

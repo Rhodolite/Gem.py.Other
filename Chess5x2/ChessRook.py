@@ -8,13 +8,11 @@ def module():
 
     @export
     class ChessRook(CardRoot):
+        __slots__          = (())
         ally_abbreviation  = 'WR'
         enemy_abbreviation = 'BR'
         initial_attack     = 2
         initial_health     = 5
-
-
-        __slots__ = (())
 
 
         def action(t, board):

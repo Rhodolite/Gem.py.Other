@@ -4,6 +4,7 @@
 @module('Chess5x2.VoidSquare')
 def module():
     class VoidSquare(Object):
+        __slots__       = (())
         ally            = false
         enemy           = false
         is_blank_square = false

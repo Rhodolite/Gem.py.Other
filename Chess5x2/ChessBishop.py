@@ -8,13 +8,11 @@ def module():
 
     @export
     class ChessBishop(CardRoot):
+        __slots__          = (())
         ally_abbreviation  = 'WB'
         enemy_abbreviation = 'BB'
         initial_attack     = 1
         initial_health     = 3
-
-
-        __slots__ = (())
 
 
         def prepare(t, board):

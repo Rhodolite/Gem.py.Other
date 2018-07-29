@@ -8,13 +8,11 @@ def module():
 
     @export
     class ChessKing(CardRoot):
+        __slots__          = (())
         ally_abbreviation  = 'WK'
         enemy_abbreviation = 'BK'
         initial_attack     = 1
         initial_health     = 20
-
-
-        __slots__ = (())
 
 
         def action(t, board):
