@@ -3,24 +3,17 @@
 #
 @module('LockFree.Core')
 def module():
-    require_module('Capital.Sleep')
-    require_module('Capital.System')
-    require_module('Capital.Thread')
-    require_module('Capital.Traceback')
-
-
+    transport('Capital.Core',                       'arrange')
+    transport('Capital.Core',                       'iterate_range')
+    transport('Capital.Core',                       'line')
+    transport('Capital.Core',                       'Method')
+    transport('Capital.Core',                       'none')
+    transport('Capital.Core',                       'Object')
+    transport('Capital.Exception',                  'except_any_clause')
+    transport('Capital.Sleep',                      'sleep')
+    transport('Capital.System',                     'change_check_interval')
+    transport('Capital.System',                     'fetch_check_interval')
+    transport('Capital.Thread',                     'allocate_lock')
+    transport('Capital.Thread',                     'start_new_thread')
+    transport('Capital.Thread',                     'thread_identifier')
     transport('Capital.Traceback',                  'print_exception_chain')
-
-
-    from Capital import allocate_lock, change_check_interval, fetch_check_interval
-    from Capital import sleep, start_new_thread, thread_identifier
-
-
-    share(
-        'change_check_interval',            change_check_interval,
-        'fetch_check_interval',             fetch_check_interval,
-        'sleep',                            sleep,
-        'allocate_lock',                    allocate_lock,
-        'start_new_thread',                 start_new_thread,
-        'thread_identifier',                thread_identifier,
-    )
