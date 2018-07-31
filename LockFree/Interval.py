@@ -3,9 +3,6 @@
 #
 @module('LockFree.Interval')
 def module():
-    require_module('LockFree.Core')
-
-
     check_interval = fetch_check_interval()
 
 

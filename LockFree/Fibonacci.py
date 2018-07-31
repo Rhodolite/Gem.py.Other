@@ -3,10 +3,6 @@
 #
 @module('LockFree.Counter')
 def module():
-    require_module('LockFree.Core')
-    require_module('LockFree.Interval')
-
-
     class FibonacciAtom(Object):
         __slots__ = ((
             'first',                    #   Integer

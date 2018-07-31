@@ -25,20 +25,19 @@ def boot():
 
 @module('CodeGenerator.Main')
 def module():
-    require_module('CodeGenerator.Core')
     require_module('CodeGenerator.NestedConjure')
 
 
     @share
     def command_generate_ascii():
-        require_module("CodeGenerator.GenerateAscii");
+        require_module('CodeGenerator.GenerateAscii');
 
         generate_ascii();
 
 
     @share
     def command_generate_test_portray_string():
-        require_module("CodeGenerator.GenerateTestPortrayString");
+        require_module('CodeGenerator.GenerateTestPortrayString');
 
         generate_test_portray_string();
 

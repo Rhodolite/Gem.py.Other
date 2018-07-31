@@ -24,8 +24,7 @@ def boot():
 
 @module('Rubber.Main')
 def module():
-    require_module('Rubber.Core')
-    require_module('Rubber.Development')
+    require_module('Rubber')
 
 
     @share

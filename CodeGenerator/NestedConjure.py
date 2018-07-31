@@ -3,9 +3,6 @@
 #
 @module('CodeGenerator.NestedConjure')
 def module():
-    require_module('CodeGenerator.Core')
-
-
     show_assert = 7
 
 

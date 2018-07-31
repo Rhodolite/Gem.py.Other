@@ -24,7 +24,6 @@ def boot():
 
 @module('Chess5x2.Main')
 def module():
-    require_module('Chess5x2.Core')
     require_module('Chess5x2.Game')
 
 

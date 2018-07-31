@@ -3,11 +3,6 @@
 #
 @module('LockFree.Shared')
 def module():
-    require_module('LockFree.Core')
-    require_module('LockFree.Interval')
-    require_module('LockFree.LifeCycle')
-
-
     class DiamondShared(Object):
         __slots__ = ((
             'status',                   #   Integer

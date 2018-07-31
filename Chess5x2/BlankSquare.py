@@ -3,9 +3,6 @@
 #
 @module('Chess5x2.BlankSquare')
 def module():
-    require_module('Chess5x2.Square')
-
-
     class BlankSquare(Object):
         __slots__ = ((
             'square',                   #   Square

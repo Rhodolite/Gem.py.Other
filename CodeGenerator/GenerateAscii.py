@@ -3,9 +3,6 @@
 #
 @module('CodeGenerator.GenerateAscii')
 def module():
-    require_module('CodeGenerator.Core')
-
-
     ascii_list = [0] * 128
 
 

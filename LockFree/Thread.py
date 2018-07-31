@@ -3,9 +3,6 @@
 #
 @module('LockFree.Thread')
 def module():
-    require_module('LockFree.Core')
-
-
     @export
     class BaseThread(Object):
         __slots__ = ((

@@ -3,9 +3,6 @@
 #
 @module('Chess5x2.Board')
 def module():
-    require_module('Chess5x2.BlankSquare')
-
-
     @share
     class GameBoard(Object):
         __slots__ = ((

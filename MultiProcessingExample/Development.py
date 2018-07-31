@@ -3,10 +3,6 @@
 #
 @module('MultiProcessingExample.Development')
 def module():
-    require_module('MultiProcessingExample.Core')
-    require_module('MultiProcessingExample.Multiprocessing')
-
-
     #
     #   NOTE #1:
     #       See Note in 'MultiProcessingExample.Child' on pickling 'pickable_child_calculate'

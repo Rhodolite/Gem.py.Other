@@ -3,11 +3,7 @@
 #
 @module('CodeGenerator.GenerateTestPortrayString')
 def module():
-    require_module('CodeGenerator.Core')
-    require_module('UnitTest.PortrayString')
-
-
-    from UnitTest import portray_string_many
+    transport('UnitTest.PortrayString',             'portray_string_many')
 
 
     def portray_java_string(s):

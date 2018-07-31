@@ -24,8 +24,7 @@ def boot():
 
 @module('MultiProcessingExample.Main')
 def module():
-    require_module('MultiProcessingExample.Core')
-    require_module('MultiProcessingExample.Development')
+    require_module('MultiProcessingExample')
 
 
     @share

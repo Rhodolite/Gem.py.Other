@@ -3,14 +3,6 @@
 #
 @module('LockFree.Development')
 def module():
-    require_module('LockFree.Chore')
-    require_module('LockFree.Core')
-    require_module('LockFree.Fibonacci')
-    require_module('LockFree.Interval')
-    require_module('LockFree.Shared')
-    require_module('LockFree.Thread')
-
-
     class DevelopmentThread(BaseThread):
         __slots__ = ((
             'ephemeral',                #   FibonacciEphemeral
