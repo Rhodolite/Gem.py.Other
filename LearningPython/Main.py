@@ -25,24 +25,27 @@ def boot():
 
 @module('LearningPython.Main')
 def module():
-    require_module('Capital.Exception')                                 #   Adds `exit_clause` as a built-in
-    require_module('Capital.Output')
-    require_module('Capital.Traceback')
-
-
+    #
+    #   See Capital.Output
+    #
+    #       flush_standard_output   = sys.stdout.flush
+    #       write_standard_output   = sys.stdout.write
+    #
+    transport('Capital.Core',                       'arrange')
+    transport('Capital.Core',                       'false')
+    transport('Capital.Core',                       'length')
+    transport('Capital.Core',                       'Method')
+    transport('Capital.Core',                       'none')
+    transport('Capital.Core',                       'portray')
+    transport('Capital.Core',                       'privileged')
+    transport('Capital.Core',                       'true')
+    transport('Capital.Core',                       'Tuple')
+    transport('Capital.Core',                       'type')
+    transport('Capital.Exception',                  'exit_clause')
     transport('Capital.Exception',                  'SystemExit')
+    transport('Capital.Output',                     'flush_standard_output')
+    transport('Capital.Output',                     'write_standard_output')
     transport('Capital.Traceback',                  'print_exception_chain')
-
-
-    from Capital import flush_standard_output                           #   See Capital.Output      = sys.stderr.flush
-    from Capital import write_standard_output                           #   See Capital.Output      = sys.stdout.write
-
-
-    #
-    #   arrange
-    #
-    def arrange(format, *arguments):
-        return format % arguments
 
 
     #

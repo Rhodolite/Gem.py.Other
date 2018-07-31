@@ -3,4 +3,8 @@
 #
 @module('Rubber.Core')
 def module():
-    require_module('Rubber.ElasticSearch')
+    transport('Capital.Core',                       'line')
+    transport('Capital.Core',                       'privileged')
+
+    
+    require_module('Rubber.ElasticSearch')                              #   Must appear after transport of `privileged`
