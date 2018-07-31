@@ -3,9 +3,6 @@
 #
 @module('Chess5x2.ChessBishop')
 def module():
-    require_module('Chess5x2.CardRoot')
-
-
     @export
     class ChessBishop(CardRoot):
         __slots__          = (())

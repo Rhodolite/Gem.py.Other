@@ -3,9 +3,6 @@
 #
 @module('Rubber.Development')
 def module():
-    require_module('Rubber.Core')
-
-
     def dump_result(name, r):
         line('Dump of %s', name)
 

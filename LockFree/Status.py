@@ -3,9 +3,6 @@
 #
 @module('LockFree.Status')
 def module():
-    require_module('LockFree.Core')
-
-
     STATUS_ACTIVE   = 1
     STATUS_DONE     = 2
     STATUS_REMOVING = 3

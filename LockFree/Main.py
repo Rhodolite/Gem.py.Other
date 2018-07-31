@@ -24,8 +24,7 @@ def boot():
 
 @module('LockFree.Main')
 def module():
-    require_module('LockFree.Core')
-    require_module('LockFree.Development')
+    require_module('LockFree')
 
 
     @share

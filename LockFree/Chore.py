@@ -3,10 +3,6 @@
 #
 @module('LockFree.Chore')
 def module():
-    require_module('LockFree.Core')
-    require_module('LockFree.LifeCycle')
-
-
     class DiamondChore(Object):
         __slots__ = ((
             'lifecycle',                #   Integer

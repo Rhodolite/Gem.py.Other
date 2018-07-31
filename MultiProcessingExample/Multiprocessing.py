@@ -3,9 +3,6 @@
 #
 @module('MultiProcessingExample.Multiprocessing')
 def module():
-    require_module('MultiProcessingExample.Core')
-
-
     @privileged
     def import_multiprocessing():
         import          multiprocessing                     #   Must be @privileged to import multiprocessing

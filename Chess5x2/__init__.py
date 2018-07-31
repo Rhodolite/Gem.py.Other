@@ -1,3 +1,30 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
+@module('Chess5x2.__init__')
+def module():
+    transport('Capital.Cache',                      'produce_conjure_triple')
+    transport('Capital.Core',                       'arrange')
+    transport('Capital.Core',                       'false')
+    transport('Capital.Core',                       'line')
+    transport('Capital.Core',                       'Object')
+    transport('Capital.Core',                       'portray')
+    transport('Capital.Core',                       'property')
+    transport('Capital.Core',                       'static_method')
+    transport('Capital.Core',                       'String')
+    transport('Capital.Core',                       'true')
+
+    require_module('Chess5x2.Square')
+    require_module('Chess5x2.BlankSquare')
+    require_module('Chess5x2.Board')
+    require_module('Chess5x2.CardRoot')
+    require_module('Chess5x2.ChessBishop')
+    require_module('Chess5x2.ChessKing')
+    require_module('Chess5x2.ChessKnight')
+    require_module('Chess5x2.ChessPawn')
+    require_module('Chess5x2.ChessRook')
+    require_module('Chess5x2.FrozenCardRoot')
+    require_module('Chess5x2.FrozenChessCard')
+    require_module('Chess5x2.Player')
+    require_module('Chess5x2.VoidSquare')
+    require_module('Chess5x2.Game')

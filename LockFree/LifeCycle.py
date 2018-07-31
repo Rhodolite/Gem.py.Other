@@ -3,9 +3,6 @@
 #
 @module('LockFree.LifeCycle')
 def module():
-    require_module('LockFree.Core')
-
-
     COUNT_MASK      = 0x0f
     LIFE_CYCLE_MASK = 0x70
 
