@@ -7,6 +7,11 @@ def module():
 
 
     class BlankSquare(Object):
+        __slots__ = ((
+            'square',                   #   Square
+        ))
+
+
         adjust          = 0
         ally            = false
         enemy           = false
@@ -15,11 +20,6 @@ def module():
         is_card         = false
         prepare         = 0
         reset           = 0
-
-
-        __slots__ = ((
-            'square',                   #   Square
-        ))
 
 
         def __init__(t, square):

@@ -5,12 +5,6 @@
 def module():
     @export
     class CardRoot(Object):
-        adjust          = 0
-        prepare         = 0
-        is_blank_square = false
-        is_card         = true
-
-
         __slots__ = ((
             'square',                   #   Square
             'ally',                     #   Boolean
@@ -19,6 +13,12 @@ def module():
             'current_shield',           #   Integer
             'maximum_health',           #   Integer
         ))
+
+
+        adjust          = 0
+        prepare         = 0
+        is_blank_square = false
+        is_card         = true
 
 
         def __init__(t, square, ally, current_attack, current_health, maximum_health):
