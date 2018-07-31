@@ -1,8 +1,8 @@
 #
 #   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
 #
-@gem('Rubber.ElasticSearch')
-def gem():
+@module('Rubber.ElasticSearch')
+def module():
     share = Shared.share
 
 

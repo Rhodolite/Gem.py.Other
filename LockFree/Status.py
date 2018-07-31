@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Status')
-def gem():
-    require_gem('LockFree.Core')
+@module('LockFree.Status')
+def module():
+    require_module('LockFree.Core')
 
 
     STATUS_ACTIVE   = 1

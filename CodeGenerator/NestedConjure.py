@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
 #
-@gem('CodeGenerator.NestedConjure')
-def gem():
-    require_gem('CodeGenerator.Core')
+@module('CodeGenerator.NestedConjure')
+def module():
+    require_module('CodeGenerator.Core')
 
 
     show_assert = 7
@@ -993,7 +993,7 @@ def gem():
             f.line('#')
             f.line('#   Copyright (c) %s %s.  All rights reserved.', year, author)
             f.line('#')
-            f.line('@gem(%r)', module_name)
+            f.line('@module(%r)', module_name)
 
             create_horde_flags = [0]
 
@@ -1022,7 +1022,7 @@ def gem():
                         produce_zero.append(arrange('produce_%s_%s', prefix, suffix))
 
 
-            with f.indent('def gem():'):
+            with f.indent('def module():'):
                 f.blank_suppress()
 
                 create_herd_many = 0
@@ -1039,7 +1039,7 @@ def gem():
                             import_list.append('displace_4z6')
                             import_list.append('displace_4z7')
 
-                        f.line('from Gem import %s', ', '.join(import_list))
+                        f.line('from Capital import %s', ', '.join(import_list))
 
                         f.blank2()
 
@@ -1128,7 +1128,7 @@ def gem():
 
             if 0:
                 create_nested_conjure__X(
-                    year, author, 'conjure', 'Gem.GeneratedConjureQuadruple',
+                    year, author, 'conjure', 'Capital.GeneratedConjureQuadruple',
 
                     which = 4123,
                 )

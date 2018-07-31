@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.BlankSquare')
-def gem():
-    require_gem('Chess5x2.Square')
+@module('Chess5x2.BlankSquare')
+def module():
+    require_module('Chess5x2.Square')
 
 
     class BlankSquare(Object):

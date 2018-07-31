@@ -16,16 +16,16 @@ def boot():
     path_0 = module_path[0]
 
     module_path.insert(0, path_absolute(path_join(path_0, '../')))
-    module_path.insert(1, path_absolute(path_join(path_0, '../../../Gem')))
+    module_path.insert(1, path_absolute(path_join(path_0, '../../../Capital')))
 
 
-    import Gem
+    import Capital
 
 
-@gem('Rubber.Main')
-def gem():
-    require_gem('Rubber.Core')
-    require_gem('Rubber.Development')
+@module('Rubber.Main')
+def module():
+    require_module('Rubber.Core')
+    require_module('Rubber.Development')
 
 
     @share

@@ -1,10 +1,10 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('MultiProcessingExample.Development')
-def gem():
-    require_gem('MultiProcessingExample.Core')
-    require_gem('MultiProcessingExample.Multiprocessing')
+@module('MultiProcessingExample.Development')
+def module():
+    require_module('MultiProcessingExample.Core')
+    require_module('MultiProcessingExample.Multiprocessing')
 
 
     #
@@ -12,7 +12,7 @@ def gem():
     #       See Note in 'MultiProcessingExample.Child' on pickling 'pickable_child_calculate'
     #
     #   NOTE #2:
-    #       In order to import 'MultiProcessingExample.Child' we have to get around the Gem system, hence create a
+    #       In order to import 'MultiProcessingExample.Child' we have to get around the Capital system, hence create a
     #       privileged function and do a normal python import :(
     #
     @privileged

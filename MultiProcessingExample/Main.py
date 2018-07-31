@@ -16,16 +16,16 @@ def boot():
     path_0 = module_path[0]
 
     module_path.insert(0, path_absolute(path_join(path_0, '../')))
-    module_path.insert(1, path_absolute(path_join(path_0, '../../Gem')))
+    module_path.insert(1, path_absolute(path_join(path_0, '../../Capital')))
 
 
-    import Gem
+    import Capital
 
 
-@gem('MultiProcessingExample.Main')
-def gem():
-    require_gem('MultiProcessingExample.Core')
-    require_gem('MultiProcessingExample.Development')
+@module('MultiProcessingExample.Main')
+def module():
+    require_module('MultiProcessingExample.Core')
+    require_module('MultiProcessingExample.Development')
 
 
     @share

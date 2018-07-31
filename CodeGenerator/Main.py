@@ -16,29 +16,29 @@ def boot():
     path_0 = module_path[0]
 
     module_path.insert(0, path_absolute(path_join(path_0, '../')))
-    module_path.insert(1, path_absolute(path_join(path_0, '../../Gem')))
+    module_path.insert(1, path_absolute(path_join(path_0, '../../Capital')))
     module_path.insert(2, path_absolute(path_join(path_0, '../../UnitTest')))
 
 
-    import Gem
+    import Capital
 
 
-@gem('CodeGenerator.Main')
-def gem():
-    require_gem('CodeGenerator.Core')
-    require_gem('CodeGenerator.NestedConjure')
+@module('CodeGenerator.Main')
+def module():
+    require_module('CodeGenerator.Core')
+    require_module('CodeGenerator.NestedConjure')
 
 
     @share
     def command_generate_ascii():
-        require_gem("CodeGenerator.GenerateAscii");
+        require_module("CodeGenerator.GenerateAscii");
 
         generate_ascii();
 
 
     @share
     def command_generate_test_portray_string():
-        require_gem("CodeGenerator.GenerateTestPortrayString");
+        require_module("CodeGenerator.GenerateTestPortrayString");
 
         generate_test_portray_string();
 

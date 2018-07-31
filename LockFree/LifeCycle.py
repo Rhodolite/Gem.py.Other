@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.LifeCycle')
-def gem():
-    require_gem('LockFree.Core')
+@module('LockFree.LifeCycle')
+def module():
+    require_module('LockFree.Core')
 
 
     COUNT_MASK      = 0x0f

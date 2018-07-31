@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Interval')
-def gem():
-    require_gem('LockFree.Core')
+@module('LockFree.Interval')
+def module():
+    require_module('LockFree.Core')
 
 
     check_interval = fetch_check_interval()

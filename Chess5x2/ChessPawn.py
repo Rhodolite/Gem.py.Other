@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.ChessPawn')
-def gem():
-    require_gem('Chess5x2.CardRoot')
+@module('Chess5x2.ChessPawn')
+def module():
+    require_module('Chess5x2.CardRoot')
 
 
     @export

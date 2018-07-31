@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
 #
-@gem('Rubber.Development')
-def gem():
-    require_gem('Rubber.Core')
+@module('Rubber.Development')
+def module():
+    require_module('Rubber.Core')
 
 
     def dump_result(name, r):

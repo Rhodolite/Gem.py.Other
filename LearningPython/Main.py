@@ -16,24 +16,24 @@ def boot():
     path_0 = module_path[0]
 
     module_path.insert(0, path_absolute(path_join(path_0, '../')))
-    module_path.insert(1, path_absolute(path_join(path_0, '../../Gem')))
+    module_path.insert(1, path_absolute(path_join(path_0, '../../Capital')))
     module_path.insert(2, path_absolute(path_join(path_0, '../../Tremolite')))
 
 
-    import Gem
+    import Capital
 
 
-@gem('LearningPython.Main')
-def gem():
-    require_gem('Gem.Exception')                                        #   Adds `exit_clause` as a built-in
-    require_gem('Gem.Output')
-    require_gem('Gem.Traceback')
+@module('LearningPython.Main')
+def module():
+    require_module('Capital.Exception')                                    #   Adds `exit_clause` as a built-in
+    require_module('Capital.Output')
+    require_module('Capital.Traceback')
 
 
-    from Gem import SystemExit                                          #   See Gem.Exception
-    from Gem import flush_standard_output                               #   See Gem.Output      = sys.stderr.flush
-    from Gem import write_standard_output                               #   See Gem.Output      = sys.stdout.write
-    from Gem import print_exception_chain                               #   See Gem.Traceback
+    from Capital import SystemExit                                      #   See Capital.Exception
+    from Capital import flush_standard_output                           #   See Capital.Output      = sys.stderr.flush
+    from Capital import write_standard_output                           #   See Capital.Output      = sys.stdout.write
+    from Capital import print_exception_chain                           #   See Capital.Traceback
 
 
     #

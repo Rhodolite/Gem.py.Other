@@ -1,9 +1,9 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('CodeGenerator.GenerateAscii')
-def gem():
-    require_gem('CodeGenerator.Core')
+@module('CodeGenerator.GenerateAscii')
+def module():
+    require_module('CodeGenerator.Core')
 
 
     ascii_list = [0] * 128

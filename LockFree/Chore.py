@@ -1,10 +1,10 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Chore')
-def gem():
-    require_gem('LockFree.Core')
-    require_gem('LockFree.LifeCycle')
+@module('LockFree.Chore')
+def module():
+    require_module('LockFree.Core')
+    require_module('LockFree.LifeCycle')
 
 
     class DiamondChore(Object):

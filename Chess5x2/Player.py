@@ -1,8 +1,8 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.Player')
-def gem():
+@module('Chess5x2.Player')
+def module():
     class Player(Object):
         __slots__ = ((
             'name',                     #   String+

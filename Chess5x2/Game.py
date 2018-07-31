@@ -1,20 +1,20 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('Chess5x2.Game')
-def gem():
-    require_gem('Chess5x2.BlankSquare')
-    require_gem('Chess5x2.Board')
-    require_gem('Chess5x2.ChessBishop')
-    require_gem('Chess5x2.ChessKing')
-    require_gem('Chess5x2.ChessKnight')
-    require_gem('Chess5x2.ChessPawn')
-    require_gem('Chess5x2.ChessRook')
-    require_gem('Chess5x2.Core')
-    require_gem('Chess5x2.FrozenChessCard')
-    require_gem('Chess5x2.Player')
-    require_gem('Chess5x2.Square')
-    require_gem('Chess5x2.VoidSquare')
+@module('Chess5x2.Game')
+def module():
+    require_module('Chess5x2.BlankSquare')
+    require_module('Chess5x2.Board')
+    require_module('Chess5x2.ChessBishop')
+    require_module('Chess5x2.ChessKing')
+    require_module('Chess5x2.ChessKnight')
+    require_module('Chess5x2.ChessPawn')
+    require_module('Chess5x2.ChessRook')
+    require_module('Chess5x2.Core')
+    require_module('Chess5x2.FrozenChessCard')
+    require_module('Chess5x2.Player')
+    require_module('Chess5x2.Square')
+    require_module('Chess5x2.VoidSquare')
 
 
     def action_and_dump(board, create_1, create_2):

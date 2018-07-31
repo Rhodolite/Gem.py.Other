@@ -1,19 +1,19 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@gem('LockFree.Core')
-def gem():
-    require_gem('Gem.Cache')
-    require_gem('Gem.Exception')
-    require_gem('Gem.Sleep')
-    require_gem('Gem.System')
-    require_gem('Gem.Thread')
-    require_gem('Gem.Traceback')
+@module('LockFree.Core')
+def module():
+    require_module('Capital.Cache')
+    require_module('Capital.Exception')
+    require_module('Capital.Sleep')
+    require_module('Capital.System')
+    require_module('Capital.Thread')
+    require_module('Capital.Traceback')
 
 
-    from Gem import allocate_lock, change_check_interval, fetch_check_interval
-    from Gem import print_exception_chain, produce_conjure_dual, produce_conjure_triple, produce_conjure_triple__312
-    from Gem import sleep, start_new_thread, thread_identifier
+    from Capital import allocate_lock, change_check_interval, fetch_check_interval
+    from Capital import print_exception_chain, produce_conjure_dual, produce_conjure_triple, produce_conjure_triple__312
+    from Capital import sleep, start_new_thread, thread_identifier
 
 
     share(
