@@ -1,7 +1,7 @@
 #
 #   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
 #
-@module('MultiProcessingExample.__init__')
+@module('MultiProcessingExample')
 def module():
     transport('Capital.Core',                       'arrange')
     transport('Capital.Core',                       'enumerate')
@@ -17,6 +17,3 @@ def module():
     transport('Capital.Exception',                  'raise_runtime_error')
     transport('Capital.System',                     'program_exit')
     transport('Capital.Traceback',                  'print_exception_chain')
-
-    require_module('MultiProcessingExample.Multiprocessing')
-    require_module('MultiProcessingExample.Development')

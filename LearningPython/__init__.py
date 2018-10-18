@@ -1,3 +1,35 @@
 #
-#   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
+#   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
+@module('LearningPython')
+def module():
+    transport('Capital.Core',                       'is_python_2')
+    transport('Capital.Core',                       'is_python_3')
+
+    transport('Capital.Capital_Object',             'Object__operator__new')
+    transport('Capital.CatchException',             'catch_AttributeError')
+    transport('Capital.Class_FindSymbol',           'find_symbol_base_and_depth')
+    transport('Capital.Class_Object',               'base_classes__Object')
+    transport('Capital.Class_Object',               'process_object_members')
+    transport('Capital.Class_ShowMembers',          'show_class_members')
+    transport('Capital.Class_Type',                 'base_classes__Type')
+    transport('Capital.Class_Type',                 'process_type_members')
+    transport('Capital.Class_Type',                 'Type__operator__call')
+    transport('Capital.Core',                       'attribute')
+    transport('Capital.Core',                       'class_method')
+    transport('Capital.Core',                       'FrozenSet')
+    transport('Capital.Core',                       'is_instance')
+    transport('Capital.Core',                       'line')
+    transport('Capital.Core',                       'Object')
+    transport('Capital.Core',                       'property')
+    transport('Capital.Core',                       'sorted_list')
+    transport('Capital.Core',                       'Type')
+    transport('Capital.Exception',                  'AttributeError')
+    transport('Capital.Exception',                  'PREPARE_attribute_ERROR')
+    transport('Capital.Exception',                  'raise_runtime_error')
+    transport('Capital.Introspection',              'introspect')
+    transport('Capital.Introspection',              'introspect_hidden')
+    transport('Capital.Line',                       'blank')
+    transport('Capital.Line',                       'blank_suppress')
+    transport('Capital.Line',                       'indent')
+    transport('Capital.Map',                        'iterate_items_sorted_by_key')

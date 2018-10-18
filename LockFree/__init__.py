@@ -1,7 +1,7 @@
 #
 #   Copyright (c) 2018 Joy Diamond.  All rights reserved.
 #
-@module('LockFree.__init__')
+@module('LockFree')
 def module():
     transport('Capital.Core',                       'arrange')
     transport('Capital.Core',                       'iterate_range')
