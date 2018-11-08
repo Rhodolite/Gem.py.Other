@@ -26,6 +26,7 @@ def boot():
 @module('CodeGenerator.Main')
 def module():
     require_module('CodeGenerator.NestedConjure')
+    require_module('CodeGenerator.GenerateTestPortrayString')
 
 
     @share

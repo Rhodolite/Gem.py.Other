@@ -24,7 +24,8 @@ def boot():
 
 @module('Rubber.Main')
 def module():
-    require_module('Rubber')
+    require_module('Rubber.ElasticSearch')                              #   Must appear after transport of `privileged`
+    require_module('Rubber.Development')
 
 
     @share

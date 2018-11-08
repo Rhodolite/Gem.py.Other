@@ -1,7 +1,7 @@
 #
 #   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
 #
-@module('CodeGenerator.__init__')
+@module('CodeGenerator')
 def module():
     transport('Capital.Absent',                     'absent')
     transport('Capital.Ascii',                      'lookup_ascii')
@@ -36,7 +36,3 @@ def module():
     transport('Capital.System',                     'program_exit')
     transport('Capital.System',                     'slice_all')
     transport('Capital.Traceback',                  'print_exception_chain')
-
-
-    require_module('CodeGenerator.NestedConjure')
-    require_module('CodeGenerator.GenerateTestPortrayString')
