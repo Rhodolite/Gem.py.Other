@@ -12,7 +12,7 @@ def module():
 
     #
     #   NOTE:
-    #       This was used to develop "Capital/Class_Type.py".
+    #       This was used to develop "Capital/ProcessTypeMembers.py".
     #
     #       Shared or Exported names are similiar to the names there; except here they are prefixed with "learning__"
     #       to distinguish them.

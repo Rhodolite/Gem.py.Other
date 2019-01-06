@@ -104,23 +104,13 @@ def module():
             #
             #   `Color_1B` was create using a call to `Type`.  A call to `Type` really means:
             #
-            #       `type(Type).__dict__["__call__"](Type, ...)`
+            #       `type(Type).__dict__["__call__"](Type, name, bases, members)`
             #
+            #   As explained in "Capital/TypeMembers.py", we can optimize all this to `create_python_type`:
             #
-            #   In other words:
+            #       `create_python_type(Type, name, bases, members)`
             #
-            #       i.  Take the `type` of `Type` (which happens to be `Type`, since `Type` is it's own metaclass);
-            #
-            #       ii. Then find the `__call__` method; and call it.
-            #
-            #   Thus we can create `Color_1C` by calling `Type__Operator__call` directly.
-            #
-            #       `Type__operator__call` is `Type.__dict__["__call__"]`
-            #       (See "Capital/Class_Type.py")
-            #
-            #   The first parameter to `Type__operator__call` will be the metaclass (in this case `Type`)
-            #
-            Color_1C = Type__operator__call(
+            Color_1C = create_python_type(
                     Type,
                     'Color_1C',
                     ((Object,)),

@@ -62,9 +62,9 @@ def module():
         blank()
 
         with indent('show_color_2:', prefix = 2):
-            class MetaMetaclass_Color_2(Type):
-                __call__ = produce_color_call          ('MetaMetaclass_Color_2')
-                __repr__ = produce_color_representation('MetaMetaclass_Color_2')
+            class Meta_Metaclass_Color_2(Type):
+                __call__ = produce_color_call          ('Meta_Metaclass_Color_2')
+                __repr__ = produce_color_representation('Meta_Metaclass_Color_2')
 
 
             #
@@ -77,20 +77,20 @@ def module():
             #           Python 2 (does *NOT* work in Python 3):
             #
             #               class Metaclass_Color_2(Type):
-            #                   __metaclass__ = MetaMetaclass_Color_2
-            #                   __call__      = produce_color_call          ('MetaMetaclass_Color_2')
-            #                   __repr__      = produce_color_representation('MetaMetaclass_Color_2')
+            #                   __metaclass__ = Meta_Metaclass_Color_2
+            #                   __call__      = produce_color_call          ('Meta_Metaclass_Color_2')
+            #                   __repr__      = produce_color_representation('Meta_Metaclass_Color_2')
             #
             #           Python 3 (does *NOT* work in Python 2):
             #
-            #               class Metaclass_Color_2(Type, metaclass = MetaMetaclass_Color_2):
-            #                   __call__      = produce_color_call          ('MetaMetaclass_Color_2')
-            #                   __repr__      = produce_color_representation('MetaMetaclass_Color_2')
+            #               class Metaclass_Color_2(Type, metaclass = Meta_Metaclass_Color_2):
+            #                   __call__      = produce_color_call          ('Meta_Metaclass_Color_2')
+            #                   __repr__      = produce_color_representation('Meta_Metaclass_Color_2')
             #
             #
             #           How we do it (works in both Python 2 & Python 3):
             #
-            #               Metaclass_Color_2 = MetaMetaclass_Color_2(
+            #               Metaclass_Color_2 = Meta_Metaclass_Color_2(
             #                       'Metaclass_Color_2',
             #                       ((Type,)),
             #                       {
@@ -103,12 +103,12 @@ def module():
             #
             #   `Metaclass_Color_2`:
             #
-            #       Uses `MetaMetaclass_Color_2.__class__.__call__` to create the class.
+            #       Uses `Meta_Metaclass_Color_2.__class__.__call__` to create the class.
             #
             #       In other words uses `Type__operator__call` to create the class
-            #       [since `Type` is the metaclass of `MetaMetaclass_Color_2`]
+            #       [since `Type` is the metaclass of `Meta_Metaclass_Color_2`]
             #
-            Metaclass_Color_2 = MetaMetaclass_Color_2(
+            Metaclass_Color_2 = Meta_Metaclass_Color_2(
                     'Metaclass_Color_2',
                     ((Type,)),
                     {
@@ -123,8 +123,8 @@ def module():
             #
             #       Uses `Metaclass_Color_2.__class__.__call__` to create the class.
             #
-            #       In other words uses `MetaMetaClass_Color_2.__call__` to create the class
-            #       [since `MetaMetaClass_Color_2` is the metaclass of `Metaclass_Color_2`]
+            #       In other words uses `Meta_Metaclass_Color_2.__call__` to create the class
+            #       [since `Meta_Metaclass_Color_2` is the metaclass of `Metaclass_Color_2`]
             #
             #   NOTE:
             #
@@ -154,7 +154,7 @@ def module():
                 line('%s.__call__(%s)', t.__class__.__name__, t)
 
 
-            Color_2 = Metaclass_Color_2(
+            Color_2 = Metaclass_Color_2(                    #   Uses Meta_Metaclass_Color_2.__call__
                     'Color_2',
                     ((Object,)),
                     {
@@ -167,10 +167,10 @@ def module():
                     },
                 )
 
-            blue = Color_2('blue')          #   Uses MetaColor_2.__call__
+            blue = Color_2('blue')                          #   Uses MetaColor_2.__call__
 
-            blue()                          #   Uses Color_2.__call__
-            Color_2.__call__(blue)          #   Also uses Color_2.__call__
+            blue()                                          #   Uses Color_2.__call__
+            Color_2.__call__(blue)                          #   Also uses Color_2.__call__
 
             line('blue:                                          %r', blue)
             line('blue.__class__:                                %r', blue.__class__)

@@ -3,6 +3,9 @@
 #
 @module('LockFree.Development')
 def module():
+    require_module('LockFree.Thread')
+
+
     class DevelopmentThread(BaseThread):
         __slots__ = ((
             'ephemeral',                #   FibonacciEphemeral
