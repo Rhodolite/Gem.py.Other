@@ -31,7 +31,7 @@ def module():
             #
             #       (i.e.: Don't confuse it's metaclass with its base parent).
             #
-            Metaclass_Color_3 = Type__operator__call(
+            Metaclass_Color_3 = create_python_type(
                     Temporary_Metaclass,                        #   `Temporary_Metaclass` is a "heap type".
                     'Metaclass_Color_3',
                     ((Type,)),

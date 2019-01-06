@@ -32,6 +32,7 @@ def module():
     require_module('LearningPython.Descriptor')
     require_module('LearningPython.Development')
     require_module('LearningPython.Metaclass')
+    require_module('LearningPython.Meta_Metaclass')
     require_module('LearningPython.Show')
     require_module('LearningPython.ObjectParts')
     require_module('LearningPython.TypeParts')
@@ -52,6 +53,7 @@ def module():
         #show_color_5()
 
         show_metaclass()
+        #show_meta_metaclass()
         #show_descriptor()
 
         #show_development()

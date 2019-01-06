@@ -9,7 +9,7 @@ def module():
 
     #
     #   NOTE:
-    #       This was used to develop "Capital/Class_Object.py".
+    #       This was used to develop "Capital/ProcessObjectMembers.py".
     #
     #       Shared or Exported names are similiar to the names there; except here they are prefixed with "learning__"
     #       to distinguish them.

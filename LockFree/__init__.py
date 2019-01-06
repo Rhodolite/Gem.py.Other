@@ -18,10 +18,10 @@ def module():
     transport('Capital.Thread',                     'thread_identifier')
     transport('Capital.Traceback',                  'print_exception_chain')
 
-    require_module('LockFree.LifeCycle')
     require_module('LockFree.Chore')
+    require_module('LockFree.Development')
+    require_module('LockFree.Fibonacci')
     require_module('LockFree.Interval')
+    require_module('LockFree.LifeCycle')
     require_module('LockFree.Shared')
     require_module('LockFree.Thread')
-    require_module('LockFree.Fibonacci')
-    require_module('LockFree.Development')

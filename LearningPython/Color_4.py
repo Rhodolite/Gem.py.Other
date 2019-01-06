@@ -29,7 +29,7 @@ def module():
 
             del Color_4.__slots__
 
-            new__Color_4              = Method(Object__operator__new, Color_4)
+            new__Color_4              = Method(new_instance, Color_4)
             initialize__Color_4__name = Color_4.name.__set__
 
 
