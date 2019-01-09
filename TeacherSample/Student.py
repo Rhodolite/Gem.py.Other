@@ -66,7 +66,7 @@ class Student(Person):
     #   Public
     #
 
-    
+
     #.__repr__                          #   Inherited from Person
 
 
@@ -85,7 +85,7 @@ class Student(Person):
 
         self.questions[question] = choice
 
-        
+
     def answer_questions(self):
         for quiz in self.quizzes:
             for question in quiz.questions:

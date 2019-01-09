@@ -121,7 +121,7 @@ def create_quiz_and_print(i, name, number, course):
 
 #
 #   create_student_or_teacher__and__print
-# 
+#
 def create_student_or_teacher__and__print(i, is_teacher, name, number):
     if is_teacher:
         person = create_Teacher(name, number)
@@ -211,7 +211,7 @@ def iterate_rows_and_print(context):
             yield create_question_and_print(i, name, number, question_text)
             continue
 
-            
+
         if row_type == 'Quiz':
             number = query_actual_string(row, 'number')
             course = query_course(row, 'parent')

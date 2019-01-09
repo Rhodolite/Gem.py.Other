@@ -257,7 +257,7 @@ def test_grade():
     swiming_easy_quiz.give_quiz_to_all_students()
 
     assert bob.grade_course(jogging)  == 100        #   100 since the jogging class had no quizzes!
-    assert bob.grade_course(jumping)  == 100        #   100 since the jumping class had a quiz with no questions 
+    assert bob.grade_course(jumping)  == 100        #   100 since the jumping class had a quiz with no questions
     assert bob.grade_course(swimming) == 0          #   100 since not yet answered the question.
 
     true_fact__we_use_chlorine_in_our_swimming_pool = create_true_fact(

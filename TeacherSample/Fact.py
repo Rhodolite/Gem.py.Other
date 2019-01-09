@@ -65,5 +65,5 @@ def create_false_fact(question_text, choice_text):
 def create_true_fact(question_text, choice_text):
     assert (type(question_text) is str) and (len(question_text) > 0)
     assert (type(choice_text)   is str) and (len(choice_text) > 0)
-   
+
     return TrueFact(question_text, choice_text)

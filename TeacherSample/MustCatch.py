@@ -151,7 +151,7 @@ def must_catch_TestingError(message):
 
     return MustCatchExceptionWithMessage(TestingError, message)
 
-   
+
 def must_catch_ValueError(message):
     assert (type(message) is str) and (len(message) > 0)
 

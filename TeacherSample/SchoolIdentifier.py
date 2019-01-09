@@ -55,7 +55,7 @@ class PersonIdentifier(SchoolIdentifier):
 #           Attempt to find the item, throw an exception if not found
 #
 #       Hence for a python `dict`, `.find` is an alias for `.__getitem__`
-#   
+#
 #   2.  lookup
 #
 #           Attempt to find the item, but return `None` if not found (do not raise an exception).

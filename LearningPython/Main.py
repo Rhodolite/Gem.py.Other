@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
+#   Copyright (c) 2017-2019 Joy Diamond.  All rights reserved.
 #
 def boot(module_name):
     def execute(f):
@@ -24,17 +24,19 @@ def boot():
 
 @module('LearningPython.Main')
 def module():
+    require_module('LearningPython.Code_1')
     require_module('LearningPython.Color_1')
     require_module('LearningPython.Color_2')
     require_module('LearningPython.Color_3')
     require_module('LearningPython.Color_4')
     require_module('LearningPython.Color_5')
+    require_module('LearningPython.Ctypes_1')
     require_module('LearningPython.Descriptor')
     require_module('LearningPython.Development')
     require_module('LearningPython.Metaclass')
     require_module('LearningPython.Meta_Metaclass')
-    require_module('LearningPython.Show')
     require_module('LearningPython.ObjectParts')
+    require_module('LearningPython.Show')
     require_module('LearningPython.TypeParts')
 
 
@@ -46,13 +48,17 @@ def module():
         #show_object_parts()
         #show_type_parts()
 
+        #show_code_1()
+
         #show_color_1()
         #show_color_2()
         #show_color_3()
         #show_color_4()
         #show_color_5()
 
-        show_metaclass()
+        show_ctypes_1()
+
+        #show_metaclass()
         #show_meta_metaclass()
         #show_descriptor()
 

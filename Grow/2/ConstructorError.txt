@@ -1,0 +1,83 @@
+#
+#   Copyright (c) 2019 Joy Diamond.  All rights reserved.
+#
+
+#
+#   Principle #6:
+#       Never call construtors directly.
+#
+#       There is always a wrapper funtion named "create_Name".
+#
+#       This achieves two things:
+#
+#           1.  It is  *WAY* easier to modify & refactor the code later.
+#
+#           2.  Any error handling is done in the wrapper function.
+#
+#               Thus, if an error occurs, then the error is thrown *BEFORE* the `instance` is created
+#               (and likewise the instance does need to be destroyed if an error is thrown).
+#
+#       See "ConstructorError.txt" for a longer explanation of why it is such a problem for errors to occur in
+#       constructors..
+
+#
+#  NOTE:
+#       A long discourse on principle `6.2`, on why it such a serious problem to have errors happen
+#       in constructors:
+#
+#           This principle, of good "lifecycle" management of an instance, is quite important.
+#
+#           The "lifecycle" of an instance being created in an empty state, never fully being initialized
+#           (due to an error), and then being destroyed (mostly in an empty) state is considered
+#           very problematical.
+#
+#           This is especially true when using objects within objects.
+#
+#           Consider an immutable Point:
+#
+#                   import math
+#
+#                   class FixedLocation(object):
+#                       __slots__ = ((
+#                           'where',                            #   Fixed Double
+#                       ))
+#
+#                       def __init__(self, where):
+#                           assert (type(where) is float) and ( ! math.isnan(where))
+#
+#                           self.where = where
+#
+#                   class FixedPoint(object):
+#                       __slots__ = ((
+#                           'x_location',                       #   FixedLocation
+#                           'y_location',                       #   FixedLocation
+#                       ))
+#
+#
+#                       def __init__(self, x, y):
+#                           assert (type(x) is float)
+#                           assert (type(y) is float)
+#
+#                           self.x = FixedLocation(x)
+#                           self.y = FixedLocation(y)
+#
+#                   invalid_point = ImmutablePoint(7, float("nan"))
+#
+#               This will throw an exception when trying to initialize `self.y` to `Location(float("nan"))`
+#
+#               This means we have a `FixedPoint` in existence with:
+#
+#                   A.  An initialized `x`, and an uninitialized `y`
+#
+#                   B.  This violates a major premise of immutable objects, that they only have a single
+#                       state (i.e.: They exist will all their members also being imutable).
+#
+#                       See Principle #4 (in "Test_Vision.py").
+#
+#               Multiple states are a serious cause of bugs.
+#
+#               Even more important, multiple *UNTESTED* states are a *VERY* serious cause of bugs.
+#
+#               And of course, no one ever really tests that an object (such as `FixedPoint` above) has
+#               multiple states ...
+#
