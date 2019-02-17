@@ -85,3 +85,17 @@ def replace_Z_module():
     #   Replace the current Z module with our new extraction code ...
     #
     sys.modules['Z'] = Z
+
+
+
+
+#
+#   if main path ends in ".z":
+#       replace_Z_module()
+#
+def if_main_path_ends_in_dot_z__replace_Z_module():
+    if len(sys.argv) == 1:
+        crystal_input_path = sys.argv[0]
+
+        if crystal_input_path.endswith('.z'):
+            register_code_generator()
