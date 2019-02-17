@@ -301,4 +301,27 @@
 
 
     sys.excepthook = crystal_except_hook
-
+#
+#
+#        3.  Declaring methods for a class in a *DIFFERENT* module than where
+#            the class is defined.
+#
+#                The Crystal Parse tree is declared in "Z/Crystal_ParseTree.py".
+#
+#                However, the methods `convert_crystal_to_python" are declared
+#                in "Z/Transform_Crystal_to_Python.py".
+#
+#                Normally methods should be declared inside their class, not
+#                outside their class, and certaily not in a different module.
+#
+#            REASON:
+#
+#                The intent is to be able to convert to 15+ languages.
+#
+#                It's much more readable to have each converter in it's own
+#                file, instead of them all jammed into "Z/Crystal_ParseTree.py".
+#
+#                Realistically, we should probably not declare them as methods
+#                on the "Z/Crystal_ParseTree.py".
+#
+#                I WILL GO CHANGE THE CODE TO DO THAT!

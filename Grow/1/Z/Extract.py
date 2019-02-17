@@ -4,9 +4,10 @@
 import  sys
 
 
-from    Z.Crystal_ParseTree     import  Crystal_ParseTree
-from    Z.Crystal_ParseTree     import  Crystal_Statement_Copyright
-from    Z.Crystal_ParseTree     import  Crystal_Statement_Output_1
+from    Z.Crystal_ParseTree             import  Crystal_ParseTree
+from    Z.Crystal_ParseTree             import  Crystal_Statement_Copyright
+from    Z.Crystal_ParseTree             import  Crystal_Statement_Output_1
+from    Z.Transform_Crystal_to_Python   import  Crystal_ParseTree__convert_crystal_to_python
 
 
 class CrystalInput(object):
@@ -29,7 +30,7 @@ class CrystalInput(object):
 
 
     def convert_crystal_to_python(self, crystal_input_path):
-        return self.crystal_parse_tree.convert_crystal_to_python(crystal_input_path)
+        return Crystal_ParseTree__convert_crystal_to_python(self.crystal_parse_tree, crystal_input_path)
 
 
 crystal_input = CrystalInput(Crystal_ParseTree())
@@ -52,7 +53,7 @@ class Extract_ParseTree_by_using_Z_Commands(object):
     #
     #       By using `@property` here, we declare `Z.copyright` as an attribute.
     #
-    #       This means when `Z.copyright` (at line 7 of "Vision.x") is used, this function gets called
+    #       This means when `Z.copyright` (at line 7 of "Vision.z") is used, this function gets called
     #       (even without the usual `()` used for function calls).
     #
     @property                           #   Declare `.copyright` as an attribute.

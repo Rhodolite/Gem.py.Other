@@ -20,16 +20,15 @@ class Crystal_ParseTree(object):
         self.crystal_statements.append(statement)
 
 
-    def convert_crystal_to_python(self, input_path):
-        python_parse_tree = Python_ParseTree()
-
-        for v in self.crystal_statements:
-            statement = v.convert_crystal_to_python(input_path)
-
-            if statement:
-                python_parse_tree.append_statement(statement)
-
-        return python_parse_tree
+    #
+    #   convert_crystal_to_python - defined in "Z/Transform_Crystal_to_Python.py"
+    #
+    #       The reason the `convert_crystal_to_python` method is defined in a different file
+    #       is so that when we have 15+ language converters, they each have their own file.
+    #
+    #       That is a better organization than having each of the convertors spread in
+    #       little bits (a little bit in each different class) throughout this file.
+    #
 
 
 #
@@ -62,6 +61,11 @@ class Crystal_Statement_Copyright(object):
         raise missing_copyright
 
 
+    #
+    #   convert_crystal_to_python - defined in "Z/Transform..."
+    #
+
+
 class Crystal_Statement_Output_1(object):
     __slots__ = ((
         'argument',                     #   String
@@ -70,3 +74,7 @@ class Crystal_Statement_Output_1(object):
 
     def __init__(self, argument):
         self.argument = argument
+
+    #
+    #   convert_crystal_to_python - defined in "Z/Transform..."
+    #
