@@ -325,3 +325,111 @@
 #                on the "Z/Crystal_ParseTree.py".
 #
 #                I WILL GO CHANGE THE CODE TO DO THAT!
+#
+
+#   convert_context
+#
+#       Convert a context to a specific instance.
+#
+#       The following conversions are preformed:
+#
+#           python type                         converted to
+#           -----------                         ------------
+#           Python_AbstractSyntaxTree_Load      syntax_tree_query
+#
+assert Python_AbstractSyntaxTree_Load._attributes == (())
+assert Python_AbstractSyntaxTree_Load._fields     == (())
+
+
+def convert_context(self):
+    assert fact_is_python_abstract_syntax_tree_load(self)
+
+    return syntax_tree_query
+
+
+
+class SyntaxTree_QueryAttribute(Python_Object):
+    __slots__ = ((
+        'left',                         #   SyntaxTree_*
+        'attribute',                    #   Python_String
+    ))
+
+
+    def __init__(self, left, attribute):
+        self.left      = left
+        self.attribute = attribute
+
+
+    def __repr__(self):
+        return arrange('<SyntaxTree.QueryAttribute {!r} {!r}>', self.left, self.attribute)
+
+
+#
+#   fact_is_python_class(classification)
+#
+#       Assert the fact that `classification` is a python class
+#       (i.e.: It's metaclass is an instance of `Python_Type` (i.e.: `type`))
+#
+if __debug__:
+    def fact_is_python_class(classification):
+        assert isinstance(type(classification), Python_Type)
+
+        return True
+
+
+#
+#   fact_is_full_string(s)
+#
+#       Assert the fact that `s` is an instance of `FullString`.
+#
+if __debug__:
+    def fact_is_full_string(s):
+        assert type(s) is FullString
+
+        return True
+
+
+#
+#   fact_is_not_python_none(v) - Assert the fact that `v` is not `None`.
+#
+if __debug__:
+    def fact_is_not_python_none(v):
+        assert v is not None
+
+        return True
+
+
+#
+#   fact_is__python_none__or__actual_string(s)
+#
+#       Assert the fact that `s` is either `None` or an instance of `ActualString`.
+#
+if __debug__:
+    def fact_is__python_none__or__actual_string(s):
+        if s is None:
+            return True
+
+        assert type(s) is ActualString
+
+        return True
+
+
+#
+#   fact_is_positive_integer(v) - Assert the fact that `v` is an integer greater than 0.
+#
+if __debug__:
+    def fact_is_positive_integer(v):
+        assert type(v) is int
+        assert v > 0
+
+        return True
+
+
+#
+#   fact_is_python_list(v) - Assert the fact that `v` is an instance of `list`.
+#
+if __debug__:
+    def fact_is_python_list(s):
+        assert type(s) is list
+
+        return True

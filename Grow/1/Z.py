@@ -24,9 +24,9 @@ import  Z.CodeGenerator_OnExit  #   "Z/CodeGenerator_OnExit.py" - Generate code 
 #   add attributes to the module (a normal python module doesn't allow us to add attributes).
 #
 #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
-#       in "Z/Extract.py" (see the line marked `@property` in that "Z/Extract.py").
+#       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
 #
-Z.Extract.replace_Z_module()
+Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
 
 
 #

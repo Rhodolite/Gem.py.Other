@@ -1,6 +1,8 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
+from    sys                             import  stderr  as  standard_error
+from    sys                             import  exit    as  PROGRAM_EXIT
 
 
 #
@@ -24,6 +26,23 @@ tracing = True
 #
 def arrange(message, *arguments):
     return message.format(*arguments)
+
+
+#
+#   ERROR - output an error message to standard error
+#
+def ERROR(format, *arguments):
+    message = arrange(format, *arguments)
+
+    standard_error.write(arrange("? {}\n", message))
+
+
+#
+#   FATAL - output an error message to standard error, then EXIT THE PROGRAM.
+#
+def FATAL(format, *arguments):
+    ERROR(format, *arguments)
+    PROGRAM_EXIT(1)
 
 
 #

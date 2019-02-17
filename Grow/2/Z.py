@@ -4,7 +4,6 @@
 __path__ = ['Z/']               #   Load Z submodules from "Z/" directory.
 
 
-import  Z.Core                  #   "Z/Core.py"                 - Core Z support code
 import  Z.Crystal_ParseTree     #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
 import  Z.Extract               #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
 import  Z.Python_ParseTree      #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
@@ -24,9 +23,9 @@ import  Z.CodeGenerator_OnExit  #   "Z/CodeGenerator_OnExit.py" - Generate code 
 #   add attributes to the module (a normal python module doesn't allow us to add attributes).
 #
 #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
-#       in "Z/Extract.py" (see the line marked `@property` in that "Z/Extract.py").
+#       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
 #
-Z.Extract.replace_Z_module()
+Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
 
 
 #

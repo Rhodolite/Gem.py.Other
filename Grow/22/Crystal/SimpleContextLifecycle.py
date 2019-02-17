@@ -12,12 +12,12 @@ def module():
     #       simple_context_lifecycle_exited     - The context has been exited.
     #
     #   NOTE:
-    #       These `lifecycles` are only used for assertions in context handlers ...
+    #       These `lifecycles` are only used for debugging (by using assertions) in context handlers ...
     #
     #       Context handlers are quite complex to write properly (especially handling exceptions in the exception
     #       function of a context hander).
     #
-    #       Hence the importance of [debugging] lifecycle management for context handlers.
+    #       Hence the importance of debugging lifecycle management for context handlers.
     #
     class SimpleContextLifecycle(Fixed_5):
         __slots__ = (())

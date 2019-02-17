@@ -2,6 +2,11 @@
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 
+#+<NEW>
+from    Capital.Fact                    import  fact_is_string
+from    Capital.String                  import  conjure_string
+#+</NEW>
+
 
 #
 #   Crystal_ParseTree - A parse tree of Crystal Statements.
@@ -52,7 +57,13 @@ class Crystal_Statement_Copyright(object):
             and text_lines[1].startswith('#   Copyright (c) ')
             and text_lines[2] == '#'
         ):
-            return text_lines[1][4:]
+#-<OLD>
+#-          return text_lines[1][4:]
+#-</OLD>
+
+#+<NEW>
+            return conjure_string(text_lines[1][4:])
+#+</NEW>
 
         value_message = arrange("cannot find copyright in {!r}", path)
 
@@ -73,6 +84,10 @@ class Crystal_Statement_Output_1(object):
 
 
     def __init__(self, argument):
+#+<NEW>
+        assert fact_is_string(argument)
+#+</NEW>
+
         self.argument = argument
 
     #

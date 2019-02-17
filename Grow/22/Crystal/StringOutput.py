@@ -31,7 +31,7 @@ def module():
     class StringOutput(Mutable_12):
         __slots__ = (())
 
-        lifecycle = mutable_12_1        #   SimpleContextLifeCycle
+        lifecycle = mutable_12_1        #   ReusableContextLifeCycle
 
         f             = mutable_12_2    #   None | Python_StringOutput
         cached_result = mutable_12_3    #   None | Python_String

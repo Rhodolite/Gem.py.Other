@@ -1,0 +1,9 @@
+#
+#   Copyright (c) 2019 Joy Diamond.  All rights reserved.
+#
+import  Z
+from A.B import C
+
+
+Z.copyright
+Z.output('Programming is an art to communicate clearly and concisely to fellow programmers.')

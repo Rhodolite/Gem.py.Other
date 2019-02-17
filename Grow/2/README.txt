@@ -142,6 +142,31 @@ SUMMARY OF HOW THE CODE GENERATOR WORKS:
 
 DETAILS OF HOW THE CODE GENERATOR WORKS:
 
+#+<NEW>
+#+  Capital.py - Common Application Programming Interface, Transcending All Languages.
+#+
+#+      Since we are translating to multiple languages, we want the same API (Application Programming Interface) to
+#+      be available in all the languages.
+#+
+#+      Capital is that common API.
+#+
+#+      Read that file next :)
+#+
+#+  Capital/BuiltIn.py - A wrapper around python `builtins` module
+#+
+#+      This is mainly an explanation of why the code uses `Python_Type` instead of `type`.
+#+
+#+  Capital/Core.py - Core Support code.
+#+
+#+      Nothing much here -- just four support functions.
+#+
+#+  Capital.Types - Types used, or exported, by the Capital module.
+#+
+#+      This can be considered a wrapper around the python `types` module.
+#+
+#+      It has common types used by Capital.
+#+<NEW>
+
     Z.py - CODE GENERATOR.
 
         The code generator is in "Z.py". 
@@ -151,10 +176,11 @@ DETAILS OF HOW THE CODE GENERATOR WORKS:
         Read that file next :)
 
 
-    Z/Core.py - Core Support code.
-
-        Nothing much here -- just two support functions.
-
+#-<OLD>
+#-  Z/Core.py - Core Support code.
+#-
+#-      Nothing much here -- just two support functions.
+#-</OLD>
 
     Z/Crystal_ParseTree.py
 

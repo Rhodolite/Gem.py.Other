@@ -747,3 +747,72 @@ def test_vision():
         StringIO = __import__('io').StringIO
     else:
         StringIO = __import__('StringIO').StringIO
+
+
+#
+#   Copyright (c) 2019 Joy Diamond.  All rights reserved.
+#
+from    os.path                         import  abspath         as  python_path_absolute
+from    os.path                         import  dirname         as  python_path_directory_name
+from    os.path                         import  join            as  python_path_join
+
+
+#
+#   parent_path__good_enough_for_now - return the ABSOLUTE path name to the parent directory
+#
+#       There is no easy way to calculate the parent path without having ".."
+#       stuck as part of the path path.
+#
+#       For now, we take the easy way out and just call `python_path_absolute`
+#       to remove any ".." in the path name.
+#
+#       FUTURE:
+#           We'll do this better.
+#
+#           But for now, we don't want to concentrate too much on a module to
+#           deal with path names, so we just take the easy way out.
+#
+def parent_path__good_enough_for_now(path):
+    return python_path_absolute(python_path_join(path, '..'))
+
+
+#
+#   `module_directory_path` - The directory this module is in.
+#
+#       `__file__` - Python builtin, which is the path to this module file name
+#                    (used to extract `module_directory_path`).
+#
+module_directory_path = python_path_directory_name(__file__)
+
+module_parent_directory_path = parent_path__good_enough_for_now(module_directory_path)
+
+
+#
+#   path_to_file_in_parent_directory(filename)
+#
+#       - Return a path to `filename`, relative to the parent directory of this module.
+#
+def path_to_file_in_parent_directory(filename):
+    return python_path_join(module_parent_directory_path, filename)
+
+
+#
+#   FUTURE - SEE ALSO:
+#
+#       "Capital.String_0.py" - String or Absent Interface
+#
+#       Reading the String or Null interface, will help explain some of the tests above
+#       (i.e.: you often want to test if something `.is_null` or `._is_string`).
+#
+    def fact_is_empty_string(s):
+        assert s.is_empty_string
+
+        return True
+
+
+    def fact_is_full_string(s):
+        assert s.is_full_string
+
+        return True
+
+
