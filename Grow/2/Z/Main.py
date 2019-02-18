@@ -2,15 +2,13 @@
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 from    _ast                            import  PyCF_ONLY_AST   as  python__COMPILE_FLAGS__ONLY__ABSTRACT_SYNTAX_TREE
-from    os.path                         import  abspath         as  python_path_absolute
-from    os.path                         import  dirname         as  python_path_directory_name
-from    os.path                         import  join            as  python_path_join
 from    sys                             import  argv            as  python_program_arguments
 
 from    Z.Core                          import  arrange
 from    Z.Core                          import  ERROR
 from    Z.Core                          import  FATAL
 from    Z.Core                          import  trace
+from    Z.Path                          import  path_to_file_in_Z_directory
 
 
 python_compile = compile                #   python builtin `compile`
@@ -45,11 +43,7 @@ def parent_path__good_enough_for_now(path):
 
 
 def command_development():
-    self_directory_path = python_path_directory_name(__file__)
-
-    parent_directory_path = parent_path__good_enough_for_now(self_directory_path)
-
-    vision_path = python_path_join(parent_directory_path, 'Vision.z')
+    vision_path = path_to_file_in_Z_directory('Vision.z')
 
     with open(vision_path) as f:
         source = f.read()
