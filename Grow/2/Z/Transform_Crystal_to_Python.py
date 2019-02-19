@@ -65,9 +65,7 @@ def Crystal_Statement_Output_1__convert_crystal_to_python(self, path):
 #
 #   map__Crystal_Statement_Type__to__psuedo_method : Map { Crystal_Statement_* : Function }
 #
-#       PRESENT:
-#           This maps a `Crystal_Statement_*` to a "psuedo method" (actually to
-#           a function).
+#       This maps a `Crystal_Statement_*` to a "psuedo method" (actually to a function).
 #
 #       EXPLANATION:
 #           What we really want to do, long term, is declare the

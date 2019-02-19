@@ -1,7 +1,6 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-from    _ast                            import  PyCF_ONLY_AST   as  python__COMPILE_FLAGS__ONLY__ABSTRACT_SYNTAX_TREE
 from    sys                             import  argv            as  python_program_arguments
 
 from    Z.Core                          import  arrange
@@ -9,18 +8,7 @@ from    Z.Core                          import  ERROR
 from    Z.Core                          import  FATAL
 from    Z.Core                          import  trace
 from    Z.Path                          import  path_to_file_in_Z_directory
-
-
-python_compile = compile                #   python builtin `compile`
-
-
-def python__compile__to__abstract_syntax_tree(source, filename):
-    return python_compile(
-               source   = source,
-               filename = filename,
-               mode     = 'exec',
-               flags    = python__COMPILE_FLAGS__ONLY__ABSTRACT_SYNTAX_TREE,
-           )
+from    Z.SyntaxTree                    import  compile_to_syntax_tree
 
 
 #
@@ -48,7 +36,7 @@ def command_development():
     with open(vision_path) as f:
         source = f.read()
 
-    tree = python__compile__to__abstract_syntax_tree(source, vision_path)
+    tree = compile_to_syntax_tree(source, vision_path)
 
     trace('tree: {}', tree)
 
