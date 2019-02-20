@@ -2,17 +2,62 @@
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 from    _ast                            import  PyCF_ONLY_AST   as  python__COMPILE_FLAGS__ONLY__ABSTRACT_SYNTAX_TREE
+from    Z.BuiltIn                       import  python_compile
+from    Z.BuiltIn                       import  python_debug_mode
+from    Z.BuiltIn                       import  python_type
 
 
 #
 #   Export the names in `_ast` as full names
 #
-from    _ast                            import  Expr    as  Python_AbstractSyntaxTree_Expression
-from    _ast                            import  Import  as  Python_AbstractSyntaxTree_Import
-from    _ast                            import  Module  as  Python_AbstractSyntaxTree_Module
+#   NOTE:
+#       No idea why it's `_ast.alias` (instead of `.Alias` with a capital `A`).
+#
+from    _ast                            import  alias       as  PythonTree_Alias
+from    _ast                            import  Attribute   as  PythonTree_Attribute
+from    _ast                            import  Call        as  PythonTree_Call
+from    _ast                            import  Expr        as  PythonTree_Expression
+from    _ast                            import  Import      as  PythonTree_Import
+from    _ast                            import  Module      as  PythonTree_Module
+from    _ast                            import  Load        as  PythonTree_Load
+from    _ast                            import  Name        as  PythonTree_Name
+from    _ast                            import  Str         as  PythonTree_String
 
 
-python_compile = compile                #   python builtin `compile`
+#
+#   fact_is_python_abstract_syntax_tree_alias(v)
+#
+#       Assert the fact that `v` is a `PythonTree_Alias` instance.
+#
+if python_debug_mode:
+    def fact_is_python_abstract_syntax_tree_alias(v):
+        assert python_type(v) is PythonTree_Alias
+
+        return v
+
+
+#
+#   fact_is_python_abstract_syntax_tree_load(v)
+#
+#       Assert the fact that `v` is a `PythonTree_Load` instance.
+#
+if python_debug_mode:
+    def fact_is_python_abstract_syntax_tree_load(v):
+        assert python_type(v) is PythonTree_Load
+
+        return v
+
+
+#
+#   fact_is_python_abstract_syntax_tree_module(v)
+#
+#       Assert the fact that `v` is a `PythonTree_Module` instance.
+#
+if python_debug_mode:
+    def fact_is_python_abstract_syntax_tree_module(v):
+        assert python_type(v) is PythonTree_Module
+
+        return v
 
 
 def python__compile__to__python_abstract_syntax_tree(source, filename):

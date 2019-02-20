@@ -29,10 +29,12 @@ else:
 #       the future code) will eventually need to go through a wrapper that in Python translated
 #       to `Python_*`, but in other languages translates to something else.
 #
-Python_Integer = Python_BuiltIn.int
-Python_List    = Python_BuiltIn.list
-Python_Tuple   = Python_BuiltIn.tuple
-#Python_Type   = Python_BuiltIn.type                #   See the comment below on `python_type` .vs. `Python_Type`
+Python_Integer  = Python_BuiltIn.int
+Python_List     = Python_BuiltIn.list
+Python_Object   = Python_BuiltIn.object
+Python_String   = Python_BuiltIn.str
+Python_Tuple    = Python_BuiltIn.tuple
+#Python_Type    = Python_BuiltIn.type                #   See the comment below on `python_type` .vs. `Python_Type`
 
 
 #
@@ -41,7 +43,9 @@ Python_Tuple   = Python_BuiltIn.tuple
 #       All python functions are renamed to `python_*` to make it clear these are
 #       python functions we are using.
 #
-#python_type = Python_BuiltIn.type                  #   See the comment below on `python_type` .vs. `Python_Type`
+python_compile = Python_BuiltIn.compile
+python_length  = Python_BuiltIn.len
+#python_type   = Python_BuiltIn.type                #   See the comment below on `python_type` .vs. `Python_Type`
 
 
 #
@@ -91,3 +95,9 @@ python_none       = None                            #   Python 3.* keyword
 #
 python_type = Python_BuiltIn.type           #   Really a type, but used as if a function
 Python_Type = Python_BuiltIn.type           #   The base type (metaclass) of all classes and types.
+
+
+#
+#   Python_NoneType - The type of `python_none` (i.e.: `none`).
+#
+Python_NoneType = python_type(python_none)
