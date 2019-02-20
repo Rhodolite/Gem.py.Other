@@ -1,6 +1,8 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
+from    Capital.Core                    import  arrange
+from    Capital.Core                    import  trace
 from    Z.BuiltIn                       import  python_debug_mode
 from    Z.BuiltIn                       import  Python_Integer
 from    Z.BuiltIn                       import  python_length
@@ -11,8 +13,6 @@ from    Z.BuiltIn                       import  Python_Object
 from    Z.BuiltIn                       import  Python_String
 from    Z.BuiltIn                       import  Python_Tuple
 from    Z.BuiltIn                       import  python_type
-from    Z.Core                          import  arrange
-from    Z.Core                          import  trace
 from    Z.Fact                          import  fact_is_empty_python_list
 from    Z.Fact                          import  fact_is_full_python_string
 from    Z.Fact                          import  fact_is_python_none

@@ -3,6 +3,9 @@
 #
 
 
+from    Capital.Core                    import  arrange
+
+
 #
 #   Crystal_ParseTree - A parse tree of Crystal Statements.
 #

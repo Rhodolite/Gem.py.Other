@@ -325,3 +325,41 @@
 #                on the "Z/Crystal_ParseTree.py".
 #
 #                I WILL GO CHANGE THE CODE TO DO THAT!
+#
+
+#   convert_context
+#
+#       Convert a context to a specific instance.
+#
+#       The following conversions are preformed:
+#
+#           python type                         converted to
+#           -----------                         ------------
+#           Python_AbstractSyntaxTree_Load      syntax_tree_query
+#
+assert Python_AbstractSyntaxTree_Load._attributes == (())
+assert Python_AbstractSyntaxTree_Load._fields     == (())
+
+
+def convert_context(self):
+    assert fact_is_python_abstract_syntax_tree_load(self)
+
+    return syntax_tree_query
+
+
+
+class SyntaxTree_QueryAttribute(Python_Object):
+    __slots__ = ((
+        'left',                         #   SyntaxTree_*
+        'attribute',                    #   Python_String
+    ))
+
+
+    def __init__(self, left, attribute):
+        self.left      = left
+        self.attribute = attribute
+
+
+    def __repr__(self):
+        return arrange('<SyntaxTree.QueryAttribute {!r} {!r}>', self.left, self.attribute)
+

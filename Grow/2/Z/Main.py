@@ -3,10 +3,9 @@
 #
 from    sys                             import  argv            as  python_program_arguments
 
-from    Z.Core                          import  arrange
-from    Z.Core                          import  ERROR
-from    Z.Core                          import  FATAL
-from    Z.Core                          import  trace
+from    Capital.Core                    import  ERROR
+from    Capital.Core                    import  FATAL
+from    Capital.Core                    import  trace
 from    Z.Path                          import  path_to_file_in_Z_directory
 from    Z.SyntaxTree                    import  compile_to_syntax_tree
 
