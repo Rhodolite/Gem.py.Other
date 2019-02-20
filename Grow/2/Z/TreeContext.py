@@ -4,7 +4,6 @@
 
 
 from    Capital.Core                    import  arrange
-from    Z.BuiltIn                       import  Python_String
 
 
 #
@@ -98,7 +97,7 @@ def enumeration(classification):
 #
 #   NOTE:
 #       Here we fake a `.name` member, by *NOT* using a real member,
-#       but instead inheriting from `Python_String` (i.e.: `str`).
+#       but instead inheriting from `str`.
 #
 #       Whenever we want to access our [fake] `.name` member, we instead
 #       use `self`.
@@ -112,13 +111,13 @@ def enumeration(classification):
 #       named `.name`) -- and our code generator will either:
 #
 #           1.  Leave it as a class with one member; OR
-#           2.  "Optimize" it to a class inherited from `Python_String`
+#           2.  "Optimize" it to a class inherited from `str`
 #
 #       Depending on the code generation option we use.
 #
 #       For now we demonstrate this as a "optimized" class inherited from
-#       `Python_String` for educational purposes -- as a simple example
-#       of how a class can inherit from `Python_String`.
+#       `str` for educational purposes -- as a simple example
+#       of how a class can inherit from `str`.
 #
 if 0:
     #
@@ -127,11 +126,8 @@ if 0:
     #       Here is how the `TreeContext` class would look if we were
     #       declaring it normally with a normal `.name` member.
     #
-    from    Z.BuiltIn                   import  Python_Object
-
-
     @enumeration
-    class TreeContext(Python_Object):
+    class TreeContext(object):
         __slots__ = ((
             'name',                         #   Python_String
         ))
@@ -148,17 +144,17 @@ else:
     #   ACTUAL CODE:
     #
     #       Here is the actual `TreeContext` class, where we inherit from
-    #       `Python_String`, and our [fake] `.name` member does not exist.
+    #       `str`, and our [fake] `.name` member does not exist.
     #
     #       As explain above, we simply use `self` when we want to access
     #       our [non-existent] [fake] `.name` member.
     #
     @enumeration
-    class TreeContext(Python_String):
+    class TreeContext(str):
         __slots__ = (())
 
 
-        #__init__ - inherited from `Python_String.__init__` (i.e.: `str.__init__`).
+        #__init__ - inherited from `str.__init__`.
 
 
         def __repr__(self):

@@ -2,9 +2,6 @@
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 from    _ast                            import  PyCF_ONLY_AST   as  python__COMPILE_FLAGS__ONLY__ABSTRACT_SYNTAX_TREE
-from    Z.BuiltIn                       import  python_compile
-from    Z.BuiltIn                       import  python_debug_mode
-from    Z.BuiltIn                       import  python_type
 
 
 #
@@ -29,9 +26,9 @@ from    _ast                            import  Str         as  PythonTree_Strin
 #
 #       Assert the fact that `v` is a `PythonTree_Alias` instance.
 #
-if python_debug_mode:
+if __debug__:
     def fact_is_python_abstract_syntax_tree_alias(v):
-        assert python_type(v) is PythonTree_Alias
+        assert type(v) is PythonTree_Alias
 
         return v
 
@@ -41,9 +38,9 @@ if python_debug_mode:
 #
 #       Assert the fact that `v` is a `PythonTree_Load` instance.
 #
-if python_debug_mode:
+if __debug__:
     def fact_is_python_abstract_syntax_tree_load(v):
-        assert python_type(v) is PythonTree_Load
+        assert type(v) is PythonTree_Load
 
         return v
 
@@ -53,15 +50,15 @@ if python_debug_mode:
 #
 #       Assert the fact that `v` is a `PythonTree_Module` instance.
 #
-if python_debug_mode:
+if __debug__:
     def fact_is_python_abstract_syntax_tree_module(v):
-        assert python_type(v) is PythonTree_Module
+        assert type(v) is PythonTree_Module
 
         return v
 
 
 def python__compile__to__python_abstract_syntax_tree(source, filename):
-    return python_compile(
+    return compile(                                 #   Call the python built-in `compile` function.
                source   = source,
                filename = filename,
                mode     = 'exec',

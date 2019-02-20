@@ -54,7 +54,7 @@ import  os.path
 #   NOTE:
 #       In python, `__path__` means a *LIST* of pathnames, not a single pathname.
 #
-__path__ = [os.path.join(os.path.dirname(__file__), 'Z')]
+__path__ = [os.path.join(os.path.dirname(__file__), 'Capital')]
 
 
 import  Capital.Core                #   "Capital/Core.py"   - Core Capital support code.

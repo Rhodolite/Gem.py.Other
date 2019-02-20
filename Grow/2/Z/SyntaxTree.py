@@ -3,16 +3,7 @@
 #
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  trace
-from    Z.BuiltIn                       import  python_debug_mode
-from    Z.BuiltIn                       import  Python_Integer
-from    Z.BuiltIn                       import  python_length
-from    Z.BuiltIn                       import  Python_List
-from    Z.BuiltIn                       import  python_none
-from    Z.BuiltIn                       import  Python_NoneType
-from    Z.BuiltIn                       import  Python_Object
-from    Z.BuiltIn                       import  Python_String
-from    Z.BuiltIn                       import  Python_Tuple
-from    Z.BuiltIn                       import  python_type
+from    Capital.Types                   import  NoneType
 from    Z.Fact                          import  fact_is_empty_python_list
 from    Z.Fact                          import  fact_is_full_python_string
 from    Z.Fact                          import  fact_is_python_none
@@ -30,9 +21,9 @@ from    Z.Python_AbstractSyntaxTree     import  PythonTree_String
 from    Z.TreeContext                   import  TreeContext
 
 
-if python_debug_mode:
+if __debug__:
     from    Z.Fact                      import  fact_is_python_integer
-    from    Z.Fact                      import  fact_is_full_exact_python_list
+    from    Z.Fact                      import  fact_is_full_python_list
     from    Z.Python_AbstractSyntaxTree import  fact_is_python_abstract_syntax_tree_alias
     from    Z.Python_AbstractSyntaxTree import  fact_is_python_abstract_syntax_tree_load
     from    Z.Python_AbstractSyntaxTree import  fact_is_python_abstract_syntax_tree_module
@@ -41,7 +32,7 @@ if python_debug_mode:
 #
 #   Empty Tuple of SyntaxTree
 #
-class EmptyTuple_of_SyntaxTree(Python_Tuple):
+class EmptyTuple_of_SyntaxTree(tuple):
     __slots__ = (())
 
 
@@ -55,7 +46,7 @@ empty_tuple_of_syntax_tree = EmptyTuple_of_SyntaxTree()
 #
 #   SyntaxTree_Attribute
 #
-class SyntaxTree_Attribute(Python_Object):
+class SyntaxTree_Attribute(object):
     __slots__ = ((
         'value',                        #   Token_Name
         'attribute',                    #   Python_String
@@ -76,7 +67,7 @@ class SyntaxTree_Attribute(Python_Object):
 #
 #   SyntaxTree_Call
 #
-class SyntaxTree_Call(Python_Object):
+class SyntaxTree_Call(object):
     __slots__ = ((
         'function',                     #   SyntaxTree_*
         'arguments',                    #   Python_String
@@ -102,7 +93,7 @@ class SyntaxTree_Call(Python_Object):
 #
 #   SyntaxTree_Import_1
 #
-class SyntaxTree_Import_1(Python_Object):
+class SyntaxTree_Import_1(object):
     __slots__ = ((
         'name_or_alias',                #   SyntaxTree_Alias | Token_Name
     ))
@@ -119,7 +110,7 @@ class SyntaxTree_Import_1(Python_Object):
 #
 #   SyntaxTree_ExpressionStatement
 #
-class SyntaxTree_ExpressionStatement(Python_Object):
+class SyntaxTree_ExpressionStatement(object):
     __slots__ = ((
         'value',                        #   SyntaxTree_*
     ))
@@ -136,7 +127,7 @@ class SyntaxTree_ExpressionStatement(Python_Object):
 #
 #   SyntaxTree_Module
 #
-class SyntaxTree_Module(Python_Object):
+class SyntaxTree_Module(object):
     __slots__ = ((
         'body',                         #   SyntaxTree_*
     ))
@@ -153,7 +144,7 @@ class SyntaxTree_Module(Python_Object):
 #
 #   SyntaxTree_Name
 #
-class SyntaxTree_Name(Python_Object):
+class SyntaxTree_Name(object):
     __slots__ = ((
         'id',                           #   Token_Name
         'context',                      #   TreeContext
@@ -172,7 +163,7 @@ class SyntaxTree_Name(Python_Object):
 #
 #   SyntaxTree_None
 #
-class SyntaxTree_None(Python_Object):
+class SyntaxTree_None(object):
     __slots__ = (())
 
 
@@ -190,7 +181,7 @@ syntax_tree_none = SyntaxTree_None()
 #
 #   SyntaxTree_String
 #
-class SyntaxTree_String(Python_Object):
+class SyntaxTree_String(object):
     __slots__ = ((
         's',                            #   Python_String
     ))
@@ -207,7 +198,7 @@ class SyntaxTree_String(Python_Object):
 #
 #   Token_Name
 #
-class Token_Name(Python_String):
+class Token_Name(str):
     __slots__ = (())
 
 
@@ -218,7 +209,7 @@ class Token_Name(Python_String):
 #
 #   Tuple_of_SyntaxTree_Alias
 #
-class Tuple_of_SyntaxTree_Alias(Python_Tuple):
+class Tuple_of_SyntaxTree_Alias(tuple):
     __slots__ = (())
 
 
@@ -230,7 +221,7 @@ class Tuple_of_SyntaxTree_Alias(Python_Tuple):
 #
 #   Tuple_of_SyntaxTree_Any
 #
-class Tuple_of_SyntaxTree_Any(Python_Tuple):
+class Tuple_of_SyntaxTree_Any(tuple):
     __slots__ = (())
 
 
@@ -242,15 +233,13 @@ class Tuple_of_SyntaxTree_Any(Python_Tuple):
 #
 #   convert_alias
 #
-#       Convert an instance of `PythonTree_Alias`
-#       (i.e.: `_ast.alias`) to a `Token_Name` instance.
+#       Convert an `PythonTree_Alias` instance (i.e.: `_ast.alias`) to a `Token_Name` instance.
 #
 #   NOTE:
-#       Currently, can only handle non-aliased names (i.e.: does not have a `as`
-#       clause in the `from` or `import` statement).
+#       Currently, can only handle non-aliased names (i.e.: does not have a `as` clause in the `from` or `import`
+#       statement).
 #
-#       Does, not yet, handle aliased names (i.e.: has a `as` claues in the
-#       `from` or `import` statement).
+#       Does, not yet, handle aliased names (i.e.: has a `as` claues in the `from` or `import` statement).
 #
 assert PythonTree_Alias._attributes == (())
 assert PythonTree_Alias._fields     == (('name', 'asname'))
@@ -259,7 +248,7 @@ assert PythonTree_Alias._fields     == (('name', 'asname'))
 def convert_alias(self):
     as_name = self.asname
 
-    if as_name is python_none:
+    if as_name is None:
         return Token_Name(self.name)
 
     assert 0, "convert_alias: incomplete to handle `.as_name` that is not none"
@@ -268,8 +257,7 @@ def convert_alias(self):
 #
 #   convert_attribute
 #
-#       Convert an instance of `PythonTree_Attribute`
-#       (i.e.: `_ast.Expr`) to a `SyntaxTree_Attribute`
+#       Convert an `PythonTree_Attribute` instance (i.e.: `_ast.Expr`) to a `SyntaxTree_Attribute` instance.
 #
 assert PythonTree_Attribute._attributes == (('lineno', 'col_offset'))
 assert PythonTree_Attribute._fields     == (('value', 'attr', 'ctx'))
@@ -288,34 +276,13 @@ def convert_attribute(self):
 #
 #   convert_call
 #
-#       Convert an instance of `PythonTree_Call`
-#       (i.e.: `_ast.Expr`) to a `SyntaxTree_Call`
+#       Convert an `PythonTree_Call` instance (i.e.: `_ast.Expr`) to a `SyntaxTree_Call` instance.
 #
 assert PythonTree_Call._attributes == (('lineno', 'col_offset'))
 assert PythonTree_Call._fields     == (('func', 'args', 'keywords', 'starargs', 'kwargs'))
 
 
 def convert_call(self):
-    if 7:
-        #
-        #   Copy this disabled code into a new convert method, to trace the
-        #   attributes & fields and help write the new method.
-        #
-        #   This code was used to write most of the convert methods in this file :)
-        #
-        function_name = 'convert_call'
-
-        trace('{}._attributes: {}', function_name, self._attributes)
-        trace('{}.lineno       {}', function_name, self.lineno)
-        trace('{}.col_offset   {}', function_name, self.col_offset)
-
-        trace('{}._fields:     {}', function_name, self._fields)
-        trace('{}.func:        {}', function_name, self.func)
-        trace('{}.args:        {}', function_name, self.args)
-        trace('{}.keywords:    {}', function_name, self.keywords)
-        trace('{}.starargs:    {}', function_name, self.starargs)
-        trace('{}.kwargs:      {}', function_name, self.kwargs)
-
     return SyntaxTree_Call(
                convert                 (self.func),
                convert_list_of_any     (self.args),
@@ -348,7 +315,7 @@ map__PythonTree_Type__to__TreeContext = {
 
 
 def convert_context(self):
-    return map__PythonTree_Type__to__TreeContext[python_type(self)]
+    return map__PythonTree_Type__to__TreeContext[type(self)]
 
 
 
@@ -356,8 +323,7 @@ def convert_context(self):
 #
 #   convert_expression
 #
-#       Convert an instance of `PythonTree_Expression`
-#       (i.e.: `_ast.Expr`) to an instance of `SyntaxTree_Expression`
+#       Convert an `PythonTree_Expression` instance (i.e.: `_ast.Expr`) to an `SyntaxTree_Expression` instance.
 #
 assert PythonTree_Expression._attributes == (('lineno', 'col_offset'))
 assert PythonTree_Expression._fields     == (('value',))
@@ -372,7 +338,7 @@ def convert_expression(self):
 #
 #   convert_import
 #
-#       Convert an instance of `PythonTree_Import` (i.e.: `_ast.Import`) to an instance of `SyntaxTree_Import_1`
+#       Convert an `PythonTree_Import` instance (i.e.: `_ast.Import`) to an `SyntaxTree_Import_1` instance.
 #
 #   NOTE:
 #       Currently, Can only handle a single `.names` (i.e.: an import of a single module), does not yet handle
@@ -383,13 +349,13 @@ assert PythonTree_Import._fields     == (('names',))
 
 
 def convert_import(self):
-    assert fact_is_python_integer        (self.lineno)
-    assert fact_is_python_integer        (self.col_offset)
-    assert fact_is_full_exact_python_list(self.names)
+    assert fact_is_python_integer  (self.lineno)
+    assert fact_is_python_integer  (self.col_offset)
+    assert fact_is_full_python_list(self.names)
 
     names = self.names
 
-    if python_length(names) == 1:
+    if len(names) == 1:
         return SyntaxTree_Import_1(convert_alias(names[0]))
 
     assert 0, 'convert_import: incomplete: import of multiple modulesin'
@@ -398,11 +364,10 @@ def convert_import(self):
 #
 #   convert_list_of_any
 #
-#       Convert an instance of `Python_List` of `PythonTree_*` (i.e.: `list` of `_ast.AST`) to an instance of
-#       `Tuple_of_SyntaxTree_Any`
+#       Convert a `list` instance of `PythonTree_*` (i.e.: `list` of `_ast.AST`) to `Tuple_of_SyntaxTree_Any` instance.
 #
 def convert_list_of_any(sequence):
-    assert fact_is_full_exact_python_list(sequence)
+    assert fact_is_full_python_list(sequence)
 
     return Tuple_of_SyntaxTree_Any(convert(v)   for v in sequence)
 
@@ -411,7 +376,7 @@ def convert_list_of_any(sequence):
 #
 #   convert_list_of_keywords
 #
-#       Convert an EMPTY instance of `list` of ? to `empty_tuple_of_syntax_tree`.
+#       Convert an EMPTY `list` instance of ? to `empty_tuple_of_syntax_tree`.
 #
 #   CURRENT:
 #       Currently can only handle an empty list.
@@ -447,13 +412,11 @@ def convert_module(self):
 #
 #   convert_name
 #
-#       Convert an instance of `PythonTree_Import`
-#       (i.e.: `_ast.Import`) to an instance of `SyntaxTree_Import_1`
+#       Convert an `PythonTree_Import` instance (i.e.: `_ast.Import`) to an `SyntaxTree_Import_1` instance.
 #
 #   NOTE:
-#       Can only handle a single `.names` (i.e.: an import of a single
-#       module), does not yet handle multiple `.names` (i.e.: an import of
-#       multiple modules).
+#       Can only handle a single `.names` (i.e.: an import of a single module), does not yet handle multiple `.names`
+#       (i.e.: an import of multiple modules).
 #
 assert PythonTree_Name._attributes == (('lineno', 'col_offset'))
 assert PythonTree_Name._fields     == (('id', 'ctx'))
@@ -476,8 +439,7 @@ def convert_none(self):
 #
 #   convert_string
 #
-#       Convert an instance of `PythonTree_String` (i.e.: `_ast.Str`) to
-#       an instance of `SyntaxTree_String`.
+#       Convert an `PythonTree_String` instance (i.e.: `_ast.Str`) to a `SyntaxTree_String` instance.
 #
 #assert PythonTree_String._attributes == (('lineno', 'col_offset'))
 #assert PythonTree_String._fields     == (('func', 'args', 'keywords', 'starargs', 'kwargs'))
@@ -512,7 +474,7 @@ def convert_string(self):
 #       "convert" psuedo method (actually to a function).
 #
 map__PythonTree_Type__to__convert_pseudo_method = {
-        Python_NoneType       : convert_none,
+        NoneType              : convert_none,
         PythonTree_Attribute  : convert_attribute,
         PythonTree_Call       : convert_call,
         PythonTree_Expression : convert_expression,
@@ -531,7 +493,7 @@ map__PythonTree_Type__to__convert_pseudo_method = {
 #       Calls all the other `convert_*` pseudo methods.
 #
 def convert(v):
-    convert_pseudo_method = map__PythonTree_Type__to__convert_pseudo_method[python_type(v)]
+    convert_pseudo_method = map__PythonTree_Type__to__convert_pseudo_method[type(v)]
 
     return convert_pseudo_method(v)
 
