@@ -1,13 +1,13 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-from    Z.Core                  import  arrange
-from    Z.Crystal_ParseTree     import  Crystal_ParseTree
-from    Z.Crystal_ParseTree     import  Crystal_Statement_Copyright
-from    Z.Crystal_ParseTree     import  Crystal_Statement_Output_1
-from    Z.Python_ParseTree      import  Python_ParseTree
-from    Z.Python_ParseTree      import  Python_Statement_Comment_Many
-from    Z.Python_ParseTree      import  Python_Statement_Print_1
+from    Capital.Core                    import  arrange
+from    Z.Crystal_ParseTree             import  Crystal_ParseTree
+from    Z.Crystal_ParseTree             import  Crystal_Statement_Copyright
+from    Z.Crystal_ParseTree             import  Crystal_Statement_Output_1
+from    Z.Python_ParseTree              import  Python_ParseTree
+from    Z.Python_ParseTree              import  Python_Statement_Comment_Many
+from    Z.Python_ParseTree              import  Python_Statement_Print_1
 
 
 #
@@ -65,9 +65,7 @@ def Crystal_Statement_Output_1__convert_crystal_to_python(self, path):
 #
 #   map__Crystal_Statement_Type__to__psuedo_method : Map { Crystal_Statement_* : Function }
 #
-#       PRESENT:
-#           This maps a `Crystal_Statement_*` to a "psuedo method" (actually to
-#           a function).
+#       This maps a `Crystal_Statement_*` to a "psuedo method" (actually to a function).
 #
 #       EXPLANATION:
 #           What we really want to do, long term, is declare the

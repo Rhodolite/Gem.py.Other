@@ -1,7 +1,7 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-from    Z.Core  import  arrange
+from    Capital.Core                    import  arrange
 
 
 #

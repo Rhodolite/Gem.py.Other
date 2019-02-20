@@ -98,4 +98,4 @@ def if_main_path_ends_in_dot_z__replace_Z_module():
         crystal_input_path = sys.argv[0]
 
         if crystal_input_path.endswith('.z'):
-            replace_Z_module()
+            register_code_generator()

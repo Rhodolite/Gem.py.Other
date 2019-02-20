@@ -32,6 +32,15 @@ if 0:
 
 
 #
+#   NOTE:
+#       `Python_Type` should be imported from "Capital.Types", which, internally, imports it from this file.
+#
+#       For everyone else, `Python_Type` should *NOT* be imported from this file.
+#
+#       The only reason it in in this file, is because, logically, `type` comes from `Python_BUiltIn`.
+#
+
+#
 #   Python_Type - The base type (metaclass) of all classes and types.
 #
 #       ===  About `type` .vs. `Python_Type`  ===
