@@ -4,223 +4,86 @@
 
 
 #
-#   Capital.String - String Interface
+#   Capital.String - String Interface.
 #
-#       EmptyString - An empty string.
-#       FullString  - A string with length greater than 0
-#
-#   Both of these are inherited from the python builtin `str`.
-#
-#   DIFFERENCES:
-#
-#       The main difference is the two different string types.
-#
-#       Conceptually, they both implement the `String` interface (shown below).
-#
-#       In addition we have our own `.__repr__` method to portray strings with the consistent way we
-#       want all `.__repr__` methods in Capital to be portrayed.
-#
-#   FUTURE:
-#
-#       In the future, the code generator, will add interfaces to classes
-#       (yes, even in python, which does not support interfaces nativly).
-#
-#       For now, since this is not implemented, we just show this in comments.
-#
+from    Capital.String_Implementation   import  conjure_string      #   See `USAGE` below.
+from    Capital.String_Implementation   import  empty_string        #   See `USAGE` below.
 
 
 #
-#   Usage:
-#
-#       empty_string            #   The EmptyString singleton.
-#       conjure_string(s)       #   Conjure a String (either an EmptyString or a FullString).
-#
-#       assert fact_is_empty_string(s)
-#       assert fact_is_full_string(s)
-#       assert fact_is_string(s)
-#
-#       s.is_empty_string       #   Test if `s` is an empty string.
-#       s.is_full_string        #   Test if `s` is a full string.
-#       s.is_string             #   Test if `s` is a string.
-#
-#   DO NOT:
-#
-#       EmptyString(s)          #   DO NOT CONSTRUCT an Emptystring.  Use `empty_string` instead.
-#       FullString(s)           #   DO NOT CONSTRUCT a  FullString.   Use `conjure_string` instead.
-#
-#   FUTURE:
-#
-#       We will throw assertions if you attempt to construct an EmptyString, or FullString intead
-#       of using `empty_string` or `conjure_string`.
-#
-#       We will *HIDE* `EmptyString` and `FullString` so you can NEVER access these directly!
-#
-#   interface String
+#   interface String - String Interface.
 #
 #       Since interfaces are not native to python, for now, we just show them in comments
 #
-#       interface String
-#           is_empty_string : boolean
-#           is_full_string  : boolean
-#           is_string       := true
+#           interface String
+#               is_empty_string : Boolean
+#               is_full_string  : Boolean
+#               is_string       : Boolean
 #
-    
-
-
+#   FUTURE:
 #
-#   EmptyString - An empty string.
-#
-#       This is a singleton, there is only one empty string named `empty_string`.
-#
-class EmptyString(str):
-    #
-    #   implements String
-    #
-    __slots__ = (())
-
-
-    #
-    #   Interface String
-    #
-    is_empty_string = True
-    is_full_string  = False
-    is_string       = True
-
-
-    #__init__ - inherited from `str.__init__`
-    #__new__  - inherited from `str.__new__`
-
-
-    @staticmethod
-    def __repr__():
-        return "<''>"
-
-
-class FullString(str):
-    #
-    #   implements String
-    #
-    __slots__ = (())
-
-    
-    #
-    #   Interface String
-    #
-    is_empty_string = False
-    is_full_string  = True
-    is_string       = True
-
-
-    #__init__ - inherited from `str.__init__`
-    #__new__  - inherited from `str.__new__`
-
-
-    def __repr__(self):
-        return arrange('<{}>', str.__repr__(self))
-
-
-#
-#   empty_string - The empty string singleton.
-#   
-empty_string = EmptyString()
-
-
-
-#
-#   string_cache       - A cache of strings
-#   conjure_string     - Lookup or Create & Insert a string.
-#   insert_full_string - Insert a FullString.
-#   lookup_string      - Lookup a string.
-#   stash_string       - Stash a FullString
-#
-#       The verb "conjure" in Capital code means "lookup, and if not found, create & insert a new one".
-#
-#       The verb "insert"  in Capital code means "insert a new key; throw an exception if the key already exist".
-#
-#       The verb "lookup"  in Capital code means "attempt to find, and return `None` if not found".
-#
-#       The verb "stash"   in Capital code means "set" (set, including possibly overwriting, a value).
+#       The code generator will be able to accept interfaces, in a syntax similiar to the above, and verify them when
+#       generating code.
 #
 
 
 #
-#   string_cache - A cache of strings
+#   USAGE:
 #
-#       All strings are stored in this as key/value pairs, where the key & value are the same.
+#       empty_string                        #   The empty string singleton.
+#       conjure_string(s)                   #   Conjure a string.
 #
-#       Starts initialized with the key/value pair:
+#       s.is_empty_string                   #   Test if `s` is an empty string.
+#       s.is_full_string                    #   Test if `s` is a  full  string.
+#       s.is_string                         #   Test if `s` is a        string.
 #
-#           empty_string : empty_string
+#       assert fact_is_empty_string(s)      #   Assert that `s` is an empty string.
+#       assert fact_is_full_string(s)       #   Assert that `s` is a  full  string.
+#       assert fact_is_string(s)            #   Assert that `s` is a        string.
 #
-#       Thus, initially, the following two function calls:
-#
-#           conjure_string("")
-#           conjure_string(empty_string)
-#
-#       will both return:
-#
-#           empty_string
-#
-#       This is because we have *NOT* overridden the following methods:
-#
-#           str.__eq__
-#           str.__hash__
-#
-#       Since these methods, treat all strings (direct instance of `str`, or instances of any subclass of `str`)
-#       as equal if their characters match.
-#
-#       Likewise, we can use the string key `"Hello"` to lookup a `FullString("hello")` key,
-#       as they will these two different instances as equal (and having the same hash)..
-#
-#       Or in other words:
-#
-#           assert "hello"       == FullString("hello")             #   Uses `str.__eq__`
-#           assert hash("hello") == hash(FullString("Hello"))       #   Uses `str.__hash__` [twice].
-#
-string_cache = {                #   Map { EmptyString | FullString } of ( EmptyString | FullString )
-                   empty_string : empty_string,
-               }
+if __debug__:
+    def fact_is_empty_string(s):
+        assert s.is_empty_string
 
-lookup_full_string = string_cache.get
-stash_string       = string_cache.__setitem__
+        return True
 
 
-def insert_full_string(k):
-    assert k not in string_cache
+    def fact_is_full_string(s):
+        assert s.is_full_string
 
-    stash_string(k, k)
+        return True
+
+
+    def fact_is_string(s):
+        assert s.is_string
+
+        return True
 
 
 #
-#   conjure_string(s)   - Conjure a string, based on `s`.
+#   CONCEPTUALLY
 #
-#       `s` must be one of the following types:
+#       Conceptually there is a `String` interface -- however, there is nothing that can be
+#       accessed as `String` in any python code.
 #
-#           `str`, `EmptyString`, or `FullString`.
+#       Does *NOT* work:
 #
-def conjure_string(s):
-    r = lookup_string(s)
-
-    if r is not None:
-        return r
-
-    #
-    #   The code above here has handled the following types:
-    #
-    #       `str`         - when empty, i.e.: (`""`).
-    #       `EmptyString` - will be found in the cache & returned.
-    #       `FullString`  - will be found in the cache & returned.
-    #
-    #   The only types left to handle are:
-    #
-    #       `str`         - when full, that is, has a length greater than 0.
-    #
-    #   We thus assert the "fact" that `s` is a full python string.
-    #
-    assert fact_is_full_python_string(s)
-
-    r = FullString(s)
-
-    insert_full_string(r)
-
-    return r
+#           type(s) is String           #   NameError: name 'String' is not defined
+#
+#       Do this instead:
+#
+#           s = conjure_string('hi')
+#
+#           if s.is_string:             #   How to test if something is a string.
+#               trace('Yes, s is a String!')
+#
+#   NOTE:
+#
+#       To use `s.is_string`, `s` must be a Capital type, so that it supports the `.is_string` attribute.
+#
+#       Does *NOT* work:
+#
+#           s = "a python string, not a capital string"
+#
+#           s.is_string                 #   AttributeError: 'str' object has no attribute 'is_string'
+#
