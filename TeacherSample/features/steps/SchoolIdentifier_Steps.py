@@ -34,7 +34,7 @@ def create_course__and__print(i, name, number, parent):
 
 #
 #   create_student_or_teacher__and__print
-# 
+#
 def create_student_or_teacher__and__print(i, is_teacher, name, number):
     if is_teacher:
         person = create_Teacher(name, number)

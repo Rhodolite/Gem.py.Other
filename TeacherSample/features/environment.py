@@ -4,5 +4,5 @@
 from    TestingFramework    import  teardown
 
 
-def after_scenario(context, scenario):  
+def after_scenario(context, scenario):
     teardown()

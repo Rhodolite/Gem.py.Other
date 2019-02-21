@@ -35,7 +35,7 @@ class Teacher(Person):
         for [i, v] in enumerate(self.courses):
             print('  Course [{}]:  {}'.format(i, v))
 
-            
+
     #
     #   Public
     #

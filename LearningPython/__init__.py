@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2018 Joy Diamond.  All rights reserved.
+#   Copyright (c) 2018-2019 Joy Diamond.  All rights reserved.
 #
 @module('LearningPython')
 def module():
@@ -13,16 +13,21 @@ def module():
     transport('Capital.Class_ShowMembers',          'show_class_members')
     transport('Capital.Core',                       'attribute')
     transport('Capital.Core',                       'class_method')
+    transport('Capital.Core',                       'enumerate')
     transport('Capital.Core',                       'FrozenSet')
     transport('Capital.Core',                       'is_instance')
+    transport('Capital.Core',                       'iterate_range')
     transport('Capital.Core',                       'line')
+    transport('Capital.Core',                       'none')
     transport('Capital.Core',                       'Object')
+    transport('Capital.Core',                       'privileged')
     transport('Capital.Core',                       'property')
     transport('Capital.Core',                       'sorted_list')
+    transport('Capital.Core',                       'true')
     transport('Capital.Core',                       'Type')
     transport('Capital.Create_Metaclass',           'create_metaclass')
     transport('Capital.Exception',                  'AttributeError')
-    transport('Capital.Exception',                  'PREPARE_attribute_ERROR')
+    transport('Capital.Exception',                  'PREPARE_AttributeError')
     transport('Capital.Exception',                  'raise_runtime_error')
     transport('Capital.Introspection',              'introspect')
     transport('Capital.Introspection',              'introspect_hidden')
@@ -30,8 +35,13 @@ def module():
     transport('Capital.Line',                       'blank_suppress')
     transport('Capital.Line',                       'indent')
     transport('Capital.Map',                        'iterate_items_sorted_by_key')
+    transport('Capital.Portray',                    'portray_2')
+    transport('Capital.Portray',                    'portray_code')
+    transport('Capital.Portray',                    'portray_full_tuple')
+    transport('Capital.Portray',                    'portray_tuple')
     transport('Capital.ProcessObjectMembers',       'base_classes__Object')
     transport('Capital.ProcessObjectMembers',       'process_object_members')
     transport('Capital.ProcessTypeMembers',         'process_type_members')
     transport('Capital.TypeMembers',                'create_python_type')
     transport('Capital.TypeMembers',                'Type__operator__call')
+    transport('Capital.Portray',                    'portray_2')
