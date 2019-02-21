@@ -1,7 +1,17 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-from    Z.Core                  import  arrange
+
+
+#-<OLD>
+#-from  Z.Core                          import  arrange
+#-</OLD>
+
+#+<NEW>
+from    Capital.Core                    import  arrange
+#+</NEW>
+
+
 from    Z.Crystal_ParseTree     import  Crystal_ParseTree
 from    Z.Crystal_ParseTree     import  Crystal_Statement_Copyright
 from    Z.Crystal_ParseTree     import  Crystal_Statement_Output_1

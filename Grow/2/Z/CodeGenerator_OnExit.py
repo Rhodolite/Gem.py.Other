@@ -5,9 +5,17 @@ import  atexit
 import  sys
 
 
-from    Z.Core      import  arrange
-from    Z.Core      import  trace
-from    Z.Extract   import  crystal_input
+#-<OLD>
+#-from  Z.Core                          import  arrange
+#-from  Z.Core                          import  trace
+#-</OLD>
+
+#+<NEW>
+from    Capital.Core                    import  arrange
+from    Capital.Core                    import  trace
+#+</NEW>
+
+from    Z.Extract                       import  crystal_input
 
 
 #
