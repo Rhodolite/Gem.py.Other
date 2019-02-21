@@ -794,3 +794,25 @@ module_parent_directory_path = parent_path__good_enough_for_now(module_directory
 #
 def path_to_file_in_parent_directory(filename):
     return python_path_join(module_parent_directory_path, filename)
+
+
+#
+#   FUTURE - SEE ALSO:
+#
+#       "Capital.String_0.py" - String or Absent Interface
+#
+#       Reading the String or Null interface, will help explain some of the tests above
+#       (i.e.: you often want to test if something `.is_null` or `._is_string`).
+#
+    def fact_is_empty_string(s):
+        assert s.is_empty_string
+
+        return True
+
+
+    def fact_is_full_string(s):
+        assert s.is_full_string
+
+        return True
+
+

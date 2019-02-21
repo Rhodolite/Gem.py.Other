@@ -55,7 +55,13 @@ class Python_Statement_Comment_Many(object):
 
 class Python_Statement_Print_1(object):
     __slots__ = ((
-        'argument',                     #   Any
+#-<OLD>
+#-      'argument',                     #   Any
+#-</OLD>
+
+#+<NEW>
+        'argument',                     #   String
+#+</NEW>
     ))
 
 
@@ -64,4 +70,29 @@ class Python_Statement_Print_1(object):
 
 
     def create_python_code(self, f):
-        f.write(arrange('print({!r})\n', self.argument))
+#-<OLD>
+#-      f.write(arrange('print({!r})\n', self.argument))
+#-</OLD>
+
+#+<NEW>
+        #
+        #   The "<OLD>" version used `{!r}` (i.e.: call python, internally, to get the representation of
+        #   `self.argument`).
+        #
+        #   This "<NEW>" version uses `{}` instead, and call the specific method:
+        #
+        #       `.python_code()`
+        #
+        #   This is defined in "Capital/String.py" as:
+        #
+        #       s.python_code()         #   Return a `str` instance that is the python code that python will
+        #                               #   compile to a `str` instance with the same characters.
+        #
+        #   In other words, currently, "<NEW>" is the same as "<OLD>", but this "<NEW>" code is much easier for us,
+        #   later, to modify the underlying decision how to generate "python code".
+        #
+        #       (As "Capital/String_Implementation.py" explains, we will in fact, modify this
+        #       in the future so that `.python_code()` calls our own improved `portray_python_string` function).
+        #
+        f.write(arrange('print({})\n', self.argument.python_code()))
+#+</NEW>

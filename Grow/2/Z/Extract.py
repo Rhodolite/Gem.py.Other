@@ -4,6 +4,11 @@
 import  sys
 
 
+#+<NEW>
+from    Capital.Fact                    import  fact_is_python_string
+from    Capital.String                  import  conjure_string
+#+</NEW>
+
 from    Z.Crystal_ParseTree             import  Crystal_ParseTree
 from    Z.Crystal_ParseTree             import  Crystal_Statement_Copyright
 from    Z.Crystal_ParseTree             import  Crystal_Statement_Output_1
@@ -65,7 +70,20 @@ class Extract_ParseTree_by_using_Z_Commands(object):
     #   Z.output (line 8 for "Vision.z")
     #
     def output(self, argument):
-        crystal_input.append_crystal_statement(Crystal_Statement_Output_1(argument))
+#-<OLD>
+#-      crystal_input.append_crystal_statement(Crystal_Statement_Output_1(argument))
+#-</OLD>
+
+#+<NEW>
+        #
+        #   Our current code is very limited, and can only handle a `str` argument.
+        #
+        assert fact_is_python_string
+
+        string_argument = conjure_string(argument)
+
+        crystal_input.append_crystal_statement(Crystal_Statement_Output_1(string_argument))
+#+</NEW>
 
 
 #

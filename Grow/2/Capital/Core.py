@@ -79,6 +79,7 @@ def FATAL(message, *arguments):
     sys.exit(1)
 
 #
+#   
 #   FATAL_AND_FORCE_EXIT - output an error message to standard error, then FORCE a program exit.
 #
 #       Example code to force an exit using `sys._exit` -- which does not thrown an exception, cannot be

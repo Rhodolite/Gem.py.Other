@@ -4,7 +4,21 @@
 
 
 #
-#   Capital.String - String Interface.
+#   Capital.String - String Interface.  Strings are Unique (in normal case).
+#
+#       By "Unique" we mean is only one string for each unique value.
+#
+#       In addition to being unique, strings are currently classifed into two groups:
+#
+#           empty       - The singleton `empty_string` has a value of `<''>`.
+#           full        - A string with length greater than 0.
+#
+#       Testing for these groups. is done with:
+#
+#           .is_empty_string
+#           .is_full_string
+#
+#       Testing is *NOT* done with the python `type` bulitin.
 #
 from    Capital.String_Implementation   import  conjure_string      #   See `USAGE` below.
 from    Capital.String_Implementation   import  empty_string        #   See `USAGE` below.
@@ -19,6 +33,7 @@ from    Capital.String_Implementation   import  empty_string        #   See `USA
 #               is_empty_string : Boolean
 #               is_full_string  : Boolean
 #               is_string       : Boolean
+#               python_code()   : Python_String
 #
 #   FUTURE:
 #
@@ -37,27 +52,28 @@ from    Capital.String_Implementation   import  empty_string        #   See `USA
 #       s.is_full_string                    #   Test if `s` is a  full  string.
 #       s.is_string                         #   Test if `s` is a        string.
 #
+#       s.python_code()                     #   Return a `str` instance that is the python code that python will
+#                                           #   compile to a `str` instance with the same characters.
+#
 #       assert fact_is_empty_string(s)      #   Assert that `s` is an empty string.
 #       assert fact_is_full_string(s)       #   Assert that `s` is a  full  string.
 #       assert fact_is_string(s)            #   Assert that `s` is a        string.
 #
-if __debug__:
-    def fact_is_empty_string(s):
-        assert s.is_empty_string
-
-        return True
 
 
-    def fact_is_full_string(s):
-        assert s.is_full_string
-
-        return True
-
-
-    def fact_is_string(s):
-        assert s.is_string
-
-        return True
+#
+#   EVALUATION IN BOOLEAN CONTEXT
+#
+#       Following standard python conventions of evaluating an object in a boolean context:
+#
+#           `empty_string`      - In a boolean context, evaluates to `False`.
+#           All full strings    - In a boolean context, evaluates to `True`.
+#
+#       This matches what python does:
+#
+#           ""                  - In a boolean context, evaluates to `False`.
+#           "any other string"  - In a boolean context, evaluates to `True`.
+#
 
 
 #
