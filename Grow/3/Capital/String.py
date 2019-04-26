@@ -8,32 +8,35 @@
 #
 #       By "Unique" we mean is only one string for each unique value.
 #
-#       In addition to being unique, strings are currently classifed into two groups:
+#       In addition to being unique, strings are currently classified into two groups:
 #
 #           empty       - The singleton `empty_string` has a value of `<''>`.
 #           full        - A string with length greater than 0.
 #
-#       Testing for these groups. is done with:
+#       Testing for these groups is done with:
 #
 #           .is_empty_string
 #           .is_full_string
 #
-#       Testing is *NOT* done with the python `type` bulitin.
+#       Testing is *NOT* done with the python `type` builtin.
 #
-from    Capital.String_Implementation   import  conjure_string      #   See `USAGE` below.
-from    Capital.String_Implementation   import  empty_string        #   See `USAGE` below.
 
 
 #
 #   interface String - String Interface.
 #
-#       Since interfaces are not native to python, for now, we just show them in comments
+#       Since interfaces are not native to python, for now, we just show them in comments:
 #
 #           interface String
-#               is_empty_string : Boolean
-#               is_full_string  : Boolean
-#               is_string       : Boolean
-#               python_code()   : Python_String
+#               attribute
+#                   is_empty_string : Boolean
+#                   is_full_string  : Boolean
+#
+#               method
+#                   python_code() : FullNativeString
+#
+#               debug
+#                   is_some_string : Boolean
 #
 #   FUTURE:
 #
@@ -45,19 +48,26 @@ from    Capital.String_Implementation   import  empty_string        #   See `USA
 #
 #   USAGE:
 #
-#       empty_string                        #   The empty string singleton.
 #       conjure_string(s)                   #   Conjure a string.
+#       empty_string                        #   The empty string singleton.
 #
 #       s.is_empty_string                   #   Test if `s` is an empty string.
 #       s.is_full_string                    #   Test if `s` is a  full  string.
-#       s.is_string                         #   Test if `s` is a        string.
 #
-#       s.python_code()                     #   Return a `str` instance that is the python code that python will
-#                                           #   compile to a `str` instance with the same characters.
+#       s.python_code()                     #   Return a `NativeString` that is the python code that python will
+#                                           #   compile to a `str` with the same characters as `s`.
+#
+#
+
+
+#
+#   USAGE (debug mode):
+#
+#       s.is_some_string                    #   Test if `s` is a string.
 #
 #       assert fact_is_empty_string(s)      #   Assert that `s` is an empty string.
 #       assert fact_is_full_string(s)       #   Assert that `s` is a  full  string.
-#       assert fact_is_string(s)            #   Assert that `s` is a        string.
+#       assert fact_is_some_string(s)       #   Assert that `s` is a        string.
 #
 
 
@@ -90,16 +100,50 @@ from    Capital.String_Implementation   import  empty_string        #   See `USA
 #
 #           s = conjure_string('hi')
 #
-#           if s.is_string:             #   How to test if something is a string.
+#           if s.is_full_string:        #   How to test if something is a string.
 #               trace('Yes, s is a String!')
 #
 #   NOTE:
 #
-#       To use `s.is_string`, `s` must be a Capital type, so that it supports the `.is_string` attribute.
+#       To use `s.is_some_string`, `s` must be a Capital type, so that it supports the `.is_some_string` attribute.
 #
 #       Does *NOT* work:
 #
 #           s = "a python string, not a capital string"
 #
-#           s.is_string                 #   AttributeError: 'str' object has no attribute 'is_string'
+#           s.is_full_string            #   AttributeError: 'str' object has no attribute 'is_full_string'
 #
+
+
+from    Capital.Private.ConjureString_V3    import  conjure_string_v3   as  conjure_string
+from    Capital.Private.EmptyString_V3      import  empty_string_v3     as  empty_string
+
+
+#
+#   fact_is_empty_string(s) - Assert that `s` is an empty string.
+#
+if __debug__:
+    def fact_is_empty_string(v):
+        assert s.is_empty_string
+
+        return True
+
+
+#
+#   fact_is_full_string(s) - Assert that `s` is an full string.
+#
+if __debug__:
+    def fact_is_full_string(v):
+        assert s.is_full_string
+
+        return True
+
+
+#
+#   fact_is_some_string(s) - Assert that `s` is a string.
+#
+if __debug__:
+    def fact_is_some_string(v):
+        assert s.is_some_string
+
+        return True

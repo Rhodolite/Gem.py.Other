@@ -7,6 +7,7 @@ from    sys                             import  argv            as  python_progr
 
 from    Capital.Core                    import  ERROR
 from    Capital.Core                    import  FATAL
+from    Capital.String                  import  conjure_string
 from    Capital.Core                    import  trace
 from    Z.Build_DumpToken               import  build_dump_token
 from    Z.Path                          import  path_to_file_in_Z_directory
@@ -32,7 +33,7 @@ def parent_path__good_enough_for_now(path):
     return python_path_absolute(python_path_join(path, '..'))
 
 
-def command_development():
+def command_parse():
     vision_path = path_to_file_in_Z_directory('ParseTest.py')
 
     with open(vision_path) as f:
@@ -47,6 +48,19 @@ def command_development():
 
     for s in f:
         trace('{}', s)
+
+
+def command_string():
+    hello = conjure_string("hello")
+
+    assert hello is conjure_string("hello")
+
+    trace('hello: {!r}', hello)
+
+
+def command_development():
+   #command_parse()
+    command_string()
 
 
 def USAGE(format, *arguments):
