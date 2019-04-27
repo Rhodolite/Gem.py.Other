@@ -14,8 +14,8 @@ default_name_version          = 2
 default_operator_version      = '1'
 default_parameter_version     = '1'
 default_statement_version     = '1'
-default_symbol_version        = 0
-default_target_version        = 1
+default_symbol_version        = 1
+default_target_version        = 2
 
 
 if default_context_version:
@@ -25,11 +25,8 @@ if default_context_version:
     #       Maximum allowed name   version is 2.
     #       Maximum allowed target version is 2.
     #
-    if default_name_version > 2:
-        default_name_version = 2
-
-    if default_target_version > 2:
-        default_target_version = 2
+    assert default_name_version   <= 2
+    assert default_target_version <= 2
 else:
     #
     #   NOT Using `Tree_Context`:
@@ -38,14 +35,9 @@ else:
     #       Symbols must be used.
     #       Minimum allowed target version is 3.
     #
-    if default_name_version < 3:
-        default_name_version = 3
-
-    if default_symbol_version == 0:
-        default_symbol_version = 1
-
-    if default_target_version < 3:
-        default_target_version = 3
+    assert default_name_version   >= 3
+    assert default_symbol_version == 1
+    assert default_target_version >= 3
 
 
 if default_symbol_version == 0:
@@ -55,8 +47,8 @@ if default_symbol_version == 0:
     #       Name   version must be 1.
     #       Target version must be 1.
     #
-    default_name_version   = 1
-    default_target_version = 1
+    assert default_name_version   == 1
+    assert default_target_version == 1
 else:
     #   
     #   Using symbols:
@@ -64,11 +56,8 @@ else:
     #       Minumum allowed name   version is 2.
     #       Minumum allowed target version is 3.
     #
-    if default_name_version < 2:
-        default_name_version = 2
-
-    if default_target_version < 2:
-        default_target_version = 2
+    assert default_name_version   >= 2
+    assert default_target_version >= 2
 
 
 #

@@ -4,12 +4,27 @@
 
 
 #
-#   Z.Tree.Convert_Attribute_V1 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 1.
+#   Z.Tree.Convert_Attribute_V2 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           Pass in `self.attr` as the `attribute` parameter (four parameter) to `create_Tree_Attribute`.
+#
+#       Version 2:
+#
+#           Pass in `conjure_symbol(self.attr)` as the `attribute` parameter (four parameter) to
+#           `create_Tree_Attribute`.
+#
+
+
+from    Z.Parser.Symbol                     import  conjure_symbol
 from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Target                       import  create_Tree_Attribute
@@ -45,6 +60,6 @@ def convert_attribute_expression(self):
                self.col_offset,
 
                convert_expression                  (self.value),
-               self.attr,
+               conjure_symbol                      (self.attr),
                convert_delete_load_OR_store_context(self.ctx),
           )
