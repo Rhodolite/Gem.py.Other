@@ -6,15 +6,12 @@
 #
 #   Z.Tree.Convert_Target - Convert Python Abstract Syntax Tree Targets to Tree classes.
 #
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
 #   See "Z/Tree/Target.py" for an explantion of what a "target" is.
 #
 
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Attribute            import  convert_attribute_expression
 from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Convert_Context              import  convert_load_OR_store_context
 from    Z.Tree.Convert_Index                import  convert_index_clause
@@ -28,7 +25,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Su
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
 from    Z.Tree.Target                       import  create_Tree_List_Expression
-from    Z.Tree.Target                       import  create_Tree_Subscript_Expression
+from    Z.Tree.Subscript_V1                 import  create_Tree_Subscript_Expression
 from    Z.Tree.Target                       import  create_Tree_Tuple_Expression
 
 
@@ -42,6 +39,32 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__INDEX
+
+
+
+#
+#   Import the version of tree targets we want to use.
+#
+from    Z.Tree.Global                   import  tree_globals
+
+
+target_version = tree_globals.target_version
+
+
+if target_version == 1:
+    from    Z.Tree.Convert_Attribute_V1     import  convert_attribute_expression
+    from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression
+elif target_version == 2:
+    from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
+    from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression        #   "_V1" on purpose
+elif target_version == 3:
+    from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
+    from    Z.Tree.Convert_Subscript_V3     import  convert_subscript_expression
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Tree/Convert_Target.py: unknown tree target version: {!r}', target_version)
+
 
 
 #
@@ -76,34 +99,6 @@ assert Native_AbstractSyntaxTree_List_Expression._fields     == (('elts', 'ctx')
 
 def convert_list_expression(self):
     return convert_many_expression(self, create_Tree_List_Expression)
-
-
-#
-#   convert_subscript_expression(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Subscript_Expression` (i.e.: `_ast.Subscript`) to a
-#       `Tree_Subscript_Expression`.
-#
-assert Native_AbstractSyntaxTree_Subscript_Expression._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Subscript_Expression._fields     == (('value', 'slice', 'ctx'))
-
-
-def convert_subscript_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                  (self.value)
-    assert fact_is__ANY__native__abstract_syntax_tree__INDEX                       (self.slice)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(self.ctx)
-
-    return create_Tree_Subscript_Expression(
-               self.lineno,
-               self.col_offset,
-               
-               convert_expression                  (self.value),
-               convert_index_clause                (self.slice),
-               convert_delete_load_OR_store_context(self.ctx),
-           )
 
 
 #

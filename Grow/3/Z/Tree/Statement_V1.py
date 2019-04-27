@@ -362,7 +362,7 @@ class Tree_Delete_Statement_V1(object):
     def dump_token(self, f):
         first = True
 
-        f.arrange('<delete @{}:{} ', self.line_number, self.column)
+        f.arrange('<delete @{}:{}', self.line_number, self.column)
 
         for v in self.targets:
             if first:

@@ -8,24 +8,28 @@
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-#   Version 2:
+
+
 #
-#       Tree_Name had a `.context` member which four possible values:
+#   Difference between Version 2 & Version 3
+#
+#       Version 2:
+#
+#           Tree_Name had a `.context` member which four possible values:
 #
 #               tree_delete_context
 #               tree_load_context
 #               tree_parameter_context
 #               tree_store_context
 #
-#   Version 3:
+#       Version 3:
 #
-#       Instead of a single class with a `.context` member, four classes exist instead:
+#           Instead of a single class with a `.context` member, four classes exist instead:
 #
 #               Tree_Delete_Name            -   Replacement for the `tree_delete_context` value.
 #               Tree_Evaluate_Name          -   Replacement for the `tree_load_context` value.
 #               Tree_Normal_Parameter       -   Replacement for the `tree_parameter_context` value.
 #               Tree_Store_Name             -   Replacement for the `tree_store_context` value.
-#
 #
 
 

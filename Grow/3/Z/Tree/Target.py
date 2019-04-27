@@ -135,7 +135,6 @@ target_version = tree_globals.target_version
 if target_version in ((1, 2, 3)):
     from    Z.Tree.Target_V1            import  (
                 create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
-                create_Tree_Subscript_Expression_V1     as  create_Tree_Subscript_Expression,
                 create_Tree_Tuple_Expression_V1         as  create_Tree_Tuple_Expression,
         )
 else:

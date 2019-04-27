@@ -8,6 +8,11 @@
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
+
+
+#
+#   Difference between Version 1 & Version 2
+#
 #   Version 1:
 #
 #       `Tree_Name` had a `.id : NativeString` member.

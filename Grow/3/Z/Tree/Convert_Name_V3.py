@@ -13,10 +13,6 @@
 #
 #   Difference between Version 2 & Version 3
 #
-#       Version 1:
-#
-#           Pass in `self.id` as the `id` parameter (third parameter) to `create_Tree_Name`.
-#
 #       Version 2:
 #
 #           Pass in a context to `create_Tree_Name`
@@ -33,8 +29,6 @@
 
 
 from    Z.Parser.Symbol                     import  conjure_symbol
-from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
-from    Z.Tree.Convert_Context              import  convert_parameter_context
 from    Z.Tree.Name_V3                      import  create_Tree_Delete_Name
 from    Z.Tree.Name_V3                      import  create_Tree_Evaluate_Name
 from    Z.Tree.Name_V3                      import  create_Tree_Normal_Parameter
