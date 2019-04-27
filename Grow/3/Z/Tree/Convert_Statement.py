@@ -91,7 +91,7 @@ if __debug__:
 #
 #       Common code for `convert_break_statement`, `convert_continue_statement` and `convert_pass_statement`.
 #
-def convert_continue_statement(self, create):
+def convert_keyword_statement(self, create):
     assert fact_is_positive_integer   (self.lineno)
     assert fact_is_substantial_integer(self.col_offset)
 

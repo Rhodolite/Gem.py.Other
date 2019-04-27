@@ -94,14 +94,14 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.comprehension_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Comprehension_V1     import  (
                 create_Tree_Comprehension_Clause_V1     as  create_Tree_Comprehension_Clause,
         )
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Comprehension.py: unknown tree version: {}', tree_version)
+    FATAL('Z/Tree/Comprehension.py: unknown tree comprehension version: {!r}', version)

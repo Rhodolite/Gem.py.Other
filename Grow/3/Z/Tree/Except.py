@@ -76,12 +76,12 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.except_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Except_V1            import  create_Tree_Except_Handler_V1   as  create_Tree_Except_Handler
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Except.py: unknown tree version: {}', tree_version)
+    FATAL('Z/Tree/Except.py: unknown tree except version: {!r}', version)

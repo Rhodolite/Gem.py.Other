@@ -39,15 +39,15 @@
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.argument_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Argument_1               import  create_Tree_Keyword_Argument_V1     as  create_Tree_Keyword_Argument
 else:
     from    Capital.Core                    import  FATAL
 
-    FATAL('Z/Tree/Argument.py: unknown tree version: {}', tree_version)
+    FATAL('Z/Tree/Argument.py: unknown tree argument version: {!r}', version)
 
 
 #

@@ -71,10 +71,10 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.index_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Index_V1         import  (
                 create_Tree_Extended_Slice_Index_V1     as  create_Tree_Extended_Slice_Index,
                 create_Tree_Simple_Index_V1             as  create_Tree_Simple_Index,
@@ -84,4 +84,4 @@ if tree_version in (('1', '2')):
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Index.py: unknown tree version: {}', tree_version)
+    FATAL('Z/Tree/Index.py: unknown tree index version: {!r}', version)

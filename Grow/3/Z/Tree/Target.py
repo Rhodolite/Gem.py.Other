@@ -126,10 +126,10 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.target_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Target_V1            import  (
                 create_Tree_Attribute_V1                as  create_Tree_Attribute,
                 create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
@@ -139,4 +139,4 @@ if tree_version in (('1', '2')):
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Target.py: unknown tree version: {}', tree_version)
+    FATAL('Z/Tree/Target.py: unknown tree target version: {!r}', version)

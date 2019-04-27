@@ -6,10 +6,11 @@ from    os.path                     import  join        as  python_path_join
 
 
 #
-#   Z.Tree - Abstract Syntax Tree modules
+#   Z.Parser
 #
 
+
 #
-#   Load Z.Tree submodules from "Z/Tree" directory.
+#   Load Z.Parser submodules from "Z/Parser" directory.
 #
-__path__ = [python_path_join(python_path_directory_name(__file__), 'Tree')]
+__path__ = [python_path_join(python_path_directory_name(__file__), 'Parser')]

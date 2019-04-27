@@ -4,161 +4,59 @@
 
 
 #
-#   Z.Tree.Name - Interface to tree class that represent a name (in a specific context).
+#   Z.Tree.Name - Interface to tree classes that represent a name (in a context).
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-
-
-from    Capital.Core                    import  arrange
-
-
-if __debug__:
-    from    Capital.Fact                import  fact_is_empty_native_list
-    from    Capital.Fact                import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Tree.Context              import  fact_is_tree_delete_context
-    from    Z.Tree.Context              import  fact_is_tree_load_context
-    from    Z.Tree.Context              import  fact_is_tree_parameter_context
-    from    Z.Tree.Context              import  fact_is_tree_store_context
+#   Explanation:
+#
+#       A Tree name is used to access a symbol (i.e.: a variable).#
+#
+#       It has a context that explains how it is accessed.
+#
+#   Furthur Explanation:
+#
+#       See "Z.Tree.Context" for an explanation of contexts.
+#
+#       To quote from there:
+#
+#           A "tree context" is used to indicate the context of another tree node:
+#
+#               A `Tree_Name` is used to access a symbol (i.e: a variable), it has a context that is either:
+#
+#                   `delete`            (to delete the symbol),
+#                   `load`              (to get the value of the symbol),
+#                   `parameter`         (to define a function parameter), or
+#                   `store`             (to save a new value to the symbol).
+#
+#       (again see "Z.Tree.Context" for more details).
+#
 
 
 #
-#   Tree_Name - A name (in a specific context).
+#   interface Tree_Name
+#       documentation
+#           Interface to tree classes that represent names.
 #
-#       See "Z/Tree/Context.py" for explanation of contexts.
+#       extends Tree_Delete_Target,
+#               Tree_Expression,
+#               Tree_Parameter,
+#               Tree_Store_Target
 #
-#       Because a `Tree_Name` can appear both as an expression, as a parameter, and as a target, it implements the
-#       `Tree_Expression`, `Tree_Parameter`, and `Tree_Target` interfaces.
+
+
 #
-class Tree_Name(object):
-    #
-    #   Implements Tree_Delete_Target,
-    #              Tree_Expression,
-    #              Tree_Parameter,
-    #              Tree_Store_Target
-    #
-    __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
-
-        'id',                           #   NativeString
-        'context',                      #   Tree_Context
-    ))
+#   Import the version of tree names we want to use.
+#
+from    Z.Tree.Global                   import  tree_globals
 
 
-    #
-    #   Private
-    #
-    def __init__(self, line_number, column, id, context):
-        self.line_number = line_number
-        self.column      = column
-
-        self.id      = id
-        self.context = context
+version = tree_globals.name_version
 
 
-    def _dump_tree_name_token(self, f):
-        f.arrange('<name @{}:{} {} ', self.line_number, self.column, self.id)
-        self.context.dump_context_token(f)
-        f.greater_than_sign()
+if version == '1':
+    from    Z.Tree.Name_V1              import  create_Tree_Name_V1     as  create_Tree_Name
+else:
+    from    Capital.Core                import  FATAL
 
-
-    #
-    #   Interface Tree_Delete_Target
-    #
-    if __debug__:
-        @property
-        def is_tree_delete_target(self):
-            return self.context.is_tree_delete_context
-
-
-    if __debug__:
-        def dump_delete_target_tokens(self, f):
-            assert fact_is_tree_delete_context(self.context)
-
-            self._dump_tree_name_token(f)
-    else:
-        dump_delete_target_tokens = _dump_tree_name_token
-
-
-    #
-    #   Interface Tree_Expression
-    #
-    if __debug__:
-        @property
-        def is_tree_expression(self):
-            return self.context.is_tree_expression_context
-
-
-    if __debug__:
-        def dump_evaluate_tokens(self, f):
-            assert fact_is_tree_load_context(self.context)
-
-            self._dump_tree_name_token(f)
-    else:
-        dump_evaluate_tokens = _dump_tree_name_token
-
-
-    #
-    #   Interface Tree_Parameter
-    #
-    if __debug__:
-        is_tree_keyword_parameter = False
-        is_tree_parameters_all    = False
-        
-
-        @property
-        def is_tree_parameter(self):
-            return self.context.is_tree_parameter_context
-
-
-        is_tree_normal_parameter = is_tree_parameter
-
-
-
-    if __debug__:
-        def dump_parameter_tokens(self, f):
-            assert fact_is_tree_parameter_context(self.context)
-
-            self._dump_tree_name_token(f)
-    else:
-        dump_parameter_tokens = _dump_tree_name_token
-
-
-    #
-    #   Interface Tree_Store_Target
-    #
-    if __debug__:
-        @property
-        def is_tree_store_target(self):
-            return self.context.is_tree_store_context
-
-
-    if __debug__:
-        def dump_store_target_tokens(self, f):
-            assert fact_is_tree_store_context(self.context)
-
-            self._dump_tree_name_token(f)
-    else:
-        dump_store_target_tokens = _dump_tree_name_token
-
-
-    #
-    #   Public
-    #
-    is_tree_token_name = True
-
-
-    def __repr__(self):
-        return arrange('<Tree_Name @{}:{} {!r} {}>', self.line_number, self.column, self.id, self.context)
-
-
-def create_Tree_Name(line_number, column, id, context):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_full_native_string(id)
-
-    return Tree_Name(line_number, column, id, context)
+    FATAL('Z/Tree/Name.py: unknown tree name version: {!r}', version)

@@ -44,10 +44,10 @@
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.operator_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Operator_V1          import (
                 tree_add_operator_v1                            as  tree_add_operator,
                 tree_binary_and_operator_v1                     as  tree_binary_and_operator,
@@ -81,7 +81,7 @@ if tree_version in (('1', '2')):
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Operator.py: not relevant for tree_version: {}', tree_version)
+    FATAL('Z/Tree/Operator.py: not relevant for tree operator version: {!r}', version)
 
 
 #

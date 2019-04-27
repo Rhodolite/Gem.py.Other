@@ -57,15 +57,15 @@
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.alias_version
 
 
-if tree_version in (('1', '2')):
+if version == '1':
     from    Z.Tree.Alias_1                  import  create_Tree_Alias_V1    as  create_Tree_Alias_Clause
 else:
     from    Capital.Core                    import  FATAL
 
-    FATAL('Z/Tree/Alias.py: unknown tree version: {}', tree_version)
+    FATAL('Z/Tree/Alias.py: unknown tree alias version: {!r}', version)
 
 
 #

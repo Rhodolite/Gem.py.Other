@@ -119,15 +119,15 @@ from    Capital.Core                    import  trace
 from    Z.Tree.Global                   import  tree_globals
 
 
-tree_version = tree_globals.tree_version
+version = tree_globals.context_version
 
 
-if tree_version == '1':
+if version == '1':
     from    Z.Tree.Context_V1               import  tree_context_delete_v1      as  tree_delete_context
     from    Z.Tree.Context_V1               import  tree_context_load_v1        as  tree_load_context
     from    Z.Tree.Context_V1               import  tree_context_parameter_v1   as  tree_parameter_context
     from    Z.Tree.Context_V1               import  tree_context_store_v1       as  tree_store_context
-elif tree_version == '2':
+elif version == '2':
     from    Z.Tree.Context_V2               import  Tree_Context_2
 
 
@@ -138,7 +138,7 @@ elif tree_version == '2':
 else:
     from    Capital.Core                    import  FATAL
 
-    FATAL('Z/Tree_Context.py: not relevant for tree_version: {}', tree_version)
+    FATAL('Z/Tree/Context.py: not relevant for context version: {}', version)
 
 
 #

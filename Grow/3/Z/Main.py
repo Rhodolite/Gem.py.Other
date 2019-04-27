@@ -59,8 +59,8 @@ def command_string():
 
 
 def command_development():
-   #command_parse()
-    command_string()
+    command_parse()
+   #command_string()
 
 
 def USAGE(format, *arguments):
