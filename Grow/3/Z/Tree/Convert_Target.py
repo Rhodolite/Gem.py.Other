@@ -14,6 +14,7 @@
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
+from    Z.Tree.Convert_Attribute            import  convert_attribute_expression
 from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Convert_Context              import  convert_load_OR_store_context
 from    Z.Tree.Convert_Index                import  convert_index_clause
@@ -63,33 +64,6 @@ def convert_many_expression(self, create):
                convert_some_list_of_expressions(self.elts),
                convert_load_OR_store_context   (self.ctx),
            )
-
-
-#
-#   convert_attribute_expression(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Attribute_Expression` (i.e.: `_ast.Expr`) to a `Tree_Attribute`.
-#
-assert Native_AbstractSyntaxTree_Attribute_Expression._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Attribute_Expression._fields     == (('value', 'attr', 'ctx'))
-
-
-def convert_attribute_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                  (self.value)
-    assert fact_is_full_native_string                                              (self.attr)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(self.ctx)
-
-    return create_Tree_Attribute(
-               self.lineno,
-               self.col_offset,
-
-               convert_expression(self.value),
-               self.attr,
-               convert_delete_load_OR_store_context(self.ctx),
-          )
 
 
 #

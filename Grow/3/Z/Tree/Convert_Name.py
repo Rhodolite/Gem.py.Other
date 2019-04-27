@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Name - - Convert Python Abstract Syntax Tree Expressions to Tree classes.
+#   Z.Tree.Convert_Name - Convert Python Abstract Syntax Tree Expressions to Tree classes.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -19,13 +19,13 @@ from    Z.Tree.Global                   import  tree_globals
 name_version = tree_globals.name_version
 
 
-if name_version == '1':
+if name_version == 1:
     from    Z.Tree.Convert_Name_V1      import  convert_name_expression
     from    Z.Tree.Convert_Name_V1      import  convert_name_parameter
-elif name_version == '2':
+elif name_version == 2:
     from    Z.Tree.Convert_Name_V2      import  convert_name_expression
     from    Z.Tree.Convert_Name_V2      import  convert_name_parameter
-elif name_version == '3':
+elif name_version == 3:
     from    Z.Tree.Convert_Name_V3      import  convert_name_expression
     from    Z.Tree.Convert_Name_V3      import  convert_name_parameter
 else:

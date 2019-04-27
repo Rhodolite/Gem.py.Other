@@ -8,6 +8,7 @@
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
+#
 #   Explanation:
 #
 #       A "target" is subset of "expression" that can appear to the left of an `=` or in a `delete` statement.
@@ -20,6 +21,7 @@
 #           Tree_Subscript_Expression
 #           Tree_Tuple_Expression
 #
+#
 #   Examples:
 #
 #       The following shows the different types of targets:
@@ -29,6 +31,7 @@
 #           e[7]     = 3                            #   `a[7]`     is a `Tree_Subscript_Expression`
 #           [e, g.h] = [4, 5]                       #   `[a, a.b]` is a `Tree_List_Expression`
 #           (i, j.k) = [6, 7]                       #   `(a, a.b)` is a `Tree_Tuple_Expression`
+#
 #
 #   NOTE:
 #
@@ -126,12 +129,21 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-version = tree_globals.target_version
+target_version = tree_globals.target_version
 
 
-if version == '1':
+if target_version == 1:
+    from    Z.Tree.Attribute_V1         import   create_Tree_Attribute
+
     from    Z.Tree.Target_V1            import  (
-                create_Tree_Attribute_V1                as  create_Tree_Attribute,
+                create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
+                create_Tree_Subscript_Expression_V1     as  create_Tree_Subscript_Expression,
+                create_Tree_Tuple_Expression_V1         as  create_Tree_Tuple_Expression,
+        )
+elif target_version == 2:
+    from    Z.Tree.Attribute_V2         import   create_Tree_Attribute
+
+    from    Z.Tree.Target_V1            import  (
                 create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
                 create_Tree_Subscript_Expression_V1     as  create_Tree_Subscript_Expression,
                 create_Tree_Tuple_Expression_V1         as  create_Tree_Tuple_Expression,
@@ -139,4 +151,4 @@ if version == '1':
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Target.py: unknown tree target version: {!r}', version)
+    FATAL('Z/Tree/Target.py: unknown tree target version: {!r}', target_version)

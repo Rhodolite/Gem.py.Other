@@ -6,7 +6,7 @@
 #
 #   Z.Tree.Target_V1 - Implementation of `Tree_Target`, Version 1.
 #
-#       Copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 

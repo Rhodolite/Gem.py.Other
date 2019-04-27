@@ -13,6 +13,7 @@
 from    Capital.Core                        import  trace
 from    Capital.Types                       import  NoneType
 from    Z.Tree.Convert_Argument             import  convert_some_list_of_keyword_arguments
+from    Z.Tree.Convert_Attribute            import  convert_attribute_expression
 from    Z.Tree.Convert_Comprehension        import  convert_full_list_of_comprehensions
 from    Z.Tree.Convert_Name                 import  convert_name_expression
 from    Z.Tree.Convert_Operator             import  convert_binary_operator
@@ -20,7 +21,6 @@ from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare
 from    Z.Tree.Convert_Operator             import  convert_logical_operator
 from    Z.Tree.Convert_Operator             import  convert_unary_operator
 from    Z.Tree.Convert_Parameter            import  convert_parameters_all
-from    Z.Tree.Convert_Target               import  convert_attribute_expression
 from    Z.Tree.Convert_Target               import  convert_list_expression
 from    Z.Tree.Convert_Target               import  convert_subscript_expression
 from    Z.Tree.Convert_Target               import  convert_tuple_expression
@@ -638,12 +638,16 @@ def convert_some_list_of_expressions(sequence):
 #
 #   Handle import loops
 #
+from    Z.Tree.Global                   import  tree_globals
+
+
 import  Z.Tree.Convert_Argument
 import  Z.Tree.Convert_Comprehension
 import  Z.Tree.Convert_Except
 import  Z.Tree.Convert_Index
 import  Z.Tree.Convert_Parameter
 import  Z.Tree.Convert_Target
+
 
 Z.Tree.Convert_Argument     .convert_expression               = convert_expression
 Z.Tree.Convert_Comprehension.convert_expression               = convert_expression
@@ -654,3 +658,21 @@ Z.Tree.Convert_Index        .convert_none_OR_expression       = convert_none_OR_
 Z.Tree.Convert_Parameter    .convert_some_list_of_expressions = convert_some_list_of_expressions
 Z.Tree.Convert_Target       .convert_expression               = convert_expression
 Z.Tree.Convert_Target       .convert_some_list_of_expressions = convert_some_list_of_expressions
+
+
+
+target_version = tree_globals.target_version
+
+
+if target_version == 1:
+    import  Z.Tree.Convert_Attribute_V1
+
+    Z.Tree.Convert_Attribute_V1.convert_expression = convert_expression
+elif target_version == 2:
+    import  Z.Tree.Convert_Attribute_V2
+
+    Z.Tree.Convert_Attribute_V2.convert_expression = convert_expression
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Tree/Convert_Attribute.py: unknown tree target version: {!r}', target_version)

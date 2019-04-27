@@ -124,6 +124,27 @@ if __debug__:
         return True
 
 
+if 0:
+    #
+    #   DISABLED (not currently used, will be enabled & used in the future)
+    #
+
+    #
+    #   fact_is__native_none__OR__some_native_integer(v)
+    #
+    #       Assert that `v` is either:
+    #
+    #           1)  `NONE`; OR
+    #
+    #           2)  a `NativeInteger` (i.e.: `int`).
+    #
+    if __debug__:
+        def fact_is__native_none__OR__some_native_integer(v):
+            assert (v is None) or (isinstance(v, int))
+
+            return True
+
+
 #
 #   fact_is_not_native_none(v) - Assert that `v` is not `None`.
 #
@@ -152,11 +173,9 @@ if __debug__:
 #
 #   fact_is_some_native_integer(v) - Assert that the `v` is an `int`.
 #
-#       `v` may *NOT* be an instance of a subclass of `int`.
-#
 if __debug__:
     def fact_is_some_native_integer(v):
-        assert type(v) is int
+        assert isinstance(v, int)
 
         return True
 
@@ -192,14 +211,12 @@ if __debug__:
 #
 #       Assert that `v` is a *DIRECT* `int` instance, and is greater than or equal to 0.
 #
-#       `v` may *NOT* be an instance of a subclass of `int`.
-#
 #   NOTE:
 #       "substantial" was chosen to mean "positive" or "zero".
 #
 if __debug__:
     def fact_is_substantial_integer(v):
-        assert type(v) is int
+        assert isinstance(v, int)
         assert v >= 0
 
         return True
