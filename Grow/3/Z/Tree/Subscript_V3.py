@@ -15,7 +15,7 @@
 #
 #       Version 1:
 #
-#           `Tree_SubscriptExpression` had a `.context` member which three possible values:
+#           `Tree_Subscript_Expression` had a `.context` member which three possible values:
 #
 #               tree_delete_context
 #               tree_load_context

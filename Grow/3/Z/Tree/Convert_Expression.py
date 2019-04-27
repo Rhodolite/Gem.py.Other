@@ -666,22 +666,28 @@ target_version = tree_globals.target_version
 
 if target_version == 1:
     import  Z.Tree.Convert_Attribute_V1
+    import  Z.Tree.Convert_Many_V1
     import  Z.Tree.Convert_Subscript_V1
 
-    Z.Tree.Convert_Attribute_V1.convert_expression = convert_expression
-    Z.Tree.Convert_Subscript_V1.convert_expression = convert_expression
+    Z.Tree.Convert_Attribute_V1.convert_expression               = convert_expression
+    Z.Tree.Convert_Many_V1     .convert_some_list_of_expressions = convert_some_list_of_expressions
+    Z.Tree.Convert_Subscript_V1.convert_expression               = convert_expression
 elif target_version == 2:
     import  Z.Tree.Convert_Attribute_V2
-    import  Z.Tree.Convert_Subscript_V1
+    import  Z.Tree.Convert_Many_V1                  #   "_V1" on purpose
+    import  Z.Tree.Convert_Subscript_V1             #   "_V1" on purpose
 
-    Z.Tree.Convert_Attribute_V2.convert_expression = convert_expression
-    Z.Tree.Convert_Subscript_V1.convert_expression = convert_expression
+    Z.Tree.Convert_Attribute_V2.convert_expression               = convert_expression
+    Z.Tree.Convert_Many_V1     .convert_some_list_of_expressions = convert_some_list_of_expressions
+    Z.Tree.Convert_Subscript_V1.convert_expression               = convert_expression
 elif target_version == 3:
     import  Z.Tree.Convert_Attribute_V3
+    import  Z.Tree.Convert_Many_V3
     import  Z.Tree.Convert_Subscript_V3
 
-    Z.Tree.Convert_Attribute_V3.convert_expression = convert_expression
-    Z.Tree.Convert_Subscript_V3.convert_expression = convert_expression
+    Z.Tree.Convert_Attribute_V3.convert_expression               = convert_expression
+    Z.Tree.Convert_Many_V3     .convert_some_list_of_expressions = convert_some_list_of_expressions
+    Z.Tree.Convert_Subscript_V3.convert_expression               = convert_expression
 else:
     from    Capital.Core                import  FATAL
 

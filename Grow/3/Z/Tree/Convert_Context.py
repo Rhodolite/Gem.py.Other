@@ -54,13 +54,13 @@ map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = 
 
 
 if __debug__:
-    def assert_no_context_fields():
-        for k in map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context:
+    def assert_no_context_fields(mapping):
+        for k in mapping:
             assert k._attributes == (())
             assert k._fields     == (())
 
 
-    assert_no_context_fields()
+    assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
 
 
 def convert_delete_load_OR_store_context(self):
@@ -79,13 +79,7 @@ map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
 
 
 if __debug__:
-    def assert_no_context_fields():
-        for k in map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields()
+    assert_no_context_fields(map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
 
 
 def convert_load_OR_store_context(self):

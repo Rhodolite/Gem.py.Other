@@ -65,13 +65,15 @@ map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscrip
 
 
 if __debug__:
-    def assert_no_context_fields():
-        for k in map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript_function:
+    def assert_no_context_fields(mapping):
+        for k in mapping:
             assert k._attributes == (())
             assert k._fields     == (())
 
 
-    assert_no_context_fields()
+    assert_no_context_fields(
+            map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript_function,
+        )
 
 
 def convert__delete_load_OR_store_context__TO__create_subscript_function(self):

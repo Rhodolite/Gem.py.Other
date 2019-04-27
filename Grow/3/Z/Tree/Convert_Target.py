@@ -11,12 +11,8 @@
 
 
 from    Capital.Core                        import  FATAL
-from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
-from    Z.Tree.Convert_Context              import  convert_load_OR_store_context
 from    Z.Tree.Convert_Index                import  convert_index_clause
 from    Z.Tree.Convert_Name                 import  convert_name_expression
-from    Z.Tree.Convert_Operator             import  convert_binary_operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
@@ -24,22 +20,10 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Na
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
-from    Z.Tree.Target                       import  create_Tree_List_Expression
-from    Z.Tree.Subscript_V1                 import  create_Tree_Subscript_Expression
-from    Z.Tree.Target                       import  create_Tree_Tuple_Expression
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__INDEX
-
+    from    Capital.Fact                    import  fact_is_full_native_list
 
 
 #
@@ -53,65 +37,24 @@ target_version = tree_globals.target_version
 
 if target_version == 1:
     from    Z.Tree.Convert_Attribute_V1     import  convert_attribute_expression
+    from    Z.Tree.Convert_Many_V1          import  convert_list_expression
+    from    Z.Tree.Convert_Many_V1          import  convert_tuple_expression
     from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression
 elif target_version == 2:
     from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
+    from    Z.Tree.Convert_Many_V1          import  convert_list_expression             #   "_V1" on purpose
+    from    Z.Tree.Convert_Many_V1          import  convert_tuple_expression            #   "_V1" on purpose
     from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression        #   "_V1" on purpose
 elif target_version == 3:
     from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
+    from    Z.Tree.Convert_Many_V3          import  convert_list_expression
+    from    Z.Tree.Convert_Many_V3          import  convert_tuple_expression
     from    Z.Tree.Convert_Subscript_V3     import  convert_subscript_expression
 else:
     from    Capital.Core                import  FATAL
 
     FATAL('Z/Tree/Convert_Target.py: unknown tree target version: {!r}', target_version)
 
-
-
-#
-#   convert_many_expression(self) - Common code for `convert_list_expression` and `convert_tuple_expression`
-#
-#       Convert a `Native_AbstractSyntaxTree_List_Expression` (i.e.: `_ast.List`) to a `Tree_List_Expression`.
-#
-def convert_many_expression(self, create):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_some_native_list                                         (self.elts)
-    assert fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT(self.ctx)
-
-    return create(
-               self.lineno,
-               self.col_offset,
-
-               convert_some_list_of_expressions(self.elts),
-               convert_load_OR_store_context   (self.ctx),
-           )
-
-
-#
-#   convert_list_expression(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_List_Expression` (i.e.: `_ast.List`) to a `Tree_List_Expression`.
-#
-assert Native_AbstractSyntaxTree_List_Expression._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_List_Expression._fields     == (('elts', 'ctx'))
-
-
-def convert_list_expression(self):
-    return convert_many_expression(self, create_Tree_List_Expression)
-
-
-#
-#   convert_tuple_expression(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Tuple_Expression` (i.e.: `_ast.Tuple`) to a `Tree_Tuple_Expression`.
-#
-assert Native_AbstractSyntaxTree_Tuple_Expression._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Tuple_Expression._fields     == (('elts', 'ctx'))
-
-
-def convert_tuple_expression(self):
-    return convert_many_expression(self, create_Tree_Tuple_Expression)
 
 
 #

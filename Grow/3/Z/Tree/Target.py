@@ -15,7 +15,7 @@
 #
 #       There are only a few targets that can appear to the left of an `=`  or in a `delete` statement:
 #
-#           Tree_Name                       #   See "Z/Tree/Name.py"
+#           Tree_Name                       #   See "Z.Tree.Name"
 #           Tree_Attribute_Expression
 #           Tree_List_Expression
 #           Tree_Subscript_Expression
@@ -133,10 +133,8 @@ target_version = tree_globals.target_version
 
 
 if target_version in ((1, 2, 3)):
-    from    Z.Tree.Target_V1            import  (
-                create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
-                create_Tree_Tuple_Expression_V1         as  create_Tree_Tuple_Expression,
-        )
+    from    Z.Tree.Many_V1              import  create_Tree_List_Expression
+    from    Z.Tree.Many_V1              import  create_Tree_Tuple_Expression
 else:
     from    Capital.Core                import  FATAL
 
