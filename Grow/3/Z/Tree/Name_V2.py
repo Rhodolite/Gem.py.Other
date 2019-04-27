@@ -4,24 +4,34 @@
 
 
 #
-#   Z.Tree.Name_V1 - Implementation of Tree Name, Version 1
+#   Z.Tree.Name_V2 - Implementation of Tree Name, Version 2
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
+#   Version 1:
+#
+#       `Tree_Name` had a `.id : NativeString` member.
+#
+#   Version 2:
+#
+#       `Tree_Name` removes the `.id` member, and replaces it with a `.symbol : Symbol` member.
 #
 
 
 from    Capital.Core                    import  arrange
+from    Z.Parser.Symbol                 import  conjure_symbol
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
+    from    Z.Parser.Symbol             import  fact_is_symbol
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_parameter_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
+    
 
 
 #
@@ -43,7 +53,7 @@ class Tree_Name(object):
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
-        'id',                           #   NativeString
+        'symbol',                       #   Symbol
         'context',                      #   Tree_Context
     ))
 
@@ -51,16 +61,16 @@ class Tree_Name(object):
     #
     #   Private
     #
-    def __init__(self, line_number, column, id, context):
+    def __init__(self, line_number, column, symbol, context):
         self.line_number = line_number
         self.column      = column
 
-        self.id      = id
+        self.symbol  = symbol
         self.context = context
 
 
     def _dump_tree_name_token(self, f):
-        f.arrange('<name @{}:{} {} ', self.line_number, self.column, self.id)
+        f.arrange('<name @{}:{} {} ', self.line_number, self.column, self.symbol)
         self.context.dump_context_token(f)
         f.greater_than_sign()
 
@@ -152,14 +162,14 @@ class Tree_Name(object):
 
 
     def __repr__(self):
-        return arrange('<Tree_Name @{}:{} {!r} {}>', self.line_number, self.column, self.id, self.context)
+        return arrange('<Tree_Name @{}:{} {!r} {}>', self.line_number, self.column, self.symbol, self.context)
 
 
-def create_Tree_Name(line_number, column, id, context):
+def create_Tree_Name(line_number, column, symbol, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_full_native_string(id)
-    assert fact_is_tree_context      (context)
+    assert fact_is_symbol      (symbol)
+    assert fact_is_tree_context(context)
 
-    return Tree_Name(line_number, column, id, context)
+    return Tree_Name(line_number, column, symbol, context)

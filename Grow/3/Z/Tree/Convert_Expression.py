@@ -14,6 +14,7 @@ from    Capital.Core                        import  trace
 from    Capital.Types                       import  NoneType
 from    Z.Tree.Convert_Argument             import  convert_some_list_of_keyword_arguments
 from    Z.Tree.Convert_Comprehension        import  convert_full_list_of_comprehensions
+from    Z.Tree.Convert_Name                 import  convert_name_expression
 from    Z.Tree.Convert_Operator             import  convert_binary_operator
 from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators
 from    Z.Tree.Convert_Operator             import  convert_logical_operator
@@ -21,7 +22,6 @@ from    Z.Tree.Convert_Operator             import  convert_unary_operator
 from    Z.Tree.Convert_Parameter            import  convert_parameters_all
 from    Z.Tree.Convert_Target               import  convert_attribute_expression
 from    Z.Tree.Convert_Target               import  convert_list_expression
-from    Z.Tree.Convert_Target               import  convert_name_expression
 from    Z.Tree.Convert_Target               import  convert_subscript_expression
 from    Z.Tree.Convert_Target               import  convert_tuple_expression
 from    Z.Tree.Expression                   import  create_Tree_Backquote_Expression

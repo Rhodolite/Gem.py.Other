@@ -27,11 +27,12 @@
 #
 
 
+from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
-from    Z.Tree.Name                         import  create_Tree_Name
+from    Z.Tree.Convert_Name                 import  convert_name_parameter
+from    Z.Tree.Global                       import  tree_globals
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
-from    Z.Tree.Convert_Context              import  convert_parameter_context
 from    Z.Tree.Parameter                    import  create_Tree_Parameters_All
 
 
@@ -41,7 +42,6 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
 
 
 #
@@ -61,35 +61,6 @@ def convert_map_parameter(self):
     assert fact_is__native_none__OR__full_native_string(self)
 
     return self
-
-
-#
-#   convert_name_parameter
-#
-#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Name`
-#
-#       The context (`.ctx` member) MUST BE a `Native_AbstractSyntaxTree_Param`.
-#
-#       To handle other contexts, please see `convert_name_expression`.
-#
-assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
-
-
-def convert_name_parameter(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_string                              (self.id)
-    assert fact_is__native__abstract_syntax_tree__parameter_context(self.ctx)
-
-    return create_Tree_Name(
-               self.lineno,
-               self.col_offset,
-
-               self.id,
-               convert_parameter_context(self.ctx),
-           )
 
 
 #

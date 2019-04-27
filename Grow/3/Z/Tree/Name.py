@@ -43,20 +43,3 @@
 #               Tree_Parameter,
 #               Tree_Store_Target
 #
-
-
-#
-#   Import the version of tree names we want to use.
-#
-from    Z.Tree.Global                   import  tree_globals
-
-
-version = tree_globals.name_version
-
-
-if version == '1':
-    from    Z.Tree.Name_V1              import  create_Tree_Name_V1     as  create_Tree_Name
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Name.py: unknown tree name version: {!r}', version)

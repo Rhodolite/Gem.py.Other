@@ -9,7 +9,7 @@
 
 
 from    Capital.Core                        import  FATAL
-from    Captial.String_Key_V3               import  create_string_key_v3
+from    Capital.StringKey_V3                import  create_string_key_v3
 
 
 if __debug__:
@@ -47,6 +47,12 @@ class Symbol(str):
     #__nonzero__ - inherited from `str.__nonzero__`     #   Returns `True`.
 
 
+    #
+    #   Public
+    #
+    is_symbol = True
+
+
     def __repr__(self):
         return '$' + self
 
@@ -61,7 +67,7 @@ class Symbol(str):
 #
 symbol_cache       = {}                 #   Map { StringKey_V3 | Symbol } of { StringKey_V3 | Symbol }
 lookup_symbol      = symbol_cache.get
-provide_string_key = string_cache.setdefault
+provide_string_key = symbol_cache.setdefault
 
 
 #
@@ -72,7 +78,7 @@ provide_string_key = string_cache.setdefault
 def conjure_symbol(s):
     assert fact_is_full_native_string(s)
 
-    r = lookup_string(s)
+    r = lookup_symbol(s)
 
     if r is not None:
         if r.temporary_key_has_definitively_been_transformed:
@@ -96,3 +102,13 @@ def conjure_symbol(s):
     assert r.temporary_key_has_definitively_been_transformed
 
     return r
+
+
+if __debug__:
+    #
+    #   fact_is_symbol(v) - Assert the fact that `v` is a `Symbol`.
+    #
+    def fact_is_symbol(v):
+        assert v.is_symbol
+
+        return True
