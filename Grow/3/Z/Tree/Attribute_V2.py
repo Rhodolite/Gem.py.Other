@@ -32,7 +32,6 @@ if __debug__:
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
     from    Z.Tree.Expression           import  fact_is_tree_expression
-    from    Z.Tree.Index                import  fact_is_tree_index_clause
 
 
 #
@@ -64,16 +63,6 @@ class Tree_Attribute(object):
     ))
 
 
-    def _dump_tree_attribute_token(self, f):
-        f.arrange('<attribute @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
-        f.space()
-        f.write(self.attribute)
-        f.space()
-        self.context.dump_context_token(f)
-        f.greater_than_sign()
-
-
     #
     #   Private
     #
@@ -84,6 +73,16 @@ class Tree_Attribute(object):
         self.value     = value
         self.attribute = attribute
         self.context   = context
+
+
+    def _dump_tree_attribute_token(self, f):
+        f.arrange('<attribute @{}:{} ', self.line_number, self.column)
+        self.value.dump_evaluate_tokens(f)
+        f.write('.')
+        f.write(self.attribute)
+        f.space()
+        self.context.dump_context_token(f)
+        f.greater_than_sign()
 
 
     #

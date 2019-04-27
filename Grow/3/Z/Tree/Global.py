@@ -6,16 +6,16 @@
 default_alias_version         = '1'
 default_argument_version      = '1'
 default_comprehension_version = '1'
-default_context_version       = 2
+default_context_version       = 1
 default_except_version        = '1'
 default_expression_version    = '1'
 default_index_version         = '1'
-default_name_version          = 2
+default_name_version          = 3
 default_operator_version      = '1'
 default_parameter_version     = '1'
 default_statement_version     = '1'
 default_symbol_version        = 1
-default_target_version        = 2
+default_target_version        = 3
 
 
 if default_context_version:
@@ -25,8 +25,9 @@ if default_context_version:
     #       Maximum allowed name   version is 2.
     #       Maximum allowed target version is 2.
     #
-    assert default_name_version   <= 2
-    assert default_target_version <= 2
+#   assert default_name_version   <= 2
+#   assert default_target_version <= 2
+    pass
 else:
     #
     #   NOT Using `Tree_Context`:

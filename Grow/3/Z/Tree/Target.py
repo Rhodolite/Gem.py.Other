@@ -132,17 +132,7 @@ from    Z.Tree.Global                   import  tree_globals
 target_version = tree_globals.target_version
 
 
-if target_version == 1:
-    from    Z.Tree.Attribute_V1         import   create_Tree_Attribute
-
-    from    Z.Tree.Target_V1            import  (
-                create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
-                create_Tree_Subscript_Expression_V1     as  create_Tree_Subscript_Expression,
-                create_Tree_Tuple_Expression_V1         as  create_Tree_Tuple_Expression,
-        )
-elif target_version == 2:
-    from    Z.Tree.Attribute_V2         import   create_Tree_Attribute
-
+if target_version in ((1, 2, 3)):
     from    Z.Tree.Target_V1            import  (
                 create_Tree_List_Expression_V1          as  create_Tree_List_Expression,
                 create_Tree_Subscript_Expression_V1     as  create_Tree_Subscript_Expression,

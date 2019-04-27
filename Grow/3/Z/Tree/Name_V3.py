@@ -121,6 +121,10 @@ class Tree_Evaluate_Name(Tree_Name):
 
 
     def dump_evaluate_tokens(self, f):
+        #
+        #   NOTE:
+        #       Omit the keyword "evaluate-name" on purpose to make the output shorter.
+        #
         f.arrange('<@{}:{} {}>', self.line_number, self.column, self.symbol)
 
 

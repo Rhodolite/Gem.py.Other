@@ -672,7 +672,11 @@ elif target_version == 2:
     import  Z.Tree.Convert_Attribute_V2
 
     Z.Tree.Convert_Attribute_V2.convert_expression = convert_expression
+elif target_version == 3:
+    import  Z.Tree.Convert_Attribute_V3
+
+    Z.Tree.Convert_Attribute_V3.convert_expression = convert_expression
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Convert_Attribute.py: unknown tree target version: {!r}', target_version)
+    FATAL('Z/Tree/Convert_Expression.py: unknown tree target version: {!r}', target_version)

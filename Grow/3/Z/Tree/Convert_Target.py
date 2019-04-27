@@ -27,7 +27,6 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Na
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
-from    Z.Tree.Target                       import  create_Tree_Attribute
 from    Z.Tree.Target                       import  create_Tree_List_Expression
 from    Z.Tree.Target                       import  create_Tree_Subscript_Expression
 from    Z.Tree.Target                       import  create_Tree_Tuple_Expression

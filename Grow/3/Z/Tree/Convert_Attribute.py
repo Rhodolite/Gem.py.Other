@@ -23,6 +23,8 @@ if target_version == 1:
     from    Z.Tree.Convert_Attribute_V1     import  convert_attribute_expression
 elif target_version == 2:
     from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
+elif target_version == 3:
+    from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
 else:
     from    Capital.Core                import  FATAL
 
