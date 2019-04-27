@@ -862,9 +862,9 @@ def create_Tree_Modify_Statement_V1(line_number, column, left, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression(left)
-    assert fact_is_tree_operator  (operator)
-    assert fact_is_tree_expression(right)
+    assert fact_is_tree_store_target(left)
+    assert fact_is_tree_operator    (operator)
+    assert fact_is_tree_expression  (right)
 
     return Tree_Modify_Statement_V1(line_number, column, left, operator, right)
 

@@ -25,7 +25,10 @@ if name_version == '1':
 elif name_version == '2':
     from    Z.Tree.Convert_Name_V2      import  convert_name_expression
     from    Z.Tree.Convert_Name_V2      import  convert_name_parameter
+elif name_version == '3':
+    from    Z.Tree.Convert_Name_V3      import  convert_name_expression
+    from    Z.Tree.Convert_Name_V3      import  convert_name_parameter
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Name.py: unknown tree name version: {!r}', name_version)
+    FATAL('Z/Tree/Convert_Name.py: unknown tree name version: {!r}', name_version)

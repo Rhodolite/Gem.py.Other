@@ -37,8 +37,8 @@ if __debug__:
 #
 #       The context (`.ctx` member) MAY NOT be an instance of `Native_AbstractSyntaxTree_Parameter_Context`.
 #
-#       To handle a context which is an instance of `Native_AbstractSyntaxTree_Param`, call `convert_name_parameter`
-#       instead.
+#       To handle a context which is an instance of `Native_AbstractSyntaxTree_Parameter_Context`, call
+#       `convert_name_parameter` instead.
 #
 assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
 assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
@@ -65,7 +65,7 @@ def convert_name_expression(self):
 #
 #       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Name`
 #
-#       The context (`.ctx` member) MUST BE a `Native_AbstractSyntaxTree_Param`.
+#       The context (`.ctx` member) MUST BE a `Native_AbstractSyntaxTree_Parameter_Context`.
 #
 #       To handle other contexts, please see `convert_name_expression`.
 #
