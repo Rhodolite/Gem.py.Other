@@ -11,7 +11,7 @@
 
 
 from    Capital.Core                    import  arrange
-from    Z.Tree.Statement                import  IMPLEMENTS_Tree_Statement
+from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 
 
 if __debug__:
@@ -35,7 +35,7 @@ if __debug__:
 #   Tree: Keyword Statement - Base class of `break` and `pass` statement.
 #
 class Tree_Keyword_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -76,7 +76,7 @@ def create_Tree_Keyword_Statement(Meta, line_number, column):
 #   Tree: Assert Statement
 #
 class Tree_Assert_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -147,7 +147,7 @@ def create_Tree_Assert_Statement(line_number, column, test, message):
 #       `e`
 #
 class Tree_Assign_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -233,7 +233,7 @@ def create_Tree_Continue_Statement(line_number, column):
 #   Tree: Delete Statement
 #
 class Tree_Delete_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -299,7 +299,7 @@ def create_Tree_Delete_Statement(line_number, column, targets):
 #   The above will be a `Tree_Execute_Statement`.
 #
 class Tree_Execute_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -373,7 +373,7 @@ def create_Tree_Execute_Statement(line_number, column, body, globals, locals):
 #       The above will be a `Tree_Expression_Statement`, the expression will be a `Tree_Call` (i.e.: a function call).
 #
 class Tree_Expression_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -423,7 +423,7 @@ def create_Tree_Expression_Statement(line_number, column, value):
 #   Tree: `from ... import ...` statement
 #
 class Tree_From_Import_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -501,7 +501,7 @@ def create_Tree_From_Import_Statement(line_number, column, module, names, level)
 #   Tree: Global Statement
 #
 class Tree_Global_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -561,7 +561,7 @@ def create_Tree_Global_Statement(line_number, column, names):
 #   Tree: `import` statement
 #
 class Tree_Import_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -630,7 +630,7 @@ def create_Tree_Import_Statement(line_number, column, aliases):
 #       (i.e.: a `+=`, `*=`, etc. statement).
 #
 class Tree_Modify_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -704,7 +704,7 @@ def create_Tree_Pass_Statement(line_number, column):
 #   Tree: Print Statement
 #
 class Tree_Print_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -780,7 +780,7 @@ def create_Tree_Print_Statement(line_number, column, destination, values, newlin
 #   Tree: Return Statement
 #
 class Tree_Return_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -834,7 +834,7 @@ def create_Tree_Return_Statement(line_number, column, value):
 #   Tree: Raise Statement
 #
 class Tree_Raise_Statement(
-        IMPLEMENTS_Tree_Statement
+        TRAIT_Tree_Statement,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger

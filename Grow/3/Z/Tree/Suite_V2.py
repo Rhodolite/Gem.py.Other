@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Suite_V1 - Implementation of `Tree_Suite`, Version 1.
+#   Z.Tree.Suite_V2 - Implementation of `Tree_Suite`, Version 2.
 #
 #       A `Tree_Suite` is two or more statements (python calls more than one statement a "suite").
 #
@@ -12,11 +12,24 @@
 #
 
 
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           Does not exist.
+#
+#       Version 2:
+#
+#           Exists.
+#
+
+
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  replace
-from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite
-from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite_0
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 if __debug__:
@@ -28,8 +41,8 @@ if __debug__:
 #
 class Tree_Suite_Implementation(
         tuple,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = (())
 
@@ -38,13 +51,13 @@ class Tree_Suite_Implementation(
     #   Interface Tree_Suite
     #
    #@replace
-    suite_estimate         = 7          #   `7` is not a very good estimate ...  but good enough ;-)
+    suite_estimate = 7                  #   `7` is not a very good estimate ...  but good enough ;-)
 
 
     @replace
     def dump_suite_tokens(self, f):
         for v in self:
-            v.dump_suite_tokens(f)
+            v.dump_statement_tokens(f)
 
 
     #

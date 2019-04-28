@@ -8,7 +8,8 @@
 #
 
 
-from    Capital.String                  import  IMPLEMENTS_String
+from    Capital.String                  import  TRAIT_String
+from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
 
 #
@@ -22,11 +23,9 @@ from    Capital.String                  import  IMPLEMENTS_String
 #
 class EmptyString_V3(
         str,
-        IMPLEMENTS_String,
+        TRAIT_String,
+        TRAIT_Temporary_Key,
 ):
-    #
-    #   implements Temporary_Key
-    #
     __slots__ = (())
 
 
@@ -35,12 +34,6 @@ class EmptyString_V3(
     #
     is_empty_string = True
     is_full_string  = False
-
-
-    #
-    #   Interface Temporary_Key
-    #
-    temporary_key_has_definitively_been_transformed = True
 
 
     #

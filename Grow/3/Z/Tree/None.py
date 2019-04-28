@@ -12,14 +12,14 @@
 #
 
 
-from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite_0
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 #
 #   Tree: None
 #
 class Tree_None(
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = (())
 

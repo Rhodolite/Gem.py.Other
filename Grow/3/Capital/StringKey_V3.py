@@ -8,8 +8,11 @@
 #
 
 
+from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
+
+
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
+    from    Capital.Fact                import  fact_is_full_native_string
 
 
 #
@@ -18,21 +21,23 @@ if __debug__:
 native_string_representation_method = str.__repr__
 
 
-class StringKey_V3(str):
-    #
-    #   Implements Temporary_Key
-    #
-    #   NOTE:
-    #       Does *NOT* implement the String interface.
-    #
-    #       This is *NOT* a string, but a string key (that *MIGHT* be transformed to a String).
-    #
+class StringKey_V3(
+        str,
+        TRAIT_Temporary_Key,
+        #
+        #   NOTE:
+        #       Does *NOT* implement the String interface.
+        #
+        #       This is *NOT* a string, but a string key (that *MIGHT* be transformed to a String).
+        #
+):
     __slots__ = (())
 
 
     #
     #   Interface Temporary_Key
     #
+   #@replace
     temporary_key_has_definitively_been_transformed = False
 
 

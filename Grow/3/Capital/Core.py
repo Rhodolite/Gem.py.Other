@@ -190,13 +190,13 @@ else:
 #   EXAMPLE USAGE:
 #
 #       class Tree_Suite_Implementation(
-#               IMPLEMENTS_Tree_Suite,
+#               TRAIT_Tree_Suite,
 #       ):
 #           @replace
 #           def dump_suite_tokens(self, f):
 #               self.dump_statement_tokens(f)
 #
-#       The `dump_suite_tokens` that was declared `@virtual` in `IMPLEMENTS_Tree_Suite` is being replaced here
+#       The `dump_suite_tokens` that was declared `@virtual` in `TRAIT_Tree_Suite` is being replaced here
 #       in `Tree_Suite_Implementation`.
 #
 def replace(f):
@@ -211,7 +211,7 @@ def replace(f):
 #
 #   EXAMPLE USAGE:
 #
-#       class IMPLEMENTS_Tree_Suite(object):
+#       class TRAIT_Tree_Suite(object):
 #           @virtual
 #           def dump_suite_tokens(self, f):
 #               self.dump_statement_tokens(f)

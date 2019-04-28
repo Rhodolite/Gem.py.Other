@@ -10,7 +10,8 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  FATAL
-from    Capital.String                  import  IMPLEMENTS_String
+from    Capital.String                  import  TRAIT_String
+from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
 
 #
@@ -31,11 +32,9 @@ from    Capital.String                  import  IMPLEMENTS_String
 #
 class FullString_V3(
         str,
-        IMPLEMENTS_String,
+        TRAIT_String,
+        TRAIT_Temporary_Key,
 ):
-    #
-    #   implements Temporary_Key
-    #
     __slots__ = (())
 
 
@@ -57,12 +56,6 @@ class FullString_V3(
     #
     is_empty_string = False
     is_full_string  = True
-
-
-    #
-    #   Interface Temporary_Key
-    #
-    temporary_key_has_definitively_been_transformed = True
 
 
     #

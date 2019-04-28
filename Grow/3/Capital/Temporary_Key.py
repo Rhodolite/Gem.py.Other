@@ -18,6 +18,12 @@
 #           attribute
 #               temporary_key_has_definitively_been_transformed : NativeBoolean
 #
+class TRAIT_Temporary_Key(object):
+    __slots__ = (())
+
+
+   #@virtual
+    temporary_key_has_definitively_been_transformed = True
 
 
 #
@@ -73,16 +79,16 @@
 #       simplier):
 #
 #
-#           class Temporary_String_Key(str):
-#               #
-#               #   Implements Temporary_Key
-#               #
+#           class Temporary_String_Key(
+#                   str,
+#                   TRAIT_Temporary_Key,
+#           ):
 #               __slots__ = (())
-#
 #
 #               #
 #               #   Interface Temporary_Key
 #               #
+#              #@replace
 #               temporary_key_has_definitively_been_transformed = False
 #
 #
@@ -90,17 +96,20 @@
 #               return Temporary_String_Key(s)
 #
 #
-#           class Unique_String_Example(str):
-#               #
-#               #   Implements Temporary_key
-#               #
+#           class Unique_String_Example(
+#                   str,
+#                   TRAIT_String,
+#                   TRAIT_Temporary_Key,
+#           ):
 #               __slots__ = (())
 #
+#               #
+#               #   Inherited from `TRAIT_Temporary_Key`:
+#               #
+#               #       `temporary_key_has_definitively_been_transformed = True`
+#               #
+#              #temporary_key_has_definitively_been_transformed = True
 #
-#               #
-#               #   Interface Temporary_Key
-#               #
-#               temporary_key_has_definitively_been_transformed = True
 #
 #
 #           #

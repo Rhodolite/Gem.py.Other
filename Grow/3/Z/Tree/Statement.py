@@ -21,7 +21,7 @@
 #       method
 #           dump_statement_tokens(f : Build_DumpToken)
 #
-class IMPLEMENTS_Tree_Statement(object):
+class TRAIT_Tree_Statement(object):
     __slots__ = (())
 
     if __debug__:

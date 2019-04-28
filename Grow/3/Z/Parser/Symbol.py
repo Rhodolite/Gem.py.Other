@@ -8,18 +8,19 @@
 #
 
 
-from    Capital.Core                        import  FATAL
-from    Capital.StringKey_V3                import  create_string_key_v3
+from    Capital.Core                    import  FATAL
+from    Capital.StringKey_V3            import  create_string_key_v3
+from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
 
 if __debug__:
-    from    Capital.Fact                    import  fact_is_full_native_string
+    from    Capital.Fact                import  fact_is_full_native_string
 
 
-class Symbol(str):
-    #
-    #   implements Temporary_Key
-    #
+class Symbol(
+        str,
+        TRAIT_Temporary_Key,
+):
     __slots__ = (())
 
 
@@ -34,12 +35,6 @@ class Symbol(str):
     if __debug__:
         def __init__(self, s):
             FATAL("Symbol.constructor (`__init__`): A Symbol may not be contructed");
-
-
-    #
-    #   Interface Temporary_Key
-    #
-    temporary_key_has_definitively_been_transformed = True
 
 
     #__init__    - inherited from `str.__init__`        #   Not Used.

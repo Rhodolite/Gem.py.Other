@@ -35,7 +35,7 @@ from    Capital.Core                    import  virtual
 #       method
 #           dump_suite_tokens(f : Build_DumpToken)
 #
-class IMPLEMENTS_Tree_Suite(object):
+class TRAIT_Tree_Suite(object):
     __slots__ = (())
 
 
@@ -72,7 +72,7 @@ class IMPLEMENTS_Tree_Suite(object):
 #       debug
 #           is_tree_suite_0 := true
 #
-class IMPLEMENTS_Tree_Suite_0(object):
+class TRAIT_Tree_Suite_0(object):
     __slots__ = (())
 
 

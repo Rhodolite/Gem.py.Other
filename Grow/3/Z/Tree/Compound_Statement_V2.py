@@ -34,9 +34,9 @@
 
 
 from    Capital.Core                    import  arrange
-from    Z.Tree.Statement                import  IMPLEMENTS_Tree_Statement
-from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite
-from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite_0
+from    Z.Tree.Statement                import  TRAIT_Tree_Statement
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 if __debug__:
@@ -64,9 +64,9 @@ if __debug__:
 #       A "Test" Statement is either a `if` or `while` statement.
 #
 class Tree_Test_Statement(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -131,9 +131,9 @@ def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_claus
 #   Tree: Class Definition
 #
 class Tree_Class_Definition(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -221,9 +221,9 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
 #   Tree: For Statement
 #
 class Tree_For_Statement(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -293,9 +293,9 @@ def create_Tree_For_Statement(line_number, column, target, sequence, body, else_
 #   Tree: Function Definition
 #
 class Tree_Function_Definition(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -389,9 +389,9 @@ def create_Tree_If_Statement(line_number, column, test, body, orelse):
 #   Tree: Try Except Statement
 #
 class Tree_Try_Except_Statement(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -461,9 +461,9 @@ def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers,
 #   Tree: Try Finally Statement
 #
 class Tree_Try_Finally_Statement(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -535,9 +535,9 @@ def create_Tree_While_Statement(line_number, column, test, body, orelse):
 #   Tree: With Statement
 #
 class Tree_With_Statement(
-        IMPLEMENTS_Tree_Statement,
-        IMPLEMENTS_Tree_Suite,
-        IMPLEMENTS_Tree_Suite_0,
+        TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger

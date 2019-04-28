@@ -13,13 +13,13 @@
 #
 #   Difference between Version 1 & Version 2
 #
-#   Version 1:
+#       Version 1:
 #
-#       `Tree_Name` had a `.id : NativeString` member.
+#           `Tree_Name` had a `.id : NativeString` member.
 #
-#   Version 2:
+#       Version 2:
 #
-#       `Tree_Name` removes the `.id` member, and replaces it with a `.symbol : Symbol` member.
+#           `Tree_Name` removes the `.id` member, and replaces it with a `.symbol : Symbol` member.
 #
 
 
