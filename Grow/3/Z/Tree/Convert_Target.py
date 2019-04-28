@@ -11,7 +11,6 @@
 
 
 from    Capital.Core                        import  FATAL
-from    Z.Tree.Convert_Index                import  convert_index_clause
 from    Z.Tree.Convert_Name                 import  convert_name_expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
