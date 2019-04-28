@@ -3,9 +3,9 @@
 #
 
 
-from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
+from    Z.Tree.Context                  import  TRAIT_Tree_Context
 
 
 #
@@ -16,23 +16,19 @@ from    Capital.Core                    import  enumeration
 
 
 #
-#   Tree_Context_Delete_V1 - A `delete` context in a Delete-Statement
+#   Tree: Delete Context - A `delete` context in a Delete-Statement
 #
-class Tree_Context_Delete_V1(object):
+class Tree_Delete_Context(
+        TRAIT_Tree_Context,
+):
     __slots__ = (())
 
 
-    is_tree_context            = True
-    is_tree_delete_context     = True
-    is_tree_expression_context = False
-    is_tree_load_context       = False
-    is_tree_parameter_context  = False
-    is_tree_store_context      = False
-
-
-    @staticmethod
-    def __repr__():
-        return arrange('<Tree-Context-Delete>')
+    #
+    #   Interface Tree_Context
+    #
+   #@replace
+    is_tree_delete_context = True
 
 
     @staticmethod
@@ -40,16 +36,24 @@ class Tree_Context_Delete_V1(object):
         f.write('<context-delete>')
 
 
+    #
+    #   Public
+    #
+    @staticmethod
+    def __repr__():
+        return '<Tree-Context-Delete>'
+
+
 @creator
-def create_Tree_Context_Delete_V1():
-    return Tree_Context_Delete_V1()
+def create_Tree_Delete_Context():
+    return Tree_Delete_Context()
 
 
-tree_context_delete_v1 = create_Tree_Context_Delete_V1()
+tree_delete_context = create_Tree_Delete_Context()
 
 
 #
-#   Tree_Context_Load_V1 - A `load` context in an expression
+#   Tree: Load Context - A `load` context in an expression
 #
 #   Example:
 #
@@ -70,21 +74,17 @@ tree_context_delete_v1 = create_Tree_Context_Delete_V1()
 #
 #           <Expression-Statement @7:0 <call @7:0 <Name f load> [<Attribute @7:2 <Name a load> b load>] []>>
 #
-class Tree_Context_Load_V1(object):
+class Tree_Load_Context(
+        TRAIT_Tree_Context,
+):
     __slots__ = (())
 
 
-    is_tree_context            = True
-    is_tree_delete_context     = False
-    is_tree_expression_context = True
-    is_tree_load_context       = True
-    is_tree_parameter_context  = False
-    is_tree_store_context      = False
-
-
-    @staticmethod
-    def __repr__():
-        return arrange('<Tree-Context-Load>')
+    #
+    #   Interface Tree_Context
+    #
+   #@replace
+    is_tree_load_context = True
 
 
     @staticmethod
@@ -92,32 +92,36 @@ class Tree_Context_Load_V1(object):
         f.write('<context-load>')
 
 
+    #
+    #   Public
+    #
+    @staticmethod
+    def __repr__():
+        return '<Tree-Context-Load>'
+
+
 @creator
-def create_Tree_Context_Load_V1():
-    return Tree_Context_Load_V1()
+def create_Tree_Load_Context():
+    return Tree_Load_Context()
 
 
-tree_context_load_v1 = create_Tree_Context_Load_V1()
+tree_load_context = create_Tree_Load_Context()
 
 
 #
-#   Tree_Context_Parameter_V1 - A "parameter" context in `Tree_Parameters_All`.
+#   Tree: Parameter Context - A "parameter" context in `Tree_Parameters_All`.
 #
-class Tree_Context_Parameter_V1(object):
+class Tree_Parameter_Context(
+        TRAIT_Tree_Context,
+):
     __slots__ = (())
 
 
-    is_tree_context            = True
-    is_tree_delete_context     = False
-    is_tree_expression_context = False
-    is_tree_load_context       = False
-    is_tree_parameter_context  = True
-    is_tree_store_context      = False
-
-
-    @staticmethod
-    def __repr__():
-        return arrange('<Tree_Context_Parameter_V1>')
+    #
+    #   Interface Tree_Context
+    #
+   #@replace
+    is_tree_parameter_context = True
 
 
     @staticmethod
@@ -125,33 +129,37 @@ class Tree_Context_Parameter_V1(object):
         f.write('<context-parameter>')
 
 
+    #
+    #   Public
+    #
+    @staticmethod
+    def __repr__():
+        return '<Tree_Parameter_Context>'
+
+
 @creator
-def create_Tree_Context_Parameter_V1():
-    return Tree_Context_Parameter_V1()
+def create_Tree_Parameter_Context():
+    return Tree_Parameter_Context()
 
 
 
-tree_context_parameter_v1 = create_Tree_Context_Parameter_V1()
+tree_parameter_context = create_Tree_Parameter_Context()
 
 
 #
-#   Tree_Context_Store_V1 - A `store` context in a statement.
+#   Tree: Store Context  - A `store` context in a statement.
 #
-class Tree_Context_Store_V1(object):
+class Tree_Store_Context(
+        TRAIT_Tree_Context,
+):
     __slots__ = (())
 
 
-    is_tree_context            = True
-    is_tree_delete_context     = False
-    is_tree_expression_context = True
-    is_tree_load_context       = False
-    is_tree_parameter_context  = False
-    is_tree_store_context      = True
-
-
-    @staticmethod
-    def __repr__():
-        return arrange('<Tree-Context-Store>')
+    #
+    #   Interface Tree_Context
+    #
+   #@replace
+    is_tree_store_context = True
 
 
     @staticmethod
@@ -159,10 +167,18 @@ class Tree_Context_Store_V1(object):
         f.write('<context-store>')
 
 
+    #
+    #   Public
+    #
+    @staticmethod
+    def __repr__():
+        return '<Tree-Context-Store>'
+
+
 @creator
-def create_Tree_Context_Store_V1():
-    return Tree_Context_Store_V1()
+def create_Tree_Store_Context():
+    return Tree_Store_Context()
 
 
 
-tree_context_store_v1 = create_Tree_Context_Store_V1()
+tree_store_context = create_Tree_Store_Context()

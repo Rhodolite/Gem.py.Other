@@ -11,7 +11,7 @@
 
 
 #
-#   interface Tree_Context - Interface to tree classes that represent operators.
+#   interface Tree_Operator - Interface to tree classes that represent operators.
 #
 #       interface Tree_Operator
 #           method

@@ -83,6 +83,7 @@ if context_version:
     #
     #       interface Tree_Context
     #           attributes
+    #               is_tree_delete_context    : boolean
     #               is_tree_load_context      : boolean
     #               is_tree_parameter_context : boolean
     #               is_tree_store_context     : boolean
@@ -93,6 +94,22 @@ if context_version:
     #           debug
     #               is_tree_context := true
     #
+    class TRAIT_Tree_Context(object):
+        __slots__ = (())
+
+
+       #@virtual
+        is_tree_delete_context    = False
+       #@virtual
+        is_tree_load_context      = False
+       #@virtual
+        is_tree_parameter_context = False
+       #@virtual
+        is_tree_store_context     = False
+
+
+        if __debug__:
+            is_tree_context = True
 
 
     #
@@ -124,10 +141,10 @@ if context_version:
     #       assert fact_is_tree_store_context(v)        #   Assert that `v` is a tree "store" context.
     #
     if context_version == 1:
-        from    Z.Tree.Context_V1               import  tree_context_delete_v1      as  tree_delete_context
-        from    Z.Tree.Context_V1               import  tree_context_load_v1        as  tree_load_context
-        from    Z.Tree.Context_V1               import  tree_context_parameter_v1   as  tree_parameter_context
-        from    Z.Tree.Context_V1               import  tree_context_store_v1       as  tree_store_context
+        from    Z.Tree.Context_V1               import  tree_delete_context
+        from    Z.Tree.Context_V1               import  tree_load_context
+        from    Z.Tree.Context_V1               import  tree_parameter_context
+        from    Z.Tree.Context_V1               import  tree_store_context
     elif context_version == 2:
         from    Z.Tree.Context_V2               import  Tree_Context_2
 

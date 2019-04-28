@@ -6,6 +6,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
+from    Z.Tree.Context                  import  TRAIT_Tree_Context
 
 
 if __debug__:
@@ -116,39 +117,52 @@ if __debug__:
 #       example of how a class can inherit from `str`.
 #
 @enumeration
-class Tree_Context_2(object):
+class Tree_Context_2(
+        TRAIT_Tree_Context,
+):
     __slots__ = ((
         'name',                         #   NativeString
+
+        #
+        #   Interface Tree_Context
+        #
+       #@replace
         'is_tree_delete_context',       #   NativeBoolean
-        'is_tree_expression_context',   #   NativeBoolean
+       #@replace
         'is_tree_load_context',         #   NativeBoolean
+       #@replace
         'is_tree_parameter_context',    #   NativeBoolean
+       #@replace
         'is_tree_store_context',        #   NativeBoolean
     ))
 
 
-    is_tree_context = True
-
-
+    #
+    #   Private
+    #
     def __init__(
-            self, name, is_tree_delete_context, is_tree_expression_context, is_tree_load_context,
-            is_tree_parameter_context, is_tree_store_context,
+            self, name, is_tree_delete_context, is_tree_load_context, is_tree_parameter_context, is_tree_store_context,
     ):
         self.name = name
 
-        self.is_tree_delete_context     = is_tree_delete_context
-        self.is_tree_expression_context = is_tree_expression_context
-        self.is_tree_load_context       = is_tree_load_context
-        self.is_tree_parameter_context  = is_tree_parameter_context
-        self.is_tree_store_context      = is_tree_store_context
+        self.is_tree_delete_context    = is_tree_delete_context
+        self.is_tree_load_context      = is_tree_load_context
+        self.is_tree_parameter_context = is_tree_parameter_context
+        self.is_tree_store_context     = is_tree_store_context
 
 
-    def __repr__(self):
-        return arrange('<Tree_Context_2 {}>', self.name)
-
-
+    #
+    #   Interface Tree_Context
+    #
     def dump_context_token(self, f):
         f.arrange('<context {}>', self.name)
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Context_2 {}>', self.name)
 
 
 @creator
@@ -172,11 +186,10 @@ def create_Tree_Context_2(
     return Tree_Context_2(
                name,
 
-               is_tree_delete_context     = is_tree_delete_context,
-               is_tree_expression_context = (is_tree_load_context) or (is_tree_store_context),
-               is_tree_load_context       = is_tree_load_context,
-               is_tree_parameter_context  = is_tree_parameter_context,
-               is_tree_store_context      = is_tree_store_context,
+               is_tree_delete_context    = is_tree_delete_context,
+               is_tree_load_context      = is_tree_load_context,
+               is_tree_parameter_context = is_tree_parameter_context,
+               is_tree_store_context     = is_tree_store_context,
            )
 
 

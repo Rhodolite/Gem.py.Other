@@ -1,192 +1,74 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-
-
-from    Capital.Core                    import  creator
-
-
-default_alias_version         = '1'
-default_argument_version      = '1'
-default_comprehension_version = '1'
-default_context_version       = 1
-default_except_version        = '1'
-default_expression_version    = '1'
-default_index_version         = '1'
-default_name_version          = 3
-default_operator_version      = '1'
-default_parameter_version     = '1'
-default_statement_version     = 2
-default_symbol_version        = 2
-default_target_version        = 3
-
-
-if default_context_version:
+if __name__ == '__main__':
     #
-    #   Using `Tree_Context`:
+    #   If called as the main program, then we are being imported as the module `__main__`.
     #
-    #       Maximum allowed name   version is 2.
-    #       Maximum allowed target version is 2.
+    #   If so:
     #
-#   assert default_name_version   <= 2
-#   assert default_target_version <= 2
-    pass
+    #       1A. *REIMPORT* ourselves under the name `Z`
+    #       1B. import `Z.Main`
+    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
+    #       2.  Call `Z_main`
+    #
+    #   This means:
+    #
+    #       *   This module is imported   under the name `__main__`;
+    #       *   This module is reimported under the name `Z`.
+    #
+    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
+    #   and does something different in each case ... so there are in effect two `Z` modules:
+    #
+    #       *   the one named `__main__` [this code under the `if`   clause], and
+    #       *   the one named `Z`        [the  code under the `else` clause below].
+    #
+    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
+
+
+    Z_main()
 else:
+    from    os.path                     import  dirname     as  python_path_directory_name
+    from    os.path                     import  join        as  python_path_join
+
+
     #
-    #   NOT Using `Tree_Context`:
+    #   Load Z submodules from "Z/" directory.
     #
-    #       Minimum allowed name   version is 3.
-    #       Symbols must be used.
-    #       Minimum allowed target version is 3.
+    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
+
+
+    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
+    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
+    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
+    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
+    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
+    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
+
+
     #
-    assert default_name_version   >= 3
-    assert default_symbol_version == 1
-    assert default_target_version >= 3
-
-
-if default_symbol_version == 0:
+    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
     #
-    #   NOT using symbols:
+    #   This implements the following commands:
     #
-    #       Name   version must be 1.
-    #       Target version must be 1.
+    #       Z.copyright         - Add a copyright.
+    #       Z.output            - Output a line of text.
     #
-    assert default_name_version   == 1
-    assert default_target_version == 1
-else:
+    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
+    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
     #
-    #   Using symbols:
+    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
+    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
     #
-    #       Minumum allowed name   version is 2.
-    #       Minumum allowed target version is 3.
+    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
+
+
     #
-    assert default_name_version   >= 2
-    assert default_target_version >= 2
-
-
-#
-#   Z.Tree.Global - Globals to affect the creation of `Tree_*` classes.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
-
-
-from    Capital.Core                    import  arrange
-from    Capital.Core                    import  trace
-
-
-if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
-
-
-#
-#   Tree_Globals - Globals to affect the creation of `Tree_*` classes.
-#
-class Tree_Globals(object):
-    __slots__ = ((
-        'alias_version',                #   NativeString
-        'argument_version',             #   NativeString
-        'comprehension_version',        #   NativeString
-        'context_version',              #   SubstantialInteger
-        'except_version',               #   NativeString
-        'expression_version',           #   NativeString
-        'index_version',                #   NativeString
-        'name_version',                 #   PositiveInteger
-        'operator_version',             #   NativeString
-        'parameter_version',            #   NativeString
-        'statement_version',            #   PositiveInteger
-        'symbol_version',               #   SubstantialInteger
-        'target_version',               #   PositiveInteger
-    ))
-
-
-    def __init__(
-            self, alias_version, argument_version, comprehension_version, context_version,
-            except_version, expression_version, index_version, name_version,
-            operator_version, parameter_version, statement_version, symbol_version,
-            target_version,
-    ):
-        self.alias_version         = alias_version
-        self.argument_version      = argument_version
-        self.comprehension_version = comprehension_version
-        self.context_version       = context_version
-        self.except_version        = except_version
-        self.index_version         = index_version
-        self.name_version          = name_version
-        self.operator_version      = operator_version
-        self.parameter_version     = parameter_version
-        self.expression_version    = expression_version
-        self.statement_version     = statement_version
-        self.symbol_version        = symbol_version
-        self.target_version        = target_version
-
-
-    def __repr__(self):
-        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {!r} {!r} {} {} {}>',
-                       self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
-                       self.except_version, self.expression_version, self.index_version, self.name_version,
-                       self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
-                       self.target_version)
-
-    def trace_tree_globals(self):
-        trace('Tree_Globals: alias={!r} argument={!r} comprehension={!r} context={} except={!r} ...',
-              self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
-              self.except_version)
-        trace('... expression={!r} index={!r} name={} statement={} operator={!r} parameter={!r} symbol={}',
-              self.expression_version, self.index_version, self.name_version, self.statement_version,
-              self.operator_version, self.parameter_version, self.symbol_version)
-        trace('... target={}',
-              self.target_version)
-
-
-@creator
-def create_tree_globals(
-        alias_version, argument_version, comprehension_version, context_version,
-        except_version, expression_version, index_version, name_version,
-        operator_version, parameter_version, statement_version, symbol_version,
-        target_version,
-):
-    assert fact_is_full_native_string (alias_version)
-    assert fact_is_full_native_string (argument_version)
-    assert fact_is_full_native_string (comprehension_version)
-    assert fact_is_substantial_integer(context_version)
-    assert fact_is_full_native_string (except_version)
-    assert fact_is_full_native_string (index_version)
-    assert fact_is_positive_integer   (name_version)
-    assert fact_is_full_native_string (operator_version)
-    assert fact_is_full_native_string (parameter_version)
-    assert fact_is_full_native_string (expression_version)
-    assert fact_is_positive_integer   (statement_version)
-    assert fact_is_substantial_integer(symbol_version)
-    assert fact_is_positive_integer   (target_version)
-
-    r = Tree_Globals(
-            alias_version, argument_version, comprehension_version, context_version, except_version,
-            expression_version, index_version, name_version,
-            operator_version, parameter_version, statement_version, symbol_version,
-            target_version,
-        )
-
-   #trace('Tree Globals: {}', r)
-    r.trace_tree_globals()
-
-    return r
-
-
-tree_globals = create_tree_globals(
-                   alias_version         = default_alias_version,
-                   argument_version      = default_argument_version,
-                   comprehension_version = default_comprehension_version,
-                   context_version       = default_context_version,
-                   except_version        = default_except_version,
-                   expression_version    = default_expression_version,
-                   index_version         = default_index_version,
-                   name_version          = default_name_version,
-                   operator_version      = default_operator_version,
-                   parameter_version     = default_parameter_version,
-                   statement_version     = default_statement_version,
-                   symbol_version        = default_symbol_version,
-                   target_version        = default_target_version,
-               )
+    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
+    #
+    #       We run the code generator:
+    #
+    #       1.  Transform Crystal to Python.
+    #       2.  Output Python (to "Vision.py").
+    #
+    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()

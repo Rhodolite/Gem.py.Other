@@ -6,6 +6,9 @@
 from    Capital.Core                    import  creator
 
 
+version = 2
+
+
 default_alias_version         = '1'
 default_argument_version      = '1'
 default_comprehension_version = '1'
@@ -13,12 +16,16 @@ default_context_version       = 1
 default_except_version        = '1'
 default_expression_version    = '1'
 default_index_version         = '1'
-default_name_version          = 3
+default_name_version          = 1
 default_operator_version      = '1'
 default_parameter_version     = '1'
-default_statement_version     = 2
-default_symbol_version        = 2
-default_target_version        = 3
+default_statement_version     = 1
+default_symbol_version        = 0
+default_target_version        = 1
+
+
+if version == 2:
+    default_context_version = 2
 
 
 if default_context_version:

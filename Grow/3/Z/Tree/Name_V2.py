@@ -105,7 +105,7 @@ class Tree_Name(object):
     if __debug__:
         @property
         def is_tree_expression(self):
-            return self.context.is_tree_expression_context
+            return (self.context.is_tree_load_context) or (self.context.is_tree_store_context)
 
 
     if __debug__:
