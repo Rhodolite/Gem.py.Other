@@ -107,7 +107,7 @@ def bind_method(method, instance):
 #
 #   SEE ALSO:
 #
-#       "Z/Tree_Context_2.py" for a real example usage of `@enumeration`.
+#       `Z.Tree.Context_V2` for a real example usage of `@enumeration`.
 #
 def enumeration(e):
     return e

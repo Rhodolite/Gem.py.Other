@@ -21,7 +21,7 @@ if __debug__:
 #
 #       We really want to say something like the following:
 #
-#           enumeration Tree_Context_2
+#           enumeration Tree_Context_Enumeration
 #               delete
 #               load
 #               parameter
@@ -33,7 +33,7 @@ if __debug__:
 #
 #   INSTEAD:
 #
-#       So instead we create a `Tree_Context_2` "class" (which is our enumeration).
+#       So instead we create a `Tree_Context_Enumeration` "class" (which is our enumeration).
 #
 #       Then we create four instances of this class (which is our four enumerators).
 #
@@ -53,8 +53,8 @@ if __debug__:
 #
 #   SEE ALSO:
 #
-#       See the note in "Capital/Core.py" which explains the usage of `@enumeration" to mark "Tree_Context_2" as *NOT*
-#       really a class, but really an enumeration.
+#       See the note in "Capital/Core.py" which explains the usage of `@enumeration" to mark `Tree_Context_Enumeration`
+#       as *NOT* really a class, but really an enumeration.
 #
 
 
@@ -100,8 +100,8 @@ if __debug__:
 #
 #       Whenever we want to access our [fake] `.name` member, we instead use `self`.
 #
-#       For example, below in `Tree_Context_2.__repr__`, we refer to our [fake] `.name` member as `self` (since `self`
-#       is both our own instance and also our own [fake] `.name` member).
+#       For example, below in `Tree_Context_Enumeration.__repr__`, we refer to our [fake] `.name` member as `self`
+#       (since `self` is both our own instance and also our own [fake] `.name` member).
 #
 #   NOTE:
 #       Later we'll turn this back into a normal class (with one member named `.name`) -- and our code generator will
@@ -117,7 +117,7 @@ if __debug__:
 #       example of how a class can inherit from `str`.
 #
 @enumeration
-class Tree_Context_2(
+class Tree_Context_Enumeration(
         TRAIT_Tree_Context,
 ):
     __slots__ = ((
@@ -162,11 +162,11 @@ class Tree_Context_2(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Context_2 {}>', self.name)
+        return arrange('<Tree_Context_Enumeration {}>', self.name)
 
 
 @creator
-def create_Tree_Context_2(
+def create_Tree_Context_Enumeration(
         name,
 
         is_tree_delete_context    = False,
@@ -183,7 +183,7 @@ def create_Tree_Context_2(
 
     assert (is_tree_delete_context + is_tree_load_context + is_tree_parameter_context + is_tree_store_context) == 1
 
-    return Tree_Context_2(
+    return Tree_Context_Enumeration(
                name,
 
                is_tree_delete_context    = is_tree_delete_context,
@@ -196,7 +196,7 @@ def create_Tree_Context_2(
 #
 #   Now we declare our four enumerators.
 #
-Tree_Context_2.delete    = create_Tree_Context_2('delete',    is_tree_delete_context    = True)
-Tree_Context_2.load      = create_Tree_Context_2('load',      is_tree_load_context      = True)
-Tree_Context_2.parameter = create_Tree_Context_2('parameter', is_tree_parameter_context = True)
-Tree_Context_2.store     = create_Tree_Context_2('store',     is_tree_store_context     = True)
+Tree_Context_Enumeration.delete    = create_Tree_Context_Enumeration('delete',    is_tree_delete_context    = True)
+Tree_Context_Enumeration.load      = create_Tree_Context_Enumeration('load',      is_tree_load_context      = True)
+Tree_Context_Enumeration.parameter = create_Tree_Context_Enumeration('parameter', is_tree_parameter_context = True)
+Tree_Context_Enumeration.store     = create_Tree_Context_Enumeration('store',     is_tree_store_context     = True)

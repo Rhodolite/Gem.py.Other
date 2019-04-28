@@ -146,12 +146,12 @@ if context_version:
         from    Z.Tree.Context_V1               import  tree_parameter_context
         from    Z.Tree.Context_V1               import  tree_store_context
     elif context_version == 2:
-        from    Z.Tree.Context_V2               import  Tree_Context_2
+        from    Z.Tree.Context_V2               import  Tree_Context_Enumeration
 
-        tree_delete_context    = Tree_Context_2.delete
-        tree_load_context      = Tree_Context_2.load
-        tree_parameter_context = Tree_Context_2.parameter
-        tree_store_context     = Tree_Context_2.store
+        tree_delete_context    = Tree_Context_Enumeration.delete
+        tree_load_context      = Tree_Context_Enumeration.load
+        tree_parameter_context = Tree_Context_Enumeration.parameter
+        tree_store_context     = Tree_Context_Enumeration.store
     else:
         from    Capital.Core                    import  FATAL
 

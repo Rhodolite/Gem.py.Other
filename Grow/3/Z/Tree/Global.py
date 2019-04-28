@@ -6,7 +6,7 @@
 from    Capital.Core                    import  creator
 
 
-version = 2
+version = 3
 
 
 default_alias_version         = '1'
@@ -17,15 +17,19 @@ default_except_version        = '1'
 default_expression_version    = '1'
 default_index_version         = '1'
 default_name_version          = 1
-default_operator_version      = '1'
+default_operator_version      = 1
 default_parameter_version     = '1'
 default_statement_version     = 1
 default_symbol_version        = 0
 default_target_version        = 1
 
 
-if version == 2:
-    default_context_version = 2
+if version >= 2:
+    #
+    #   Version 2:  Convert the four context classes to a single enumeration `Tree_Context_2`
+    #
+    default_context_version  = 2
+if version >= 3:        default_operator_version = 2
 
 
 if default_context_version:
@@ -101,7 +105,7 @@ class Tree_Globals(object):
         'expression_version',           #   NativeString
         'index_version',                #   NativeString
         'name_version',                 #   PositiveInteger
-        'operator_version',             #   NativeString
+        'operator_version',             #   PositiveInteger
         'parameter_version',            #   NativeString
         'statement_version',            #   PositiveInteger
         'symbol_version',               #   SubstantialInteger
@@ -131,7 +135,7 @@ class Tree_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {!r} {!r} {} {} {}>',
+        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {} {!r} {} {} {}>',
                        self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
                        self.except_version, self.expression_version, self.index_version, self.name_version,
                        self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
@@ -141,7 +145,7 @@ class Tree_Globals(object):
         trace('Tree_Globals: alias={!r} argument={!r} comprehension={!r} context={} except={!r} ...',
               self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
               self.except_version)
-        trace('... expression={!r} index={!r} name={} statement={} operator={!r} parameter={!r} symbol={}',
+        trace('... expression={!r} index={!r} name={} statement={} operator={} parameter={!r} symbol={}',
               self.expression_version, self.index_version, self.name_version, self.statement_version,
               self.operator_version, self.parameter_version, self.symbol_version)
         trace('... target={}',
@@ -162,7 +166,7 @@ def create_tree_globals(
     assert fact_is_full_native_string (except_version)
     assert fact_is_full_native_string (index_version)
     assert fact_is_positive_integer   (name_version)
-    assert fact_is_full_native_string (operator_version)
+    assert fact_is_positive_integer   (operator_version)
     assert fact_is_full_native_string (parameter_version)
     assert fact_is_full_native_string (expression_version)
     assert fact_is_positive_integer   (statement_version)

@@ -3,15 +3,6 @@
 #
 
 
-from    Capital.Core                    import  arrange
-from    Capital.Core                    import  creator
-from    Capital.Core                    import  enumeration
-
-
-if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
-
-
 #
 #   Z.Tree.Operator_V1 - Implementation of `Tree_Operator`, Version 1.
 #
@@ -19,65 +10,115 @@ if __debug__:
 #
 
 
+from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
+from    Capital.String                  import  conjure_string
+from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
+
+
 #
-#   Tree: Operator, Version 1
+#   Create_TOE(MetaName, operator_token)
 #
-class Tree_Operator_V1(object):
-    __slots__ = ((
-        'name',                         #   NativeString
-        'operator_token',               #   NativeString
-    ))
-
-
-    def __init__(self, name, operator_token):
-        self.name           = name
-        self.operator_token = operator_token
-
-
-    is_tree_operator = True
-
-
-    def __repr__(self):
-        return arrange('<Tree_Operator_V1 {}>', self.operator_token)
-
-
-    def dump_operator_token(self, f):
-        f.write(self.operator_token)
-
-
+#       Create a class with the name [in the parameter] `MetaName`:
+#
+#           With a `.dump_operator_token` that writes [the value in the parameter] `operator_token`.
+#
+#       Then return a singleton of that class
+#
+#   Example:
+#
+#       Given the call `Create_TOE("Add", "{+}")
+#
+#   It will create the following class:
+#
+#       #
+#       #   Tree: Add Operator
+#       #
+#       class Tree_Add_Operator(
+#               TRAIT_Tree_Operator,
+#       ):
+#           __slots__ = (())
+#
+#
+#           #
+#           #  Interface Tree_Operator
+#           #
+#           @staticmethod
+#           def dump_operator_token(f):
+#               f.write('+')                    #   This is `operator` in the code below.
+#
+#
+#           @staticmethod
+#           def __repr__(f):
+#               return '<Tree_Add_Operator>'    #   This is `portrait` in the code below.
+#
+#   Then return a singleton of that class.
+#
 @creator
-def create_Tree_Operator_V1(name, operator_token):
-    assert fact_is_full_native_string(name)
-    assert fact_is_full_native_string(operator_token)
-
-    return Tree_Operator_V1(name, operator_token)
+def create_TOE(MetaName, operator_token):
+    operator = conjure_string(operator_token)
+    portrait = arrange('<{}>', MetaName)
 
 
-tree_add_operator_v1                           = create_Tree_Operator_V1('add',                   '{+}'     )
-tree_binary_and_operator_v1                    = create_Tree_Operator_V1('binary-and',            '{&}'     )
-tree_binary_exclusive_or_operator_v1           = create_Tree_Operator_V1('binary-exclusive-or',   '{^}'     )
-tree_compare_different_operator_v1             = create_Tree_Operator_V1('different',             '{is-not}')
-tree_compare_equal_operator_v1                 = create_Tree_Operator_V1('equal',                 '{==}'    )
-tree_compare_greater_than_operator_v1          = create_Tree_Operator_V1('greater-than',          '{>}'     )
-tree_compare_greater_than_or_equal_operator_v1 = create_Tree_Operator_V1('greater-than-or-equal', '{>=}'    )
-tree_compare_identity_operator_v1              = create_Tree_Operator_V1('identity',              '{is}'    )
-tree_compare_less_than_operator_v1             = create_Tree_Operator_V1('less-than',             '{<}'     )
-tree_compare_less_than_or_equal_operator_v1    = create_Tree_Operator_V1('less-than-or-equal',    '{<=}'    )
-tree_compare_not_equal_operator_v1             = create_Tree_Operator_V1('not-equal',             '{!=}'    )
-tree_contains_operator_v1                      = create_Tree_Operator_V1('in',                    '{in}'    )
-tree_divide_operator_v1                        = create_Tree_Operator_V1('divide',                '{/}'     )
-tree_excludes_operator_v1                      = create_Tree_Operator_V1('not-in',                '{not-in}')
-tree_floor_divide_operator_v1                  = create_Tree_Operator_V1('floor-divide',          '{//}'    )
-tree_invert_operator_v1                        = create_Tree_Operator_V1('invert',                '{~}'     )
-tree_left_shift_operator_v1                    = create_Tree_Operator_V1('left-shift',            '{<<}'    )
-tree_logical_and_operator_v1                   = create_Tree_Operator_V1('and',                   '{and}'   )
-tree_logical_or_operator_v1                    = create_Tree_Operator_V1('or',                    '{or}'    )
-tree_modify_subtract_operator_v1               = create_Tree_Operator_V1('modify-subtract',       '{-=}'    )
-tree_modulus_operator_v1                       = create_Tree_Operator_V1('modulus',               '{%}'     )
-tree_multiply_operator_v1                      = create_Tree_Operator_V1('multiply',              '{*}'     )
-tree_negative_operator_v1                      = create_Tree_Operator_V1('negative',              '{-}'     )
-tree_not_operator_v1                           = create_Tree_Operator_V1('not',                   '{not}'   )
-tree_positive_operator_v1                      = create_Tree_Operator_V1('positive',              '{+}'     )
-tree_power_operator_v1                         = create_Tree_Operator_V1('power',                 '{**}'    )
-tree_right_shift_operator_v1                   = create_Tree_Operator_V1('right-shift',           '{>>}'    )
-tree_subtract_operator_v1                      = create_Tree_Operator_V1('subtract',              '{-}'     )
+    #
+    #   Tree: MetaName Operator
+    #
+    class X_Operator(
+            TRAIT_Tree_Operator,
+    ):
+        __slots__ = (())
+
+
+        #
+        #  Interface Tree_Operator
+        #
+        @staticmethod
+        def dump_operator_token(f):
+            f.write(operator)
+
+
+        @staticmethod
+        def __repr__(f):
+            return portrait
+
+
+    #
+    #   Rename class `X_Operator` to have the name [in the parameter] `MetaName`
+    #
+    X_Operator.__name__ = MetaName
+
+    
+    return X_Operator()
+
+
+tree_add_operator                           = create_TOE('Tree_Add_Operator',                           '{+}'     )
+tree_binary_and_operator                    = create_TOE('Tree_Binary_And_Operator',                    '{&}'     )
+tree_binary_exclusive_or_operator           = create_TOE('Tree_Binary_Exclusive_Or_Operator',           '{^}'     )
+tree_compare_different_operator             = create_TOE('Tree_Compare_Different_Operator',             '{is-not}')
+tree_compare_equal_operator                 = create_TOE('Tree_Compare_Equal_Operator',                 '{==}'    )
+tree_compare_greater_than_operator          = create_TOE('Tree_Compare_Greater_Than_Operator',          '{>}'     )
+tree_compare_greater_than_or_equal_operator = create_TOE('Tree_Compare_Greater_Than_Or_Equal_Operator', '{>=}'    )
+tree_compare_identity_operator              = create_TOE('Tree_Compare_Identity_Operator',              '{is}'    )
+tree_compare_less_than_operator             = create_TOE('Tree_Compare_Less_Than_Operator',             '{<}'     )
+tree_compare_less_than_or_equal_operator    = create_TOE('Tree_Compare_Less_Than_Or_Equal_Operator',    '{<=}'    )
+tree_compare_not_equal_operator             = create_TOE('Tree_Compare_Not_Equal_Operator',             '{!=}'    )
+tree_contains_operator                      = create_TOE('Tree_Contains_Operator',                      '{in}'    )
+tree_divide_operator                        = create_TOE('Tree_Divide_Operator',                        '{/}'     )
+tree_excludes_operator                      = create_TOE('Tree_Excludes_Operator',                      '{not.in}')
+tree_floor_divide_operator                  = create_TOE('Tree_Floor_Divide_Operator',                  '{//}'    )
+tree_invert_operator                        = create_TOE('Tree_Invert_Operator',                        '{~}'     )
+tree_left_shift_operator                    = create_TOE('Tree_Left_Shift_Operator',                    '{<<}'    )
+tree_logical_and_operator                   = create_TOE('Tree_Logical_And_Operator',                   '{and}'   )
+tree_logical_or_operator                    = create_TOE('Tree_Logical_Or_Operator',                    '{or}'    )
+tree_modulus_operator                       = create_TOE('Tree_Modulus_Operator',                       '{%}'     )
+tree_multiply_operator                      = create_TOE('Tree_Multiply_Operator',                      '{*}'     )
+tree_negative_operator                      = create_TOE('Tree_Negative_Operator',                      '{-}'     )
+tree_not_operator                           = create_TOE('Tree_Not_Operator',                           '{not}'   )
+tree_positive_operator                      = create_TOE('Tree_Positive_Operator',                      '{+}'     )
+tree_power_operator                         = create_TOE('Tree_Power_Operator',                         '{**}'    )
+tree_right_shift_operator                   = create_TOE('Tree_Right_Shift_Operator',                   '{>>}'    )
+tree_subtract_operator                      = create_TOE('Tree_Subtract_Operator',                      '{-}'     )
+
+
+
+del create_TOE

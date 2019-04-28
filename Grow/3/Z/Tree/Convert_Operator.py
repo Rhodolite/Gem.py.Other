@@ -40,6 +40,7 @@ from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTre
 from    Z.Tree.Operator                         import  tree_add_operator
 from    Z.Tree.Operator                         import  tree_binary_and_operator
 from    Z.Tree.Operator                         import  tree_binary_exclusive_or_operator
+from    Z.Tree.Operator                         import  tree_contains_operator
 from    Z.Tree.Operator                         import  tree_compare_different_operator
 from    Z.Tree.Operator                         import  tree_compare_equal_operator
 from    Z.Tree.Operator                         import  tree_compare_greater_than_operator
@@ -48,7 +49,6 @@ from    Z.Tree.Operator                         import  tree_compare_identity_op
 from    Z.Tree.Operator                         import  tree_compare_less_than_operator
 from    Z.Tree.Operator                         import  tree_compare_less_than_or_equal_operator
 from    Z.Tree.Operator                         import  tree_compare_not_equal_operator
-from    Z.Tree.Operator                         import  tree_contains_operator
 from    Z.Tree.Operator                         import  tree_divide_operator
 from    Z.Tree.Operator                         import  tree_excludes_operator
 from    Z.Tree.Operator                         import  tree_floor_divide_operator
@@ -56,7 +56,6 @@ from    Z.Tree.Operator                         import  tree_invert_operator
 from    Z.Tree.Operator                         import  tree_left_shift_operator
 from    Z.Tree.Operator                         import  tree_logical_and_operator
 from    Z.Tree.Operator                         import  tree_logical_or_operator
-from    Z.Tree.Operator                         import  tree_modify_subtract_operator
 from    Z.Tree.Operator                         import  tree_modulus_operator
 from    Z.Tree.Operator                         import  tree_multiply_operator
 from    Z.Tree.Operator                         import  tree_negative_operator
@@ -169,10 +168,10 @@ def convert_logical_operator(self):
 #
 #           python type                                     converted to
 #           -----------                                     ------------
-#           Native_AbstractSyntaxTree_Subtract_Operator     tree_modify_subtract_operator
+#           Native_AbstractSyntaxTree_Subtract_Operator     tree_subtract_operator
 #
 map__Native_AbstractSyntaxTree_OPERATOR__to__MODIFY__Tree_Operator = {
-        Native_AbstractSyntaxTree_Subtract_Operator : tree_modify_subtract_operator,
+        Native_AbstractSyntaxTree_Subtract_Operator : tree_subtract_operator,
     }
 
 
