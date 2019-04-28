@@ -42,7 +42,6 @@ from    Z.Tree.Statement                    import  create_Tree_Delete_Statement
 from    Z.Tree.Statement                    import  create_Tree_Execute_Statement
 from    Z.Tree.Statement                    import  create_Tree_Expression_Statement
 from    Z.Tree.Statement                    import  create_Tree_From_Import_Statement
-from    Z.Tree.Statement                    import  create_Tree_Function_Definition
 from    Z.Tree.Statement                    import  create_Tree_Global_Statement
 from    Z.Tree.Statement                    import  create_Tree_Import_Statement
 from    Z.Tree.Statement                    import  create_Tree_Modify_Statement

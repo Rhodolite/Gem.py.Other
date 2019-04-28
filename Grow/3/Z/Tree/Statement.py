@@ -104,13 +104,6 @@ statement_version = tree_globals.statement_version
 
 
 if statement_version in ((1, 2)):
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_Class_Definition
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_For_Statement
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_Function_Definition
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_Try_Except_Statement
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_Try_Finally_Statement
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_While_Statement
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_With_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assert_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assign_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Break_Statement
@@ -126,12 +119,6 @@ if statement_version in ((1, 2)):
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Print_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Raise_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Return_Statement
-
-
-if statement_version == 1:
-    from    Z.Tree.Compound_Statement_V1    import      create_Tree_If_Statement
-elif statement_version == 2:
-    from    Z.Tree.Compound_Statement_V2    import      create_Tree_If_Statement
 else:
     from    Capital.Core                import  FATAL
 

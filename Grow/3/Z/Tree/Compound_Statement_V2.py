@@ -1,4 +1,6 @@
 #
+#   Copyright (c) 2019 Joy Diamond.  All rights reserved.
+#
 
 
 #
@@ -110,6 +112,281 @@ def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_claus
 
 
 #
+#   Tree: Class Definition
+#
+class Tree_Class_Definition(object):
+    #
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
+    #
+    __slots__ = ((
+        'line_number',                  #   PositiveInteger
+        'column',                       #   SubstantialInteger
+
+        'name',                         #   NativeString
+        'bases',                        #   NativeList of Tree_Expression
+        'body',                         #   Tree_Statement
+        'decorator_list',               #   NativeList of Tree_Decorator
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, line_number, column, name, bases, body, decorator_list):
+        self.line_number = line_number
+        self.column      = column
+
+        self.name           = name
+        self.bases          = bases
+        self.body           = body
+        self.decorator_list = decorator_list
+
+
+    def _dump_bases_tokens(self, f, header, trailer):
+        with f.indent_2(header, trailer):
+            for v in self.bases:
+                v.dump_evaluate_tokens(f)
+                f.line()
+
+
+    def _dump_body_tokens(self, f, header, trailer):
+        with f.indent_2(header, trailer):
+            self.body.dump_suite_tokens(f)
+
+
+    def _dump_decorator_tokens(self, f, header, trailer):
+        with f.indent_2(header, trailer):
+            for v in self.decorator_list:
+                f.write('@')
+                v.dump_evaluate_tokens(f)
+                f.line()
+
+
+    #
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
+    #
+    if __debug__:
+        is_tree_statement   = True
+        is_tree_statement_0 = True
+
+
+    is_tree_statement_none = False
+    suite_estimate         = 1
+
+
+    def dump_suite_tokens(self, f):
+        decorator_list = self.decorator_list
+
+        header = arrange('<class-definition @{}:{} {}', self.line_number, self.column, self.name)
+
+        with f.indent_2(header, '>'):
+            self._dump_bases_tokens(f, 'bases: {', None)
+
+            if len(self.decorator_list) == 0:
+                self._dump_body_tokens     (f, '}; body: {',           '}')
+            else:
+                self._dump_body_tokens     (f, '}; body: {',           None)
+                self._dump_decorator_tokens(f, '}; decorator_list: {', '}')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Class_Definition @{}:{} {!r} {!r} {!r} {!r}>',
+                       self.line_number, self.column, self.name, self.bases, self.body, self.decorator_list)
+
+
+def create_Tree_Class_Definition(line_number, column, name, bases, body, decorator_list):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_full_native_string(name)
+    assert fact_is_some_native_list  (bases)
+    assert fact_is_tree_statement    (body)
+    assert fact_is_some_native_list  (decorator_list)
+
+    return Tree_Class_Definition(line_number, column, name, bases, body, decorator_list)
+
+
+#
+#   Tree: For Statement
+#
+class Tree_For_Statement(object):
+    #
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
+    #
+    __slots__ = ((
+        'line_number',                  #   PositiveInteger
+        'column',                       #   SubstantialInteger
+
+        'target',                       #   Tree_Target
+        'sequence',                     #   Tree_Expression
+        'body',                         #   Tree_Statement
+        'else_clause_0',                #   Tree_Statement_0
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, line_number, column, target, sequence, body, else_clause_0):
+        self.line_number = line_number
+        self.column      = column
+
+        self.target        = target
+        self.sequence      = sequence
+        self.body          = body
+        self.else_clause_0 = else_clause_0
+
+
+    #
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
+    #
+    if __debug__:
+        is_tree_statement   = True
+        is_tree_statement_0 = True
+
+
+    is_tree_statement_none = False
+    suite_estimate         = 1
+
+
+    def dump_suite_tokens(self, f):
+        f.arrange('<for @{}:{} ', self.line_number, self.column)
+        self.target.dump_store_target_tokens(f)
+        f.write(' in ')
+        self.sequence.dump_evaluate_tokens(f)
+        f.line(' {')
+
+        with f.indent_2():
+            self.body.dump_suite_tokens(f)
+
+        if self.else_clause_0.suite_estimate:
+            with f.indent('} else {'):
+                v.else_clause.dump_suite_tokens(f)
+
+        f.line('}>')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_For_Statement @{}:{} {!r} {!r} {!r} {!r}>',
+                       self.line_number, self.column, self.target, self.sequence, self.body, self.else_clause_0)
+
+
+def create_Tree_For_Statement(line_number, column, target, sequence, body, else_clause_0):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_tree_store_target(target)
+    assert fact_is_tree_expression  (sequence)
+    assert fact_is_tree_statement   (body)
+    assert fact_is_tree_statement_0 (else_clause_0)
+
+    return Tree_For_Statement(line_number, column, target, sequence, body, else_clause_0)
+
+
+#
+#   Tree: Function Definition
+#
+class Tree_Function_Definition(object):
+    #
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
+    #
+    __slots__ = ((
+        'line_number',                  #   PositiveInteger
+        'column',                       #   SubstantialInteger
+
+        'name',                         #   NativeString
+        'parameters',                   #   Tree_Parameter
+        'body',                         #   Tree_List
+        'decorator_list',               #   NativeList of Tree_Decorator
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, line_number, column, name, parameters, body, decorator_list):
+        self.line_number = line_number
+        self.column      = column
+
+        self.name           = name
+        self.parameters     = parameters
+        self.body           = body
+        self.decorator_list = decorator_list
+
+
+    def _dump_body_tokens(self, f, header, trailer):
+        with f.indent_2(header, trailer):
+            self.body.dump_suite_tokens(f)
+
+
+    def _dump_decorator_tokens(self, f, header, trailer):
+        with f.indent_2(header, trailer):
+            for v in self.decorator_list:
+                f.write('@')
+                v.dump_evaluate_tokens(f)
+                f.line()
+
+
+    #
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
+    #
+    if __debug__:
+        is_tree_statement   = True
+        is_tree_statement_0 = True
+
+
+    is_tree_statement_none = False
+    suite_estimate         = 1
+
+
+    def dump_suite_tokens(self, f):
+        decorator_list = self.decorator_list
+
+        header = arrange('<function-definition @{}:{} {}', self.line_number, self.column, self.name)
+
+        with f.indent_2(header, '>'):
+            self.parameters.dump_parameter_tokens(f)
+
+            if len(self.decorator_list) == 0:
+                self._dump_body_tokens     (f, '{',                    '}')
+            else:
+                self._dump_body_tokens     (f, '{',                    None)
+                self._dump_decorator_tokens(f, '}; decorator_list: {', '}')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Function_Definition @{}:{} {!r} {!r} {!r} {!r}>',
+                       self.line_number, self.column, self.name, self.parameters, self.body, self.decorator_list)
+
+
+def create_Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_full_native_string (name)
+    assert fact_is_tree_parameters_all(parameters)
+    assert fact_is_tree_statement     (body)
+    assert fact_is_some_native_list   (decorator_list)
+
+    return Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list)
+
+
+#
 #   Tree: `if` statement
 #
 class Tree_If_Statement(Tree_Test_Statement):
@@ -120,3 +397,16 @@ class Tree_If_Statement(Tree_Test_Statement):
 
 def create_Tree_If_Statement(line_number, column, test, body, orelse):
     return create_Tree_Test_Statement(Tree_If_Statement, line_number, column, test, body, orelse)
+
+
+#
+#   Tree: `while` statement
+#
+class Tree_While_Statement(Tree_Test_Statement):
+    __slots__ = (())
+
+    keyword = 'while'
+
+
+def create_Tree_While_Statement(line_number, column, test, body, orelse):
+    return create_Tree_Test_Statement(Tree_While_Statement, line_number, column, test, body, orelse)

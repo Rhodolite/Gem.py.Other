@@ -1,16 +1,9 @@
-#
-#   Copyright (c) 2019 Joy Diamond.  All rights reserved.
-#
-
-
-#
-#   Z.Tree.Convert_Compound_Statement_V1 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 1.
-#
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 from    Capital.Core                        import  trace
+from    Z.Tree.Convert_Decorator            import  convert_some_list_of_decorators
 from    Z.Tree.Convert_Except               import  convert_full_list_of_except_clauses
 from    Z.Tree.Convert_Expression           import  convert_expression
 from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
@@ -29,14 +22,14 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tr
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_While_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_With_Statement
 from    Z.Tree.None                         import  tree_none
-from    Z.Tree.Statement                    import  create_Tree_Class_Definition
-from    Z.Tree.Statement                    import  create_Tree_For_Statement
-from    Z.Tree.Statement                    import  create_Tree_Function_Definition
-from    Z.Tree.Statement                    import  create_Tree_If_Statement
-from    Z.Tree.Statement                    import  create_Tree_Try_Except_Statement
-from    Z.Tree.Statement                    import  create_Tree_Try_Finally_Statement
-from    Z.Tree.Statement                    import  create_Tree_While_Statement
-from    Z.Tree.Statement                    import  create_Tree_With_Statement
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_Class_Definition
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_For_Statement
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_Function_Definition
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_If_Statement
+from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Except_Statement
+from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Statement
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_While_Statement
+from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement
 from    Z.Tree.Suite                        import  create_Tree_Suite
 
 
@@ -97,7 +90,7 @@ def convert_class_definition(self):
 
                self.name,
                convert_some_list_of_expressions(self.bases),
-               convert_full_list_of_statements (self.body),
+               convert_suite                   (self.body),
                convert_some_list_of_decorators (self.decorator_list),
            )
 
@@ -124,10 +117,10 @@ def convert_for_statement(self):
                self.lineno,
                self.col_offset,
 
-               convert_target                 (self.target),
-               convert_expression             (self.iter),
-               convert_full_list_of_statements(self.body),
-               convert_some_list_of_statements(self.orelse),
+               convert_target    (self.target),
+               convert_expression(self.iter),
+               convert_suite     (self.body),
+               convert_suite_0   (self.orelse),
            )
 
 
@@ -156,7 +149,7 @@ def convert_function_definition(self):
 
                self.name,
                convert_parameters_all         (self.args),
-               convert_full_list_of_statements(self.body),
+               convert_suite                  (self.body),
                convert_some_list_of_decorators(self.decorator_list),
            )
 

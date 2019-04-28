@@ -137,15 +137,15 @@ elif statement_version == 2:
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_break_statement         #   "_V1" on purpose
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_class_definition        #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_class_definition        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_continue_statement      #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_delete_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_execute_statement       #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_expression_statement    #   "_V1" on purpose
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement           #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_for_statement           #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement   #   "_V1" on purpose
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition     #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_function_definition     #   "_V1" on purpose
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_if_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement        #   "_V1" on purpose
@@ -155,7 +155,7 @@ elif statement_version == 2:
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement    #   "_V1" on purpose
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement   #   "_V1" on purpose
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement         #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_while_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement          #   "_V1" on purpose
 else:
     from    Capital.Core                import  FATAL

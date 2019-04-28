@@ -46,20 +46,20 @@ class Tree_Test_Statement(object):
 
         'test',                         #   Tree_Expression
         'body',                         #   FullNativeList of Tree_Statement
-        'else_many',                    #   SomeNativeList of Tree_Statement
+        'else_clause_0',                #   SomeNativeList of Tree_Statement
     ))
 
 
     #
     #   Protected
     #
-    def __init__(self, line_number, column, test, body, else_many):
+    def __init__(self, line_number, column, test, body, else_clause_0):
         self.line_number = line_number
         self.column      = column
 
-        self.test      = test
-        self.body      = body
-        self.else_many = else_many
+        self.test          = test
+        self.body          = body
+        self.else_clause_0 = else_clause_0
 
 
     #
@@ -80,13 +80,13 @@ class Tree_Test_Statement(object):
         self.test.dump_evaluate_tokens(f)
         f.line(' {')
 
-        with f.indent():
+        with f.indent_2():
             for v in self.body:
                 v.dump_suite_tokens(f)
 
-        if len(self.else_many) > 0:
+        if len(self.else_clause_0) > 0:
             with f.indent('} else {'):
-                for v in self.else_many:
+                for v in self.else_clause_0:
                     v.dump_suite_tokens(f)
 
         f.line('}>')
@@ -97,18 +97,19 @@ class Tree_Test_Statement(object):
     #
     def __repr__(self):
         return arrange('<{} @{}:{} {!r} {!r} {!r}>',
-                       self.__class__.__name__, self.line_number, self.column, self.test, self.body, self.else_many)
+                       self.__class__.__name__, self.line_number, self.column, self.test, self.body,
+                       self.else_clause_0)
 
 
-def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_many):
+def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_clause_0):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_expression (test)
     assert fact_is_full_native_list(body)
-    assert fact_is_some_native_list(else_many)
+    assert fact_is_some_native_list(else_clause_0)
 
-    return Meta(line_number, column, test, body, else_many)
+    return Meta(line_number, column, test, body, else_clause_0)
 
 
 #
@@ -183,13 +184,13 @@ class Tree_Class_Definition(object):
         header = arrange('<class-definition @{}:{} {}', self.line_number, self.column, self.name)
 
         with f.indent_2(header, '>'):
-            self._dump_bases_tokens(f, 'bases: [', None)
+            self._dump_bases_tokens(f, 'bases: {', None)
 
             if len(self.decorator_list) == 0:
-                self._dump_body_tokens     (f, ']; body: [',           ']')
+                self._dump_body_tokens     (f, '}; body: {',           '}')
             else:
-                self._dump_body_tokens     (f, ']; body: [',           None)
-                self._dump_decorator_tokens(f, ']; decorator_list: [', ']')
+                self._dump_body_tokens     (f, '}; body: {',           None)
+                self._dump_decorator_tokens(f, '}; decorator_list: {', '}')
 
 
     #
@@ -227,21 +228,21 @@ class Tree_For_Statement(object):
         'target',                       #   Tree_Target
         'sequence',                     #   Tree_Expression
         'body',                         #   FullNativeList of Tree_Statement
-        'else_many',                    #   SomeNativeList of Tree_Statement
+        'else_clause_0',                #   SomeNativeList of Tree_Statement
     ))
 
 
     #
     #   Private
     #
-    def __init__(self, line_number, column, target, sequence, body, else_many):
+    def __init__(self, line_number, column, target, sequence, body, else_clause_0):
         self.line_number = line_number
         self.column      = column
 
-        self.target    = target
-        self.sequence  = sequence
-        self.body      = body
-        self.else_many = else_many
+        self.target        = target
+        self.sequence      = sequence
+        self.body          = body
+        self.else_clause_0 = else_clause_0
 
 
     #
@@ -264,13 +265,13 @@ class Tree_For_Statement(object):
         self.sequence.dump_evaluate_tokens(f)
         f.line(' {')
 
-        with f.indent():
+        with f.indent_2():
             for v in self.body:
                 v.dump_suite_tokens(f)
 
-        if len(self.else_many) > 0:
+        if len(self.else_clause_0) > 0:
             with f.indent('} else {'):
-                for v in self.else_many:
+                for v in self.else_clause_0:
                     v.dump_suite_tokens(f)
 
         f.line('}>')
@@ -281,19 +282,19 @@ class Tree_For_Statement(object):
     #
     def __repr__(self):
         return arrange('<Tree_For_Statement @{}:{} {!r} {!r} {!r} {!r}>',
-                       self.line_number, self.column, self.target, self.sequence, self.body, self.else_many)
+                       self.line_number, self.column, self.target, self.sequence, self.body, self.else_clause_0)
 
 
-def create_Tree_For_Statement(line_number, column, target, sequence, body, else_many):
+def create_Tree_For_Statement(line_number, column, target, sequence, body, else_clause_0):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_store_target(target)
     assert fact_is_tree_expression  (sequence)
     assert fact_is_full_native_list (body)
-    assert fact_is_some_native_list (else_many)
+    assert fact_is_some_native_list (else_clause_0)
 
-    return Tree_For_Statement(line_number, column, target, sequence, body, else_many)
+    return Tree_For_Statement(line_number, column, target, sequence, body, else_clause_0)
 
 
 #
@@ -377,10 +378,10 @@ class Tree_Function_Definition(object):
             self.parameters.dump_parameter_tokens(f)
 
             if len(self.decorator_list) == 0:
-                self._dump_body_tokens     (f, '[',                    ']')
+                self._dump_body_tokens     (f, '{',                    '}')
             else:
-                self._dump_body_tokens     (f, '[',                    None)
-                self._dump_decorator_tokens(f, ']; decorator_list: [', ']')
+                self._dump_body_tokens     (f, '{',                    None)
+                self._dump_decorator_tokens(f, '}; decorator_list: {', '}')
 
 
     #
@@ -417,20 +418,20 @@ class Tree_Try_Except_Statement(object):
 
         'body',                         #   FullNativeList of Tree_Statement
         'except_handlers',              #   FullNativeList of Tree_Except_Handler
-        'else_many',                    #   SomeNativeList of Tree_Statement
+        'else_clause_0',                #   SomeNativeList of Tree_Statement
     ))
 
 
     #
     #   Private
     #
-    def __init__(self, line_number, column, body, except_handlers, else_many):
+    def __init__(self, line_number, column, body, except_handlers, else_clause_0):
         self.line_number = line_number
         self.column      = column
 
         self.body            = body
         self.except_handlers = except_handlers
-        self.else_many       = else_many
+        self.else_clause_0   = else_clause_0
 
 
     #
@@ -459,9 +460,9 @@ class Tree_Try_Except_Statement(object):
             for v in self.except_handlers:
                 v.dump_except_clause_tokens(f)
 
-            if len(self.else_many) > 0:
+            if len(self.else_clause_0) > 0:
                 with f.indent('else {', '}'):
-                    for v in self.else_many:
+                    for v in self.else_clause_0:
                         v.dump_suite_tokens(f)
 
         f.line('>')
@@ -472,18 +473,18 @@ class Tree_Try_Except_Statement(object):
     #
     def __repr__(self):
         return arrange('<Tree_Try_Except_Statement @{}:{} {!r} {!r} {!r}>',
-                       self.line_number, self.column, self.body, self.except_handlers, self.else_many)
+                       self.line_number, self.column, self.body, self.except_handlers, self.else_clause_0)
 
 
-def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_many):
+def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_clause_0):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_full_native_list(body)
     assert fact_is_full_native_list(except_handlers)
-    assert fact_is_some_native_list(else_many)
+    assert fact_is_some_native_list(else_clause_0)
 
-    return Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_many)
+    return Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_clause_0)
 
 
 #
@@ -625,7 +626,7 @@ class Tree_With_Statement(object):
 
         f.line(' {')
 
-        with f.indent():
+        with f.indent_2():
             for v in self.body:
                 v.dump_suite_tokens(f)
 
@@ -637,7 +638,7 @@ class Tree_With_Statement(object):
     #
     def __repr__(self):
         return arrange('<Tree_With_Statement @{}:{} {!r} {!r} {!r}>',
-                       self.line_number, self.column, self.value, self.target, self.body.else_many)
+                       self.line_number, self.column, self.value, self.target, self.body.else_clause_0)
 
 
 def create_Tree_With_Statement(line_number, column, value, target, body):
