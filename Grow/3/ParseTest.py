@@ -4,62 +4,45 @@
 
 
 #
-#   Z.Tree.Convert_Attribute_V2 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 1.
+#   Z.Tree.Module - Tree class that represent a module.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
-#
-#   Difference between Version 1 & Version 2
-#
-#       Version 1:
-#
-#           Pass in `self.attr` as the `attribute` parameter (four parameter) to `create_Tree_Attribute`.
-#
-#       Version 2:
-#
-#           Pass in `conjure_symbol(self.attr)` as the `attribute` parameter (four parameter) to
-#           `create_Tree_Attribute`.
-#
-
-
-from    Z.Parser.Symbol                     import  conjure_symbol
-from    Z.Tree.Attribute_V2                 import  create_Tree_Attribute
-from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
+from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
+    from    Capital.Fact                import  fact_is_some_native_list
 
 
 #
-#   convert_attribute_expression(self)
+#   Tree_Module
 #
-#       Convert a `Native_AbstractSyntaxTree_Attribute_Expression` (i.e.: `_ast.Expr`) to a `Tree_Attribute`.
-#
-assert Native_AbstractSyntaxTree_Attribute_Expression._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Attribute_Expression._fields     == (('value', 'attr', 'ctx'))
+class Tree_Module(object):
+    __slots__ = ((
+        'body',                         #   NativeList of Tree_Statement
+    ))
 
 
-def convert_attribute_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+    def __init__(self, body):
+        self.body = body
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                  (self.value)
-    assert fact_is_full_native_string                                              (self.attr)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(self.ctx)
 
-    return create_Tree_Attribute(
-               self.lineno,
-               self.col_offset,
+    def __repr__(self):
+        return arrange('<Tree.Module {!r}>', self.body)
 
-               convert_expression                  (self.value),
-               conjure_symbol                      (self.attr),
-               convert_delete_load_OR_store_context(self.ctx),
-          )
+
+    def dump_module_tokens(self, f):
+        with f.indent_2('<module [', ']>'):
+            for v in self.body:
+                v.dump_statement_tokens(f)
+
+
+@creator
+def create_Tree_Module(body):
+    assert fact_is_some_native_list(body)
+
+    return Tree_Module(body)

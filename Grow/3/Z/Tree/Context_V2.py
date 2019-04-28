@@ -3,6 +3,29 @@
 #
 
 
+#
+#   Z.Tree.Context_V2 - Implementation of `Tree_Context`, Version 2.
+#
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
+
+
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           One class per contexxt (so as to do a 1-1 emulation of `_ast`).
+#
+#       Version 2:
+#
+#           A single enumeration named `Tree_Context_Enumeration`.
+#
+#           (see more details below on this enumeration).
+#
+
+
+
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration

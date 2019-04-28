@@ -6,41 +6,82 @@
 from    Capital.Core                    import  creator
 
 
-version = 3
+version = 7
 
 
-default_alias_version         = '1'
-default_argument_version      = '1'
-default_comprehension_version = '1'
-default_context_version       = 1
-default_except_version        = '1'
-default_expression_version    = '1'
-default_index_version         = '1'
-default_name_version          = 1
-default_operator_version      = 1
-default_parameter_version     = '1'
-default_statement_version     = 1
-default_symbol_version        = 0
-default_target_version        = 1
+alias_version         = '1'
+argument_version      = '1'
+comprehension_version = '1'
+context_version       = 1
+except_version        = '1'
+expression_version    = '1'
+index_version         = '1'
+name_version          = 1
+operator_version      = 1
+parameter_version     = '1'
+statement_version     = 1
+symbol_version        = 0
+target_version        = 1
 
 
+#
+#   Version 2 & 3:
+#
+#       Introduce Enumerations
+#
+#           2:  Enumeration for `Tree_Context`
+#           3:  Enumeration for `Tree_Operator`
+#
 if version >= 2:
-    #
-    #   Version 2:  Convert the four context classes to a single enumeration `Tree_Context_2`
-    #
-    default_context_version  = 2
-if version >= 3:        default_operator_version = 2
+    context_version = 2
+
+if version >= 3:
+    operator_version = 2
 
 
-if default_context_version:
+#
+#   Version 4 & 5:
+#
+#       Introduce Symbols
+#
+#           4:  `Tree_Name`   uses symbols
+#           5:  `Tree_Target` uses symbols (affects `Tree_Attribute`).
+#
+if version >= 4:
+    name_version   = 2
+    symbol_version = 1
+
+if version >= 5:
+    target_version = 2
+
+
+#
+#   Version 6:
+#
+#       No longer use contexts
+#
+#           6:  `Tree_Name`    no longer uses contexts.
+#
+#           7:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+#                              `Tree_Subscript`).
+#
+if version >= 6:
+    name_version = 3
+
+if version >= 7:
+    context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
+    target_version  = 3
+
+
+if context_version:
     #
     #   Using `Tree_Context`:
     #
     #       Maximum allowed name   version is 2.
     #       Maximum allowed target version is 2.
     #
-#   assert default_name_version   <= 2
-#   assert default_target_version <= 2
+#   assert name_version   <= 2
+#   assert target_version <= 2
     pass
 else:
     #
@@ -50,29 +91,27 @@ else:
     #       Symbols must be used.
     #       Minimum allowed target version is 3.
     #
-    assert default_name_version   >= 3
-    assert default_symbol_version == 1
-    assert default_target_version >= 3
+    assert name_version   >= 3
+    assert symbol_version == 1
+    assert target_version >= 3
 
 
-if default_symbol_version == 0:
+if symbol_version == 0:
     #
     #   NOT using symbols:
     #
     #       Name   version must be 1.
     #       Target version must be 1.
     #
-    assert default_name_version   == 1
-    assert default_target_version == 1
+    assert name_version   == 1
+    assert target_version == 1
 else:
     #
     #   Using symbols:
     #
     #       Minumum allowed name   version is 2.
-    #       Minumum allowed target version is 3.
     #
-    assert default_name_version   >= 2
-    assert default_target_version >= 2
+    assert name_version   >= 2
 
 
 #
@@ -187,17 +226,17 @@ def create_tree_globals(
 
 
 tree_globals = create_tree_globals(
-                   alias_version         = default_alias_version,
-                   argument_version      = default_argument_version,
-                   comprehension_version = default_comprehension_version,
-                   context_version       = default_context_version,
-                   except_version        = default_except_version,
-                   expression_version    = default_expression_version,
-                   index_version         = default_index_version,
-                   name_version          = default_name_version,
-                   operator_version      = default_operator_version,
-                   parameter_version     = default_parameter_version,
-                   statement_version     = default_statement_version,
-                   symbol_version        = default_symbol_version,
-                   target_version        = default_target_version,
+                   alias_version         = alias_version,
+                   argument_version      = argument_version,
+                   comprehension_version = comprehension_version,
+                   context_version       = context_version,
+                   except_version        = except_version,
+                   expression_version    = expression_version,
+                   index_version         = index_version,
+                   name_version          = name_version,
+                   operator_version      = operator_version,
+                   parameter_version     = parameter_version,
+                   statement_version     = statement_version,
+                   symbol_version        = symbol_version,
+                   target_version        = target_version,
                )

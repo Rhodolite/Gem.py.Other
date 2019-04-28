@@ -133,9 +133,7 @@ target_version = tree_globals.target_version
 
 
 if target_version in ((1, 2, 3)):
-    from    Z.Tree.Attribute_V1         import  create_Tree_Attribute
-    from    Z.Tree.Many_V1              import  create_Tree_List_Expression
-    from    Z.Tree.Many_V1              import  create_Tree_Tuple_Expression
+    pass
 else:
     from    Capital.Core                import  FATAL
 

@@ -12,6 +12,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Z.Tree.Except                   import  TRAIT_Tree_Except_Clause
 
 
 if __debug__:
@@ -24,9 +25,11 @@ if __debug__:
 
 
 #
-#   Tree: Except Handler, Version 1
+#   Tree: Except Handler
 #
-class Tree_Except_Handler_V1(object):
+class Tree_Except_Handler_V1(
+        TRAIT_Tree_Except_Clause,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -37,6 +40,9 @@ class Tree_Except_Handler_V1(object):
     ))
 
 
+    #
+    #   Private
+    #
     def __init__(self, line_number, column, type_expression, name_expression, body):
         self.line_number = line_number
         self.column      = column
@@ -46,11 +52,9 @@ class Tree_Except_Handler_V1(object):
         self.body            = body
 
 
-    def __repr__(self):
-        return arrange('<Tree_Except_Handler_V1 @{}:{} {!r} {!r} {!r}>',
-                       self.line_number, self.column, self.type_expression, self.name_expression, self.body)
-
-
+    #
+    #   Interface Tree_Except_Clause
+    #
     def dump_except_clause_tokens(self, f):
         f.arrange('<except @{}:{}', self.line_number, self.column)
 
@@ -66,9 +70,18 @@ class Tree_Except_Handler_V1(object):
 
         with f.indent_2():
             for v in self.body:
-                v.dump_suite_tokens(f)
+                v.dump_statement_tokens(f)
 
         f.line('}>')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Except_Handler_V1 @{}:{} {!r} {!r} {!r}>',
+                       self.line_number, self.column, self.type_expression, self.name_expression, self.body)
+
 
 
 @creator

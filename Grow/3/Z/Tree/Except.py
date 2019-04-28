@@ -34,6 +34,12 @@
 #       debug
 #           is_tree_except_clause := true
 #
+class TRAIT_Tree_Except_Clause(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_except_clause = True
 
 
 #

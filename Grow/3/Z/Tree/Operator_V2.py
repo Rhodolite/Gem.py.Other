@@ -3,6 +3,28 @@
 #
 
 
+#
+#   Z.Tree.Operator - Implementation of `Tree_Operator`, Version 2.
+#
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
+
+
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           One class per operator (so as to do a 1-1 emulation of `_ast`).
+#
+#       Version 2:
+#
+#           A single enumeration named `Tree_Operator_Enumeration`.
+#
+#           See "Z.Tree.Context_V2" for an explanation of "enumeration".
+#
+
+
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
@@ -12,13 +34,6 @@ from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_string
-
-
-#
-#   Z.Tree.Operator - Implementation of `Tree_Operator`, Version 2.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
 
 
 #

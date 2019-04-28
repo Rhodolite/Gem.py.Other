@@ -42,10 +42,6 @@ from    Capital.Core                    import  creator
 if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Tree.Context              import  fact_is_tree_context
-    from    Z.Tree.Context              import  fact_is_tree_delete_context
-    from    Z.Tree.Context              import  fact_is_tree_load_context
-    from    Z.Tree.Context              import  fact_is_tree_store_context
     from    Z.Tree.Expression           import  fact_is_tree_expression
     from    Z.Tree.Index                import  fact_is_tree_index_clause
 

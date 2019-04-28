@@ -3,16 +3,16 @@
 #
 
 
-from    Capital.Core                    import  creator
-from    Capital.Core                    import  enumeration
-from    Z.Tree.Context                  import  TRAIT_Tree_Context
-
-
 #
 #   Z.Tree.Context_V1 - Implementation of `Tree_Context`, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
+
+
+from    Capital.Core                    import  creator
+from    Capital.Core                    import  enumeration
+from    Z.Tree.Context                  import  TRAIT_Tree_Context
 
 
 #
