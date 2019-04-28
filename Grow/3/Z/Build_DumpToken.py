@@ -1,10 +1,10 @@
 #
-#   Copyright (c) 2017-2018 Joy Diamond.  All rights reserved.
+#   Copyright (c) 2017-2019 Joy Diamond.  All rights reserved.
 #
 
 
 #
-#   Z.Build_DumpToken - Build lines of text from `.dump_token`
+#   Z.Build_DumpToken - Build lines of text from `.dump_*_token`
 #
 
 
@@ -17,7 +17,7 @@ if __debug__:
 
 
 #
-#   Build_DumpToken - Build lines of text from `.dump_token`
+#   Build_DumpToken - Build lines of text from `.dump_*_token`
 #
 #       Derived from `Build_Lines_of_NativeString` -- adds a few methods:
 #

@@ -65,7 +65,7 @@ class Tree_Except_Handler_V1(object):
 
         with f.indent_2():
             for v in self.body:
-                v.dump_token(f)
+                v.dump_suite_tokens(f)
 
         f.line('}>')
 

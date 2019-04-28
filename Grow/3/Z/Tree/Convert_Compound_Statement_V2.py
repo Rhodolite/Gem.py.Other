@@ -26,8 +26,8 @@ from    Z.Tree.Compound_Statement_V2        import  create_Tree_Class_Definition
 from    Z.Tree.Compound_Statement_V2        import  create_Tree_For_Statement
 from    Z.Tree.Compound_Statement_V2        import  create_Tree_Function_Definition
 from    Z.Tree.Compound_Statement_V2        import  create_Tree_If_Statement
-from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Except_Statement
-from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Statement
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_Try_Except_Statement
+from    Z.Tree.Compound_Statement_V2        import  create_Tree_Try_Finally_Statement
 from    Z.Tree.Compound_Statement_V2        import  create_Tree_While_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement
 from    Z.Tree.Suite                        import  create_Tree_Suite
@@ -189,7 +189,7 @@ def convert_try_except_statement(self):
                self.lineno,
                self.col_offset,
 
-               convert_full_list_of_statements    (self.body),
+               convert_suite                      (self.body),
                convert_full_list_of_except_clauses(self.handlers),
                convert_some_list_of_statements    (self.orelse),
            )
@@ -235,8 +235,8 @@ def convert_try_finally_statement(self):
                self.lineno,
                self.col_offset,
 
-               convert_full_list_of_statements(self.body),
-               convert_full_list_of_statements(self.finalbody),
+               convert_suite(self.body),
+               convert_suite(self.finalbody),
            )
 
 

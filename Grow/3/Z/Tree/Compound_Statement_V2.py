@@ -400,6 +400,159 @@ def create_Tree_If_Statement(line_number, column, test, body, orelse):
 
 
 #
+#   Tree: Try Except Statement
+#
+class Tree_Try_Except_Statement(object):
+    #
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
+    #
+    __slots__ = ((
+        'line_number',                  #   PositiveInteger
+        'column',                       #   SubstantialInteger
+
+        'body',                         #   Tree_Statement
+        'except_handlers',              #   FullNativeList of Tree_Except_Handler
+        'else_clause_0',                #   SomeNativeList of Tree_Statement
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, line_number, column, body, except_handlers, else_clause_0):
+        self.line_number = line_number
+        self.column      = column
+
+        self.body            = body
+        self.except_handlers = except_handlers
+        self.else_clause_0   = else_clause_0
+
+
+    #
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
+    #
+    if __debug__:
+        is_tree_statement   = True
+        is_tree_statement_0 = True
+
+
+    is_tree_statement_none = False
+    suite_estimate         = 1
+
+
+    def dump_suite_tokens(self, f):
+        f.line('<try @{}:{} {{', self.line_number, self.column)
+
+        with f.indent_2():
+            with f.indent_2():
+                self.body.dump_suite_tokens(f)
+
+            f.line('}')
+
+            for v in self.except_handlers:
+                v.dump_except_clause_tokens(f)
+
+            if len(self.else_clause_0) > 0:
+                with f.indent('else {', '}'):
+                    for v in self.else_clause_0:
+                        v.dump_suite_tokens(f)
+
+        f.line('>')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Try_Except_Statement @{}:{} {!r} {!r} {!r}>',
+                       self.line_number, self.column, self.body, self.except_handlers, self.else_clause_0)
+
+
+def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_clause_0):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_tree_statement  (body)
+    assert fact_is_full_native_list(except_handlers)
+    assert fact_is_some_native_list(else_clause_0)
+
+    return Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_clause_0)
+
+
+#
+#   Tree: Try Finally Statement
+#
+class Tree_Try_Finally_Statement(object):
+    #
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
+    #
+    __slots__ = ((
+        'line_number',                  #   PositiveInteger
+        'column',                       #   SubstantialInteger
+
+        'body',                         #   Tree_Statement
+        'finally_body',                 #   Tree_Statement
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, line_number, column, body, finally_body):
+        self.line_number = line_number
+        self.column      = column
+
+        self.body         = body
+        self.finally_body = finally_body
+
+
+    #
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
+    #
+    if __debug__:
+        is_tree_statement   = True
+        is_tree_statement_0 = True
+
+
+    is_tree_statement_none = False
+    suite_estimate         = 1
+
+
+    def dump_suite_tokens(self, f):
+        header = arrange('<try @{}:{} {{', self.line_number, self.column)
+
+        with f.indent_2(header):
+            self.body.dump_suite_tokens(f)
+
+        with f.indent_2('} finally {'):
+            self.finally_body.dump_suite_tokens(f)
+
+        f.line('}>')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Try_Finally_Statement @{}:{} {!r} {!r}>',
+                       self.line_number, self.column, self.body, self.finally_body)
+
+
+def create_Tree_Try_Finally_Statement(line_number, column, body, finally_body):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_tree_statement(body)
+    assert fact_is_tree_statement(finally_body)
+
+    return Tree_Try_Finally_Statement(line_number, column, body, finally_body)
+
+
+#
 #   Tree: `while` statement
 #
 class Tree_While_Statement(Tree_Test_Statement):
