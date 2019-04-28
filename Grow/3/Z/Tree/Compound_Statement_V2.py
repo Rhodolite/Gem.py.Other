@@ -4,13 +4,37 @@
 
 
 #
-#   Z.Tree.Statement - Implementation of `Tree_Statement`, Version 2.
+#   Z.Tree.Compound_Statement_V2 - Implementation of `Tree_Statement`, Version 2.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
+#
+#   Difference between Version 1 & Version 2
+#
+#   Version 1:
+#
+#       Class do *NOT* implement `Tree_Suite` or `Tree_Suite_0`.
+#
+#       A           list of statements is stored as `FullNativeList of Tree_Statement`.
+#
+#       An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
+#
+#   Version 2:
+#
+#       All classes implement `Tree_Suite` and `Tree_Suite_0`.
+#
+#       A           list of statements is stored as `Tree_Suite`.
+#
+#       An optional list of statements is stored as `Tree_Suite_0`.
+#
+
+
 from    Capital.Core                    import  arrange
+from    Z.Tree.Statement                import  IMPLEMENTS_Tree_Statement
+from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite
+from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite_0
 
 
 if __debug__:
@@ -26,8 +50,8 @@ if __debug__:
     from    Z.Tree.Expression           import  fact_is_tree_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
     from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
-    from    Z.Tree.Statement            import  fact_is_tree_statement
-    from    Z.Tree.Statement            import  fact_is_tree_statement_0
+    from    Z.Tree.Suite                import  fact_is_tree_suite
+    from    Z.Tree.Suite                import  fact_is_tree_suite_0
     from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
     from    Z.Tree.Target               import  fact_is_tree_store_target
 
@@ -37,11 +61,11 @@ if __debug__:
 #
 #       A "Test" Statement is either a `if` or `while` statement.
 #
-class Tree_Test_Statement(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_Test_Statement(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -65,19 +89,9 @@ class Tree_Test_Statement(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         f.arrange('<{} @{}:{} ', self.keyword, self.line_number, self.column)
         self.test.dump_evaluate_tokens(f)
         f.line(' {')
@@ -104,9 +118,9 @@ def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_claus
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression (test)
-    assert fact_is_tree_statement  (body)
-    assert fact_is_tree_statement_0(body)
+    assert fact_is_tree_expression(test)
+    assert fact_is_tree_suite     (body)
+    assert fact_is_tree_suite_0   (else_clause_0)
 
     return Meta(line_number, column, test, body, else_clause_0)
 
@@ -114,11 +128,11 @@ def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_claus
 #
 #   Tree: Class Definition
 #
-class Tree_Class_Definition(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_Class_Definition(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -164,19 +178,9 @@ class Tree_Class_Definition(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         decorator_list = self.decorator_list
 
         header = arrange('<class-definition @{}:{} {}', self.line_number, self.column, self.name)
@@ -205,7 +209,7 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
 
     assert fact_is_full_native_string(name)
     assert fact_is_some_native_list  (bases)
-    assert fact_is_tree_statement    (body)
+    assert fact_is_tree_suite        (body)
     assert fact_is_some_native_list  (decorator_list)
 
     return Tree_Class_Definition(line_number, column, name, bases, body, decorator_list)
@@ -214,11 +218,11 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
 #
 #   Tree: For Statement
 #
-class Tree_For_Statement(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_For_Statement(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -244,19 +248,9 @@ class Tree_For_Statement(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         f.arrange('<for @{}:{} ', self.line_number, self.column)
         self.target.dump_store_target_tokens(f)
         f.write(' in ')
@@ -287,8 +281,8 @@ def create_Tree_For_Statement(line_number, column, target, sequence, body, else_
 
     assert fact_is_tree_store_target(target)
     assert fact_is_tree_expression  (sequence)
-    assert fact_is_tree_statement   (body)
-    assert fact_is_tree_statement_0 (else_clause_0)
+    assert fact_is_tree_suite       (body)
+    assert fact_is_tree_suite_0     (else_clause_0)
 
     return Tree_For_Statement(line_number, column, target, sequence, body, else_clause_0)
 
@@ -296,11 +290,11 @@ def create_Tree_For_Statement(line_number, column, target, sequence, body, else_
 #
 #   Tree: Function Definition
 #
-class Tree_Function_Definition(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_Function_Definition(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -339,19 +333,9 @@ class Tree_Function_Definition(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         decorator_list = self.decorator_list
 
         header = arrange('<function-definition @{}:{} {}', self.line_number, self.column, self.name)
@@ -380,7 +364,7 @@ def create_Tree_Function_Definition(line_number, column, name, parameters, body,
 
     assert fact_is_full_native_string (name)
     assert fact_is_tree_parameters_all(parameters)
-    assert fact_is_tree_statement     (body)
+    assert fact_is_tree_suite         (body)
     assert fact_is_some_native_list   (decorator_list)
 
     return Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list)
@@ -402,11 +386,11 @@ def create_Tree_If_Statement(line_number, column, test, body, orelse):
 #
 #   Tree: Try Except Statement
 #
-class Tree_Try_Except_Statement(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_Try_Except_Statement(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -430,19 +414,9 @@ class Tree_Try_Except_Statement(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         f.line('<try @{}:{} {{', self.line_number, self.column)
 
         with f.indent_2():
@@ -474,7 +448,7 @@ def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers,
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_statement  (body)
+    assert fact_is_tree_suite      (body)
     assert fact_is_full_native_list(except_handlers)
     assert fact_is_some_native_list(else_clause_0)
 
@@ -484,11 +458,11 @@ def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers,
 #
 #   Tree: Try Finally Statement
 #
-class Tree_Try_Finally_Statement(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_Try_Finally_Statement(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -510,19 +484,9 @@ class Tree_Try_Finally_Statement(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         header = arrange('<try @{}:{} {{', self.line_number, self.column)
 
         with f.indent_2(header):
@@ -546,8 +510,8 @@ def create_Tree_Try_Finally_Statement(line_number, column, body, finally_body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_statement(body)
-    assert fact_is_tree_statement(finally_body)
+    assert fact_is_tree_suite(body)
+    assert fact_is_tree_suite(finally_body)
 
     return Tree_Try_Finally_Statement(line_number, column, body, finally_body)
 
@@ -568,11 +532,11 @@ def create_Tree_While_Statement(line_number, column, test, body, orelse):
 #
 #   Tree: With Statement
 #
-class Tree_With_Statement(object):
-    #
-    #   Implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+class Tree_With_Statement(
+        IMPLEMENTS_Tree_Statement,
+        IMPLEMENTS_Tree_Suite,
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -596,19 +560,9 @@ class Tree_With_Statement(object):
 
 
     #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
+    #   Interface Tree_Statement
     #
-    if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = False
-    suite_estimate         = 1
-
-
-    def dump_suite_tokens(self, f):
+    def dump_statement_tokens(self, f):
         f.arrange('<with @{}:{} ', self.line_number, self.column)
         self.value.dump_evaluate_tokens(f)
 
@@ -638,6 +592,6 @@ def create_Tree_With_Statement(line_number, column, value, target, body):
 
     assert fact_is_tree_expression                    (value)
     assert fact_is__native_none__OR__tree_store_target(target)
-    assert fact_is_tree_statement                     (body)
+    assert fact_is_tree_suite                         (body)
 
     return Tree_With_Statement(line_number, column, value, target, body)

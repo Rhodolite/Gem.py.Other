@@ -4,60 +4,143 @@
 
 
 #
-#   Z.Tree.Suite - Implementation of `Tree_Suite`
+#   Z.Tree.Suite - Interface to tree classes that represent a suite.
 #
-#       A `Tree_Suite` is two or more statements (python calls more than one statement a "suite").
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-#       All other tree statements implement themselves *as* *if* they are a "suite" of exactly one statement.
+#       A "Suite" is a one or more tree statements (this is the definition used by python).
 #
 
 
-from    Capital.Core                    import  arrange
-
-
-if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_list
+from    Capital.Core                    import  virtual
 
 
 #
-#   Tree: Suite
+#   interface Tree_Suite
+#       documentation
+#           Interface to tree classes that represent a suite.
 #
-class Tree_Suite(tuple):
-    #
-    #   implements Tree_Statement,
-    #              Tree_Statement_0
-    #
+#           A "Suite" is a one or more tree statements (this is the definition used by python).
+#
+#       debug
+#           is_tree_suite := true
+#
+#       attribute
+#           suite_estimate : integer { 1, 7 }
+#               documentation
+#                   A suite estimate of 0 means 0 statements.
+#                   A suite estimate of 1 means 1 statement.
+#                   A suite estimate of 7 means 2 or more statements.
+#
+#       method
+#           dump_suite_tokens(f : Build_DumpToken)
+#
+class IMPLEMENTS_Tree_Suite(object):
     __slots__ = (())
 
 
-    #
-    #   Interface Tree_Statement,
-    #             Tree_Statement_0
-    #
     if __debug__:
-        is_tree_statement   = True
-        is_tree_statement_0 = True
+        is_tree_suite = True
 
 
-    is_tree_statement_none = False
-    suite_estimate         = 7          #   `7` is not a very good estimate ...  but good enough ;-)
+   #@virtual
+    suite_estimate = 1
 
 
+    @virtual
     def dump_suite_tokens(self, f):
-        for v in self:
-            v.dump_suite_tokens(f)
+        self.dump_statement_tokens(f)
 
 
+#
+#   interface Tree_Suite_0
+#       documentation
+#           Interface to tree classes that represent a suite OR none.
+#
+#           A "Suite" is a one or more tree statements (this is the definition used by python).
+#
+#       attribute
+#           suite_estimate : integer { 0, 1, 7 }
+#               documentation
+#                   A suite estimate of 0 means 0 statements.
+#                   A suite estimate of 1 means 1 statement.
+#                   A suite estimate of 7 means 2 or more statements.
+#
+#       if suite_estimate
+#           implements Tree_Suite
+#
+#       debug
+#           is_tree_suite_0 := true
+#
+class IMPLEMENTS_Tree_Suite_0(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_suite_0 = True
+
+
+#
+#   USAGE:
+#
+#       v.dump_suite_tokens(f)              #   Dump the tokens representing the tree statement(s) to `f`.
+#
+#       v.suite_estimate                    #   Estimate the number of statements in this suite.
+#                                           #   (See documentation above for the estimate values).
+#
+
+
+#
+#   USAGE (debug mode):
+#
+#       v.is_tree_suite                     #   Test if `v` is a tree suite.
+#
+#       v.is_tree_suite_0                   #   Test if `v` is a `Tree_Suite_0`.
+#
+#       assert fact_is_tree_suite(v)        #   Assert that `v` is a tree suite.
+#
+#       assert fact_is_tree_suite_0(v)      #   Assert that `v` is a `Tree_Suite_0`.
+#
+
+
+
+#
+#   fact_is_tree_suite(v) - Assert that `v` is a tree suite.
+#
+if __debug__:
+    def fact_is_tree_suite(v):
+        assert v.is_tree_suite
+
+        return True
+
+
+#
+#   fact_is_tree_suite_0(v) - Assert that `v` is a `Tree_Suite_0`.
+#
+if __debug__:
+    def fact_is_tree_suite_0(v):
+        assert v.is_tree_suite_0
+
+        return True
+
+
+#
+#   Import the version of tree suite we want to use.
+#
+from    Z.Tree.Global                   import  tree_globals
+
+
+statement_version = tree_globals.statement_version
+
+
+if statement_version == 1:
     #
-    #   Public
+    #   A "Suite" does not exist in statement version 1.
     #
-    def __repr__(self):
-        return arrange('<Tree_Suite {}>', ','.join(repr(v)    for v in self))
+    pass
+elif statement_version == 2:
+    from    Z.Tree.Suite_V2             import  create_Tree_Suite
+else:
+    from    Capital.Core                import  FATAL
 
-
-def create_Tree_Suite(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    assert len(sequence) >= 2
-
-    return Tree_Suite(sequence)
+    FATAL('Z/Tree/Suite.py: unknown tree statement version: {!r}', statement_version)

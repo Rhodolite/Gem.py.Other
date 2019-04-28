@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Module - Interface to tree class that represent a module.
+#   Z.Tree.Module - Tree class that represent a module.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -37,7 +37,7 @@ class Tree_Module(object):
     def dump_module_tokens(self, f):
         with f.indent_2('<module [', ']>'):
             for v in self.body:
-                v.dump_suite_tokens(f)
+                v.dump_statement_tokens(f)
 
 
 def create_Tree_Module(body):

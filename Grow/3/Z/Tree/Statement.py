@@ -1,3 +1,4 @@
+#
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 
@@ -14,49 +15,23 @@
 #       documentation
 #           Interface to tree classes that represent statements.
 #
-#       method
-#           dump_suite_tokens(f : Build_DumpToken)
-#
-#       attribute
-#           suite_estimate : integer { 0, 1, 7 }
-#               documentation
-#                   A suite estimate of 0 means 0 statements.
-#                   A suite estimate of 1 means 1 statement.
-#                   A suite estimate of 7 means 2 or more statements.
-#
 #       debug
 #           is_tree_statement := true
 #
+#       method
+#           dump_statement_tokens(f : Build_DumpToken)
+#
+class IMPLEMENTS_Tree_Statement(object):
+    __slots__ = (())
 
-
-#
-#   interface Tree_Statement_0
-#       documentation
-#           Interface to tree classes that represent statements OR none.
-#
-#       attribute
-#           is_tree_statement_none : boolean
-#
-#           suite_estimate : integer { 0, 1, 7 }
-#               documentation
-#                   A suite estimate of 0 means 0 statements.
-#                   A suite estimate of 1 means 1 statement.
-#                   A suite estimate of 7 means 2 or more statements.
-#
-#       debug
-#           is_tree_statement_0 := true
-#
+    if __debug__:
+        is_tree_statement = True
 
 
 #
 #   USAGE:
 #
-#       v.dump_suite_tokens(f)              #   Dump the tokens representing the tree statement(s) to `f`.
-#
-#       v.is_tree_statement_none            #   Test if `v` is tree statement none (i.e.: `tree_none`).
-#
-#       v.suite_estimate                    #   Estimate the number of statements in this suite.
-#                                           #   (See documentation above for the estimate values).
+#       v.dump_statement_tokens(f)          #   Dump the tokens representing the tree statement(s) to `f`.
 #
 
 
@@ -65,11 +40,7 @@
 #
 #       v.is_tree_statement                 #   Test if `v` is a tree statement.
 #
-#       v.is_tree_statement_0               #   Test if `v` is a `Tree_Statement_0`.
-#
 #       assert fact_is_tree_statement(v)    #   Assert that `v` is a tree statement.
-#
-#       assert fact_is_tree_statement_0(v)  #   Assert that `v` is a `Tree_Statement_0`.
 #
 
 
@@ -82,17 +53,6 @@ if __debug__:
         assert v.is_tree_statement
 
         return True
-
-
-#
-#   fact_is_tree_statement_0(v) - Assert that `v` is a `Tree_Statement_0`.
-#
-if __debug__:
-    def fact_is_tree_statement_0(v):
-        assert v.is_tree_statement_0
-
-        return True
-
 
 #
 #   Import the version of tree statements we want to use.

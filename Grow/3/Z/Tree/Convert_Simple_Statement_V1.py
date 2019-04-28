@@ -49,7 +49,6 @@ from    Z.Tree.Statement                    import  create_Tree_Pass_Statement
 from    Z.Tree.Statement                    import  create_Tree_Print_Statement
 from    Z.Tree.Statement                    import  create_Tree_Raise_Statement
 from    Z.Tree.Statement                    import  create_Tree_Return_Statement
-from    Z.Tree.Suite                        import  create_Tree_Suite
 
 
 if __debug__:

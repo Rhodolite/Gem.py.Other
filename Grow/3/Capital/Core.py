@@ -180,3 +180,43 @@ if tracing:
 else:
     def trace(message, *arguments):
         '''Do nothing -- since `tracing` is not set.'''
+
+
+#
+#   replace(f) - Doesn't do anything at all.
+#
+#       Used to document that a method is "overriding" a "@virtual" method declared in an "IMPLEMENT_*" class.
+#
+#   EXAMPLE USAGE:
+#
+#       class Tree_Suite_Implementation(
+#               IMPLEMENTS_Tree_Suite,
+#       ):
+#           @replace
+#           def dump_suite_tokens(self, f):
+#               self.dump_statement_tokens(f)
+#
+#       The `dump_suite_tokens` that was declared `@virtual` in `IMPLEMENTS_Tree_Suite` is being replaced here
+#       in `Tree_Suite_Implementation`.
+#
+def replace(f):
+    return f
+
+
+#
+#   virtual(f) - Doesn't do anything at all.
+#
+#       Used to document that a method is "virtual" implementation in a "IMPLEMENTS_*" class, and can be replaced
+#       in an actual class.
+#
+#   EXAMPLE USAGE:
+#
+#       class IMPLEMENTS_Tree_Suite(object):
+#           @virtual
+#           def dump_suite_tokens(self, f):
+#               self.dump_statement_tokens(f)
+#
+#       The `dump_suite_tokens` may be replaced in a class that "implements" `Tree_Suite`.
+#
+def virtual(f):
+    return f
