@@ -8,6 +8,9 @@
 #
 
 
+from    Capital.String                  import  IMPLEMENTS_String
+
+
 #
 #   EmptyString_V3 - An empty string.
 #
@@ -17,12 +20,21 @@
 #
 #       In a boolean context evaluates to `False` (see `.__nonzero__` below).
 #
-class EmptyString_V3(str):
+class EmptyString_V3(
+        str,
+        IMPLEMENTS_String,
+):
     #
-    #   implements Temporary_Key,
-    #              String
+    #   implements Temporary_Key
     #
     __slots__ = (())
+
+
+    #
+    #   Interface String
+    #
+    is_empty_string = True
+    is_full_string  = False
 
 
     #
@@ -32,15 +44,8 @@ class EmptyString_V3(str):
 
 
     #
-    #   Interface String
+    #   Public
     #
-    is_empty_string = True
-    is_full_string  = False
-
-    if __debug__:
-        is_some_string = True
-
-
     #__init__    - inherited from `str.__init__`        #   Does nothing.
     #__new__     - inherited from `str.__new__`         #   Creates the new empty string.
     #__nonzero__ - inherited from `str.__nonzero__`     #   Returns `False`.

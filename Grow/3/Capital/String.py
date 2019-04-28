@@ -43,6 +43,12 @@
 #       The code generator will be able to accept interfaces, in a syntax similiar to the above, and verify them when
 #       generating code.
 #
+class IMPLEMENTS_String(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_some_string = True
 
 
 #

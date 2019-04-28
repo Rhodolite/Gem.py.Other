@@ -9,7 +9,7 @@ from    Capital.Core                    import  arrange
 #
 class Python_ParseTree(object):
     __slots__ = ((
-        'python_statements',               #   List of Python_Statement_*
+        'python_statements',               #   NativeList of Python_Statement_*
     ))
 
 
@@ -32,7 +32,7 @@ class Python_ParseTree(object):
 #
 class Python_Statement_Comment_Many(object):
     __slots__ = ((
-        'commment_tuple',               #   Tuple of String
+        'commment_tuple',               #   NativeTuple of NativeString
     ))
 
 

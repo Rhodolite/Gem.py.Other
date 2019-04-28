@@ -10,6 +10,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  FATAL
+from    Capital.String                  import  IMPLEMENTS_String
 
 
 #
@@ -28,10 +29,12 @@ from    Capital.Core                    import  FATAL
 #
 #       In a boolean context evaluates to `True` (see `.__nonzero__` below).
 #
-class FullString_V3(str):
+class FullString_V3(
+        str,
+        IMPLEMENTS_String,
+):
     #
-    #   implements Temporary_Key,
-    #              String
+    #   implements Temporary_Key
     #
     __slots__ = (())
 
@@ -50,21 +53,21 @@ class FullString_V3(str):
 
 
     #
+    #   Interface String
+    #
+    is_empty_string = False
+    is_full_string  = True
+
+
+    #
     #   Interface Temporary_Key
     #
     temporary_key_has_definitively_been_transformed = True
 
 
     #
-    #   Interface String
+    #   Public
     #
-    is_empty_string = False
-    is_full_string  = True
-
-    if __debug__:
-        is_some_string = True
-
-
     #__init__    - inherited from `str.__init__`        #   Not Used.
     #__new__     - inherited from `str.__new__`         #   Not Used.
     #__nonzero__ - inherited from `str.__nonzero__`     #   Returns `True`.

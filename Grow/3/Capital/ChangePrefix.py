@@ -42,8 +42,8 @@ class ChangePrefix(object):
 
         'ending',                       #   None | NativeString
 
-        'new__prefix',                  #   String
-        'new__prefix_blank',            #   None | String
+        'new__prefix',                  #   NativeString
+        'new__prefix_blank',            #   None | NativeString
     ))
 
 
