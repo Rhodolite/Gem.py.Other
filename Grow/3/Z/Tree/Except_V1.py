@@ -32,7 +32,7 @@ class Tree_Except_Handler_V1(object):
 
         'type_expression',              #   None | Tree_Expression
         'name_expression',              #   None | Tree_Expression
-        'body',                         #   FullNativeList of Tree_Statment
+        'body',                         #   FullNativeList of Tree_Statement
     ))
 
 

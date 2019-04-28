@@ -132,7 +132,7 @@ SUMMARY OF HOW THE CODE GENERATOR WORKS:
             6A. "Z/Crystal_ParseTree.py" is the Crystal Parse Tree.
 
         7.  "Z/Transform_Crystal_to_Python" is called to transform the Crystal
-            Statments to Python Statements
+            Statements to Python Statements
 
             7A. "Z/Python_ParseTree.py" is the Python Parse Tree.
 

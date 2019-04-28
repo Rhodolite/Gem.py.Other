@@ -46,7 +46,7 @@ class Tree_Alias_V1(object):
         return arrange('<Tree.Alias#1 {!r} as {!r}>', self.name, self.as_name)
 
 
-    def dump_token(self, f):
+    def dump_alias_tokens(self, f):
         f.arrange('<alias {}', self.name)
 
         if self.as_name is not None:

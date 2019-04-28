@@ -11,8 +11,21 @@
 
 
 #
-#   interface Tree_Statement - Interface to tree classes that represent statements.
-#           dump_statement_tokens(f : Build_DumpToken)
+#   interface Tree_Statement
+#       documentation
+#           Interface to tree classes that represent statements.
+#
+#       method
+#           dump_suite_tokens(f : Build_DumpToken)
+#
+#       attribute
+#           suite_estimate : integer { 0, 1, 7 }
+#               documentation
+#                   A suite estimate of 0 means 0 statements.
+#                   A suite estimate of 1 means 1 statement.
+#                   A suite estimate of 7 means 2 or more statements.
+#
+#       debug
 #           is_tree_statement := true
 #
 
@@ -20,9 +33,17 @@
 #
 #   USAGE:
 #
-#       v.is_tree_statement                 #   Test if `v` is a tree statement.
+#       v.dump_suite_tokens(f)              #   Dump the tokens representing the tree statement(s) to `f`.
 #
-#       v.dump_statement_tokens(f)          #   Dump the tokens representing the tree statement to `f`.
+#       v.suite_estimate                    #   Estimate the number of statements in this suite.
+#                                           #   (See documentation above for the estimate values).
+#
+
+
+#
+#   USAGE (debug mode):
+#
+#       v.is_tree_statement                 #   Test if `v` is a tree statement.
 #
 #       assert fact_is_tree_statement(v)    #   Assert that `v` is a tree statement.
 #
@@ -46,10 +67,10 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-version = tree_globals.statement_version
+statement_version = tree_globals.statement_version
 
 
-if version == '1':
+if statement_version == 1:
     from    Z.Tree.Statement_V1         import  (
                 create_Tree_Assert_Statement_V1         as  create_Tree_Assert_Statement,
                 create_Tree_Assign_Statement_V1         as  create_Tree_Assign_Statement,
@@ -78,4 +99,4 @@ if version == '1':
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Statement.py: unknown tree statment version: {!r}', version)
+    FATAL('Z/Tree/Statement.py: unknown tree statement version: {!r}', statement_version)

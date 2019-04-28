@@ -34,10 +34,10 @@ class Tree_Module(object):
         return arrange('<Tree.Module {!r}>', self.body)
 
 
-    def dump_token(self, f):
+    def dump_module_tokens(self, f):
         with f.indent_2('<module [', ']>'):
             for v in self.body:
-                v.dump_token(f)
+                v.dump_suite_tokens(f)
 
 
 def create_Tree_Module(body):

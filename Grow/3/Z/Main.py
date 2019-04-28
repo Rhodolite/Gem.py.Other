@@ -44,7 +44,7 @@ def command_parse():
     #trace('tree: {}', tree)
 
     with build_dump_token() as f:
-        tree.dump_token(f)
+        tree.dump_module_tokens(f)
 
     for s in f:
         trace('{}', s)

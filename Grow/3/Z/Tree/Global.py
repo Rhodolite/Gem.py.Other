@@ -13,7 +13,7 @@ default_index_version         = '1'
 default_name_version          = 3
 default_operator_version      = '1'
 default_parameter_version     = '1'
-default_statement_version     = '1'
+default_statement_version     = 1
 default_symbol_version        = 1
 default_target_version        = 3
 
@@ -93,7 +93,7 @@ class Tree_Globals(object):
         'name_version',                 #   PositiveInteger
         'operator_version',             #   NativeString
         'parameter_version',            #   NativeString
-        'statement_version',            #   NativeString
+        'statement_version',            #   PositiveInteger
         'symbol_version',               #   SubstantialInteger
         'target_version',               #   PositiveInteger
     ))
@@ -121,7 +121,7 @@ class Tree_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {!r} {!r} {!r} {} {}>',
+        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {!r} {!r} {} {} {}>',
                        self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
                        self.except_version, self.expression_version, self.index_version, self.name_version,
                        self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
@@ -131,7 +131,7 @@ class Tree_Globals(object):
         trace('Tree_Globals: alias={!r} argument={!r} comprehension={!r} context={} except={!r} ...',
               self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
               self.except_version)
-        trace('... expression={!r} index={!r} name={} statement={!r} operator={!r} parameter={!r} symbol={}',
+        trace('... expression={!r} index={!r} name={} statement={} operator={!r} parameter={!r} symbol={}',
               self.expression_version, self.index_version, self.name_version, self.statement_version,
               self.operator_version, self.parameter_version, self.symbol_version)
         trace('... target={}',
@@ -154,7 +154,7 @@ def create_tree_globals(
     assert fact_is_full_native_string (operator_version)
     assert fact_is_full_native_string (parameter_version)
     assert fact_is_full_native_string (expression_version)
-    assert fact_is_full_native_string (statement_version)
+    assert fact_is_positive_integer   (statement_version)
     assert fact_is_substantial_integer(symbol_version)
     assert fact_is_positive_integer   (target_version)
 
