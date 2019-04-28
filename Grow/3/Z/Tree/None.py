@@ -12,25 +12,22 @@
 #
 
 
+from    Z.Tree.Suite                    import  IMPLEMENTS_Tree_Suite_0
+
+
 #
 #   Tree: None
 #
-class Tree_None(object):
-    #
-    #   Implements Tree_Statement_0
-    #
+class Tree_None(
+        IMPLEMENTS_Tree_Suite_0,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Statement_0
     #
-    if __debug__:
-        is_tree_statement_0 = True
-
-
-    is_tree_statement_none = True
-    suite_estimate         = 0
+    suite_estimate = 0
 
 
     #

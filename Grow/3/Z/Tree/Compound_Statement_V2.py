@@ -13,21 +13,23 @@
 #
 #   Difference between Version 1 & Version 2
 #
-#   Version 1:
+#       Version 1:
 #
-#       Class do *NOT* implement `Tree_Suite` or `Tree_Suite_0`.
+#           1)  Tree Statements implement `Tree_Statement`.
 #
-#       A           list of statements is stored as `FullNativeList of Tree_Statement`.
+#           2)  A           list of statements is stored as `FullNativeList of Tree_Statement`.
 #
-#       An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
+#           3)  An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
 #
-#   Version 2:
+#       Version 2:
 #
-#       All classes implement `Tree_Suite` and `Tree_Suite_0`.
+#           1)  Tree Statements implement `Tree_Statement`; and ...
 #
-#       A           list of statements is stored as `Tree_Suite`.
+#               ... in addition also implement `Tree_Suite`, and `Tree_Suite_0`.
 #
-#       An optional list of statements is stored as `Tree_Suite_0`.
+#           2)  A           list of statements is stored as `Tree_Suite`.
+#
+#           3)  An optional list of statements is stored as `Tree_Suite_0`.
 #
 
 

@@ -13,7 +13,7 @@ default_index_version         = '1'
 default_name_version          = 3
 default_operator_version      = '1'
 default_parameter_version     = '1'
-default_statement_version     = 1
+default_statement_version     = 2
 default_symbol_version        = 2
 default_target_version        = 3
 
