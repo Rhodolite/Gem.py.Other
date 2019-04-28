@@ -1,74 +1,101 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-if __name__ == '__main__':
-    #
-    #   If called as the main program, then we are being imported as the module `__main__`.
-    #
-    #   If so:
-    #
-    #       1A. *REIMPORT* ourselves under the name `Z`
-    #       1B. import `Z.Main`
-    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
-    #       2.  Call `Z_main`
-    #
-    #   This means:
-    #
-    #       *   This module is imported   under the name `__main__`;
-    #       *   This module is reimported under the name `Z`.
-    #
-    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
-    #   and does something different in each case ... so there are in effect two `Z` modules:
-    #
-    #       *   the one named `__main__` [this code under the `if`   clause], and
-    #       *   the one named `Z`        [the  code under the `else` clause below].
-    #
-    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
 
 
-    Z_main()
-else:
-    from    os.path                     import  dirname     as  python_path_directory_name
-    from    os.path                     import  join        as  python_path_join
+#
+#   Capital.Python_Type - Declaration of Python_Type - The base type (metaclass) of all classes and types.
+#
 
 
-    #
-    #   Load Z submodules from "Z/" directory.
-    #
-    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
+#
+#   NOTE:
+#       `Python_Type` should be imported from "Capital.Types", which, internally, imports it from this file.
+#
+#       For everyone else, `Python_Type` should *NOT* be imported from this file.
+#
+#       The only reason it in in this file, is to fully explain about `Python_Type`, and why it is a alias for
+#       for `type`.
+#
 
 
-    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
-    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
-    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
-    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
-    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
-    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
+#
+#   Python_Type - The base type (metaclass) of all classes and types.
+#
+#       ===  About `type` .vs. `Python_Type`  ===
+#
+#           In python, the builtin `type` is a type (the base metaclass of all classes and types).
+#
+#           When called with three arguments, as a normal constructor, it constructs a new type.
+#
+#           However, when `type` is called with one argument, it instead behaves as if it was a function, returning the
+#           type of it's first argument.
+#
+#           To distinguish between these two cases, in Capital code, the following is always used:
+#
+#               `type`          - A function that returns the python type of something.
+#               `Python_Type`   - The base type (metaclass) of all classes and types.
+#
+#           Obviously, `Python_Type` is mapped to the python builtin `type` (done below).
+#
+#       REASON:
+#
+#           It is already confusing enough that `Python_Type` is "The base type (metaclass) of all classes and types"
+#           (Including, of course, itself; i.e.:
+#
+#               1.  The metaclass of `Python_Type` is `Python_Type;
+#
+#               2.  that is: `Python_Type` is it's own metaclass).
+#
+#           We are working to avoid, some of that confusion, by making a clear distinction between `type` (used as
+#           a function) and `Python_Type` (used as a type).
+#
+#           Thus instead of the very confusing statement:
+#
+#               assert type(type) is type                       #   Very confusing -- Don't do this!
+#
+#           We can say the slightly less confusing statement:
+#
+#               assert type(Python_Type) is Python_Type         #   Slightly less confusing.
+#
+#       EXAMPLE:
+#
+#           Example (see the fuller assertion below):
+#
+#               assert type(Python_Type) is Python_Type
+#
+#           Here we are taking the type of `Python_Type` and verifying it is a `Python_Type` instance (in other
+#           words verifying that `Python_Type` is a class -- like all classes it's base metaclass will be
+#           `Python_Type`).
+#
+#           Thus we are using the two different meanings (`type` .vs. `Python_Type`) of the underlying
+#           python builtin `type` in a single asserttion.
+#
+#   NOTE:
+#       The assertion below are included, not for code purposes, but as educational assertions, that clearly and
+#       concisely shows that:
+#
+#           `Python_Type` is "The base type (metaclass) of all classes and types".
+#
+Python_Type = type                      #   The base type (metaclass) of all classes and types.
 
 
-    #
-    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
-    #
-    #   This implements the following commands:
-    #
-    #       Z.copyright         - Add a copyright.
-    #       Z.output            - Output a line of text.
-    #
-    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
-    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
-    #
-    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
-    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
-    #
-    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
+#
+#   Simple assertions ...
+#
+assert type(0)           is int         #   The type of `0` is an integer.
+assert type(int)         is Python_Type #   The type of integer is `Python_Type`.
+assert type(Python_Type) is Python_Type #   The type of `Python_type` is `Python_Type`.
 
 
-    #
-    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
-    #
-    #       We run the code generator:
-    #
-    #       1.  Transform Crystal to Python.
-    #       2.  Output Python (to "Vision.py").
-    #
-    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()
+#
+#   Slightly more complicated assertion ...
+#
+#       The type of any type (`bool`, `int`, `object`, `str`, etc) is `Python_Type`, (including of course, the type of
+#       `Python_Type` is `Python_Type`).
+#
+#   As stated above, this assertion clearly and concisely shows that:
+#
+#       `Python_Type` is "The base type (metaclass) of all classes and types".
+#
+assert type(bool) is type(int) is type(object) is type(str) is type(Python_Type) is Python_Type

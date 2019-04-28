@@ -10,6 +10,43 @@
 #
 
 
+#
+#<order>
+#
+#   NOTE:
+#       TO avoid import loops, the following have to apper *before* other imports.
+#
+#       This is so other files can import the functions below from this file.
+#
+
+
+#
+#   convert_full_list_of_statements
+#
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `NativeList of Tree_Statement`.
+#
+#
+def convert_full_list_of_statements(sequence):
+    assert fact_is_full_native_list(sequence)
+
+    return [convert_statement(v)   for v in sequence]
+
+
+#
+#   convert_some_list_of_statements
+#
+#       Convert a `NativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `NativeList of Tree_Statement`.
+#
+#
+def convert_some_list_of_statements(sequence):
+    assert fact_is_some_native_list(sequence)
+
+    return [convert_statement(v)   for v in sequence]
+#</order>
+
+
 from    Capital.Core                        import  FATAL
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
@@ -53,51 +90,51 @@ statement_version = tree_globals.statement_version
 
 
 if statement_version == 1:
-    from    Z.Tree.Convert_Statement_V1     import  convert_assert_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_assign_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_break_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_class_definition
-    from    Z.Tree.Convert_Statement_V1     import  convert_continue_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_delete_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_execute_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_expression_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_for_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_global_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_from_import_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_function_definition  
-    from    Z.Tree.Convert_Statement_V1     import  convert_if_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_import_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_modify_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_pass_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_print_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_raise_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_return_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_try_except_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_try_finally_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_while_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_with_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_break_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_class_definition
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_continue_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_delete_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_execute_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_expression_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition  
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_pass_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_print_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_raise_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement
 elif statement_version == 2:
-    from    Z.Tree.Convert_Statement_V1     import  convert_assert_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_assign_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_break_statement         #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_class_definition        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_continue_statement      #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_delete_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_expression_statement    #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_global_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_from_import_statement   #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_function_definition     #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V2     import  convert_if_statement
-    from    Z.Tree.Convert_Statement_V1     import  convert_import_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_modify_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_pass_statement          #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_print_statement         #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_raise_statement         #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_return_statement        #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_try_except_statement    #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_try_finally_statement   #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_while_statement         #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V1     import  convert_with_statement          #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_break_statement         #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_class_definition        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_continue_statement      #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_delete_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_expression_statement    #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement   #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition     #   "_V1" on purpose
+    from    Z.Tree.Convert_Statement_V2             import  convert_if_statement
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_pass_statement          #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_print_statement         #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_raise_statement         #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement    #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement   #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement         #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement          #   "_V1" on purpose
 else:
     from    Capital.Core                import  FATAL
 
@@ -159,19 +196,6 @@ def convert_statement(v):
 
 
 #
-#   convert_full_list_of_statements
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `NativeList of Tree_Statement`.
-#
-#
-def convert_full_list_of_statements(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_statement(v)   for v in sequence]
-
-
-#
 #   convert_full_list_of_statements_V2
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either a single
@@ -184,26 +208,3 @@ def convert_full_list_of_statements_V2(sequence):
         return convert_statement(v[0])
 
     return create_Tree_Suite([convert_statement(v)   for v in sequence])
-
-
-#
-#   convert_some_list_of_statements
-#
-#       Convert a `NativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `NativeList of Tree_Statement`.
-#
-#
-def convert_some_list_of_statements(sequence):
-    assert fact_is_some_native_list(sequence)
-
-    return [convert_statement(v)   for v in sequence]
-
-#
-#   Handle import loops
-#
-import  Z.Tree.Convert_Except
-import  Z.Tree.Convert_Statement_V1
-
-Z.Tree.Convert_Except      .convert_full_list_of_statements = convert_full_list_of_statements
-Z.Tree.Convert_Statement_V1.convert_full_list_of_statements = convert_full_list_of_statements
-Z.Tree.Convert_Statement_V1.convert_some_list_of_statements = convert_some_list_of_statements
