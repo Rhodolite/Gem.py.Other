@@ -3,420 +3,190 @@
 #
 
 
+from    Capital.Core                    import  creator
+
+
+default_alias_version         = '1'
+default_argument_version      = '1'
+default_comprehension_version = '1'
+default_context_version       = 1
+default_except_version        = '1'
+default_expression_version    = '1'
+default_index_version         = '1'
+default_name_version          = 3
+default_operator_version      = '1'
+default_parameter_version     = '1'
+default_statement_version     = 2
+default_symbol_version        = 2
+default_target_version        = 3
+
+
+if default_context_version:
+    #
+    #   Using `Tree_Context`:
+    #
+    #       Maximum allowed name   version is 2.
+    #       Maximum allowed target version is 2.
+    #
+#   assert default_name_version   <= 2
+#   assert default_target_version <= 2
+    pass
+else:
+    #
+    #   NOT Using `Tree_Context`:
+    #
+    #       Minimum allowed name   version is 3.
+    #       Symbols must be used.
+    #       Minimum allowed target version is 3.
+    #
+    assert default_name_version   >= 3
+    assert default_symbol_version == 1
+    assert default_target_version >= 3
+
+
+if default_symbol_version == 0:
+    #
+    #   NOT using symbols:
+    #
+    #       Name   version must be 1.
+    #       Target version must be 1.
+    #
+    assert default_name_version   == 1
+    assert default_target_version == 1
+else:
+    #
+    #   Using symbols:
+    #
+    #       Minumum allowed name   version is 2.
+    #       Minumum allowed target version is 3.
+    #
+    assert default_name_version   >= 2
+    assert default_target_version >= 2
+
+
 #
-#   Z.Tree.Convert_Simple_Statement_V1 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 1.
+#   Z.Tree.Global - Globals to affect the creation of `Tree_*` classes.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
-from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Alias                import  convert_full_list_of_alias_clauses
-from    Z.Tree.Convert_Expression           import  convert_expression
-from    Z.Tree.Convert_Expression           import  convert_full_list_of_expressions
-from    Z.Tree.Convert_Expression           import  convert_none_OR_expression
-from    Z.Tree.Convert_Operator             import  convert_modify_operator
-from    Z.Tree.Convert_Target               import  convert_full_list_of_targets
-from    Z.Tree.Convert_Target               import  convert_target
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Raise_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Return_Statement
-from    Z.Tree.Statement                    import  create_Tree_Assert_Statement
-from    Z.Tree.Statement                    import  create_Tree_Assign_Statement
-from    Z.Tree.Statement                    import  create_Tree_Break_Statement
-from    Z.Tree.Statement                    import  create_Tree_Continue_Statement
-from    Z.Tree.Statement                    import  create_Tree_Delete_Statement
-from    Z.Tree.Statement                    import  create_Tree_Execute_Statement
-from    Z.Tree.Statement                    import  create_Tree_Expression_Statement
-from    Z.Tree.Statement                    import  create_Tree_From_Import_Statement
-from    Z.Tree.Statement                    import  create_Tree_Global_Statement
-from    Z.Tree.Statement                    import  create_Tree_Import_Statement
-from    Z.Tree.Statement                    import  create_Tree_Modify_Statement
-from    Z.Tree.Statement                    import  create_Tree_Pass_Statement
-from    Z.Tree.Statement                    import  create_Tree_Print_Statement
-from    Z.Tree.Statement                    import  create_Tree_Raise_Statement
-from    Z.Tree.Statement                    import  create_Tree_Return_Statement
+from    Capital.Core                    import  arrange
+from    Capital.Core                    import  trace
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_native_boolean
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__MODIFY_OPERATOR
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET
+    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Fact                import  fact_is_positive_integer
+    from    Capital.Fact                import  fact_is_substantial_integer
 
 
 #
-#   create_keyword_statement(self)
+#   Tree_Globals - Globals to affect the creation of `Tree_*` classes.
 #
-#       Common code for `convert_break_statement`, `convert_continue_statement` and `convert_pass_statement`.
-#
-def convert_keyword_statement(self, create):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    return create(self.lineno, self.col_offset)
-
-
-
-#
-#   convert_assert_statement(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Assert_Statement` (i.e.: `_ast.Assert`) to a `Tree_Assert_Statement`.
-#
-assert Native_AbstractSyntaxTree_Assert_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Assert_Statement._fields     == (('test', 'msg'))
-
-
-def convert_assert_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                    (self.test)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.msg)
-
-    return create_Tree_Assert_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_expression        (self.test),
-               convert_none_OR_expression(self.msg),
-           )
-
-
-#
-#   convert_assign_statement(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Assign_Statement` (i.e.: `_ast.Assign`) to a `Tree_Assign`.
-#
-assert Native_AbstractSyntaxTree_Assign_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Assign_Statement._fields     == (('targets', 'value'))
-
-
-def convert_assign_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_list                              (self.targets)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
-
-    return create_Tree_Assign_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_full_list_of_targets(self.targets),
-               convert_expression          (self.value),
-           )
-
-
-#
-#   convert_break_statement(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Break_Statement` (i.e.: `_ast.Break`) to a `Tree_Break_Statement`.
-#
-assert Native_AbstractSyntaxTree_Break_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Break_Statement._fields     == (())
-
-
-def convert_break_statement(self):
-    return convert_keyword_statement(self, create_Tree_Break_Statement)
-
-
-#
-#   convert_continue_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Continue_Statement` (i.e.: `_ast.Continue`) to a
-#       `Tree_Continue_Statement`.
-#
-assert Native_AbstractSyntaxTree_Continue_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Continue_Statement._fields     == (())
-
-
-def convert_continue_statement(self):
-    return convert_keyword_statement(self, create_Tree_Continue_Statement)
-
-
-#
-#   convert_delete_statement(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Delete_Statement` (i.e.: `_ast.Delete`) to a `Tree_Extended_Delete_Statement`.
-#
-assert Native_AbstractSyntaxTree_Delete_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Delete_Statement._fields     == (('targets',))
-
-
-def convert_delete_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_list(self.targets)
-
-    return create_Tree_Delete_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_full_list_of_targets(self.targets),
-           )
-
-
-#
-#   convert_execute_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Execute_Statement` (i.e.: `_ast.Exec`) to a
-#       `Tree_Execute_Statement`.
-#
-assert Native_AbstractSyntaxTree_Execute_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Execute_Statement._fields     == (('body', 'globals', 'locals'))
-
-
-def convert_execute_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                    (self.body)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.globals)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.locals)
-
-    return create_Tree_Execute_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_expression        (self.body),
-               convert_none_OR_expression(self.globals),
-               convert_none_OR_expression(self.locals),
-           )
-
-
-#
-#   convert_expression_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Expression_Statement` (i.e.: `_ast.Expr`) to a
-#       `Tree_Expression_Statement`.
-#
-assert Native_AbstractSyntaxTree_Expression_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Expression_Statement._fields     == (('value',))
-
-
-def convert_expression_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
-
-    return create_Tree_Expression_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_expression(self.value),
-           )
-
-
-#
-#   convert_global_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Global_Statement` (i.e.: `_ast.Global`) to a
-#       `Tree_Global_Statement`.
-#
-assert Native_AbstractSyntaxTree_Global_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Global_Statement._fields     == (('names',))
-
-
-def convert_global_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_list(self.names)
-
-    return create_Tree_Global_Statement(
-               self.lineno,
-               self.col_offset,
-
-               self.names,
-           )
-
-
-#
-#   convert_from_import_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_From_Import_Statement` (i.e.: `_ast.ImportFrom`) to a
-#       `Tree_From_Import_Statement`.
-#
-assert Native_AbstractSyntaxTree_From_Import_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_From_Import_Statement._fields     == (('module', 'names', 'level'))
-
-
-def convert_from_import_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_string (self.module)
-    assert fact_is_full_native_list   (self.names)
-    assert fact_is_substantial_integer(self.level)
-
-    return create_Tree_From_Import_Statement(
-               self.lineno,
-               self.col_offset,
-
-               self.module,
-               convert_full_list_of_alias_clauses(self.names),
-               self.level,
-           )
-
-
-
-#
-#   convert_import_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Import_Statement` (i.e.: `_ast.Import`) to a `Tree_Import_Statement`.
-#
-assert Native_AbstractSyntaxTree_Import_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Import_Statement._fields     == (('names',))
-
-
-def convert_import_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_list(self.names)
-
-    return create_Tree_Import_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_full_list_of_alias_clauses(self.names),
-           )
-
-
-#
-#   convert_modify_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Modify_Statement` (i.e.: `_ast.AugAssign`) to a `Tree_Modify_Statement`.
-#
-assert Native_AbstractSyntaxTree_Modify_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Modify_Statement._fields     == (('target', 'op', 'value'))
-
-
-def convert_modify_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__TARGET         (self.target)
-    assert fact_is__ANY__native__abstract_syntax_tree__MODIFY_OPERATOR(self.op)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (self.value)
-
-    return create_Tree_Modify_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_target         (self.target),
-               convert_modify_operator(self.op),
-               convert_expression     (self.value),
-           )
-
-
-#
-#   convert_pass_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Pass_Statement` (i.e.: `_ast.Pass`) to a `Tree_Pass_Statement`.
-#
-assert Native_AbstractSyntaxTree_Pass_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Pass_Statement._fields     == (())
-
-
-def convert_pass_statement(self):
-    return convert_keyword_statement(self, create_Tree_Pass_Statement)
-
-
-#
-#   convert_print_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Print_Statement` (i.e.: `_ast.Print`) to a `Tree_Print_Statement`.
-#
-assert Native_AbstractSyntaxTree_Print_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Print_Statement._fields     == (('dest', 'values', 'nl'))
-
-
-def convert_print_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.dest)
-    assert fact_is_full_native_list                                                  (self.values)
-    assert fact_is_native_boolean                                                    (self.nl)
-
-    return create_Tree_Print_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_none_OR_expression      (self.dest),
-               convert_full_list_of_expressions(self.values),
-               self.nl,
-           )
-
-
-#
-#   convert_raise_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Raise_Statement` (i.e.: `_ast.Raise`) to a `Tree_Raise_Statement`.
-#
-assert Native_AbstractSyntaxTree_Raise_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Raise_Statement._fields     == (('type', 'inst', 'tback'))
-
-
-def convert_raise_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.type)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.inst)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.tback)
-
-    return create_Tree_Raise_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_none_OR_expression(self.type),
-               convert_none_OR_expression(self.inst),
-               convert_none_OR_expression(self.tback),
-           )
-
-
-#
-#   convert_return_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_Return_Statement` (i.e.: `_ast.Return`) to a `Tree_Return_Statement`.
-#
-assert Native_AbstractSyntaxTree_Return_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Return_Statement._fields     == (('value',))
-
-
-def convert_return_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
-
-    return create_Tree_Return_Statement(
-               self.lineno,
-               self.col_offset,
-
-               convert_none_OR_expression(self.value),
-           )
+class Tree_Globals(object):
+    __slots__ = ((
+        'alias_version',                #   NativeString
+        'argument_version',             #   NativeString
+        'comprehension_version',        #   NativeString
+        'context_version',              #   SubstantialInteger
+        'except_version',               #   NativeString
+        'expression_version',           #   NativeString
+        'index_version',                #   NativeString
+        'name_version',                 #   PositiveInteger
+        'operator_version',             #   NativeString
+        'parameter_version',            #   NativeString
+        'statement_version',            #   PositiveInteger
+        'symbol_version',               #   SubstantialInteger
+        'target_version',               #   PositiveInteger
+    ))
+
+
+    def __init__(
+            self, alias_version, argument_version, comprehension_version, context_version,
+            except_version, expression_version, index_version, name_version,
+            operator_version, parameter_version, statement_version, symbol_version,
+            target_version,
+    ):
+        self.alias_version         = alias_version
+        self.argument_version      = argument_version
+        self.comprehension_version = comprehension_version
+        self.context_version       = context_version
+        self.except_version        = except_version
+        self.index_version         = index_version
+        self.name_version          = name_version
+        self.operator_version      = operator_version
+        self.parameter_version     = parameter_version
+        self.expression_version    = expression_version
+        self.statement_version     = statement_version
+        self.symbol_version        = symbol_version
+        self.target_version        = target_version
+
+
+    def __repr__(self):
+        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {!r} {!r} {} {} {}>',
+                       self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
+                       self.except_version, self.expression_version, self.index_version, self.name_version,
+                       self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
+                       self.target_version)
+
+    def trace_tree_globals(self):
+        trace('Tree_Globals: alias={!r} argument={!r} comprehension={!r} context={} except={!r} ...',
+              self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
+              self.except_version)
+        trace('... expression={!r} index={!r} name={} statement={} operator={!r} parameter={!r} symbol={}',
+              self.expression_version, self.index_version, self.name_version, self.statement_version,
+              self.operator_version, self.parameter_version, self.symbol_version)
+        trace('... target={}',
+              self.target_version)
+
+
+@creator
+def create_tree_globals(
+        alias_version, argument_version, comprehension_version, context_version,
+        except_version, expression_version, index_version, name_version,
+        operator_version, parameter_version, statement_version, symbol_version,
+        target_version,
+):
+    assert fact_is_full_native_string (alias_version)
+    assert fact_is_full_native_string (argument_version)
+    assert fact_is_full_native_string (comprehension_version)
+    assert fact_is_substantial_integer(context_version)
+    assert fact_is_full_native_string (except_version)
+    assert fact_is_full_native_string (index_version)
+    assert fact_is_positive_integer   (name_version)
+    assert fact_is_full_native_string (operator_version)
+    assert fact_is_full_native_string (parameter_version)
+    assert fact_is_full_native_string (expression_version)
+    assert fact_is_positive_integer   (statement_version)
+    assert fact_is_substantial_integer(symbol_version)
+    assert fact_is_positive_integer   (target_version)
+
+    r = Tree_Globals(
+            alias_version, argument_version, comprehension_version, context_version, except_version,
+            expression_version, index_version, name_version,
+            operator_version, parameter_version, statement_version, symbol_version,
+            target_version,
+        )
+
+   #trace('Tree Globals: {}', r)
+    r.trace_tree_globals()
+
+    return r
+
+
+tree_globals = create_tree_globals(
+                   alias_version         = default_alias_version,
+                   argument_version      = default_argument_version,
+                   comprehension_version = default_comprehension_version,
+                   context_version       = default_context_version,
+                   except_version        = default_except_version,
+                   expression_version    = default_expression_version,
+                   index_version         = default_index_version,
+                   name_version          = default_name_version,
+                   operator_version      = default_operator_version,
+                   parameter_version     = default_parameter_version,
+                   statement_version     = default_statement_version,
+                   symbol_version        = default_symbol_version,
+                   target_version        = default_target_version,
+               )

@@ -4,6 +4,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
 
 
@@ -44,6 +45,7 @@ class Tree_Operator_V1(object):
         f.write(self.operator_token)
 
 
+@creator
 def create_Tree_Operator_V1(name, operator_token):
     assert fact_is_full_native_string(name)
     assert fact_is_full_native_string(operator_token)

@@ -3,6 +3,9 @@
 #
 
 
+from    Capital.Core                    import  creator
+
+
 default_alias_version         = '1'
 default_argument_version      = '1'
 default_comprehension_version = '1'
@@ -138,6 +141,7 @@ class Tree_Globals(object):
               self.target_version)
 
 
+@creator
 def create_tree_globals(
         alias_version, argument_version, comprehension_version, context_version,
         except_version, expression_version, index_version, name_version,

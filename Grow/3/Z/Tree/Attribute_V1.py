@@ -11,6 +11,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
@@ -135,6 +136,7 @@ class Tree_Attribute(object):
                        self.line_number, self.column, self.value, self.attribute, self.context)
 
 
+@creator
 def create_Tree_Attribute(line_number, column, value, attribute, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

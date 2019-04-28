@@ -24,6 +24,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Z.Parser.Symbol                 import  conjure_symbol
 
 
@@ -170,6 +171,7 @@ class Tree_Name(object):
         return arrange('<Tree_Name @{}:{} {!r} {}>', self.line_number, self.column, self.symbol, self.context)
 
 
+@creator
 def create_Tree_Name(line_number, column, symbol, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

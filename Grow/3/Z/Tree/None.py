@@ -12,6 +12,7 @@
 #
 
 
+from    Capital.Core                    import  creator
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
@@ -38,6 +39,7 @@ class Tree_None(
         return '<tree-none>'
 
 
+@creator
 def create_Tree_None():
     return Tree_None()
 

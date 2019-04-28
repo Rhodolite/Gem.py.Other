@@ -13,7 +13,9 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  trace
+from    Z.Tree.Comprehension            import  TRAIT_Tree_Comprehension_Clause
 
 
 if __debug__:
@@ -23,12 +25,11 @@ if __debug__:
 
 
 #
-#   Tree: Comprehension Clause, Version 1
+#   Tree: Comprehension Clause
 #
-class Tree_Comprehension_Clause_V1(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Comprehension_Clause_Implementation(
+        TRAIT_Tree_Comprehension_Clause,
+):
     __slots__ = ((
         'target',                       #   Tree_Expression
         'sequence',                     #   Tree_Expression
@@ -46,12 +47,8 @@ class Tree_Comprehension_Clause_V1(object):
 
 
     #
-    #   Interface Tree_Expression
+    #   Interface Tree_Comprehension_Clause
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_comprehension_clause_tokens(self, f):
         f.write('<comprehension-clause for ')
         self.target.dump_store_target_tokens(f)
@@ -69,13 +66,14 @@ class Tree_Comprehension_Clause_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Comprehension_Clause_V1 {!r}.{} {}>',
+        return arrange('<Tree_Comprehension_Clause_Implementation {!r}.{} {}>',
                        self.target, self.sequence, self.if_tests)
 
 
-def create_Tree_Comprehension_Clause_V1(target, sequence, if_tests):
+@creator
+def create_Tree_Comprehension_Clause(target, sequence, if_tests):
     assert fact_is_tree_store_target(target)
     assert fact_is_tree_expression  (sequence)
     assert fact_is_some_native_list(if_tests)
 
-    return Tree_Comprehension_Clause_V1(target, sequence, if_tests)
+    return Tree_Comprehension_Clause_Implementation(target, sequence, if_tests)

@@ -123,7 +123,8 @@ class TRAIT_Temporary_Key(object):
 #           cache = {}
 #
 #
-#           def create_unique_string_example(s):
+#           @creator
+#           def conjure_unique_string_example(s):
 #               #
 #               #   Step #3A (as explained above).
 #               #
@@ -174,7 +175,7 @@ class TRAIT_Temporary_Key(object):
 #
 #
 #       The above example will guarentee that all instances of type `Unique_String_Example`
-#       (created with `create_unique_string_example`) are unique.
+#       (created with `conjure_unique_string_example`) are unique.
 #
 
 

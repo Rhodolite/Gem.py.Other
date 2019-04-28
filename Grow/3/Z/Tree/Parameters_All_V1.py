@@ -13,6 +13,9 @@
 #
 
 
+from    Capital.Core                    import  creator
+
+
 if __debug__:
     from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Fact                import  fact_is__native_none__OR__full_native_string
@@ -89,6 +92,7 @@ class Tree_Parameters_All_V1(object):
                        self.normal_parameters, self.tuple_parameter, self.map_parameter, self.defaults)
 
 
+@creator
 def create_Tree_Parameters_All_V1(normal_parameters, tuple_parameter, map_parameter, defaults):
     assert fact_is_some_native_list                    (normal_parameters)
     assert fact_is__native_none__OR__full_native_string(tuple_parameter)

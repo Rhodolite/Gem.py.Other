@@ -11,6 +11,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
@@ -70,6 +71,7 @@ class Tree_Except_Handler_V1(object):
         f.line('}>')
 
 
+@creator
 def create_Tree_Except_Handler_V1(line_number, column, type_expression, name_expression, body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

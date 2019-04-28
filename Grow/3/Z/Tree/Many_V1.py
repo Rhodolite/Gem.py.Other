@@ -13,6 +13,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
@@ -129,6 +130,7 @@ class Tree_Many_Expression(object):
                        self.__class__.__name__, self.line_number, self.column, self.elements, self.context)
 
 
+@creator
 def create_Tree_Many_Expression(Meta, line_number, column, elements, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -153,6 +155,7 @@ class Tree_List_Expression(Tree_Many_Expression):
     keyword = 'list-expression'
 
 
+@creator
 def create_Tree_List_Expression(line_number, column, elements, context):
     return create_Tree_Many_Expression(Tree_List_Expression, line_number, column, elements, context)
 
@@ -171,5 +174,6 @@ class Tree_Tuple_Expression(Tree_Many_Expression):
     keyword = 'tuple-expression'
 
 
+@creator
 def create_Tree_Tuple_Expression(line_number, column, elements, context):
     return create_Tree_Many_Expression(Tree_Tuple_Expression, line_number, column, elements, context)

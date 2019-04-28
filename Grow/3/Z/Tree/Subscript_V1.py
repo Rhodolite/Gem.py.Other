@@ -11,6 +11,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
@@ -126,6 +127,7 @@ class Tree_Subscript_Expression(object):
                        self.line_number, self.column, self.value, self.index, self.context)
 
 
+@creator
 def create_Tree_Subscript_Expression(line_number, column, value, index, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

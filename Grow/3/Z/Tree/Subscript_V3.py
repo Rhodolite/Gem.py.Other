@@ -36,6 +36,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
@@ -108,6 +109,7 @@ class Tree_Delete_Subscript(Tree_Subscript_Expression):
         f.write(']>')
 
 
+@creator
 def create_Tree_Delete_Subscript(line_number, column, value, index):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -147,6 +149,7 @@ class Tree_Evaluate_Subscript(Tree_Subscript_Expression):
         f.write(']>')
 
 
+@creator
 def create_Tree_Evaluate_Subscript(line_number, column, value, index):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -182,6 +185,7 @@ class Tree_Store_Subscript(Tree_Subscript_Expression):
         f.write(']>')
 
 
+@creator
 def create_Tree_Store_Subscript(line_number, column, value, index):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

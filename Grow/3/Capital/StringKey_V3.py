@@ -8,6 +8,7 @@
 #
 
 
+from    Capital.Core                    import  creator
 from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
 
@@ -48,6 +49,7 @@ class StringKey_V3(
         return arrange('<StringKey_V3 {}>', native_string_representation_method(self))
 
 
+@creator
 def create_string_key_v3(s):
     assert fact_is_full_native_string(s)
 

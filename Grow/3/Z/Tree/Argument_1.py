@@ -4,11 +4,13 @@
 
 
 #
-#   Z.Tree.Argument_V1 - Implementation of `Tree_Argument`, Version 1.
+#   Z.Tree.Argument_V1 - Implementation of class that implement `Tree_Argument`, Version 1.
 #
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
+from    Z.Tree.Argument                 import  TRAIT_Tree_Argument
 
 
 if __debug__:
@@ -17,9 +19,11 @@ if __debug__:
 
 
 #
-#   Tree_Keyword_Argument_V1 - A keyword argment in a function call.
+#   Tree: Keyword Argument - A keyword argment in a function call.
 #
-class Tree_Keyword_Argument_V1(object):
+class Tree_Keyword_Argument(
+        TRAIT_Tree_Argument,
+):
     __slots__ = ((
         'name',                         #   FullNativeString
         'value',                        #   Tree_Expression
@@ -32,7 +36,7 @@ class Tree_Keyword_Argument_V1(object):
 
 
     def __repr__(self):
-        return arrange('<Tree_Keyword_Argument_V1 {!r} = {!r}>', self.name, self.value)
+        return arrange('<Tree_Keyword_Argument {!r} = {!r}>', self.name, self.value)
 
 
     def dump_argument_tokens(self, f):
@@ -41,8 +45,9 @@ class Tree_Keyword_Argument_V1(object):
         f.greater_than_sign()
 
 
-def create_Tree_Keyword_Argument_V1(name, value):
+@creator
+def create_Tree_Keyword_Argument(name, value):
     assert fact_is_full_native_string(name)
     assert fact_is_tree_expression   (value)
 
-    return Tree_Keyword_Argument_V1(name, value)
+    return Tree_Keyword_Argument(name, value)

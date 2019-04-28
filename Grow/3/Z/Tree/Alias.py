@@ -35,9 +35,19 @@
 #   interface Tree_Alias - Interface to tree classes that represent aliases.
 #
 #       interface Tree_Alias
-#           dump_alias_tokens (f : Build_DumpToken)
-#           is_tree_alias := true
+#           debug
+#               is_tree_alias := true
 #
+#           method
+#               dump_alias_tokens (f : Build_DumpToken)
+#
+class TRAIT_Tree_Alias(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_alias = True
+
 
 
 #
@@ -61,7 +71,7 @@ version = tree_globals.alias_version
 
 
 if version == '1':
-    from    Z.Tree.Alias_1                  import  create_Tree_Alias_V1    as  create_Tree_Alias_Clause
+    from    Z.Tree.Alias_1                  import  create_Tree_Alias_Clause
 else:
     from    Capital.Core                    import  FATAL
 

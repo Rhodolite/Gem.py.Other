@@ -20,6 +20,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  trace
 
 
@@ -92,6 +93,7 @@ class Tree_Value_Comprehension_V1(object):
                        self.__class__.__name__, self.line_number, self.column, self.element, self.generators)
 
 
+@creator
 def create_Tree_Value_Comprehension_V1(Meta, line_number, column, element, generators):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -148,6 +150,7 @@ class Tree_Backquote_Expression_V1(object):
                        self.line_number, self.column, self.value)
 
 
+@creator
 def create_Tree_Backquote_Expression_V1(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -211,6 +214,7 @@ class Tree_Binary_Expression_V1(object):
                        self.line_number, self.column, self.left, self.operator, self.right)
 
 
+@creator
 def create_Tree_Binary_Expression_V1(line_number, column, left, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -319,6 +323,7 @@ class Tree_Call_V1(object):
                        self.function, self.arguments, self.keywords, self.star_arguments, self.keyword_arguments)
 
 
+@creator
 def create_Tree_Call_V1(
         line_number, column, function, arguments, keywords, star_arguments, keyword_arguments,
 ):
@@ -393,6 +398,7 @@ class Tree_Compare_Expression_V1(object):
                        self.line_number, self.column, self.left, self.operators, self.comparators)
 
 
+@creator
 def create_Tree_Compare_Expression_V1(line_number, column, left, operators, comparators):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -413,6 +419,7 @@ class Tree_Generator_Comprehension_V1(Tree_Value_Comprehension_V1):
     keyword = 'generator-comprehension'
 
 
+@creator
 def create_Tree_Generator_Comprehension_V1(line_number, column, element, generators):
     return create_Tree_Value_Comprehension_V1(Tree_Generator_Comprehension_V1, line_number, column, element, generators)
 
@@ -471,6 +478,7 @@ class Tree_If_Expression_V1(object):
                        self.line_number, self.column, self.test, self.body, self.else_expression)
 
 
+@creator
 def create_Tree_If_Expression_V1(line_number, column, test, body, else_expression):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -542,6 +550,7 @@ class Tree_Logical_Expression_V1(object):
                        self.line_number, self.column, self.operator, self.values)
 
 
+@creator
 def create_Tree_Logical_Expression_V1(line_number, column, operator, values):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -616,6 +625,7 @@ class Tree_Map_Expression_V1(object):
                        self.line_number, self.column, self.keys, self.values)
 
 
+@creator
 def create_Tree_Map_Expression_V1(line_number, column, keys, values):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -678,6 +688,7 @@ class Tree_Lambda_Expression_V1(object):
                        self.line_number, self.column, self.parameters, self.body)
 
 
+@creator
 def create_Tree_Lambda_Expression_V1(line_number, column, parameters, body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -697,6 +708,7 @@ class Tree_List_Comprehension_V1(Tree_Value_Comprehension_V1):
     keyword = 'list-comprehension'
 
 
+@creator
 def create_Tree_List_Comprehension_V1(line_number, column, element, generators):
     return create_Tree_Value_Comprehension_V1(Tree_List_Comprehension_V1, line_number, column, element, generators)
 
@@ -759,6 +771,7 @@ class Tree_Map_Comprehension_V1(object):
                        self.line_number, self.column, self.key, self.value, self.generators)
 
 
+@creator
 def create_Tree_Map_Comprehension_V1(line_number, column, key, value, generators):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -812,6 +825,7 @@ class Tree_Number_V1(object):
         return arrange('<Tree_Number_V1 @{}:{} {!r}>', self.line_number, self.column, self.n)
 
 
+@creator
 def create_Tree_Number_V1(line_number, column, n):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -830,6 +844,7 @@ class Tree_Set_Comprehension_V1(Tree_Value_Comprehension_V1):
     keyword = 'set-comprehension'
 
 
+@creator
 def create_Tree_Set_Comprehension_V1(line_number, column, element, generators):
     return create_Tree_Value_Comprehension_V1(Tree_Set_Comprehension_V1, line_number, column, element, generators)
 
@@ -889,6 +904,7 @@ class Tree_Set_Expression_V1(object):
         return arrange('<Tree_Set_Expression_V1 @{}:{} {!r}>', self.line_number, self.column, self.values)
 
 
+@creator
 def create_Tree_Set_Expression_V1(line_number, column, values):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -942,6 +958,7 @@ class Tree_String_V1(object):
         return arrange('<Tree_String_V1 @{}:{} {!r}>', self.line_number, self.column, self.s)
 
 
+@creator
 def create_Tree_String_V1(line_number, column, s):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -1001,6 +1018,7 @@ class Tree_Unary_Expression_V1(object):
                        self.line_number, self.column, self.operator, self.right)
 
 
+@creator
 def create_Tree_Unary_Expression_V1(line_number, column, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -1061,6 +1079,7 @@ class Tree_Yield_Expression_V1(object):
                        self.line_number, self.column, self.value)
 
 
+@creator
 def create_Tree_Yield_Expression_V1(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

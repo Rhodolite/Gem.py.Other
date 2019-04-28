@@ -4,6 +4,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
 
 
@@ -150,6 +151,7 @@ class Tree_Context_2(object):
         f.arrange('<context {}>', self.name)
 
 
+@creator
 def create_Tree_Context_2(
         name,
 

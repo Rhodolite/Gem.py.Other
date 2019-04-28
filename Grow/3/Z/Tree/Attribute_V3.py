@@ -28,6 +28,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Z.Parser.Symbol                 import  conjure_symbol
 
 
@@ -108,6 +109,7 @@ class Tree_Delete_Attribute(Tree_Attribute):
         f.greater_than_sign()
 
 
+@creator
 def create_Tree_Delete_Attribute(line_number, column, value, attribute):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -147,6 +149,7 @@ class Tree_Evaluate_Attribute(Tree_Attribute):
         f.greater_than_sign()
 
 
+@creator
 def create_Tree_Evaluate_Attribute(line_number, column, value, attribute):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -182,6 +185,7 @@ class Tree_Store_Attribute(Tree_Attribute):
         f.greater_than_sign()
 
 
+@creator
 def create_Tree_Store_Attribute(line_number, column, value, attribute):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

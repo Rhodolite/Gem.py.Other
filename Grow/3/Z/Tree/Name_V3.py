@@ -34,6 +34,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Z.Parser.Symbol                 import  conjure_symbol
 
 
@@ -98,6 +99,7 @@ class Tree_Delete_Name(Tree_Name):
         f.arrange('<delete-name @{}:{} {}>', self.line_number, self.column, self.symbol)
 
 
+@creator
 def create_Tree_Delete_Name(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -132,6 +134,7 @@ class Tree_Evaluate_Name(Tree_Name):
         f.arrange('<@{}:{} {}>', self.line_number, self.column, self.symbol)
 
 
+@creator
 def create_Tree_Evaluate_Name(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -165,6 +168,7 @@ class Tree_Normal_Parameter(Tree_Name):
         f.arrange('<normal-parameter @{}:{} {}>', self.line_number, self.column, self.symbol)
 
 
+@creator
 def create_Tree_Normal_Parameter(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -195,6 +199,7 @@ class Tree_Store_Name(Tree_Name):
         f.arrange('<store-name @{}:{} {}>', self.line_number, self.column, self.symbol)
 
 
+@creator
 def create_Tree_Store_Name(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

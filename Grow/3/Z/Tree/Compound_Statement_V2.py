@@ -34,6 +34,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
@@ -116,6 +117,7 @@ class Tree_Test_Statement(
                        self.__class__.__name__, self.line_number, self.column, self.test, self.body, self.else_clause_0)
 
 
+@creator
 def create_Tree_Test_Statement(Meta, line_number, column, test, body, else_clause_0):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -205,6 +207,7 @@ class Tree_Class_Definition(
                        self.line_number, self.column, self.name, self.bases, self.body, self.decorator_list)
 
 
+@creator
 def create_Tree_Class_Definition(line_number, column, name, bases, body, decorator_list):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -277,6 +280,7 @@ class Tree_For_Statement(
                        self.line_number, self.column, self.target, self.sequence, self.body, self.else_clause_0)
 
 
+@creator
 def create_Tree_For_Statement(line_number, column, target, sequence, body, else_clause_0):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -360,6 +364,7 @@ class Tree_Function_Definition(
                        self.line_number, self.column, self.name, self.parameters, self.body, self.decorator_list)
 
 
+@creator
 def create_Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -381,6 +386,7 @@ class Tree_If_Statement(Tree_Test_Statement):
     keyword = 'if'
 
 
+@creator
 def create_Tree_If_Statement(line_number, column, test, body, orelse):
     return create_Tree_Test_Statement(Tree_If_Statement, line_number, column, test, body, orelse)
 
@@ -446,6 +452,7 @@ class Tree_Try_Except_Statement(
                        self.line_number, self.column, self.body, self.except_handlers, self.else_clause_0)
 
 
+@creator
 def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_clause_0):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -508,6 +515,7 @@ class Tree_Try_Finally_Statement(
                        self.line_number, self.column, self.body, self.finally_body)
 
 
+@creator
 def create_Tree_Try_Finally_Statement(line_number, column, body, finally_body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -527,6 +535,7 @@ class Tree_While_Statement(Tree_Test_Statement):
     keyword = 'while'
 
 
+@creator
 def create_Tree_While_Statement(line_number, column, test, body, orelse):
     return create_Tree_Test_Statement(Tree_While_Statement, line_number, column, test, body, orelse)
 
@@ -588,6 +597,7 @@ class Tree_With_Statement(
                        self.line_number, self.column, self.value, self.target)
 
 
+@creator
 def create_Tree_With_Statement(line_number, column, value, target, body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

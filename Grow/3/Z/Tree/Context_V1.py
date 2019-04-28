@@ -4,6 +4,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
 
 
@@ -39,6 +40,7 @@ class Tree_Context_Delete_V1(object):
         f.write('<context-delete>')
 
 
+@creator
 def create_Tree_Context_Delete_V1():
     return Tree_Context_Delete_V1()
 
@@ -90,10 +92,9 @@ class Tree_Context_Load_V1(object):
         f.write('<context-load>')
 
 
-
+@creator
 def create_Tree_Context_Load_V1():
     return Tree_Context_Load_V1()
-
 
 
 tree_context_load_v1 = create_Tree_Context_Load_V1()
@@ -124,6 +125,7 @@ class Tree_Context_Parameter_V1(object):
         f.write('<context-parameter>')
 
 
+@creator
 def create_Tree_Context_Parameter_V1():
     return Tree_Context_Parameter_V1()
 
@@ -157,6 +159,7 @@ class Tree_Context_Store_V1(object):
         f.write('<context-store>')
 
 
+@creator
 def create_Tree_Context_Store_V1():
     return Tree_Context_Store_V1()
 

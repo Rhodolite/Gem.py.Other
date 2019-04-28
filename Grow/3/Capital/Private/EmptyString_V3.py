@@ -8,6 +8,7 @@
 #
 
 
+from    Capital.Core                    import  creator
 from    Capital.String                  import  TRAIT_String
 from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
@@ -54,6 +55,7 @@ class EmptyString_V3(
         return "''"                                     #   Same as `str.__repr__("")`
 
 
+@creator
 def create_empty_string_v3():
     return EmptyString_V3('')
 

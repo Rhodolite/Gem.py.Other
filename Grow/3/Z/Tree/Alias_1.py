@@ -6,11 +6,13 @@
 #
 #   Z.Tree.Alias_V1 - Implementation of `Tree_Alias`, Version 1.
 #
-#       See "Z/Tree/Alias.py" for an explanation of "tree aliases".
+#       See "Z.Tree.Alias" for an explanation of "tree aliases".
 #
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
+from    Z.Tree.Alias                    import  TRAIT_Tree_Alias
 
 
 if __debug__:
@@ -23,11 +25,13 @@ if __debug__:
 
 
 #
-#   Tree_Alias_V1 - An alias in an `import` or `from` statement.
+#   Tree: Alias Clause - An alias in an `import` or `from` statement.
 #
-#       Again, see "Z/Tree/Alias.py" for an explanation of "tree aliases".
+#       Again, see "Z.Tree.Alias" for an explanation of "tree aliases".
 #
-class Tree_Alias_V1(object):
+class Tree_Alias_Clause(
+        TRAIT_Tree_Alias,
+):
     __slots__ = ((
         'name',                         #   NativeString
         'as_name',                      #   None | NativeString
@@ -41,9 +45,9 @@ class Tree_Alias_V1(object):
 
     def __repr__(self):
         if self.as_name is None:
-            return arrange('<Tree.Alias#1 {!r}>', self.name)
+            return arrange('<Tree_Alias_Clause {!r}>', self.name)
 
-        return arrange('<Tree.Alias#1 {!r} as {!r}>', self.name, self.as_name)
+        return arrange('<Tree_Alias_Clause {!r} as {!r}>', self.name, self.as_name)
 
 
     def dump_alias_tokens(self, f):
@@ -56,8 +60,9 @@ class Tree_Alias_V1(object):
         f.greater_than_sign()
 
 
-def create_Tree_Alias_V1(name, as_name):
+@creator
+def create_Tree_Alias_Clause(name, as_name):
     assert fact_is_full_native_string                  (name)
     assert fact_is__native_none__OR__full_native_string(as_name)
 
-    return Tree_Alias_V1(name, as_name)
+    return Tree_Alias_Clause(name, as_name)

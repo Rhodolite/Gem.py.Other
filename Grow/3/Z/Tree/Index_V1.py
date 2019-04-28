@@ -11,6 +11,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  trace
 
 
@@ -50,6 +51,7 @@ class Tree_Ellipses_Index_V1(object):
         return '<Tree_Ellipses_Index_V1>'
 
 
+@creator
 def create_Tree_Ellipses_Index_V1():
     return Tree_Ellipses_Index_V1()
 
@@ -106,6 +108,7 @@ class Tree_Extended_Slice_Index_V1(object):
         return arrange('<Tree_Extended_Slice_Index_V1 {!r}>', self.many)
 
 
+@creator
 def create_Tree_Extended_Slice_Index_V1(many):
     assert fact_is_full_native_list(many)
 
@@ -151,6 +154,7 @@ class Tree_Simple_Index_V1(object):
         return arrange('<Tree_Simple_Index_V1 {!r}>', self.value)
 
 
+@creator
 def create_Tree_Simple_Index_V1(value):
     assert fact_is_tree_expression(value)
 
@@ -230,6 +234,7 @@ class Tree_Slice_Index_V1(object):
         return arrange('<Tree_Slice_Index_V1 {!r} {!r} {!r}>', self.lower, self.upper, self.step)
 
 
+@creator
 def create_Tree_Slice_Index_V1(lower, upper, step):
     assert fact_is__native_none__OR__tree_expression(lower)
     assert fact_is__native_none__OR__tree_expression(upper)

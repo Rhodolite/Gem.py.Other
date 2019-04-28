@@ -51,6 +51,12 @@
 #       debug
 #           is_tree_comprehension_clause := true
 #
+class TRAIT_Tree_Comprehension_Clause(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_comprehension_clause = True
 
 
 #
@@ -98,9 +104,7 @@ version = tree_globals.comprehension_version
 
 
 if version == '1':
-    from    Z.Tree.Comprehension_V1     import  (
-                create_Tree_Comprehension_Clause_V1     as  create_Tree_Comprehension_Clause,
-        )
+    from    Z.Tree.Comprehension_V1     import  create_Tree_Comprehension_Clause
 else:
     from    Capital.Core                import  FATAL
 

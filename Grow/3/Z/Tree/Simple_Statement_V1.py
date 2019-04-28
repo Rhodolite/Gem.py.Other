@@ -11,6 +11,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 
 
@@ -65,6 +66,7 @@ class Tree_Keyword_Statement(
         return arrange('<{} @{}:{}>', self.__class__.__name__, self.line_number, self.column)
 
 
+@creator
 def create_Tree_Keyword_Statement(Meta, line_number, column):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -121,6 +123,7 @@ class Tree_Assert_Statement(
 
 
 
+@creator
 def create_Tree_Assert_Statement(line_number, column, test, message):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -191,6 +194,7 @@ class Tree_Assign_Statement(
                        self.line_number, self.column, self.targets, self.value)
 
 
+@creator
 def create_Tree_Assign_Statement(line_number, column, targets, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -211,6 +215,7 @@ class Tree_Break_Statement(Tree_Keyword_Statement):
     keyword = 'break'
 
 
+@creator
 def create_Tree_Break_Statement(line_number, column):
     return create_Tree_Keyword_Statement(Tree_Break_Statement, line_number, column)
 
@@ -225,6 +230,7 @@ class Tree_Continue_Statement(Tree_Keyword_Statement):
     keyword = 'continue'
 
 
+@creator
 def create_Tree_Continue_Statement(line_number, column):
     return create_Tree_Keyword_Statement(Tree_Continue_Statement, line_number, column)
 
@@ -280,6 +286,7 @@ class Tree_Delete_Statement(
         return arrange('<Tree_Delete_Statement @{}:{} {!r}>', self.line_number, self.column, self.targets)
 
 
+@creator
 def create_Tree_Delete_Statement(line_number, column, targets):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -349,6 +356,7 @@ class Tree_Execute_Statement(
                        self.line_number, self.column, self.body, self.globals, self.locals)
 
 
+@creator
 def create_Tree_Execute_Statement(line_number, column, body, globals, locals):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -410,6 +418,7 @@ class Tree_Expression_Statement(
                        self.line_number, self.column, self.value)
 
 
+@creator
 def create_Tree_Expression_Statement(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -486,6 +495,7 @@ class Tree_From_Import_Statement(
                        self.module, self.names, self.level)
 
 
+@creator
 def create_Tree_From_Import_Statement(line_number, column, module, names, level):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -548,6 +558,7 @@ class Tree_Global_Statement(
         return arrange('<Tree_Global_Statement @{}:{} {!r}>', self.line_number, self.column, self.names)
 
 
+@creator
 def create_Tree_Global_Statement(line_number, column, names):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -615,6 +626,7 @@ class Tree_Import_Statement(
         return arrange('<Tree_Import_Statement @{}:{} {!r}>', self.line_number, self.column, self.aliases)
 
 
+@creator
 def create_Tree_Import_Statement(line_number, column, aliases):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -675,6 +687,7 @@ class Tree_Modify_Statement(
                        self.line_number, self.column, self.left, self.operator, self.right)
 
 
+@creator
 def create_Tree_Modify_Statement(line_number, column, left, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -696,6 +709,7 @@ class Tree_Pass_Statement(Tree_Keyword_Statement):
     keyword = 'pass'
 
 
+@creator
 def create_Tree_Pass_Statement(line_number, column):
     return create_Tree_Keyword_Statement(Tree_Pass_Statement, line_number, column)
 
@@ -765,6 +779,7 @@ class Tree_Print_Statement(
                        self.line_number, self.column, self.destination, self.values, self.newline)
 
 
+@creator
 def create_Tree_Print_Statement(line_number, column, destination, values, newline):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -821,6 +836,7 @@ class Tree_Return_Statement(
 
 
 
+@creator
 def create_Tree_Return_Statement(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -891,6 +907,7 @@ class Tree_Raise_Statement(
                        self.line_number, self.column, self.type, self.instance, self.traceback)
 
 
+@creator
 def create_Tree_Raise_Statement(line_number, column, type, instance, traceback):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)

@@ -41,6 +41,7 @@
 
 
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 
 
 if __debug__:
@@ -134,6 +135,7 @@ class Tree_Many_Expression(object):
         return arrange('<{} @{}:{} {!r}>', self.__class__.__name__, self.line_number, self.column, self.elements)
 
 
+@creator
 def create_Tree_Many_Expression(Meta, line_number, column, elements):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
@@ -169,6 +171,7 @@ class Tree_Evaluate_List(Tree_Many_Expression):
     keyword = 'evaluate-list'
 
 
+@creator
 def create_Tree_Evaluate_List(line_number, column, elements):
     return create_Tree_Many_Expression(Tree_Evaluate_List, line_number, column, elements)
 
@@ -199,6 +202,7 @@ class Tree_Evaluate_Tuple(Tree_Many_Expression):
     keyword = 'evaluate-tuple'
 
 
+@creator
 def create_Tree_Evaluate_Tuple(line_number, column, elements):
     return create_Tree_Many_Expression(Tree_Evaluate_Tuple, line_number, column, elements)
 
@@ -229,6 +233,7 @@ class Tree_Store_List(Tree_Many_Expression):
     keyword = 'store-list'
 
 
+@creator
 def create_Tree_Store_List(line_number, column, elements):
     return create_Tree_Many_Expression(Tree_Store_List, line_number, column, elements)
 
@@ -259,5 +264,6 @@ class Tree_Store_Tuple(Tree_Many_Expression):
     keyword = 'store-tuple'
 
 
+@creator
 def create_Tree_Store_Tuple(line_number, column, elements):
     return create_Tree_Many_Expression(Tree_Store_Tuple, line_number, column, elements)
