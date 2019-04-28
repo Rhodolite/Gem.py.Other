@@ -28,6 +28,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tr
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Finally_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_While_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_With_Statement
+from    Z.Tree.None                         import  tree_none
 from    Z.Tree.Statement                    import  create_Tree_Class_Definition
 from    Z.Tree.Statement                    import  create_Tree_For_Statement
 from    Z.Tree.Statement                    import  create_Tree_Function_Definition
@@ -66,9 +67,9 @@ def convert_test_statement(self, create):
                self.lineno,
                self.col_offset,
 
-               convert_expression                (self.test),
-               convert_full_list_of_statements_V2(self.body),
-               convert_some_list_of_statements   (self.orelse),
+               convert_expression(self.test),
+               convert_suite     (self.body),
+               convert_suite_0   (self.orelse),
            )
 
 
@@ -288,15 +289,41 @@ def convert_with_statement(self):
 
 
 #
-#   convert_full_list_of_statements_V2
+#   convert_suite(sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either a single
-#       statement or a `Tree_Suite`.
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
 #
-def convert_full_list_of_statements_V2(sequence):
+#           1)  a single statement; or
+#           2)  a `Tree_Suite`.
+#
+def convert_suite(sequence):
     assert fact_is_full_native_list(sequence)
 
     if len(sequence) == 1:
+        return convert_statement(sequence[0])
+
+    return create_Tree_Suite([convert_statement(v)   for v in sequence])
+
+
+
+#
+#   convert_suite_0(sequence)
+#
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
+#
+#           1)  `tree_none`;
+#           2)  a single statement; or
+#           3)  a `Tree_Suite`.
+#
+def convert_suite_0(sequence):
+    assert fact_is_some_native_list(sequence)
+
+    total = len(sequence)
+
+    if total == 0:
+        return tree_none
+
+    if total == 1:
         return convert_statement(sequence[0])
 
     return create_Tree_Suite([convert_statement(v)   for v in sequence])

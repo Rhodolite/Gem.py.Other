@@ -24,25 +24,29 @@ if __debug__:
 #
 class Tree_Suite(tuple):
     #
-    #   implements Tree_Statement
+    #   implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = (())
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 7                  #   `7` is not a very good estimate ...  but good enough ;-)
+    is_tree_statement_none = False
+    suite_estimate         = 7          #   `7` is not a very good estimate ...  but good enough ;-)
 
 
     def dump_suite_tokens(self, f):
-        with f.indent_2('{', '}'):
-            for v in self:
-                v.dump_suite_tokens(f)
+        for v in self:
+            v.dump_suite_tokens(f)
+
 
     #
     #   Public

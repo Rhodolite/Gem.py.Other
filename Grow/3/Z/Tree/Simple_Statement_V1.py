@@ -35,7 +35,8 @@ if __debug__:
 #
 class Tree_Keyword_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -52,13 +53,16 @@ class Tree_Keyword_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -84,7 +88,8 @@ def create_Tree_Keyword_Statement(Meta, line_number, column):
 #
 class Tree_Assert_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -107,13 +112,16 @@ class Tree_Assert_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -163,7 +171,8 @@ def create_Tree_Assert_Statement(line_number, column, test, message):
 #
 class Tree_Assign_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -186,13 +195,16 @@ class Tree_Assign_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -257,7 +269,8 @@ def create_Tree_Continue_Statement(line_number, column):
 #
 class Tree_Delete_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -278,13 +291,16 @@ class Tree_Delete_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -331,7 +347,8 @@ def create_Tree_Delete_Statement(line_number, column, targets):
 #
 class Tree_Execute_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -356,13 +373,16 @@ class Tree_Execute_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -413,7 +433,8 @@ def create_Tree_Execute_Statement(line_number, column, body, globals, locals):
 #
 class Tree_Expression_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -434,13 +455,16 @@ class Tree_Expression_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -471,7 +495,8 @@ def create_Tree_Expression_Statement(line_number, column, value):
 #
 class Tree_From_Import_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -496,13 +521,16 @@ class Tree_From_Import_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -557,7 +585,8 @@ def create_Tree_From_Import_Statement(line_number, column, module, names, level)
 #
 class Tree_Global_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -578,13 +607,16 @@ class Tree_Global_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -625,7 +657,8 @@ def create_Tree_Global_Statement(line_number, column, names):
 #
 class Tree_Import_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -646,13 +679,16 @@ class Tree_Import_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -702,7 +738,8 @@ def create_Tree_Import_Statement(line_number, column, aliases):
 #
 class Tree_Modify_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -727,13 +764,16 @@ class Tree_Modify_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -784,7 +824,8 @@ def create_Tree_Pass_Statement(line_number, column):
 #
 class Tree_Print_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -809,13 +850,16 @@ class Tree_Print_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -868,7 +912,8 @@ def create_Tree_Print_Statement(line_number, column, destination, values, newlin
 #
 class Tree_Return_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -889,13 +934,16 @@ class Tree_Return_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):
@@ -930,7 +978,8 @@ def create_Tree_Return_Statement(line_number, column, value):
 #
 class Tree_Raise_Statement(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
     #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -955,13 +1004,16 @@ class Tree_Raise_Statement(object):
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement   = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 1
+    is_tree_statement_none = False
+    suite_estimate         = 1
 
 
     def dump_suite_tokens(self, f):

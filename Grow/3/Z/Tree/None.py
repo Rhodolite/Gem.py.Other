@@ -17,24 +17,20 @@
 #
 class Tree_None(object):
     #
-    #   Implements Tree_Statement
+    #   Implements Tree_Statement_0
     #
     __slots__ = (())
 
 
     #
-    #   Interface Tree_Statement
+    #   Interface Tree_Statement_0
     #
     if __debug__:
-        is_tree_statement = True
+        is_tree_statement_0 = True
 
 
-    suite_estimate = 0
-
-
-    @staticmethod
-    def dump_suite_tokens(f):
-        f.line('<statement-none>')
+    is_tree_statement_none = True
+    suite_estimate         = 0
 
 
     #
