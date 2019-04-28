@@ -143,7 +143,7 @@ elif statement_version == 2:
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_except_statement
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_finally_statement
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_while_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement          #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_with_statement
 else:
     from    Capital.Core                import  FATAL
 

@@ -563,3 +563,81 @@ class Tree_While_Statement(Tree_Test_Statement):
 
 def create_Tree_While_Statement(line_number, column, test, body, orelse):
     return create_Tree_Test_Statement(Tree_While_Statement, line_number, column, test, body, orelse)
+
+
+#
+#   Tree: With Statement
+#
+class Tree_With_Statement(object):
+    #
+    #   Implements Tree_Statement,
+    #              Tree_Statement_0
+    #
+    __slots__ = ((
+        'line_number',                  #   PositiveInteger
+        'column',                       #   SubstantialInteger
+
+        'value',                        #   Tree_Expression
+        'target',                       #   None | Tree_Target
+        'body',                         #   Tree_Statement
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, line_number, column, value, target, body):
+        self.line_number = line_number
+        self.column      = column
+
+        self.value  = value
+        self.target = target
+        self.body   = body
+
+
+    #
+    #   Interface Tree_Statement,
+    #             Tree_Statement_0
+    #
+    if __debug__:
+        is_tree_statement   = True
+        is_tree_statement_0 = True
+
+
+    is_tree_statement_none = False
+    suite_estimate         = 1
+
+
+    def dump_suite_tokens(self, f):
+        f.arrange('<with @{}:{} ', self.line_number, self.column)
+        self.value.dump_evaluate_tokens(f)
+
+        if self.target is not None:
+            f.write(' as ')
+            self.target.dump_store_target_tokens(f)
+
+        f.line(' {')
+
+        with f.indent_2():
+            self.body.dump_suite_tokens(f)
+
+        f.line('}>')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_With_Statement @{}:{} {!r} {!r}>',
+                       self.line_number, self.column, self.value, self.target)
+
+
+def create_Tree_With_Statement(line_number, column, value, target, body):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_tree_expression                    (value)
+    assert fact_is__native_none__OR__tree_store_target(target)
+    assert fact_is_tree_statement                     (body)
+
+    return Tree_With_Statement(line_number, column, value, target, body)

@@ -637,8 +637,8 @@ class Tree_With_Statement(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_With_Statement @{}:{} {!r} {!r} {!r}>',
-                       self.line_number, self.column, self.value, self.target, self.body.else_clause_0)
+        return arrange('<Tree_With_Statement @{}:{} {!r} {!r}>',
+                       self.line_number, self.column, self.value, self.target)
 
 
 def create_Tree_With_Statement(line_number, column, value, target, body):
