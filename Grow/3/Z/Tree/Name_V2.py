@@ -36,7 +36,7 @@ if __debug__:
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_parameter_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
-    
+
 
 
 #
@@ -122,7 +122,7 @@ class Tree_Name(object):
     if __debug__:
         is_tree_keyword_parameter = False
         is_tree_parameters_all    = False
-        
+
 
         @property
         def is_tree_parameter(self):

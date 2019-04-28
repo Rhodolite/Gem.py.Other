@@ -103,7 +103,7 @@ def convert_subscript_expression(self):
     return create_subscript(
                self.lineno,
                self.col_offset,
-               
+
                convert_expression  (self.value),
                convert_index_clause(self.slice),
            )

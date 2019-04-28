@@ -107,7 +107,7 @@ class Tree_Name(object):
     if __debug__:
         is_tree_keyword_parameter = False
         is_tree_parameters_all    = False
-        
+
 
         @property
         def is_tree_parameter(self):

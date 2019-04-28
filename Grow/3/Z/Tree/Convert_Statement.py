@@ -14,14 +14,18 @@
 #<order>
 #
 #   NOTE:
-#       TO avoid import loops, the following have to apper *before* other imports.
+#       TO avoid import loops, the following have to appear *before* other imports:
+#
+#           convert_full_list_of_statements
+#           convert_some_list_of_statements
+#           convert_statement
 #
 #       This is so other files can import the functions below from this file.
 #
 
 
 #
-#   convert_full_list_of_statements
+#   convert_full_list_of_statements(sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `NativeList of Tree_Statement`.
@@ -34,7 +38,7 @@ def convert_full_list_of_statements(sequence):
 
 
 #
-#   convert_some_list_of_statements
+#   convert_some_list_of_statements(sequence)
 #
 #       Convert a `NativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `NativeList of Tree_Statement`.
@@ -44,6 +48,22 @@ def convert_some_list_of_statements(sequence):
     assert fact_is_some_native_list(sequence)
 
     return [convert_statement(v)   for v in sequence]
+
+
+#
+#   convert_statement(v)
+#
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) instance to an instance of a class that implements
+#       `Tree_Statement`.
+#
+#       Calls all the other `convert_*` pseudo methods.
+#
+def convert_statement(v):
+    convert_statement__pseudo_method = (
+            map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method[type(v)]
+        )
+
+    return convert_statement__pseudo_method(v)
 #</order>
 
 
@@ -101,7 +121,7 @@ if statement_version == 1:
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition  
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement
@@ -120,11 +140,13 @@ elif statement_version == 2:
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_class_definition        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_continue_statement      #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_delete_statement        #   "_V1" on purpose
+    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_execute_statement       #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_expression_statement    #   "_V1" on purpose
+    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement           #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement   #   "_V1" on purpose
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition     #   "_V1" on purpose
-    from    Z.Tree.Convert_Statement_V2             import  convert_if_statement
+    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_if_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement        #   "_V1" on purpose
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_pass_statement          #   "_V1" on purpose
@@ -141,8 +163,6 @@ else:
     FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {!r}', statement_version)
 
 
-#
-#<convert_statement>
 #
 #   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method
 #           : Map { Native_AbstractSyntaxTree_* : Function }
@@ -175,36 +195,3 @@ map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method =
         Native_AbstractSyntaxTree_While_Statement       : convert_while_statement,
         Native_AbstractSyntaxTree_With_Statement        : convert_with_statement,
     }
-
-
-#
-#   convert_statement
-#
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) instance to an instance of a class that implements
-#       `Tree_Statement`.
-#
-#       Calls all the other `convert_*` pseudo methods.
-#
-def convert_statement(v):
-    convert_statement__pseudo_method = (
-            map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method[type(v)]
-        )
-
-    return convert_statement__pseudo_method(v)
-#</convert_statement>
-
-
-
-#
-#   convert_full_list_of_statements_V2
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either a single
-#       statement or a `Tree_Suite`.
-#
-def convert_full_list_of_statements_V2(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    if len(sequence) == 1:
-        return convert_statement(v[0])
-
-    return create_Tree_Suite([convert_statement(v)   for v in sequence])

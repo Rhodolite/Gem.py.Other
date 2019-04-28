@@ -65,7 +65,7 @@ def convert_except_handler(self):
 
     if self.type is None:
         assert fact_is_native_none(self.name)
-        
+
     return create_Tree_Except_Handler(
                self.lineno,
                self.col_offset,

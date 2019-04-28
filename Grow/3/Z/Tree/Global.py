@@ -51,7 +51,7 @@ if default_symbol_version == 0:
     assert default_name_version   == 1
     assert default_target_version == 1
 else:
-    #   
+    #
     #   Using symbols:
     #
     #       Minumum allowed name   version is 2.

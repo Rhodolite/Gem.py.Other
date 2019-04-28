@@ -97,7 +97,7 @@ def hidden():
         #
         __slots__ = (())
 
-        
+
         #
         #   Interface String
         #
@@ -141,7 +141,7 @@ def hidden():
         #       For now, we just use the python built in `str.__repr__`.
         #
         #   FUTURE:
-        # 
+        #
         #       We will use the funtion `portray_python_string` which does a really good job of a python
         #       represenation (much more readable than `str.__repr__` when presented with a "raw" string).
         #

@@ -75,7 +75,7 @@ from    os.path                         import  join            as  python_path_
 #       fellow programers.
 #
 #       Name your variables properly!
-#       
+#
 #       Thanks, much appreciated.
 #
 

@@ -396,7 +396,7 @@ def convert_map_expression(self):
     return create_Tree_Map_Expression(
                self.lineno,
                self.col_offset,
-               
+
                convert_some_list_of_expressions(self.keys),
                convert_some_list_of_expressions(self.values),
            )
@@ -460,7 +460,7 @@ def convert_set_expression(self):
     return create_Tree_Set_Expression(
                self.lineno,
                self.col_offset,
-               
+
                convert_some_list_of_expressions(self.elts),
            )
 

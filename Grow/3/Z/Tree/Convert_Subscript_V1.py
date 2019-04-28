@@ -48,7 +48,7 @@ def convert_subscript_expression(self):
     return create_Tree_Subscript_Expression(
                self.lineno,
                self.col_offset,
-               
+
                convert_expression                  (self.value),
                convert_index_clause                (self.slice),
                convert_delete_load_OR_store_context(self.ctx),

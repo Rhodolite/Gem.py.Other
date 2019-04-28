@@ -69,7 +69,7 @@ def USAGE(format, *arguments):
     ERROR(format, *arguments)
     FATAL("usage: python {} development", program_name)
 
-    
+
 def Z_main():
     command_line_arguments = python_program_arguments[1:]   #   Ignore the program name for command line arguments
 

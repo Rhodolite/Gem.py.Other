@@ -35,7 +35,7 @@ class Symbol(str):
         def __init__(self, s):
             FATAL("Symbol.constructor (`__init__`): A Symbol may not be contructed");
 
-    
+
     #
     #   Interface Temporary_Key
     #

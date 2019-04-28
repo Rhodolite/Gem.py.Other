@@ -102,7 +102,7 @@ class Tree_Attribute(object):
     else:
         dump_delete_target_tokens = _dump_tree_attribute_token
 
-        
+
     #
     #   Interface Tree_Expression
     #

@@ -10,7 +10,7 @@
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_string
-    
+
 
 #
 #   StringKey_V3 - String Key Implementation, Version 1.

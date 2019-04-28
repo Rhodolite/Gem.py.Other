@@ -48,7 +48,7 @@ class FullString_V3(str):
         def __init__(self, s):
             FATAL("FullString_V3.constructor (`__init__`): A FullString_V3 may not be contructed");
 
-    
+
     #
     #   Interface Temporary_Key
     #
@@ -101,7 +101,7 @@ class FullString_V3(str):
     #       For now, we just use the python built in `str.__repr__`.
     #
     #   FUTURE:
-    # 
+    #
     #       We will use the funtion `portray_python_string` which does a really good job of a python
     #       represenation (much more readable than `str.__repr__` when presented with a "raw" string).
     #

@@ -45,7 +45,7 @@ from    Capital.NativeString            import  intern_native_string
 #
 #
 #   State Machine Picture:
-#    
+#
 #                                               simple_context_changing   - The context is being created.
 #                                                             |
 #                     +---------------------------------------+

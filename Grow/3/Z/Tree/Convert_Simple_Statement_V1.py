@@ -372,8 +372,8 @@ def convert_print_statement(self):
                convert_full_list_of_expressions(self.values),
                self.nl,
            )
-    
-           
+
+
 #
 #   convert_raise_statement
 #

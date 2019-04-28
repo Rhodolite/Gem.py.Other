@@ -44,30 +44,30 @@ if context_version:
     #       Example:
     #
     #           In the following statements:
-    #    
+    #
     #               def f(a): pass
     #               b = c.d
     #               del e, g.h
-    #    
+    #
     #           There are seven contexts:
-    #    
+    #
     #               `a`     - On the `Tree_Name` of `a`, the context is `Parameter` to indicate `a` is a parameter to
     #                         function `f`.
-    #    
+    #
     #               `b`     - On the `Tree_Name` of `b`, the context is `Store`, to indicate we are storing (saving) a new
     #                         value to symbol `b`.
-    #    
+    #
     #               `c`     - On the `Tree_Name` of `c`, the context is `load`, to indicate we are loading the value of
     #                         symbol `c` (so as to next load the value of attribute `c.d`)
-    #    
+    #
     #               `c.d`   - On the `Tree_Attribute` of `c.d` the context is `load` to indicate we are loading the value
     #                         of attribute `c.d`.
-    #    
+    #
     #               `e`     - On the `Tree_Name` of `e`, the context is `delete`, to indicate we are deleting `e`.
-    #    
+    #
     #               `g`     - On the `Tree_Name` of `g`, the context is `load`, to indicate we are loading the value of `g`
     #                         (so as to next delete `g.h`)
-    #    
+    #
     #               `g.h`   - On the `Tree_Attribute` of `g.h` the context is `delete` to indicate we are deleting the
     #                         attribute `g.h`
     #

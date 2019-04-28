@@ -126,7 +126,7 @@
 #               #   Step #3B & #3C (as explained above).
 #               #
 #               #   `r` will be "unique" due to how `.setdefault` works.
-#               #   
+#               #
 #               #       "Unique with respect to other keys that are in the cache" -- (see fuller explanation of this in
 #               #       1B above).
 #               #
@@ -176,7 +176,7 @@
 #       #   NOTE:
 #       #       This is named `.temporary_key_has_definitively_been_transformed` instead of `.temporary_key_transformed`
 #       #       to *STRONLY* indicate that the test may be *INCONCLUSIVE* when returning false.
-#       #       
+#       #
 #       #       I.E.:  A value of false means the key is not definitively known to have transformed; but it *MAY* have
 #       #              have transformed (although we don't know it yet)!
 #       #
@@ -196,5 +196,5 @@
 #       #               may not still be a temporary key".
 #       #
 #       v.temporary_key_has_definitively_been_transformed   #   Test if `v` is definitively known to have been
-#                                                           #   transformed, and is no longer a temporary key. 
+#                                                           #   transformed, and is no longer a temporary key.
 #

@@ -130,7 +130,7 @@ def ERROR(message, *arguments):
 #       caught & ignored).
 #
 #       In our code, we do not, yet, catch `SystemExit` and ignore it.
-#       
+#
 #   UNIT TESTING:
 #
 #       It would be quite appropriate for a unit test to catch `SystemExit`, mark the unit test as

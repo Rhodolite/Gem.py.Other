@@ -128,7 +128,7 @@ SUMMARY OF HOW THE CODE GENERATOR WORKS:
 
         6.  "Z/Extract.py" has functions that are called for each Z statement,
             and creates a Crystal parse tree
-        
+
             6A. "Z/Crystal_ParseTree.py" is the Crystal Parse Tree.
 
         7.  "Z/Transform_Crystal_to_Python" is called to transform the Crystal
@@ -144,7 +144,7 @@ DETAILS OF HOW THE CODE GENERATOR WORKS:
 
     Z.py - CODE GENERATOR.
 
-        The code generator is in "Z.py". 
+        The code generator is in "Z.py".
 
         Actually this is just a wrapper to input "Z/*.py".
 
@@ -177,7 +177,7 @@ DETAILS OF HOW THE CODE GENERATOR WORKS:
 
 
     Z/Transform_Crystal_to_Python
-    
+
         Transform Crystal statements to Python statements.
 
 
@@ -223,7 +223,7 @@ PYTHON VIOLATIONS
                 Normally we should not be running code after a program exits.
 
             REASON:
-                
+
                 We are, temporarily, using python to parse our "*.z" files
                 while we develop the Crystal Parser.
 
