@@ -3,13 +3,17 @@
 #
 
 
-from    Capital.Core                    import  creator
+#
+#   Z.Tree.Global - Globals to affect the creation of `Tree_*` classes.
+#
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
 
 
-version = 7
+version = 4
 
 
-alias_version         = '1'
+alias_version         = 1
 argument_version      = '1'
 comprehension_version = '1'
 context_version       = 1
@@ -40,6 +44,15 @@ if version >= 3:
 
 
 #
+#   Version 4:
+#
+#       Split `Tree_Alias` into `Tree_Module_Alias` and `Tree_Symbol_Alias`
+#
+if version >= 4:
+    alias_version = 2
+
+
+#
 #   Version 4 & 5:
 #
 #       Introduce Symbols
@@ -47,81 +60,46 @@ if version >= 3:
 #           4:  `Tree_Name`   uses symbols
 #           5:  `Tree_Target` uses symbols (affects `Tree_Attribute`).
 #
-if version >= 4:
+if version >= 5:
     name_version   = 2
     symbol_version = 1
 
-if version >= 5:
+if version >= 6:
     target_version = 2
 
 
 #
-#   Version 6:
+#   Version 7 & 8:
 #
 #       No longer use contexts
 #
-#           6:  `Tree_Name`    no longer uses contexts.
+#           7:  `Tree_Name`    no longer uses contexts.
 #
-#           7:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+#           8:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
 #                              `Tree_Subscript`).
 #
-if version >= 6:
+if version >= 7:
     name_version = 3
 
-if version >= 7:
+if version >= 8:
     context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
     target_version  = 3
 
 
-if context_version:
-    #
-    #   Using `Tree_Context`:
-    #
-    #       Maximum allowed name   version is 2.
-    #       Maximum allowed target version is 2.
-    #
-#   assert name_version   <= 2
-#   assert target_version <= 2
-    pass
-else:
-    #
-    #   NOT Using `Tree_Context`:
-    #
-    #       Minimum allowed name   version is 3.
-    #       Symbols must be used.
-    #       Minimum allowed target version is 3.
-    #
-    assert name_version   >= 3
-    assert symbol_version == 1
-    assert target_version >= 3
-
-
-if symbol_version == 0:
-    #
-    #   NOT using symbols:
-    #
-    #       Name   version must be 1.
-    #       Target version must be 1.
-    #
-    assert name_version   == 1
-    assert target_version == 1
-else:
-    #
-    #   Using symbols:
-    #
-    #       Minumum allowed name   version is 2.
-    #
-    assert name_version   >= 2
+#
+#   Version 9
+#
+#       Add `Tree_Suite` & `Tree_Suite_0`
+#
+if version >= 9:
+    statement_version = 2 
 
 
 #
-#   Z.Tree.Global - Globals to affect the creation of `Tree_*` classes.
+#   Imports
 #
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
-
-
 from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
 from    Capital.Core                    import  trace
 
 
@@ -136,7 +114,7 @@ if __debug__:
 #
 class Tree_Globals(object):
     __slots__ = ((
-        'alias_version',                #   NativeString
+        'alias_version',                #   PositiveInteger
         'argument_version',             #   NativeString
         'comprehension_version',        #   NativeString
         'context_version',              #   SubstantialInteger
@@ -174,14 +152,14 @@ class Tree_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Tree_Globals {!r} {!r} {!r} {} {!r} {!r} {!r} {} {} {!r} {} {} {}>',
+        return arrange('<Tree_Globals {} {!r} {!r} {} {!r} {!r} {!r} {} {} {!r} {} {} {}>',
                        self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
                        self.except_version, self.expression_version, self.index_version, self.name_version,
                        self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
                        self.target_version)
 
     def trace_tree_globals(self):
-        trace('Tree_Globals: alias={!r} argument={!r} comprehension={!r} context={} except={!r} ...',
+        trace('Tree_Globals: alias={} argument={!r} comprehension={!r} context={} except={!r} ...',
               self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
               self.except_version)
         trace('... expression={!r} index={!r} name={} statement={} operator={} parameter={!r} symbol={}',
@@ -198,7 +176,7 @@ def create_tree_globals(
         operator_version, parameter_version, statement_version, symbol_version,
         target_version,
 ):
-    assert fact_is_full_native_string (alias_version)
+    assert fact_is_positive_integer   (alias_version)
     assert fact_is_full_native_string (argument_version)
     assert fact_is_full_native_string (comprehension_version)
     assert fact_is_substantial_integer(context_version)

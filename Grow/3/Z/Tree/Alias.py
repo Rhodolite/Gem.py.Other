@@ -61,22 +61,6 @@ class TRAIT_Tree_Alias(object):
 #
 
 
-#
-#   Import the version of tree aliases we want to use
-#
-from    Z.Tree.Global                   import  tree_globals
-
-
-version = tree_globals.alias_version
-
-
-if version == '1':
-    from    Z.Tree.Alias_1                  import  create_Tree_Alias_Clause
-else:
-    from    Capital.Core                    import  FATAL
-
-    FATAL('Z/Tree/Alias.py: unknown tree alias version: {!r}', version)
-
 
 #
 #   fact_is_tree_alias(v) - Assert the fact that `v` is a `Tree_Alias`.
@@ -86,3 +70,20 @@ if __debug__:
         assert v.is_tree_alias
 
         return True
+
+
+#
+#   Import the version of tree aliases we want to use
+#
+from    Z.Tree.Global                   import  tree_globals
+
+
+version = tree_globals.alias_version
+
+
+if version in ((1, 2)):
+    pass
+else:
+    from    Capital.Core                    import  FATAL
+
+    FATAL('Z/Tree/Alias.py: unknown tree alias version: {}', version)

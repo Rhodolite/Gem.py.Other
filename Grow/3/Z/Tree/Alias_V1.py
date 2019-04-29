@@ -38,18 +38,17 @@ class Tree_Alias_Clause(
     ))
 
 
+    #
+    #   Private
+    #
     def __init__(self, name, as_name):
         self.name    = name
         self.as_name = as_name
 
 
-    def __repr__(self):
-        if self.as_name is None:
-            return arrange('<Tree_Alias_Clause {!r}>', self.name)
-
-        return arrange('<Tree_Alias_Clause {!r} as {!r}>', self.name, self.as_name)
-
-
+    #
+    #   Interface Tree_Alias
+    #
     def dump_alias_tokens(self, f):
         f.arrange('<alias {}', self.name)
 
@@ -58,6 +57,16 @@ class Tree_Alias_Clause(
             f.write(self.as_name)
 
         f.greater_than_sign()
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        if self.as_name is None:
+            return arrange('<Tree_Alias_Clause {!r}>', self.name)
+
+        return arrange('<Tree_Alias_Clause {!r} as {!r}>', self.name, self.as_name)
 
 
 @creator

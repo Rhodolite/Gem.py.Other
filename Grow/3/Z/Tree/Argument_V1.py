@@ -30,19 +30,28 @@ class Tree_Keyword_Argument(
     ))
 
 
+    #
+    #   Private
+    #
     def __init__(self, name, value):
         self.name  = name
         self.value = value
 
 
-    def __repr__(self):
-        return arrange('<Tree_Keyword_Argument {!r} = {!r}>', self.name, self.value)
-
-
+    #
+    #   Interface Tree_Argument
+    #
     def dump_argument_tokens(self, f):
         f.arrange('<keyword_argument {} = ', self.name)
         self.value.dump_evaluate_tokens(f)
         f.greater_than_sign()
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Keyword_Argument {!r} = {!r}>', self.name, self.value)
 
 
 @creator

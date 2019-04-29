@@ -11,7 +11,8 @@
 
 
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Alias                import  convert_full_list_of_alias_clauses
+from    Z.Tree.Convert_Alias                import  convert_full_list_of_module_aliases
+from    Z.Tree.Convert_Alias                import  convert_full_list_of_symbol_aliases
 from    Z.Tree.Convert_Expression           import  convert_expression
 from    Z.Tree.Convert_Expression           import  convert_full_list_of_expressions
 from    Z.Tree.Convert_Expression           import  convert_none_OR_expression
@@ -276,7 +277,7 @@ def convert_from_import_statement(self):
                self.col_offset,
 
                self.module,
-               convert_full_list_of_alias_clauses(self.names),
+               convert_full_list_of_symbol_aliases(self.names),
                self.level,
            )
 
@@ -301,7 +302,7 @@ def convert_import_statement(self):
                self.lineno,
                self.col_offset,
 
-               convert_full_list_of_alias_clauses(self.names),
+               convert_full_list_of_module_aliases(self.names),
            )
 
 
