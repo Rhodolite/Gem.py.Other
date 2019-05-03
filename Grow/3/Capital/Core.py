@@ -114,6 +114,15 @@ def enumeration(e):
 
 
 #
+#   export(symbol) - Doesn't do anything at all.
+#
+#       Used to document that a symbol is exported from a module.
+#
+def export(symbol):
+    return symbol
+
+
+#
 #   ERROR - output an error message to standard error
 #
 def ERROR(message, *arguments):

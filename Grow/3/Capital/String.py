@@ -33,7 +33,8 @@
 #                   is_full_string  : Boolean
 #
 #               method
-#                   python_code() : FullNativeString
+#                   python_code()     : FullNativeString
+#                   native_subclass() : NativeString
 #
 #               debug
 #                   is_some_string : Boolean
@@ -59,6 +60,9 @@ class TRAIT_String(object):
 #
 #       s.is_empty_string                   #   Test if `s` is an empty string.
 #       s.is_full_string                    #   Test if `s` is a  full  string.
+#
+#       s.native_subclass()                 #   Return the `NativeString` that `s` represents (may return a subclass
+#                                           #   of `NativeString).
 #
 #       s.python_code()                     #   Return a `NativeString` that is the python code that python will
 #                                           #   compile to a `str` with the same characters as `s`.
@@ -121,10 +125,6 @@ class TRAIT_String(object):
 #
 
 
-from    Capital.Private.ConjureString_V3    import  conjure_string_v3   as  conjure_string
-from    Capital.Private.EmptyString_V3      import  empty_string_v3     as  empty_string
-
-
 #
 #   fact_is_empty_string(s) - Assert that `s` is an empty string.
 #
@@ -153,3 +153,29 @@ if __debug__:
         assert s.is_some_string
 
         return True
+
+
+#
+#   Import the version of tree names we want to use.
+#
+#       (imports must be after the "fact_*" functions, in case the imported file needs the "fact_*" functions).
+#
+from    Capital.Global                  import  capital_globals
+
+
+string_version = capital_globals.string_version
+
+
+if string_version == 1:
+    from    Capital.Private.ConjureString_V1    import  conjure_string
+    from    Capital.Private.String_V1           import  empty_string
+elif string_version == 2:
+    from    Capital.Private.ConjureString_V2    import  conjure_string_v3   as  conjure_string
+    from    Capital.Private.EmptyString_V2      import  empty_string_v3     as  empty_string
+elif string_version == 3:
+    from    Capital.Private.ConjureString_V3    import  conjure_string_v3   as  conjure_string
+    from    Capital.Private.EmptyString_V3      import  empty_string_v3     as  empty_string
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Capital/String.py: unknown string version: {!r}', string_version)

@@ -7,6 +7,9 @@ from    sys                             import  argv            as  python_progr
 
 from    Capital.Core                    import  ERROR
 from    Capital.Core                    import  FATAL
+from    Capital.Core                    import  arrange
+from    Capital.Global                  import  capital_globals
+from    Capital.String                  import  empty_string
 from    Capital.String                  import  conjure_string
 from    Capital.Core                    import  trace
 from    Z.Build_DumpToken               import  build_dump_token
@@ -51,16 +54,22 @@ def command_parse():
 
 
 def command_string():
+    assert empty_string is conjure_string("")
+
     hello = conjure_string("hello")
+    world = conjure_string("world")
 
     assert hello is conjure_string("hello")
+    assert world is conjure_string("world")
 
-    trace('hello: {!r}', hello)
+    assert "hello world" == arrange('{} {}', hello, world)
+
+    trace('Passed: String Test (version {})', capital_globals.string_version)
 
 
 def command_development():
-    command_parse()
-   #command_string()
+   #command_parse()
+    command_string()
 
 
 def USAGE(format, *arguments):

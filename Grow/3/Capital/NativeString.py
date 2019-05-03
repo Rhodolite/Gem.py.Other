@@ -30,3 +30,15 @@ else:
 #   strip_trailing_whitespace - strip trailing whitespace
 #
 strip_trailing_whitespace = NativeString.rstrip
+
+
+
+#
+#   fact_is_some_INTERNED_native_string(s) - Assert that `s` is a `str` instance that has been interned.
+#
+if __debug__:
+    def fact_is_some_INTERNED_native_string(s):
+        assert type(s) is str
+        assert s       is intern_native_string(s)
+
+        return True

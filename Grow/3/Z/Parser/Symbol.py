@@ -8,9 +8,30 @@
 #
 
 
-from    Capital.Core                    import  FATAL
-from    Capital.StringKey_V3            import  create_string_key_v3
-from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
+#
+#   The "proper" value for `conjure_symbol_version` is `3`.
+#
+#       Other possible values to use (only when reading the code to understand it):
+#
+#           1)  `conjure_symbol_version = 1`    --  Simple   version implemented in `Z.Parser.Conjure_Symbol_V1.py`
+#
+#           2)  `conjure_symbol_version = 2`    --  Produced version implemented in `Z.Parser.Conjure_Symbol_V2.py`
+#
+#           3)  `conjure_symbol_version = 3`    --  Produced version implemented in `Z.Parser.Conjure_Symbol_V3.py`
+#
+#       By:
+#
+#           Reading `*_V1` first, then 
+#           reading `*_V2` second, and finally
+#           reading `*_V3` ... it will make it a lot clearer how `*_V3` is implemented.
+#
+conjure_symbol_version = 3
+
+
+from    Capital.Core                        import  FATAL
+from    Capital.StringKey_V3                import  create_string_key_v3
+from    Capital.Temporary_Key               import  TRAIT_Temporary_Key
+from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 
 
 if __debug__:
@@ -53,52 +74,6 @@ class Symbol(
 
 
 
-#
-#   The rest of this code is pretty much a copy of `conjure_string_v3` in "Capital.Private.ConjureString_V3".
-#
-#   See that module for comments.
-#
-#   The only real difference is that there `s` may be an empty string, while in this module `s` must be a full string.
-#
-symbol_cache       = {}                 #   Map { StringKey_V3 | Symbol } of { StringKey_V3 | Symbol }
-lookup_symbol      = symbol_cache.get
-provide_string_key = symbol_cache.setdefault
-
-
-#
-#   conjure_symbol(s) - Conjure a symbol, based on `s`.  Guarentees Uniqueness.
-#
-#       `s` must be of type `FullNativeString`
-#
-def conjure_symbol(s):
-    assert fact_is_full_native_string(s)
-
-    r = lookup_symbol(s)
-
-    if r is not None:
-        if r.temporary_key_has_definitively_been_transformed:
-            return r
-
-        r.__class__ = Symbol
-
-        assert r.temporary_key_has_definitively_been_transformed
-
-        return r
-
-    k = create_string_key_v3(s)
-
-    r = provide_string_key(k, k)
-
-    if r.temporary_key_has_definitively_been_transformed:
-        return r
-
-    r.__class__ = Symbol
-
-    assert r.temporary_key_has_definitively_been_transformed
-
-    return r
-
-
 if __debug__:
     #
     #   fact_is_symbol(v) - Assert the fact that `v` is a `Symbol`.
@@ -107,3 +82,21 @@ if __debug__:
         assert v.is_symbol
 
         return True
+
+
+#
+#   Import the version of `conjure_symbol` we want to use.
+#
+conjure_symbol_version = 3
+
+
+if conjure_symbol_version == 1:
+    from    Z.Parse.Conjure_Symbol_V1   import  conjure_symbol
+elif conjure_symbol_version == 2:
+    from    Z.Parse.Conjure_Symbol_V2   import  conjure_symbol
+elif conjure_symbol_version == 3:
+    from    Z.Parse.Conjure_Symbol_V3   import  conjure_symbol
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Parser/Symbol.py: unknown `conjure_symbol_versoin`: {}', conjure_symbol_version)
