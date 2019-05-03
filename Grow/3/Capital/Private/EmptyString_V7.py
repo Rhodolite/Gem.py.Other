@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.EmptyString_V3 - Private implementation of the public `String` Interface, Version 3.
+#   Capital.Private.EmptyString_V7 - Private implementation of the public `String` Interface, Version 3.
 #
 
 
@@ -14,15 +14,15 @@ from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
 
 #
-#   EmptyString_V3 - An empty string.
+#   EmptyString - An empty string.
 #
-#       This is a singleton, there is only one empty string named `empty_string_v3`.
+#       This is a singleton, there is only one empty string named `empty_string`.
 #
 #   NOTE:
 #
 #       In a boolean context evaluates to `False` (see `.__nonzero__` below).
 #
-class EmptyString_V3(
+class EmptyString(
         str,
         TRAIT_String,
         TRAIT_Temporary_Key,
@@ -56,8 +56,8 @@ class EmptyString_V3(
 
 
 @creator
-def create_empty_string_v3():
-    return EmptyString_V3('')
+def create_empty_string():
+    return EmptyString('')
 
 
-empty_string_v3 = create_empty_string_v3()
+empty_string = create_empty_string()

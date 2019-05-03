@@ -4,13 +4,13 @@
 
 
 #
-#   Capital.Private.ConjureString_3 - Private implementation of the public `String` Interface, Version 3.
+#   Capital.Private.ConjureString_V3 - Private implementation of the public `String` Interface, Version 3.
 #
 
 
 from    Capital.Fact                    import  fact_is_some_native_string
-from    Capital.Private.EmptyString_V3  import  empty_string_v3
-from    Capital.Private.FullString_V3   import  FullString_V3
+from    Capital.Private.EmptyString_V7  import  empty_string
+from    Capital.Private.FullString_V7   import  FullString
 from    Capital.StringKey_V3            import  create_string_key_v3
 
 
@@ -35,9 +35,9 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 #       There are three classes:
 #
-#           EmptyString_V3      - An empty string.
-#           FullString_V3       - A string with length greater than 0.
-#           StringKey_V3        - A `FullString_V3` in the process of being constructed.
+#           Capital.Private.FullString_V7.EmptyString   - An empty string.
+#           Capital.Private.FullString_V7.FullString    - A string with length greater than 0.
+#           StringKey_V3                                - A `FullString` in the process of being constructed.
 #
 #       All three of these are inherited from the python builtin `str`.
 #
@@ -91,7 +91,7 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 #       Starts initialized with the key/value pair:
 #
-#           empty_string_v3 : empty_string_v3
+#           empty_string : empty_string
 #
 #       Thus, initially, the following function calls:
 #
@@ -99,7 +99,7 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 #       will return:
 #
-#           empty_string_v3
+#           empty_string
 #
 #       This is because we have *NOT* overridden the following methods:
 #
@@ -109,30 +109,28 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #       Since these methods, treat all strings (direct instance of `str`, or instances of any subclass of `str`)
 #       as equal if their characters match.
 #
-#       Likewise, we can use the string key `"Hello"` to lookup a `FullString_V3("hello")` key,
+#       Likewise, we can use the string key `"Hello"` to lookup a `FullString("hello")` key,
 #       as they will these two different instances as equal (and having the same hash)..
 #
 #       Or in other words:
 #
-#           assert "hello"       == conjure_string_v3("hello")          #   Uses `str.__eq__`
-#           assert hash("hello") == hash(conjure_string_v3("Hello"))    #   Uses `str.__hash__` [twice].
+#           assert "hello"       == conjure_string("hello")             #   Uses `str.__eq__`
+#           assert hash("hello") == hash(conjure_string("Hello"))       #   Uses `str.__hash__` [twice].
 #
 #       The "type" of `string_cache` is:
 #
 #           Map { String } of String
 #
-#       where `String` can be one of `EmptyString_V3`, `FullString_V3`, or `StringKey_V3`.
+#       where `String` can be one of `EmptyString`, `FulllString`, or `StringKey_V3`.
 #
-string_cache = {
-                   empty_string_v3 : empty_string_v3,
-               }
+string_cache = { empty_string : empty_string }
 
 lookup_string      = string_cache.get
 provide_string_key = string_cache.setdefault                       #   Thread safe (see comment below).
 
 
 #
-#   conjure_string_v3(s) - Conjure a string, based on `s`.  Guarentees Uniqueness.
+#   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness.
 #
 #       `s` must be of type `SomeNativeString` (i.e.: `str`).
 #
@@ -150,15 +148,15 @@ provide_string_key = string_cache.setdefault                       #   Thread sa
 #
 #       By creating a `StringKey_V3` instance, we make the following guarentee:
 #
-#           Any leakage of `FullString_V3` instance is unique.
+#           Any leakage of `FullString` instance is unique.
 #
 #   NOTE:
 #       A `StringKey_V3` may leak -- it may not be unique.
 #
 #       A `StringKey_V3` may at any moment be transformed (by another thread, or by multiple other threads) to a
-#       `FullString_V3`.
+#       `FullString`.
 #
-def conjure_string_v3(s):
+def conjure_string(s):
     assert fact_is_some_native_string(s)
 
     r = lookup_string(s)
@@ -169,7 +167,7 @@ def conjure_string_v3(s):
         #
         #       Due to multithreading `r` may actually be a `StringKey_V3`.
         #
-        #       In this case, transform it to a `FullString_V3`
+        #       In this case, transform it to a `FullString`
         #
         #       This is thread safe, as the fact it made it *INTO* `string_cache`, is a guarentee of it's
         #       uniqueness.
@@ -192,10 +190,10 @@ def conjure_string_v3(s):
         #       Also, as a secondary consideration:
         #
         #           2.  There is a very minor expense to transforming a string, so we don't want to attempt to
-        #               transform a `hidden.FullString_V3` to a `hidden.FullString_V3` -- it's safe, but no
-        #               need to try when we can avoid it with the `r.is_string` above.
+        #               transform a `FullString` to a `FullString` -- it's safe, but no need to try when we can avoid
+        #               it with the `r.is_string` above.
         #
-        r.__class__ = FullString_V3          #   THREAD SAFE: Make `r` a string.
+        r.__class__ = FullString             #   THREAD SAFE: Make `r` a string.
 
         assert r.temporary_key_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
@@ -228,14 +226,14 @@ def conjure_string_v3(s):
 
     #
     #   NOTE:
-    #       Multiple threads may be simultanously transforming `r` from a `StringKey_V3` to a `FullString_V3`.
+    #       Multiple threads may be simultanously transforming `r` from a `StringKey_V3` to a `FullString`.
     #
     #       This is thread safe.
     #
-    r.__class__ = FullString_V3                                 #   THREAD SAFE: Make `r` a string.
+    r.__class__ = FullString                                    #   THREAD SAFE: Make `r` a string.
 
     #
-    #   At this point `r` is now a `FullString_V3` (either we transformed it, or we & other threads all
+    #   At this point `r` is now a `FullString` (either we transformed it, or we & other threads all
     #   attempted to transformd it [and one thread actually did transform it]).
     #
     assert r.temporary_key_has_definitively_been_transformed    #   `r` has definitively been transformed now.

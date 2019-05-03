@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.FullString_3 - Private implementation of the public `String` Interface, Version 3.
+#   Capital.Private.FullString_V7 - Private implementation of the public `String` Interface, Version 7.
 #
 
 
@@ -15,22 +15,22 @@ from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 
 
 #
-#   FullString_V3 - A full string.
+#   FullString - A full string.
 #
-#       These are unique, there is only one `FullString_V3` for each unique value.
+#       These are unique, there is only one `FullString` for each unique value.
 #
-#       Uniqueness is guarenteed with `conjure_string_v3`.
+#       Uniqueness is guarenteed with `conjure_string` (in "Capital.Private.ConjureString_V7").
 #
 #   NOTE:
-#       A `FullString_V3` is never created or constructed.
+#       A `FullString` is never created or constructed.
 #
-#       Instead a `StringKey_V3` is created, and [sometimes] transformed to a `FullString_V3`.
+#       Instead a `Capital.Private.StringKey_V7.StringKey` is created, and [sometimes] transformed to a `FullString`.
 #
 #   NOTE:
 #
 #       In a boolean context evaluates to `True` (see `.__nonzero__` below).
 #
-class FullString_V3(
+class FullString(
         str,
         TRAIT_String,
         TRAIT_Temporary_Key,
@@ -43,12 +43,14 @@ class FullString_V3(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL("FullString_V3.operator new (`__new__`): A FullString_V3 may not be created");
+            FATAL('{}: A FullString may not be created',
+                  "Capital.Private.FullString_V7.FullString.operator new (`__new__`)")
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL("FullString_V3.constructor (`__init__`): A FullString_V3 may not be contructed");
+            FATAL('{}: A FullString may not be construted',
+                  "Capital.Private.FullString_V7.FullString.constructor (`__init__`)")
 
 
     #
@@ -67,7 +69,7 @@ class FullString_V3(
 
 
     #
-    #   .__repr__ - Portraying a `FullString_V3`
+    #   .__repr__ - Portraying a `FullString`
     #
     #   CURRENT
     #

@@ -8,22 +8,29 @@
 #
 
 
-version = 2
+version = 7
 
 
 string_version = 1
 
 
 #
-#   Version 1: Introduce SomeString
+#   Version 1: Introduce `String_V1`, a very simple string wrapper.
 #
 
 
 #
-#   Version 2: Introduce EmptyString
+#   Version 2: Add `EmptyString` and `FullString`.
 #
 if version >= 2:
     string_version = 2
+
+
+#
+#   Version 7:  Old Code -- Until assigned a number.
+#
+if version >= 7:
+    string_version = 7
 
 
 #

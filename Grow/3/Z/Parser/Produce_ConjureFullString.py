@@ -19,25 +19,25 @@ if __debug__:
 #
 #       Produce a `conjure_full_name(s)` method.
 #
-#       This produce method is pretty much a copy of `conjure_string_v3` in "Capital.Private.ConjureString_V3".
+#       This produce method is pretty much a copy of `conjure_string` in "Capital.Private.ConjureString_V7".
 #
 #       See that module for comments.
 #
 #       The only real difference are:
 #
-#           1)  The method is "produced" with `Meta`; while in `conjure_string_v3` it always makes a `FullString_V3`.
+#           1)  The method is "produced" with `Meta`; while in `conjure_string` it always makes a `FullString`.
 #
-#           2)  The method can only handle full strings; while `conjure_string_v3` can handle an empty string
+#           2)  The method can only handle full strings; while `conjure_string` can handle an empty string
 #       
-#           2A) `conjure_string_v3` only handles an empty due to how:
+#           2A) `conjure_string` only handles an empty due to how:
 #
 #                   2A.i)   `string_cache` is initialized with an empty string:
 #
-#                               string_cache = { empty_string_v3 : empty_string_v3 }
+#                               string_cache = { empty_string : empty_string }
 #
 #                   2A.ii)  It uses `assert fact_is_some_native_string` [to allow an empty string].
 #
-#               Other than these two minor differences, `conjure_string_v3` is basically the "template" for
+#               Other than these two minor differences, `conjure_string` is basically the "template" for
 #               the `conjure_full_name` function that is "produced" here.
 #
 def produce_conjure_full_name(Meta):

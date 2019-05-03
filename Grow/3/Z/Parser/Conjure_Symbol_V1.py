@@ -29,11 +29,11 @@ if __debug__:
 #
 #           `conjure_string_V3`:
 #
-#               1)  Allows an empty string (since it's cache is initialized with `empty_string_v3`).
+#               1)  Allows an empty string (since it's cache is initialized with `empty_string`).
 #
 #               2)  Uses `fact_is_some_native_string` to allow an empty or full string.
 #
-#               3)  Creates full strings of type `FullString_V3`
+#               3)  Creates full strings of type `Capital.Prive.FullString_V7.FullString`
 #
 #           `conjure_symbol_V1`
 #
