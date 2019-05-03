@@ -5,13 +5,14 @@
 
 from    sys                             import  argv            as  python_program_arguments
 
+from    Capital.Core                    import  arrange
 from    Capital.Core                    import  ERROR
 from    Capital.Core                    import  FATAL
-from    Capital.Core                    import  arrange
-from    Capital.Global                  import  capital_globals
-from    Capital.String                  import  empty_string
-from    Capital.String                  import  conjure_string
+from    Capital.Core                    import  NativeBoolean
 from    Capital.Core                    import  trace
+from    Capital.Global                  import  capital_globals
+from    Capital.String                  import  conjure_string
+from    Capital.String                  import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
 from    Z.Path                          import  path_to_file_in_Z_directory
 from    Z.Tree.Convert_Module           import  compile_to_syntax_tree
@@ -54,15 +55,22 @@ def command_parse():
 
 
 def command_string():
+    hello   = conjure_string("hello")
+    crystal = conjure_string("crystal")
+
     assert empty_string is conjure_string("")
+    assert hello        is conjure_string("hello")
+    assert crystal      is conjure_string("crystal")
 
-    hello = conjure_string("hello")
-    world = conjure_string("world")
+    assert NativeBoolean(empty_string) is False
+    assert NativeBoolean(hello)        is True
+    assert NativeBoolean(crystal)      is True
 
-    assert hello is conjure_string("hello")
-    assert world is conjure_string("world")
+    assert len(empty_string) == 0
+    assert len(hello)        == 5
+    assert len(crystal)      == 7
 
-    assert "hello world" == arrange('{} {}', hello, world)
+    assert "hello crystal" == arrange('{} {}', hello, crystal)
 
     trace('Passed: String Test (version {})', capital_globals.string_version)
 

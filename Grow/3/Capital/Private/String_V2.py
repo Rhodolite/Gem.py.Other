@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.String_V1 - Private implementation of the public `String` Interface, Version 1.
+#   Capital.Private.String_V2 - Private implementation of the public `String` Interface, Version 1.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -16,6 +16,30 @@
 #
 #       Later versions fix this issue (of non-uniqueness in abnormal cases), and strings are always unique
 #       in later versions.
+#
+
+
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           1)  Both empty & full strings are managed by `String_V1`;
+#
+#           2)  Implementation of `.is_empty_string` and `.is_full_string` is done by properties.
+#
+#       Version 2:
+#
+#           There are seperate classes for empty & full strings:
+#
+#               1A)     `EmptyString` is used to handle the singleton `empty_string`; and
+#
+#               1B)     `FullString` is used to handle full strings.
+#
+#           And also:
+#
+#               2)      Implementation of `.is_empty_string` and `.is_full_stting done by members (which is much
+#                       simplier & faster than properties).
 #
 
 
@@ -31,16 +55,15 @@ if __debug__:
 
 
 #
-#   String_V1 - A very simple string wrapper.
+#   BaseString - A very simple string wrapper, base calss of `EmptyString` and `FullString`.
 #
-#       NOTE: Named `String_V1` instead of `String`, since the name "String" is reserved for `interface String`.
+#       NOTE: Named `BaseString` instead of `String`, since the name "String" is reserved for `interface String`.
 #
 #             (even though in the current implementation python (which does not have interfaces in python) does not
 #             actually have anything really named `interface String` -- conceptually it does, and thus the name
 #             "String" is still reserved for `interface String`).
 #
-@export
-class String_V1(
+class BaseString(
         TRAIT_String,
 ):
     __slots__ = ((
@@ -59,32 +82,79 @@ class String_V1(
     #   Interface String
     #
     @property
-    def is_empty_string(self):
-        return len(self.interned_s) == 0
-
-
-    @property
-    def is_full_string(self):
-        return len(self.interned_s) != 0
-
-
-    @property
     def native_subclass(self):
         return self.interned_s
 
-
-    #
-    #   Public
-    #
 
     #
     #   .__format__ (format_specification)  - Format `String`
     #
     #       Delegated to the `NativeString` implementation via `.interned_s`.
     #
-    #
     def __format__(self, format_specification):
         return self.interned_s.__format__(format_specification)
+
+
+class EmptyString(BaseString):
+    __slots__ = (())
+
+
+    #
+    #   Interface String
+    #
+    is_empty_string = True
+    is_full_string  = False
+
+
+    #
+    #   Public
+    #
+
+
+    #
+    #   .__len__()  - Return the length.
+    #
+    #       Always returns `0` for an `EmptyString`.
+    #
+    @staticmethod
+    def __len__():
+        return 0
+
+
+    #
+    #   .__repr__() - Return the representation of a `String`
+    #
+    @staticmethod
+    def __repr__():
+        return '<"">'
+
+
+    #
+    #   .python_code()
+    #
+    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the same
+    #       characters.
+    #
+    @staticmethod
+    def python_code():
+        return '""'
+
+
+
+class FullString(BaseString):
+    __slots__ = (())
+
+
+    #
+    #   Interface String
+    #
+    is_empty_string = False
+    is_full_string  = True
+
+
+    #
+    #   Public
+    #
 
 
     #
@@ -118,8 +188,8 @@ class String_V1(
     #
     #   .python_code()
     #
-    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the
-    #       same characters.
+    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the same
+    #       characters.
     #
     #   CURRENT
     #
@@ -139,15 +209,22 @@ class String_V1(
         return repr(self.interned_s)
 
 
-@export
 @creator
-def create_string_v1(interned_s):
+def create_empty_string(interned_s):
     assert fact_is_some_INTERNED_native_string(interned_s)
 
-    return String_V1(interned_s)
+    return EmptyString(interned_s)
 
 
-empty_string = create_string_v1(intern_native_string(""))
+@export
+@creator
+def create_full_string(interned_s):
+    assert fact_is_some_INTERNED_native_string(interned_s)
+
+    return FullString(interned_s)
+
+
+empty_string = create_empty_string("")
 
 
 export(empty_string)

@@ -8,7 +8,7 @@
 #
 
 
-version = 1
+version = 2
 
 
 string_version = 1
@@ -54,7 +54,7 @@ class Capital_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Capital_Globals {}>', self.string_version)
+        return arrange('<Capital_Globals string={}>', self.string_version)
 
 
 @creator

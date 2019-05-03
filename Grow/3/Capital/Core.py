@@ -172,6 +172,12 @@ if 0:                                                                   #   DISA
 
 
 #
+#   NativeBoolean - A native boolean (i.e.: `bool`)
+#
+NativeBoolean = bool
+
+
+#
 #   iterate(v) - create an iterator for `v`
 #
 from    Capital.BuiltIn     import      iterate

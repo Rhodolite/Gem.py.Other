@@ -12,7 +12,7 @@ from    Capital.System                  import  is_python_2
 
 
 #
-#   NativeString - A native String (i.e.: `str`)
+#   NativeString - A native string (i.e.: `str`)
 #
 NativeString = str
 

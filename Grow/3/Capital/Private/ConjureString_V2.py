@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V1 - Private implementation of `conjure_string` for  `String` Interface, Version 1.
+#   Capital.Private.ConjureString_V2 - Private implementation of `conjure_string` for  `String` Interface, Version 2.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -19,12 +19,37 @@
 #
 
 
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           1)  Uses `empty_string`     (from String_V1)
+#
+#           2)  Uses `create_string_v1` (from String_V1)
+#
+#       Version 2:
+#
+#           1)  Uses `empty_string`       (from String_V2)
+#
+#           2)  Uses `create_full_string` (from String_V2)
+#
+#       Internally, the code has no other differences from `CreateString_V1` -- most of the actuall difference are between:
+#
+#           String_V1.py (implements `String_V1`)
+#
+#               .vs.
+#
+#           String_V2.py (implements `EmptyString` & `FullString`).
+#
+
+
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Fact                    import  fact_is_some_native_string
 from    Capital.NativeString            import  intern_native_string
-from    Capital.Private.String_V1       import  create_string_v1
-from    Capital.Private.String_V1       import  empty_string
+from    Capital.Private.String_V2       import  create_full_string
+from    Capital.Private.String_V2       import  empty_string
 
 
 #
@@ -89,7 +114,7 @@ def conjure_string(s):
 
     interned_s = intern_native_string(s)
 
-    string__possibly_non_unique = create_string_v1(interned_s)
+    string__possibly_non_unique = create_full_string(interned_s)
 
     #
     #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
