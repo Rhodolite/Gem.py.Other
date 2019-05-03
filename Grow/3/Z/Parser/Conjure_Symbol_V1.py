@@ -9,7 +9,7 @@
 
 
 from    Z.Capital.Symbol                    import  Symbol
-from    Capital.StringKey_V3                import  create_string_key_v3
+from    Capital.StringKey_V7                import  create_string_key
 
 
 if __debug__:
@@ -46,7 +46,7 @@ if __debug__:
 #       Please read the comments in `Z.Capital.Conjure_V3` for extensive documentation on `conjure_string_V3`
 #       (these commens all apply to `conjure_symbol_V1).
 #
-cache   = {}                 #   Map { StringKey_V3 | Symbol } of { StringKey_V3 | symbol }
+cache   = {}                 #   Map { StringKey | Symbol } of { StringKey | symbol }
 lookup  = cache.get
 provide = cache.setdefault
 
@@ -66,7 +66,7 @@ def conjure_symbol_V1(s):
 
         return r
 
-    k = create_string_key_v3(s)
+    k = create_string_key(s)
 
     r = provide(k, k)
 

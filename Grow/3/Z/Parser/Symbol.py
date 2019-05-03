@@ -29,7 +29,7 @@ conjure_symbol_version = 3
 
 
 from    Capital.Core                        import  FATAL
-from    Capital.StringKey_V3                import  create_string_key_v3
+from    Capital.StringKey_V7                import  create_string_key
 from    Capital.Temporary_Key               import  TRAIT_Temporary_Key
 from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 

@@ -11,7 +11,7 @@
 from    Capital.Fact                    import  fact_is_some_native_string
 from    Capital.Private.EmptyString_V7  import  empty_string
 from    Capital.Private.FullString_V7   import  FullString
-from    Capital.StringKey_V3            import  create_string_key_v3
+from    Capital.StringKey_V7            import  create_string_key
 
 
 #
@@ -37,7 +37,7 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 #           Capital.Private.FullString_V7.EmptyString   - An empty string.
 #           Capital.Private.FullString_V7.FullString    - A string with length greater than 0.
-#           StringKey_V3                                - A `FullString` in the process of being constructed.
+#           Capital.String_V7.StringKey                 - A `FullString` in the process of being constructed.
 #
 #       All three of these are inherited from the python builtin `str`.
 #
@@ -62,7 +62,6 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 
 
-
 #
 #   EXPLANATION OF VERBS
 #
@@ -70,7 +69,7 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 #           conjure_string       - Lookup or "create & insert" a string.
 #           lookup_string        - Lookup a string.
-#           provide_string_key   - Provide a `StringKey_V3` instance.
+#           provide_string_key   - Provide a `StringKey` instance.
 #
 #       The verb "conjure" in Capital code means "lookup, and if not found, create & insert a new one".
 #
@@ -121,7 +120,7 @@ from    Capital.StringKey_V3            import  create_string_key_v3
 #
 #           Map { String } of String
 #
-#       where `String` can be one of `EmptyString`, `FulllString`, or `StringKey_V3`.
+#       where `String` can be one of `EmptyString`, `FulllString`, or `StringKey`.
 #
 string_cache = { empty_string : empty_string }
 
@@ -146,14 +145,14 @@ provide_string_key = string_cache.setdefault                       #   Thread sa
 #           3.  A different thread uses the python `gc` module (garbage collection) to look at the internal
 #               instances of `conjure_string`.
 #
-#       By creating a `StringKey_V3` instance, we make the following guarentee:
+#       By creating a `StringKey` instance, we make the following guarentee:
 #
 #           Any leakage of `FullString` instance is unique.
 #
 #   NOTE:
-#       A `StringKey_V3` may leak -- it may not be unique.
+#       A `StringKey` may leak -- it may not be unique.
 #
-#       A `StringKey_V3` may at any moment be transformed (by another thread, or by multiple other threads) to a
+#       A `StringKey` may at any moment be transformed (by another thread, or by multiple other threads) to a
 #       `FullString`.
 #
 def conjure_string(s):
@@ -165,7 +164,7 @@ def conjure_string(s):
         #
         #   MULTI-THREADING NOTE:
         #
-        #       Due to multithreading `r` may actually be a `StringKey_V3`.
+        #       Due to multithreading `r` may actually be a `StringKey`.
         #
         #       In this case, transform it to a `FullString`
         #
@@ -203,10 +202,10 @@ def conjure_string(s):
     #   NOTE:
     #       Due to multi-threading `k` may *NOT* be unique.
     #
-    #       There may be two or more seperate threads, all of which, simultanously, create a `StringKey_V3` with the
-    #       same internal characters.
+    #       There may be two or more seperate threads, all of which, simultanously, create a `StringKey` with the same
+    #       internal characters.
     #
-    k = create_string_key_v3(s)
+    k = create_string_key(s)
 
     #
     #   `provide_string_key` is thread safe, and all threads will return the same `hidden.Build_A_String`
@@ -216,8 +215,8 @@ def conjure_string(s):
     #       `provide_string_key` is thread safe since it is the python builtin method `dict.setdefault` (which
     #       is thread safe).
     #
-    #       If two (or more) threads, simultanoulsy, create a `StringKey_V3` with the same internal
-    #       characters, then `provide_string_key` will return the same instance in all threads.
+    #       If two (or more) threads, simultanoulsy, create a `StringKey` with the same internal characters, then
+    #       `provide_string_key` will return the same instance in all threads.
     #
     r = provide_string_key(k, k)            #   THREAD SAFE: Guarentees Uniqueness (see comment above)
 
@@ -226,7 +225,7 @@ def conjure_string(s):
 
     #
     #   NOTE:
-    #       Multiple threads may be simultanously transforming `r` from a `StringKey_V3` to a `FullString`.
+    #       Multiple threads may be simultanously transforming `r` from a `StringKey` to a `FullString`.
     #
     #       This is thread safe.
     #

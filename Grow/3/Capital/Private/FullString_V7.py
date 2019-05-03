@@ -24,7 +24,7 @@ from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 #   NOTE:
 #       A `FullString` is never created or constructed.
 #
-#       Instead a `Capital.Private.StringKey_V7.StringKey` is created, and [sometimes] transformed to a `FullString`.
+#       Instead a `Capital.StringKey_V7.StringKey` is created, and [sometimes] transformed to a `FullString`.
 #
 #   NOTE:
 #

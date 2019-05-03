@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.StringKey_V3 - String Key Implementation, Version 1.
+#   Capital.StringKey_V7 - String Key Implementation, Version 1.
 #
 
 
@@ -17,12 +17,15 @@ if __debug__:
 
 
 #
-#   StringKey_V3 - String Key Implementation, Version 1.
+#   native_string_representation_method - NativeString implementation of `__repr__`.
 #
 native_string_representation_method = str.__repr__
 
 
-class StringKey_V3(
+#
+#   StringKey - String Key Implementation, Version 7.
+#
+class StringKey(
         str,
         TRAIT_Temporary_Key,
         #
@@ -46,11 +49,11 @@ class StringKey_V3(
     #   Public
     #
     def __repr__(self):
-        return arrange('<StringKey_V3 {}>', native_string_representation_method(self))
+        return arrange('<StringKey {}>', native_string_representation_method(self))
 
 
 @creator
-def create_string_key_v3(s):
+def create_string_key(s):
     assert fact_is_full_native_string(s)
 
-    return StringKey_V3(s)
+    return StringKey(s)

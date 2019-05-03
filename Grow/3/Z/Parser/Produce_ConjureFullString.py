@@ -8,7 +8,7 @@
 #
 
 
-from    Capital.StringKey_V3            import  create_string_key_v3
+from    Capital.StringKey_V7            import  create_string_key
 
 
 if __debug__:
@@ -41,7 +41,7 @@ if __debug__:
 #               the `conjure_full_name` function that is "produced" here.
 #
 def produce_conjure_full_name(Meta):
-    cacche  = {}                 #   Map { StringKey_V3 | Meta } of { StringKey_V3 | Meta }
+    cacche  = {}                        #   Map { StringKey | Meta } of { StringKey | Meta }
     lookup  = cacche.get
     provide = cacche.setdefault
 
@@ -68,7 +68,7 @@ def produce_conjure_full_name(Meta):
 
             return r
 
-        k = create_string_key_v3(s)
+        k = create_string_key(s)
 
         r = provide_string_key(k, k)
 
