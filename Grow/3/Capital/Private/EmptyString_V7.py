@@ -10,7 +10,7 @@
 
 from    Capital.Core                    import  creator
 from    Capital.String                  import  TRAIT_String
-from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
+from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
 
 #
@@ -25,7 +25,7 @@ from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 class EmptyString(
         str,
         TRAIT_String,
-        TRAIT_Temporary_Key,
+        TRAIT_TemporaryElement,
 ):
     __slots__ = (())
 

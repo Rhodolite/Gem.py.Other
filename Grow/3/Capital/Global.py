@@ -8,7 +8,7 @@
 #
 
 
-version = 7
+version = 2
 
 
 string_version = 1
@@ -20,10 +20,31 @@ string_version = 1
 
 
 #
-#   Version 2: Add `EmptyString` and `FullString`.
+#   Version 2: Producer function `produce_conjure_string` to produce `conjure_string` functions.
 #
 if version >= 2:
     string_version = 2
+
+
+#
+#   Version 3: Add `EmptyString` and `FullString`.
+#
+if version >= 3:
+    string_version = 3
+
+
+#
+#   Version 4:
+#
+if version >= 4:
+    string_version = 4
+
+
+#
+#   Version 5: Guarantee Uniqueness of `FullString` always (see "Capital/Private/ConjureString_V3.py for details).
+#
+if version >= 3:
+    string_version = 3
 
 
 #

@@ -59,12 +59,12 @@ def produce_conjure_full_name(Meta):
         r = lookup_symbol(s)
 
         if r is not None:
-            if r.temporary_key_has_definitively_been_transformed:
+            if r.temporary_element_has_definitively_been_transformed:
                 return r
 
             r.__class__ = Meta
 
-            assert r.temporary_key_has_definitively_been_transformed
+            assert r.temporary_element_has_definitively_been_transformed
 
             return r
 
@@ -72,12 +72,12 @@ def produce_conjure_full_name(Meta):
 
         r = provide_string_key(k, k)
 
-        if r.temporary_key_has_definitively_been_transformed:
+        if r.temporary_element_has_definitively_been_transformed:
             return r
 
         r.__class__ = Meta
 
-        assert r.temporary_key_has_definitively_been_transformed
+        assert r.temporary_element_has_definitively_been_transformed
 
         return r
 

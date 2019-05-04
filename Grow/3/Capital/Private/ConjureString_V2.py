@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V2 - Private implementation of `conjure_string` for  `String` Interface, Version 2.
+#   Capital.Private.ConjureString_V2 - Private implementation of `conjure_string` for `String` Interface, Version 2.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -16,7 +16,6 @@
 #
 #       Later versions fix this issue (of non-uniqueness in abnormal cases), and strings are always unique.
 #
-#
 
 
 #
@@ -24,32 +23,24 @@
 #
 #       Version 1:
 #
-#           1)  Uses `empty_string`     (from String_V1)
-#
-#           2)  Uses `create_string_v1` (from String_V1)
+#           Implementation of creator function `conjure_string`.
 #
 #       Version 2:
 #
-#           1)  Uses `empty_string`       (from String_V2)
+#           Producer function `produce_conjure_string` to produce `conjure_string` functions.
 #
-#           2)  Uses `create_full_string` (from String_V2)
-#
-#       Internally, the code has no other differences from `CreateString_V1` -- most of the actuall difference are between:
-#
-#           String_V1.py (implements `String_V1`)
-#
-#               .vs.
-#
-#           String_V2.py (implements `EmptyString` & `FullString`).
+#           The initially created `conjure_string` is identical to `Capital.Private.ConjureString_V1.conjure_string`
+#           (the only internal difference is using a closure for variables instead of global variables).
 #
 
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Fact                    import  fact_is_some_native_string
+from    Capital.Core                    import  trace
 from    Capital.NativeString            import  intern_native_string
-from    Capital.Private.String_V2       import  create_full_string
-from    Capital.Private.String_V2       import  empty_string
+from    Capital.Private.String_V1       import  create_full_string
+from    Capital.Private.String_V1       import  empty_string
 
 
 #
@@ -74,50 +65,69 @@ from    Capital.Private.String_V2       import  empty_string
 
 
 #
-#   string_cache - A cache of strings
+#   produce_conjure_string(empty_string, create_string) - Produce a `conjure_string(s)` function.
 #
-#       All strings are stored in this as key/value pairs:
+#       Produced `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
-#           1)  The key   is an interned `NativeString`; and
-#           2)  The value is a `String_V1`.
+#           `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
 #
-#       The type of `string_cache` is `Map { interned NativeString } of String_V1`
+#           Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
+#           version.s
 #
-#       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
-#       when the `conjure_string("")` is called.
-#
-string_cache = {
-                   intern_native_string("") : empty_string,
-               }
+def produce_conjure_string(empty_String, create_full_string):
+    #
+    #   string_cache - A cache of strings
+    #
+    #       All strings are stored in this as key/value pairs:
+    #
+    #           1)  The key   is an interned `NativeString`; and
+    #           2)  The value is a `String`.
+    #
+    #       The type of `string_cache` is `Map { interned NativeString } of String`
+    #
+    #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
+    #       when the `conjure_string("")` is called.
+    #
+    string_cache = { intern_native_string("") : empty_string }
 
-lookup_string  = string_cache.get
-provide_string = string_cache.setdefault
+    lookup_string  = string_cache.get
+    provide_string = string_cache.setdefault
 
-
-#
-#   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
-#
-#       `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
-#
-#       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
-#       version.s
-#
-@export
-@creator
-def conjure_string(s):
-    assert fact_is_some_native_string(s)
-
-    r = lookup_string(s)
-
-    if r is not None:
-        return r
-
-    interned_s = intern_native_string(s)
-
-    string__possibly_non_unique = create_full_string(interned_s)
 
     #
-    #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
-    #   `String_V1` that is stored in `string_cache).
+    #   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
-    return provide_string(interned_s, string__possibly_non_unique)
+    #       `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
+    #
+    #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
+    #       version.s
+    #
+    @creator
+    def conjure_string(s):
+        assert fact_is_some_native_string(s)
+
+        r = lookup_string(s)
+
+        if r is not None:
+            return r
+
+        interned_s = intern_native_string(s)
+
+        string__possibly_non_unique = create_full_string(interned_s)
+
+        #
+        #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
+        #   `String_V1` that is stored in `string_cache).
+        #
+        return provide_string(interned_s, string__possibly_non_unique)
+
+
+   #trace('produce_conjure_string({!r}, <function {}>)', empty_string, create_full_string.__name__)
+
+    return conjure_string
+
+
+conjure_string = produce_conjure_string(empty_string, create_full_string)
+
+
+export(conjure_string)

@@ -9,7 +9,7 @@
 
 
 from    Capital.Core                    import  creator
-from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
+from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
 
 if __debug__:
@@ -27,7 +27,7 @@ native_string_representation_method = str.__repr__
 #
 class StringKey(
         str,
-        TRAIT_Temporary_Key,
+        TRAIT_TemporaryElement,
         #
         #   NOTE:
         #       Does *NOT* implement the String interface.
@@ -39,10 +39,10 @@ class StringKey(
 
 
     #
-    #   Interface Temporary_Key
+    #   Interface TemporaryElement
     #
    #@replace
-    temporary_key_has_definitively_been_transformed = False
+    temporary_element_has_definitively_been_transformed = False
 
 
     #

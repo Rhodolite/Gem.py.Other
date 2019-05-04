@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V1 - Private implementation of `conjure_string` for `String` Interface, Version 1.
+#   Capital.Private.ConjureString_V2 - Private implementation of `conjure_string` for `String` Interface, Version 2.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -16,14 +16,41 @@
 #
 #       Later versions fix this issue (of non-uniqueness in abnormal cases), and strings are always unique.
 #
+#
+
+
+#
+#   Difference between Version 1 & Version 2
+#
+#       Version 1:
+#
+#           1)  Uses `Capital.Private.String_V1.empty_string`           #   NOTE: "*_V1.*"
+#
+#           2)  Uses `Capital.Private.String_V1.create_full_string`     #   NOTE: "*_V1.*"
+#
+#       Version 2:
+#
+#           1)  Uses `Capital.Private.String_V2.empty_string`           #   NOTE: "*_V2.*"
+#
+#           2)  Uses `Capital.Private.String_V2.create_full_string`     #   NOTE: "*_V2.*"
+#
+#       Internally, this code has no other differences from "Capital.Private.CreateString_V1" -- most of the actual
+#       difference are between the two files:
+#
+#           Capital.Private.String_V1.py            #   Uses class `String_V1`.
+#
+#                    .vs.
+#
+#           Capital.Private.String_V2.py            #   Uses classes `EmptyString` and `FullString`.
+#
 
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Fact                    import  fact_is_some_native_string
 from    Capital.NativeString            import  intern_native_string
-from    Capital.Private.String_V1       import  create_full_string
-from    Capital.Private.String_V1       import  empty_string
+from    Capital.Private.String_V2       import  create_full_string
+from    Capital.Private.String_V2       import  empty_string
 
 
 #
@@ -60,9 +87,7 @@ from    Capital.Private.String_V1       import  empty_string
 #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
 #       when the `conjure_string("")` is called.
 #
-string_cache = {
-                   intern_native_string("") : empty_string,
-               }
+string_cache = { intern_native_string("") : empty_string }
 
 lookup_string  = string_cache.get
 provide_string = string_cache.setdefault

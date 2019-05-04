@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V3 - Private implementation of the public `String` Interface, Version 3.
+#   Capital.Private.ConjureString_V7 - Private implementation of the public `String` Interface, Version 7.
 #
 
 
@@ -171,7 +171,7 @@ def conjure_string(s):
         #       This is thread safe, as the fact it made it *INTO* `string_cache`, is a guarentee of it's
         #       uniqueness.
         #
-        if r.temporary_key_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
+        if r.temporary_element_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
             return r
 
         #
@@ -180,11 +180,13 @@ def conjure_string(s):
         #
         #   NOTE -- DO NOT OPTIMIZE:
         #
-        #       Do *NOT* remove the `r.temporary_key_has_definitively_been_transformed` above.
+        #       Do *NOT* remove the `r.temporary_element_has_definitively_been_transformed` above.
         #
-        #       The test `r.temporary_key_has_definitively_been_transformed` above is needed for the following reason:
+        #       The test `r.temporary_element_has_definitively_been_transformed` above is needed for the following
+        #       reason:
         #
-        #           1.  `r` may have been a `hidden.EmptyString` -- It would be incorrect to transform `r` in such a case.
+        #           1.  `r` may have been a `hidden.EmptyString` -- It would be incorrect to transform `r` in such a
+        #               case.
         #
         #       Also, as a secondary consideration:
         #
@@ -194,7 +196,7 @@ def conjure_string(s):
         #
         r.__class__ = FullString             #   THREAD SAFE: Make `r` a string.
 
-        assert r.temporary_key_has_definitively_been_transformed    #   `r` has definitively been transformed now.
+        assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
         return r
 
@@ -220,7 +222,7 @@ def conjure_string(s):
     #
     r = provide_string_key(k, k)            #   THREAD SAFE: Guarentees Uniqueness (see comment above)
 
-    if r.temporary_key_has_definitively_been_transformed:       #   Has `r` already definitively been transformed?
+    if r.temporary_element_has_definitively_been_transformed:       #   Has `r` already definitively been transformed?
         return r
 
     #
@@ -229,12 +231,12 @@ def conjure_string(s):
     #
     #       This is thread safe.
     #
-    r.__class__ = FullString                                    #   THREAD SAFE: Make `r` a string.
+    r.__class__ = FullString                                        #   THREAD SAFE: Make `r` a string.
 
     #
     #   At this point `r` is now a `FullString` (either we transformed it, or we & other threads all
     #   attempted to transformd it [and one thread actually did transform it]).
     #
-    assert r.temporary_key_has_definitively_been_transformed    #   `r` has definitively been transformed now.
+    assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
     return r

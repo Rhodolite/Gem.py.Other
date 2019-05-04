@@ -32,6 +32,33 @@ else:
 strip_trailing_whitespace = NativeString.rstrip
 
 
+#
+#   fact_is_empty_INTERNED_native_string(s)
+#
+#       Assert that `s` is a `str` instance that has been interned, and is empty (i.e.: is the string `""`).
+#
+if __debug__:
+    def fact_is_empty_INTERNED_native_string(s):
+        assert type(s) is str
+        assert s       is intern_native_string(s)
+        assert len(s)  == 0
+
+        return True
+
+
+#
+#   fact_is_full_INTERNED_native_string(s)
+#
+#       Assert that `s` is a `str` instance that has been interned, and is "full" (i.e.: has a length greater than 0).
+#
+if __debug__:
+    def fact_is_full_INTERNED_native_string(s):
+        assert type(s) is str
+        assert s       is intern_native_string(s)
+        assert len(s)  > 0
+
+        return True
+
 
 #
 #   fact_is_some_INTERNED_native_string(s) - Assert that `s` is a `str` instance that has been interned.

@@ -30,7 +30,7 @@ conjure_symbol_version = 3
 
 from    Capital.Core                        import  FATAL
 from    Capital.StringKey_V7                import  create_string_key
-from    Capital.Temporary_Key               import  TRAIT_Temporary_Key
+from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 
 
@@ -40,7 +40,7 @@ if __debug__:
 
 class Symbol(
         str,
-        TRAIT_Temporary_Key,
+        TRAIT_TemporaryElement,
 ):
     __slots__ = (())
 

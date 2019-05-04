@@ -57,12 +57,12 @@ def conjure_symbol_V1(s):
     r = lookup(s)
 
     if r is not None:
-        if r.temporary_key_has_definitively_been_transformed:
+        if r.temporary_element_has_definitively_been_transformed:
             return r
 
         r.__class__ = Symbol
 
-        assert r.temporary_key_has_definitively_been_transformed
+        assert r.temporary_element_has_definitively_been_transformed
 
         return r
 
@@ -70,11 +70,11 @@ def conjure_symbol_V1(s):
 
     r = provide(k, k)
 
-    if r.temporary_key_has_definitively_been_transformed:
+    if r.temporary_element_has_definitively_been_transformed:
         return r
 
     r.__class__ = Symbol
 
-    assert r.temporary_key_has_definitively_been_transformed
+    assert r.temporary_element_has_definitively_been_transformed
 
     return r

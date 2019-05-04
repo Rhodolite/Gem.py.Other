@@ -11,7 +11,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  FATAL
 from    Capital.String                  import  TRAIT_String
-from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
+from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
 
 #
@@ -33,7 +33,7 @@ from    Capital.Temporary_Key           import  TRAIT_Temporary_Key
 class FullString(
         str,
         TRAIT_String,
-        TRAIT_Temporary_Key,
+        TRAIT_TemporaryElement,
 ):
     __slots__ = (())
 
@@ -49,7 +49,7 @@ class FullString(
 
     if __debug__:
         def __init__(self, s):
-            FATAL('{}: A FullString may not be construted',
+            FATAL('{}: A FullString may not be constructed',
                   "Capital.Private.FullString_V7.FullString.constructor (`__init__`)")
 
 

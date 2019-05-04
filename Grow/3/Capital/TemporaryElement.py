@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Temporary_Key - Temporary Key Interface (Only used internally to help create unique objects).
+#   Capital.TemporaryElement - Temporary Element Interface (Only used internally to help create other unique objects).
 #
 #   See long explnation below.
 #
@@ -14,16 +14,16 @@
 #
 #   Since interfaces are not native to python, for now, we just show them in comments
 #
-#       interface Temporary_Key
+#       interface TemporaryElement
 #           attribute
-#               temporary_key_has_definitively_been_transformed : NativeBoolean
+#               temporary_element_has_definitively_been_transformed : NativeBoolean
 #
-class TRAIT_Temporary_Key(object):
+class TRAIT_TemporaryElement(object):
     __slots__ = (())
 
 
    #@virtual
-    temporary_key_has_definitively_been_transformed = True
+    temporary_element_has_definitively_been_transformed = True
 
 
 #
@@ -81,15 +81,15 @@ class TRAIT_Temporary_Key(object):
 #
 #           class Temporary_String_Key(
 #                   str,
-#                   TRAIT_Temporary_Key,
+#                   TRAIT_TemporaryElement,
 #           ):
 #               __slots__ = (())
 #
 #               #
-#               #   Interface Temporary_Key
+#               #   Interface TemporaryElement
 #               #
 #              #@replace
-#               temporary_key_has_definitively_been_transformed = False
+#               temporary_element_has_definitively_been_transformed = False
 #
 #
 #           def create_temporary_string_key(s):
@@ -99,16 +99,16 @@ class TRAIT_Temporary_Key(object):
 #           class Unique_String_Example(
 #                   str,
 #                   TRAIT_String,
-#                   TRAIT_Temporary_Key,
+#                   TRAIT_TemporaryElement,
 #           ):
 #               __slots__ = (())
 #
 #               #
-#               #   Inherited from `TRAIT_Temporary_Key`:
+#               #   Inherited from `TRAIT_TemporaryElement`:
 #               #
-#               #       `temporary_key_has_definitively_been_transformed = True`
+#               #       `temporary_element_has_definitively_been_transformed = True`
 #               #
-#              #temporary_key_has_definitively_been_transformed = True
+#              #temporary_element_has_definitively_been_transformed = True
 #
 #
 #
@@ -149,7 +149,7 @@ class TRAIT_Temporary_Key(object):
 #               #
 #               #   Has `r` already been transformed, and is no longer a temporary key?
 #               #
-#               if r.temporary_key_has_definitively_been_transformed:
+#               if r.temporary_element_has_definitively_been_transformed:
 #                   return r
 #
 #               #
@@ -169,7 +169,7 @@ class TRAIT_Temporary_Key(object):
 #               #
 #               #   After the transformation `r` had *BETTER* be known to have definitively transformed.
 #               #
-#               assert r.temporary_key_has_definitively_been_transformed
+#               assert r.temporary_element_has_definitively_been_transformed
 #
 #               return r
 #
@@ -184,8 +184,9 @@ class TRAIT_Temporary_Key(object):
 #
 #       #
 #       #   NOTE:
-#       #       This is named `.temporary_key_has_definitively_been_transformed` instead of `.temporary_key_transformed`
-#       #       to *STRONLY* indicate that the test may be *INCONCLUSIVE* when returning false.
+#       #       This is named `.temporary_element_has_definitively_been_transformed` instead of
+#       #       `.temporary_element_transformed` to *STRONLY* indicate that the test may be *INCONCLUSIVE* when
+#       #       returning false.
 #       #
 #       #       I.E.:  A value of false means the key is not definitively known to have transformed; but it *MAY* have
 #       #              have transformed (although we don't know it yet)!
@@ -193,11 +194,11 @@ class TRAIT_Temporary_Key(object):
 #       #       If the above test returns false; then at any moment (including right after the above test), `v` may be
 #       #       transformed by another thread, and no longer be a temporary key.
 #       #
-#       #       Thus, if `v.temporary_key_has_definitively_been_transformed` returns true:
+#       #       Thus, if `v.temporary_element_has_definitively_been_transformed` returns true:
 #       #
 #       #           1.  We can say "v was a temporary key; but has been transformed, and is no longer a temporary key".
 #       #
-#       #       However, if `v.temporary_key_has_definitively_been_transformed` returns false:
+#       #       However, if `v.temporary_element_has_definitively_been_transformed` returns false:
 #       #
 #       #           2.  We *CANNOT* say that "v has not transformed and is still a temporary key"
 #       #               (it may have been transformed to a non-temporary key by another thread since our test);
@@ -205,6 +206,6 @@ class TRAIT_Temporary_Key(object):
 #       #           3.  All we can say is that "v was a temporary key, may or may not have transformed, and may or
 #       #               may not still be a temporary key".
 #       #
-#       v.temporary_key_has_definitively_been_transformed   #   Test if `v` is definitively known to have been
+#       v.temporary_element_has_definitively_been_transformed   #   Test if `v` is definitively known to have been
 #                                                           #   transformed, and is no longer a temporary key.
 #
