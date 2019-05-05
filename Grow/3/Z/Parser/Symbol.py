@@ -97,6 +97,17 @@ if __debug__:
 
 
 #
-#   Imports (must appear after the "facts" above).
+#   Import the version of symbol we want to use (must be after the "facts" above)
 #
-from    Z.Parser.Symbol_V1              import conjure_parser_symbol
+from    Z.Parser.Global                 import  parser_globals
+
+
+symbol_version = parser_globals.symbol_version
+
+
+if symbol_version == 1:
+    from    Z.Parser.Symbol_V1          import conjure_parser_symbol
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Parser/Symbol.py: unknown symbol version: {!r}', symbol_version)

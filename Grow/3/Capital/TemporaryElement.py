@@ -64,7 +64,7 @@ class TRAIT_TemporaryElement(object):
 #
 #               3A)     We create a temporary key (may not be unique).
 #
-#               3B)     We use the python built-in `.setdefault` to simultanously lookup & insert
+#               3B)     We use the python built-in `.setdefault` to simultaneously lookup & insert
 #                       the temporary key.
 #
 #               3C)     We get back a "unique" object (this is what `.setdefault` guarentees).

@@ -201,7 +201,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
 
             #
             #   NOTE:
-            #       See note below on "multiple threads may be simultanously transforming `r`" being thread safe.
+            #       See note below on "multiple threads may be simultaneously transforming `r`" being thread safe.
             #
             #   NOTE -- DO NOT OPTIMIZE:
             #
@@ -226,12 +226,12 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
 
         #
         #   NOTE:
-        #       Due to multi-threading `temporary_string__possibly_non_unique` may *NOT* be unique.
+        #       Due to multi-threading `temporary_string__maybe_duplicate` may be a duplicate (not unique).
         #
-        #       There may be two or more seperate threads, all of which, simultanously, create a `TemporaryString` with
+        #       There may be two or more seperate threads, all of which, simultaneously, create a `TemporaryString` with
         #       the same internal characters.
         #
-        temporary_string__possibly_non_unique = create_temporary_string(s)
+        temporary_string__maybe_duplicate = create_temporary_string(s)
 
         #
         #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
@@ -241,17 +241,17 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
         #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is thread
         #       safe).
         #
-        #       If two (or more) threads, simultanoulsy, create a `TemporaryString` with the same internal characters,
+        #       If two (or more) threads, simultaneously, create a `TemporaryString` with the same internal characters,
         #       then `provide_string_key` will return the same instance in all threads.
         #
-        r = provide_string(temporary_string__possibly_non_unique, temporary_string__possibly_non_unique)
+        r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
 
         if r.temporary_element_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
             return r
 
         #
         #   NOTE:
-        #       Multiple threads may be simultanously transforming `r` from a `TemporaryString` to a `Meta`.
+        #       Multiple threads may be simultaneously transforming `r` from a `TemporaryString` to a `Meta`.
         #
         #       This is thread safe.
         #

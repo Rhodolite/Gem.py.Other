@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Version 1 & Version 2
+#   Difference between Version 1 & Version 2.
 #
 #       Version 1:
 #
@@ -25,13 +25,12 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Parser.Symbol                 import  conjure_symbol
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Parser.Symbol             import  fact_is_symbol
+    from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
@@ -176,7 +175,7 @@ def create_Tree_Name(line_number, column, symbol, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_symbol      (symbol)
-    assert fact_is_tree_context(context)
+    assert fact_is_parser_symbol(symbol)
+    assert fact_is_tree_context (context)
 
     return Tree_Name(line_number, column, symbol, context)

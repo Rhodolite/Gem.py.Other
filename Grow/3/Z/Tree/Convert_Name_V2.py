@@ -19,11 +19,11 @@
 #
 #       Version 2:
 #
-#           Pass in `conjure_symbol(self.id)` as the `symbol` parameter (third parameter) to `create_Tree_Name`.
+#           Pass in `conjure_parser_symbol(self.id)` as the `symbol` parameter (third parameter) to `create_Tree_Name`.
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_symbol
+from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Convert_Context              import  convert_parameter_context
 from    Z.Tree.Name_V2                      import  create_Tree_Name
@@ -69,7 +69,7 @@ def convert_name_expression(self):
                self.lineno,
                self.col_offset,
 
-               conjure_symbol                      (self.id),
+               conjure_parser_symbol               (self.id),
                convert_delete_load_OR_store_context(self.ctx),
            )
 
@@ -98,6 +98,6 @@ def convert_name_parameter(self):
                self.lineno,
                self.col_offset,
 
-               conjure_symbol           (self.id),
+               conjure_parser_symbol    (self.id),
                convert_parameter_context(self.ctx),
            )

@@ -8,11 +8,11 @@
 #
 
 
-from    Capital.TemporaryString_V6      import  create_temporary_string
+from    Capital.Private.TemporaryString_V6      import  create_temporary_string
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Fact                        import  fact_is_full_native_string
 
 
 #
@@ -62,9 +62,10 @@ if __debug__:
 #                   transformation issues.
 #
 def produce_conjure_full_name(Meta):
-    cacche  = {}                        #   Map { StringKey | Meta } of { StringKey | Meta }
-    lookup  = cacche.get
-    provide = cacche.setdefault
+    string_cache  = {}                  #   Map { TemporaryKey | Meta } of { TemporaryKey | Meta }
+
+    lookup_string  = string_cache.get
+    provide_string = string_cache.setdefault
 
 
     #
@@ -80,7 +81,7 @@ def produce_conjure_full_name(Meta):
         #
         assert fact_is_full_native_string(s)
 
-        r = lookup_symbol(s)
+        r = lookup_string(s)
 
         if r is not None:
             if r.temporary_element_has_definitively_been_transformed:
@@ -92,9 +93,9 @@ def produce_conjure_full_name(Meta):
 
             return r
 
-        k = create_temporary_string(s)
+        temporary_string__maybe_duplicate = create_temporary_string(s)
 
-        r = provide_string_key(k, k)
+        r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
 
         if r.temporary_element_has_definitively_been_transformed:
             return r

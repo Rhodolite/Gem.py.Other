@@ -4,7 +4,20 @@
 
 
 #
-#   Z.Parser.Symbol_V1 - Implementation of an identifier used in the Z parser, Version 1
+#   Z.Parser.Symbol_V2 - Implementation of an identifier used in the Z parser, Version 2
+#
+
+
+#
+#   Difference between Version 1 & Version 2.
+#
+#       Version 1:
+#
+#           `Parser_Symbol_V1` does not implement `Parser_Module_Name`
+#
+#       Version 2:
+#
+#           `Parser_Symbol_V2` implements `Parser_Module_Name`
 #
 
 
@@ -13,6 +26,7 @@ from    Capital.Core                        import  export
 from    Capital.NativeString                import  NativeString
 from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
+from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
 
 
@@ -20,9 +34,10 @@ if __debug__:
     from    Capital.Core                    import  FATAL
 
 
-class Parser_Symbol_V1(
+class Parser_Symbol_V2(
         NativeString,
         TRAIT_TemporaryElement,
+        TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,
 ):
     __slots__ = (())
@@ -45,10 +60,10 @@ class Parser_Symbol_V1(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Parser_Symbol_V1 {}>', self)
+        return arrange('<Parser_Symbol_V2 {}>', self)
 
 
-conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_V1)
+conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_V2)
 
 
 export(conjure_parser_symbol)
