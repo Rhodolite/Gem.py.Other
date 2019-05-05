@@ -8,7 +8,7 @@
 #
 
 
-version = 4
+version = 6
 
 
 string_version = 1
@@ -27,26 +27,32 @@ if version >= 2:
 
 
 #
-#   Version 3: Add `EmptyString` and `FullString`.
+#   Version 3: Add `BaseString`, `EmptyString` and `FullString`.
 #
 if version >= 3:
     string_version = 3
 
 
 #
-#   Version 4:
+#   Version 4: Remove `BaseString`.
 #
 if version >= 4:
     string_version = 4
 
 
 #
-#   Version 5: Guarantee Uniqueness of `FullString` always (see "Capital/Private/ConjureString_V3.py for details).
+#   Version 5: Guarantee Uniqueness of `FullString` always (see "Capital/Private/ConjureString_V5.py for details).
 #
 if version >= 5:
     string_version = 5
 
 
+#
+#   Version 6: Derive String classes from `str` (instead of from `object`)
+#
+if version >= 6:
+    string_version = 6
+   
 #
 #   Version 7:  Old Code -- Until assigned a number.
 #

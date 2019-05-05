@@ -178,9 +178,12 @@ elif string_version == 3:
 elif string_version == 4:
     from    Capital.Private.ConjureString_V4    import  conjure_string
     from    Capital.Private.String_V4           import  empty_string
-elif string_version == 7:
-    from    Capital.Private.ConjureString_V7    import  conjure_string
-    from    Capital.Private.EmptyString_V7      import  empty_string
+elif string_version == 5:
+    from    Capital.Private.ConjureString_V5    import  conjure_string
+    from    Capital.Private.String_V5           import  empty_string
+elif string_version == 6:
+    from    Capital.Private.ConjureString_V6    import  conjure_string
+    from    Capital.Private.String_V6           import  empty_string
 else:
     from    Capital.Core                import  FATAL
 

@@ -294,7 +294,7 @@ export(conjure_string)
 #       The code below which dumps the variables (and cells) for `conjure_string`, is dumping the variables for a
 #       closure of `conjure_string`.
 #
-if 1:
+if 0:
     def dump_code(code):
         trace('==== Code for {} ===', code.co_name)
        #trace('dir: {}', dir(code))

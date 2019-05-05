@@ -235,7 +235,7 @@ def create_full_string(interned_s):
     return FullString(interned_s)
 
 
-empty_string = create_empty_string("")
+empty_string = create_empty_string(intern_native_string(""))
 
 
 export(empty_string)

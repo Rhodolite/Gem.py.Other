@@ -4,33 +4,29 @@
 
 
 #
-#   Capital.Private.ConjureString_V5 - Private implementation of the public `String` Interface, Version 5.
+#   Capital.Private.ConjureString_V6 - Private implementation of `conjure_string` for `String` Interface, Version 6.
+#
+#
 #
 
-
 #
-#   Difference between Version 4 & Version 5.
+#   Difference between Version 5 & Version 6.
 #
-#       Version 4:
+#       Version 5:
 #
-#           Uses the same producer function from Version 2.
+#           The key/value pairs in `string_cache` are:
 #
-#           1)  Strings are unique (in normal cases).
+#               1)  Key is an interned `NativeString`;
 #
-#           2)  Uses `create_full_string` to create a full string, before attempting to put it in `string_cache`
-#               (as explained there, in abnormal cases, this `FullString` may leak).
+#               2)  Value is one of `EmptyString | FullString | TemporaryString`.
 #
-#       Version 3:
+#       Version 6:
 #
-#           1)  Strings are unique (always).
+#           The key/value pairs in `string_cache` are:
 #
-#           2)  Uses `create_temporary_string` to create a temporary string, before attempting to put it in
-#               `string_cache`.
+#               1)  Key is the same as value;
 #
-#               Only after the temporary string is guarentted unique (in the contect of `string_cache`), is it
-#               then transformed to a unique `FullString`.
-#
-#               See all the comments below for more details.
+#               2)  Value is one of `EmptyString | FullString | TemporaryString`.
 #
 
 
@@ -53,9 +49,9 @@
 from    Capital.Core                        import  export
 from    Capital.Core                        import  trace
 from    Capital.NativeString                import  intern_native_string
-from    Capital.Private.String_V5           import  empty_string
-from    Capital.Private.String_V5           import  FullString
-from    Capital.Private.TemporaryString_V5  import  create_temporary_string
+from    Capital.Private.String_V6           import  empty_string
+from    Capital.Private.String_V6           import  FullString
+from    Capital.Private.TemporaryString_V6  import  create_temporary_string
 
 
 if __debug__:
@@ -97,16 +93,17 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key   is an interned `NativeString`; and
+    #           1)  The key  is the same as the value;
+    #
     #           2)  The value is a `String`.
     #
     #       The type of `string_cache` is
-    #       `Map { interned NativeString } of EmptyString | FullString | TemporaryString`.
+    #       `Map { EmptyString | FullString | TemporaryString } of EmptyString | FullString | TemporaryString`.
     #
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
     #       when the `conjure_string("")` is called.
     #
-    string_cache = { intern_native_string("") : empty_string }
+    string_cache = { empty_string : empty_string }
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault            #   Thread safe (see comment below).
@@ -195,9 +192,7 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
         #       There may be two or more seperate threads, all of which, simultanously, create a `TemporaryString` with
         #       the same internal characters.
         #
-        interned_s = intern_native_string(s)
-
-        temporary_string__possibly_non_unique = create_temporary_string(interned_s)
+        temporary_string__possibly_non_unique = create_temporary_string(s)
 
         #
         #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
@@ -210,7 +205,7 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
         #       If two (or more) threads, simultanoulsy, create a `TemporaryString` with the same internal characters,
         #       then `provide_string_key` will return the same instance in all threads.
         #
-        r = provide_string(interned_s, temporary_string__possibly_non_unique)
+        r = provide_string(temporary_string__possibly_non_unique, temporary_string__possibly_non_unique)
 
         if r.temporary_element_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
             return r

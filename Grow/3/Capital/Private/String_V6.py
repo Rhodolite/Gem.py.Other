@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.String_V5 - Private implementation of the public `String` Interface, Version 5.
+#   Capital.Private.String_V6 - Private implementation of the public `String` Interface, Version 6.
 #
 #       Strings are Unique (always).
 #
@@ -14,38 +14,29 @@
 
 
 #
-#   Difference between Version 4 & Version 5.
-#
-#       Version 4:
-#
-#           1)  Strings are unique (in normal cases).
-#
-#           2)  Has creator function `create_full_string` for `FullString`.
+#   Difference between Version 5 & Version 6.
 #
 #       Version 5:
 #
-#           1)  Strings are unique (always).
+#           String classes use `object` as their base class.
 #
-#           2)  Does *NOT* have creator function for `FullString` (since `FullString` cannot be created, but
-#               only transformed from a `Capital.Private.TemporaryString_V3.TemporaryString`).
+#       Version 6:
 #
-#               Also in debug mode, `FullString` has disabled the create (`__new__`) and construct (`__init__`)
-#               methods.
-#
-#           3)  `FullString` implements interface `TemporaryElement` (needed to make strings unique always).
+#           String classes use `NativeString` as their base class.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.NativeString            import  intern_native_string
+from    Capital.NativeString            import  NativeString
 from    Capital.String                  import  TRAIT_String
 from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
 
 if __debug__:
-    from    Capital.NativeString        import  fact_is_empty_INTERNED_native_string
+    from    Capital.Fact                import  fact_is_empty_native_string
+    from    Capital.Fact                import  fact_is_full_native_string
 
 
 #
@@ -64,16 +55,7 @@ if __debug__:
 #
 @property
 def property__BaseString__native_subclass(self):
-    return self.interned_s
-
-
-#
-#   BaseString.__format__ (format_specification)  - Format `String`
-#
-#       Delegated to the `NativeString` implementation via `.interned_s`.
-#
-def method__BaseString__operator_format(self, format_specification):
-    return self.interned_s.__format__(format_specification)
+    return self
 #</methods>
 
 
@@ -81,19 +63,11 @@ def method__BaseString__operator_format(self, format_specification):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class EmptyString(
+        NativeString,
         TRAIT_TemporaryElement,
         TRAIT_String,
 ):
-    __slots__ = ((
-        'interned_s',                   #   EmptyNativeString
-    ))
-
-
-    #
-    #   Private
-    #
-    def __init__(self, interned_s):
-        self.interned_s = interned_s
+    __slots__ = (())
 
 
     #
@@ -110,11 +84,8 @@ class EmptyString(
 
 
     #
-    #   .__format__ (format_specification)  - Format `String`
+    #   .format(format_specification) - Inherited from `NativeString`.
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
-    #
-    __format__ = method__BaseString__operator_format
 
 
     #
@@ -138,7 +109,7 @@ class EmptyString(
     #
     #   .python_code()
     #
-    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the same
+    #       Return a `NativeString` that is the python code that python will compile to a `NativeString` with the same
     #       characters.
     #
     @staticmethod
@@ -147,15 +118,20 @@ class EmptyString(
 
 
 #
+#   method__NativeString__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#
+method__NativeString__representation = NativeString.__repr__
+
+
+#
 #   Full String - A wrapper around a full native string.
 #
 class FullString(
+        NativeString,
         TRAIT_TemporaryElement,
         TRAIT_String,
 ):
-    __slots__ = ((
-        'interned_s',                   #   FullNativeString
-    ))
+    __slots__ = (())
 
 
     #
@@ -187,20 +163,9 @@ class FullString(
 
 
     #
-    #   .__format__ (format_specification)  - Format `String`
+    #   .format(format_specification) - Inherited from `str`.
+    #   .__len__()                    - Inherited from `str`.
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
-    #
-    __format__ = method__BaseString__operator_format
-
-
-    #
-    #   .__len__()  - Return the length.
-    #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
-    #
-    def __len__(self):
-        return self.interned_s.__len__()
 
 
     #
@@ -230,7 +195,7 @@ class FullString(
     #
     #   CURRENT
     #
-    #       For now, we just use the `NativeString` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `NativeString` representation (i.e: `str.__repr__`).
     #
     #   FUTURE:
     #
@@ -242,26 +207,25 @@ class FullString(
     #       Also, really, we want to code generate the `portray_python_string` ... so will wait until the
     #       code generator can generate that function, before using it.
     #
-    def python_code(self):
-        return repr(self.interned_s)
+    python_code = method__NativeString__representation
 
 
 @creator
-def create_empty_string(interned_s):
-    assert fact_is_empty_INTERNED_native_string(interned_s)
+def create_empty_string(s):
+    assert fact_is_empty_native_string(s)
 
-    return EmptyString(interned_s)
+    return EmptyString(s)
 
 
 @export
 @creator
-def create_full_string(interned_s):
-    assert fact_is_full_INTERNED_native_string(interned_s)
+def create_full_string(s):
+    assert fact_is_full_native_string(interned_s)
 
-    return FullString(interned_s)
+    return FullString(s)
 
 
-empty_string = create_empty_string(intern_native_string(""))
+empty_string = create_empty_string("")
 
 
 export(empty_string)
