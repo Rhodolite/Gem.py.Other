@@ -13,10 +13,10 @@
 #
 #   Import the version of tree aliases we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-alias_version = tree_globals.alias_version
+alias_version = parser_globals.alias_version
 
 
 if alias_version == 1:

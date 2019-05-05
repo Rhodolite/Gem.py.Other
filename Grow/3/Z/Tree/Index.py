@@ -68,10 +68,10 @@ if __debug__:
 #
 #   Import the version of tree index clauses we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-version = tree_globals.index_version
+version = parser_globals.index_version
 
 
 if version == '1':

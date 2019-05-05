@@ -4,9 +4,7 @@
 
 
 #
-#   Z.Tree.Global - Globals to affect the creation of `Tree_*` classes.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#   Z.Parser.Global - Globals to affect the "Z" Parser.
 #
 
 
@@ -102,9 +100,9 @@ if __debug__:
 
 
 #
-#   Tree_Globals - Globals to affect the creation of `Tree_*` classes.
+#   Parser_Globals - Globals to affect the "Z" Parser.
 #
-class Tree_Globals(object):
+class Parser_Globals(object):
     __slots__ = ((
         'alias_version',                #   PositiveInteger
         'argument_version',             #   NativeString
@@ -144,14 +142,14 @@ class Tree_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Tree_Globals {} {!r} {!r} {} {!r} {!r} {!r} {} {} {!r} {} {} {}>',
+        return arrange('<Parser_Globals {} {!r} {!r} {} {!r} {!r} {!r} {} {} {!r} {} {} {}>',
                        self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
                        self.except_version, self.expression_version, self.index_version, self.name_version,
                        self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
                        self.target_version)
 
-    def trace_tree_globals(self):
-        trace('Tree_Globals: alias={} argument={!r} comprehension={!r} context={} except={!r} ...',
+    def trace_parser_globals(self):
+        trace('Parser_Globals: alias={} argument={!r} comprehension={!r} context={} except={!r} ...',
               self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
               self.except_version)
         trace('... expression={!r} index={!r} name={} statement={} operator={} parameter={!r} symbol={}',
@@ -162,7 +160,7 @@ class Tree_Globals(object):
 
 
 @creator
-def create_tree_globals(
+def create_parser_globals(
         alias_version, argument_version, comprehension_version, context_version,
         except_version, expression_version, index_version, name_version,
         operator_version, parameter_version, statement_version, symbol_version,
@@ -182,20 +180,20 @@ def create_tree_globals(
     assert fact_is_substantial_integer(symbol_version)
     assert fact_is_positive_integer   (target_version)
 
-    r = Tree_Globals(
+    r = Parser_Globals(
             alias_version, argument_version, comprehension_version, context_version, except_version,
             expression_version, index_version, name_version,
             operator_version, parameter_version, statement_version, symbol_version,
             target_version,
         )
 
-   #trace('Tree Globals: {}', r)
-    r.trace_tree_globals()
+   #trace('Parser Globals: {}', r)
+    r.trace_parser_globals()
 
     return r
 
 
-tree_globals = create_tree_globals(
+parser_globals = create_parser_globals(
                    alias_version         = alias_version,
                    argument_version      = argument_version,
                    comprehension_version = comprehension_version,

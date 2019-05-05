@@ -638,7 +638,7 @@ def convert_some_list_of_expressions(sequence):
 #
 #   Handle import loops
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
 import  Z.Tree.Convert_Argument
@@ -661,7 +661,7 @@ Z.Tree.Convert_Target       .convert_some_list_of_expressions = convert_some_lis
 
 
 
-target_version = tree_globals.target_version
+target_version = parser_globals.target_version
 
 
 if target_version == 1:

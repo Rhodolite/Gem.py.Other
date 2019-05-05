@@ -13,10 +13,10 @@
 #
 #   Import the version of tree names we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-name_version = tree_globals.name_version
+name_version = parser_globals.name_version
 
 
 if name_version == 1:

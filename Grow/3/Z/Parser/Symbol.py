@@ -4,58 +4,99 @@
 
 
 #
-#   Z.Parser.Symbol - An identifier used in the Z parser.
+#   Z.Parser.Symbol - Interface to an identifier used in the Z parser.
 #
 
 
-from    Capital.Core                        import  arrange
-from    Capital.NativeString                import  NativeString
-from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
-from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
-
-
-if __debug__:
-    from    Capital.Core                    import  FATAL
-
-
-class Symbol(
-        NativeString,
-        TRAIT_TemporaryElement,
-):
+#
+#   interface Parser_Symbol
+#       documentation
+#           Interface to an identifier used in the Z parser.
+#
+#       extends
+#           Parser_Module_Name
+#
+#       debug
+#           is_parser_symbol := true
+#
+#       method
+#           dump_alias_tokens (f : Build_DumpToken)
+#
+class TRAIT_Parser_Symbol(object):
     __slots__ = (())
 
 
-    #
-    #   Private
-    #
     if __debug__:
-        def __new__(Meta, s):
-            FATAL("Symbol.operator new (`__new__`): A Symbol may not be created");
+        is_parser_symbol = True
+
+
+#
+#   interface Parser_Symbol_0
+#       documentation
+#           Interface to an identifier used in the Z parser; OR the `parser_none`.
+#
+#       attribute
+#           has_parser_symbol : Boolean
+#
+#       if has_parser_symbol
+#           implements Parser_Symbol
+#
+#       debug
+#           is_parser_symbol_0 := true
+#
+class TRAIT_Parser_Symbol_0(object):
+    __slots__ = (())
 
 
     if __debug__:
-        def __init__(self, s):
-            FATAL("Symbol.constructor (`__init__`): A Symbol may not be contructed");
+        is_parser_symbol_0 = True
 
 
-    #
-    #   Public
-    #
-    is_symbol = True
+   #@virtual
+    has_parser_symbol = True
 
 
-    def __repr__(self):
-        return arrange('<Symbol {}>', self)
+#
+#   USAGE:
+#
+#       v.has_parser_symbol                 #   Test if `v` has a parser symbol and is *NOT* `parser_none`.
+#
 
 
-conjure_symbol = produce_conjure_full_name(Symbol)
+#
+#   USAGE (debug mode):
+#
+#       v.is_parser_symbol                  #   Test if `v` is a parser symbol.
+#
+#       v.is_parser_symbol_0                #   Test if `v` is a `Parser_Symbol_0`.
+#
+#       assert fact_is_parser_symbol(v)     #   Assert that `v` is a parser symbol.
+#
+#       assert fact_is_parser_symbol_0(v)   #   Assert that `v` is a `Parser_Symbol_0`.
+#
 
 
 if __debug__:
     #
-    #   fact_is_symbol(v) - Assert the fact that `v` is a `Symbol`.
+    #   fact_is_parser_symbol(v) - Assert the fact that `v` is a parser symbol.
     #
-    def fact_is_symbol(v):
-        assert v.is_symbol
+    def fact_is_parser_symbol(v):
+        assert v.is_parser_symbol
 
         return True
+
+
+if __debug__:
+    #
+    #   fact_is_parser_symbol_0(v) - Assert the fact that `v` is a `Parser_Symbol_0`.
+    #
+    def fact_is_parser_symbol_0(v):
+        assert v.is_parser_symbol_0
+
+        return True
+
+
+#
+#   Imports (must appear after the "facts" above).
+#
+from    Z.Parser.Symbol_V1              import conjure_parser_symbol

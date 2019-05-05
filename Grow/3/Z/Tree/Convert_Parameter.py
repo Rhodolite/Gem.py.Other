@@ -30,7 +30,6 @@
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Name                 import  convert_name_parameter
-from    Z.Tree.Global                       import  tree_globals
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
 from    Z.Tree.Parameter                    import  create_Tree_Parameters_All

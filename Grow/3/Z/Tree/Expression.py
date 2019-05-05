@@ -37,22 +37,11 @@
 #                                               #   See "Z/Tree/Context" for for an explanation of a "load" context).
 #
 #       assert fact_is__native_none__OR__tree_expression(v)
-#                                           #   Assert that `v` is either `None` or a tree expression.
+#                                               #   Assert that `v` is either `None` or a tree expression.
 #
-#       assert fact_is_tree_expression(v)   #   Assert that `v` is a tree expression.
+#       assert fact_is_tree_expression(v)       #   Assert that `v` is a tree expression.
 #
 
-
-
-#
-#<order>
-#
-#   NOTE:
-#       Because "Z/Tree_Expression_1.py" needs facts, then it imports this file.
-#
-#   HENCE:
-#       The "fact" functions *MUST* appear *BEFORE* the import of "Z.TreeExpression_1.py"
-#
 
 
 #
@@ -78,16 +67,15 @@ if __debug__:
         assert v.is_tree_expression
 
         return True
-#</order>
 
 
 #
-#   Import the version of tree expressions we want to use.
+#   Import the version of tree expressions we want to use (must be after the "facts" above)
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-version = tree_globals.expression_version
+version = parser_globals.expression_version
 
 
 if version == '1':

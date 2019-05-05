@@ -79,10 +79,10 @@ if __debug__:
 #
 #   Import the version of tree except clauses we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-version = tree_globals.except_version
+version = parser_globals.except_version
 
 
 if version == '1':

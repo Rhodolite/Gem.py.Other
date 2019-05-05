@@ -47,10 +47,10 @@ class TRAIT_Tree_Operator(object):
 #
 #   Import the version of tree operators we want to use
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-operator_version = tree_globals.operator_version
+operator_version = parser_globals.operator_version
 
 
 if operator_version == 1:

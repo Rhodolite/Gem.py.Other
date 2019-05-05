@@ -97,10 +97,10 @@ if __debug__:
 #
 #   Import the version of tree comprehension clauses we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-version = tree_globals.comprehension_version
+version = parser_globals.comprehension_version
 
 
 if version == '1':

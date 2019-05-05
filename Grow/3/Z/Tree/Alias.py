@@ -10,7 +10,7 @@
 #
 #       Explanation:
 #
-#           A "tree alias" is used to indicate an [aliased or unaliased] import statement (or `from` statement).
+#           A "tree alias" is used to indicate an [aliased or unaliased] `import` statement (or `from` statement).
 #
 #       Example:
 #
@@ -70,20 +70,3 @@ if __debug__:
         assert v.is_tree_alias
 
         return True
-
-
-#
-#   Import the version of tree aliases we want to use
-#
-from    Z.Tree.Global                   import  tree_globals
-
-
-alias_version = tree_globals.alias_version
-
-
-if alias_version in ((1, 2)):
-    pass
-else:
-    from    Capital.Core                    import  FATAL
-
-    FATAL('Z/Tree/Alias.py: unknown tree alias version: {}', alias_version)

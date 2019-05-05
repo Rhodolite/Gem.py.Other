@@ -14,10 +14,10 @@
 #
 #   Select the version of tree context we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-context_version = tree_globals.context_version
+context_version = parser_globals.context_version
 
 
 if context_version:

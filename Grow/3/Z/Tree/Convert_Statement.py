@@ -102,10 +102,10 @@ if __debug__:
 #
 #   Import the version of tree statements we want to use.
 #
-from    Z.Tree.Global                   import  tree_globals
+from    Z.Parser.Global                 import  parser_globals
 
 
-statement_version = tree_globals.statement_version
+statement_version = parser_globals.statement_version
 
 
 if statement_version in ((1, 2)):

@@ -33,6 +33,12 @@ strip_trailing_whitespace = NativeString.rstrip
 
 
 #
+#   native_string__lookup_index__OR__MINUS_1(s, sub) - Look for `sub` in `s`.  Return `-1` on failure.
+#
+native_string__lookup_index__OR__MINUS_1 = NativeString.find
+
+
+#
 #   fact_is_empty_INTERNED_native_string(s)
 #
 #       Assert that `s` is a `str` instance that has been interned, and is empty (i.e.: is the string `""`).
