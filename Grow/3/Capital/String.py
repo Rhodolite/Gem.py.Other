@@ -175,6 +175,9 @@ elif string_version == 2:
 elif string_version == 3:
     from    Capital.Private.ConjureString_V3    import  conjure_string
     from    Capital.Private.String_V3           import  empty_string
+elif string_version == 4:
+    from    Capital.Private.ConjureString_V4    import  conjure_string
+    from    Capital.Private.String_V4           import  empty_string
 elif string_version == 7:
     from    Capital.Private.ConjureString_V7    import  conjure_string
     from    Capital.Private.EmptyString_V7      import  empty_string

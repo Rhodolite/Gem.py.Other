@@ -66,8 +66,6 @@ from    Capital.Private.String_V2       import  empty_string
 #
 
 
-
-
 #
 #   produce_conjure_string(empty_string, create_string) - Produce a `conjure_string(s)` function.
 #
@@ -78,7 +76,7 @@ from    Capital.Private.String_V2       import  empty_string
 #           Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
 #           version.
 #
-#
+@export
 def produce_conjure_string(empty_string, create_full_string):
     #
     #   string_cache - A cache of strings
@@ -141,6 +139,8 @@ export(conjure_string)
 #
 #   EXPLANATION OF THE PYTHON TERMINOLOGY: "closure", "cell variable", and "free variable".
 #
+#   SUMMARY of "closure" (more details below)
+#
 #       Above, `produce_conjure_string` is a function.
 #
 #       Inside of `produce_conjure_string` is the nested function `conjure_string`
@@ -153,7 +153,7 @@ export(conjure_string)
 #
 #           3)  `provide_string`
 #
-#       These are "cell variables in `produce_conjure_string`.
+#       These are "cell variables" in `produce_conjure_string`.
 #
 #       These are "free variables" in `conjure_string`.
 #
@@ -237,7 +237,7 @@ export(conjure_string)
 #           % ==== Code for produce_conjure_string ===
 #           % Constant #0: None
 #           % Constant #1: ''
-#           % Constant #2: <code object conjure_string at 0x012345676543, file "...//Grow/3/Capital/Private/ConjureString_V2.py", line 145>
+#           % Constant #2: <code object conjure_string at 0x..., file ".../Grow/3/Capital/Private/ConjureString_V2.py", line 145>
 #           % Local Variable & Function Parameter #0: 'empty_string'
 #           % Local Variable & Function Parameter #1: 'create_full_string'
 #           % Local Variable #2: 'string_cache'
@@ -255,25 +255,49 @@ export(conjure_string)
 #           % Free Variable #0: 'create_full_string'
 #           % Free Variable #1: 'lookup_string'
 #           % Free Variable #2: 'provide_string'
+#           % Cell #0: <function create_full_string at 0x...>
+#           % Cell #1: <built-in method get of dict object at 0x...>
+#           % Cell #2: <built-in method setdefault of dict object at 0x...>
 #
 #       As can be seen, this matched what has been explaied above.
 #
 #       One comment on "Constant #2".  It's value is:
 #
-#           <code object conjure_string at 0x012345676543, file "...//Grow/3/Capital/Private/ConjureString_V2.py", line 145>
+#           <code object conjure_string at 0x..., file "...//Grow/3/Capital/Private/ConjureString_V2.py", line 145>
 #
-#       This is the code object for `conjure_string` that is created for all the closures.
+#       This is the original code object for `conjure_string`, all the closures for `conjure_string` use the same
+#       code object (NOTE: This is a code object, not a function object.  When creating a closure, a function object
+#       is created to refer to this common code object ... see below for more details).
 #
-#       When a closure is created, it is created from this code object, and the new code object for the closure, is as
-#       explained above:
+#       When a closure is created, it is created from this original code object, and the new code object for the
+#       closure, is as explained above:
 #
-#               "each of it's free variable's is bound to a cell variable in the currently executing enclosing function
-#               (i.e.: in the current execution of `produce_conjure_string`)."
+#           "each of it's free variable's is bound to a cell variable in the currently executing enclosing function
+#           (i.e.: in the current execution of `produce_conjure_string`)."
 #
-if 0:
+#           The value for the cells is stored in the function object for each closure.
+#
+#           This is seen below where it reads:
+#
+#               % Cell #0: <function create_full_string at 0x...>
+#               % Cell #1: <built-in method get of dict object at 0x...>
+#               % Cell #2: <built-in method setdefault of dict object at 0x...>
+#
+#           This is showing the value of the three cells is:
+#
+#               1)  `create_full_string`;
+#
+#               2)  `lookup_string`; (i.e.: `string_cache.get`).
+#
+#               2)  `provide_string`; (i.e.: `string_cache.setdefault`).
+#
+#       The code below which dumps the variables (and cells) for `conjure_string`, is dumping the variables for a
+#       closure of `conjure_string`.
+#
+if 1:
     def dump_code(code):
         trace('==== Code for {} ===', code.co_name)
-        trace('dir: {}', dir(code))
+       #trace('dir: {}', dir(code))
 
         for [i, v] in enumerate(code.co_consts):
             trace('Constant #{}: {!r}', i, v)
@@ -293,5 +317,8 @@ if 0:
     def dump_functions():
         dump_code(produce_conjure_string.func_code)
         dump_code(conjure_string.func_code)
+
+        for [i, v] in enumerate(conjure_string.func_closure):
+            trace('Cell #{}: {!r}', i, v.cell_contents)
 
     dump_functions()

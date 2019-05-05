@@ -57,7 +57,8 @@ from    Capital.String                  import  TRAIT_String
 
 
 if __debug__:
-    from    Capital.NativeString        import  fact_is_some_INTERNED_native_string
+    from    Capital.NativeString        import  fact_is_empty_INTERNED_native_string
+    from    Capital.NativeString        import  fact_is_full_INTERNED_native_string
 
 
 #
@@ -221,7 +222,7 @@ class FullString(BaseString):
 
 @creator
 def create_empty_string(interned_s):
-    assert fact_is_some_INTERNED_native_string(interned_s)
+    assert fact_is_empty_INTERNED_native_string(interned_s)
 
     return EmptyString(interned_s)
 
@@ -229,7 +230,7 @@ def create_empty_string(interned_s):
 @export
 @creator
 def create_full_string(interned_s):
-    assert fact_is_some_INTERNED_native_string(interned_s)
+    assert fact_is_full_INTERNED_native_string(interned_s)
 
     return FullString(interned_s)
 

@@ -8,7 +8,7 @@
 #
 
 
-version = 2
+version = 4
 
 
 string_version = 1
@@ -43,8 +43,8 @@ if version >= 4:
 #
 #   Version 5: Guarantee Uniqueness of `FullString` always (see "Capital/Private/ConjureString_V3.py for details).
 #
-if version >= 3:
-    string_version = 3
+if version >= 5:
+    string_version = 5
 
 
 #

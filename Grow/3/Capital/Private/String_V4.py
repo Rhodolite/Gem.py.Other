@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.String_V3 - Private implementation of the public `String` Interface, Version 3.
+#   Capital.Private.String_V4 - Private implementation of the public `String` Interface, Version 4.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -20,13 +20,13 @@
 
 
 #
-#   Difference between Version 2 & Version 3
+#   Difference between Version 3 and Version 4:
 #
-#       Version 2:
+#       Version 3:
 #
 #           Has a `BaseString` to avoid duplicate code.
 #
-#       Version 2:
+#       Version 4:
 #
 #           Removes `BaseString`, and instead duplicates code (See below)
 #
@@ -37,10 +37,10 @@
 #
 #   SUMMARY:
 #
-#       To avoid a limitation in python related to it's implementation of multiple inheritance, in version 4
+#       To avoid a limitation in python related to it's implementation of multiple inheritance, in version 5
 #       of String Implementation, where we need to do class transformations using `.__class__` assignment.
 #
-#       (See "Capital.Private.ConjureString_V4.py" for details).
+#       (See "Capital.Private.ConjureString_V5.py" for details).
 #
 #   DETAILS:
 #
@@ -63,7 +63,7 @@
 #
 #                   multiple bases (A & B) both have __slots__ that are non-empty.
 #
-#           2)  When figuring out a if `.__class__` assignment is allowed, python typically only allows the
+#           2)  When figuring out if `.__class__` assignment is allowed, python typically only allows the
 #               [non-empty] `__slots__` to be in the "same" place in the inheritance diagram.
 #
 #               EXAMPLE (what we want to do):
@@ -106,7 +106,7 @@
 #                   x = TemporaryString()
 #                   x.__class__ = FullString
 #
-#               NOW, Python happily accepts out transformation.
+#               NOW, python accepts out transformation.
 #
 #   CONCLUSION:
 #
@@ -130,20 +130,39 @@ if __debug__:
 
 
 #
-#   BaseString methods - A very simple string wrapper, base calss of `EmptyString` and `FullString`.
+#<methods>
+#   BaseString methods - A very simple string wrapper, common methods of `EmptyString` and `FullString`.
 #
 #       As explained above we had to get rid of `BaseString`.
 #
 #       So instead we just list the [no longer existing] `BaseString` methods, and copy them into
 #       `EmptyString` and `FullString` below.
 #
-def BaseString__constructor(self, interned_s):
+
+
+#
+#   BaseString: contructor
+#
+def method__BaseString__constructor(self, interned_s):
     self.interned_s = interned_s
 
 
+#
+#   BaseString: Interface String
+#
 @property
-def BaseString__native_subclass(self):
+def property__BaseString__native_subclass(self):
     return self.interned_s
+
+
+#
+#   BaseString.__format__ (format_specification)  - Format `String`
+#
+#       Delegated to the `NativeString` implementation via `.interned_s`.
+#
+def method__BaseString__operator_format(self, format_specification):
+    return self.interned_s.__format__(format_specification)
+#</methods>
 
 
 #
@@ -160,7 +179,7 @@ class EmptyString(
     #
     #   Private
     #
-    __init__ = BaseString__constructor
+    __init__ = method__BaseString__constructor
 
 
     #
@@ -168,12 +187,20 @@ class EmptyString(
     #
     is_empty_string = True
     is_full_string  = False
-    native_subclass = BaseString__native_subclass
+    native_subclass = property__BaseString__native_subclass
 
 
     #
     #   Public
     #
+
+
+    #
+    #   .__format__ (format_specification)  - Format `String`
+    #
+    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #
+    __format__ = method__BaseString__operator_format
 
 
     #
@@ -219,7 +246,7 @@ class FullString(
     #
     #   Private
     #
-    __init__ = BaseString__constructor
+    __init__ = method__BaseString__constructor
 
 
     #
@@ -227,12 +254,20 @@ class FullString(
     #
     is_empty_string = False
     is_full_string  = True
-    native_subclass = BaseString__native_subclass
+    native_subclass = property__BaseString__native_subclass
 
 
     #
     #   Public
     #
+
+
+    #
+    #   .__format__ (format_specification)  - Format `String`
+    #
+    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #
+    __format__ = method__BaseString__operator_format
 
 
     #
