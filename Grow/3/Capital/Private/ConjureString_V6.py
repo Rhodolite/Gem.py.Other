@@ -80,6 +80,45 @@ if __debug__:
 
 
 #
+#   COMMENT ON KEYS in `string_cache`.
+#
+#       The keys in `string_cache` are the same as the values (i.e.: one of `EmptyString`, `FullString`, or `TemporaryString`).
+#
+#       However, you can still do a lookup using a native string, and it will still work.
+#
+#       For example, the following function calls
+#
+#           conjure_string('')
+#
+#       will return:
+#
+#           empty_string
+#
+#       This is because we have *NOT* overridden the following methods:
+#
+#           str.__eq__
+#           str.__hash__
+#
+#       Since these methods, treat all strings (direct instance of `str`, or instances of any subclass of `str`)
+#       as equal if their characters match.
+#
+#       Likewise, we can use the string key `"Hello"` to lookup a `FullString("hello")` key,
+#       as they will these two different instances as equal (and having the same hash)..
+#
+#       Or in other words:
+#
+#           assert "hello"       == conjure_string("hello")             #   Uses `str.__eq__`
+#           assert hash("hello") == hash(conjure_string("Hello"))       #   Uses `str.__hash__` [twice].
+#
+#       The "type" of `string_cache` is:
+#
+#           Map { String } of String
+#
+#       where `String` can be one of `EmptyString`, `FulllString`, or `StringKey`.
+#
+
+
+#
 #   produce_conjure_string(empty_string, create_temporary_string, FullString) - Produce a `conjure_string(s)` function.
 #
 #       Produces: `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
@@ -112,7 +151,7 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
     #
     #   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
     #
-    #       `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
+    #       `s` must be of type some `NativeString` (i.e.: `str` or a subclass derived from `str`).
     #
     #   NOTE:
     #       There exists the possibility that internal instances of `TemporaryString* may "leak" from this code.
