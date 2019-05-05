@@ -28,7 +28,7 @@
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_symbol
+from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Name_V3                      import  create_Tree_Delete_Name
 from    Z.Tree.Name_V3                      import  create_Tree_Evaluate_Name
 from    Z.Tree.Name_V3                      import  create_Tree_Normal_Parameter
@@ -110,7 +110,7 @@ def convert_name_expression(self):
                self.lineno,
                self.col_offset,
 
-               conjure_symbol(self.id),
+               conjure_parser_symbol(self.id),
            )
 
 
@@ -138,5 +138,5 @@ def convert_name_parameter(self):
                self.lineno,
                self.col_offset,
 
-               conjure_symbol(self.id),
+               conjure_parser_symbol(self.id),
            )

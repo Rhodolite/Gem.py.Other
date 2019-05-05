@@ -27,7 +27,7 @@
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_symbol
+from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Attribute_V3                 import  create_Tree_Delete_Attribute
 from    Z.Tree.Attribute_V3                 import  create_Tree_Evaluate_Attribute
 from    Z.Tree.Attribute_V3                 import  create_Tree_Store_Attribute
@@ -107,6 +107,6 @@ def convert_attribute_expression(self):
                self.lineno,
                self.col_offset,
 
-               convert_expression(self.value),
-               conjure_symbol    (self.attr),
+               convert_expression   (self.value),
+               conjure_parser_symbol(self.attr),
           )

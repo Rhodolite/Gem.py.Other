@@ -13,11 +13,11 @@
 #
 #       Version 1:
 #
-#           `Parser_Symbol_V1` does not implement `Parser_Module_Name`
+#           `Parser_Symbol_V1` does not implement `Parser_Module_Name`.
 #
 #       Version 2:
 #
-#           `Parser_Symbol_V2` implements `Parser_Module_Name`
+#           `Parser_Symbol_V2` implements `Parser_Module_Name`.
 #
 
 

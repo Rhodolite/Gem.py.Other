@@ -8,7 +8,7 @@
 #
 
 
-version = 5
+version = 7
 
 
 alias_version         = 1
@@ -47,7 +47,7 @@ if version >= 4:
 
 
 #
-#   Version 5 & 6: Introduce Symbols
+#   Version 5 & 6: Introduce `Parser_Symbol`
 #
 #       5:  `Tree_Name`   uses symbols
 #       6:  `Tree_Target` uses symbols (affects `Tree_Attribute`).
@@ -61,17 +61,24 @@ if version >= 6:
 
 
 #
-#   Version 7 & 8: No longer use contexts
-#
-#       7:  `Tree_Name`    no longer uses contexts.
-#
-#       8:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
-#                          `Tree_Subscript`).
+#   Version 7: Introduce `Parser_Module_Name`
 #
 if version >= 7:
+    symbol_version = 2      #   Symbol version 2 implements `Parser_Module_Name`
+
+
+#
+#   Version 8 & 9: No longer use contexts
+#
+#       8:  `Tree_Name`    no longer uses contexts.
+#
+#       9:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+#                          `Tree_Subscript`).
+#
+if version >= 8:
     name_version = 3
 
-if version >= 8:
+if version >= 9:
     context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
     target_version  = 3
 

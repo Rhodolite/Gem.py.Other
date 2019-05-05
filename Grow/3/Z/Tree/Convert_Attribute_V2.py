@@ -15,16 +15,16 @@
 #
 #       Version 1:
 #
-#           Pass in `self.attr` as the `attribute` parameter (four parameter) to `create_Tree_Attribute`.
+#           Pass in `self.attr` as the `attribute` parameter (fourth parameter) to `create_Tree_Attribute`.
 #
 #       Version 2:
 #
-#           Pass in `conjure_symbol(self.attr)` as the `attribute` parameter (four parameter) to
+#           Pass in `conjure_parser_symbol(self.attr)` as the `attribute` parameter (fourth parameter) to
 #           `create_Tree_Attribute`.
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_symbol
+from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Attribute_V2                 import  create_Tree_Attribute
 from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
@@ -60,6 +60,6 @@ def convert_attribute_expression(self):
                self.col_offset,
 
                convert_expression                  (self.value),
-               conjure_symbol                      (self.attr),
+               conjure_parser_symbol               (self.attr),
                convert_delete_load_OR_store_context(self.ctx),
           )

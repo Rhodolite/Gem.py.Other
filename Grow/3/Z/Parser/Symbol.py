@@ -106,7 +106,9 @@ symbol_version = parser_globals.symbol_version
 
 
 if symbol_version == 1:
-    from    Z.Parser.Symbol_V1          import conjure_parser_symbol
+    from    Z.Parser.Symbol_V1          import  conjure_parser_symbol
+elif symbol_version == 2:
+    from    Z.Parser.Symbol_V2          import  conjure_parser_symbol
 else:
     from    Capital.Core                import  FATAL
 

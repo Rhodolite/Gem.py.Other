@@ -20,14 +20,13 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Parser.Symbol                 import  conjure_symbol
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Parser.Symbol             import  fact_is_symbol
+    from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
@@ -152,7 +151,7 @@ def create_Tree_Attribute(line_number, column, value, attribute, context):
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_expression(value)
-    assert fact_is_symbol         (attribute)
+    assert fact_is_parser_symbol  (attribute)
     assert fact_is_tree_context   (context)
 
     return Tree_Attribute(line_number, column, value, attribute, context)

@@ -35,13 +35,12 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Parser.Symbol                 import  conjure_symbol
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Parser.Symbol             import  fact_is_symbol
+    from    Z.Parser.Symbol             import  fact_is_parser_symbol
 
 
 
@@ -104,7 +103,7 @@ def create_Tree_Delete_Name(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_symbol(symbol)
+    assert fact_is_parser_symbol(symbol)
 
     return Tree_Delete_Name(line_number, column, symbol)
 
@@ -139,7 +138,7 @@ def create_Tree_Evaluate_Name(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_symbol(symbol)
+    assert fact_is_parser_symbol(symbol)
 
     return Tree_Evaluate_Name(line_number, column, symbol)
 
@@ -173,7 +172,7 @@ def create_Tree_Normal_Parameter(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_symbol(symbol)
+    assert fact_is_parser_symbol(symbol)
 
     return Tree_Normal_Parameter(line_number, column, symbol)
 
@@ -204,6 +203,6 @@ def create_Tree_Store_Name(line_number, column, symbol):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_symbol(symbol)
+    assert fact_is_parser_symbol(symbol)
 
     return Tree_Store_Name(line_number, column, symbol)
