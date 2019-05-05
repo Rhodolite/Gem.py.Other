@@ -18,7 +18,7 @@
 #
 #               1)  Key is an interned `NativeString`;
 #
-#               2)  Value is one of `EmptyString | FullString | TemporaryString`.
+#               2)  Value is one of `EmptyString | Meta | TemporaryString`.
 #
 #       Version 6:
 #
@@ -26,7 +26,7 @@
 #
 #               1)  Key is the same as value;
 #
-#               2)  Value is one of `EmptyString | FullString | TemporaryString`.
+#               2)  Value is one of `EmptyString | Meta | TemporaryString`.
 #
 
 
@@ -82,7 +82,7 @@ if __debug__:
 #
 #   COMMENT ON KEYS in `string_cache`.
 #
-#       The keys in `string_cache` are the same as the values (i.e.: one of `EmptyString`, `FullString`, or `TemporaryString`).
+#       The keys in `string_cache` are the same as the values (i.e.: one of `EmptyString`, `Meta`, or `TemporaryString`).
 #
 #       However, you can still do a lookup using a native string, and it will still work.
 #
@@ -102,7 +102,7 @@ if __debug__:
 #       Since these methods, treat all strings (direct instance of `str`, or instances of any subclass of `str`)
 #       as equal if their characters match.
 #
-#       Likewise, we can use the string key `"Hello"` to lookup a `FullString("hello")` key,
+#       Likewise, we can use the string key `"Hello"` to lookup a `Meta("hello")` key,
 #       as they will these two different instances as equal (and having the same hash)..
 #
 #       Or in other words:
@@ -119,14 +119,14 @@ if __debug__:
 
 
 #
-#   produce_conjure_string(empty_string, create_temporary_string, FullString) - Produce a `conjure_string(s)` function.
+#   produce_conjure_string(empty_string, create_temporary_string, Meta) - Produce a `conjure_string(s)` function.
 #
 #       Produces: `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
 #
 #           `s` must be of type some `NativeString` (i.e.: `str` or a subclass derived from `str`).
 #
 @export
-def produce_conjure_string(empty_string, create_temporary_string, FullString):
+def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #
     #   string_cache - A cache of strings
     #
@@ -137,7 +137,7 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
     #           2)  The value is a `String`.
     #
     #       The type of `string_cache` is
-    #       `Map { EmptyString | FullString | TemporaryString } of EmptyString | FullString | TemporaryString`.
+    #       `Map { EmptyString | Meta | TemporaryString } of EmptyString | Meta | TemporaryString`.
     #
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
     #       when the `conjure_string("")` is called.
@@ -167,13 +167,13 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
     #
     #       By creating a `TemporaryString` instance, we make the following guarentee:
     #
-    #           Any leakage of `FullString` instance is unique.
+    #           Any leakage of `Meta` instance is unique.
     #
     #   NOTE:
     #       A `TemporaryString` may leak -- it may not be unique.
     #
     #       A `TemporaryString` may at any moment be transformed (by another thread, or by multiple other threads) to a
-    #       `FullString`.
+    #       `Meta`.
     #
     def conjure_string(s):
         assert fact_is_some_native_string(s)
@@ -186,7 +186,7 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
             #
             #       Due to multithreading `r` may actually be a `TemporaryString`.
             #
-            #       In this case, transform it to a `FullString`
+            #       In this case, transform it to a `Meta`
             #
             #       This is thread safe, as the fact it made it *INTO* `string_cache`, is a guarentee of it's
             #       uniqueness.
@@ -215,10 +215,10 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
             #       Also, as a secondary consideration:
             #
             #           2.  There is a very minor expense to transforming a string, so we don't want to attempt to
-            #               [identity] transform a `FullString` to a `FullString` -- it's safe, but no need to try when
+            #               [identity] transform a `Meta` to a `Meta` -- it's safe, but no need to try when
             #               we can avoid it with the `r.temporary_element_has_definitively_been_transformed` above.
             #
-            r.__class__ = FullString                                        #   THREAD SAFE: Make `r` a string.
+            r.__class__ = Meta                                              #   THREAD SAFE: Make `r` a string.
 
             assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
@@ -235,7 +235,7 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
 
         #
         #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
-        #   `TemporaryString` or a `FullString`).
+        #   `TemporaryString` or a `Meta`).
         #
         #   NOTE:
         #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is thread
@@ -251,14 +251,14 @@ def produce_conjure_string(empty_string, create_temporary_string, FullString):
 
         #
         #   NOTE:
-        #       Multiple threads may be simultanously transforming `r` from a `TemporaryString` to a `FullString`.
+        #       Multiple threads may be simultanously transforming `r` from a `TemporaryString` to a `Meta`.
         #
         #       This is thread safe.
         #
-        r.__class__ = FullString
+        r.__class__ = Meta
 
         #
-        #   At this point `r` is now a `FullString` (either we transformed it, or we & other threads all attempted to
+        #   At this point `r` is now a `Meta` (either we transformed it, or we & other threads all attempted to
         #   transformd it [and one thread actually did transform it]).
         #
         assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.

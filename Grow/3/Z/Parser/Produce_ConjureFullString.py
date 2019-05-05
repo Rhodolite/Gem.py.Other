@@ -8,37 +8,58 @@
 #
 
 
-from    Capital.StringKey_V7            import  create_string_key
+from    Capital.TemporaryString_V6      import  create_temporary_string
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_string
 
 
+#
 #   produce_conjure_full_name(Meta)
 #
 #       Produce a `conjure_full_name(s)` method.
 #
-#       This produce method is pretty much a copy of `conjure_string` in "Capital.Private.ConjureString_V7".
+#       This produce method is pretty much a copy of `produduce_conjure_string` in "Capital.Private.ConjureString_V6".
 #
-#       See that module for comments.
+#       Differences betweeen `produce_conjure_full_name` and `produce_conjure_string`:
 #
-#       The only real difference are:
+#           `produce_conjure_full_name(Meta)`:
 #
-#           1)  The method is "produced" with `Meta`; while in `conjure_string` it always makes a `FullString`.
+#               1)  The produced function `conjure_full_name` does not allow empty strings.
 #
-#           2)  The method can only handle full strings; while `conjure_string` can handle an empty string
-#       
-#           2A) `conjure_string` only handles an empty due to how:
+#               2)  `produce_conjure_full_name` does *NOT* take a parameter named `empty_string`; and
+#                   instead initializes it's `string_cache` as follows:
 #
-#                   2A.i)   `string_cache` is initialized with an empty string:
+#                       string_cache = {}
+#   
+#               3)  `produce_conjure_full_name` does *NOT* take a parameter named `create_temporary_string`; instead
+#                   it always uses `Capital.Private.TemporaryString_V6.create_temporary_string` (defined above).
 #
-#                               string_cache = { empty_string : empty_string }
+#               4)  The produced function `conjure_full_name` uses `fact_is_full_native_string(s)` (i.e.: it's `s`
+#                   parameter must be a *FULL* native string).
 #
-#                   2A.ii)  It uses `assert fact_is_some_native_string` [to allow an empty string].
+#               5)  `produce_conjure_full_name` does not have extensive comments.
 #
-#               Other than these two minor differences, `conjure_string` is basically the "template" for
-#               the `conjure_full_name` function that is "produced" here.
+#                   Instead, read the comments in `produce_conjure_string`, to understand the multi-threading and class
+#                   transformation issues.
+#
+#           `produce_conjure_string(empty_string, create_temporary_string, Meta)`:
+#
+#               1)  The produced function `conjure_string` allows empty strings.
+#
+#               2)  `produce_conjure_string` takes a parameter named `empty_string`; and initilizes it's `string_cache`
+#                   as follows:
+#
+#                       string_cache = { empty_string : empty_string }
+#
+#               3)  `produce_conjure_string` takes a parameter named `create_temporary_string`.
+#
+#               4)  The produced function `conjure_string` uses `fact_is_some_native_string(s)` (i.e.: it's `s`
+#                   parameter may be an empty or full native string).
+#
+#               5)  `produce_conjure_string` has extensive comments to explain the multi-threading and class
+#                   transformation issues.
 #
 def produce_conjure_full_name(Meta):
     cacche  = {}                        #   Map { StringKey | Meta } of { StringKey | Meta }
@@ -54,6 +75,9 @@ def produce_conjure_full_name(Meta):
     #       `s` must be a "full" string (i.e.: length greater than 0).
     #
     def conjure_full_name(s):
+        #
+        #   See comments in "Capital.Private.ConjureString_V6.py" to understand this code.
+        #
         assert fact_is_full_native_string(s)
 
         r = lookup_symbol(s)
@@ -68,7 +92,7 @@ def produce_conjure_full_name(Meta):
 
             return r
 
-        k = create_string_key(s)
+        k = create_temporary_string(s)
 
         r = provide_string_key(k, k)
 

@@ -29,12 +29,10 @@ target_version        = 1
 
 
 #
-#   Version 2 & 3:
+#   Version 2 & 3: Introduce Enumerations
 #
-#       Introduce Enumerations
-#
-#           2:  Enumeration for `Tree_Context`
-#           3:  Enumeration for `Tree_Operator`
+#       2:  Enumeration for `Tree_Context`
+#       3:  Enumeration for `Tree_Operator`
 #
 if version >= 2:
     context_version = 2
@@ -44,21 +42,17 @@ if version >= 3:
 
 
 #
-#   Version 4:
-#
-#       Split `Tree_Alias` into `Tree_Module_Alias` and `Tree_Symbol_Alias`
+#   Version 4: Split `Tree_Alias` into `Tree_Module_Alias` and `Tree_Symbol_Alias`
 #
 if version >= 4:
     alias_version = 2
 
 
 #
-#   Version 4 & 5:
+#   Version 5 & 6: Introduce Symbols
 #
-#       Introduce Symbols
-#
-#           4:  `Tree_Name`   uses symbols
-#           5:  `Tree_Target` uses symbols (affects `Tree_Attribute`).
+#       5:  `Tree_Name`   uses symbols
+#       6:  `Tree_Target` uses symbols (affects `Tree_Attribute`).
 #
 if version >= 5:
     name_version   = 2
@@ -69,14 +63,12 @@ if version >= 6:
 
 
 #
-#   Version 7 & 8:
+#   Version 7 & 8: No longer use contexts
 #
-#       No longer use contexts
+#       7:  `Tree_Name`    no longer uses contexts.
 #
-#           7:  `Tree_Name`    no longer uses contexts.
-#
-#           8:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
-#                              `Tree_Subscript`).
+#       8:  `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+#                          `Tree_Subscript`).
 #
 if version >= 7:
     name_version = 3

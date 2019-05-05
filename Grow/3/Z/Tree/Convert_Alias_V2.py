@@ -10,14 +10,12 @@
 #
 
 
-
-
 #
-#   Difference between Version 1 & Version 2
+#   Difference between Version 1 & Version 2.
 #
 #       Version 1:
 #
-#           1)  `convert_alias_clause` is used for both module aliases & symbol aliases  (so as to do a 1-1 emulation
+#           1)  `convert_alias_clause` is used for both module aliases & symbol aliases (so as to do a 1-1 emulation
 #                of `_ast`).
 #
 #           2)  Both `convert_full_list_of_module_aliases` and `convert_full_list_of_symbol_aliases` are mapped to

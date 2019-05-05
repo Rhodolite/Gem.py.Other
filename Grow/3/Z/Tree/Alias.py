@@ -78,12 +78,12 @@ if __debug__:
 from    Z.Tree.Global                   import  tree_globals
 
 
-version = tree_globals.alias_version
+alias_version = tree_globals.alias_version
 
 
-if version in ((1, 2)):
+if alias_version in ((1, 2)):
     pass
 else:
     from    Capital.Core                    import  FATAL
 
-    FATAL('Z/Tree/Alias.py: unknown tree alias version: {}', version)
+    FATAL('Z/Tree/Alias.py: unknown tree alias version: {}', alias_version)

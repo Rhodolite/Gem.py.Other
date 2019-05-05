@@ -15,7 +15,7 @@
 #
 #       Version 1:
 #
-#           `Tree_Alias_Clause` is used for both module aliases & symbol aliases  (so as to do a 1-1 emulation of
+#           `Tree_Alias_Clause` is used for both module aliases & symbol aliases (so as to do a 1-1 emulation of
 #           `_ast`).
 #
 #       Version 2:
