@@ -11,7 +11,9 @@
 #       In abnormal cases, Non-unique strings can "leak".  Abnormal cases are:
 #
 #           1.  Multithreading race conditions;
+#
 #           2.  Tracebacks due to MemoryError (out of memory);
+#
 #           3.  Using `gc` (garbage collection) module to examine instances in another thread.
 #
 #       Later versions fix this issue (of non-uniqueness in abnormal cases), and strings are always unique.

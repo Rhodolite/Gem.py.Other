@@ -174,7 +174,7 @@ elif string_version == 2:
     from    Capital.Private.String_V2           import  empty_string
 elif string_version == 3:
     from    Capital.Private.ConjureString_V3    import  conjure_string
-    from    Capital.Private.String_V2           import  empty_string            #   NOTE: "_V2" on purpose.k
+    from    Capital.Private.String_V3           import  empty_string
 elif string_version == 7:
     from    Capital.Private.ConjureString_V7    import  conjure_string
     from    Capital.Private.EmptyString_V7      import  empty_string

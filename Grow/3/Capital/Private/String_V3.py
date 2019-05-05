@@ -4,14 +4,16 @@
 
 
 #
-#   Capital.Private.String_V2 - Private implementation of the public `String` Interface, Version 2.
+#   Capital.Private.String_V3 - Private implementation of the public `String` Interface, Version 3.
 #
 #       Strings are Unique (in normal cases).
 #
 #       In abnormal cases, Non-unique strings can "leak".  Abnormal cases are:
 #
 #           1.  Multithreading race conditions;
+#
 #           2.  Tracebacks due to MemoryError (out of memory);
+#
 #           3.  Using `gc` (garbage collection) module to examine instances in another thread.
 #
 #       Later versions fix this issue (of non-uniqueness in abnormal cases), and strings are always unique
@@ -20,7 +22,7 @@
 
 
 #
-#   Difference between Version 1 & Version 2
+#   Difference between Version 1, Version 2, and Version 3
 #
 #       Version 1:
 #
@@ -29,6 +31,10 @@
 #           2)  Implementation of `.is_empty_string` and `.is_full_string` is done by properties.
 #
 #       Version 2:
+#
+#           Identical to version 1.
+#
+#       Version 3:
 #
 #           There are seperate classes for empty & full strings:
 #
@@ -39,7 +45,7 @@
 #           And also:
 #
 #               2)      Implementation of `.is_empty_string` and `.is_full_stting done by members (which is much
-#                       simplier & faster than properties).
+#                       simplier & faster than properties used in version 1).
 #
 
 
@@ -55,7 +61,7 @@ if __debug__:
 
 
 #
-#   BaseString - A very simple string wrapper, base calss of `EmptyString` and `FullString`.
+#   BaseString - A very simple string wrapper, base class of `EmptyString` and `FullString`.
 #
 #       NOTE: Named `BaseString` instead of `String`, since the name "String" is reserved for `interface String`.
 #
