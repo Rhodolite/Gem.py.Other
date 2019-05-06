@@ -151,7 +151,7 @@ def method__BaseString__constructor(self, interned_s):
 #   BaseString: Interface String
 #
 @property
-def property__BaseString__native_subclass(self):
+def property__BaseString__native_string(self):
     return self.interned_s
 
 
@@ -187,7 +187,7 @@ class EmptyString(
     #
     is_empty_string = True
     is_full_string  = False
-    native_subclass = property__BaseString__native_subclass
+    native_string   = property__BaseString__native_string
 
 
     #
@@ -254,7 +254,7 @@ class FullString(
     #
     is_empty_string = False
     is_full_string  = True
-    native_subclass = property__BaseString__native_subclass
+    native_string   = property__BaseString__native_string
 
 
     #

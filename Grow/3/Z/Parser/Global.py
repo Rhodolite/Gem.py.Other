@@ -64,6 +64,7 @@ if version >= 6:
 #   Version 7: Introduce `Parser_Module_Name`
 #
 if version >= 7:
+    alias_version  = 3      #   `Tree_Module_Alias.name` is a `Parser_Module_Name`.
     symbol_version = 2      #   Symbol version 2 implements `Parser_Module_Name`
 
 

@@ -15,8 +15,11 @@
 #           debug
 #               is_parser_module_name := true
 #
+#           attribute
+#               native_string : NativeString
+#
 #           method
-#               dump_module_name_token (f : Build_DumpToken)
+#               dump_module_name_token(f : Build_DumpToken)
 #
 class TRAIT_Parser_Module_Name(object):
     __slots__ = (())
@@ -39,7 +42,7 @@ if __debug__:
     #
     #   fact_is_parser_module_name(v) - Assert the fact that `v` is a parser module name.
     #
-    def fact_is_module_name(v):
-        assert v.is_module_name
+    def fact_is_parser_module_name(v):
+        assert v.is_parser_module_name
 
         return True

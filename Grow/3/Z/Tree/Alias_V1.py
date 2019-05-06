@@ -33,8 +33,8 @@ class Tree_Alias_Clause(
         TRAIT_Tree_Alias,
 ):
     __slots__ = ((
-        'name',                         #   NativeString
-        'as_name',                      #   None | NativeString
+        'name',                         #   FullNativeString
+        'as_name',                      #   None | FullNativeString
     ))
 
 

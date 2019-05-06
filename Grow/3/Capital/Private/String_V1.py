@@ -72,7 +72,7 @@ class String_V1(
 
 
     @property
-    def native_subclass(self):
+    def native_string(self):
         return self.interned_s
 
 

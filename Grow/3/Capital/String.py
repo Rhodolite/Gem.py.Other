@@ -33,8 +33,8 @@
 #                   is_full_string  : Boolean
 #
 #               method
-#                   python_code()     : FullNativeString
-#                   native_subclass() : NativeString
+#                   python_code()   : FullNativeString
+#                   native_string() : NativeString
 #
 #               debug
 #                   is_some_string : Boolean
@@ -61,8 +61,8 @@ class TRAIT_String(object):
 #       s.is_empty_string                   #   Test if `s` is an empty string.
 #       s.is_full_string                    #   Test if `s` is a  full  string.
 #
-#       s.native_subclass()                 #   Return the `NativeString` that `s` represents (may return a subclass
-#                                           #   of `NativeString).
+#       s.native_string                     #   The `NativeString` that `s` represents (may be a subclass of
+#                                           #   `NativeString).
 #
 #       s.python_code()                     #   Return a `NativeString` that is the python code that python will
 #                                           #   compile to a `str` with the same characters as `s`.

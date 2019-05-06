@@ -57,6 +57,18 @@ class Parser_Symbol_V2(
 
 
     #
+    #   Interface Parser_Module_Name
+    #
+    @property
+    def native_string(self):
+        return self
+
+
+    def dump_module_name_token(self, f):
+        f.arrange('<module-name symbol {}>', self)
+
+
+    #
     #   Public
     #
     def __repr__(self):

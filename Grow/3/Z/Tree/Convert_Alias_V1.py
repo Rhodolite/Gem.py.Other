@@ -16,6 +16,8 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Al
 
 if __debug__:
     from    Capital.Fact                    import  fact_is_full_native_list
+    from    Capital.Fact                    import  fact_is_full_native_string
+    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
 
 
 #
@@ -28,6 +30,9 @@ assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname')
 
 
 def convert_alias_clause(self):
+    assert fact_is_full_native_string                  (self.name)
+    assert fact_is__native_none__OR__full_native_string(self.asname)
+
     return create_Tree_Alias_Clause(self.name, self.asname)
 
 

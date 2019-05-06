@@ -89,7 +89,7 @@ class BaseString(
     #   Interface String
     #
     @property
-    def native_subclass(self):
+    def native_string(self):
         return self.interned_s
 
 
