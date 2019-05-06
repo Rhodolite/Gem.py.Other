@@ -15,11 +15,11 @@
 #
 #       Version 2:
 #
-#           The first argument to `create_Tree_Module_Alias` is of type `FullNativeString`.
+#           The first argument to `create_Tree_Module_Alias` is a `FullNativeString`.
 #
 #       Version 3:
 #
-#           The first argument to `create_Tree_Module_Alias` is of type `Parser_Module_Name`.
+#           The first argument to `create_Tree_Module_Alias` is a `Parser_Module_Name`.
 #
 
 

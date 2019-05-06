@@ -33,7 +33,7 @@ class Tree_Alias_Clause(
         TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
-        'name',                         #   FullNativeString
+        'symbol',                       #   FullNativeString
         'as_name',                      #   None | FullNativeString
     ))
 
@@ -41,8 +41,8 @@ class Tree_Alias_Clause(
     #
     #   Private
     #
-    def __init__(self, name, as_name):
-        self.name    = name
+    def __init__(self, symbol, as_name):
+        self.symbol  = symbol
         self.as_name = as_name
 
 
@@ -50,7 +50,7 @@ class Tree_Alias_Clause(
     #   Interface Tree_Module_Alias
     #
     def dump_module_alias_tokens(self, f):
-        f.arrange('<module-alias {}', self.name)
+        f.arrange('<module-alias {}', self.symbol)
 
         if self.as_name is not None:
             f.write(' as ')
@@ -63,7 +63,7 @@ class Tree_Alias_Clause(
     #   Interface Tree_Symbol_Alias
     #
     def dump_symbol_alias_tokens(self, f):
-        f.arrange('<symbol-alias {}', self.name)
+        f.arrange('<symbol-alias {}', self.symbol)
 
         if self.as_name is not None:
             f.write(' as ')
@@ -77,14 +77,14 @@ class Tree_Alias_Clause(
     #
     def __repr__(self):
         if self.as_name is None:
-            return arrange('<Tree_Alias_Clause {!r}>', self.name)
+            return arrange('<Tree_Alias_Clause {!r}>', self.symbol)
 
-        return arrange('<Tree_Alias_Clause {!r} as {!r}>', self.name, self.as_name)
+        return arrange('<Tree_Alias_Clause {!r} as {!r}>', self.symbol, self.as_name)
 
 
 @creator
-def create_Tree_Alias_Clause(name, as_name):
-    assert fact_is_full_native_string                  (name)
+def create_Tree_Alias_Clause(symbol, as_name):
+    assert fact_is_full_native_string                  (symbol)
     assert fact_is__native_none__OR__full_native_string(as_name)
 
-    return Tree_Alias_Clause(name, as_name)
+    return Tree_Alias_Clause(symbol, as_name)

@@ -13,7 +13,7 @@
 #
 #       Version 1:
 #
-#           `Tree_Keyword_Argument.name` is a `NativeString`.
+#           `Tree_Keyword_Argument.symbol` is a `NativeString`.
 #
 #       Version 2:
 #
@@ -54,8 +54,8 @@ class Tree_Keyword_Argument(
     #   Interface Tree_Argument
     #
     def dump_argument_tokens(self, f):
-        f.arrange('<keyword_argument ')
-        self.symbol.dump_symbol_token()
+        f.arrange('<keyword-argument ')
+        self.symbol.dump_symbol_token(f)
         f.write(' = ')
         self.value.dump_evaluate_tokens(f)
         f.greater_than_sign()
