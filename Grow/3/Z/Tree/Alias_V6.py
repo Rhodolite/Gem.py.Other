@@ -4,22 +4,32 @@
 
 
 #
-#   Z.Tree.Alias_V4 - Implementation of `Tree_{Module,Symbol}_Alias`, Version 4.
+#   Z.Tree.Alias_V6 - Implementation of `Tree_{Module,Symbol}_Alias`, Version 6.
 #
 #       See "Z.Tree.Alias" for an explanation of "tree aliases".
 #
 
 
 #
-#   Difference between Version 3 & Version 4.
+#   Difference between Version 5 & Version 6.
 #
-#       Version 3:
+#       Version 5:
 #
-#           `Tree_Module_Alias_Implementation.name` is a `FullNativeString`.
+#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
 #
-#       Version 4:
+#           2)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
 #
-#           `Tree_Module_Alias_Implementation.name` is a `Parser_Module_Name`.
+#       Version 6:
+#
+#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol`.
+#
+#           2)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol`.
+#
+#           3)  Instead of creating either a `Tree_Module_Alias_Implementation` with a `.as_name` of `parser_none`;
+#               instead it simply uses the `Parser_Module_Name` as the `Tree_Alias`
+#
+#           4)  Instead of creating either a `Tree_Symbol_Alias_Implementation` with a `.as_name` of `parser_none`;
+#               instead it simply uses the `Parser_Symbol` as the `Tree_Alias`
 #
 
 
@@ -30,11 +40,10 @@ from    Z.Tree.Alias                    import  TRAIT_Tree_Symbol_Alias
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is__native_none__OR__full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Module_Name        import  fact_is_parser_module_name
+    from    Z.Parser.Symbol             import  fact_is_parser_symbol
 
 
 #
@@ -45,7 +54,7 @@ class Tree_Module_Alias_Implementation(
 ):
     __slots__ = ((
         'name',                         #   Parser_Module_Name
-        'as_name',                      #   None | NativeString
+        'as_name',                      #   Parser_Symbol
     ))
 
 
@@ -63,10 +72,8 @@ class Tree_Module_Alias_Implementation(
     def dump_module_alias_tokens(self, f):
         f.arrange('<module-alias ')
         self.name.dump_module_name_token(f)
-
-        if self.as_name is not None:
-            f.write(' as ')
-            f.write(self.as_name)
+        f.write(' as ')
+        self.as_name.dump_symbol_token(f)
 
         f.greater_than_sign()
 
@@ -83,8 +90,8 @@ class Tree_Module_Alias_Implementation(
 
 @creator
 def create_Tree_Module_Alias(name, as_name):
-    assert fact_is_parser_module_name                  (name)
-    assert fact_is__native_none__OR__full_native_string(as_name)
+    assert fact_is_parser_module_name(name)
+    assert fact_is_parser_symbol     (as_name)
 
     return Tree_Module_Alias_Implementation(name, as_name)
 
@@ -96,8 +103,8 @@ class Tree_Symbol_Alias_Implementation(
         TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
-        'name',                         #   NativeString
-        'as_name',                      #   None | NativeString
+        'name',                         #   Parser_Symbol
+        'as_name',                      #   Parser_Symbol
     ))
 
 
@@ -113,12 +120,10 @@ class Tree_Symbol_Alias_Implementation(
     #   Interface Tree_Symbol_Alias
     #
     def dump_symbol_alias_tokens(self, f):
-        f.arrange('<symbol-alias {}', self.name)
-
-        if self.as_name is not None:
-            f.write(' as ')
-            f.write(self.as_name)
-
+        f.arrange('<symbol-alias ')
+        self.name.dump_symbol_token(f)
+        f.write(' as ')
+        self.as_name.dump_symbol_token(f)
         f.greater_than_sign()
 
 
@@ -134,7 +139,7 @@ class Tree_Symbol_Alias_Implementation(
 
 @creator
 def create_Tree_Symbol_Alias(name, as_name):
-    assert fact_is_full_native_string                  (name)
-    assert fact_is__native_none__OR__full_native_string(as_name)
+    assert fact_is_parser_symbol(name)
+    assert fact_is_parser_symbol(as_name)
 
     return Tree_Symbol_Alias_Implementation(name, as_name)

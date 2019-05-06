@@ -63,7 +63,7 @@ from    Z.Parser.Global                 import  parser_globals
 statement_version = parser_globals.statement_version
 
 
-if statement_version in ((1, 2)):
+if statement_version in ((1, 2, 3)):
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assert_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assign_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Break_Statement
@@ -79,7 +79,7 @@ if statement_version in ((1, 2)):
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Print_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Raise_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Return_Statement
-elif statement_version == 3:
+elif statement_version == 4:
     from    Z.Tree.Simple_Statement_V3      import      create_Tree_Assert_Statement
     from    Z.Tree.Simple_Statement_V3      import      create_Tree_Assign_Statement
     from    Z.Tree.Simple_Statement_V3      import      create_Tree_Break_Statement
@@ -98,4 +98,4 @@ elif statement_version == 3:
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Statement.py: unknown tree statement version: {!r}', statement_version)
+    FATAL('Z/Tree/Statement.py: unknown tree statement version: {}', statement_version)

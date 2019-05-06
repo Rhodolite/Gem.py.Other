@@ -15,30 +15,19 @@
 #
 #       Version 3:
 #
-#           1)  The second argument to `create_Tree_Module_Alias` is of type `None | FullNativeString`.
-#
-#           2)  The first argument to `create_Tree_Symbol_Alias` is of type `FullNativeString`.
-#
-#           3)  The second argument to `create_Tree_Symbol_Alias` is of type `None | FullNativeString`.
+#           The first argument to `create_Tree_Module_Alias` is a `FullNativeString`.
 #
 #       Version 4:
 #
-#           1)  The second argument to `create_Tree_Module_Alias` is of type `Parser_Symbol_0`.
-#
-#           2)  The first argument to `create_Tree_Symbol_Alias` is of type `Parser_Symbol`.
-#
-#           3)  The second argument to `create_Tree_Symbol_Alias` is of type `Parser_Symbol_0`.
-#
+#           The first argument to `create_Tree_Module_Alias` is a `Parser_Module_Name`.
 #
 
 
 from    Z.Parser.Conjure_Module_Name        import  conjure_parser_module_name
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Parser.Symbol                     import  conjure_parser_symbol_0
 from    Z.Tree.Alias_V4                     import  create_Tree_Module_Alias
 from    Z.Tree.Alias_V4                     import  create_Tree_Symbol_Alias
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
-from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -62,7 +51,7 @@ def convert_module_alias(self):
 
     return create_Tree_Module_Alias(
                conjure_parser_module_name(self.name),
-               conjure_parser_symbol_0   (self.asname),
+               self.asname,
            )
 
 
@@ -79,10 +68,7 @@ def convert_symbol_alias(self):
     assert fact_is_full_native_string                  (self.name)
     assert fact_is__native_none__OR__full_native_string(self.asname)
 
-    return create_Tree_Symbol_Alias(
-               conjure_parser_symbol  (self.name),
-               conjure_parser_symbol_0(self.asname),
-           )
+    return create_Tree_Symbol_Alias(self.name, self.asname)
 
 
 #

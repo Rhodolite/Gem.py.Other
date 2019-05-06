@@ -15,11 +15,23 @@
 #
 #       Version 2:
 #
-#           `Tree_Module_Alias_Implementation.name` is a `FullNativeString`.
+#           `Tree_Alias_Clause` is used for both module aliases & symbol aliases (so as to do a 1-1 emulation of
+#           `_ast`).
 #
 #       Version 3:
 #
-#           `Tree_Module_Alias_Implementation.name` is a `Parser_Module_Name`.
+#           1)  `Tree_Alias_Clause` removed.
+#
+#           2)  `Tree_Module_Alias_Implementation` used for module aliases.
+#
+#           3)  `Tree_Symbol_Alias_Implementation` used for symbol aliases.
+#
+#           NOTE:
+#
+#               In version 2, `Tree_Module_Alias_Implementation` and `Tree_Symbol_Alias_Implementation` are identical
+#               (other than minor differences in result of `__repr__`).
+#
+#               However, this will soon change, in Version 3.
 #
 
 
@@ -34,7 +46,6 @@ if __debug__:
     from    Capital.Fact                import  fact_is__native_none__OR__full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Parser.Module_Name        import  fact_is_parser_module_name
 
 
 #
@@ -44,8 +55,8 @@ class Tree_Module_Alias_Implementation(
         TRAIT_Tree_Module_Alias,
 ):
     __slots__ = ((
-        'name',                         #   Parser_Module_Name
-        'as_name',                      #   None | NativeString
+        'name',                         #   FullNativeString
+        'as_name',                      #   None | FullNativeString
     ))
 
 
@@ -61,8 +72,7 @@ class Tree_Module_Alias_Implementation(
     #   Interface Tree_Module_Alias
     #
     def dump_module_alias_tokens(self, f):
-        f.arrange('<module-alias ')
-        self.name.dump_module_name_token(f)
+        f.arrange('<module-alias {}', self.name)
 
         if self.as_name is not None:
             f.write(' as ')
@@ -83,7 +93,7 @@ class Tree_Module_Alias_Implementation(
 
 @creator
 def create_Tree_Module_Alias(name, as_name):
-    assert fact_is_parser_module_name                  (name)
+    assert fact_is_full_native_string                  (name)
     assert fact_is__native_none__OR__full_native_string(as_name)
 
     return Tree_Module_Alias_Implementation(name, as_name)
@@ -96,8 +106,8 @@ class Tree_Symbol_Alias_Implementation(
         TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
-        'name',                         #   NativeString
-        'as_name',                      #   None | NativeString
+        'name',                         #   FullNativeString
+        'as_name',                      #   None | FullNativeString
     ))
 
 

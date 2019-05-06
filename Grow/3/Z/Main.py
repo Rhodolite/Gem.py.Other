@@ -16,6 +16,7 @@ from    Capital.String                  import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
 from    Z.Path                          import  path_to_file_in_Z_directory
 from    Z.Tree.Convert_Module           import  compile_to_syntax_tree
+from    Z.Tree.Convert_Zone             import  fill_convert_zone
 
 
 #
@@ -42,6 +43,8 @@ def command_parse():
 
     with open(vision_path) as f:
         source = f.read()
+
+    fill_convert_zone()
 
     tree = compile_to_syntax_tree(source, vision_path)
 

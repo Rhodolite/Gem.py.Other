@@ -15,19 +15,30 @@
 #
 #       Version 2:
 #
-#           The first argument to `create_Tree_Module_Alias` is a `FullNativeString`.
+#           1)  `convert_alias_clause` is used for both module aliases & symbol aliases (so as to do a 1-1 emulation
+#                of `_ast`).
+#
+#           2)  Both `convert_full_list_of_module_aliases` and `convert_full_list_of_symbol_aliases` are mapped to
+#               `convert_full_list_of_alias_clauses`.
 #
 #       Version 3:
 #
-#           The first argument to `create_Tree_Module_Alias` is a `Parser_Module_Name`.
+#           1)  `convert_alias_clause` removed.
+#
+#           2)  `convert_module_alias` used for module aliases.
+#
+#           3)  `convert_symbol_alias` used for symbol aliases.
+#
+#           4)  `convert_full_list_of_module_aliases` becomes it's own routine (used for full list of module aliases)
+#
+#           5)  `convert_full_list_of_symbol_aliases` becomes it's own routine (used for full list of symbol aliases).
 #
 
 
-from    Z.Parser.Conjure_Module_Name        import  conjure_parser_module_name
 from    Z.Tree.Alias_V3                     import  create_Tree_Module_Alias
 from    Z.Tree.Alias_V3                     import  create_Tree_Symbol_Alias
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
-from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -49,10 +60,7 @@ def convert_module_alias(self):
     assert fact_is_full_native_string                  (self.name)
     assert fact_is__native_none__OR__full_native_string(self.asname)
 
-    return create_Tree_Module_Alias(
-               conjure_parser_module_name(self.name),
-               self.asname,
-           )
+    return create_Tree_Module_Alias(self.name, self.asname)
 
 
 #

@@ -34,6 +34,9 @@ elif alias_version == 4:
 elif alias_version == 5:
     from    Z.Tree.Convert_Alias_V5     import  convert_full_list_of_module_aliases
     from    Z.Tree.Convert_Alias_V5     import  convert_full_list_of_symbol_aliases
+elif alias_version == 6:
+    from    Z.Tree.Convert_Alias_V6     import  convert_full_list_of_module_aliases
+    from    Z.Tree.Convert_Alias_V6     import  convert_full_list_of_symbol_aliases
 else:
     from    Capital.Core                import  FATAL
 

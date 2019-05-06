@@ -133,14 +133,14 @@ from    Z.Parser.Global                 import  parser_globals
 statement_version = parser_globals.statement_version
 
 
-if statement_version in (1, 2):
+if statement_version in ((1, 2, 3)):
     #
     #   A "Suite" does not exist in statement versions 1 or 2.
     #
     pass
-elif statement_version == 3:
+elif statement_version == 4:
     from    Z.Tree.Suite_V2             import  create_Tree_Suite
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Z/Tree/Suite.py: unknown tree statement version: {!r}', statement_version)
+    FATAL('Z/Tree/Suite.py: unknown tree statement version: {}', statement_version)

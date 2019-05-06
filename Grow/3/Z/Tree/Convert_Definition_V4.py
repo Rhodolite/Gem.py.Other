@@ -4,34 +4,34 @@
 
 
 #
-#   Z.Tree.Convert_Definition_V2 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 2.
+#   Z.Tree.Convert_Definition_V4 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 4.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           The class or function name is `FullNativeList`.
+#   Difference between Version 3 & Version 4.
 #
 #       Version 3:
 #
-#           The class or function name is `Parser_Symbol`.
+#           Uses `FullNativeList of Tree_Statement` for a suite of statements.
+#
+#       Version 4:
+#
+#           Uses `Tree_Suite` for a suite of statements.
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Convert_Decorator            import  convert_some_list_of_decorators
-from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Parameter            import  convert_parameters_all
-from    Z.Tree.Convert_Statement            import  convert_full_list_of_statements
-from    Z.Tree.Definition_V2                import  create_Tree_Class_Definition
-from    Z.Tree.Definition_V2                import  create_Tree_Function_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
+from    Z.Parser.Symbol                         import  conjure_parser_symbol
+from    Z.Tree.Convert_Compound_Statement_V4    import  convert_suite
+from    Z.Tree.Convert_Decorator                import  convert_some_list_of_decorators
+from    Z.Tree.Convert_Expression               import  convert_some_list_of_expressions
+from    Z.Tree.Convert_Parameter                import  convert_parameters_all
+from    Z.Tree.Definition_V3                    import  create_Tree_Class_Definition
+from    Z.Tree.Definition_V3                    import  create_Tree_Function_Definition
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Class_Definition
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Function_Definition
 
 
 if __debug__:
@@ -67,7 +67,7 @@ def convert_class_definition(self):
 
                conjure_parser_symbol           (self.name),
                convert_some_list_of_expressions(self.bases),
-               convert_full_list_of_statements (self.body),
+               convert_suite                   (self.body),
                convert_some_list_of_decorators (self.decorator_list),
            )
 
@@ -97,6 +97,6 @@ def convert_function_definition(self):
 
                conjure_parser_symbol          (self.name),
                convert_parameters_all         (self.args),
-               convert_full_list_of_statements(self.body),
+               convert_suite                  (self.body),
                convert_some_list_of_decorators(self.decorator_list),
            )

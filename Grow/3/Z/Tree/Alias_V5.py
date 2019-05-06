@@ -15,21 +15,19 @@
 #
 #       Version 4:
 #
-#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
+#           1)  `Tree_Module_Alias_Implementation.as_name` is a `None | FullNativeString`.
 #
-#           2)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
+#           2)  `Tree_Symbol_Alias_Implementation.name` is a `FullNativeString`.
+#
+#           3)  `Tree_Symbol_Alias_Implementation.as_name` is a `None | FullNativeString`.
 #
 #       Version 5:
 #
-#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol`.
+#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
 #
-#           2)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol`.
+#           2)  `Tree_Symbol_Alias_Implementation.name` is a `Parser_Symbol`.
 #
-#           3)  Instead of creating either a `Tree_Module_Alias_Implementation` with a `.as_name` of `parser_none`;
-#               instead it simply uses the `Parser_Module_Name` as the `Tree_Alias`
-#
-#           4)  Instead of creating either a `Tree_Symbol_Alias_Implementation` with a `.as_name` of `parser_none`;
-#               instead it simply uses the `Parser_Symbol` as the `Tree_Alias`
+#           3)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
 #
 
 
@@ -44,6 +42,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Module_Name        import  fact_is_parser_module_name
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
+    from    Z.Parser.Symbol             import  fact_is_parser_symbol_0
 
 
 #
@@ -54,7 +53,7 @@ class Tree_Module_Alias_Implementation(
 ):
     __slots__ = ((
         'name',                         #   Parser_Module_Name
-        'as_name',                      #   Parser_Symbol
+        'as_name',                      #   Parser_Symbol_0
     ))
 
 
@@ -72,8 +71,10 @@ class Tree_Module_Alias_Implementation(
     def dump_module_alias_tokens(self, f):
         f.arrange('<module-alias ')
         self.name.dump_module_name_token(f)
-        f.write(' as ')
-        self.as_name.dump_symbol_token(f)
+
+        if self.as_name.has_parser_symbol:
+            f.write(' as ')
+            self.as_name.dump_symbol_token(f)
 
         f.greater_than_sign()
 
@@ -91,7 +92,7 @@ class Tree_Module_Alias_Implementation(
 @creator
 def create_Tree_Module_Alias(name, as_name):
     assert fact_is_parser_module_name(name)
-    assert fact_is_parser_symbol     (as_name)
+    assert fact_is_parser_symbol_0   (as_name)
 
     return Tree_Module_Alias_Implementation(name, as_name)
 
@@ -104,7 +105,7 @@ class Tree_Symbol_Alias_Implementation(
 ):
     __slots__ = ((
         'name',                         #   Parser_Symbol
-        'as_name',                      #   Parser_Symbol
+        'as_name',                      #   Parser_Symbol_0
     ))
 
 
@@ -122,8 +123,11 @@ class Tree_Symbol_Alias_Implementation(
     def dump_symbol_alias_tokens(self, f):
         f.arrange('<symbol-alias ')
         self.name.dump_symbol_token(f)
-        f.write(' as ')
-        self.as_name.dump_symbol_token(f)
+
+        if self.as_name.has_parser_symbol:
+            f.write(' as ')
+            self.as_name.dump_symbol_token(f)
+
         f.greater_than_sign()
 
 
@@ -139,7 +143,7 @@ class Tree_Symbol_Alias_Implementation(
 
 @creator
 def create_Tree_Symbol_Alias(name, as_name):
-    assert fact_is_parser_symbol(name)
-    assert fact_is_parser_symbol(as_name)
+    assert fact_is_parser_symbol  (name)
+    assert fact_is_parser_symbol_0(as_name)
 
     return Tree_Symbol_Alias_Implementation(name, as_name)
