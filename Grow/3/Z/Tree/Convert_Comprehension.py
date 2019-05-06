@@ -14,6 +14,8 @@
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Comprehension                import  create_Tree_Comprehension_Clause
+from    Z.Tree.Convert_Expression           import  convert_expression
+from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Target               import  convert_target
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
 from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR

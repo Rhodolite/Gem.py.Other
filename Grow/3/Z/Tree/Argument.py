@@ -40,23 +40,6 @@ class TRAIT_Tree_Argument(object):
 
 
 #
-#   Import the version of tree aliases we want to use
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-version = parser_globals.argument_version
-
-
-if version == '1':
-    from    Z.Tree.Argument_V1              import  create_Tree_Keyword_Argument
-else:
-    from    Capital.Core                    import  FATAL
-
-    FATAL('Z/Tree/Argument.py: unknown tree argument version: {!r}', version)
-
-
-#
 #   fact_is_tree_argument(v) - Assert the fact that `v` is a `Tree_Argument`.
 #
 if __debug__:
@@ -64,3 +47,22 @@ if __debug__:
         assert v.is_tree_argument
 
         return True
+
+
+#
+#   Import the version of tree aliases we want to use (must appear after the "fact" above).
+#
+from    Z.Parser.Global                 import  parser_globals
+
+
+argument_version = parser_globals.argument_version
+
+
+if argument_version == 1:
+    from    Z.Tree.Argument_V1              import  create_Tree_Keyword_Argument
+elif argument_version == 2:
+    from    Z.Tree.Argument_V2              import  create_Tree_Keyword_Argument
+else:
+    from    Capital.Core                    import  FATAL
+
+    FATAL('Z/Tree/Argument.py: unknown tree argument version: {!r}', argument_version)

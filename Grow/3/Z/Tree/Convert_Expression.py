@@ -10,6 +10,73 @@
 #
 
 
+#
+#<order>
+#
+#   To avoid import loops:
+#
+#           1)  `convert_expression`,
+#
+#           2)  `convert_full_list_of_expressions`, and
+#
+#           3)  `convert_some_list_of_expressions`
+#
+#   must be defined fisrt, since lots of other modules (that we import) need to import these function.s
+#
+
+
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List         import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+
+
+#
+#   convert_expression(v)
+#
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
+#
+#       Calls all the other `convert_*` pseudo methods.
+#
+def convert_expression(v):
+    convert_expression__pseudo_method = (
+            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method[type(v)]
+        )
+
+    return convert_expression__pseudo_method(v)
+
+
+#
+#   convert_none_OR_expression(v)
+#
+#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
+#
+def convert_none_OR_expression(v):
+    if v is None:
+        return None
+
+    return convert_expression(v)
+
+
+#
+#   convert_full_list_of_expressions(sequence)
+#
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `FullNativeList of Tree_Expression`.
+#
+convert_full_list_of_expressions = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
+
+
+#
+#   convert_some_list_of_expressions(sequence)
+#
+#       Convert a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `SomeNativeList of Tree_Expression`.
+#
+convert_some_list_of_expressions = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
+
+
+#</order>
+
+
 from    Capital.Core                        import  trace
 from    Capital.Types                       import  NoneType
 from    Z.Tree.Convert_Argument             import  convert_some_list_of_keyword_arguments
@@ -63,8 +130,6 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Su
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yield_Expression
-from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Produce_Convert_List         import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -534,12 +599,7 @@ def convert_yield_expression(self):
 
 
 #
-#<convert_expression>
-#
-#   NOTE:
-#       Although `convert_expression` and `convert_statement *COULD* be combined into one routine (and also only one
-#       `map__Native_AbstractSyntaxTree_ANY__to__convert_*__pseudo_method` table, it is much clearer to have two
-#       seperate routines, to distinguish betweeen "expression" and "statements"
+#   USED BY: convert_expression (at top of file).
 #
 #   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method
 #           : Map { Native_AbstractSyntaxTree_* : Function }
@@ -571,108 +631,3 @@ map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method
         Native_AbstractSyntaxTree_Unary_Expression        : convert_unary_expression,
         Native_AbstractSyntaxTree_Yield_Expression        : convert_yield_expression,
     }
-
-
-#
-#   convert_expression(v)
-#
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
-#
-#       Calls all the other `convert_*` pseudo methods.
-#
-def convert_expression(v):
-    convert_expression__pseudo_method = (
-            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method[type(v)]
-        )
-
-    return convert_expression__pseudo_method(v)
-#</convert_expression>
-
-
-#
-#   convert_none_OR_expression(v)
-#
-#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
-#
-def convert_none_OR_expression(v):
-    if v is None:
-        return None
-
-    return convert_expression(v)
-
-
-#
-#   convert_full_list_of_expressions(sequence)
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Expression`.
-#
-convert_full_list_of_expressions = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
-
-
-#
-#   convert_some_list_of_expressions(sequence)
-#
-#       Convert a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `SomeNativeList of Tree_Expression`.
-#
-convert_some_list_of_expressions = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
-
-
-#
-#   Handle import loops
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-import  Z.Tree.Convert_Argument
-import  Z.Tree.Convert_Comprehension
-import  Z.Tree.Convert_Except
-import  Z.Tree.Convert_Index
-import  Z.Tree.Convert_Parameter
-import  Z.Tree.Convert_Target
-
-
-Z.Tree.Convert_Argument     .convert_expression               = convert_expression
-Z.Tree.Convert_Comprehension.convert_expression               = convert_expression
-Z.Tree.Convert_Comprehension.convert_some_list_of_expressions = convert_some_list_of_expressions
-Z.Tree.Convert_Except       .convert_none_OR_expression       = convert_none_OR_expression
-Z.Tree.Convert_Index        .convert_expression               = convert_expression
-Z.Tree.Convert_Index        .convert_none_OR_expression       = convert_none_OR_expression
-Z.Tree.Convert_Parameter    .convert_some_list_of_expressions = convert_some_list_of_expressions
-Z.Tree.Convert_Target       .convert_expression               = convert_expression
-Z.Tree.Convert_Target       .convert_some_list_of_expressions = convert_some_list_of_expressions
-
-
-
-target_version = parser_globals.target_version
-
-
-if target_version == 1:
-    import  Z.Tree.Convert_Attribute_V1
-    import  Z.Tree.Convert_Many_V1
-    import  Z.Tree.Convert_Subscript_V1
-
-    Z.Tree.Convert_Attribute_V1.convert_expression               = convert_expression
-    Z.Tree.Convert_Many_V1     .convert_some_list_of_expressions = convert_some_list_of_expressions
-    Z.Tree.Convert_Subscript_V1.convert_expression               = convert_expression
-elif target_version == 2:
-    import  Z.Tree.Convert_Attribute_V2
-    import  Z.Tree.Convert_Many_V1                  #   "_V1" on purpose
-    import  Z.Tree.Convert_Subscript_V1             #   "_V1" on purpose
-
-    Z.Tree.Convert_Attribute_V2.convert_expression               = convert_expression
-    Z.Tree.Convert_Many_V1     .convert_some_list_of_expressions = convert_some_list_of_expressions
-    Z.Tree.Convert_Subscript_V1.convert_expression               = convert_expression
-elif target_version == 3:
-    import  Z.Tree.Convert_Attribute_V3
-    import  Z.Tree.Convert_Many_V3
-    import  Z.Tree.Convert_Subscript_V3
-
-    Z.Tree.Convert_Attribute_V3.convert_expression               = convert_expression
-    Z.Tree.Convert_Many_V3     .convert_some_list_of_expressions = convert_some_list_of_expressions
-    Z.Tree.Convert_Subscript_V3.convert_expression               = convert_expression
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Convert_Expression.py: unknown tree target version: {!r}', target_version)

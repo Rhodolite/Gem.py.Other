@@ -29,6 +29,7 @@
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
+from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Name                 import  convert_name_parameter
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All

@@ -4,49 +4,28 @@
 
 
 #
-#   Z.Tree.Convert_Argument - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes.
+#   Z.Tree.Convert_Argument_V1 - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
-from    Capital.Core                        import  trace
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Keyword_Argument
-from    Z.Tree.Argument                     import  create_Tree_Keyword_Argument
-
-
-if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_some_native_list
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-
-
 #
-#   convert_keyword_argument(self)
+#   Import the version of tree argument we want to use.
 #
-#       Convert a `Native_AbstractSyntaxTree_Keyword_Argument (i.e.: `_ast.keyword`) to a `Tree_Keyword_Argument`.
-#
-assert Native_AbstractSyntaxTree_Keyword_Argument._attributes == (())
-assert Native_AbstractSyntaxTree_Keyword_Argument._fields     == (('arg', 'value'))
+from    Z.Parser.Global                 import  parser_globals
 
 
-def convert_keyword_argument(self):
-    assert fact_is_full_native_string                            (self.arg)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
-
-    return create_Tree_Keyword_Argument(
-               self.arg,
-               convert_expression(self.value),
-           )
+argument_version = parser_globals.argument_version
 
 
-#
-#   convert_some_list_of_keywords(sequence)
-#
-#       Convert `SomeNativeList of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
-#       `SomeNativeList of Tree_Keyword_Argument`
-#
-def convert_some_list_of_keyword_arguments(sequence):
-    assert fact_is_some_native_list(sequence)
+if argument_version == 1:
+    from    Z.Tree.Convert_Argument_V1  import  convert_keyword_argument
+    from    Z.Tree.Convert_Argument_V1  import  convert_some_list_of_keyword_arguments
+elif argument_version == 2:
+    from    Z.Tree.Convert_Argument_V2  import  convert_keyword_argument
+    from    Z.Tree.Convert_Argument_V2  import  convert_some_list_of_keyword_arguments
+else:
+    from    Capital.Core                import  FATAL
 
-    return [convert_keyword_argument(v)   for v in sequence]
+    FATAL('Z/Tree/Convert_Argument.py: unknown tree argument version: {!r}', argument_version)

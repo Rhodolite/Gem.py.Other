@@ -10,7 +10,6 @@
 #
 
 
-
 #
 #   Difference between Version 1 & Version 3
 #
@@ -33,6 +32,7 @@
 #
 
 
+from    Z.Tree.Convert_Expression           import  convert_expression
 from    Z.Tree.Convert_Index                import  convert_index_clause
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
