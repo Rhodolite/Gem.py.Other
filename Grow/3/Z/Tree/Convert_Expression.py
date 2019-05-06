@@ -63,6 +63,8 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Su
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yield_Expression
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List         import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -605,10 +607,7 @@ def convert_none_OR_expression(v):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `FullNativeList of Tree_Expression`.
 #
-def convert_full_list_of_expressions(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_expression(v)   for v in sequence]
+convert_full_list_of_expressions = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
 
 
 #
@@ -617,22 +616,7 @@ def convert_full_list_of_expressions(sequence):
 #       Convert a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `SomeNativeList of Tree_Expression`.
 #
-def convert_some_list_of_expressions(sequence):
-    assert fact_is_some_native_list(sequence)
-
-    return [convert_expression(v)   for v in sequence]
-
-
-#
-#   convert_some_list_of_expressions(sequence)
-#
-#       Convert `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `SomeNativeList of Tree_Expression`.
-#
-def convert_some_list_of_expressions(sequence):
-    assert fact_is_some_native_list(sequence)
-
-    return [convert_expression(v)   for v in sequence]
+convert_some_list_of_expressions = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
 
 
 #

@@ -6,9 +6,9 @@
 #
 #   Capital.Build_Lines_of_NativeString - A "file" like context, that creates lines of text.
 #
-#       A "file" like context, that creates lines of text (saved as NativeStrings; i.e.: `str`).
+#       A "file" like context, that creates lines of text (saved as `NativeString`s; i.e.: `str`).
 #
-#       After the context has exited, it can be iterated, to return the lines of text (as NativeString).
+#       After the context has exited, it can be iterated, to return the lines of text (as `NativeString`).
 #
 
 
@@ -18,7 +18,7 @@ from    Capital.BuildContextLifecycle   import  build_context_lifecycle_entered
 from    Capital.BuildContextLifecycle   import  build_context_lifecycle_exception
 from    Capital.BuildContextLifecycle   import  build_context_lifecycle_exited
 from    Capital.BuildContextLifecycle   import  build_context_lifecycle_iterating
-from    Capital.BuildNativeString       import  build_native_string
+from    Capital.Build_NativeString      import  build_native_string
 from    Capital.ChangePrefix            import  change_prefix
 from    Capital.Core                    import  bind_method
 from    Capital.Core                    import  creator
@@ -38,7 +38,6 @@ if __debug__:
 
 #
 #   Build_Lines_of_NativeString
-#
 #
 #   Important Members (excludes members named "_*", or "cached_method__*"):
 #

@@ -14,6 +14,7 @@ from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Statement            import  convert_full_list_of_statements
 from    Z.Tree.Except                       import  create_Tree_Except_Handler
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Except_Handler
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -83,8 +84,7 @@ def convert_except_handler(self):
 #
 #       Hence this routine just calls `convert_except_handler`.
 #
-def convert_except_clause(v):
-    return convert_except_handler(v)
+convert_except_clause = convert_except_handler
 
 
 #
@@ -93,7 +93,6 @@ def convert_except_clause(v):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Except_Handler` (i.e.: `list of _ast.ExceptHandler`) to
 #       a `NativeList of Tree_Except_Clause`.
 #
-def convert_full_list_of_except_clauses(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_except_clause(v)   for v in sequence]
+convert_full_list_of_except_clauses = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_except_clause)
+    )

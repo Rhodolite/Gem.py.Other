@@ -19,6 +19,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_El
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Extended_Slice_Index
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Slice_Index
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -134,7 +135,6 @@ def convert_index_clause(v):
 #       Convert `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `FullNativeList of Tree_Index_clause`.
 #
-def convert_full_list_of_index_clauses(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_index_clause(v)   for v in sequence]
+convert_full_list_of_index_clauses = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_index_clause)
+    )

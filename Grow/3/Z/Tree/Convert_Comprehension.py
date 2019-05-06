@@ -16,6 +16,7 @@ from    Capital.Core                        import  trace
 from    Z.Tree.Comprehension                import  create_Tree_Comprehension_Clause
 from    Z.Tree.Convert_Target               import  convert_target
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -54,7 +55,6 @@ def convert_comprehension_clause(self):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Comprehension_Clause`
 #       (i.e.: `list of _ast.Comprehension`) to a `FullNativeList of Tree_Comprehension_Clause`.
 #
-def convert_full_list_of_comprehensions(sequence):
-    assert fact_is_some_native_list(sequence)
-
-    return [convert_comprehension_clause(v)   for v in sequence]
+convert_full_list_of_comprehensions = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_comprehension_clause)
+    )

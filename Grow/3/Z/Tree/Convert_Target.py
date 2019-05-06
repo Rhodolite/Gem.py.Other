@@ -19,6 +19,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Na
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -110,7 +111,4 @@ def convert_target(v):
 #
 #       Each of the expressions must be a target expresion.
 #
-def convert_full_list_of_targets(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_target(v)   for v in sequence]
+convert_full_list_of_targets = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_target)

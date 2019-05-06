@@ -12,6 +12,7 @@
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Expression           import  convert_expression
+from    Z.Tree.Produce_Convert_List         import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -43,7 +44,4 @@ def convert_decorator(self):
 #       Convert some `NativeList of Native_AbstractSyntaxTree_Decorator` (i.e.: `list of _ast.decorator`) to a
 #       `NativeList of Tree_Decorator`.
 #
-def convert_some_list_of_decorators(sequence):
-    assert fact_is_some_native_list(sequence)
-
-    return [convert_decorator(v)   for v in sequence]
+convert_some_list_of_decorators = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_decorator)

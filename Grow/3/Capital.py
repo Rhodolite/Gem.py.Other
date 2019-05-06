@@ -1,6 +1,8 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
+
+#
 #   CAPITAL - Common Application Programming Interface, Transcending All Languages.
 #
 #       Since we are translating to multiple languages, we want the same API (Application Programming Interface) to

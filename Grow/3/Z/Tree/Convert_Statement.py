@@ -10,6 +10,10 @@
 #
 
 
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List         import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+
+
 #
 #<order>
 #
@@ -22,33 +26,6 @@
 #
 #       This is so other files can import the functions below from this file.
 #
-
-
-#
-#   convert_full_list_of_statements(sequence)
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `NativeList of Tree_Statement`.
-#
-#
-def convert_full_list_of_statements(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_statement(v)   for v in sequence]
-
-
-#
-#   convert_some_list_of_statements(sequence)
-#
-#       Convert a `NativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `NativeList of Tree_Statement`.
-#
-#
-def convert_some_list_of_statements(sequence):
-    assert fact_is_some_native_list(sequence)
-
-    return [convert_statement(v)   for v in sequence]
-
 
 #
 #   convert_statement(v)
@@ -64,6 +41,26 @@ def convert_statement(v):
         )
 
     return convert_statement__pseudo_method(v)
+
+
+#
+#   convert_full_list_of_statements(sequence)
+#
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `NativeList of Tree_Statement`.
+#
+convert_full_list_of_statements = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)
+
+
+#
+#   convert_some_list_of_statements(sequence)
+#
+#       Convert a `NativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `NativeList of Tree_Statement`.
+#
+convert_some_list_of_statements = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)
+
+
 #</order>
 
 

@@ -12,6 +12,7 @@
 
 from    Z.Tree.Alias_V1                     import  create_Tree_Alias_Clause
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -42,10 +43,9 @@ def convert_alias_clause(self):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
 #       `FullNativeList of Tree_Alias_Clause`.
 #
-def convert_full_list_of_alias_clauses(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_alias_clause(v)   for v in sequence]
+convert_full_list_of_alias_clauses = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_alias_clause)
+    )
 
 
 #

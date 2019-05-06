@@ -40,7 +40,6 @@ from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTre
 from    Z.Tree.Operator                         import  tree_add_operator
 from    Z.Tree.Operator                         import  tree_binary_and_operator
 from    Z.Tree.Operator                         import  tree_binary_exclusive_or_operator
-from    Z.Tree.Operator                         import  tree_contains_operator
 from    Z.Tree.Operator                         import  tree_compare_different_operator
 from    Z.Tree.Operator                         import  tree_compare_equal_operator
 from    Z.Tree.Operator                         import  tree_compare_greater_than_operator
@@ -49,6 +48,7 @@ from    Z.Tree.Operator                         import  tree_compare_identity_op
 from    Z.Tree.Operator                         import  tree_compare_less_than_operator
 from    Z.Tree.Operator                         import  tree_compare_less_than_or_equal_operator
 from    Z.Tree.Operator                         import  tree_compare_not_equal_operator
+from    Z.Tree.Operator                         import  tree_contains_operator
 from    Z.Tree.Operator                         import  tree_divide_operator
 from    Z.Tree.Operator                         import  tree_excludes_operator
 from    Z.Tree.Operator                         import  tree_floor_divide_operator
@@ -64,6 +64,7 @@ from    Z.Tree.Operator                         import  tree_positive_operator
 from    Z.Tree.Operator                         import  tree_power_operator
 from    Z.Tree.Operator                         import  tree_right_shift_operator
 from    Z.Tree.Operator                         import  tree_subtract_operator
+from    Z.Tree.Produce_Convert_List             import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -212,7 +213,6 @@ def convert_unary_operator(self):
 #
 #       Each of the elements must be a compare operator.
 #
-def convert_full_list_of_compare_operators(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_compare_operator(v)   for v in sequence]
+convert_full_list_of_compare_operators = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_compare_operator)
+    )

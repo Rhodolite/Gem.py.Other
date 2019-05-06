@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.BuildNativeString - Build a NativeString
+#   Capital.Build_NativeString - Build a `NativeString`
 #
 
 

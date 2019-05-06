@@ -24,7 +24,7 @@ if __debug__:
 #
 #   convert_keyword_argument(self)
 #
-#       Convert a `Native_AbstractSyntaxTree_?` (i.e.: `_ast.?`) to a `Tree_List_?`.
+#       Convert a `Native_AbstractSyntaxTree_Keyword_Argument (i.e.: `_ast.keyword`) to a `Tree_Keyword_Argument`.
 #
 assert Native_AbstractSyntaxTree_Keyword_Argument._attributes == (())
 assert Native_AbstractSyntaxTree_Keyword_Argument._fields     == (('arg', 'value'))

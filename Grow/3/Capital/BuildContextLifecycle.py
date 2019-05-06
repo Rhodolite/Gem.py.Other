@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.BuildConextLifecyle - Lifecycle for a build context (`with` statement handler)
+#   Capital.BuildContextLifecyle - Lifecycle for a build context (`with` statement handler)
 #
 
 

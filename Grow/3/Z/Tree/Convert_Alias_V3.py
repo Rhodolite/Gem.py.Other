@@ -23,10 +23,11 @@
 #
 
 
+from    Z.Parser.Conjure_Module_Name        import  conjure_parser_module_name
 from    Z.Tree.Alias_V3                     import  create_Tree_Module_Alias
 from    Z.Tree.Alias_V3                     import  create_Tree_Symbol_Alias
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
-from    Z.Parser.Conjure_Module_Name        import  conjure_parser_module_name
+from    Z.Tree.Produce_Convert_List         import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -76,10 +77,7 @@ def convert_symbol_alias(self):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
 #       `FullNativeList of Tree_Module_Alias`.
 #
-def convert_full_list_of_module_aliases(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_module_alias(v)   for v in sequence]
+convert_full_list_of_module_aliases = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_module_alias)
 
 
 #
@@ -88,7 +86,4 @@ def convert_full_list_of_module_aliases(sequence):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
 #       `FullNativeList of Tree_Symbol_Alias`.
 #
-def convert_full_list_of_symbol_aliases(sequence):
-    assert fact_is_full_native_list(sequence)
-
-    return [convert_symbol_alias(v)   for v in sequence]
+convert_full_list_of_symbol_aliases = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_symbol_alias)
