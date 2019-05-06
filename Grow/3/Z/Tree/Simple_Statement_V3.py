@@ -44,6 +44,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is__native_none__OR__full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_expression
     from    Z.Tree.Expression           import  fact_is_tree_expression
@@ -768,7 +769,7 @@ class Tree_Print_Statement(
         'column',                       #   SubstantialInteger
 
         'destination',                  #   None | Tree_Expression
-        'values',                       #   FullNativeList of Tree_Expression
+        'values',                       #   SomeNativeList of Tree_Expression
         'newline',                      #   NativeBoolean
     ))
 
@@ -828,7 +829,7 @@ def create_Tree_Print_Statement(line_number, column, destination, values, newlin
     assert fact_is_substantial_integer(column)
 
     assert fact_is__native_none__OR__tree_expression(destination)
-    assert fact_is_full_native_list                 (values)
+    assert fact_is_some_native_list                 (values)
     assert fact_is_native_boolean                   (newline)
 
     return Tree_Print_Statement(line_number, column, destination, values, newline)
@@ -928,7 +929,7 @@ class Tree_Raise_Statement(
         f.arrange('<raise @{}:{}', self.line_number, self.column)
 
         if self.type is None:
-            assert instance is traceback is None
+            assert self.instance is self.traceback is None
         else:
             f.space()
             self.type.dump_evaluate_tokens(f)

@@ -2,7 +2,6 @@
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 
-assert 0
 
 #
 #   Z.Tree.Convert_Statement_V1 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 1.
@@ -104,90 +103,32 @@ if __debug__:
 from    Z.Parser.Global                 import  parser_globals
 
 
-statement_version = parser_globals.statement_version
+assert parser_globals.statement_version == 1
 
 
-if statement_version == 1:
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_break_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_continue_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_delete_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_execute_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_expression_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_pass_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_print_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_raise_statement
-    from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement
-elif statement_version in ((2, 3, 4)):
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_assert_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_assign_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_break_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_continue_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_delete_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_execute_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_expression_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_global_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_from_import_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_import_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_modify_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_pass_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_print_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_raise_statement
-    from    Z.Tree.Convert_Simple_Statement_V2      import  convert_return_statement
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {}', statement_version)
-
-
-if statement_version == 1:
-    from    Z.Tree.Convert_Definition_V1            import  convert_class_definition
-    from    Z.Tree.Convert_Definition_V1            import  convert_function_definition
-elif statement_version == 2:
-    from    Z.Tree.Convert_Definition_V2            import  convert_class_definition
-    from    Z.Tree.Convert_Definition_V2            import  convert_function_definition
-elif statement_version == 3:
-    from    Z.Tree.Convert_Definition_V3            import  convert_class_definition
-    from    Z.Tree.Convert_Definition_V3            import  convert_function_definition
-elif statement_version == 4:
-    from    Z.Tree.Convert_Definition_V4            import  convert_class_definition
-    from    Z.Tree.Convert_Definition_V4            import  convert_function_definition
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {}', statement_version)
-
-
-if statement_version == 1:
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement
-elif statement_version in ((2, 3)):
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_for_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_if_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_except_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_finally_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_while_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_with_statement
-elif statement_version == 4:
-    from    Z.Tree.Convert_Compound_Statement_V4    import  convert_for_statement
-    from    Z.Tree.Convert_Compound_Statement_V4    import  convert_if_statement
-    from    Z.Tree.Convert_Compound_Statement_V4    import  convert_try_except_statement
-    from    Z.Tree.Convert_Compound_Statement_V4    import  convert_try_finally_statement
-    from    Z.Tree.Convert_Compound_Statement_V4    import  convert_while_statement
-    from    Z.Tree.Convert_Compound_Statement_V4    import  convert_with_statement
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {}', statement_version)
+from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
+from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
+from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement
+from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement
+from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement
+from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement
+from    Z.Tree.Convert_Definition_V1            import  convert_class_definition
+from    Z.Tree.Convert_Definition_V1            import  convert_function_definition
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_break_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_continue_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_delete_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_execute_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_expression_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_from_import_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_global_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_import_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_modify_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_pass_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_print_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_raise_statement
+from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement
 
 
 #

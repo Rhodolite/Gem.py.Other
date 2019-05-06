@@ -44,7 +44,7 @@ if __debug__:
 
 
 #
-#   convert_class_definition
+#   convert_class_definition(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Class_Definition` (i.e.: `_ast.ClassDef`) to a `Tree_Class_Definition`.
 #
@@ -52,28 +52,28 @@ assert Native_AbstractSyntaxTree_Class_Definition._attributes == (('lineno', 'co
 assert Native_AbstractSyntaxTree_Class_Definition._fields     == (('name', 'bases', 'body', 'decorator_list'))
 
 
-def convert_class_definition(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_class_definition(z, v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_full_native_string(self.name)
-    assert fact_is_some_native_list  (self.bases)
-    assert fact_is_full_native_list  (self.body)
-    assert fact_is_some_native_list  (self.decorator_list)
+    assert fact_is_full_native_string(v.name)
+    assert fact_is_some_native_list  (v.bases)
+    assert fact_is_full_native_list  (v.body)
+    assert fact_is_some_native_list  (v.decorator_list)
 
     return create_Tree_Class_Definition(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               conjure_parser_symbol           (self.name),
-               convert_some_list_of_expressions(self.bases),
-               convert_suite                   (self.body),
-               convert_some_list_of_decorators (self.decorator_list),
+               conjure_parser_symbol           (v.name),
+               convert_some_list_of_expressions(v.bases),
+               convert_suite                   (v.body),
+               convert_some_list_of_decorators (v.decorator_list),
            )
 
 
 #
-#   convert_function_definition
+#   convert_function_definition(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Function_Definition` (i.e.: `_ast.FunctionDef`) to a
 #       `Tree_Function_Definition`.
@@ -82,21 +82,21 @@ assert Native_AbstractSyntaxTree_Function_Definition._attributes == (('lineno', 
 assert Native_AbstractSyntaxTree_Function_Definition._fields     == (('name', 'args', 'body', 'decorator_list'))
 
 
-def convert_function_definition(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_function_definition(z, v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_full_native_string                           (self.name)
-    assert fact_is__native__abstract_syntax_tree__parameters_all(self.args)
-    assert fact_is_full_native_list                             (self.body)
-    assert fact_is_some_native_list                             (self.decorator_list)
+    assert fact_is_full_native_string                           (v.name)
+    assert fact_is__native__abstract_syntax_tree__parameters_all(v.args)
+    assert fact_is_full_native_list                             (v.body)
+    assert fact_is_some_native_list                             (v.decorator_list)
 
     return create_Tree_Function_Definition(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               conjure_parser_symbol          (self.name),
-               convert_parameters_all         (self.args),
-               convert_suite                  (self.body),
-               convert_some_list_of_decorators(self.decorator_list),
+               conjure_parser_symbol          (v.name),
+               convert_parameters_all         (v.args),
+               convert_suite                  (v.body),
+               convert_some_list_of_decorators(v.decorator_list),
            )

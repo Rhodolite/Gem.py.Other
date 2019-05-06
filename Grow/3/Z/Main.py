@@ -14,10 +14,8 @@ from    Capital.Global                  import  capital_globals
 from    Capital.String                  import  conjure_string
 from    Capital.String                  import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
-from    Z.Path                          import  path_to_file_in_Z_directory
-from    Z.Tree.Convert_Module           import  compile_to_syntax_tree
-from    Z.Tree.Convert_Zone             import  fill_convert_zone
 from    Z.Parser.Global                 import  parser_globals
+from    Z.Path                          import  path_to_file_in_Z_directory
 
 
 #
@@ -45,10 +43,17 @@ def command_parse():
     with open(vision_path) as f:
         source = f.read()
 
-    if parser_globals.version >= 2:
-        fill_convert_zone()
+    if parser_globals.version == 1:
+        from    Z.Tree.Convert_Module_V1    import  compile_to_syntax_tree_v1
 
-    tree = compile_to_syntax_tree(source, vision_path)
+        tree = compile_to_syntax_tree_v1(source, vision_path)
+    else:
+        from    Z.Tree.Convert_Module_V2    import  compile_to_syntax_tree_v2
+        from    Z.Tree.Convert_Zone         import  fill_convert_zone
+
+        z = fill_convert_zone()
+
+        tree = compile_to_syntax_tree_v2(z, source, vision_path)
 
     #trace('tree: {}', tree)
 

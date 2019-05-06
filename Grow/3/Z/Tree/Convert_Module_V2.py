@@ -4,13 +4,25 @@
 
 
 #
-#   Z.Tree.Convert_Module - Convert Python Abstract Syntax Tree Module to `Tree_Module`.
+#   Z.Tree.Convert_Module_V2 - Convert Python Abstract Syntax Tree Module to `Tree_Module`, Version 2.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
-from    Z.Tree.Convert_Statement            import  convert_some_list_of_statements
+#
+#   Difference between Version 1 & Version 2.
+#
+#       Version 1:
+#
+#           Does not use `Convert_Zone`.
+#
+#       Version 2:
+#
+#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
+#
+
+
 from    Z.Tree.Module                       import  create_Tree_Module
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Module
 from    Z.Tree.Native_AbstractSyntaxTree    import  native__compile__to__native__abstract_syntax_tree
@@ -22,7 +34,7 @@ if __debug__:
 
 
 #
-#   convert_module
+#   convert_module(z, v)
 #
 #       Convert an instance of `Native_AbstractSyntaxTree_Module` (i.e.: `_ast.Module`) to an instance of
 #       `SyntaxTree_Module`.
@@ -31,17 +43,17 @@ assert Native_AbstractSyntaxTree_Module._attributes == (())
 assert Native_AbstractSyntaxTree_Module._fields     == (('body',))
 
 
-def convert_module(self):
-    assert fact_is__native__abstract_syntax_tree__module(self)
-    assert fact_is_some_native_list                     (self.body)
+def convert_module(z, v):
+    assert fact_is__native__abstract_syntax_tree__module(v)
+    assert fact_is_some_native_list                     (v.body)
 
     return create_Tree_Module(
-               convert_some_list_of_statements(self.body),
+               z.convert_some_list_of_statements(z, v.body),
            )
 
 
 #
-#   compile_to_syntax_tree - Compile `source` to an instance of `SyntaxTree_Module`.
+#   compile_to_syntax_tree_v2 - Compile `source` to an instance of `SyntaxTree_Module`.
 #
 #       Two step process:
 #
@@ -50,7 +62,7 @@ def convert_module(self):
 #       2.  Convert the `Native_AbstractSyntaxTree_Module` (i.e.: `_ast.Module`) instance to an instance of
 #           `SyntaxTree_Module`.
 #
-def compile_to_syntax_tree(source, filename):
+def compile_to_syntax_tree_v2(z, source, filename):
     native__abstract_syntax_tree = native__compile__to__native__abstract_syntax_tree(source, filename)
 
-    return convert_module(native__abstract_syntax_tree)
+    return convert_module(z, native__abstract_syntax_tree)

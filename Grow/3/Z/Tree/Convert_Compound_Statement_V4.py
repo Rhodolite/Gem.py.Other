@@ -38,7 +38,6 @@ from    Z.Tree.Compound_Statement_V4        import  create_Tree_With_Statement
 from    Z.Tree.Convert_Except_V2            import  convert_full_list_of_except_clauses
 from    Z.Tree.Convert_Expression           import  convert_expression
 from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Statement_V2         import  convert_statement
 from    Z.Tree.Convert_Target               import  convert_none_OR_target
 from    Z.Tree.Convert_Target               import  convert_target
 from    Z.Tree.Convert_Zone                 import  convert_zone
@@ -62,28 +61,28 @@ if __debug__:
 
 
 #
-#   convert_test_statement(self, create) - common code for `convert_if_statement` and `convert_while_statement`.
+#   convert_test_statement(v, create) - common code for `convert_{if,while}_statement`.
 #
-def convert_test_statement(self, create):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_test_statement(v, create):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.test)
-    assert fact_is_full_native_list                              (self.body)
-    assert fact_is_some_native_list                              (self.orelse)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.test)
+    assert fact_is_full_native_list                              (v.body)
+    assert fact_is_some_native_list                              (v.orelse)
 
     return create(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression(self.test),
-               convert_suite     (self.body),
-               convert_suite_0   (self.orelse),
+               convert_expression(v.test),
+               convert_suite     (v.body),
+               convert_suite_0   (v.orelse),
            )
 
 
 #
-#   convert_for_statement(self)
+#   convert_for_statement(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_For_Statement` (i.e.: `_ast.For`) to a `Tree_Extended_For_Statement`.
 #
@@ -91,28 +90,28 @@ assert Native_AbstractSyntaxTree_For_Statement._attributes == (('lineno', 'col_o
 assert Native_AbstractSyntaxTree_For_Statement._fields     == (('target', 'iter', 'body', 'orelse'))
 
 
-def convert_for_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_for_statement(z, v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (self.target)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.iter)
-    assert fact_is_full_native_list                              (self.body)
-    assert fact_is_some_native_list                              (self.orelse)
+    assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (v.target)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.iter)
+    assert fact_is_full_native_list                              (v.body)
+    assert fact_is_some_native_list                              (v.orelse)
 
     return create_Tree_For_Statement(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_target    (self.target),
-               convert_expression(self.iter),
-               convert_suite     (self.body),
-               convert_suite_0   (self.orelse),
+               convert_target    (v.target),
+               convert_expression(v.iter),
+               convert_suite     (v.body),
+               convert_suite_0   (v.orelse),
            )
 
 
 #
-#   convert_if_statement
+#   convert_if_statement(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_If_Statement` (i.e.: `_ast.If`) to a `Tree_If_Statement`.
 #
@@ -120,12 +119,12 @@ assert Native_AbstractSyntaxTree_If_Statement._attributes == (('lineno', 'col_of
 assert Native_AbstractSyntaxTree_If_Statement._fields     == (('test', 'body', 'orelse'))
 
 
-def convert_if_statement(self):
-    return convert_test_statement(self, create_Tree_If_Statement)
+def convert_if_statement(z, v):
+    return convert_test_statement(v, create_Tree_If_Statement)
 
 
 #
-#   convert_try_except_statement
+#   convert_try_except_statement(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Try_Except_Statement` (i.e.: `_ast.TryExcept`) to a
 #       `Tree_Try_Except_Statement`.
@@ -134,26 +133,26 @@ assert Native_AbstractSyntaxTree_Try_Except_Statement._attributes == (('lineno',
 assert Native_AbstractSyntaxTree_Try_Except_Statement._fields     == (('body', 'handlers', 'orelse'))
 
 
-def convert_try_except_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_try_except_statement(z, v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_full_native_list(self.body)
-    assert fact_is_full_native_list(self.handlers)
-    assert fact_is_some_native_list(self.orelse)
+    assert fact_is_full_native_list(v.body)
+    assert fact_is_full_native_list(v.handlers)
+    assert fact_is_some_native_list(v.orelse)
 
     return create_Tree_Try_Except_Statement(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_suite                      (self.body),
-               convert_full_list_of_except_clauses(convert_zone, self.handlers),
-               convert_suite_0                    (self.orelse),
+               convert_suite                      (v.body),
+               convert_full_list_of_except_clauses(convert_zone, v.handlers),
+               convert_suite_0                    (v.orelse),
            )
 
 
 #
-#   convert_try_finally_statement
+#   convert_try_finally_statement(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Try_Finally_Statement` (i.e.: `_ast.TryFinally`) to a
 #       `Tree_Try_Finally_Statement`.
@@ -162,43 +161,24 @@ assert Native_AbstractSyntaxTree_Try_Finally_Statement._attributes == (('lineno'
 assert Native_AbstractSyntaxTree_Try_Finally_Statement._fields     == (('body', 'finalbody'))
 
 
-def convert_try_finally_statement(self):
-    if 0:
-        #
-        #   Copy this disabled code into a new convert method, to trace the attributes & fields and help write the new
-        #   method.
-        #
-        #   This code was used to write most of the convert methods in the "Z/Test/Convert_*.py" files :)
-        #
-        function_name = 'convert_try_finally_statement'
+def convert_try_finally_statement(z, v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-        trace('{}:              {!r}', function_name, self)
-        trace('{}._attributes:  {!r}', function_name, self._attributes)
-        trace('{}._fields:      {!r}', function_name, self._fields)
-
-        trace('{}.lineno        {!r}', function_name, self.lineno)
-        trace('{}.col_offset    {!r}', function_name, self.col_offset)
-
-        trace('{}.body:      {!r}', function_name, self.body)
-        trace('{}.finalbody: {!r}', function_name, self.finalbody)
-
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
-
-    assert fact_is_full_native_list(self.body)
-    assert fact_is_full_native_list(self.finalbody)
+    assert fact_is_full_native_list(v.body)
+    assert fact_is_full_native_list(v.finalbody)
 
     return create_Tree_Try_Finally_Statement(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_suite(self.body),
-               convert_suite(self.finalbody),
+               convert_suite(v.body),
+               convert_suite(v.finalbody),
            )
 
 
 #
-#   convert_while_statement
+#   convert_while_statement(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_While_Statement` (i.e.: `_ast.While`) to a `Tree_While_Statement`.
 #
@@ -206,12 +186,12 @@ assert Native_AbstractSyntaxTree_While_Statement._attributes == (('lineno', 'col
 assert Native_AbstractSyntaxTree_While_Statement._fields     == (('test', 'body', 'orelse'))
 
 
-def convert_while_statement(self):
-    return convert_test_statement(self, create_Tree_While_Statement)
+def convert_while_statement(z, v):
+    return convert_test_statement(v, create_Tree_While_Statement)
 
 
 #
-#   convert_with_statement(self)
+#   convert_with_statement(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_With_Statement` (i.e.: `_ast.With`) to a `Tree_Extended_With_Statement`.
 #
@@ -219,21 +199,21 @@ assert Native_AbstractSyntaxTree_With_Statement._attributes == (('lineno', 'col_
 assert Native_AbstractSyntaxTree_With_Statement._fields     == (('context_expr', 'optional_vars', 'body'))
 
 
-def convert_with_statement(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_with_statement(z, v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                (self.context_expr)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET(self.optional_vars)
-    assert fact_is_full_native_list                                              (self.body)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                (v.context_expr)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET(v.optional_vars)
+    assert fact_is_full_native_list                                              (v.body)
 
     return create_Tree_With_Statement(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression    (self.context_expr),
-               convert_none_OR_target(self.optional_vars),
-               convert_suite         (self.body),
+               convert_expression    (v.context_expr),
+               convert_none_OR_target(v.optional_vars),
+               convert_suite         (v.body),
            )
 
 
@@ -244,15 +224,18 @@ def convert_with_statement(self):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
 #
 #           1)  a single statement; or
+#
 #           2)  a `Tree_Suite`.
 #
 def convert_suite(sequence):
     assert fact_is_full_native_list(sequence)
 
-    if len(sequence) == 1:
-        return convert_statement(sequence[0])
+    z = convert_zone
 
-    return create_Tree_Suite([convert_statement(v)   for v in sequence])
+    if len(sequence) == 1:
+        return z.convert_statement(z, sequence[0])
+
+    return create_Tree_Suite([z.convert_statement(z, v)   for v in sequence])
 
 
 
@@ -262,7 +245,9 @@ def convert_suite(sequence):
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
 #
 #           1)  `parser_none`;
+#
 #           2)  a single statement; or
+#
 #           3)  a `Tree_Suite`.
 #
 def convert_suite_0(sequence):
@@ -273,7 +258,9 @@ def convert_suite_0(sequence):
     if total == 0:
         return parser_none
 
-    if total == 1:
-        return convert_statement(sequence[0])
+    z = convert_zone
 
-    return create_Tree_Suite([convert_statement(v)   for v in sequence])
+    if total == 1:
+        return z.convert_statement(z, sequence[0])
+
+    return create_Tree_Suite([z.convert_statement(z, v)   for v in sequence])
