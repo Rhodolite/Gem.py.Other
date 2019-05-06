@@ -121,20 +121,33 @@ if statement_version in ((1, 2)):
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_print_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_raise_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {!r}', statement_version)
+
 
 if statement_version == 1:
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_class_definition
+    from    Z.Tree.Convert_Definition_V1            import  convert_class_definition
+    from    Z.Tree.Convert_Definition_V1            import  convert_function_definition
+elif statement_version == 2:
+    from    Z.Tree.Convert_Definition_V2            import  convert_class_definition
+    from    Z.Tree.Convert_Definition_V2            import  convert_function_definition
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {!r}', statement_version)
+
+
+if statement_version == 1:
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
-    from    Z.Tree.Convert_Compound_Statement_V1    import  convert_function_definition
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement
 elif statement_version == 2:
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_class_definition
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_for_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_function_definition
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_if_statement
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_except_statement
     from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_finally_statement
