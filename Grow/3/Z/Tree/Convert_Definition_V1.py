@@ -16,8 +16,6 @@ from    Z.Tree.Convert_Parameter            import  convert_parameters_all
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
 from    Z.Tree.Definition_V1                import  create_Tree_Class_Definition
 from    Z.Tree.Definition_V1                import  create_Tree_Function_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
 
 
 if __debug__:
@@ -27,6 +25,8 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameters_all
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
 
 
 #

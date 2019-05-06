@@ -32,37 +32,6 @@ from    Z.Tree.Convert_Expression           import  convert_none_OR_expression
 from    Z.Tree.Convert_Operator             import  convert_modify_operator
 from    Z.Tree.Convert_Target               import  convert_full_list_of_targets
 from    Z.Tree.Convert_Target               import  convert_target
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Raise_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Return_Statement
-from    Z.Tree.Statement                    import  create_Tree_Assert_Statement
-from    Z.Tree.Statement                    import  create_Tree_Assign_Statement
-from    Z.Tree.Statement                    import  create_Tree_Break_Statement
-from    Z.Tree.Statement                    import  create_Tree_Continue_Statement
-from    Z.Tree.Statement                    import  create_Tree_Delete_Statement
-from    Z.Tree.Statement                    import  create_Tree_Execute_Statement
-from    Z.Tree.Statement                    import  create_Tree_Expression_Statement
-from    Z.Tree.Statement                    import  create_Tree_From_Import_Statement
-from    Z.Tree.Statement                    import  create_Tree_Global_Statement
-from    Z.Tree.Statement                    import  create_Tree_Import_Statement
-from    Z.Tree.Statement                    import  create_Tree_Modify_Statement
-from    Z.Tree.Statement                    import  create_Tree_Pass_Statement
-from    Z.Tree.Statement                    import  create_Tree_Print_Statement
-from    Z.Tree.Statement                    import  create_Tree_Raise_Statement
-from    Z.Tree.Statement                    import  create_Tree_Return_Statement
 
 
 if __debug__:
@@ -78,6 +47,22 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Raise_Statement
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Return_Statement
 
 
 #
@@ -111,7 +96,7 @@ def convert_assert_statement(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                    (v.test)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.msg)
 
-    return create_Tree_Assert_Statement(
+    return z.create_Tree_Assert_Statement(
                v.lineno,
                v.col_offset,
 
@@ -138,7 +123,7 @@ def convert_assign_statement(z, v):
     assert fact_is_full_native_list                              (v.targets)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
-    return create_Tree_Assign_Statement(
+    return z.create_Tree_Assign_Statement(
                v.lineno,
                v.col_offset,
 
@@ -159,7 +144,7 @@ assert Native_AbstractSyntaxTree_Break_Statement._fields     == (())
 def convert_break_statement(z, v):
     assert fact_is_convert_zone(z)
 
-    return convert_keyword_statement(v, create_Tree_Break_Statement)
+    return convert_keyword_statement(v, z.create_Tree_Break_Statement)
 
 
 #
@@ -175,7 +160,7 @@ assert Native_AbstractSyntaxTree_Continue_Statement._fields     == (())
 def convert_continue_statement(z, v):
     assert fact_is_convert_zone(z)
 
-    return convert_keyword_statement(v, create_Tree_Continue_Statement)
+    return convert_keyword_statement(v, z.create_Tree_Continue_Statement)
 
 
 #
@@ -195,7 +180,7 @@ def convert_delete_statement(z, v):
 
     assert fact_is_full_native_list(v.targets)
 
-    return create_Tree_Delete_Statement(
+    return z.create_Tree_Delete_Statement(
                v.lineno,
                v.col_offset,
 
@@ -223,7 +208,7 @@ def convert_execute_statement(z, v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.globals)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.locals)
 
-    return create_Tree_Execute_Statement(
+    return z.create_Tree_Execute_Statement(
                v.lineno,
                v.col_offset,
 
@@ -251,7 +236,7 @@ def convert_expression_statement(z, v):
 
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
-    return create_Tree_Expression_Statement(
+    return z.create_Tree_Expression_Statement(
                v.lineno,
                v.col_offset,
 
@@ -277,7 +262,7 @@ def convert_global_statement(z, v):
 
     assert fact_is_full_native_list(v.names)
 
-    return create_Tree_Global_Statement(
+    return z.create_Tree_Global_Statement(
                v.lineno,
                v.col_offset,
 
@@ -305,7 +290,7 @@ def convert_from_import_statement(z, v):
     assert fact_is_full_native_list   (v.names)
     assert fact_is_substantial_integer(v.level)
 
-    return create_Tree_From_Import_Statement(
+    return z.create_Tree_From_Import_Statement(
                v.lineno,
                v.col_offset,
 
@@ -333,7 +318,7 @@ def convert_import_statement(z, v):
 
     assert fact_is_full_native_list(v.names)
 
-    return create_Tree_Import_Statement(
+    return z.create_Tree_Import_Statement(
                v.lineno,
                v.col_offset,
 
@@ -360,7 +345,7 @@ def convert_modify_statement(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__MODIFY_OPERATOR(v.op)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (v.value)
 
-    return create_Tree_Modify_Statement(
+    return z.create_Tree_Modify_Statement(
                v.lineno,
                v.col_offset,
 
@@ -382,7 +367,7 @@ assert Native_AbstractSyntaxTree_Pass_Statement._fields     == (())
 def convert_pass_statement(z, v):
     assert fact_is_convert_zone(z)
 
-    return convert_keyword_statement(v, create_Tree_Pass_Statement)
+    return convert_keyword_statement(v, z.create_Tree_Pass_Statement)
 
 
 #
@@ -404,7 +389,7 @@ def convert_print_statement(z, v):
     assert fact_is_some_native_list                                                  (v.values)
     assert fact_is_native_boolean                                                    (v.nl)
 
-    return create_Tree_Print_Statement(
+    return z.create_Tree_Print_Statement(
                v.lineno,
                v.col_offset,
 
@@ -433,7 +418,7 @@ def convert_raise_statement(z, v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.inst)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.tback)
 
-    return create_Tree_Raise_Statement(
+    return z.create_Tree_Raise_Statement(
                v.lineno,
                v.col_offset,
 
@@ -460,7 +445,7 @@ def convert_return_statement(z, v):
 
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
-    return create_Tree_Return_Statement(
+    return z.create_Tree_Return_Statement(
                v.lineno,
                v.col_offset,
 

@@ -55,8 +55,25 @@ class Convert_Zone(object):
         'convert_full_list_of_statements',          #   Function
         'convert_some_list_of_statements',          #   Function
         'convert_statement',                        #   Function
+        'create_Tree_Assert_Statement',             #   Function
+        'create_Tree_Assign_Statement',             #   Function
+        'create_Tree_Break_Statement',              #   Function
+        'create_Tree_Class_Definition',             #   Function
+        'create_Tree_Continue_Statement',           #   Function
+        'create_Tree_Delete_Statement',             #   Function
+        'create_Tree_Execute_Statement',            #   Function
+        'create_Tree_Expression_Statement',         #   Function
         'create_Tree_For_Statement',                #   Function
+        'create_Tree_From_Import_Statement',        #   Function
+        'create_Tree_Function_Definition',          #   Function
+        'create_Tree_Global_Statement',             #   Function
         'create_Tree_If_Statement',                 #   Function
+        'create_Tree_Import_Statement',             #   Function
+        'create_Tree_Modify_Statement',             #   Function
+        'create_Tree_Pass_Statement',               #   Function
+        'create_Tree_Print_Statement',              #   Function
+        'create_Tree_Raise_Statement',              #   Function
+        'create_Tree_Return_Statement',             #   Function
         'create_Tree_Try_Except_Statement',         #   Function
         'create_Tree_Try_Finally_Statement',        #   Function
         'create_Tree_While_Statement',              #   Function
@@ -150,12 +167,12 @@ def fill_convert_zone():
     #   Statements
     #
     if statement_version in ((2, 3)):
-        from    Z.Tree.Compound_Statement_V1        import  create_Tree_For_Statement
-        from    Z.Tree.Compound_Statement_V1        import  create_Tree_If_Statement
-        from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Except_Statement
-        from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Statement
-        from    Z.Tree.Compound_Statement_V1        import  create_Tree_While_Statement
-        from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement
+        from    Z.Tree.Compound_Statement_V1        import  create_Tree_For_Statement           #   "_V1" on purpose
+        from    Z.Tree.Compound_Statement_V1        import  create_Tree_If_Statement            #   "_V1" on purpose
+        from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Except_Statement    #   "_V1" on purpose
+        from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Statement   #   "_V1" on purpose
+        from    Z.Tree.Compound_Statement_V1        import  create_Tree_While_Statement         #   "_V1" on purpose
+        from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement          #   "_V1" on purpose
     elif statement_version == 4:
         from    Z.Tree.Compound_Statement_V4        import  create_Tree_For_Statement
         from    Z.Tree.Compound_Statement_V4        import  create_Tree_If_Statement
@@ -226,6 +243,54 @@ def fill_convert_zone():
         FATAL_unknown_version('statement', statement_version)
 
 
+    if statement_version == 2:
+        from    Z.Tree.Definition_V1    import  create_Tree_Class_Definition    #   "_V1" on purpose
+        from    Z.Tree.Definition_V1    import  create_Tree_Function_Definition #   "_V1" on purpose
+    elif statement_version == 3:
+        from    Z.Tree.Definition_V3    import  create_Tree_Class_Definition
+        from    Z.Tree.Definition_V3    import  create_Tree_Function_Definition
+    elif statement_version == 4:
+        from    Z.Tree.Definition_V4    import  create_Tree_Class_Definition
+        from    Z.Tree.Definition_V4    import  create_Tree_Function_Definition
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((1, 2, 3)):
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assert_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assign_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Break_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Continue_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Delete_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Execute_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Expression_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_From_Import_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Global_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Import_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Modify_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Pass_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Print_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Raise_Statement
+        from    Z.Tree.Simple_Statement_V1      import      create_Tree_Return_Statement
+    elif statement_version == 4:
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Assert_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Assign_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Break_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Continue_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Delete_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Execute_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Expression_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_From_Import_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Global_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Import_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Modify_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Pass_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Print_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Raise_Statement
+        from    Z.Tree.Simple_Statement_V3      import      create_Tree_Return_Statement
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
     #
     #   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function
     #           : Map { Native_AbstractSyntaxTree_* : Function }
@@ -295,8 +360,25 @@ def fill_convert_zone():
     z.convert_full_list_of_statements   = convert_full_list_of_statements
     z.convert_some_list_of_statements   = convert_some_list_of_statements
     z.convert_statement                 = convert_statement
+    z.create_Tree_Assert_Statement      = create_Tree_Assert_Statement
+    z.create_Tree_Assign_Statement      = create_Tree_Assign_Statement
+    z.create_Tree_Break_Statement       = create_Tree_Break_Statement
+    z.create_Tree_Class_Definition      = create_Tree_Class_Definition
+    z.create_Tree_Continue_Statement    = create_Tree_Continue_Statement
+    z.create_Tree_Delete_Statement      = create_Tree_Delete_Statement
+    z.create_Tree_Execute_Statement     = create_Tree_Execute_Statement
+    z.create_Tree_Expression_Statement  = create_Tree_Expression_Statement
     z.create_Tree_For_Statement         = create_Tree_For_Statement
+    z.create_Tree_From_Import_Statement = create_Tree_From_Import_Statement
+    z.create_Tree_Function_Definition   = create_Tree_Function_Definition
+    z.create_Tree_Global_Statement      = create_Tree_Global_Statement
     z.create_Tree_If_Statement          = create_Tree_If_Statement
+    z.create_Tree_Import_Statement      = create_Tree_Import_Statement
+    z.create_Tree_Modify_Statement      = create_Tree_Modify_Statement
+    z.create_Tree_Pass_Statement        = create_Tree_Pass_Statement
+    z.create_Tree_Print_Statement       = create_Tree_Print_Statement
+    z.create_Tree_Raise_Statement       = create_Tree_Raise_Statement
+    z.create_Tree_Return_Statement      = create_Tree_Return_Statement
     z.create_Tree_Try_Except_Statement  = create_Tree_Try_Except_Statement
     z.create_Tree_Try_Finally_Statement = create_Tree_Try_Finally_Statement
     z.create_Tree_While_Statement       = create_Tree_While_Statement

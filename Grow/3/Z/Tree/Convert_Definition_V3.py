@@ -27,10 +27,6 @@ from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Convert_Decorator            import  convert_some_list_of_decorators
 from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Parameter            import  convert_parameters_all
-from    Z.Tree.Definition_V3                import  create_Tree_Class_Definition
-from    Z.Tree.Definition_V3                import  create_Tree_Function_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
 
 
 if __debug__:
@@ -39,8 +35,10 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameters_all
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
 
 
 #
@@ -63,7 +61,7 @@ def convert_class_definition(z, v):
     assert fact_is_full_native_list  (v.body)
     assert fact_is_some_native_list  (v.decorator_list)
 
-    return create_Tree_Class_Definition(
+    return z.create_Tree_Class_Definition(
                v.lineno,
                v.col_offset,
 
@@ -95,7 +93,7 @@ def convert_function_definition(z, v):
     assert fact_is_full_native_list                             (v.body)
     assert fact_is_some_native_list                             (v.decorator_list)
 
-    return create_Tree_Function_Definition(
+    return z.create_Tree_Function_Definition(
                v.lineno,
                v.col_offset,
 
