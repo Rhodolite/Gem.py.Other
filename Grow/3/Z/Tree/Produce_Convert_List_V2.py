@@ -45,7 +45,7 @@ def produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert):
     #       `FullNativeList of Tree_*`.
     #
     def convert__full_list_of__Native_AbstractSyntaxTree_STAR(z, sequence):
-        assert fact_is_convert_zone(z)
+        assert fact_is_convert_zone    (z)
         assert fact_is_full_native_list(sequence)
 
         return [convert(z, v)   for v in sequence]
@@ -73,7 +73,7 @@ def produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert):
     #       `SomeNativeList of Tree_*`.
     #
     def convert__some_list_of__Native_AbstractSyntaxTree_STAR(z, sequence):
-        assert fact_is_convert_zone(z)
+        assert fact_is_convert_zone    (z)
         assert fact_is_some_native_list(sequence)
 
         return [convert(z, v)   for v in sequence]

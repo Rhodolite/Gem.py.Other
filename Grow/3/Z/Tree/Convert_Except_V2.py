@@ -35,6 +35,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_substantial_integer
     from    Capital.Fact                        import  fact_is__native_none__OR__full_native_string
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
 
 
@@ -49,6 +50,8 @@ assert Native_AbstractSyntaxTree_Except_Handler._fields     == (('type', 'name',
 
 
 def convert_except_handler(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 

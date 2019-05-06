@@ -26,13 +26,13 @@
 from    Z.Tree.Alias_V1                     import  create_Tree_Alias_Clause
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Convert_Zone                 import  convert_zone
 
 
 if __debug__:
     from    Capital.Fact                    import  fact_is_full_native_list
     from    Capital.Fact                    import  fact_is_full_native_string
     from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
+    from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
 
 
 #
@@ -51,6 +51,8 @@ assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname')
 
 
 def convert_module_alias(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_full_native_string                  (v.name)
     assert fact_is__native_none__OR__full_native_string(v.asname)
 
@@ -73,6 +75,8 @@ assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname')
 
 
 def convert_symbol_alias(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_full_native_string                  (v.name)
     assert fact_is__native_none__OR__full_native_string(v.asname)
 

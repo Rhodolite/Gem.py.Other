@@ -32,7 +32,6 @@ from    Z.Tree.Convert_Expression           import  convert_none_OR_expression
 from    Z.Tree.Convert_Operator             import  convert_modify_operator
 from    Z.Tree.Convert_Target               import  convert_full_list_of_targets
 from    Z.Tree.Convert_Target               import  convert_target
-from    Z.Tree.Convert_Zone                 import  convert_zone
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
@@ -73,6 +72,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__MODIFY_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
@@ -103,6 +103,8 @@ assert Native_AbstractSyntaxTree_Assert_Statement._fields     == (('test', 'msg'
 
 
 def convert_assert_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -128,6 +130,8 @@ assert Native_AbstractSyntaxTree_Assign_Statement._fields     == (('targets', 'v
 
 
 def convert_assign_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -153,6 +157,8 @@ assert Native_AbstractSyntaxTree_Break_Statement._fields     == (())
 
 
 def convert_break_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     return convert_keyword_statement(v, create_Tree_Break_Statement)
 
 
@@ -167,6 +173,8 @@ assert Native_AbstractSyntaxTree_Continue_Statement._fields     == (())
 
 
 def convert_continue_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     return convert_keyword_statement(v, create_Tree_Continue_Statement)
 
 
@@ -180,6 +188,8 @@ assert Native_AbstractSyntaxTree_Delete_Statement._fields     == (('targets',))
 
 
 def convert_delete_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -204,6 +214,8 @@ assert Native_AbstractSyntaxTree_Execute_Statement._fields     == (('body', 'glo
 
 
 def convert_execute_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -232,6 +244,8 @@ assert Native_AbstractSyntaxTree_Expression_Statement._fields     == (('value',)
 
 
 def convert_expression_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -256,6 +270,8 @@ assert Native_AbstractSyntaxTree_Global_Statement._fields     == (('names',))
 
 
 def convert_global_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -280,6 +296,8 @@ assert Native_AbstractSyntaxTree_From_Import_Statement._fields     == (('module'
 
 
 def convert_from_import_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -292,7 +310,7 @@ def convert_from_import_statement(z, v):
                v.col_offset,
 
                v.module,
-               convert_full_list_of_symbol_aliases(convert_zone, v.names),
+               convert_full_list_of_symbol_aliases(z, v.names),
                v.level,
            )
 
@@ -308,6 +326,8 @@ assert Native_AbstractSyntaxTree_Import_Statement._fields     == (('names',))
 
 
 def convert_import_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -317,7 +337,7 @@ def convert_import_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_full_list_of_module_aliases(convert_zone, v.names),
+               convert_full_list_of_module_aliases(z, v.names),
            )
 
 
@@ -331,6 +351,8 @@ assert Native_AbstractSyntaxTree_Modify_Statement._fields     == (('target', 'op
 
 
 def convert_modify_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -358,6 +380,8 @@ assert Native_AbstractSyntaxTree_Pass_Statement._fields     == (())
 
 
 def convert_pass_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     return convert_keyword_statement(v, create_Tree_Pass_Statement)
 
 
@@ -371,6 +395,8 @@ assert Native_AbstractSyntaxTree_Print_Statement._fields     == (('dest', 'value
 
 
 def convert_print_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -398,6 +424,8 @@ assert Native_AbstractSyntaxTree_Raise_Statement._fields     == (('type', 'inst'
 
 
 def convert_raise_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -425,6 +453,8 @@ assert Native_AbstractSyntaxTree_Return_Statement._fields     == (('value',))
 
 
 def convert_return_statement(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 

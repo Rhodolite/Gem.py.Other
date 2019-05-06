@@ -41,11 +41,11 @@ if __debug__:
 def convert_statement(z, v):
     assert fact_is_convert_zone(z)
 
-    convert_statement__pseudo_method = (
-            z.map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method[type(v)]
+    convert_statement_function = (
+            z.map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function[type(v)]
         )
 
-    return convert_statement__pseudo_method(z, v)
+    return convert_statement_function(z, v)
 
 
 #

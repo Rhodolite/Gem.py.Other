@@ -40,6 +40,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameters_all
 
 
@@ -53,6 +54,8 @@ assert Native_AbstractSyntaxTree_Class_Definition._fields     == (('name', 'base
 
 
 def convert_class_definition(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -67,7 +70,7 @@ def convert_class_definition(z, v):
 
                conjure_parser_symbol           (v.name),
                convert_some_list_of_expressions(v.bases),
-               convert_suite                   (v.body),
+               convert_suite                   (z, v.body),
                convert_some_list_of_decorators (v.decorator_list),
            )
 
@@ -83,6 +86,8 @@ assert Native_AbstractSyntaxTree_Function_Definition._fields     == (('name', 'a
 
 
 def convert_function_definition(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
@@ -97,6 +102,6 @@ def convert_function_definition(z, v):
 
                conjure_parser_symbol          (v.name),
                convert_parameters_all         (v.args),
-               convert_suite                  (v.body),
+               convert_suite                  (z, v.body),
                convert_some_list_of_decorators(v.decorator_list),
            )

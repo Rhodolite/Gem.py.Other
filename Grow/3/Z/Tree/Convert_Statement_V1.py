@@ -37,11 +37,11 @@ from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_
 #       Calls all the other `convert_*` pseudo methods.
 #
 def convert_statement(v):
-    convert_statement__pseudo_method = (
-            map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method[type(v)]
+    convert_statement__function = (
+            map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function[type(v)]
         )
 
-    return convert_statement__pseudo_method(v)
+    return convert_statement__function(v)
 
 
 #
@@ -132,13 +132,13 @@ from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement
 
 
 #
-#   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method
+#   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function
 #           : Map { Native_AbstractSyntaxTree_* : Function }
 #
 #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_statement" psuedo method
 #       (actually to a function).
 #
-map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__pseudo_method = {
+map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function = {
         Native_AbstractSyntaxTree_Assert_Statement      : convert_assert_statement,
         Native_AbstractSyntaxTree_Assign_Statement      : convert_assign_statement,
         Native_AbstractSyntaxTree_Break_Statement       : convert_break_statement,
