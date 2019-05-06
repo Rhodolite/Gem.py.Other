@@ -33,19 +33,31 @@ class Parser_Symbol_V1(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL("Parser_Symbol_V1.operator new (`__new__`): A Parser_Symbol_V1 may not be created");
+            class_name = Meta.__name__
+
+            FATAL("{}.operator new (`__new__`): A {} may not be created", class_name, class_name)
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL("Parser_Symbol_V1.constructor (`__init__`): A Parser_Symbol_V1 may not be contructed");
+            class_name = self.__class__.__name__
+
+            FATAL("{}.constructor (`__init__`): A {} may not be constructed", class_name, class_name)
+
+
+    #
+    #   Interface Parser_Symbol
+    #
+    def dump_symbol_token(self, f):
+        f.arrange('<$ {}>', self)
+
 
 
     #
     #   Public
     #
     def __repr__(self):
-        return arrange('<Parser_Symbol_V1 {}>', self)
+        return arrange('<{} {}>', self.__class__.__name__, self)
 
 
 conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_V1)

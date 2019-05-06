@@ -139,14 +139,16 @@ class FullString(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL('{}: A FullString may not be created',
-                  "Capital.Private.FullString_V5.FullString.operator new (`__new__`)")
+            FATAL('{}: A FullString may not be {}',
+                  "Capital.Private.FullString_V6.FullString.operator new (`__new__`)",
+                  'created')
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL('{}: A FullString may not be constructed',
-                  "Capital.Private.FullString_V5.FullString.constructor (`__init__`)")
+            FATAL('{}: A FullString may not be {}',
+                  "Capital.Private.FullString_V6.FullString.constructor (`__init__`)",
+                  'constructed')
 
 
     #

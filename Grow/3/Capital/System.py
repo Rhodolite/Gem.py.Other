@@ -23,6 +23,4 @@ is_python_2 = (Python_System.version_info.major == 2)
 is_python_3 = (Python_System.version_info.major == 3)
 
 
-
-
 assert (is_python_2 ^ is_python_3)              #   Must be [exclusive] either python 2.* or python 3.*

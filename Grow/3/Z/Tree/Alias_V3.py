@@ -34,8 +34,6 @@ if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Module_Name        import  fact_is_parser_module_name
-    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_expression
-    from    Z.Tree.Expression           import  fact_is_tree_expression
 
 
 #

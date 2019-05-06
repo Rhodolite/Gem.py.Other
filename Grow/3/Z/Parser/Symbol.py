@@ -8,6 +8,12 @@
 #
 
 
+from    Z.Parser.Global                 import  parser_globals
+
+
+symbol_version = parser_globals.symbol_version
+
+
 #
 #   interface Parser_Symbol
 #       documentation
@@ -20,7 +26,7 @@
 #           is_parser_symbol := true
 #
 #       method
-#           dump_alias_tokens (f : Build_DumpToken)
+#           dump_symbol_token(f : Build_DumpToken)
 #
 class TRAIT_Parser_Symbol(object):
     __slots__ = (())
@@ -30,30 +36,31 @@ class TRAIT_Parser_Symbol(object):
         is_parser_symbol = True
 
 
-#
-#   interface Parser_Symbol_0
-#       documentation
-#           Interface to an identifier used in the Z parser; OR the `parser_none`.
-#
-#       attribute
-#           has_parser_symbol : Boolean
-#
-#       if has_parser_symbol
-#           implements Parser_Symbol
-#
-#       debug
-#           is_parser_symbol_0 := true
-#
-class TRAIT_Parser_Symbol_0(object):
-    __slots__ = (())
+if symbol_version >= 3:
+    #
+    #   interface Parser_Symbol_0
+    #       documentation
+    #           Interface to an identifier used in the Z parser; OR the `parser_none`.
+    #
+    #       attribute
+    #           has_parser_symbol : Boolean
+    #
+    #       if has_parser_symbol
+    #           implements Parser_Symbol
+    #
+    #       debug
+    #           is_parser_symbol_0 := true
+    #
+    class TRAIT_Parser_Symbol_0(object):
+        __slots__ = (())
 
 
-    if __debug__:
-        is_parser_symbol_0 = True
+        if __debug__:
+            is_parser_symbol_0 = True
 
 
-   #@virtual
-    has_parser_symbol = True
+       #@virtual
+        has_parser_symbol = True
 
 
 #
@@ -99,16 +106,13 @@ if __debug__:
 #
 #   Import the version of symbol we want to use (must be after the "facts" above)
 #
-from    Z.Parser.Global                 import  parser_globals
-
-
-symbol_version = parser_globals.symbol_version
-
-
 if symbol_version == 1:
     from    Z.Parser.Symbol_V1          import  conjure_parser_symbol
 elif symbol_version == 2:
     from    Z.Parser.Symbol_V2          import  conjure_parser_symbol
+elif symbol_version == 3:
+    from    Z.Parser.Symbol_V3          import  conjure_parser_symbol
+    from    Z.Parser.Symbol_V3          import  conjure_parser_symbol_0
 else:
     from    Capital.Core                import  FATAL
 
