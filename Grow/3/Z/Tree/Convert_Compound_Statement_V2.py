@@ -1,4 +1,25 @@
+#
+#   Copyright (c) 2019 Joy Diamond.  All rights reserved.
+#
+
+
+#
+#   Z.Tree.Convert_Compound_Statement_V1 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 1.
+#
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
+
+
+#
+#   Difference between Version 1 & Version 2.
+#
+#       Version 1:
+#
+#           Uses `FullNativeList of Tree_Statement` for a suite of statements.
+#
+#       Version 2:
+#
+#           Uses `Tree_Suite` for a suite of statements.
 #
 
 
@@ -17,7 +38,6 @@ from    Z.Tree.Convert_Except               import  convert_full_list_of_except_
 from    Z.Tree.Convert_Expression           import  convert_expression
 from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Parameter            import  convert_parameters_all
-from    Z.Tree.Convert_Statement            import  convert_full_list_of_statements
 from    Z.Tree.Convert_Statement            import  convert_some_list_of_statements
 from    Z.Tree.Convert_Statement            import  convert_statement
 from    Z.Tree.Convert_Target               import  convert_none_OR_target
@@ -191,7 +211,7 @@ def convert_try_except_statement(self):
 
                convert_suite                      (self.body),
                convert_full_list_of_except_clauses(self.handlers),
-               convert_some_list_of_statements    (self.orelse),
+               convert_suite_0                    (self.orelse),
            )
 
 

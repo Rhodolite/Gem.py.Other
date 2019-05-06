@@ -261,7 +261,7 @@ def convert_while_statement(self):
 #
 #   convert_with_statement(self)
 #
-#       Convert a `Native_AbstractSyntaxTree_With_Statement` (i.e.: `_ast.With`) to a `Tree_Extended_With_Statement`.
+#       Convert a `Native_AbstractSyntaxTree_With_Statement` (i.e.: `_ast.With`) to a `Tree_With_Statement`.
 #
 assert Native_AbstractSyntaxTree_With_Statement._attributes == (('lineno', 'col_offset'))
 assert Native_AbstractSyntaxTree_With_Statement._fields     == (('context_expr', 'optional_vars', 'body'))

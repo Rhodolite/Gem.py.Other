@@ -405,7 +405,7 @@ class Tree_Try_Except_Statement(
 
         'body',                         #   Tree_Statement
         'except_handlers',              #   FullNativeList of Tree_Except_Handler
-        'else_clause_0',                #   SomeNativeList of Tree_Statement
+        'else_clause_0',                #   Tree_Suite_0
     ))
 
 
@@ -436,10 +436,9 @@ class Tree_Try_Except_Statement(
             for v in self.except_handlers:
                 v.dump_except_clause_tokens(f)
 
-            if len(self.else_clause_0) > 0:
-                with f.indent('else {', '}'):
-                    for v in self.else_clause_0:
-                        v.dump_suite_tokens(f)
+            if self.else_clause_0.suite_estimate:
+                with f.indent('} else {'):
+                    self.else_clause_0.dump_suite_tokens(f)
 
         f.line('>')
 
@@ -459,7 +458,7 @@ def create_Tree_Try_Except_Statement(line_number, column, body, except_handlers,
 
     assert fact_is_tree_suite      (body)
     assert fact_is_full_native_list(except_handlers)
-    assert fact_is_some_native_list(else_clause_0)
+    assert fact_is_tree_suite_0    (else_clause_0)
 
     return Tree_Try_Except_Statement(line_number, column, body, except_handlers, else_clause_0)
 

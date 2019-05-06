@@ -15,12 +15,11 @@
 #
 #       Version 1:
 #
-#           Pass in `self.attr` as the `attribute` parameter (fourth parameter) to `create_Tree_Attribute`.
+#           The `attribute` parameter (fourth parameter) to `create_Tree_Attribute` is a `NativeString`.
 #
 #       Version 2:
 #
-#           Pass in `conjure_parser_symbol(self.attr)` as the `attribute` parameter (fourth parameter) to
-#           `create_Tree_Attribute`.
+#           The `attribute` parameter (fourth parameter) to `create_Tree_Attribute` is a `Parser_Symbol`.
 #
 
 

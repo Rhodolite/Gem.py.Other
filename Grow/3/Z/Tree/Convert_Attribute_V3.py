@@ -80,9 +80,9 @@ def convert__delete_load_OR_store_context__TO__create_attribute_function(self):
 #       Convert a `Native_AbstractSyntaxTree_Attribute_Expression` (i.e.: `_ast.Attribute`) to one of the following
 #       three classes:
 #
-#               Tree_Delete_Attribute
-#               Tree_Evaluate_Attribute
-#               Tree_Store_Attribute
+#           Tree_Delete_Attribute
+#           Tree_Evaluate_Attribute
+#           Tree_Store_Attribute
 #
 #       The context (`.ctx` member) must be an instance of one of the following types:
 #
