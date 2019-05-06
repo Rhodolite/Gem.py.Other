@@ -13,7 +13,7 @@
 #
 #       Version 3:
 #
-#           1)  `Parser_Symbol_Implementation` does not implement `Tree_Alias`.
+#           1)  `Parser_Symbol_Implementation` does not implement `Tree_{Module,Symbol}_Alias`.
 #
 #           2)  `Parser_Symbol_Implementation` implements `Parser_Symbol_0`.
 #
@@ -21,7 +21,7 @@
 #
 #       Version 4:
 #
-#           1)  `Parser_Symbol_Implementation` implements `Tree_Alias`.
+#           1)  `Parser_Symbol_Implementation` implements `Tree_{Module,Symbol}_Alias`.
 #
 #           2)  `Parser_Symbol_Implementation` does not implement `Parser_Symbol_0`.
 #
@@ -38,7 +38,8 @@ from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.None                       import  parser_none
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
-from    Z.Tree.Alias                        import  TRAIT_Tree_Alias
+from    Z.Tree.Alias                        import  TRAIT_Tree_Module_Alias
+from    Z.Tree.Alias                        import  TRAIT_Tree_Symbol_Alias
 
 
 if __debug__:
@@ -51,7 +52,8 @@ class Parser_Symbol_Implementation(
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,
-        TRAIT_Tree_Alias,
+        TRAIT_Tree_Module_Alias,
+        TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = (())
 
@@ -91,10 +93,17 @@ class Parser_Symbol_Implementation(
 
 
     #
-    #   Interface Tree_Alias
+    #   Interface Tree_Module_Alias
     #
-    def dump_alias_tokens(self, f):
-        f.arrange('<alias {}>', self)
+    def dump_module_alias_tokens(self, f):
+        f.arrange('<$ module-alias {}>', self)
+
+
+    #
+    #   Interface Tree_Symbol_Alias
+    #
+    def dump_symbol_alias_tokens(self, f):
+        f.arrange('<$ symbol-alias {}>', self)
 
 
     #

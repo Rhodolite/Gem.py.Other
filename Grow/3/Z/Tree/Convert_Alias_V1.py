@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Alias_V1 - Convert Python Abstract Syntax Tree Alias to `Tree_Alias`, Version 1.
+#   Z.Tree.Convert_Alias_V1 - Convert Python Abstract Syntax Tree Alias to `Tree_Alias_Clause`, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -40,7 +40,7 @@ def convert_alias_clause(self):
 #   convert_full_list_of_alias_clauses(sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
-#       `FullNativeList of Tree_Alias`.
+#       `FullNativeList of Tree_Alias_Clause`.
 #
 def convert_full_list_of_alias_clauses(sequence):
     assert fact_is_full_native_list(sequence)

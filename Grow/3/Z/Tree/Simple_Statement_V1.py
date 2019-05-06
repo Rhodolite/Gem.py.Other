@@ -439,7 +439,7 @@ class Tree_From_Import_Statement(
         'column',                       #   SubstantialInteger
 
         'module',                       #   NativeString
-        'names',                        #   NativeList of Tree_Alias
+        'names',                        #   FullNativeList of Tree_Symbol_Alias
         'level',                        #   SubstantialInteger
     ))
 
@@ -475,7 +475,7 @@ class Tree_From_Import_Statement(
             else:
                 f.write(', ')
 
-            v.dump_alias_tokens(f)
+            v.dump_symbol_alias_tokens(f)
 
         f.write(']')
         #</>
@@ -578,18 +578,18 @@ class Tree_Import_Statement(
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
-        'aliases',                      #   NativeList of Tree_Alias
+        'module_aliases',               #   NativeList of Tree_Module_Alias
     ))
 
 
     #
     #   Private
     #
-    def __init__(self, line_number, column, aliases):
+    def __init__(self, line_number, column, module_aliases):
         self.line_number = line_number
         self.column      = column
 
-        self.aliases = aliases
+        self.module_aliases = module_aliases
 
 
     #
@@ -599,19 +599,19 @@ class Tree_Import_Statement(
         f.arrange('<import @{}:{} ', self.line_number, self.column)
 
         #
-        #<aliases>
+        #<module_aliases>
         #
         f.write('[')
 
         first = True
 
-        for v in self.aliases:
+        for v in self.module_aliases:
             if first:
                 first = False
             else:
                 f.write(', ')
 
-            v.dump_alias_tokens(f)
+            v.dump_module_alias_tokens(f)
 
         f.write(']')
         #</>
@@ -623,17 +623,17 @@ class Tree_Import_Statement(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Import_Statement @{}:{} {!r}>', self.line_number, self.column, self.aliases)
+        return arrange('<Tree_Import_Statement @{}:{} {!r}>', self.line_number, self.column, self.module_aliases)
 
 
 @creator
-def create_Tree_Import_Statement(line_number, column, aliases):
+def create_Tree_Import_Statement(line_number, column, module_aliases):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_full_native_list(aliases)
+    assert fact_is_full_native_list(module_aliases)
 
-    return Tree_Import_Statement(line_number, column, aliases)
+    return Tree_Import_Statement(line_number, column, module_aliases)
 
 
 #

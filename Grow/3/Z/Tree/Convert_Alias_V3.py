@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Alias_V3 - Convert Python Abstract Syntax Tree Alias to `Tree_Alias`, Version 3.
+#   Z.Tree.Convert_Alias_V3 - Convert Python Abstract Syntax Tree Alias to `Tree_{Module,Symbol}_Alias`, Version 3.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #

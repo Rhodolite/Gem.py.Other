@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Alias_V1 - Implementation of `Tree_Alias`, Version 1.
+#   Z.Tree.Alias_V1 - Implementation of `Tree_{Module,Symbol}_Alias`, Version 1.
 #
 #       See "Z.Tree.Alias" for an explanation of "tree aliases".
 #
@@ -12,7 +12,8 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Tree.Alias                    import  TRAIT_Tree_Alias
+from    Z.Tree.Alias                    import  TRAIT_Tree_Module_Alias
+from    Z.Tree.Alias                    import  TRAIT_Tree_Symbol_Alias
 
 
 if __debug__:
@@ -28,7 +29,8 @@ if __debug__:
 #       Again, see "Z.Tree.Alias" for an explanation of "tree aliases".
 #
 class Tree_Alias_Clause(
-        TRAIT_Tree_Alias,
+        TRAIT_Tree_Module_Alias,
+        TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
         'name',                         #   FullNativeString
@@ -45,10 +47,23 @@ class Tree_Alias_Clause(
 
 
     #
-    #   Interface Tree_Alias
+    #   Interface Tree_Module_Alias
     #
-    def dump_alias_tokens(self, f):
-        f.arrange('<alias {}', self.name)
+    def dump_module_alias_tokens(self, f):
+        f.arrange('<module-alias {}', self.name)
+
+        if self.as_name is not None:
+            f.write(' as ')
+            f.write(self.as_name)
+
+        f.greater_than_sign()
+
+
+    #
+    #   Interface Tree_Symbol_Alias
+    #
+    def dump_symbol_alias_tokens(self, f):
+        f.arrange('<symbol-alias {}', self.name)
 
         if self.as_name is not None:
             f.write(' as ')

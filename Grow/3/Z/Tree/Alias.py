@@ -32,41 +32,83 @@
 
 
 #
-#   interface Tree_Alias - Interface to tree classes that represent aliases.
+#   interface Tree_Module_Alias
+#       documentation
+#           Interface to tree classes that represent module aliases.
 #
-#       interface Tree_Alias
-#           debug
-#               is_tree_alias := true
+#       debug
+#           is_tree_module_alias := true
 #
-#           method
-#               dump_alias_tokens(f : Build_DumpToken)
+#       method
+#           dump_module_alias_tokens(f : Build_DumpToken)
 #
-class TRAIT_Tree_Alias(object):
+class TRAIT_Tree_Module_Alias(object):
     __slots__ = (())
 
 
     if __debug__:
-        is_tree_alias = True
+        is_tree_module_alias = True
+
+
+#
+#   interface Tree_Symbol_Alias
+#       documentation
+#           Interface to tree classes that represent symbol aliases.
+#
+#       debug
+#           is_tree_symbol_alias := true
+#
+#       method
+#           dump_symbol_alias_tokens(f : Build_DumpToken)
+#
+class TRAIT_Tree_Symbol_Alias(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_symbol_alias = True
 
 
 
 #
 #   USAGE:
 #
-#       v.is_tree_alias                     #   Test if `v` is a `Tree_Alias`.
+#       v.dump_module_alias_tokens(f)       #   Dump the tokens representing the tree module alias to `f`.
 #
-#       v.dump_alias_tokens(f)              #   Dump the tokens representing the tree alias to `f`.
-#
-#       assert fact_is_tree_alias(v) )      #   Assert that `v` is a tree alias.
+#       v.dump_symbol_alias_tokens(f)       #   Dump the tokens representing the tree symbol alias to `f`.
 #
 
 
-
 #
-#   fact_is_tree_alias(v) - Assert the fact that `v` is a `Tree_Alias`.
+#   USAGE (debug mode):
 #
-if __debug__:
-    def fact_is_tree_alias(v):
-        assert v.is_tree_alias
+#       v.is_tree_module_alias              #   Test if `v` is a tree module alias.
+#
+#       v.is_tree_symbol_alias              #   Test if `v` is a tree symbol alias.
+#
+#       assert fact_is_tree_module_alias(v) #   Assert that `v` is a tree module alias.
+#
+#       assert fact_is_tree_symbol_alias(v) #   Assert that `v` is a tree symbol alias.
+#
 
-        return True
+
+if 0:
+    #
+    #   fact_is_tree_module_alias(v) - Assert the fact that `v` is a tree module alias.
+    #
+    if __debug__:
+        def fact_is_tree_module_alias(v):
+            assert v.is_tree_module_alias
+
+            return True
+
+
+if 0:
+    #
+    #   fact_is_tree_symbol_alias(v) - Assert the fact that `v` is a tree symbol alias.
+    #
+    if __debug__:
+        def fact_is_tree_symbol_alias(v):
+            assert v.is_tree_module_alias
+
+            return True
