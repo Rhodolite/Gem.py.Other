@@ -20,7 +20,7 @@ if __debug__:
     from    Capital.Core                    import  FATAL
 
 
-class Parser_Symbol_V1(
+class Parser_Symbol_Implementation(
         NativeString,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Symbol,
@@ -33,16 +33,14 @@ class Parser_Symbol_V1(
     #
     if __debug__:
         def __new__(Meta, s):
-            class_name = Meta.__name__
-
-            FATAL("{}.operator new (`__new__`): A {} may not be created", class_name, class_name)
+            FATAL('{}: A Parser_Symbol_Implementation may not be created',
+                  "Parser_Symbol_Implementation.operator new (`__new__`)");
 
 
     if __debug__:
         def __init__(self, s):
-            class_name = self.__class__.__name__
-
-            FATAL("{}.constructor (`__init__`): A {} may not be constructed", class_name, class_name)
+            FATAL('{}: A Parser_Symbol_Implementation may not be constructed',
+                  "Parser_Symbol_Implementation.constructor (`__init__`)");
 
 
     #
@@ -57,10 +55,10 @@ class Parser_Symbol_V1(
     #   Public
     #
     def __repr__(self):
-        return arrange('<{} {}>', self.__class__.__name__, self)
+        return arrange('<Parser_Symbol_Implementation {}>', self)
 
 
-conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_V1)
+conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_Implementation)
 
 
 export(conjure_parser_symbol)

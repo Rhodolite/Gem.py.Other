@@ -8,9 +8,9 @@
 #
 
 
-from    Z.Parser.Module_Name_With_Dot   import  conjure_parser_module_name_with_dot
-from    Z.Parser.Symbol                 import  conjure_parser_symbol
 from    Capital.NativeString            import  native_string__lookup_index__OR__MINUS_1
+from    Z.Parser.Module_Name            import  conjure_parser_module_name_with_dot
+from    Z.Parser.Symbol                 import  conjure_parser_symbol
 
 
 #

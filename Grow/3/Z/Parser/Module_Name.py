@@ -46,3 +46,22 @@ if __debug__:
         assert v.is_parser_module_name
 
         return True
+
+
+#
+#   Import the version of tree expressions we want to use (must be after the "facts" above)
+#
+from    Z.Parser.Global                 import  parser_globals
+
+
+module_name_version = parser_globals.module_name_version
+
+
+if module_name_version == 1:
+    from    Z.Parser.Module_Name_V1     import  conjure_parser_module_name_with_dot
+elif module_name_version == 2:
+    from    Z.Parser.Module_Name_V2     import  conjure_parser_module_name_with_dot
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Z/Parser/Module_name.py: unknown module name version: {!r}', module_name_version)

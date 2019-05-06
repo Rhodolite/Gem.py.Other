@@ -113,6 +113,8 @@ elif symbol_version == 2:
 elif symbol_version == 3:
     from    Z.Parser.Symbol_V3          import  conjure_parser_symbol
     from    Z.Parser.Symbol_V3          import  conjure_parser_symbol_0
+elif symbol_version == 4:
+    from    Z.Parser.Symbol_V4          import  conjure_parser_symbol
 else:
     from    Capital.Core                import  FATAL
 

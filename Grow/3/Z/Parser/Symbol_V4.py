@@ -4,20 +4,29 @@
 
 
 #
-#   Z.Parser.Symbol_V2 - Implementation of an identifier used in the Z parser, Version 2
+#   Z.Parser.Symbol_V4 - Implementation of an identifier used in the Z parser, Version 4
 #
 
 
 #
-#   Difference between Version 1 & Version 2.
+#   Difference between Version 3 & Version 4.
 #
-#       Version 1:
+#       Version 3:
 #
-#           `Parser_Symbol_Implementation` does not implement `Parser_Module_Name`.
+#           1)  `Parser_Symbol_Implementation` does not implement `Tree_Alias`.
 #
-#       Version 2:
+#           2)  `Parser_Symbol_Implementation` implements `Parser_Symbol_0`.
 #
-#           `Parser_Symbol_Implementation` implements `Parser_Module_Name`.
+#           3)  Defines `conjure_parser_symbol_0`.
+#
+#       Version 4:
+#
+#           1)  `Parser_Symbol_Implementation` implements `Tree_Alias`.
+#
+#           2)  `Parser_Symbol_Implementation` does not implement `Parser_Symbol_0`.
+#
+#           3)  Does not define `conjure_parser_symbol_0`.
+#
 #
 
 
@@ -27,11 +36,14 @@ from    Capital.NativeString                import  NativeString
 from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
+from    Z.Parser.None                       import  parser_none
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
+from    Z.Tree.Alias                        import  TRAIT_Tree_Alias
 
 
 if __debug__:
     from    Capital.Core                    import  FATAL
+    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
 
 
 class Parser_Symbol_Implementation(
@@ -39,6 +51,7 @@ class Parser_Symbol_Implementation(
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,
+        TRAIT_Tree_Alias,
 ):
     __slots__ = (())
 
@@ -67,7 +80,7 @@ class Parser_Symbol_Implementation(
 
 
     def dump_module_name_token(self, f):
-        f.arrange('<module-name symbol {}>', self)
+        f.arrange('<module-name $ {}>', self)
 
 
     #
@@ -75,6 +88,13 @@ class Parser_Symbol_Implementation(
     #
     def dump_symbol_token(self, f):
         f.arrange('<$ {}>', self)
+
+
+    #
+    #   Interface Tree_Alias
+    #
+    def dump_alias_tokens(self, f):
+        f.arrange('<alias {}>', self)
 
 
     #

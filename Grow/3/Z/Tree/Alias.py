@@ -39,7 +39,7 @@
 #               is_tree_alias := true
 #
 #           method
-#               dump_alias_tokens (f : Build_DumpToken)
+#               dump_alias_tokens(f : Build_DumpToken)
 #
 class TRAIT_Tree_Alias(object):
     __slots__ = (())

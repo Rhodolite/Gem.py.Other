@@ -8,7 +8,7 @@
 #
 
 
-version = 8
+version = 9
 
 
 alias_version         = 1
@@ -18,6 +18,7 @@ context_version       = 1
 except_version        = '1'
 expression_version    = '1'
 index_version         = '1'
+module_name_version   = 0
 name_version          = 1
 operator_version      = 1
 parameter_version     = '1'
@@ -61,43 +62,53 @@ if version >= 6:
 
 
 #
-#   Version 7 & 8: Introduce `Parser_Module_Name`
-#
-#       7: `Tree_Module_Alias.name` is a `Parser_Module_Name`.
-#
-#       8: Use `Parser_Symbol` and `Parser_Symbol_0` for the rest of `Tree_*_Alias` members.
+#   Version 7: Introduce `Parser_Module_Name`
 #
 if version >= 7:
-    alias_version  = 3      #   `Tree_Module_Alias.name` is a `Parser_Module_Name`.
-    symbol_version = 2      #   Symbol version 2 implements `Parser_Module_Name`
+    alias_version       = 3     #   `Tree_Module_Alias.name` is a `Parser_Module_Name`.
+    module_name_version = 1
+    symbol_version      = 2     #   Symbol version 2 implements `Parser_Module_Name`
 
+
+#
+#   Version 8 & 9: Improve `Tree_Module_Alias` and `Tree_Symbol_Alias`.
+#
+#       8: `Tree_Module_Alias` and `Tree_Symbol_Alias` use `Parser_Symbol` and `Parser_Symbol_0`.
+#
+#       9:  Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
+#
 if version >= 8:
-    alias_version  = 4      #   Use `Parser_Symbol` and `Parser_Symbol_0` for the rest of `Tree_*_Alias` members.
-    symbol_version = 3      #   Symbol version 3 implements `conjure_parser_symbol_0`.
+    alias_version  = 4          #   `Tree_{Module,Symbol}_Alias` use `Parser_Symbol` and `Parser_Symbol_0`.
+    symbol_version = 3          #   Symbol version 3 implements `Parser_Symbol_0`
+
+if version >= 9:
+    alias_version       = 5     #   Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
+    module_name_version = 2     #   `Parser_Module_Name_With_Dot` implements `Tree_Alias`
+    symbol_version      = 4     #   Symbol version 4 implements `Tree_Alias`
 
 
 #
-#   Version 9 & 10: No longer use contexts
+#   Version 10 & 11: No longer use contexts
 #
-#       9:  `Tree_Name`    no longer uses contexts.
+#       10: `Tree_Name`    no longer uses contexts.
 #
-#       10: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+#       11: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
 #                          `Tree_Subscript`).
 #
-if version >= 9:
+if version >= 10:
     name_version = 3
 
-if version >= 10:
+if version >= 11:
     context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
     target_version  = 3
 
 
 #
-#   Version 9
+#   Version 12
 #
 #       Add `Tree_Suite` & `Tree_Suite_0`
 #
-if version >= 9:
+if version >= 12:
     statement_version = 2 
 
 
@@ -127,6 +138,7 @@ class Parser_Globals(object):
         'except_version',               #   NativeString
         'expression_version',           #   NativeString
         'index_version',                #   NativeString
+        'module_name_version',          #   SubstantialInteger
         'name_version',                 #   PositiveInteger
         'operator_version',             #   PositiveInteger
         'parameter_version',            #   NativeString
@@ -138,9 +150,9 @@ class Parser_Globals(object):
 
     def __init__(
             self, alias_version, argument_version, comprehension_version, context_version,
-            except_version, expression_version, index_version, name_version,
-            operator_version, parameter_version, statement_version, symbol_version,
-            target_version,
+            except_version, expression_version, index_version, module_name_version,
+            name_version, operator_version, parameter_version, statement_version,
+            symbol_version, target_version,
     ):
         self.alias_version         = alias_version
         self.argument_version      = argument_version
@@ -148,6 +160,7 @@ class Parser_Globals(object):
         self.context_version       = context_version
         self.except_version        = except_version
         self.index_version         = index_version
+        self.module_name_version   = module_name_version
         self.name_version          = name_version
         self.operator_version      = operator_version
         self.parameter_version     = parameter_version
@@ -158,29 +171,29 @@ class Parser_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Parser_Globals {} {!r} {!r} {} {!r} {!r} {!r} {} {} {!r} {} {} {}>',
+        return arrange('<Parser_Globals {} {!r} {!r} {} {!r} {!r} {!r} {} {} {} {!r} {} {} {}>',
                        self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
-                       self.except_version, self.expression_version, self.index_version, self.name_version,
-                       self.operator_version, self.parameter_version, self.statement_version, self.symbol_version,
-                       self.target_version)
+                       self.except_version, self.expression_version, self.index_version, self.module_name_version,
+                       self.name_version, self.operator_version, self.parameter_version, self.statement_version,
+                       self.symbol_version, self.target_version)
 
     def trace_parser_globals(self):
         trace('Parser_Globals: alias={} argument={!r} comprehension={!r} context={} except={!r} ...',
               self.alias_version, self.argument_version, self.comprehension_version, self.context_version,
               self.except_version)
-        trace('... expression={!r} index={!r} name={} statement={} operator={} parameter={!r} symbol={}',
-              self.expression_version, self.index_version, self.name_version, self.statement_version,
-              self.operator_version, self.parameter_version, self.symbol_version)
-        trace('... target={}',
-              self.target_version)
+        trace('... expression={!r} index={!r} module_name={} name={} statement={} operator={} parameter={!r}',
+              self.expression_version, self.index_version, module_name_version,
+              self.name_version, self.statement_version, self.operator_version, self.parameter_version)
+        trace('... symbol={} target={}',
+              self.symbol_version, self.target_version)
 
 
 @creator
 def create_parser_globals(
         alias_version, argument_version, comprehension_version, context_version,
-        except_version, expression_version, index_version, name_version,
-        operator_version, parameter_version, statement_version, symbol_version,
-        target_version,
+        except_version, expression_version, index_version, module_name_version,
+        name_version, operator_version, parameter_version, statement_version,
+        symbol_version, target_version,
 ):
     assert fact_is_positive_integer   (alias_version)
     assert fact_is_full_native_string (argument_version)
@@ -188,6 +201,7 @@ def create_parser_globals(
     assert fact_is_substantial_integer(context_version)
     assert fact_is_full_native_string (except_version)
     assert fact_is_full_native_string (index_version)
+    assert fact_is_substantial_integer(module_name_version)
     assert fact_is_positive_integer   (name_version)
     assert fact_is_positive_integer   (operator_version)
     assert fact_is_full_native_string (parameter_version)
@@ -197,10 +211,10 @@ def create_parser_globals(
     assert fact_is_positive_integer   (target_version)
 
     r = Parser_Globals(
-            alias_version, argument_version, comprehension_version, context_version, except_version,
-            expression_version, index_version, name_version,
-            operator_version, parameter_version, statement_version, symbol_version,
-            target_version,
+            alias_version, argument_version, comprehension_version, context_version,
+            except_version, expression_version, index_version, module_name_version, 
+            name_version, operator_version, parameter_version, statement_version,
+            symbol_version, target_version,
         )
 
    #trace('Parser Globals: {}', r)
@@ -217,6 +231,7 @@ parser_globals = create_parser_globals(
                    except_version        = except_version,
                    expression_version    = expression_version,
                    index_version         = index_version,
+                   module_name_version   = module_name_version,
                    name_version          = name_version,
                    operator_version      = operator_version,
                    parameter_version     = parameter_version,

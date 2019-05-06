@@ -4,7 +4,20 @@
 
 
 #
-#   Z.Parser.Module_Name_With_Dot: Implementation of a module name (with dot) used in the Z parser.
+#   Z.Parser.Module_Name_V2: Implementation of a module name used in the Z parser, Version 2
+#
+
+
+#
+#   Difference between Version 1 & Version 2.
+#
+#       Version 1:
+#
+#           `Parser_Module_Name_With_Dot` does not implement `Tree_Alias`.
+#
+#       Version 2:
+#
+#           `Parser_Module_Name_With_Dot` implements `Tree_Alias`.
 #
 
 
@@ -14,6 +27,7 @@ from    Capital.NativeString                import  NativeString
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
+from    Z.Tree.Alias                        import  TRAIT_Tree_Alias
 
 
 if __debug__:
@@ -27,6 +41,7 @@ class Parser_Module_Name_With_Dot(
         NativeString,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
+        TRAIT_Tree_Alias,
 ):
     __slots__ = (())
 
@@ -36,14 +51,14 @@ class Parser_Module_Name_With_Dot(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL("Parser_Module_Name_With_Dot.operator new (`__new__`): A Parser_Module_Name_With_Dot not be {}",
-                  'created')
+            FATAL('{}, A Parser_Module_Name_With_Dot not be created'
+                  "Parser_Module_Name_With_Dot.operator new (`__new__`)")
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL("Parser_Module_Name_With_Dot.constructor (`__init__`): A Parser_Module_Name_With_Dot not be {}",
-                  'constructed');
+            FATAL('{}, A Parser_Module_Name_With_Dot not be constructed'
+                  "Parser_Module_Name_With_Dot.constructor (`__init__`)")
 
 
     #
@@ -56,6 +71,13 @@ class Parser_Module_Name_With_Dot(
 
     def dump_module_name_token(self, f):
         f.arrange('<module-name-with-dot {}>', self)
+
+
+    #
+    #   Interface Tree_Alias
+    #
+    def dump_alias_tokens(self, f):
+        f.arrange('<alias module-name-with-dot {}>', self)
 
 
     #
