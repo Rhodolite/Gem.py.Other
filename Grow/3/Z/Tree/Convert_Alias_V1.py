@@ -22,7 +22,7 @@ if __debug__:
 
 
 #
-#   convert_alias_clause(self)
+#   convert_module_alias(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Alias_Clause`.
 #
@@ -30,35 +30,51 @@ assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
 
 
-def convert_alias_clause(self):
-    assert fact_is_full_native_string                  (self.name)
-    assert fact_is__native_none__OR__full_native_string(self.asname)
+def convert_module_alias(v):
+    assert fact_is_full_native_string                  (v.name)
+    assert fact_is__native_none__OR__full_native_string(v.asname)
 
-    return create_Tree_Alias_Clause(self.name, self.asname)
+    return create_Tree_Alias_Clause(v.name, v.asname)
 
 
 #
-#   convert_full_list_of_alias_clauses(sequence)
+#   convert_symbol_alias(v)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
-#       `FullNativeList of Tree_Alias_Clause`.
+#       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Alias_Clause`.
 #
-convert_full_list_of_alias_clauses = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_alias_clause)
-    )
+#       In version 1, identical to `convert_module_alias`
+#
+assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
+assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
+
+
+def convert_symbol_alias(v):
+    assert fact_is_full_native_string                  (v.name)
+    assert fact_is__native_none__OR__full_native_string(v.asname)
+
+    return create_Tree_Alias_Clause(v.name, v.asname)
 
 
 #
 #   convert_full_list_of_module_aliases(sequence)
 #
-#       In Version 1, identical to `convert_full_list_of_alias_clauses`.
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
+#       `FullNativeList of Tree_Alias_Clause`.
 #
-convert_full_list_of_module_aliases = convert_full_list_of_alias_clauses
+convert_full_list_of_module_aliases = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_module_alias)
+    )
 
 
 #
 #   convert_full_list_of_symbol_aliases(sequence)
 #
-#       In Version 1, identical to `convert_full_list_of_alias_clauses`.
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
+#       `FullNativeList of Tree_Alias_Clause`.
 #
-convert_full_list_of_symbol_aliases = convert_full_list_of_alias_clauses
+#       In Version 1, identical to `convert_full_list_of_alias_clauses` (since `convert_module_alias` is
+#       identical to `convert_symbol_alias`).
+#
+convert_full_list_of_symbol_aliases = (
+        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_symbol_alias)
+    )

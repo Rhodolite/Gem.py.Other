@@ -72,7 +72,7 @@ def produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert):
     #       Convert a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
     #       `SomeNativeList of Tree_*`.
     #
-    def convert__some_list_of__Native_AbstractSyntaxTree_STAR(sequence):
+    def convert__some_list_of__Native_AbstractSyntaxTree_STAR(z, sequence):
         assert fact_is_convert_zone(z)
         assert fact_is_some_native_list(sequence)
 

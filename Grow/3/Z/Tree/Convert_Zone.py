@@ -23,7 +23,8 @@ class Convert_Zone(object):
         #
         'convert_full_list_of_module_aliases',      #   Function
         'convert_full_list_of_symbol_aliases',      #   Function
-        'create_Tree_Alias_Clause',                 #   Function
+        'create_Tree_Module_Alias',                 #   Function
+        'create_Tree_Symbol_Alias',                 #   Function
     ))
 
 
@@ -66,25 +67,34 @@ def fill_convert_zone():
     #   Alias Version
     #
     if alias_version == 2:
+        #
+        #   Next two lines use "_V1" on purpose
+        #
+        from    Z.Tree.Alias_V1             import  create_Tree_Alias_Clause            as  create_Tree_Module_Alias
+        from    Z.Tree.Alias_V1             import  create_Tree_Alias_Clause            as  create_Tree_Symbol_Alias
+
         from    Z.Tree.Convert_Alias_V2     import  convert_full_list_of_module_aliases
         from    Z.Tree.Convert_Alias_V2     import  convert_full_list_of_symbol_aliases
-        from    Z.Tree.Alias_V1             import  create_Tree_Alias_Clause                #   "_V1" on purpose.
     elif alias_version == 3:
+        from    Z.Tree.Alias_V3             import  create_Tree_Module_Alias
+        from    Z.Tree.Alias_V3             import  create_Tree_Symbol_Alias
         from    Z.Tree.Convert_Alias_V3     import  convert_full_list_of_module_aliases
         from    Z.Tree.Convert_Alias_V3     import  convert_full_list_of_symbol_aliases
-        from    Z.Tree.Alias_V3             import  create_Tree_Alias_Clause
-    elif alias_version == 3:
+    elif alias_version == 4:
+        from    Z.Tree.Alias_V4             import  create_Tree_Module_Alias
+        from    Z.Tree.Alias_V4             import  create_Tree_Symbol_Alias
         from    Z.Tree.Convert_Alias_V4     import  convert_full_list_of_module_aliases
         from    Z.Tree.Convert_Alias_V4     import  convert_full_list_of_symbol_aliases
-        from    Z.Tree.Alias_V4             import  create_Tree_Alias_Clause
     elif alias_version == 5:
+        from    Z.Tree.Alias_V5             import  create_Tree_Module_Alias
+        from    Z.Tree.Alias_V5             import  create_Tree_Symbol_Alias
         from    Z.Tree.Convert_Alias_V5     import  convert_full_list_of_module_aliases
         from    Z.Tree.Convert_Alias_V5     import  convert_full_list_of_symbol_aliases
-        from    Z.Tree.Alias_V5             import  create_Tree_Alias_Clause
     elif alias_version == 6:
+        from    Z.Tree.Alias_V6             import  create_Tree_Module_Alias
+        from    Z.Tree.Alias_V6             import  create_Tree_Symbol_Alias
         from    Z.Tree.Convert_Alias_V6     import  convert_full_list_of_module_aliases
         from    Z.Tree.Convert_Alias_V6     import  convert_full_list_of_symbol_aliases
-        from    Z.Tree.Alias_V6             import  create_Tree_Alias_Clause
     else:
         FATAL_unknown_version('alias', alias_version)
 
@@ -96,7 +106,8 @@ def fill_convert_zone():
 
     z.convert_full_list_of_module_aliases = convert_full_list_of_module_aliases
     z.convert_full_list_of_symbol_aliases = convert_full_list_of_symbol_aliases
-    z.create_Tree_Alias_Clause            = create_Tree_Alias_Clause
+    z.create_Tree_Module_Alias            = create_Tree_Module_Alias
+    z.create_Tree_Symbol_Alias            = create_Tree_Symbol_Alias
 
 
 @creator

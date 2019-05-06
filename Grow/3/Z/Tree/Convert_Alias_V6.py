@@ -37,10 +37,8 @@
 
 from    Z.Parser.Conjure_Module_Name        import  conjure_parser_module_name
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Alias_V6                     import  create_Tree_Module_Alias
-from    Z.Tree.Alias_V6                     import  create_Tree_Symbol_Alias
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -50,7 +48,7 @@ if __debug__:
 
 
 #
-#   convert_module_alias(self)
+#   convert_module_alias(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Module_Alias`.
 #
@@ -58,23 +56,23 @@ assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
 
 
-def convert_module_alias(self):
-    assert fact_is_full_native_string                  (self.name)
-    assert fact_is__native_none__OR__full_native_string(self.asname)
+def convert_module_alias(z, v):
+    assert fact_is_full_native_string                  (v.name)
+    assert fact_is__native_none__OR__full_native_string(v.asname)
 
-    name = conjure_parser_module_name(self.name)
+    name = conjure_parser_module_name(v.name)
 
-    if self.asname is None:
+    if v.asname is None:
         return name
 
-    return create_Tree_Module_Alias(
+    return z.create_Tree_Module_Alias(
                name,
-               conjure_parser_symbol(self.asname),
+               conjure_parser_symbol(v.asname),
            )
 
 
 #
-#   convert_symbol_alias(self)
+#   convert_symbol_alias(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Symbol_Alias`.
 #
@@ -82,23 +80,23 @@ assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
 
 
-def convert_symbol_alias(self):
-    assert fact_is_full_native_string                  (self.name)
-    assert fact_is__native_none__OR__full_native_string(self.asname)
+def convert_symbol_alias(z, v):
+    assert fact_is_full_native_string                  (v.name)
+    assert fact_is__native_none__OR__full_native_string(v.asname)
 
-    name = conjure_parser_symbol(self.name)
+    name = conjure_parser_symbol(v.name)
 
-    if self.asname is None:
+    if v.asname is None:
         return name
 
-    return create_Tree_Symbol_Alias(
+    return z.create_Tree_Symbol_Alias(
                name,
-               conjure_parser_symbol(self.asname),
+               conjure_parser_symbol(v.asname),
            )
 
 
 #
-#   convert_full_list_of_module_aliases(sequence)
+#   convert_full_list_of_module_aliases(z, sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
 #       `FullNativeList of Tree_Module_Alias`.
@@ -107,7 +105,7 @@ convert_full_list_of_module_aliases = produce__convert__full_list_of__Native_Abs
 
 
 #
-#   convert_full_list_of_symbol_aliases(sequence)
+#   convert_full_list_of_symbol_aliases(z, sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
 #       `FullNativeList of Tree_Symbol_Alias`.
