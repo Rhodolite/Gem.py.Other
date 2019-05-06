@@ -54,6 +54,11 @@ class Parser_Symbol_Implementation(
     #
     #   Public
     #
+    @property
+    def native_string(self):
+        return self
+
+
     def __repr__(self):
         return arrange('<Parser_Symbol_Implementation {}>', self)
 

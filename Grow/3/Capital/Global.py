@@ -52,7 +52,7 @@ if version >= 5:
 #
 if version >= 6:
     string_version = 6
-   
+
 #
 #   Version 7:  Old Code -- Until assigned a number.
 #

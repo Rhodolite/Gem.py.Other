@@ -310,7 +310,7 @@ if 0:
 
         for [i, v] in enumerate(code.co_cellvars):
             trace('Cell Variable #{}: {!r}', i, v)
-            
+
         for [i, v] in enumerate(code.co_freevars):
             trace('Free Variable #{}: {!r}', i, v)
 

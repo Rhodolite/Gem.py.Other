@@ -160,7 +160,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
             #
             #   Has `r` already definitively been transformed?
             #
-            if r.temporary_element_has_definitively_been_transformed:   
+            if r.temporary_element_has_definitively_been_transformed:
                 return r
 
             #

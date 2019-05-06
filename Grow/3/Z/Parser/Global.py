@@ -8,7 +8,7 @@
 #
 
 
-version = 13
+version = 77
 
 
 alias_version         = 1
@@ -48,14 +48,15 @@ if version >= 4:
 
 
 #
-#   Version 5 & 6: Introduce `Parser_Symbol`
+#   Version 5, 6, 7, & 8: Introduce `Parser_Symbol`
 #
-#       5:  `Tree_Keyword_Argument` uses symbols.
+#       5:  `Tree_Keyword_Argument`            uses symbols.
 #
-#       6:  `Tree_Name`             uses symbols.
+#       6:  `Tree_Name`                        uses symbols.
 #
-#       7:  `Tree_Target`           uses symbols (affects `Tree_Attribute`).
+#       7:  `Tree_Target`                      uses symbols (affects `Tree_Attribute`).
 #
+#       9:  `Tree_{Class,Function}_Definition` uses symbols.
 #
 if version >= 5:
     argument_version = 2                #   `Tree_Keyword_Argument` uses symbols.
@@ -67,56 +68,59 @@ if version >= 6:
 if version >= 7:
     target_version = 2                  #   `Tree_Target` uses symbols (affects `Tree_Attribute`).
 
+if version >= 8:
+    statement_version = 2               #   `Tree_{Class,Function}_Definition` uses symbols.
+
 
 #
-#   Version 8: Introduce `Parser_Module_Name`
+#   Version 9: Introduce `Parser_Module_Name`
 #
-if version >= 8:
+if version >= 9:
     alias_version       = 3     #   `Tree_Module_Alias_Implementation.name` is a `Parser_Module_Name`.
     module_name_version = 1
     symbol_version      = 2     #   Symbol version 2 implements `Parser_Module_Name`
 
 
 #
-#   Version 9 & 10: Improve `Tree_{Module,Symbol}_Alias_Implementation`.
+#   Version 10 & 11: Improve `Tree_{Module,Symbol}_Alias_Implementation`.
 #
-#       9: `Tree_{Module,Symbol}_Alias_Implementation` use `Parser_Symbol` and `Parser_Symbol_0`.
+#       10: `Tree_{Module,Symbol}_Alias_Implementation` use `Parser_Symbol` and `Parser_Symbol_0`.
 #
-#       10: Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
+#       11: Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
 #
-if version >= 9:
+if version >= 10:
     alias_version  = 4          #   `Tree_{Module,Symbol}_Alias` use `Parser_Symbol` and `Parser_Symbol_0`.
     symbol_version = 3          #   Symbol version 3 implements `Parser_Symbol_0`
 
-if version >= 10:
+if version >= 11:
     alias_version       = 5     #   Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
     module_name_version = 2     #   `Parser_Module_Name_With_Dot` implements `Tree_Module_Alias`.
     symbol_version      = 4     #   Symbol version 4 implements `Tree_{Module,Symbol}_Alias`.
 
 
 #
-#   Version 11 & 12: No longer use contexts
+#   Version 12 & 13: No longer use contexts
 #
-#       11: `Tree_Name`    no longer uses contexts.
+#       12: `Tree_Name`    no longer uses contexts.
 #
-#       12: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+#       13: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
 #                          `Tree_Subscript`).
 #
-if version >= 11:
+if version >= 12:
     name_version = 3
 
-if version >= 12:
+if version >= 13:
     context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
     target_version  = 3
 
 
 #
-#   Version 13
+#   Version 14
 #
 #       Add `Tree_Suite` & `Tree_Suite_0`
 #
-if version >= 13:
-    statement_version = 2 
+if version >= 14:
+    statement_version = 3
 
 
 #
@@ -219,7 +223,7 @@ def create_parser_globals(
 
     r = Parser_Globals(
             alias_version, argument_version, comprehension_version, context_version,
-            except_version, expression_version, index_version, module_name_version, 
+            except_version, expression_version, index_version, module_name_version,
             name_version, operator_version, parameter_version, statement_version,
             symbol_version, target_version,
         )

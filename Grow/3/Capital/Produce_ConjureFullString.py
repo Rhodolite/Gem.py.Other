@@ -32,7 +32,7 @@ if __debug__:
 #                   instead initializes it's `string_cache` as follows:
 #
 #                       string_cache = {}
-#   
+#
 #               3)  `produce_conjure_full_name` does *NOT* take a parameter named `create_temporary_string`; instead
 #                   it always uses `Capital.Private.TemporaryString_V6.create_temporary_string` (defined above).
 #

@@ -105,7 +105,7 @@ from    Z.Parser.Global                 import  parser_globals
 statement_version = parser_globals.statement_version
 
 
-if statement_version in ((1, 2)):
+if statement_version in ((1, 2, 3)):
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement
     from    Z.Tree.Convert_Simple_Statement_V1      import  convert_break_statement
@@ -133,26 +133,29 @@ if statement_version == 1:
 elif statement_version == 2:
     from    Z.Tree.Convert_Definition_V2            import  convert_class_definition
     from    Z.Tree.Convert_Definition_V2            import  convert_function_definition
+elif statement_version == 3:
+    from    Z.Tree.Convert_Definition_V3            import  convert_class_definition
+    from    Z.Tree.Convert_Definition_V3            import  convert_function_definition
 else:
     from    Capital.Core                import  FATAL
 
     FATAL('Z/Tree/Convert_Statement.py: unknown tree statement version: {!r}', statement_version)
 
 
-if statement_version == 1:
+if statement_version in ((1, 2)):
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_finally_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement
     from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement
-elif statement_version == 2:
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_for_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_if_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_except_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_finally_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_while_statement
-    from    Z.Tree.Convert_Compound_Statement_V2    import  convert_with_statement
+elif statement_version == 3:
+    from    Z.Tree.Convert_Compound_Statement_V3    import  convert_for_statement
+    from    Z.Tree.Convert_Compound_Statement_V3    import  convert_if_statement
+    from    Z.Tree.Convert_Compound_Statement_V3    import  convert_try_except_statement
+    from    Z.Tree.Convert_Compound_Statement_V3    import  convert_try_finally_statement
+    from    Z.Tree.Convert_Compound_Statement_V3    import  convert_while_statement
+    from    Z.Tree.Convert_Compound_Statement_V3    import  convert_with_statement
 else:
     from    Capital.Core                import  FATAL
 

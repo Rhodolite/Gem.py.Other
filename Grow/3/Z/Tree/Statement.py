@@ -63,7 +63,7 @@ from    Z.Parser.Global                 import  parser_globals
 statement_version = parser_globals.statement_version
 
 
-if statement_version == 1:
+if statement_version in ((1, 2)):
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assert_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Assign_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Break_Statement
@@ -79,22 +79,22 @@ if statement_version == 1:
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Print_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Raise_Statement
     from    Z.Tree.Simple_Statement_V1      import      create_Tree_Return_Statement
-elif statement_version == 2:
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Assert_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Assign_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Break_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Continue_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Delete_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Execute_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Expression_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_From_Import_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Global_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Import_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Modify_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Pass_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Print_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Raise_Statement
-    from    Z.Tree.Simple_Statement_V2      import      create_Tree_Return_Statement
+elif statement_version == 3:
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Assert_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Assign_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Break_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Continue_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Delete_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Execute_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Expression_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_From_Import_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Global_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Import_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Modify_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Pass_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Print_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Raise_Statement
+    from    Z.Tree.Simple_Statement_V3      import      create_Tree_Return_Statement
 else:
     from    Capital.Core                import  FATAL
 

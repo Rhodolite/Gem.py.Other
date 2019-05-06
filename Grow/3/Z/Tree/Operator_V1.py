@@ -87,7 +87,7 @@ def create_TOE(MetaName, operator_token):
     #
     X_Operator.__name__ = MetaName
 
-    
+
     return X_Operator()
 
 
