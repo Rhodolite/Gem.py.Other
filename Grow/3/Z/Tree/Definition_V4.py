@@ -4,37 +4,49 @@
 
 
 #
-#   Z.Tree.Definition_V2 - Implementation of tree compound statements, Version 2.
+#   Z.Tree.Definition_V4 - Implementation of tree compound statements, Version 4.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1 & Version 2
+#   Difference between Version 3 & Version 4.
 #
-#       Version 1:
+#       Version 3:
 #
-#           The class & function `.name` member is a `FullNativeString`.
+#           1)  Tree Statements implement `Tree_Statement`.
 #
-#       Version 2:
+#           2)  A           list of statements is stored as `FullNativeList of Tree_Statement`.
 #
-#           The class & function `.name` member is a `Parser_Symbol`.
+#           3)  An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
+#
+#       Version 4:
+#
+#           1)  Tree Statements implement `Tree_Statement`; and ...
+#
+#               ... in addition also implement `Tree_Suite`, and `Tree_Suite_0`.
+#
+#           2)  A           list of statements is stored as `Tree_Suite`.
+#
+#           3)  An optional list of statements is stored as `Tree_Suite_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Statement                import  TRAIT_Tree_Statement
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite
+from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
+    from    Z.Tree.Suite                import  fact_is_tree_suite
 
 
 #
@@ -42,6 +54,8 @@ if __debug__:
 #
 class Tree_Class_Definition(
         TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -49,7 +63,7 @@ class Tree_Class_Definition(
 
         'name',                         #   Parser_Symbol
         'bases',                        #   NativeList of Tree_Expression
-        'body',                         #   NativeList of Tree_Statement
+        'body',                         #   Tree_Statement
         'decorator_list',               #   NativeList of Tree_Decorator
     ))
 
@@ -76,8 +90,7 @@ class Tree_Class_Definition(
 
     def _dump_body_tokens(self, f, header, trailer):
         with f.indent_2(header, trailer):
-            for v in self.body:
-                v.dump_statement_tokens(f)
+            self.body.dump_suite_tokens(f)
 
 
     def _dump_decorator_tokens(self, f, header, trailer):
@@ -119,10 +132,10 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_parser_symbol   (name)
-    assert fact_is_some_native_list(bases)
-    assert fact_is_full_native_list(body)
-    assert fact_is_some_native_list(decorator_list)
+    assert fact_is_parser_symbol     (name)
+    assert fact_is_some_native_list  (bases)
+    assert fact_is_tree_suite        (body)
+    assert fact_is_some_native_list  (decorator_list)
 
     return Tree_Class_Definition(line_number, column, name, bases, body, decorator_list)
 
@@ -132,6 +145,8 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
 #
 class Tree_Function_Definition(
         TRAIT_Tree_Statement,
+        TRAIT_Tree_Suite,
+        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
@@ -139,7 +154,7 @@ class Tree_Function_Definition(
 
         'name',                         #   Parser_Symbol
         'parameters',                   #   Tree_Parameter
-        'body',                         #   NativeList of Tree_Statement
+        'body',                         #   Tree_List
         'decorator_list',               #   NativeList of Tree_Decorator
     ))
 
@@ -159,8 +174,7 @@ class Tree_Function_Definition(
 
     def _dump_body_tokens(self, f, header, trailer):
         with f.indent_2(header, trailer):
-            for v in self.body:
-                v.dump_statement_tokens(f)
+            self.body.dump_suite_tokens(f)
 
 
     def _dump_decorator_tokens(self, f, header, trailer):
@@ -204,7 +218,7 @@ def create_Tree_Function_Definition(line_number, column, name, parameters, body,
 
     assert fact_is_parser_symbol      (name)
     assert fact_is_tree_parameters_all(parameters)
-    assert fact_is_full_native_list   (body)
+    assert fact_is_tree_suite         (body)
     assert fact_is_some_native_list   (decorator_list)
 
     return Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list)

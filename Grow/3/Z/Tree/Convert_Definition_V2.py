@@ -4,32 +4,31 @@
 
 
 #
-#   Z.Tree.Convert_Definition_V3 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 3.
+#   Z.Tree.Convert_Definition_V2 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 2.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 2 & Version 3.
+#   Difference between Version 1 & Version 2.
+#
+#       Version 1:
+#
+#           Does not use `Convert_Zone`.
 #
 #       Version 2:
 #
-#           The class or function name is `FullNativeList`.
-#
-#       Version 3:
-#
-#           The class or function name is `Parser_Symbol`.
+#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Convert_Decorator            import  convert_some_list_of_decorators
 from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Parameter            import  convert_parameters_all
 from    Z.Tree.Convert_Statement_V2         import  convert_full_list_of_statements
-from    Z.Tree.Definition_V3                import  create_Tree_Class_Definition
-from    Z.Tree.Definition_V3                import  create_Tree_Function_Definition
+from    Z.Tree.Definition_V1                import  create_Tree_Class_Definition                #   "_V1" on purpose
+from    Z.Tree.Definition_V1                import  create_Tree_Function_Definition             #   "_V1" on purpose
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
 
@@ -65,7 +64,7 @@ def convert_class_definition(self):
                self.lineno,
                self.col_offset,
 
-               conjure_parser_symbol           (self.name),
+               self.name,
                convert_some_list_of_expressions(self.bases),
                convert_full_list_of_statements (self.body),
                convert_some_list_of_decorators (self.decorator_list),
@@ -95,7 +94,7 @@ def convert_function_definition(self):
                self.lineno,
                self.col_offset,
 
-               conjure_parser_symbol          (self.name),
+               self.name,
                convert_parameters_all         (self.args),
                convert_full_list_of_statements(self.body),
                convert_some_list_of_decorators(self.decorator_list),

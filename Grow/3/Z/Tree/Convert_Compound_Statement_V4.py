@@ -35,12 +35,13 @@ from    Z.Tree.Compound_Statement_V4        import  create_Tree_Try_Except_State
 from    Z.Tree.Compound_Statement_V4        import  create_Tree_Try_Finally_Statement
 from    Z.Tree.Compound_Statement_V4        import  create_Tree_While_Statement
 from    Z.Tree.Compound_Statement_V4        import  create_Tree_With_Statement
-from    Z.Tree.Convert_Except               import  convert_full_list_of_except_clauses
+from    Z.Tree.Convert_Except_V2            import  convert_full_list_of_except_clauses
 from    Z.Tree.Convert_Expression           import  convert_expression
 from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Statement            import  convert_statement
+from    Z.Tree.Convert_Statement_V2         import  convert_statement
 from    Z.Tree.Convert_Target               import  convert_none_OR_target
 from    Z.Tree.Convert_Target               import  convert_target
+from    Z.Tree.Convert_Zone                 import  convert_zone
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_For_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_If_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Except_Statement
@@ -146,7 +147,7 @@ def convert_try_except_statement(self):
                self.col_offset,
 
                convert_suite                      (self.body),
-               convert_full_list_of_except_clauses(self.handlers),
+               convert_full_list_of_except_clauses(convert_zone, self.handlers),
                convert_suite_0                    (self.orelse),
            )
 
