@@ -77,7 +77,7 @@ class Parser_Module_Name_With_Dot(
     #   Interface Tree_Module_Alias
     #
     def dump_module_alias_tokens(self, f):
-        f.arrange('<module-name-with-dot module-alias {}>', self)
+        f.arrange('<module-alias module-name-with-dot {}>', self)
 
 
     #

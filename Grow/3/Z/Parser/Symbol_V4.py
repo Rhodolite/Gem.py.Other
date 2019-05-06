@@ -96,14 +96,14 @@ class Parser_Symbol_Implementation(
     #   Interface Tree_Module_Alias
     #
     def dump_module_alias_tokens(self, f):
-        f.arrange('<$ module-alias {}>', self)
+        f.arrange('<module-alias $ {}>', self)
 
 
     #
     #   Interface Tree_Symbol_Alias
     #
     def dump_symbol_alias_tokens(self, f):
-        f.arrange('<$ symbol-alias {}>', self)
+        f.arrange('<symbol-alias $ {}>', self)
 
 
     #
