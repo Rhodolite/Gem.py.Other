@@ -99,21 +99,6 @@ def convert_tuple_parameter(z, v):
 
 
 #
-#   convert_list_of_name_parameters(z, sequence)
-#
-#       Convert a `list of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a `list of SyntaxTree_Name`.
-#
-#       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
-#       of type `Native_AbstractSyntaxTree_Parameter`.
-#
-def convert_list_of_name_parameters(z, sequence):
-    assert fact_is_convert_zone    (z)
-    assert fact_is_some_native_list(sequence)
-
-    return [z.convert_name_parameter(z, v)   for v in sequence]
-
-
-#
 #   convert_parameters_all(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameters_All`.
@@ -131,8 +116,8 @@ def convert_parameters_all(z, v):
     assert fact_is_some_native_list                    (v.defaults)
 
     return create_Tree_Parameters_All(
-               convert_list_of_name_parameters   (z, v.args),
-               convert_tuple_parameter           (z, v.vararg),
-               convert_map_parameter             (z, v.kwarg),
-               z.convert_some_list_of_expressions(z, v.defaults),
+               z.convert_some_list_of_name_parameters(z, v.args),
+               convert_tuple_parameter               (z, v.vararg),
+               convert_map_parameter                 (z, v.kwarg),
+               z.convert_some_list_of_expressions    (z, v.defaults),
            )

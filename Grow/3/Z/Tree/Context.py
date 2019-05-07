@@ -140,22 +140,6 @@ if context_version:
     #
     #       assert fact_is_tree_store_context(v)        #   Assert that `v` is a tree "store" context.
     #
-    if context_version in ((1, 2)):
-        from    Z.Tree.Context_V1               import  tree_delete_context
-        from    Z.Tree.Context_V1               import  tree_load_context
-        from    Z.Tree.Context_V1               import  tree_parameter_context
-        from    Z.Tree.Context_V1               import  tree_store_context
-    elif context_version == 3:
-        from    Z.Tree.Context_V3               import  Tree_Context_Enumeration
-
-        tree_delete_context    = Tree_Context_Enumeration.delete
-        tree_load_context      = Tree_Context_Enumeration.load
-        tree_parameter_context = Tree_Context_Enumeration.parameter
-        tree_store_context     = Tree_Context_Enumeration.store
-    else:
-        from    Capital.Core                    import  FATAL
-
-        FATAL('Z/Tree/Context.py: not relevant for context version: {}', context_version)
 
 
     #

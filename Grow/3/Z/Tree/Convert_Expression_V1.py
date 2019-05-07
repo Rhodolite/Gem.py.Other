@@ -458,7 +458,7 @@ def convert_map_expression(v):
     assert fact_is_some_native_list(v.keys)
     assert fact_is_some_native_list(v.values)
 
-    assert len(v.keys) == len(self.values)
+    assert len(v.keys) == len(v.values)
 
     return create_Tree_Map_Expression(
                v.lineno,
@@ -484,7 +484,7 @@ def convert_number(v):
 
     assert fact_is_some_native_integer(v.n)
 
-    return create_Tree_Number(v.lineno, self.col_offset, self.n)
+    return create_Tree_Number(v.lineno, v.col_offset, v.n)
 
 
 #
@@ -547,7 +547,7 @@ def convert_string(v):
 
     assert fact_is_some_native_string(v.s)
 
-    return create_Tree_String(v.lineno, self.col_offset, self.s)
+    return create_Tree_String(v.lineno, v.col_offset, v.s)
 
 
 #

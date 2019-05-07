@@ -1,139 +1,74 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-
-
-#
-#   Z.Tree.Subscript_V1 - Implementation of `Tree_Subscript`, Version 1.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
-
-
-from    Capital.Core                    import  arrange
-from    Capital.Core                    import  creator
-
-
-if __debug__:
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Tree.Context              import  fact_is_tree_context
-    from    Z.Tree.Context              import  fact_is_tree_delete_context
-    from    Z.Tree.Context              import  fact_is_tree_load_context
-    from    Z.Tree.Context              import  fact_is_tree_store_context
-    from    Z.Tree.Expression           import  fact_is_tree_expression
-    from    Z.Tree.Index                import  fact_is_tree_index_clause
-
-
-#
-#   Tree: Subscript Expression
-#
-class Tree_Subscript_Expression(object):
+if __name__ == '__main__':
     #
-    #   implements Tree_Delete_Target,
-    #              Tree_Expression,
-    #              Tree_Store_Target
+    #   If called as the main program, then we are being imported as the module `__main__`.
     #
-    __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+    #   If so:
+    #
+    #       1A. *REIMPORT* ourselves under the name `Z`
+    #       1B. import `Z.Main`
+    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
+    #       2.  Call `Z_main`
+    #
+    #   This means:
+    #
+    #       *   This module is imported   under the name `__main__`;
+    #       *   This module is reimported under the name `Z`.
+    #
+    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
+    #   and does something different in each case ... so there are in effect two `Z` modules:
+    #
+    #       *   the one named `__main__` [this code under the `if`   clause], and
+    #       *   the one named `Z`        [the  code under the `else` clause below].
+    #
+    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
 
-        'value',                        #   Tree_Expression
-        'index',                        #   Tree_Index_Clause
-        'context',                      #   Tree_Context
-    ))
+
+    Z_main()
+else:
+    from    os.path                     import  dirname     as  python_path_directory_name
+    from    os.path                     import  join        as  python_path_join
 
 
     #
-    #   Private
+    #   Load Z submodules from "Z/" directory.
     #
-    def __init__(self, line_number, column, value, index, context):
-        self.line_number = line_number
-        self.column      = column
-
-        self.value   = value
-        self.index   = index
-        self.context = context
+    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
 
 
-    def _dump_tree_subscript_expression_tokens(self, f):
-        first = True
-
-        f.arrange('<subscript @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
-        f.write(' [')
-        self.index.dump_index_clause_tokens(f)
-        f.write(']; ')
-        self.context.dump_context_token(f)
-        f.greater_than_sign()
+    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
+    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
+    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
+    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
+    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
+    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
 
 
     #
-    #   Interface Tree_Delete_Target
+    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
     #
-    if __debug__:
-        @property
-        def is_tree_delete_target(self):
-            return self.context.is_tree_delete_context
-
-
-    if __debug__:
-        def dump_delete_target_tokens(self, f):
-            assert fact_is_tree_delete_context(self.context)
-
-            self._dump_tree_subscript_expression_tokens(f)
-    else:
-        dump_delete_target_tokens = _dump_tree_subscript_expression_tokens
-
-
+    #   This implements the following commands:
     #
-    #   Interface Tree_Expression
+    #       Z.copyright         - Add a copyright.
+    #       Z.output            - Output a line of text.
     #
-    if __debug__:
-        is_tree_expression = True
-
-
-    if __debug__:
-        def dump_evaluate_tokens(self, f):
-            assert fact_is_tree_load_context(self.context)
-
-            self._dump_tree_subscript_expression_tokens(f)
-    else:
-        dump_evaluate_tokens = _dump_tree_subscript_expression_tokens
+    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
+    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
+    #
+    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
+    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
+    #
+    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
 
 
     #
-    #   Interface Tree_Store_Target
+    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
     #
-    if __debug__:
-        @property
-        def is_tree_store_target(self):
-            return self.context.is_tree_store_context
-
-    if __debug__:
-        def dump_store_target_tokens(self, f):
-            assert fact_is_tree_store_context(self.context)
-
-            self._dump_tree_subscript_expression_tokens(f)
-    else:
-        dump_store_target_tokens = _dump_tree_subscript_expression_tokens
-
-
+    #       We run the code generator:
     #
-    #   Public
+    #       1.  Transform Crystal to Python.
+    #       2.  Output Python (to "Vision.py").
     #
-    def __repr__(self):
-        return arrange('<Tree_Subscript_Expression @{}:{} {!r} {!r} {!r}>',
-                       self.line_number, self.column, self.value, self.index, self.context)
-
-
-@creator
-def create_Tree_Subscript_Expression(line_number, column, value, index, context):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_tree_expression  (value)
-    assert fact_is_tree_index_clause(index)
-    assert fact_is_tree_context     (context)
-
-    return Tree_Subscript_Expression(line_number, column, value, index, context)
+    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()

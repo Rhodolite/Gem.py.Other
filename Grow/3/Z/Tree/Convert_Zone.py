@@ -24,6 +24,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ca
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ellipsis_Index
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
@@ -40,6 +41,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Im
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Lambda_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Logical_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
@@ -54,6 +56,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Se
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Slice_Index
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Except_Statement
@@ -71,26 +74,41 @@ class Convert_Zone(object):
         #   Argument
         #
         'convert_some_list_of_keyword_arguments',   #   Function
+
         'create_Tree_Keyword_Argument',             #   Function
+
 
         #
         #   Alias
         #
         'convert_full_list_of_module_aliases',      #   Function
         'convert_full_list_of_symbol_aliases',      #   Function
+
         'create_Tree_Module_Alias',                 #   Function
         'create_Tree_Symbol_Alias',                 #   Function
+
 
         #
         #   Comprehension
         #
         'convert_full_list_of_comprehensions',      #   Function
 
+
         #
         #   Context
         #
         'convert_delete_load_OR_store_context',     #   Function
         'convert_parameter_context',                #   Function
+
+        'tree_delete_context',                      #   Tree_Context
+        'tree_parameter_context',                   #   Tree_Context
+
+        'map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context',
+                                                    #   Map { Native_AbstractSyntaxTree_* : Tree_Context }
+
+        'map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context',
+                                                    #   Map { Native_AbstractSyntaxTree_* : Tree_Context }
+
 
         #
         #   Decorator
@@ -112,24 +130,29 @@ class Convert_Zone(object):
         #   Index
         #
         'convert_index_clause',
+
         'map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function',
+
 
         #
         #   Name
         #
-        'convert_name_parameter',
+        'convert_some_list_of_name_parameters',
+
 
         #
         #   Parameter
         #
         'convert_parameters_all',
         
+
         #
         #   Statement
         #
         'convert_full_list_of_statements',          #   Function
         'convert_some_list_of_statements',          #   Function
         'convert_statement',                        #   Function
+
         'create_Tree_Assert_Statement',             #   Function
         'create_Tree_Assign_Statement',             #   Function
         'create_Tree_Break_Statement',              #   Function
@@ -277,11 +300,58 @@ def fill_convert_zone():
     #   Context
     #
     if context_version == 0:
+        tree_delete_context    = None
+        tree_parameter_context = None
+    elif context_version == 2:
+        from    Z.Tree.Context_V1               import  tree_delete_context
+        from    Z.Tree.Context_V1               import  tree_load_context
+        from    Z.Tree.Context_V1               import  tree_parameter_context
+        from    Z.Tree.Context_V1               import  tree_store_context
+    elif context_version == 3:
+        from    Z.Tree.Context_V3               import  Tree_Context_Enumeration
+
+        tree_delete_context    = Tree_Context_Enumeration.delete
+        tree_load_context      = Tree_Context_Enumeration.load
+        tree_parameter_context = Tree_Context_Enumeration.parameter
+        tree_store_context     = Tree_Context_Enumeration.store
+    else:
+        FATAL_unknown_version('context', context_version)
+
+    if context_version == 0:
         convert_delete_load_OR_store_context = None
         convert_parameter_context            = None
-    elif context_version == 2:
+    elif context_version in ((2, 3)):
         from    Z.Tree.Convert_Context_V2   import  convert_delete_load_OR_store_context
         from    Z.Tree.Convert_Context_V2   import  convert_parameter_context
+    else:
+        FATAL_unknown_version('context', context_version)
+
+
+    if context_version == 0:
+        map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = None
+        map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context        = None
+    elif context_version in ((2, 3)):
+        map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
+                Native_AbstractSyntaxTree_Delete_Context : tree_delete_context,
+                Native_AbstractSyntaxTree_Load_Context   : tree_load_context,
+                Native_AbstractSyntaxTree_Store_Context  : tree_store_context,
+            }
+
+        map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
+                Native_AbstractSyntaxTree_Load_Context  : tree_load_context,
+                Native_AbstractSyntaxTree_Store_Context : tree_store_context,
+            }
+
+
+        if __debug__:
+            def assert_no_context_fields(mapping):
+                for k in mapping:
+                    assert k._attributes == (())
+                    assert k._fields     == (())
+
+
+            assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
+            assert_no_context_fields(map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
     else:
         FATAL_unknown_version('context', context_version)
 
@@ -339,13 +409,13 @@ def fill_convert_zone():
     #
     if name_version == 2:
         from    Z.Tree.Convert_Name_V2              import  convert_name_expression
-        from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V2              import  convert_some_list_of_name_parameters
     elif name_version == 3:
         from    Z.Tree.Convert_Name_V3              import  convert_name_expression
-        from    Z.Tree.Convert_Name_V3              import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V3              import  convert_some_list_of_name_parameters
     elif name_version == 4:
         from    Z.Tree.Convert_Name_V4              import  convert_name_expression
-        from    Z.Tree.Convert_Name_V4              import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V4              import  convert_some_list_of_name_parameters
     else:
         FATAL_unknown_version('name', name_version)
 
@@ -633,6 +703,7 @@ def fill_convert_zone():
     #   Argument
     #
     z.convert_some_list_of_keyword_arguments = convert_some_list_of_keyword_arguments
+
     z.create_Tree_Keyword_Argument           = create_Tree_Keyword_Argument
 
 
@@ -641,6 +712,7 @@ def fill_convert_zone():
     #
     z.convert_full_list_of_module_aliases = convert_full_list_of_module_aliases
     z.convert_full_list_of_symbol_aliases = convert_full_list_of_symbol_aliases
+
     z.create_Tree_Module_Alias            = create_Tree_Module_Alias
     z.create_Tree_Symbol_Alias            = create_Tree_Symbol_Alias
 
@@ -656,6 +728,17 @@ def fill_convert_zone():
     #
     z.convert_delete_load_OR_store_context = convert_delete_load_OR_store_context
     z.convert_parameter_context            = convert_parameter_context
+
+    z.tree_delete_context    = tree_delete_context
+    z.tree_parameter_context = tree_parameter_context
+
+    z.map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = (
+            map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context
+        )
+
+    z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context = (
+            map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context
+        )
 
 
     #
@@ -690,7 +773,7 @@ def fill_convert_zone():
     #
     #   Name
     #
-    z.convert_name_parameter = convert_name_parameter
+    z.convert_some_list_of_name_parameters = convert_some_list_of_name_parameters
 
     
     #
@@ -705,6 +788,7 @@ def fill_convert_zone():
     z.convert_full_list_of_statements   = convert_full_list_of_statements
     z.convert_some_list_of_statements   = convert_some_list_of_statements
     z.convert_statement                 = convert_statement
+
     z.create_Tree_Assert_Statement      = create_Tree_Assert_Statement
     z.create_Tree_Assign_Statement      = create_Tree_Assign_Statement
     z.create_Tree_Break_Statement       = create_Tree_Break_Statement

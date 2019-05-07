@@ -25,6 +25,7 @@
 
 from    Z.Tree.Name_V1                      import  create_Tree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -103,3 +104,17 @@ def convert_name_parameter(z, v):
                v.id,
                z.convert_parameter_context(z, v.ctx),
            )
+
+
+#
+#   convert_some_list_of_name_parameters(z, v)
+#
+#       Convert a `SomeNativeList of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
+#       `SomeNativeList of SyntaxTree_Name`.
+#
+#       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
+#       of type `Native_AbstractSyntaxTree_Parameter`.
+#
+convert_some_list_of_name_parameters = (
+        produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_name_parameter)
+    )

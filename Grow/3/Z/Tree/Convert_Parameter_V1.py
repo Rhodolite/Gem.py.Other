@@ -30,9 +30,8 @@
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Name_V1              import  convert_name_parameter
+from    Z.Tree.Convert_Name_V1              import  convert_some_list_of_name_parameters
 from    Z.Tree.Parameter                    import  create_Tree_Parameters_All
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -84,19 +83,6 @@ def convert_tuple_parameter(v):
 
 
 #
-#   convert_list_of_name_parameters(v)
-#
-#       Convert a `list of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a `list of SyntaxTree_Name`.
-#
-#       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
-#       of type `Native_AbstractSyntaxTree_Parameter`.
-#
-convert_list_of_name_parameters = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_name_parameter)
-    )
-
-
-#
 #   convert_parameters_all(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameters_All`.
@@ -112,8 +98,8 @@ def convert_parameters_all(v):
     assert fact_is_some_native_list                    (v.defaults)
 
     return create_Tree_Parameters_All(
-               convert_list_of_name_parameters (v.args),
-               convert_tuple_parameter         (v.vararg),
-               convert_map_parameter           (v.kwarg),
-               convert_some_list_of_expressions(v.defaults),
+               convert_some_list_of_name_parameters(v.args),
+               convert_tuple_parameter             (v.vararg),
+               convert_map_parameter               (v.kwarg),
+               convert_some_list_of_expressions    (v.defaults),
            )

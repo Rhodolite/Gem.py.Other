@@ -3,8 +3,6 @@
 #
 
 
-assert 0
-
 #
 #   Z.Tree.Convert_Argument_V1 - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes, Version 1.
 #

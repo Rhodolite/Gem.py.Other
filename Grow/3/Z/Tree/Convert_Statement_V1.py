@@ -10,8 +10,13 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+#
+#   Verify statement version 1
+#
+from    Z.Parser.Global                 import  parser_globals
+
+
+assert parser_globals.statement_version == 1
 
 
 #
@@ -26,6 +31,10 @@ from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_
 #
 #       This is so other files can import the functions below from this file.
 #
+
+
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 #
@@ -65,47 +74,6 @@ convert_some_list_of_statements = produce__convert__some_list_of__Native_Abstrac
 #</order>
 
 
-from    Capital.Core                        import  FATAL
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_For_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_If_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Raise_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Return_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Except_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Finally_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_While_Statement
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_With_Statement
-
-
-if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_integer
-
-
-#
-#   Import the version of tree statements we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-assert parser_globals.statement_version == 1
-
-
 from    Z.Tree.Convert_Compound_Statement_V1    import  convert_for_statement
 from    Z.Tree.Convert_Compound_Statement_V1    import  convert_if_statement
 from    Z.Tree.Convert_Compound_Statement_V1    import  convert_try_except_statement
@@ -129,6 +97,29 @@ from    Z.Tree.Convert_Simple_Statement_V1      import  convert_pass_statement
 from    Z.Tree.Convert_Simple_Statement_V1      import  convert_print_statement
 from    Z.Tree.Convert_Simple_Statement_V1      import  convert_raise_statement
 from    Z.Tree.Convert_Simple_Statement_V1      import  convert_return_statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Assert_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Assign_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Break_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Class_Definition
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Continue_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Delete_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Execute_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Expression_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_For_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_From_Import_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Function_Definition
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Global_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_If_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Import_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Modify_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Pass_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Print_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Raise_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Return_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Try_Except_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Try_Finally_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_While_Statement
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_With_Statement
 
 
 #
