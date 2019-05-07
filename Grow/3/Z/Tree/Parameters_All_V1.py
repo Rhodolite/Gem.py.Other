@@ -31,8 +31,8 @@ class Tree_Parameters_All(object):
     #
     __slots__ = ((
         'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
-        'tuple_parameter',              #   None | NativeString
-        'map_parameter',                #   None | NativeString
+        'tuple_parameter',              #   None | Full_Native_String
+        'map_parameter',                #   None | Full_Native_String
         'defaults',                     #   SomeNativeList of Tree_Expression
     ))
 

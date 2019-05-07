@@ -4,11 +4,23 @@
 
 
 #
-#   Capital.NativeString - Native String & methods.
+#   Capital.Native_String - Native String & methods.
 #
 
 
 from    Capital.System                  import  is_python_2
+
+
+#
+#   Empty_Native_String - An empty native string (i.e.: `str` that has 0 characaters).
+#
+Empty_Native_String = str
+
+
+#
+#   Full_Native_String - A full native string (i.e.: `str` that has at least 1 characater).
+#
+Full_Native_String = str
 
 
 #
@@ -18,7 +30,13 @@ NativeString = str
 
 
 #
-#   intern_native_string - intern a NativeString
+#   Some_Native_String - A native string (i.e.: `str`).
+#
+Some_Native_String = str
+
+
+#
+#   intern_native_string - intern a `Some_Native_String` (i.e.: `str`).
 #
 if is_python_2:
     from    __builtin__                 import  intern as intern_native_string
@@ -29,13 +47,13 @@ else:
 #
 #   strip_trailing_whitespace - strip trailing whitespace
 #
-strip_trailing_whitespace = NativeString.rstrip
+strip_trailing_whitespace = Some_Native_String.rstrip
 
 
 #
 #   native_string__lookup_index__OR__MINUS_1(s, sub) - Look for `sub` in `s`.  Return `-1` on failure.
 #
-native_string__lookup_index__OR__MINUS_1 = NativeString.find
+native_string__lookup_index__OR__MINUS_1 = Some_Native_String.find
 
 
 #

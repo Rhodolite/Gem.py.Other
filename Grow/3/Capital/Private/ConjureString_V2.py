@@ -40,7 +40,7 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Fact                    import  fact_is_some_native_string
 from    Capital.Core                    import  trace
-from    Capital.NativeString            import  intern_native_string
+from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V2       import  create_full_string
 from    Capital.Private.String_V2       import  empty_string
 
@@ -71,7 +71,7 @@ from    Capital.Private.String_V2       import  empty_string
 #
 #       Produces: `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
-#           `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
+#           `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #
 #           Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
 #           version.
@@ -83,10 +83,11 @@ def produce_conjure_string(empty_string, create_full_string):
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key   is an interned `NativeString`; and
+    #           1)  The key is an interned `Some_Native_String`; and
+    #
     #           2)  The value is a `String`.
     #
-    #       The type of `string_cache` is `Map { interned NativeString } of String`
+    #       The type of `string_cache` is `Map { interned Some_Native_String } of String`
     #
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
     #       when the `conjure_string("")` is called.
@@ -100,7 +101,7 @@ def produce_conjure_string(empty_string, create_full_string):
     #
     #   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
-    #       `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
+    #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
     #
     #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
     #       version.s

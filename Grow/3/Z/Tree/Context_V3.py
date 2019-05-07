@@ -147,7 +147,7 @@ class Tree_Context_Enumeration(
         TRAIT_Tree_Context,
 ):
     __slots__ = ((
-        'name',                         #   NativeString
+        'name',                         #   Full_Native_String
 
         #
         #   Interface Tree_Context

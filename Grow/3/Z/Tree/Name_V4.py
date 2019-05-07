@@ -49,8 +49,8 @@ if __debug__:
 #
 class Tree_Name(object):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'symbol',                       #   Symbol
     ))

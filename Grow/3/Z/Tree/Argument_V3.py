@@ -13,7 +13,7 @@
 #
 #       Version 1:
 #
-#           `Tree_Keyword_Argument.symbol` is a `NativeString`.
+#           `Tree_Keyword_Argument.symbol` is a `Full_Native_String`.
 #
 #       Version 2:
 #

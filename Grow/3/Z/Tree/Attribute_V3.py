@@ -15,7 +15,7 @@
 #
 #       Version 1:
 #
-#           `Tree_Attribute` has a `.attribute` member that is a `NativeString`.
+#           `Tree_Attribute` has a `.attribute` member that is a `Full_Native_String`.
 #
 #       Version 2:
 #
@@ -63,8 +63,8 @@ class Tree_Attribute(object):
     #              Tree_Store_Target
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
         'attribute',                    #   Parser_Symbol

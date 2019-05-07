@@ -14,14 +14,14 @@
 #
 #               convert_tuple_parameter - "Converts" the `.varargs` member.
 #
-#                   The `.varargs` member is either `None` or a `NativeString`.
+#                   The `.varargs` member is either `None` or a `Full_Native_String`.
 #
 #                   For version 1, no conversion is done, these are left as is.
 #
 #
 #               convert_map_parameter - "Converts" the `.kwargs` member.
 #
-#                   The `.kwargs` member is either `None` or a `NativeString`.
+#                   The `.kwargs` member is either `None` or a `Full_Native_String`.
 #
 #                   For version 1, no conversion is done, these are left as is.
 #
@@ -47,13 +47,13 @@ if __debug__:
 #
 #       "Convert" `None` to `None`.
 #
-#       "Convert" a full `NativeString` to the [same] full `NativeString`
+#       "Convert" a full `Full_Native_String` to the [same] `Full_Native_String`
 #
 #   FUTURE:
-#       Will convert `NativeString` to `Tree_Map_Parameter`.
+#       Will convert `Full_Native_String` to `Tree_Map_Parameter`.
 #
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
-#       a full `NativeString` to the [same] full `NativeString`.
+#       a full `Full_Native_String` to the [same] `Full_Native_String`.
 #
 def convert_map_parameter(v):
     assert fact_is__native_none__OR__full_native_string(v)
@@ -66,13 +66,13 @@ def convert_map_parameter(v):
 #
 #       "Convert" `None` to `None`.
 #
-#       "Convert" a full `NativeString` to the [same] full `NativeString`
+#       "Convert" a `Full_Native_String` to the [same] `Full_Native_String`.
 #
 #   FUTURE:
-#       Will convert `NativeString` to `Tree_Tuple_Parameter`.
+#       Will convert `Full_Native_String` to `Tree_Tuple_Parameter`.
 #
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
-#       a full `NativeString` to the [same] full `NativeString`.
+#       a `Full_Native_String` to the [same] `Full_Native_String`.
 #
 def convert_tuple_parameter(v):
     assert fact_is__native_none__OR__full_native_string(v)

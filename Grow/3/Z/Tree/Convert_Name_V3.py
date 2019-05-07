@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           The `id` parameter (third parameter) to `z.create_Tree_Name` is a `NativeString`.
+#           The `id` parameter (third parameter) to `z.create_Tree_Name` is a `Full_Native_String`.
 #
 #       Version 3:
 #

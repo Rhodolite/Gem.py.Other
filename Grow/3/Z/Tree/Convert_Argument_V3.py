@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           The first argument to `create_Tree_Keyword_Argument` is a `FullNativeString`.
+#           The first argument to `create_Tree_Keyword_Argument` is a `Full_Native_String`.
 #
 #       Version 3:
 #

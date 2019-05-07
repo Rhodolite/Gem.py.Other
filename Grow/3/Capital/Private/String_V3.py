@@ -38,9 +38,9 @@
 #
 #           There are seperate classes for empty & full strings:
 #
-#               1A)     `EmptyString` is used to handle the singleton `empty_string`; and
+#               1A)     `Empty_String` is used to handle the singleton `empty_string`; and
 #
-#               1B)     `FullString` is used to handle full strings.
+#               1B)     `Full_String` is used to handle full strings.
 #
 #           And also:
 #
@@ -52,29 +52,29 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.NativeString            import  intern_native_string
+from    Capital.Native_String           import  intern_native_string
 from    Capital.String                  import  TRAIT_String
 
 
 if __debug__:
-    from    Capital.NativeString        import  fact_is_empty_INTERNED_native_string
-    from    Capital.NativeString        import  fact_is_full_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
 
 
 #
-#   BaseString - A very simple string wrapper, base class of `EmptyString` and `FullString`.
+#   Base_String - A very simple string wrapper, base class of `Empty_String` and `Full_String`.
 #
-#       NOTE: Named `BaseString` instead of `String`, since the name "String" is reserved for `interface String`.
+#       NOTE: Named `Base_String` instead of `String`, since the name "String" is reserved for `interface String`.
 #
 #             (even though in the current implementation python (which does not have interfaces in python) does not
 #             actually have anything really named `interface String` -- conceptually it does, and thus the name
 #             "String" is still reserved for `interface String`).
 #
-class BaseString(
+class Base_String(
         TRAIT_String,
 ):
     __slots__ = ((
-        'interned_s',                   #   NativeString
+        'interned_s',                   #   Some_Native_String
     ))
 
 
@@ -96,15 +96,15 @@ class BaseString(
     #
     #   .__format__ (format_specification)  - Format `String`
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
     #
     def __format__(self, format_specification):
         return self.interned_s.__format__(format_specification)
 
 
-class EmptyString(BaseString):
+class Empty_String(Base_String):
     __slots__ = ((
-    #   'interned_s',                   #   Inherited from `BaseString`; but type changes to `EmptyNativeString`.
+    #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Empty_Native_String`.
     ))
 
 
@@ -123,7 +123,7 @@ class EmptyString(BaseString):
     #
     #   .__len__()  - Return the length.
     #
-    #       Always returns `0` for an `EmptyString`.
+    #       Always returns `0` for an `Empty_String`.
     #
     @staticmethod
     def __len__():
@@ -150,9 +150,9 @@ class EmptyString(BaseString):
 
 
 
-class FullString(BaseString):
+class Full_String(Base_String):
     __slots__ = ((
-    #   'interned_s',                   #   Inherited from `BaseString`; but type changes to `FullNativeString`.
+    #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Full_Native_String`.
     ))
 
 
@@ -171,7 +171,7 @@ class FullString(BaseString):
     #
     #   .__len__()  - Return the length.
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
     #
     def __len__(self):
         return self.interned_s.__len__()
@@ -204,7 +204,7 @@ class FullString(BaseString):
     #
     #   CURRENT
     #
-    #       For now, we just use the `NativeString` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `Some_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
     #
     #   FUTURE:
     #
@@ -224,7 +224,7 @@ class FullString(BaseString):
 def create_empty_string(interned_s):
     assert fact_is_empty_INTERNED_native_string(interned_s)
 
-    return EmptyString(interned_s)
+    return Empty_String(interned_s)
 
 
 @export
@@ -232,7 +232,7 @@ def create_empty_string(interned_s):
 def create_full_string(interned_s):
     assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return FullString(interned_s)
+    return Full_String(interned_s)
 
 
 empty_string = create_empty_string(intern_native_string(""))

@@ -18,7 +18,7 @@
 #           1)  Strings are unique (in normal cases).
 #
 #           2)  Uses `create_full_string` to create a full string, before attempting to put it in `string_cache`
-#               (as explained there, in abnormal cases, this `FullString` may leak).
+#               (as explained there, in abnormal cases, this `Full_String` may leak).
 #
 #       Version 3:
 #
@@ -28,7 +28,7 @@
 #               `string_cache`.
 #
 #               Only after the temporary string is guarentted unique (in the contect of `string_cache`), is it
-#               then transformed to a unique `FullString`.
+#               then transformed to a unique `Full_String`.
 #
 #               See all the comments below for more details.
 #
@@ -52,10 +52,10 @@
 
 from    Capital.Core                    import  export
 from    Capital.Core                    import  trace
-from    Capital.NativeString            import  intern_native_string
+from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V5       import  empty_string
-from    Capital.Private.String_V5       import  FullString
-from    Capital.TemporaryString_V5      import  create_temporary_string
+from    Capital.Private.String_V5       import  Full_String
+from    Capital.Temporary_String_V5     import  create_temporary_string
 
 
 if __debug__:
@@ -88,7 +88,7 @@ if __debug__:
 #
 #       Produces: `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
 #
-#           `s` must be of type some `NativeString` (i.e.: `str` or a subclass derived from `str`).
+#           `s` must be of type some `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #
 @export
 def produce_conjure_string(empty_string, create_temporary_string, Meta):
@@ -97,11 +97,12 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key   is an interned `NativeString`; and
+    #           1)  The key is an interned `Some_Native_String`; and
+    #
     #           2)  The value is a `String`.
     #
     #       The type of `string_cache` is
-    #       `Map { interned NativeString } of EmptyString | Meta | TemporaryString`.
+    #       `Map { interned Some_Native_String } of Empty_String | Meta | Temporary_String`.
     #
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
     #       when the `conjure_string("")` is called.
@@ -115,10 +116,10 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #
     #   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
     #
-    #       `s` must be of type `SomeNativeString` (i.e.: `str` or a subclass derived from `str`).
+    #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
     #
     #   NOTE:
-    #       There exists the possibility that internal instances of `TemporaryString* may "leak" from this code.
+    #       There exists the possibility that internal instances of `Temporary_String` may "leak" from this code.
     #
     #       Three common ways of "leakage" are:
     #
@@ -129,15 +130,15 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #           3.  A different thread uses the python `gc` module (garbage collection) to look at the internal
     #               instances of `conjure_string`.
     #
-    #       By creating a `TemporaryString` instance, we make the following guarentee:
+    #       By creating a `Temporary_String` instance, we make the following guarentee:
     #
     #           Any leakage of `Meta` instance is unique.
     #
     #   NOTE:
-    #       A `TemporaryString` may leak -- it may not be unique.
+    #       A `Temporary_String` may leak -- it may not be unique.
     #
-    #       A `TemporaryString` may at any moment be transformed (by another thread, or by multiple other threads) to a
-    #       `Meta`.
+    #       A `Temporary_String` may at any moment be transformed (by another thread, or by multiple other threads) to
+    #       a `Meta`.
     #
     def conjure_string(s):
         assert fact_is_some_native_string(s)
@@ -148,7 +149,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
             #
             #   MULTI-THREADING NOTE:
             #
-            #       Due to multithreading `r` may actually be a `TemporaryString`.
+            #       Due to multithreading `r` may actually be a `Temporary_String`.
             #
             #       In this case, transform it to a `Meta`
             #
@@ -174,7 +175,8 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
             #       The test `r.temporary_element_has_definitively_been_transformed` above is needed for the following
             #       reason:
             #
-            #           1.  `r` may have been a `EmptyString` -- It would be incorrect to transform `r` in such a case.
+            #           1.  `r` may have been a `Empty_String` -- It would be incorrect to transform `r` in such a
+            #               case.
             #
             #       Also, as a secondary consideration:
             #
@@ -192,8 +194,8 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
         #   NOTE:
         #       Due to multi-threading `temporary_string__maybe_duplicate` may be a duplicate (not unique).
         #
-        #       There may be two or more seperate threads, all of which, simultaneously, create a `TemporaryString` with
-        #       the same internal characters.
+        #       There may be two or more seperate threads, all of which, simultaneously, create a `Temporary_String`
+        #       with the same internal characters.
         #
         interned_s = intern_native_string(s)
 
@@ -201,14 +203,14 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
 
         #
         #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
-        #   `TemporaryString` or a `Meta`).
+        #   `Temporary_String` or a `Meta`).
         #
         #   NOTE:
         #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is thread
         #       safe).
         #
-        #       If two (or more) threads, simultaneously, create a `TemporaryString` with the same internal characters,
-        #       then `provide_string_key` will return the same instance in all threads.
+        #       If two (or more) threads, simultaneously, create a `Temporary_String` with the same internal
+        #       characters, then `provide_string_key` will return the same instance in all threads.
         #
         r = provide_string(interned_s, temporary_string__maybe_duplicate)
 
@@ -217,7 +219,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
 
         #
         #   NOTE:
-        #       Multiple threads may be simultaneously transforming `r` from a `TemporaryString` to a `Meta`.
+        #       Multiple threads may be simultaneously transforming `r` from a `Temporary_String` to a `Meta`.
         #
         #       This is thread safe.
         #
@@ -235,7 +237,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     return conjure_string
 
 
-conjure_string = produce_conjure_string(empty_string, create_temporary_string, FullString)
+conjure_string = produce_conjure_string(empty_string, create_temporary_string, Full_String)
 
 
 export(conjure_string)

@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.TemporaryString_V5 - Temporaary String Implementation, Version 5.
+#   Capital.Temporary_String_V5 - Temporary String Implementation, Version 5.
 #
 
 
@@ -17,19 +17,19 @@
 #
 #       Version 2:
 #
-#           Does not exist (not used to transform to `Capital.Private.String_V2.FullString`)
+#           Does not exist (not used to transform to `Capital.Private.String_V2.Full_String`)
 #
 #       Version 3:
 #
-#           Does not exist (not used to transform to `Capital.Private.String_V3.FullString`)
+#           Does not exist (not used to transform to `Capital.Private.String_V3.Full_String`)
 #
 #       Version 4:
 #
-#           Does not exist (not used to transform to `Capital.Private.String_V5.FullString`)
+#           Does not exist (not used to transform to `Capital.Private.String_V4.Full_String`)
 #
 #       Version 5:
 #
-#           Exists (and transformed to a `Capital.Private.String_V5.FullString`).
+#           Exists (and transformed to a `Capital.Private.String_V5.Full_String`).
 #
 
 
@@ -39,13 +39,13 @@ from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
 
 if __debug__:
-    from    Capital.NativeString        import  fact_is_full_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
 
 
 #
 #   StringKey - String Key Implementation, Version 5.
 #
-class TemporaryString(
+class Temporary_String(
         TRAIT_TemporaryElement,
         #
         #   NOTE:
@@ -55,11 +55,11 @@ class TemporaryString(
         #
 ):
     #
-    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V5.FullString` (which an instance of this
+    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V5.Full_String` (which an instance of this
     #   class is transformed to).
     #
     __slots__ = ((
-        'interned_s',                   #   FullNativeString
+        'interned_s',                   #   Full_Native_String
     ))
 
 
@@ -81,7 +81,7 @@ class TemporaryString(
     #   Public
     #
     def __repr__(self):
-        return arrange('<TemporaryString {!r}>', repr(self.interned_s))
+        return arrange('<Temporary_String {!r}>', repr(self.interned_s))
 
 
 @export
@@ -89,4 +89,4 @@ class TemporaryString(
 def create_temporary_string(interned_s):
     assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return TemporaryString(interned_s)
+    return Temporary_String(interned_s)

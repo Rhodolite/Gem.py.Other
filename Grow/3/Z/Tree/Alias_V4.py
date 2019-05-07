@@ -15,7 +15,7 @@
 #
 #       Version 3:
 #
-#           `Tree_Module_Alias_Leaf.name` is a `FullNativeString`.
+#           `Tree_Module_Alias_Leaf.name` is a `Full_Native_String`.
 #
 #       Version 4:
 #
@@ -45,7 +45,7 @@ class Tree_Module_Alias_Leaf(
 ):
     __slots__ = ((
         'name',                         #   Parser_Module_Name
-        'as_name',                      #   None | NativeString
+        'as_name',                      #   None | Full_Native_String
     ))
 
 
@@ -96,8 +96,8 @@ class Tree_Symbol_Alias_Leaf(
         TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
-        'name',                         #   NativeString
-        'as_name',                      #   None | NativeString
+        'name',                         #   Full_Native_String
+        'as_name',                      #   None | Full_Native_String
     ))
 
 

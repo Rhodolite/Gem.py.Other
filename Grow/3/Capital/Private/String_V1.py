@@ -24,30 +24,24 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.NativeString            import  intern_native_string
+from    Capital.Native_String           import  intern_native_string
 from    Capital.String                  import  TRAIT_String
 
 
 if __debug__:
-    from    Capital.NativeString        import  fact_is_empty_INTERNED_native_string
-    from    Capital.NativeString        import  fact_is_full_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
 
 
 #
-#   String_V1 - A very simple string wrapper.
-#
-#       NOTE: Named `String_V1` instead of `String`, since the name "String" is reserved for `interface String`.
-#
-#             (even though in the current implementation python (which does not have interfaces in python) does not
-#             actually have anything really named `interface String` -- conceptually it does, and thus the name
-#             "String" is still reserved for `interface String`).
+#   String [Leaf] - A very simple string wrapper.
 #
 @export
-class String_V1(
+class String_Leaf(
         TRAIT_String,
 ):
     __slots__ = ((
-        'interned_s',                   #   NativeString
+        'interned_s',                   #   Some_Native_String
     ))
 
 
@@ -83,8 +77,7 @@ class String_V1(
     #
     #   .__format__ (format_specification)  - Format `String`
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
-    #
+    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
     #
     def __format__(self, format_specification):
         return self.interned_s.__format__(format_specification)
@@ -93,7 +86,7 @@ class String_V1(
     #
     #   .__len__()  - Return the length.
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
     #
     def __len__(self):
         return self.interned_s.__len__()
@@ -126,7 +119,7 @@ class String_V1(
     #
     #   CURRENT
     #
-    #       For now, we just use the `NativeString` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `Some_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
     #
     #   FUTURE:
     #
@@ -146,7 +139,7 @@ class String_V1(
 def create_empty_string(interned_s):
     assert fact_is_empty_INTERNED_native_string(interned_s)
 
-    return String_V1(interned_s)
+    return String_Leaf(interned_s)
 
 
 @export
@@ -154,7 +147,7 @@ def create_empty_string(interned_s):
 def create_full_string(interned_s):
     assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return String_V1(interned_s)
+    return String_Leaf(interned_s)
 
 
 empty_string = create_empty_string(intern_native_string(""))

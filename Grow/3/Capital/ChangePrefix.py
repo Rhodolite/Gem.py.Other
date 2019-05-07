@@ -32,18 +32,18 @@ class ChangePrefix(object):
     __slots__ = ((
         'lifecycle',                    #   SimpleContextLifeCycle
 
-        'old__prefix',                  #   None | NativeString
-        'old__prefix_blank',            #   None | NativeString
+        'old__prefix',                  #   None | Full_Native_String
+        'old__prefix_blank',            #   None | Some_Native_String
 
         'method__line',                 #   None | BoundMethod
         'method__query_position',       #   None | BoundMethod
         'method__stash_prefix',         #   BoundMethod
         'method__stash_prefix_blank',   #   None | BoundMethod
 
-        'ending',                       #   None | NativeString
+        'ending',                       #   None | Full_Native_String
 
-        'new__prefix',                  #   NativeString
-        'new__prefix_blank',            #   None | NativeString
+        'new__prefix',                  #   Full_Native_String
+        'new__prefix_blank',            #   None | Some_Native_String
     ))
 
 

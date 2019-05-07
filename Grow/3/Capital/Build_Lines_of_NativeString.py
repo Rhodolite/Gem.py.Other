@@ -6,9 +6,9 @@
 #
 #   Capital.Build_Lines_of_NativeString - A "file" like context, that creates lines of text.
 #
-#       A "file" like context, that creates lines of text (saved as `NativeString`s; i.e.: `str`).
+#       A "file" like context, that creates lines of text (saved as `Native_String`s; i.e.: `str`).
 #
-#       After the context has exited, it can be iterated, to return the lines of text (as `NativeString`).
+#       After the context has exited, it can be iterated, to return the lines of text (as `Native_String`).
 #
 
 
@@ -23,7 +23,7 @@ from    Capital.ChangePrefix            import  change_prefix
 from    Capital.Core                    import  bind_method
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  iterate
-from    Capital.NativeString            import  strip_trailing_whitespace
+from    Capital.Native_String           import  strip_trailing_whitespace
 
 
 if __debug__:
@@ -70,11 +70,11 @@ class Build_Lines_of_NativeString(object):
     __slots__ = ((
         'lifecycle',                #   BuildContextLifeCycle
 
-        'lines',                    #   NativeList of [ NativeString ]
+        'lines',                    #   SomeNativeList of Some_Native_String
         '_append_line',             #   NativeMethod
 
-        'prefix',                   #   None | NativeString
-        'prefix_blank',             #   NativeString
+        'prefix',                   #   None | Full_Native_String
+        'prefix_blank',             #   Some_Native_String
 
         'position',                 #   SignificantInteger
         'f',                        #   None | BuildNativeString

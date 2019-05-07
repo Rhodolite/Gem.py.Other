@@ -58,8 +58,8 @@ class Tree_Class_Definition(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'name',                         #   Parser_Symbol
         'bases',                        #   SomeNativeList of Tree_Expression
@@ -149,8 +149,8 @@ class Tree_Function_Definition(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'name',                         #   Parser_Symbol
         'parameters',                   #   Tree_Parameter

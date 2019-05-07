@@ -9,7 +9,7 @@
 
 
 from    Capital.Core                    import  creator
-from    Capital.NativeString            import  intern_native_string
+from    Capital.Native_String           import  intern_native_string
 
 
 if __debug__:

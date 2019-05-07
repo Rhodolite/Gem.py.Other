@@ -74,8 +74,8 @@ class Tree_Test_Statement(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'test',                         #   Tree_Expression
         'body',                         #   Tree_Statement
@@ -142,10 +142,10 @@ class Tree_Class_Definition(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        'name',                         #   FullNativeString
+        'name',                         #   Full_Native_String
         'bases',                        #   SomeNativeList of Tree_Expression
         'body',                         #   Tree_Statement
         'decorator_list',               #   SomeNativeList of Tree_Decorator
@@ -233,8 +233,8 @@ class Tree_For_Statement(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'target',                       #   Tree_Target
         'sequence',                     #   Tree_Expression
@@ -306,10 +306,10 @@ class Tree_Function_Definition(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        'name',                         #   FullNativeString
+        'name',                         #   Full_Native_String
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_List
         'decorator_list',               #   SomeNativeList of Tree_Decorator
@@ -404,8 +404,8 @@ class Tree_Try_Except_Statement(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'body',                         #   Tree_Statement
         'except_handlers',              #   FullNativeList of Tree_Except_Handler
@@ -476,8 +476,8 @@ class Tree_Try_Finally_Statement(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'body',                         #   Tree_Statement
         'finally_body',                 #   Tree_Statement
@@ -552,8 +552,8 @@ class Tree_With_Statement(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
         'target',                       #   None | Tree_Target

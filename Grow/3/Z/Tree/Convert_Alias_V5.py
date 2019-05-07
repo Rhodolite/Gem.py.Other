@@ -15,11 +15,11 @@
 #
 #       Version 4:
 #
-#           1)  The second argument to `z.create_Tree_Module_Alias` is of type `None | FullNativeString`.
+#           1)  The second argument to `z.create_Tree_Module_Alias` is of type `None | Full_Native_String`.
 #
-#           2)  The first  argument to `z.create_Tree_Symbol_Alias` is of type `FullNativeString`.
+#           2)  The first  argument to `z.create_Tree_Symbol_Alias` is of type `Full_Native_String`.
 #
-#           3)  The second argument to `z.create_Tree_Symbol_Alias` is of type `None | FullNativeString`.
+#           3)  The second argument to `z.create_Tree_Symbol_Alias` is of type `None | Full_Native_String`.
 #
 #       Version 5:
 #

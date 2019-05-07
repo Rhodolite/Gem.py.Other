@@ -45,11 +45,11 @@ class Tree_Attribute(object):
     #              Tree_Store_Target
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
-        'attribute',                    #   NativeString
+        'attribute',                    #   Full_Native_String
         'context',                      #   Tree_Context
     ))
 

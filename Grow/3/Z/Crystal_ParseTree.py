@@ -71,7 +71,7 @@ class Crystal_Statement_Copyright(object):
 
 class Crystal_Statement_Output_1(object):
     __slots__ = ((
-        'argument',                     #   NativeString
+        'argument',                     #   Full_Native_String
     ))
 
 

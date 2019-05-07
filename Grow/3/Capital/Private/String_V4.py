@@ -24,16 +24,16 @@
 #
 #       Version 3:
 #
-#           Has a `BaseString` to avoid duplicate code.
+#           Has a `Base_String` to avoid duplicate code.
 #
 #       Version 4:
 #
-#           Removes `BaseString`, and instead duplicates code (See below)
+#           Removes `Base_String`, and instead duplicates code (See below)
 #
 
 
 #
-#   WHY DUPLICATE CODE IN REMOVING `BaseString`?
+#   WHY DUPLICATE CODE IN REMOVING `Base_String`?
 #
 #   SUMMARY:
 #
@@ -70,48 +70,48 @@
 #
 #                   class TRAIT_String(object):                                 __slots__ = (())
 #                   class TRAIT_TemporaryElement(object):                       __slots__ = (())
-#                   class TemporaryString(TRAIT_TemporaryElement):              __slots__ = (('interned_s',))
-#                   class BaseString     (TRAIT_String):                        __slots__ = (('interned_s',))
-#                   class FullString     (BaseString, TRAIT_TemporaryElement):  __slots__ = (())
+#                   class Temporary_String(TRAIT_TemporaryElement):             __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_String):                        __slots__ = (('interned_s',))
+#                   class Full_String    (Base_String, TRAIT_TemporaryElement): __slots__ = (())
 #
-#                   x = TemporaryString()
-#                   x.__class__ = FullString
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String
 #
 #               However, this fails with:
 #
-#                   Type Error: __class__ assignment: 'TemporaryString' and object layout diffes from 'FullString'.
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from 'Full_String'.
 #
-#               Removing `BaseString`, allows us to simplfy this:
+#               Removing `Base_String`, allows us to simplfy this:
 #
 #                   class TRAIT_String(object):                                     __slots__ = (())
 #                   class TRAIT_TemporaryElement(object):                           __slots__ = (())
-#                   class TemporaryString(TRAIT_TemporaryElement):                  __slots__ = (('interned_s',))
-#                   class FullString     (TRAIT_String, TRAIT_TemporaryElement):    __slots__ = (('interned_s',))
+#                   class Temporary_String(TRAIT_TemporaryElement):                 __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_String, TRAIT_TemporaryElement):    __slots__ = (('interned_s',))
 #
-#                   x = TemporaryString()
-#                   x.__class__ = FullString
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String
 #
 #               ALTHOUGH, this still fails with the same error as above:
 #
-#                   Type Error: __class__ assignment: 'TemporaryString' and object layout diffes from 'FullString'.
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from 'Full_String'.
 #
-#               However, we can now REVERSE the order we declare the multiple inheritance for `FullString`
-#               (since we eliminated `BaseString`):
+#               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String`
+#               (since we eliminated `Base_String`):
 #
 #                   class TRAIT_String(object):                                     __slots__ = (())
 #                   class TRAIT_TemporaryElement(object):                           __slots__ = (())
-#                   class TemporaryString(TRAIT_TemporaryElement):                  __slots__ = (('interned_s',))
-#                   class FullString     (TRAIT_TemporaryElement, TRAIT_String):    __slots__ = (('interned_s',))
+#                   class Temporary_String(TRAIT_TemporaryElement):                 __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_TemporaryElement, TRAIT_String):    __slots__ = (('interned_s',))
 #
-#                   x = TemporaryString()
-#                   x.__class__ = FullString
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String
 #
 #               NOW, python accepts out transformation.
 #
 #   CONCLUSION:
 #
 #       To avoid a limitation in python related to it's implementation of multiple inheritance, we have to eliminate
-#       `BaseString`, and duplicate a few lines of code.
+#       `Base_String`, and duplicate a few lines of code.
 #
 #       This will allos us to use `.__class__` assignment in version 4 implementation.
 #
@@ -120,47 +120,47 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.NativeString            import  intern_native_string
+from    Capital.Native_String           import  intern_native_string
 from    Capital.String                  import  TRAIT_String
 
 
 if __debug__:
-    from    Capital.NativeString        import  fact_is_empty_INTERNED_native_string
-    from    Capital.NativeString        import  fact_is_full_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
 
 
 #
 #<methods>
-#   BaseString methods - A very simple string wrapper, common methods of `EmptyString` and `FullString`.
+#   Base_String methods - A very simple string wrapper, common methods of `Empty_String` and `Full_String`.
 #
-#       As explained above we had to get rid of `BaseString`.
+#       As explained above we had to get rid of `Base_String`.
 #
-#       So instead we just list the [no longer existing] `BaseString` methods, and copy them into
-#       `EmptyString` and `FullString` below.
+#       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
+#       `Empty_String` and `Full_String` below.
 #
 
 
 #
-#   BaseString: contructor
+#   Base_String: contructor
 #
-def method__BaseString__constructor(self, interned_s):
+def method__Base_String__constructor(self, interned_s):
     self.interned_s = interned_s
 
 
 #
-#   BaseString: Interface String
+#   Base_String: Interface String
 #
 @property
-def property__BaseString__native_string(self):
+def property__Base_String__native_string(self):
     return self.interned_s
 
 
 #
-#   BaseString.__format__ (format_specification)  - Format `String`
+#   Base_String.__format__ (format_specification)  - Format `String`
 #
-#       Delegated to the `NativeString` implementation via `.interned_s`.
+#       Delegated to the `Some_Native_String` implementation via `.interned_s`.
 #
-def method__BaseString__operator_format(self, format_specification):
+def method__Base_String__operator_format(self, format_specification):
     return self.interned_s.__format__(format_specification)
 #</methods>
 
@@ -168,18 +168,18 @@ def method__BaseString__operator_format(self, format_specification):
 #
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
-class EmptyString(
+class Empty_String(
         TRAIT_String,
 ):
     __slots__ = ((
-        'interned_s',                   #   EmptyNativeString
+        'interned_s',                   #   Empty_Native_String
     ))
 
 
     #
     #   Private
     #
-    __init__ = method__BaseString__constructor
+    __init__ = method__Base_String__constructor
 
 
     #
@@ -187,7 +187,7 @@ class EmptyString(
     #
     is_empty_string = True
     is_full_string  = False
-    native_string   = property__BaseString__native_string
+    native_string   = property__Base_String__native_string
 
 
     #
@@ -198,15 +198,15 @@ class EmptyString(
     #
     #   .__format__ (format_specification)  - Format `String`
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #       Delegated to the `Empty_Native_String` implementation via `.interned_s`.
     #
-    __format__ = method__BaseString__operator_format
+    __format__ = method__Base_String__operator_format
 
 
     #
     #   .__len__()  - Return the length.
     #
-    #       Always returns `0` for an `EmptyString`.
+    #       Always returns `0` for an `Empty_String`.
     #
     @staticmethod
     def __len__():
@@ -235,18 +235,18 @@ class EmptyString(
 #
 #   Full String - A wrapper around a full native string.
 #
-class FullString(
+class Full_String(
         TRAIT_String,
 ):
     __slots__ = ((
-        'interned_s',                   #   FullNativeString
+        'interned_s',                   #   Full_Native_String
     ))
 
 
     #
     #   Private
     #
-    __init__ = method__BaseString__constructor
+    __init__ = method__Base_String__constructor
 
 
     #
@@ -254,7 +254,7 @@ class FullString(
     #
     is_empty_string = False
     is_full_string  = True
-    native_string   = property__BaseString__native_string
+    native_string   = property__Base_String__native_string
 
 
     #
@@ -265,15 +265,15 @@ class FullString(
     #
     #   .__format__ (format_specification)  - Format `String`
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
     #
-    __format__ = method__BaseString__operator_format
+    __format__ = method__Base_String__operator_format
 
 
     #
     #   .__len__()  - Return the length.
     #
-    #       Delegated to the `NativeString` implementation via `.interned_s`.
+    #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
     #
     def __len__(self):
         return self.interned_s.__len__()
@@ -306,7 +306,7 @@ class FullString(
     #
     #   CURRENT
     #
-    #       For now, we just use the `NativeString` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
     #
     #   FUTURE:
     #
@@ -326,7 +326,7 @@ class FullString(
 def create_empty_string(interned_s):
     assert fact_is_empty_INTERNED_native_string(interned_s)
 
-    return EmptyString(interned_s)
+    return Empty_String(interned_s)
 
 
 @export
@@ -334,7 +334,7 @@ def create_empty_string(interned_s):
 def create_full_string(interned_s):
     assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return FullString(interned_s)
+    return Full_String(interned_s)
 
 
 empty_string = create_empty_string(intern_native_string(""))

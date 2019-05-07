@@ -31,10 +31,10 @@ class Tree_Class_Definition(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        'name',                         #   FullNativeString
+        'name',                         #   Full_Native_String
         'bases',                        #   SomeNativeList of Tree_Expression
         'body',                         #   FullNativeList of Tree_Statement
         'decorator_list',               #   SomeNativeList of Tree_Decorator
@@ -121,10 +121,10 @@ class Tree_Function_Definition(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        'name',                         #   FullNativeString
+        'name',                         #   Full_Native_String
         'parameters',                   #   Tree_Parameter
         'body',                         #   FullNativeList of Tree_Statement
         'decorator_list',               #   SomeNativeList of Tree_Decorator

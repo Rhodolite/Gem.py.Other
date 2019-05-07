@@ -22,14 +22,15 @@
 #
 #       Version 6:
 #
-#           String classes use `NativeString` as their base class.
+#           String classes use `Some_Native_String` as their base class.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.NativeString            import  NativeString
+from    Capital.Native_String           import  Empty_Native_String
+from    Capital.Native_String           import  Full_Native_String
 from    Capital.String                  import  TRAIT_String
 from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
@@ -41,20 +42,20 @@ if __debug__:
 
 #
 #<methods>
-#   common methods of `EmptyString` and `FullString`.
+#   common methods of `Empty_String` and `Full_String`.
 #
-#       As explained in "Capital.Private.String_V4.py" we had to get rid of `BaseString`.
+#       As explained in "Capital.Private.String_V4.py" we had to get rid of `Base_String`.
 #
-#       So instead we just list the [no longer existing] `BaseString` methods, and copy them into
-#       `EmptyString` and `FullString` below.
+#       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
+#       `Empty_String` and `Full_String` below.
 #
 
 
 #
-#   BaseString: Interface String
+#   Base_String: Interface String
 #
 @property
-def property__BaseString__native_string(self):
+def property__Base_String__native_string(self):
     return self
 #</methods>
 
@@ -62,8 +63,8 @@ def property__BaseString__native_string(self):
 #
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
-class EmptyString(
-        NativeString,
+class Empty_String(
+        Empty_Native_String,
         TRAIT_TemporaryElement,
         TRAIT_String,
 ):
@@ -75,7 +76,7 @@ class EmptyString(
     #
     is_empty_string = True
     is_full_string  = False
-    native_string   = property__BaseString__native_string
+    native_string   = property__Base_String__native_string
 
 
     #
@@ -84,14 +85,14 @@ class EmptyString(
 
 
     #
-    #   .format(format_specification) - Inherited from `NativeString`.
+    #   .format(format_specification) - Inherited from `Empty_Native_String`.
     #
 
 
     #
     #   .__len__()  - Return the length.
     #
-    #       Always returns `0` for an `EmptyString`.
+    #       Always returns `0` for an `Empty_String`.
     #
     @staticmethod
     def __len__():
@@ -109,8 +110,8 @@ class EmptyString(
     #
     #   .python_code()
     #
-    #       Return a `NativeString` that is the python code that python will compile to a `NativeString` with the same
-    #       characters.
+    #       Return a `Full_Native_String` that is the python code that python will compile to a `Empty_Native_String`
+    #       with the same characters.
     #
     @staticmethod
     def python_code():
@@ -118,16 +119,16 @@ class EmptyString(
 
 
 #
-#   method__NativeString__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
 #
-method__NativeString__representation = NativeString.__repr__
+method__Full_Native_String__representation = Full_Native_String.__repr__
 
 
 #
 #   Full String - A wrapper around a full native string.
 #
-class FullString(
-        NativeString,
+class Full_String(
+        Full_Native_String,
         TRAIT_TemporaryElement,
         TRAIT_String,
 ):
@@ -139,15 +140,15 @@ class FullString(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL('{}: A FullString may not be {}',
-                  "Capital.Private.FullString_V6.FullString.operator new (`__new__`)",
+            FATAL('{}: A Full_String may not be {}',
+                  "Capital.Private.FullString_V6.Full_String.operator new (`__new__`)",
                   'created')
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL('{}: A FullString may not be {}',
-                  "Capital.Private.FullString_V6.FullString.constructor (`__init__`)",
+            FATAL('{}: A Full_String may not be {}',
+                  "Capital.Private.FullString_V6.Full_String.constructor (`__init__`)",
                   'constructed')
 
 
@@ -156,7 +157,7 @@ class FullString(
     #
     is_empty_string = False
     is_full_string  = True
-    native_string   = property__BaseString__native_string
+    native_string   = property__Base_String__native_string
 
 
     #
@@ -197,7 +198,7 @@ class FullString(
     #
     #   CURRENT
     #
-    #       For now, we just use the `NativeString` representation (i.e: `str.__repr__`).
+    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__`).
     #
     #   FUTURE:
     #
@@ -209,14 +210,14 @@ class FullString(
     #       Also, really, we want to code generate the `portray_python_string` ... so will wait until the
     #       code generator can generate that function, before using it.
     #
-    python_code = method__NativeString__representation
+    python_code = method__Full_Native_String__representation
 
 
 @creator
 def create_empty_string(s):
     assert fact_is_empty_native_string(s)
 
-    return EmptyString(s)
+    return Empty_String(s)
 
 
 @export
@@ -224,7 +225,7 @@ def create_empty_string(s):
 def create_full_string(s):
     assert fact_is_full_native_string(interned_s)
 
-    return FullString(s)
+    return Full_String(s)
 
 
 empty_string = create_empty_string("")

@@ -25,7 +25,7 @@ class Tree_Keyword_Argument(
         TRAIT_Tree_Argument,
 ):
     __slots__ = ((
-        'name',                         #   FullNativeString
+        'name',                         #   Full_Native_String
         'value',                        #   Tree_Expression
     ))
 

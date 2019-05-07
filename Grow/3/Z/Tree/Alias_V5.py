@@ -15,17 +15,17 @@
 #
 #       Version 4:
 #
-#           1)  `Tree_Module_Alias_Leaf.as_name` is a `None | FullNativeString`.
+#           1)  `Tree_Module_Alias_Leaf.as_name` is a `None | Full_Native_String`.
 #
-#           2)  `Tree_Symbol_Alias_Leaf.name` is a `FullNativeString`.
+#           2)  `Tree_Symbol_Alias_Leaf.name`    is a `Full_Native_String`.
 #
-#           3)  `Tree_Symbol_Alias_Leaf.as_name` is a `None | FullNativeString`.
+#           3)  `Tree_Symbol_Alias_Leaf.as_name` is a `None | Full_Native_String`.
 #
 #       Version 5:
 #
 #           1)  `Tree_Module_Alias_Leaf.as_name` is a `Parser_Symbol_0`.
 #
-#           2)  `Tree_Symbol_Alias_Leaf.name` is a `Parser_Symbol`.
+#           2)  `Tree_Symbol_Alias_Leaf.name`    is a `Parser_Symbol`.
 #
 #           3)  `Tree_Symbol_Alias_Leaf.as_name` is a `Parser_Symbol_0`.
 #

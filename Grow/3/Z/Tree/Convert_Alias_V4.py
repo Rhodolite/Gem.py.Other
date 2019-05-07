@@ -15,7 +15,7 @@
 #
 #       Version 3:
 #
-#           The first argument to `z.create_Tree_Module_Alias` is a `FullNativeString`.
+#           The first argument to `z.create_Tree_Module_Alias` is a `Full_Native_String`.
 #
 #       Version 4:
 #

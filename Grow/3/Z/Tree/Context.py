@@ -68,7 +68,7 @@
 #           NOTE:
 #
 #               In the function definition above, there is no context for `f`.  In fact, in the function definition
-#               above, `f` is not a `Tree_Name` but instead just a NativeString.
+#               above, `f` is not a `Tree_Name` but instead just a `Full_Native_String`.
 #
 
 

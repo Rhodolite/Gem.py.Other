@@ -67,9 +67,9 @@
 #                                                                 (each `Tree_Name` has a context of
 #                                                                 `Tree_Context_Parameter`).
 #
-#                                       `.tuple_parameter`      - Stores `*g` as a `NativeString`.
+#                                       `.tuple_parameter`      - Stores `*g` as a `Full_Native_String`.
 #
-#                                       `.map_parameter`        - Stored `**h` as a `NativeString`.
+#                                       `.map_parameter`        - Stored `**h` as a `Full_Native_String`.
 #
 #                                       `.defaults'             - Stores `7, "eight"` as a
 #                                                                 `NativeList of Tree_Expression`.

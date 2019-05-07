@@ -10,7 +10,7 @@
 #
 
 
-from    Capital.TemporaryString_V6      import  create_temporary_string
+from    Capital.Temporary_String_V6     import  create_temporary_string
 
 
 if __debug__:
@@ -41,7 +41,7 @@ def produce_conjure_full_name__with_unused_Z_parameter(Meta):
     #
     #       The `z` parameter is unused.
     #
-    #       `s` must be of type `NativeString` (or a type that is a subclass of `NativeString`).
+    #       `s` must be of type `Full_Native_String` (or a type that is a subclass of `Full_Native_String`).
     #
     #       `s` must be a "full" string (i.e.: length greater than 0).
     #

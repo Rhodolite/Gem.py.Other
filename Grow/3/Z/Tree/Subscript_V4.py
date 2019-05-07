@@ -53,8 +53,8 @@ if __debug__:
 #
 class Tree_Subscript_Expression(object):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
         'index',                        #   Tree_Index_Clause

@@ -119,7 +119,7 @@ from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_exited
 #
 class BuildContextLifecycle(object):
     __slots__ = ((
-        'name',                     #   NativeString
+        'name',                     #   Full_Native_String
         'exception',                #   Boolean
         'iterating',                #   Boolean
     ))

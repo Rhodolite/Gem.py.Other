@@ -40,8 +40,8 @@ class Tree_Keyword_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
     ))
 
 
@@ -82,8 +82,8 @@ class Tree_Assert_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'test',                         #   Tree_Expression
         'message',                      #   None | Tree_Expression
@@ -154,8 +154,8 @@ class Tree_Assign_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'targets',                      #   NativeList of Tree_Expression
         'value',                        #   Tree_Expression
@@ -243,8 +243,8 @@ class Tree_Delete_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'targets',                      #   FullNativeList of Tree_Target
     ))
@@ -310,8 +310,8 @@ class Tree_Execute_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'body',                         #   Tree_Expression
         'globals',                      #   None | Tree_Expression
@@ -385,8 +385,8 @@ class Tree_Expression_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
     ))
@@ -436,12 +436,12 @@ class Tree_From_Import_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        'module',                       #   NativeString
+        'module',                       #   Full_Native_String
         'names',                        #   FullNativeList of Tree_Symbol_Alias
-        'level',                        #   SubstantialInteger
+        'level',                        #   Substantial_Integer
     ))
 
 
@@ -515,10 +515,10 @@ class Tree_Global_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        'names',                        #   FullNativeList of FullNativeString
+        'names',                        #   FullNativeList of Full_Native_String
     ))
 
 
@@ -576,8 +576,8 @@ class Tree_Import_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'module_aliases',               #   NativeList of Tree_Module_Alias
     ))
@@ -646,8 +646,8 @@ class Tree_Modify_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'left',                         #   Tree_Expression
         'operator',                     #   Tree_Operator
@@ -722,8 +722,8 @@ class Tree_Print_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'destination',                  #   None | Tree_Expression
         'values',                       #   SomeNativeList of Tree_Expression
@@ -799,8 +799,8 @@ class Tree_Return_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
     ))
@@ -854,8 +854,8 @@ class Tree_Raise_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'type',                         #   None | Tree_Expression
         'instance',                     #   None | Tree_Expression

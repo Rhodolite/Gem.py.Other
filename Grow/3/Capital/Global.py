@@ -27,21 +27,21 @@ if version >= 2:
 
 
 #
-#   Version 3: Add `BaseString`, `EmptyString` and `FullString`.
+#   Version 3: Add `Base_String`, `Empty_String` and `Full_String`.
 #
 if version >= 3:
     string_version = 3
 
 
 #
-#   Version 4: Remove `BaseString`.
+#   Version 4: Remove `Base_String`.
 #
 if version >= 4:
     string_version = 4
 
 
 #
-#   Version 5: Guarantee Uniqueness of `FullString` always (see "Capital/Private/ConjureString_V5.py for details).
+#   Version 5: Guarantee Uniqueness of `Full_String` always (see "Capital/Private/ConjureString_V5.py for details).
 #
 if version >= 5:
     string_version = 5
@@ -79,7 +79,7 @@ if __debug__:
 #
 class Capital_Globals(object):
     __slots__ = ((
-        'string_version',               #   PositiveInteger
+        'string_version',               #   Positive_Integer
     ))
 
 

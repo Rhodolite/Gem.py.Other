@@ -23,7 +23,7 @@
 
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
-from    Capital.NativeString                import  NativeString
+from    Capital.Native_String               import  Full_Native_String
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
@@ -37,7 +37,7 @@ if __debug__:
 #   Parser: Symbol [Leaf]
 #
 class Parser_Symbol_Leaf(
-        NativeString,
+        Full_Native_String,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Symbol,
 ):

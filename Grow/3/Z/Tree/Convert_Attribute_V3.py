@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           The `attribute` parameter (fourth parameter) to `z.create_Tree_Attribute` is a `NativeString`.
+#           The `attribute` parameter (fourth parameter) to `z.create_Tree_Attribute` is a `Full_Native_String`.
 #
 #       Version 3:
 #

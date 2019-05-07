@@ -8,7 +8,7 @@
 #
 
 
-from    Capital.NativeString            import  native_string__lookup_index__OR__MINUS_1
+from    Capital.Native_String           import  native_string__lookup_index__OR__MINUS_1
 
 
 if __debug__:

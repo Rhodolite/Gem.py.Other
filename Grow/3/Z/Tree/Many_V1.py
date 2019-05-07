@@ -34,8 +34,8 @@ class Tree_Many_Expression(object):
     #              Tree_Store_Target
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'elements',                     #   SomeNativeList of Tree_Expression
         'context',                      #   Tree_Context

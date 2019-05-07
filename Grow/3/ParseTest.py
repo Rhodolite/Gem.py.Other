@@ -4,96 +4,113 @@
 
 
 #
-#   Z.Parser.Symbol - Interface to an identifier used in the Z parser.
+#   Z.Tree.Convert_Alias_V6 - Convert Python Abstract Syntax Tree Alias to `Tree_{Module,Symbol}_Alias`, Version 6.
+#
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   interface Parser_Symbol
-#       documentation
-#           Interface to an identifier used in the Z parser.
+#   Difference between Version 5 & Version 6.
 #
-#       extends
-#           Parser_Module_Name
+#       Version 5:
 #
-#       debug
-#           is_parser_symbol := true
+#           Creates either:
 #
-#       method
-#           dump_symbol_token(f : Build_DumpToken)
+#               1)  `Tree_Module_Alias` (sometimes with a second argument of `parser_none`); or
 #
-class TRAIT_Parser_Symbol(object):
-    __slots__ = (())
-
-
-    if __debug__:
-        is_parser_symbol = True
-
-
+#               2)  `Tree_Symbol_Alias` (sometimes with a second argument of `parser_none`).
 #
-#   interface Parser_Symbol_0
-#       documentation
-#           Interface to an identifier used in the Z parser; OR the `parser_none`.
+#       Version 6:
 #
-#       attribute
-#           has_parser_symbol : Boolean
+#           Creates either:
 #
-#       if has_parser_symbol
-#           implements Parser_Symbol
+#               1)  `Tree_Module_Alias`       (when second argument has a value);
 #
-#       debug
-#           is_parser_symbol_0 := true
+#               2)  `Tree_Symbol_Alias`       (when second argument has a value):
 #
-#   NOTE:
-#       `Parser_Symbol_0` is only used in `symbol_version >= 4` (see "Z.Tree.Convert_Zone.py" for `symbol_version`).
+#               3)  `Tree_Parser_Module_Name` (when `.asname` is `None`).
 #
-class TRAIT_Parser_Symbol_0(object):
-    __slots__ = (())
-
-
-    if __debug__:
-        is_parser_symbol_0 = True
-
-
-   #@virtual
-    has_parser_symbol = True
-
-
-#
-#   USAGE:
-#
-#       v.has_parser_symbol                 #   Test if `v` has a parser symbol and is *NOT* `parser_none`.
+#               4)  `Tree_Parser_Symbol`      (when `.asname` is `None`).
 #
 
 
-#
-#   USAGE (debug mode):
-#
-#       v.is_parser_symbol                  #   Test if `v` is a parser symbol.
-#
-#       v.is_parser_symbol_0                #   Test if `v` is a `Parser_Symbol_0`.
-#
-#       assert fact_is_parser_symbol(v)     #   Assert that `v` is a parser symbol.
-#
-#       assert fact_is_parser_symbol_0(v)   #   Assert that `v` is a `Parser_Symbol_0`.
-#
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
-    #
-    #   fact_is_parser_symbol(v) - Assert the fact that `v` is a parser symbol.
-    #
-    def fact_is_parser_symbol(v):
-        assert v.is_parser_symbol
-
-        return True
+    from    Capital.Fact                        import  fact_is_full_native_list
+    from    Capital.Fact                        import  fact_is_full_native_string
+    from    Capital.Fact                        import  fact_is__native_none__OR__full_native_string
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
 
 
-if __debug__:
-    #
-    #   fact_is_parser_symbol_0(v) - Assert the fact that `v` is a `Parser_Symbol_0`.
-    #
-    def fact_is_parser_symbol_0(v):
-        assert v.is_parser_symbol_0
+#
+#   convert_module_alias(z, v)
+#
+#       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Module_Alias`.
+#
+assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
+assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
 
-        return True
+
+def convert_module_alias(z, v):
+    assert fact_is_convert_zone(z)
+
+    assert fact_is_full_native_string                  (v.name)
+    assert fact_is__native_none__OR__full_native_string(v.asname)
+
+    name = z.conjure_parser_module_name(z, v.name)
+
+    if v.asname is None:
+        return name
+
+    return z.create_Tree_Module_Alias(
+               name,
+               z.conjure_parser_symbol(z, v.asname),
+           )
+
+
+#
+#   convert_symbol_alias(z, v)
+#
+#       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Symbol_Alias`.
+#
+assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
+assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
+
+
+def convert_symbol_alias(z, v):
+    assert fact_is_convert_zone(z)
+
+    assert fact_is_full_native_string                  (v.name)
+    assert fact_is__native_none__OR__full_native_string(v.asname)
+
+    name = z.conjure_parser_symbol(z, v.name)
+
+    if v.asname is None:
+        return name
+
+    return z.create_Tree_Symbol_Alias(
+               name,
+               z.conjure_parser_symbol(z, v.asname),
+           )
+
+
+#
+#   convert_full_list_of_module_aliases(z, sequence)
+#
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
+#       `FullNativeList of Tree_Module_Alias`.
+#
+convert_full_list_of_module_aliases = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_module_alias)
+
+
+#
+#   convert_full_list_of_symbol_aliases(z, sequence)
+#
+#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
+#       `FullNativeList of Tree_Symbol_Alias`.
+#
+convert_full_list_of_symbol_aliases = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_symbol_alias)

@@ -47,8 +47,8 @@ class Tree_Value_Comprehension(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'element',                      #   Tree_Expression
         'generators',                   #   FullNativeList of Tree_Comprehension
@@ -112,8 +112,8 @@ class Tree_Backquote_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   Tree_Expression
     ))
@@ -168,8 +168,8 @@ class Tree_Binary_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'left',                         #   Tree_Expression
         'operator',                     #   Tree_Operator
@@ -234,8 +234,8 @@ class Tree_Call_Expression(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'function',                     #   Tree_Expression
         'arguments',                    #   Some_NativeList of Tree_Expression
@@ -349,8 +349,8 @@ class Tree_Compare_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'left',                         #   Tree_Expression
         'operators',                    #   FullNativeList of Tree_Operator
@@ -432,8 +432,8 @@ class Tree_If_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'test',                         #   Tree_Expression
         'body',                         #   Tree_Expression
@@ -498,8 +498,8 @@ class Tree_Logical_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'operator',                     #   Tree_Operator
         'values',                       #   FullNativeList of Tree_Expression
@@ -569,8 +569,8 @@ class Tree_Map_Expression(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'keys',                         #   SomeNativeList of Tree_Expression
         'values',                       #   SomeNativeList of Tree_Expression
@@ -643,8 +643,8 @@ def create_Tree_Map_Expression(line_number, column, keys, values):
 #
 class Tree_Lambda_Expression(object):
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_Expression
@@ -721,8 +721,8 @@ class Tree_Map_Comprehension(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'key',                          #   Tree_Expression
         'value',                        #   Tree_Expression
@@ -791,8 +791,8 @@ class Tree_Number(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'n',                            #   int
     ))
@@ -857,8 +857,8 @@ class Tree_Set_Expression(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'values',                       #   SomeNativeList of Tree_Expression
     ))
@@ -922,10 +922,10 @@ class Tree_String(object):
     #   Implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
-        's',                            #   SomeNativeString
+        's',                            #   Some_Native_String
     ))
 
 
@@ -976,8 +976,8 @@ class Tree_Unary_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'operator',                     #   Tree_Operator
         'right',                        #   Tree_Expression
@@ -1037,8 +1037,8 @@ class Tree_Yield_Expression(object):
     #   implements Tree_Expression
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'value',                        #   None | Tree_Expression
     ))

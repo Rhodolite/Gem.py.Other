@@ -23,7 +23,7 @@
 
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
-from    Capital.NativeString                import  NativeString
+from    Capital.Native_String               import  Full_Native_String
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
@@ -38,7 +38,7 @@ if __debug__:
 #   Parser: Module Name With Dot
 #
 class Parser_Module_Name_With_Dot(
-        NativeString,
+        Full_Native_String,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
         TRAIT_Tree_Module_Alias,

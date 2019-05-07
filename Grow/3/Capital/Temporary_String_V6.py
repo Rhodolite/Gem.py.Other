@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.TemporaryString_V6 - Temporaary String Implementation, Version 6.
+#   Capital.Temporary_String_V6 - Temporary String Implementation, Version 6.
 #
 
 
@@ -17,13 +17,16 @@
 #
 #       Version 6:
 #
-#           String classes use `NativeString` as their base class.
+#           String classes use `Some_Native_String` (i.e.: `str`) as their base class.
+#
+#           (although some string classes use `Full_Native_String` (also: `str`) as their base class,
+#           to indicate they only handle "full" strings).
 #
 
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.NativeString            import  NativeString
+from    Capital.Native_String           import  Full_Native_String
 from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
 
 
@@ -32,16 +35,16 @@ if __debug__:
 
 
 #
-#   method__NativeString__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
 #
-method__NativeString__representation = NativeString.__repr__
+method__Full_Native_String__representation = Full_Native_String.__repr__
 
 
 #
-#   StringKey - String Key Implementation, Version 6.
+#   Temporary_String - Temporary String Implementation, Version 6.
 #
-class TemporaryString(
-        NativeString,
+class Temporary_String(
+        Full_Native_String,
         TRAIT_TemporaryElement,
         #
         #   NOTE:
@@ -51,7 +54,7 @@ class TemporaryString(
         #
 ):
     #
-    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V6.FullString` (which an instance of this
+    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V6.Full_String` (which an instance of this
     #   class is transformed to).
     #
     __slots__ = (())
@@ -68,7 +71,7 @@ class TemporaryString(
     #   Public
     #
     def __repr__(self):
-        return arrange('<TemporaryString {!r}>', method__NativeString__representation(self))
+        return arrange('<Temporary_String {!r}>', method__Full_Native_String__representation(self))
 
 
 @export
@@ -76,4 +79,4 @@ class TemporaryString(
 def create_temporary_string(s):
     assert fact_is_full_native_string(s)
 
-    return TemporaryString(s)
+    return Temporary_String(s)

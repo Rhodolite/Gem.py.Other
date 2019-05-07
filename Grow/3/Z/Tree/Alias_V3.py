@@ -55,8 +55,8 @@ class Tree_Module_Alias_Leaf(
         TRAIT_Tree_Module_Alias,
 ):
     __slots__ = ((
-        'name',                         #   FullNativeString
-        'as_name',                      #   None | FullNativeString
+        'name',                         #   Full_Native_String
+        'as_name',                      #   None | Full_Native_String
     ))
 
 
@@ -106,8 +106,8 @@ class Tree_Symbol_Alias_Leaf(
         TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
-        'name',                         #   FullNativeString
-        'as_name',                      #   None | FullNativeString
+        'name',                         #   Full_Native_String
+        'as_name',                      #   None | Full_Native_String
     ))
 
 

@@ -10,7 +10,7 @@
 #
 
 
-from    Capital.TemporaryString_V6      import  create_temporary_string
+from    Capital.Temporary_String_V6     import  create_temporary_string
 
 
 if __debug__:
@@ -36,7 +36,7 @@ if __debug__:
 #                       string_cache = {}
 #
 #               3)  `produce_conjure_full_name` does *NOT* take a parameter named `create_temporary_string`; instead
-#                   it always uses `Capital.Private.TemporaryString_V6.create_temporary_string` (defined above).
+#                   it always uses `Capital.Private.Temporary_String_V6.create_temporary_string` (defined above).
 #
 #               4)  The produced function `conjure_full_name` uses `fact_is_full_native_string(s)` (i.e.: it's `s`
 #                   parameter must be a *FULL* native string).
@@ -73,7 +73,7 @@ def produce_conjure_full_name(Meta):
     #
     #   conjure_full_name(s) - Conjure a `Meta`, based on `s`.  Guarentees Uniqueness.
     #
-    #       `s` must be of type `NativeString` (or a type that is a subclass of `NativeString`).
+    #       `s` must be of type `Full_Native_String` (or a type that is a subclass of `Full_Native_String`).
     #
     #       `s` must be a "full" string (i.e.: length greater than 0).
     #

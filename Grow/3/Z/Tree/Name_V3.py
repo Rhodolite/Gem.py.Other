@@ -15,11 +15,11 @@
 #
 #       Version 2:
 #
-#           `Tree_Name` had a `.id : NativeString` member.
+#           `Tree_Name` had a `.id` member of type `Full_Native_String`.
 #
 #       Version 3:
 #
-#           `Tree_Name` removes the `.id` member, and replaces it with a `.symbol : Symbol` member.
+#           `Tree_Name` removes the `.id` member, and replaces it with a `.symbol` of type `Parser_Symbol`.
 #
 
 
@@ -55,8 +55,8 @@ class Tree_Name(object):
     #              Tree_Store_Target
     #
     __slots__ = ((
-        'line_number',                  #   PositiveInteger
-        'column',                       #   SubstantialInteger
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
 
         'symbol',                       #   Symbol
         'context',                      #   Tree_Context
