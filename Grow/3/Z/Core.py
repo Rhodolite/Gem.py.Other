@@ -1,6 +1,8 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
+
+
 from    sys                             import  stderr  as  standard_error
 from    sys                             import  exit    as  PROGRAM_EXIT
 

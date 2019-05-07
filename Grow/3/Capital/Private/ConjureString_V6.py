@@ -6,8 +6,7 @@
 #
 #   Capital.Private.ConjureString_V6 - Private implementation of `conjure_string` for `String` Interface, Version 6.
 #
-#
-#
+
 
 #
 #   Difference between Version 5 & Version 6.

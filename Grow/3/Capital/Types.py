@@ -6,6 +6,8 @@
 #
 #   Capital.Types - Types used, or exported, by the Capital module.
 #
+
+
 import  types                           #   python `types` module.
 
 

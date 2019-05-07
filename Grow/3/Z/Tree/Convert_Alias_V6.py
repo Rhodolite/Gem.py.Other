@@ -25,9 +25,9 @@
 #
 #           Creates either:
 #
-#               1)  `Tree_Module_Alias` (when second argument has a value);
+#               1)  `Tree_Module_Alias`       (when second argument has a value);
 #
-#               2)  `Tree_Symbol_Alias` (when second argument has a value):
+#               2)  `Tree_Symbol_Alias`       (when second argument has a value):
 #
 #               3)  `Tree_Parser_Module_Name` (when `.asname` is `None`).
 #
