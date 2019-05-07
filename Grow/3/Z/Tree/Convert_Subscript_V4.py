@@ -32,14 +32,6 @@
 #
 
 
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
-from    Z.Tree.Subscript_V4                 import  create_Tree_Delete_Subscript
-from    Z.Tree.Subscript_V4                 import  create_Tree_Evaluate_Subscript
-from    Z.Tree.Subscript_V4                 import  create_Tree_Store_Subscript
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_substantial_integer
@@ -51,31 +43,12 @@ if __debug__:
 
 
 #
-#   convert__delete_load_OR_store_context__TO__create_subscript_function(v)
+#   convert__delete_load_OR_store_context__TO__create_subscript__function(z, v)
 #
 #       Convert a "delete", "load", or "store" context to a create subscript function.
 #
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript_function = {
-        Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Subscript,
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Subscript,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Subscript,
-    }
-
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(
-            map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript_function,
-        )
-
-
-def convert__delete_load_OR_store_context__TO__create_subscript_function(v):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript_function[type(v)]
+def convert__delete_load_OR_store_context__TO__create_subscript__function(z, v):
+    return z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function[type(v)]
 
 
 #
@@ -98,9 +71,9 @@ def convert_subscript_expression(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__INDEX                       (v.slice)
     assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    create_subscript = convert__delete_load_OR_store_context__TO__create_subscript_function(v.ctx)
+    create_subscript__function = convert__delete_load_OR_store_context__TO__create_subscript__function(z, v.ctx)
 
-    return create_subscript(
+    return create_subscript__function(
                v.lineno,
                v.col_offset,
 

@@ -49,7 +49,7 @@ if __debug__:
 def convert__delete_load_OR_store_context__TO__create_attribute_function(z, v):
     assert fact_is_convert_zone(z)
 
-    return z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function[type(v)]
+    return z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function[type(v)]
 
 
 #

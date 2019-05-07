@@ -219,20 +219,29 @@ class Convert_Zone(object):
 
         'create_Tree_Attribute',                    #   None | Function
         'create_Tree_List_Expression',              #   None | Function
+        'create_Tree_Normal_Parameter',             #   None | Function
         'create_Tree_Subscript_Expression',         #   None | Function
         'create_Tree_Tuple_Expression',             #   None | Function
 
-        'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function',
+        'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function',
                                                     #   None |  Map { Native_AbstractSyntaxTree_* : Function }
 
-        'map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function',
+        'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function',
                                                     #   None |  Map { Native_AbstractSyntaxTree_* : Function }
 
-        'map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function',
+        'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function',
+                                                    #   None |  Map { Native_AbstractSyntaxTree_* : Function }
+
+        'map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function',
+                                                    #   None |  Map { Native_AbstractSyntaxTree_* : Function }
+
+        'map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function',
                                                     #   None |  Map { Native_AbstractSyntaxTree_* : Function }
 
         'map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function',
                                                     #    Map { Native_AbstractSyntaxTree_* : Function }
+
+
     ))
 
 
@@ -626,12 +635,11 @@ def fill_convert_zone():
     #
     if target_version in ((2, 3)):
         #
-        #    No need to defined these, leave them vacant (i.e.: uninitialized).
+        #    No need to define these, leave them vacant (i.e.: uninitialized).
         #
        #create_Tree_Delete_Attribute   = VACANT
        #create_Tree_Evaluate_Attribute = VACANT
        #create_Tree_Store_Attribute    = VACANT
-
 
         pass
     elif target_version == 4:
@@ -700,7 +708,7 @@ def fill_convert_zone():
 
     if target_version in ((2, 3)):
         #
-        #    No need to defined these, leave them vacant (i.e.: uninitialized).
+        #    No need to define these, leave them vacant (i.e.: uninitialized).
         #
        #create_Tree_Evaluate_List  = VACANT
        #create_Tree_Evaluate_Tuple = VACANT
@@ -718,9 +726,44 @@ def fill_convert_zone():
 
 
     if target_version in ((2, 3)):
+        #
+        #    No need to define these, leave them vacant (i.e.: uninitialized).
+        #
+       #create_Tree_Delete_Name   = VACANT
+       #create_Tree_Evaluate_Name = VACANT
+       #create_Tree_Store_Name    = VACANT
+
+        create_Tree_Normal_Parameter = None
+    elif target_version == 4:
+        from    Z.Tree.Name_V4          import  create_Tree_Delete_Name
+        from    Z.Tree.Name_V4          import  create_Tree_Evaluate_Name
+        from    Z.Tree.Name_V4          import  create_Tree_Normal_Parameter
+        from    Z.Tree.Name_V4          import  create_Tree_Store_Name
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
+    if target_version in ((2, 3)):
         from    Z.Tree.Subscript_V1     import  create_Tree_Subscript_Expression        #   "_V1" on purpose.
     elif target_version == 4:
         create_Tree_Subscript_Expression = None
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
+    if target_version in ((2, 3)):
+        #
+        #    No need to define these, leave them vacant (i.e.: uninitialized).
+        #
+       #create_Tree_Delete_Subscript   = VACANT
+       #create_Tree_Evaluate_Subscript = VACANT
+       #create_Tree_Store_Subscript    = VACANT
+
+        pass
+    elif target_version == 4:
+        from    Z.Tree.Subscript_V4                 import  create_Tree_Delete_Subscript
+        from    Z.Tree.Subscript_V4                 import  create_Tree_Evaluate_Subscript
+        from    Z.Tree.Subscript_V4                 import  create_Tree_Store_Subscript
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -860,61 +903,75 @@ def fill_convert_zone():
     #
     #   (Used by target, version 4)
     #
-    #   map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function
-    #           : Map { Native_AbstractSyntaxTree_* : Function }
+    #   1)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function
+    #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
-    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_attribute" function.
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_attribute" function.
     #
-    if target_version in ((2, 3)):
-        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function = None
-    elif target_version == 4:
-        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function = {
-                Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Attribute,
-                Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Attribute,
-                Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Attribute,
-            }
-
-        assert fact_no_context_fields(
-                   map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function,
-               )
-    else:
-        FATAL_unknown_version('target', taget_version)
-
-
+    #   2)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function
+    #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
-    #   (Used by target, version 4)
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_name" function.
     #
-    #   1)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_list_function
+    #   3)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function
+    #               : Map { Native_AbstractSyntaxTree_* : Function }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_subscript" function.
+    #
+    #   4)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_list_function
     #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
     #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_list" function.
     #
-    #   2)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function
+    #   5)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function
     #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
     #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_tuple" function.
     #
     if target_version in ((2, 3)):
-        map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function  = None
-        map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function = None
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function = None
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function      = None
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = None
+        map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function             = None
+        map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function            = None
     elif target_version == 4:
-        map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function = {
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function = {
+                Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Attribute,
+                Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Attribute,
+                Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Attribute,
+            }
+
+
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function = {
+                Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Name,
+                Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Name,
+                Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Name,
+            }
+
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = {
+                Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Subscript,
+                Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Subscript,
+                Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Subscript,
+            }
+
+        map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function = {
                 Native_AbstractSyntaxTree_Load_Context  : create_Tree_Evaluate_List,
                 Native_AbstractSyntaxTree_Store_Context : create_Tree_Store_List,
             }
 
-        map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function = {
+        map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function = {
                 Native_AbstractSyntaxTree_Load_Context  : create_Tree_Evaluate_Tuple,
                 Native_AbstractSyntaxTree_Store_Context : create_Tree_Store_Tuple,
             }
 
-        assert fact_no_context_fields(
-                   map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function,
-               )
-
-        assert fact_no_context_fields(
-                   map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function,
-               )
+        for mapping in ((
+               map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function,
+               map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function,
+               map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function,
+               map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function,
+               map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function,
+        )):
+            assert fact_no_context_fields(mapping)
     else:
         FATAL_unknown_version('target', taget_version)
 
@@ -1096,19 +1153,28 @@ def fill_convert_zone():
 
     z.create_Tree_Attribute            = create_Tree_Attribute
     z.create_Tree_List_Expression      = create_Tree_List_Expression
+    z.create_Tree_Normal_Parameter     = create_Tree_Normal_Parameter
     z.create_Tree_Subscript_Expression = create_Tree_Subscript_Expression
     z.create_Tree_Tuple_Expression     = create_Tree_Tuple_Expression
 
-    z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function = (
-            map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function
+    z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function = (
+            map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function
         )
 
-    z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function = (
-            map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function
+    z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function = (
+            map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function
         )
 
-    z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function = (
-            map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function
+    z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = (
+            map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function
+        )
+
+    z.map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function = (
+            map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function
+        )
+
+    z.map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function = (
+            map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function
         )
 
     z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = (

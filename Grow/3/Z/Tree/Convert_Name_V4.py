@@ -29,13 +29,6 @@
 
 
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Name_V4                      import  create_Tree_Delete_Name
-from    Z.Tree.Name_V4                      import  create_Tree_Evaluate_Name
-from    Z.Tree.Name_V4                      import  create_Tree_Normal_Parameter
-from    Z.Tree.Name_V4                      import  create_Tree_Store_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -50,29 +43,12 @@ if __debug__:
 
 
 #
-#   convert__delete_load_OR_store_context__TO__create_name_function
+#   convert__delete_load_OR_store_context__TO__create_name__function(z, v)
 #
 #       Convert a "delete", "load", or "store" context to a create name function.
 #
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function = {
-        Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Name,
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Name,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Name,
-    }
-
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function)
-
-
-def convert__delete_load_OR_store_context__TO__create_name_function(v):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function[type(v)]
+def convert__delete_load_OR_store_context__TO__create_name__function(z, v):
+    return z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function[type(v)]
 
 
 #
@@ -108,9 +84,9 @@ def convert_name_expression(z, v):
     assert fact_is_full_native_string                                              (v.id)
     assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    create_name = convert__delete_load_OR_store_context__TO__create_name_function(v.ctx)
+    create_name__function = convert__delete_load_OR_store_context__TO__create_name__function(z, v.ctx)
 
-    return create_name(
+    return create_name__function(
                v.lineno,
                v.col_offset,
 
@@ -140,7 +116,7 @@ def convert_name_parameter(z, v):
     assert fact_is_full_native_string                              (v.id)
     assert fact_is__native__abstract_syntax_tree__parameter_context(v.ctx)
 
-    return create_Tree_Normal_Parameter(
+    return z.create_Tree_Normal_Parameter(
                v.lineno,
                v.col_offset,
 

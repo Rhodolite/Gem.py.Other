@@ -38,14 +38,6 @@
 #
 
 
-from    Z.Tree.Many_V4                      import  create_Tree_Evaluate_List
-from    Z.Tree.Many_V4                      import  create_Tree_Evaluate_Tuple
-from    Z.Tree.Many_V4                      import  create_Tree_Store_List
-from    Z.Tree.Many_V4                      import  create_Tree_Store_Tuple
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
@@ -62,11 +54,11 @@ if __debug__:
 #       Convert a "load" or "store" context to a create list or create tuple function.
 #
 def convert__load_OR_store_context__TO__create_list_function(z, v):
-    return z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function[type(v)]
+    return z.map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function[type(v)]
 
 
 def convert__load_OR_store_context__TO__create_tuple_function(z, v):
-    return z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function[type(v)]
+    return z.map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function[type(v)]
 
 
 
