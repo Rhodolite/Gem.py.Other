@@ -67,38 +67,3 @@ if __debug__:
         assert v.is_tree_expression
 
         return True
-
-
-#
-#   Import the version of tree expressions we want to use (must be after the "facts" above)
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-version = parser_globals.expression_version
-
-
-if version == '1':
-    from    Z.Tree.Expression_V1        import  (
-                create_Tree_Backquote_Expression_V1     as  create_Tree_Backquote_Expression,
-                create_Tree_Binary_Expression_V1        as  create_Tree_Binary_Expression,
-                create_Tree_Call_V1                     as  create_Tree_Call,
-                create_Tree_Compare_Expression_V1       as  create_Tree_Compare_Expression,
-                create_Tree_Generator_Comprehension_V1  as  create_Tree_Generator_Comprehension,
-                create_Tree_If_Expression_V1            as  create_Tree_If_Expression,
-                create_Tree_Lambda_Expression_V1        as  create_Tree_Lambda_Expression,
-                create_Tree_List_Comprehension_V1       as  create_Tree_List_Comprehension,
-                create_Tree_Map_Comprehension_V1        as  create_Tree_Map_Comprehension,
-                create_Tree_Map_Expression_V1           as  create_Tree_Map_Expression,
-                create_Tree_Number_V1                   as  create_Tree_Number,
-                create_Tree_Set_Comprehension_V1        as  create_Tree_Set_Comprehension,
-                create_Tree_Set_Expression_V1           as  create_Tree_Set_Expression,
-                create_Tree_String_V1                   as  create_Tree_String,
-                create_Tree_Unary_Expression_V1         as  create_Tree_Unary_Expression,
-                create_Tree_Logical_Expression_V1       as  create_Tree_Logical_Expression,
-                create_Tree_Yield_Expression_V1         as  create_Tree_Yield_Expression,
-        )
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Expression.py: unknown tree expression version: {!r}', version)

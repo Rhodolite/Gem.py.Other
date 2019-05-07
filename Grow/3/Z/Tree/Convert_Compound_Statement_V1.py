@@ -18,11 +18,11 @@ from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Stat
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_While_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement
 from    Z.Tree.Convert_Except_V1            import  convert_full_list_of_except_clauses
-from    Z.Tree.Convert_Expression           import  convert_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_expression
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
 from    Z.Tree.Convert_Statement_V1         import  convert_some_list_of_statements
-from    Z.Tree.Convert_Target               import  convert_none_OR_target
-from    Z.Tree.Convert_Target               import  convert_target
+from    Z.Tree.Convert_Target_V1            import  convert_none_OR_target
+from    Z.Tree.Convert_Target_V1            import  convert_target
 
 
 if __debug__:

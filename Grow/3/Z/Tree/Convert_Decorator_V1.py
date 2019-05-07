@@ -4,14 +4,14 @@
 
 
 #
-#   Z.Tree.Convert_Decorator - Convert Python Abstract Syntax Tree Decorators to Tree classes.
+#   Z.Tree.Convert_Decorator_V1 - Convert Python Abstract Syntax Tree Decorators to Tree classes, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Expression           import  convert_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_expression
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -20,7 +20,7 @@ if __debug__:
 
 
 #
-#   convert_decorator
+#   convert_decorator(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) to a `Tree_Expression`.
 #
@@ -34,12 +34,12 @@ if __debug__:
 #
 #       We will have a special class for a decorator.
 #
-def convert_decorator(self):
-    return convert_expression(self)
+def convert_decorator(v):
+    return convert_expression(v)
 
 
 #
-#   convert_some_list_of_decorators
+#   convert_some_list_of_decorators(v)
 #
 #       Convert some `NativeList of Native_AbstractSyntaxTree_Decorator` (i.e.: `list of _ast.decorator`) to a
 #       `NativeList of Tree_Decorator`.

@@ -16,33 +16,64 @@ from    Capital.Core                        import  FATAL
 from    Z.Parser.Global                     import  parser_globals
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Backquote_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Call_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ellipsis_Index
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Extended_Slice_Index
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_For_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Generator_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_If_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_If_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Lambda_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Comprehension
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Logical_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Comprehension
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Number
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Raise_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Return_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Comprehension
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Slice_Index
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Except_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Finally_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_While_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_With_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yield_Expression
 
 
 class Convert_Zone(object):
     __slots__ = ((
         #
-        #   Aliases
+        #   Argument
+        #
+        'convert_some_list_of_keyword_arguments',   #   Function
+
+        #
+        #   Alias
         #
         'convert_full_list_of_module_aliases',      #   Function
         'convert_full_list_of_symbol_aliases',      #   Function
@@ -50,7 +81,28 @@ class Convert_Zone(object):
         'create_Tree_Symbol_Alias',                 #   Function
 
         #
-        #   Statements
+        #   Decorator
+        #
+        'convert_some_list_of_decorators',          #   Function
+
+        #
+        #   Expression
+        #
+        'convert_full_list_of_expressions',          #   Function
+        'convert_some_list_of_expressions',          #   Function
+        'convert_expression',                        #   Function
+
+        'map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function',
+                                                    #    Map { Native_AbstractSyntaxTree_* : Function }
+
+        #
+        #   Index
+        #
+        'map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function',
+
+        
+        #
+        #   Statement
         #
         'convert_full_list_of_statements',          #   Function
         'convert_some_list_of_statements',          #   Function
@@ -87,6 +139,17 @@ class Convert_Zone(object):
         #   Suite
         #
         'create_Tree_Suite',                        #   Function
+
+
+        #
+        #   Target
+        #
+        'convert_full_list_of_targets',             #   Function
+        'convert_none_OR_target',                   #   Function
+        'convert_target',                           #   Function
+
+        'map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function',
+                                                    #    Map { Native_AbstractSyntaxTree_* : Function }
     ))
 
 
@@ -128,7 +191,16 @@ def fill_convert_zone():
 
 
     #
-    #   Alias Version
+    #   Argument
+    #
+    if argument_version in ((2, 3)):
+        from    Z.Tree.Convert_Argument_V2  import  convert_some_list_of_keyword_arguments
+    else:
+        FATAL_unknown_version('argument', argument_version)
+        
+
+    #
+    #   Alias
     #
     if alias_version == 2:
         #
@@ -161,6 +233,53 @@ def fill_convert_zone():
         from    Z.Tree.Convert_Alias_V6     import  convert_full_list_of_symbol_aliases
     else:
         FATAL_unknown_version('alias', alias_version)
+
+
+    #
+    #   Decorators
+    #
+    from    Z.Tree.Convert_Decorator_V2     import  convert_some_list_of_decorators
+
+
+    #
+    #   Expressions
+    #
+    if expression_version == 2:
+        from    Z.Tree.Convert_Expression_V2            import  convert_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_full_list_of_expressions
+        from    Z.Tree.Convert_Expression_V2            import  convert_some_list_of_expressions
+        from    Z.Tree.Convert_Expression_V2            import  convert_backquote_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_binary_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_call_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_compare_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_generator_comprehension
+        from    Z.Tree.Convert_Expression_V2            import  convert_if_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_lambda_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_list_comprehension
+        from    Z.Tree.Convert_Expression_V2            import  convert_logical_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_map_comprehension
+        from    Z.Tree.Convert_Expression_V2            import  convert_map_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_name_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_number
+        from    Z.Tree.Convert_Expression_V2            import  convert_set_comprehension
+        from    Z.Tree.Convert_Expression_V2            import  convert_set_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_string
+        from    Z.Tree.Convert_Expression_V2            import  convert_unary_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_yield_expression
+    else:
+        FATAL_unknown_version('expression', expression_version)
+
+
+    #
+    #   Index
+    #
+    if index_version == 2:
+        from    Z.Tree.Convert_Index_V2             import  convert_ellipses_index
+        from    Z.Tree.Convert_Index_V2             import  convert_extended_slice_index
+        from    Z.Tree.Convert_Index_V2             import  convert_simple_index
+        from    Z.Tree.Convert_Index_V2             import  convert_slice_index
+    else:
+        FATAL_unknown_version('index', index_version)
 
 
     #
@@ -291,6 +410,87 @@ def fill_convert_zone():
     else:
         FATAL_unknown_version('statement', statement_version)
 
+    
+    #
+    #   Suite
+    #
+    if statement_version in ((1, 2, 3)):
+        #
+        #   A "Suite" does not exist in statement versions 1 or 2.
+        #
+        create_Tree_Suite = None
+    elif statement_version == 4:
+        from    Z.Tree.Suite_V4             import  create_Tree_Suite
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    #
+    #   Target
+    #
+    if target_version == 2:
+        from    Z.Tree.Convert_Target_V2        import  convert_full_list_of_targets
+        from    Z.Tree.Convert_Target_V2        import  convert_none_OR_target
+        from    Z.Tree.Convert_Target_V2        import  convert_target
+    else:
+        FATAL_unknown_version('target', target_version)
+
+    if target_version == 2:
+        from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
+        from    Z.Tree.Convert_Many_V2          import  convert_list_expression
+        from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression
+        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
+    #
+    #   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
+    #           : Map { Native_AbstractSyntaxTree_* : Function }
+    #
+    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_expression" psuedo method
+    #       (actually to a function).
+    #
+    map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = {
+            Native_AbstractSyntaxTree_Attribute_Expression    : convert_attribute_expression,
+            Native_AbstractSyntaxTree_Backquote_Expression    : convert_backquote_expression,
+            Native_AbstractSyntaxTree_Binary_Expression       : convert_binary_expression,
+            Native_AbstractSyntaxTree_Call_Expression         : convert_call_expression,
+            Native_AbstractSyntaxTree_Compare_Expression      : convert_compare_expression,
+            Native_AbstractSyntaxTree_Generator_Comprehension : convert_generator_comprehension,
+            Native_AbstractSyntaxTree_If_Expression           : convert_if_expression,
+            Native_AbstractSyntaxTree_Lambda_Expression       : convert_lambda_expression,
+            Native_AbstractSyntaxTree_List_Comprehension      : convert_list_comprehension,
+            Native_AbstractSyntaxTree_List_Expression         : convert_list_expression,
+            Native_AbstractSyntaxTree_Logical_Expression      : convert_logical_expression,
+            Native_AbstractSyntaxTree_Map_Comprehension       : convert_map_comprehension,
+            Native_AbstractSyntaxTree_Map_Expression          : convert_map_expression,
+            Native_AbstractSyntaxTree_Name                    : convert_name_expression,
+            Native_AbstractSyntaxTree_Number                  : convert_number,
+            Native_AbstractSyntaxTree_Set_Comprehension       : convert_set_comprehension,
+            Native_AbstractSyntaxTree_Set_Expression          : convert_set_expression,
+            Native_AbstractSyntaxTree_String                  : convert_string,
+            Native_AbstractSyntaxTree_Subscript_Expression    : convert_subscript_expression,
+            Native_AbstractSyntaxTree_Tuple_Expression        : convert_tuple_expression,
+            Native_AbstractSyntaxTree_Unary_Expression        : convert_unary_expression,
+            Native_AbstractSyntaxTree_Yield_Expression        : convert_yield_expression,
+    }
+
+
+    #
+    #   map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function
+    #           : Map { Native_AbstractSyntaxTree_* : Function }
+    #
+    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_index" function.
+    #
+    map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function = {
+            Native_AbstractSyntaxTree_Ellipsis_Index       : convert_ellipses_index,
+            Native_AbstractSyntaxTree_Extended_Slice_Index : convert_extended_slice_index,
+            Native_AbstractSyntaxTree_Simple_Index         : convert_simple_index,
+            Native_AbstractSyntaxTree_Slice_Index          : convert_slice_index,
+        }
+
+
     #
     #   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function
     #           : Map { Native_AbstractSyntaxTree_* : Function }
@@ -326,18 +526,18 @@ def fill_convert_zone():
 
 
     #
-    #   Suite
+    #   map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function
+    #           : Map { Native_AbstractSyntaxTree_* : Function }
     #
-    if statement_version in ((1, 2, 3)):
-        #
-        #   A "Suite" does not exist in statement versions 1 or 2.
-        #
-        create_Tree_Suite = None
-    elif statement_version == 4:
-        from    Z.Tree.Suite_V4             import  create_Tree_Suite
-    else:
-        FATAL_unknown_version('statement', statement_version)
-
+    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_target" function.
+    #
+    map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = {
+            Native_AbstractSyntaxTree_Attribute_Expression : convert_attribute_expression,
+            Native_AbstractSyntaxTree_List_Expression      : convert_list_expression,
+            Native_AbstractSyntaxTree_Name                 : convert_name_expression,
+            Native_AbstractSyntaxTree_Subscript_Expression : convert_subscript_expression,
+            Native_AbstractSyntaxTree_Tuple_Expression     : convert_tuple_expression,
+        }
 
     #
     #   ========================================  z  ========================================
@@ -346,7 +546,13 @@ def fill_convert_zone():
 
 
     #
-    #   Aliases
+    #   Argument
+    #
+    z.convert_some_list_of_keyword_arguments = convert_some_list_of_keyword_arguments
+
+
+    #
+    #   Alias
     #
     z.convert_full_list_of_module_aliases = convert_full_list_of_module_aliases
     z.convert_full_list_of_symbol_aliases = convert_full_list_of_symbol_aliases
@@ -355,7 +561,33 @@ def fill_convert_zone():
 
 
     #
-    #  Statements
+    #   Decorator
+    #
+    z.convert_some_list_of_decorators = convert_some_list_of_decorators
+
+
+    #
+    #   Expression
+    #
+    z.convert_expression               = convert_expression
+    z.convert_full_list_of_expressions = convert_full_list_of_expressions
+    z.convert_some_list_of_expressions = convert_some_list_of_expressions
+
+    z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = (
+            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
+        )
+
+
+    #
+    #   Index
+    #
+    z.map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function = (
+            map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function
+        )
+
+
+    #
+    #  Statement
     #
     z.convert_full_list_of_statements   = convert_full_list_of_statements
     z.convert_some_list_of_statements   = convert_some_list_of_statements
@@ -393,6 +625,18 @@ def fill_convert_zone():
     #   Suite
     #
     z.create_Tree_Suite = create_Tree_Suite
+
+
+    #
+    #   Target
+    #
+    z.convert_full_list_of_targets = convert_full_list_of_targets
+    z.convert_none_OR_target       = convert_none_OR_target
+    z.convert_target               = convert_target
+
+    z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = (
+            map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function
+        )
 
 
     #

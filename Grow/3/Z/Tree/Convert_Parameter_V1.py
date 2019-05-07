@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Parameter - Convert Python Abstract Syntax Tree Parameters to Tree classes.
+#   Z.Tree.Convert_Parameter_V1 - Convert Python Abstract Syntax Tree Parameters to Tree classes, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -29,10 +29,8 @@
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
+from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Name                 import  convert_name_parameter
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
 from    Z.Tree.Parameter                    import  create_Tree_Parameters_All
 
 
@@ -42,6 +40,8 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
 
 
 #
@@ -57,10 +57,10 @@ if __debug__:
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
 #       a full `NativeString` to the [same] full `NativeString`.
 #
-def convert_map_parameter(self):
-    assert fact_is__native_none__OR__full_native_string(self)
+def convert_map_parameter(v):
+    assert fact_is__native_none__OR__full_native_string(v)
 
-    return self
+    return v
 
 
 #
@@ -76,10 +76,10 @@ def convert_map_parameter(self):
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
 #       a full `NativeString` to the [same] full `NativeString`.
 #
-def convert_tuple_parameter(self):
-    assert fact_is__native_none__OR__full_native_string(self)
+def convert_tuple_parameter(v):
+    assert fact_is__native_none__OR__full_native_string(v)
 
-    return self
+    return v
 
 
 #
@@ -105,15 +105,15 @@ assert Native_AbstractSyntaxTree_Parameters_All._attributes == (())
 assert Native_AbstractSyntaxTree_Parameters_All._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
 
 
-def convert_parameters_all(self):
-    assert fact_is_some_native_list                    (self.args)
-    assert fact_is__native_none__OR__full_native_string(self.vararg)
-    assert fact_is__native_none__OR__full_native_string(self.kwarg)
-    assert fact_is_some_native_list                    (self.defaults)
+def convert_parameters_all(v):
+    assert fact_is_some_native_list                    (v.args)
+    assert fact_is__native_none__OR__full_native_string(v.vararg)
+    assert fact_is__native_none__OR__full_native_string(v.kwarg)
+    assert fact_is_some_native_list                    (v.defaults)
 
     return create_Tree_Parameters_All(
-               convert_list_of_name_parameters (self.args),
-               convert_tuple_parameter         (self.vararg),
-               convert_map_parameter           (self.kwarg),
-               convert_some_list_of_expressions(self.defaults),
+               convert_list_of_name_parameters (v.args),
+               convert_tuple_parameter         (v.vararg),
+               convert_map_parameter           (v.kwarg),
+               convert_some_list_of_expressions(v.defaults),
            )

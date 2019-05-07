@@ -87,17 +87,6 @@
 
 
 #
-#<order>
-#
-#   NOTE:
-#       Because "Z/Tree/target_1.py" needs facts, then it imports this file.
-#
-#   HENCE:
-#       The "fact" functions *MUST* appear *BEFORE* the import of "Z.Tree.Target_1"
-#
-
-
-#
 #   fact_is__native_none__OR__tree_store_target(v)
 #
 #       Assert that `v` is either `None` or a tree "store" target.
@@ -120,21 +109,3 @@ if __debug__:
         assert v.is_tree_store_target
 
         return True
-#</order>
-
-
-#
-#   Import the version of tree targets we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-target_version = parser_globals.target_version
-
-
-if target_version in ((1, 2, 3)):
-    pass
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Target.py: unknown tree target version: {!r}', target_version)

@@ -10,7 +10,7 @@
 
 version = 1
 version = 2
-version = 9
+#version = 9
 #version = 15
 
 
@@ -19,8 +19,8 @@ argument_version      = 1
 comprehension_version = '1'
 context_version       = 1
 except_version        = '1'
-expression_version    = '1'
-index_version         = '1'
+expression_version    = 1
+index_version         = 1
 module_name_version   = 0
 name_version          = 1
 operator_version      = 1
@@ -34,8 +34,12 @@ target_version        = 1
 #   Version 2: Introduce `Convert_Zone`
 #
 if version >= 2:
-    alias_version     = 2
-    statement_version = 2
+    alias_version      = 2
+    argument_version   = 2
+    expression_version = 2
+    index_version      = 2
+    statement_version  = 2
+    target_version     = 2
 
 
 #
@@ -70,14 +74,14 @@ if version >= 5:
 #       9:  `Tree_{Class,Function}_Definition` uses symbols.
 #
 if version >= 6:
-    argument_version = 2                #   `Tree_Keyword_Argument` uses symbols.
+    argument_version = 3                #   `Tree_Keyword_Argument` uses symbols.
     symbol_version   = 1                #   Enable `Parser_Symbol`
 
 if version >= 7:
     name_version = 2                    #   `Tree_Name` uses symbols.
 
 if version >= 8:
-    target_version = 2                  #   `Tree_Target` uses symbols (affects `Tree_Attribute`).
+    target_version = 3                  #   `Tree_Target` uses symbols (affects `Tree_Attribute`).
 
 if version >= 9:
     statement_version = 3               #   `Tree_{Class,Function}_Definition` uses symbols.
@@ -122,7 +126,7 @@ if version >= 13:
 
 if version >= 14:
     context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
-    target_version  = 3
+    target_version  = 4
 
 
 #
@@ -159,8 +163,8 @@ class Parser_Globals(object):
         'comprehension_version',        #   NativeString
         'context_version',              #   SubstantialInteger
         'except_version',               #   NativeString
-        'expression_version',           #   NativeString
-        'index_version',                #   NativeString
+        'expression_version',           #   PositiveInteger
+        'index_version',                #   PositiveInteger
         'module_name_version',          #   SubstantialInteger
         'name_version',                 #   PositiveInteger
         'operator_version',             #   PositiveInteger
@@ -195,7 +199,7 @@ class Parser_Globals(object):
 
 
     def __repr__(self):
-        return arrange('<Parser_Globals {} {} {} {!r} {} {!r} {!r} {!r} {} {} {} {!r} {} {} {}>',
+        return arrange('<Parser_Globals {} {} {} {!r} {} {} {} {!r} {} {} {} {!r} {} {} {}>',
                        self.version, self.alias_version, self.argument_version, self.comprehension_version,
                        self.context_version, self.except_version, self.expression_version, self.index_version,
                        self.module_name_version, self.name_version, self.operator_version, self.parameter_version,
@@ -205,7 +209,7 @@ class Parser_Globals(object):
         trace('Parser_Globals: version={} alias={} argument={} comprehension={!r} context={} except={!r} ...',
               self.version, self.alias_version, self.argument_version, self.comprehension_version,
               self.context_version, self.except_version)
-        trace('... expression={!r} index={!r} module_name={} name={} statement={} operator={} parameter={!r}',
+        trace('... expression={} index={} module_name={} name={} statement={} operator={} parameter={!r}',
               self.expression_version, self.index_version, module_name_version,
               self.name_version, self.statement_version, self.operator_version, self.parameter_version)
         trace('... symbol={} target={}',
@@ -225,12 +229,12 @@ def create_parser_globals(
     assert fact_is_full_native_string (comprehension_version)
     assert fact_is_substantial_integer(context_version)
     assert fact_is_full_native_string (except_version)
-    assert fact_is_full_native_string (index_version)
+    assert fact_is_positive_integer   (index_version)
     assert fact_is_substantial_integer(module_name_version)
     assert fact_is_positive_integer   (name_version)
     assert fact_is_positive_integer   (operator_version)
     assert fact_is_full_native_string (parameter_version)
-    assert fact_is_full_native_string (expression_version)
+    assert fact_is_positive_integer   (expression_version)
     assert fact_is_positive_integer   (statement_version)
     assert fact_is_substantial_integer(symbol_version)
     assert fact_is_positive_integer   (target_version)

@@ -4,26 +4,26 @@
 
 
 #
-#   Z.Tree.Attribute_V3 - Implementation of Tree Name, Version 3
+#   Z.Tree.Attribute_V3 - Implementation of Tree Attribute, Version 3
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-#   Version 2:
+
+
 #
-#       Tree_Attribute had a `.context` member which three possible values:
+#   Difference between Version 1, Version 2 & Version 3.
 #
-#               tree_delete_context
-#               tree_load_context
-#               tree_store_context
+#       Version 1:
 #
-#   Version 3:
+#           `Tree_Attribute` has a `.attribute` member that is a `NativeString`.
 #
-#       Instead of a single class with a `.context` member, three classes exist instead:
+#       Version 2:
 #
-#               Tree_Delete_Attribute       -   Replacement for the `tree_delete_context` value.
-#               Tree_Evaluate_Attribute     -   Replacement for the `tree_load_context` value.
-#               Tree_Store_Attribute        -   Replacement for the `tree_store_context` value.
+#           Does not exist.
 #
+#       Version 3:
+#
+#           `Tree_Attribute` has a `.attribute` member that is a `Parser_Symbol`.
 #
 
 
@@ -36,97 +36,80 @@ if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
+    from    Z.Tree.Context              import  fact_is_tree_context
+    from    Z.Tree.Context              import  fact_is_tree_delete_context
+    from    Z.Tree.Context              import  fact_is_tree_load_context
+    from    Z.Tree.Context              import  fact_is_tree_store_context
     from    Z.Tree.Expression           import  fact_is_tree_expression
 
 
 #
-#   Tree: Attribute - Base of classes with delete, evaluate, or store an attribute.
+#   Tree_Attribute - An attribute access in an expresssion.
 #
 #   Example:
 #
 #       In the following statement:
 #
 #           a.b = c.d
-#           del e.g
 #
-#       The left  hand side of the first statement: `a.b` will be a `Tree_Store_Attribute`.
+#       The left hand side  `a.b` will be an attribute access, and the context will be `store`.
 #
-#       The right hand side of the first statement: `c.d` will be a `Tree_Evauluate_Attribute`.
-#
-#       The second statement after the `del` keyword: `e.g` will be a `Tree_Delete_Attribute`.
+#       The right hand side `c.d` will be an attribute access, and the context will be `load`.
 #
 class Tree_Attribute(object):
+    #
+    #   implements Tree_Delete_Target,
+    #              Tree_Expression,
+    #              Tree_Store_Target
+    #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
         'value',                        #   Tree_Expression
-        'attribute',                    #   Symbol
+        'attribute',                    #   Parser_Symbol
+        'context',                      #   Tree_Context
     ))
 
 
     #
     #   Private
     #
-    def __init__(self, line_number, column, value, attribute):
+    def __init__(self, line_number, column, value, attribute, context):
         self.line_number = line_number
         self.column      = column
 
         self.value     = value
         self.attribute = attribute
-
-    #
-    #   Public
-    #
-    def __repr__(self):
-        return arrange('<{} @{}:{} {!r}.{}>',
-                       self.__class__.__name__, self.line_number, self.column, self.value, self.attribute)
+        self.context   = context
 
 
-#
-#   Tree: Delete Attribute
-#
-class Tree_Delete_Attribute(Tree_Attribute):
-    #
-    #   implements Tree_Delete_Target
-    #
-    __slots__ = (())
+    def _dump_tree_attribute_token(self, f):
+        f.arrange('<attribute @{}:{} ', self.line_number, self.column)
+        self.value.dump_evaluate_tokens(f)
+        f.write('.')
+        f.write(self.attribute)
+        f.space()
+        self.context.dump_context_token(f)
+        f.greater_than_sign()
 
 
     #
     #   Interface Tree_Delete_Target
     #
     if __debug__:
-        is_tree_delete_target = True
+        @property
+        def is_tree_delete_target(self):
+            return self.context.is_tree_delete_context
 
 
-    def dump_delete_target_tokens(self, f):
-        f.arrange('<delete-attribute @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
-        f.write('.')
-        f.write(self.attribute)
-        f.greater_than_sign()
+    if __debug__:
+        def dump_delete_target_tokens(self, f):
+            assert fact_is_tree_delete_context(self.context)
 
-
-@creator
-def create_Tree_Delete_Attribute(line_number, column, value, attribute):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_tree_expression(value)
-    assert fact_is_parser_symbol  (attribute)
-
-    return Tree_Delete_Attribute(line_number, column, value, attribute)
-
-
-#
-#   Tree: Evaluate Attribute
-#
-class Tree_Evaluate_Attribute(Tree_Attribute):
-    #
-    #   implements Tree_Expression
-    #
-    __slots__ = (())
+            self._dump_tree_attribute_token(f)
+    else:
+        dump_delete_target_tokens = _dump_tree_attribute_token
 
 
     #
@@ -136,60 +119,48 @@ class Tree_Evaluate_Attribute(Tree_Attribute):
         is_tree_expression = True
 
 
-    def dump_evaluate_tokens(self, f):
-        #
-        #   NOTE:
-        #       Omit the keyword "evaluate-attribute" on purpose to make the output shorter.
-        #
-        f.arrange('<@{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
-        f.write('.')
-        f.write(self.attribute)
-        f.greater_than_sign()
+    if __debug__:
+        def dump_evaluate_tokens(self, f):
+            assert fact_is_tree_load_context(self.context)
 
-
-@creator
-def create_Tree_Evaluate_Attribute(line_number, column, value, attribute):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_tree_expression(value)
-    assert fact_is_parser_symbol  (attribute)
-
-    return Tree_Evaluate_Attribute(line_number, column, value, attribute)
-
-
-#
-#   Tree: Store Attribute
-#
-class Tree_Store_Attribute(Tree_Attribute):
-    #
-    #   implements Tree_Store_Target
-    #
-    __slots__ = (())
+            self._dump_tree_attribute_token(f)
+    else:
+        dump_evaluate_tokens = _dump_tree_attribute_token
 
 
     #
     #   Interface Tree_Store_Target
     #
     if __debug__:
-        is_tree_store_target = True
+        @property
+        def is_tree_store_target(self):
+            return self.context.is_tree_store_context
 
 
-    def dump_store_target_tokens(self, f):
-        f.arrange('<store-attribute @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
-        f.write('.')
-        f.write(self.attribute)
-        f.greater_than_sign()
+    if __debug__:
+        def dump_store_target_tokens(self, f):
+            assert fact_is_tree_store_context(self.context)
+
+            self._dump_tree_attribute_token(f)
+    else:
+        dump_store_target_tokens = _dump_tree_attribute_token
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<Tree_Attribute @{}:{} {!r}.{} {}>',
+                       self.line_number, self.column, self.value, self.attribute, self.context)
 
 
 @creator
-def create_Tree_Store_Attribute(line_number, column, value, attribute):
+def create_Tree_Attribute(line_number, column, value, attribute, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_expression(value)
     assert fact_is_parser_symbol  (attribute)
+    assert fact_is_tree_context   (context)
 
-    return Tree_Store_Attribute(line_number, column, value, attribute)
+    return Tree_Attribute(line_number, column, value, attribute, context)

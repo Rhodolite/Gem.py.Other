@@ -25,9 +25,7 @@
 
 from    Z.Parser.Symbol                         import  conjure_parser_symbol
 from    Z.Tree.Convert_Compound_Statement_V4    import  convert_suite
-from    Z.Tree.Convert_Decorator                import  convert_some_list_of_decorators
-from    Z.Tree.Convert_Expression               import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Parameter                import  convert_parameters_all
+from    Z.Tree.Convert_Parameter_V2             import  convert_parameters_all
 
 
 if __debug__:
@@ -66,10 +64,10 @@ def convert_class_definition(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol           (v.name),
-               convert_some_list_of_expressions(v.bases),
-               convert_suite                   (z, v.body),
-               convert_some_list_of_decorators (v.decorator_list),
+               conjure_parser_symbol             (v.name),
+               z.convert_some_list_of_expressions(z, v.bases),
+               convert_suite                     (z, v.body),
+               z.convert_some_list_of_decorators (z, v.decorator_list),
            )
 
 
@@ -98,8 +96,8 @@ def convert_function_definition(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol          (v.name),
-               convert_parameters_all         (v.args),
-               convert_suite                  (z, v.body),
-               convert_some_list_of_decorators(v.decorator_list),
+               conjure_parser_symbol            (v.name),
+               convert_parameters_all           (v.args),
+               convert_suite                    (z, v.body),
+               z.convert_some_list_of_decorators(z, v.decorator_list),
            )

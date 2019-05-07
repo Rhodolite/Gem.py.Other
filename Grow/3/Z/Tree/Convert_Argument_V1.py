@@ -3,6 +3,8 @@
 #
 
 
+assert 0
+
 #
 #   Z.Tree.Convert_Argument_V1 - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes, Version 1.
 #
@@ -12,8 +14,7 @@
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Argument                     import  create_Tree_Keyword_Argument
-from    Z.Tree.Convert_Expression           import  convert_expression
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Keyword_Argument
+from    Z.Tree.Convert_Expression_V1        import  convert_expression
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -21,10 +22,11 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Keyword_Argument
 
 
 #
-#   convert_keyword_argument(self)
+#   convert_keyword_argument(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Keyword_Argument (i.e.: `_ast.keyword`) to a `Tree_Keyword_Argument`.
 #
@@ -32,13 +34,13 @@ assert Native_AbstractSyntaxTree_Keyword_Argument._attributes == (())
 assert Native_AbstractSyntaxTree_Keyword_Argument._fields     == (('arg', 'value'))
 
 
-def convert_keyword_argument(self):
-    assert fact_is_full_native_string                            (self.arg)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
+def convert_keyword_argument(v):
+    assert fact_is_full_native_string                            (v.arg)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
     return create_Tree_Keyword_Argument(
-               self.arg,
-               convert_expression(self.value),
+               v.arg,
+               convert_expression(v.value),
            )
 
 

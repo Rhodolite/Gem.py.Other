@@ -38,11 +38,11 @@ if __debug__:
 
 
 #
-#   Tree: Value Comprehension, V1
+#   Tree: Value Comprehension
 #
-#       Base of `Tree_Generator_Comprehension_V1`, `Tree_List_Comprehension_V1`, and `Tree_Set_Comprehension_V1`.
+#       Base of `Tree_{Generator,List,Set}_Comprehension`.
 #
-class Tree_Value_Comprehension_V1(object):
+class Tree_Value_Comprehension(object):
     #
     #   Implements Tree_Expression
     #
@@ -94,7 +94,7 @@ class Tree_Value_Comprehension_V1(object):
 
 
 @creator
-def create_Tree_Value_Comprehension_V1(Meta, line_number, column, element, generators):
+def create_Tree_Value_Comprehension(Meta, line_number, column, element, generators):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -105,9 +105,9 @@ def create_Tree_Value_Comprehension_V1(Meta, line_number, column, element, gener
 
 
 #
-#   Tree: Backquote Expression, Version 1
+#   Tree: Backquote Expression
 #
-class Tree_Backquote_Expression_V1(object):
+class Tree_Backquote_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -146,24 +146,24 @@ class Tree_Backquote_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Backquote_Expression_V1 @{}:{} {!r}>',
+        return arrange('<Tree_Backquote_Expression @{}:{} {!r}>',
                        self.line_number, self.column, self.value)
 
 
 @creator
-def create_Tree_Backquote_Expression_V1(line_number, column, value):
+def create_Tree_Backquote_Expression(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_expression(value)
 
-    return Tree_Backquote_Expression_V1(line_number, column, value)
+    return Tree_Backquote_Expression(line_number, column, value)
 
 
 #
-#   Tree: Binary Expression, Version 1
+#   Tree: Binary Expression
 #
-class Tree_Binary_Expression_V1(object):
+class Tree_Binary_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -210,12 +210,12 @@ class Tree_Binary_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Binary_Expression_V1 @{}:{} {!r} {!r} {!r}>',
+        return arrange('<Tree_Binary_Expression @{}:{} {!r} {!r} {!r}>',
                        self.line_number, self.column, self.left, self.operator, self.right)
 
 
 @creator
-def create_Tree_Binary_Expression_V1(line_number, column, left, operator, right):
+def create_Tree_Binary_Expression(line_number, column, left, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -223,13 +223,13 @@ def create_Tree_Binary_Expression_V1(line_number, column, left, operator, right)
     assert fact_is_tree_operator  (operator)
     assert fact_is_tree_expression(right)
 
-    return Tree_Binary_Expression_V1(line_number, column, left, operator, right)
+    return Tree_Binary_Expression(line_number, column, left, operator, right)
 
 
 #
-#   Tree_Call_V1
+#   Tree: Call Expression
 #
-class Tree_Call_V1(object):
+class Tree_Call_Expression(object):
     #
     #   Implements Tree_Expression
     #
@@ -318,13 +318,13 @@ class Tree_Call_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Call_V1 @{}:{} {!r} {} {} {} {}>',
+        return arrange('<Tree_Call_Expression @{}:{} {!r} {} {} {} {}>',
                        self.line_number, self.column,
                        self.function, self.arguments, self.keywords, self.star_arguments, self.keyword_arguments)
 
 
 @creator
-def create_Tree_Call_V1(
+def create_Tree_Call_Expression(
         line_number, column, function, arguments, keywords, star_arguments, keyword_arguments,
 ):
     assert fact_is_positive_integer   (line_number)
@@ -336,15 +336,15 @@ def create_Tree_Call_V1(
     assert fact_is__native_none__OR__tree_expression(star_arguments)
     assert fact_is__native_none__OR__tree_expression(keyword_arguments)
 
-    return Tree_Call_V1(
+    return Tree_Call_Expression(
                line_number, column, function, arguments, keywords, star_arguments, keyword_arguments,
            )
 
 
 #
-#   Tree: Compare Expression, Version 1
+#   Tree: Compare Expression
 #
-class Tree_Compare_Expression_V1(object):
+class Tree_Compare_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -394,12 +394,12 @@ class Tree_Compare_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Compare_Expression_V1 @{}:{} {!r} {!r} {!r}>',
+        return arrange('<Tree_Compare_Expression @{}:{} {!r} {!r} {!r}>',
                        self.line_number, self.column, self.left, self.operators, self.comparators)
 
 
 @creator
-def create_Tree_Compare_Expression_V1(line_number, column, left, operators, comparators):
+def create_Tree_Compare_Expression(line_number, column, left, operators, comparators):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -407,27 +407,27 @@ def create_Tree_Compare_Expression_V1(line_number, column, left, operators, comp
     assert fact_is_full_native_list(operators)
     assert fact_is_full_native_list(comparators)
 
-    return Tree_Compare_Expression_V1(line_number, column, left, operators, comparators)
+    return Tree_Compare_Expression(line_number, column, left, operators, comparators)
 
 
 #
-#   Tree: Generator Comprehension, V1
+#   Tree: Generator Comprehension
 #
-class Tree_Generator_Comprehension_V1(Tree_Value_Comprehension_V1):
+class Tree_Generator_Comprehension(Tree_Value_Comprehension):
     __slots__ = (())
 
     keyword = 'generator-comprehension'
 
 
 @creator
-def create_Tree_Generator_Comprehension_V1(line_number, column, element, generators):
-    return create_Tree_Value_Comprehension_V1(Tree_Generator_Comprehension_V1, line_number, column, element, generators)
+def create_Tree_Generator_Comprehension(line_number, column, element, generators):
+    return create_Tree_Value_Comprehension(Tree_Generator_Comprehension, line_number, column, element, generators)
 
 
 #
-#   Tree: If Expression, Version 1
+#   Tree: If Expression
 #
-class Tree_If_Expression_V1(object):
+class Tree_If_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -474,12 +474,12 @@ class Tree_If_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_If_Expression_V1 @{}:{} {!r} {!r} {!r}>',
+        return arrange('<Tree_If_Expression @{}:{} {!r} {!r} {!r}>',
                        self.line_number, self.column, self.test, self.body, self.else_expression)
 
 
 @creator
-def create_Tree_If_Expression_V1(line_number, column, test, body, else_expression):
+def create_Tree_If_Expression(line_number, column, test, body, else_expression):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -487,13 +487,13 @@ def create_Tree_If_Expression_V1(line_number, column, test, body, else_expressio
     assert fact_is_tree_expression(body)
     assert fact_is_tree_expression(else_expression)
 
-    return Tree_If_Expression_V1(line_number, column, test, body, else_expression)
+    return Tree_If_Expression(line_number, column, test, body, else_expression)
 
 
 #
-#   Tree: Logical Expression, Version 1
+#   Tree: Logical Expression
 #
-class Tree_Logical_Expression_V1(object):
+class Tree_Logical_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -546,25 +546,25 @@ class Tree_Logical_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Logical_Expression_V1 @{}:{} {!r} {!r}>',
+        return arrange('<Tree_Logical_Expression @{}:{} {!r} {!r}>',
                        self.line_number, self.column, self.operator, self.values)
 
 
 @creator
-def create_Tree_Logical_Expression_V1(line_number, column, operator, values):
+def create_Tree_Logical_Expression(line_number, column, operator, values):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_operator   (operator)
     assert fact_is_full_native_list(values)
 
-    return Tree_Logical_Expression_V1(line_number, column, operator, values)
+    return Tree_Logical_Expression(line_number, column, operator, values)
 
 
 #
-#   Tree: Map Expression, V1
+#   Tree: Map Expression
 #
-class Tree_Map_Expression_V1(object):
+class Tree_Map_Expression(object):
     #
     #   Implements Tree_Expression
     #
@@ -621,12 +621,12 @@ class Tree_Map_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Map_Expression_V1 @{}:{} {!r} {!r}>',
+        return arrange('<Tree_Map_Expression @{}:{} {!r} {!r}>',
                        self.line_number, self.column, self.keys, self.values)
 
 
 @creator
-def create_Tree_Map_Expression_V1(line_number, column, keys, values):
+def create_Tree_Map_Expression(line_number, column, keys, values):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -635,13 +635,13 @@ def create_Tree_Map_Expression_V1(line_number, column, keys, values):
 
     assert len(keys) == len(values)
 
-    return Tree_Map_Expression_V1(line_number, column, keys, values)
+    return Tree_Map_Expression(line_number, column, keys, values)
 
 
 #
-#   Tree: Lambda Expression, Version 1
+#   Tree: Lambda Expression
 #
-class Tree_Lambda_Expression_V1(object):
+class Tree_Lambda_Expression(object):
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
@@ -684,39 +684,39 @@ class Tree_Lambda_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Lambda_Expression_V1 @{}:{} {!r} {!r}>',
+        return arrange('<Tree_Lambda_Expression @{}:{} {!r} {!r}>',
                        self.line_number, self.column, self.parameters, self.body)
 
 
 @creator
-def create_Tree_Lambda_Expression_V1(line_number, column, parameters, body):
+def create_Tree_Lambda_Expression(line_number, column, parameters, body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_parameters_all(parameters)
     assert fact_is_tree_expression    (body)
 
-    return Tree_Lambda_Expression_V1(line_number, column, parameters, body)
+    return Tree_Lambda_Expression(line_number, column, parameters, body)
 
 
 #
-#   Tree: List Comprehension, V1
+#   Tree: List Comprehension
 #
-class Tree_List_Comprehension_V1(Tree_Value_Comprehension_V1):
+class Tree_List_Comprehension(Tree_Value_Comprehension):
     __slots__ = (())
 
     keyword = 'list-comprehension'
 
 
 @creator
-def create_Tree_List_Comprehension_V1(line_number, column, element, generators):
-    return create_Tree_Value_Comprehension_V1(Tree_List_Comprehension_V1, line_number, column, element, generators)
+def create_Tree_List_Comprehension(line_number, column, element, generators):
+    return create_Tree_Value_Comprehension(Tree_List_Comprehension, line_number, column, element, generators)
 
 
 #
-#   Tree: Map Comprehension, V1
+#   Tree: Map Comprehension
 #
-class Tree_Map_Comprehension_V1(object):
+class Tree_Map_Comprehension(object):
     #
     #   Implements Tree_Expression
     #
@@ -767,12 +767,12 @@ class Tree_Map_Comprehension_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Map_Comprehension_V1 @{}:{} {!r} {!r} {!r}>',
+        return arrange('<Tree_Map_Comprehension @{}:{} {!r} {!r} {!r}>',
                        self.line_number, self.column, self.key, self.value, self.generators)
 
 
 @creator
-def create_Tree_Map_Comprehension_V1(line_number, column, key, value, generators):
+def create_Tree_Map_Comprehension(line_number, column, key, value, generators):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -780,13 +780,13 @@ def create_Tree_Map_Comprehension_V1(line_number, column, key, value, generators
     assert fact_is_tree_expression (value)
     assert fact_is_full_native_list(generators)
 
-    return Tree_Map_Comprehension_V1(line_number, column, key, value, generators)
+    return Tree_Map_Comprehension(line_number, column, key, value, generators)
 
 
 #
-#   Tree: Number, Version 1
+#   Tree: Number
 #
-class Tree_Number_V1(object):
+class Tree_Number(object):
     #
     #   Implements Tree_Expression
     #
@@ -822,37 +822,37 @@ class Tree_Number_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Number_V1 @{}:{} {!r}>', self.line_number, self.column, self.n)
+        return arrange('<Tree_Number @{}:{} {!r}>', self.line_number, self.column, self.n)
 
 
 @creator
-def create_Tree_Number_V1(line_number, column, n):
+def create_Tree_Number(line_number, column, n):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_some_native_integer(n)
 
-    return Tree_Number_V1(line_number, column, n)
+    return Tree_Number(line_number, column, n)
 
 
 #
-#   Tree: Set Comprehension, V1
+#   Tree: Set Comprehension
 #
-class Tree_Set_Comprehension_V1(Tree_Value_Comprehension_V1):
+class Tree_Set_Comprehension(Tree_Value_Comprehension):
     __slots__ = (())
 
     keyword = 'set-comprehension'
 
 
 @creator
-def create_Tree_Set_Comprehension_V1(line_number, column, element, generators):
-    return create_Tree_Value_Comprehension_V1(Tree_Set_Comprehension_V1, line_number, column, element, generators)
+def create_Tree_Set_Comprehension(line_number, column, element, generators):
+    return create_Tree_Value_Comprehension(Tree_Set_Comprehension, line_number, column, element, generators)
 
 
 #
-#   Tree: Set Expression, V1
+#   Tree: Set Expression
 #
-class Tree_Set_Expression_V1(object):
+class Tree_Set_Expression(object):
     #
     #   Implements Tree_Expression
     #
@@ -901,23 +901,23 @@ class Tree_Set_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Set_Expression_V1 @{}:{} {!r}>', self.line_number, self.column, self.values)
+        return arrange('<Tree_Set_Expression @{}:{} {!r}>', self.line_number, self.column, self.values)
 
 
 @creator
-def create_Tree_Set_Expression_V1(line_number, column, values):
+def create_Tree_Set_Expression(line_number, column, values):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_some_native_list(values)
 
-    return Tree_Set_Expression_V1(line_number, column, values)
+    return Tree_Set_Expression(line_number, column, values)
 
 
 #
-#   Tree: String, Version 1
+#   Tree: String
 #
-class Tree_String_V1(object):
+class Tree_String(object):
     #
     #   Implements Tree_Expression
     #
@@ -955,23 +955,23 @@ class Tree_String_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_String_V1 @{}:{} {!r}>', self.line_number, self.column, self.s)
+        return arrange('<Tree_String @{}:{} {!r}>', self.line_number, self.column, self.s)
 
 
 @creator
-def create_Tree_String_V1(line_number, column, s):
+def create_Tree_String(line_number, column, s):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_some_native_string(s)
 
-    return Tree_String_V1(line_number, column, s)
+    return Tree_String(line_number, column, s)
 
 
 #
-#   Tree: Unary Expression, Version 1
+#   Tree: Unary Expression
 #
-class Tree_Unary_Expression_V1(object):
+class Tree_Unary_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -1014,25 +1014,25 @@ class Tree_Unary_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Unary_Expression_V1 @{}:{} {!r} {!r}>',
+        return arrange('<Tree_Unary_Expression @{}:{} {!r} {!r}>',
                        self.line_number, self.column, self.operator, self.right)
 
 
 @creator
-def create_Tree_Unary_Expression_V1(line_number, column, operator, right):
+def create_Tree_Unary_Expression(line_number, column, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_tree_operator  (operator)
     assert fact_is_tree_expression(right)
 
-    return Tree_Unary_Expression_V1(line_number, column, operator, right)
+    return Tree_Unary_Expression(line_number, column, operator, right)
 
 
 #
-#   Tree: Yield Expression, Version 1
+#   Tree: Yield Expression
 #
-class Tree_Yield_Expression_V1(object):
+class Tree_Yield_Expression(object):
     #
     #   implements Tree_Expression
     #
@@ -1075,15 +1075,15 @@ class Tree_Yield_Expression_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Yield_Expression_V1 @{}:{} {!r}>',
+        return arrange('<Tree_Yield_Expression @{}:{} {!r}>',
                        self.line_number, self.column, self.value)
 
 
 @creator
-def create_Tree_Yield_Expression_V1(line_number, column, value):
+def create_Tree_Yield_Expression(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is__native_none__OR__tree_expression(value)
 
-    return Tree_Yield_Expression_V1(line_number, column, value)
+    return Tree_Yield_Expression(line_number, column, value)

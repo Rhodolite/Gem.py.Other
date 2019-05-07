@@ -118,4 +118,6 @@ elif symbol_version == 4:
 else:
     from    Capital.Core                import  FATAL
 
+    assert 0
+
     FATAL('Z/Parser/Symbol.py: unknown symbol version: {!r}', symbol_version)

@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Comprehension - Convert Python Abstract Syntax Tree Comprehension to Tree classes.
+#   Z.Tree.Convert_Comprehension_V1 - Convert Python Abstract Syntax Tree Comprehension to Tree classes, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -14,9 +14,9 @@
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Comprehension                import  create_Tree_Comprehension_Clause
-from    Z.Tree.Convert_Expression           import  convert_expression
-from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Target               import  convert_target
+from    Z.Tree.Convert_Expression_V1        import  convert_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
+from    Z.Tree.Convert_Target_V1            import  convert_target
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
@@ -30,7 +30,7 @@ if __debug__:
 
 
 #
-#   convert_comprehension(self)
+#   convert_comprehension(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Comprehension_Clause` (i.e.: `_ast.comprehension` to a
 #       `Tree_Comprehension_Clause`.
@@ -39,15 +39,15 @@ assert Native_AbstractSyntaxTree_Comprehension_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Comprehension_Clause._fields     == (('target', 'iter', 'ifs'))
 
 
-def convert_comprehension_clause(self):
-    assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (self.target)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.iter)
-    assert fact_is_some_native_list                              (self.ifs)
+def convert_comprehension_clause(v):
+    assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (v.target)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.iter)
+    assert fact_is_some_native_list                              (v.ifs)
 
     return create_Tree_Comprehension_Clause(
-               convert_target                  (self.target),
-               convert_expression              (self.iter),
-               convert_some_list_of_expressions(self.ifs),
+               convert_target                  (v.target),
+               convert_expression              (v.iter),
+               convert_some_list_of_expressions(v.ifs),
            )
 
 

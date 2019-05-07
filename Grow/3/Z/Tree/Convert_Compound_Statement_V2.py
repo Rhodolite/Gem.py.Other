@@ -24,9 +24,6 @@
 
 
 from    Z.Tree.Convert_Except_V2            import  convert_full_list_of_except_clauses
-from    Z.Tree.Convert_Expression           import  convert_expression
-from    Z.Tree.Convert_Target               import  convert_none_OR_target
-from    Z.Tree.Convert_Target               import  convert_target
 
 
 if __debug__:
@@ -63,7 +60,7 @@ def convert_test_statement(z, v, create):
                v.lineno,
                v.col_offset,
 
-               convert_expression               (v.test),
+               z.convert_expression             (z, v.test),
                z.convert_full_list_of_statements(z, v.body),
                z.convert_some_list_of_statements(z, v.orelse),
            )
@@ -93,8 +90,8 @@ def convert_for_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_target                   (v.target),
-               convert_expression               (v.iter),
+               z.convert_target                 (z, v.target),
+               z.convert_expression             (z, v.iter),
                z.convert_full_list_of_statements(z, v.body),
                z.convert_some_list_of_statements(z, v.orelse),
            )
@@ -211,7 +208,7 @@ def convert_with_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_expression               (v.context_expr),
-               convert_none_OR_target           (v.optional_vars),
+               z.convert_expression             (z, v.context_expr),
+               z.convert_none_OR_target         (z, v.optional_vars),
                z.convert_full_list_of_statements(z, v.body),
            )

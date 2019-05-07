@@ -26,12 +26,8 @@
 from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Alias                import  convert_full_list_of_module_aliases
 from    Z.Tree.Convert_Alias                import  convert_full_list_of_symbol_aliases
-from    Z.Tree.Convert_Expression           import  convert_expression
-from    Z.Tree.Convert_Expression           import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Expression           import  convert_none_OR_expression
+from    Z.Tree.Convert_Expression_V2        import  convert_none_OR_expression
 from    Z.Tree.Convert_Operator             import  convert_modify_operator
-from    Z.Tree.Convert_Target               import  convert_full_list_of_targets
-from    Z.Tree.Convert_Target               import  convert_target
 
 
 if __debug__:
@@ -100,7 +96,7 @@ def convert_assert_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_expression        (v.test),
+               z.convert_expression      (z, v.test),
                convert_none_OR_expression(v.msg),
            )
 
@@ -127,8 +123,8 @@ def convert_assign_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_full_list_of_targets(v.targets),
-               convert_expression          (v.value),
+               z.convert_full_list_of_targets(z, v.targets),
+               z.convert_expression          (z, v.value),
            )
 
 
@@ -184,7 +180,7 @@ def convert_delete_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_full_list_of_targets(v.targets),
+               z.convert_full_list_of_targets(z, v.targets),
            )
 
 
@@ -212,7 +208,7 @@ def convert_execute_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_expression        (v.body),
+               z.convert_expression      (z, v.body),
                convert_none_OR_expression(v.globals),
                convert_none_OR_expression(v.locals),
            )
@@ -240,7 +236,7 @@ def convert_expression_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_expression(v.value),
+               z.convert_expression(z, v.value),
            )
 
 
@@ -349,9 +345,9 @@ def convert_modify_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_target         (v.target),
+               z.convert_target       (z, v.target),
                convert_modify_operator(v.op),
-               convert_expression     (v.value),
+               z.convert_expression   (z, v.value),
            )
 
 
@@ -393,8 +389,8 @@ def convert_print_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_expression      (v.dest),
-               convert_some_list_of_expressions(v.values),
+               convert_none_OR_expression        (v.dest),
+               z.convert_some_list_of_expressions(z, v.values),
                v.nl,
            )
 

@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Expression - Convert Python Abstract Syntax Tree Expressions to Tree classes.
+#   Z.Tree.Convert_Expression_V1 - Convert Python Abstract Syntax Tree Expressions to Tree classes, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -37,11 +37,11 @@ from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_
 #       Calls all the other `convert_*` pseudo methods.
 #
 def convert_expression(v):
-    convert_expression__pseudo_method = (
-            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method[type(v)]
+    convert_expression__function = (
+            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function[type(v)]
         )
 
-    return convert_expression__pseudo_method(v)
+    return convert_expression__function(v)
 
 
 #
@@ -79,35 +79,35 @@ convert_some_list_of_expressions = produce__convert__some_list_of__Native_Abstra
 
 from    Capital.Core                        import  trace
 from    Capital.Types                       import  NoneType
-from    Z.Tree.Convert_Argument             import  convert_some_list_of_keyword_arguments
-from    Z.Tree.Convert_Comprehension        import  convert_full_list_of_comprehensions
+from    Z.Tree.Convert_Argument_V1          import  convert_some_list_of_keyword_arguments
+from    Z.Tree.Convert_Comprehension_V1     import  convert_full_list_of_comprehensions
 from    Z.Tree.Convert_Name                 import  convert_name_expression
 from    Z.Tree.Convert_Operator             import  convert_binary_operator
 from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators
 from    Z.Tree.Convert_Operator             import  convert_logical_operator
 from    Z.Tree.Convert_Operator             import  convert_unary_operator
-from    Z.Tree.Convert_Parameter            import  convert_parameters_all
-from    Z.Tree.Convert_Target               import  convert_attribute_expression
-from    Z.Tree.Convert_Target               import  convert_list_expression
-from    Z.Tree.Convert_Target               import  convert_subscript_expression
-from    Z.Tree.Convert_Target               import  convert_tuple_expression
-from    Z.Tree.Expression                   import  create_Tree_Backquote_Expression
-from    Z.Tree.Expression                   import  create_Tree_Binary_Expression
-from    Z.Tree.Expression                   import  create_Tree_Call
-from    Z.Tree.Expression                   import  create_Tree_Compare_Expression
-from    Z.Tree.Expression                   import  create_Tree_Generator_Comprehension
-from    Z.Tree.Expression                   import  create_Tree_If_Expression
-from    Z.Tree.Expression                   import  create_Tree_Lambda_Expression
-from    Z.Tree.Expression                   import  create_Tree_List_Comprehension
-from    Z.Tree.Expression                   import  create_Tree_Logical_Expression
-from    Z.Tree.Expression                   import  create_Tree_Map_Comprehension
-from    Z.Tree.Expression                   import  create_Tree_Map_Expression
-from    Z.Tree.Expression                   import  create_Tree_Number
-from    Z.Tree.Expression                   import  create_Tree_Set_Comprehension
-from    Z.Tree.Expression                   import  create_Tree_Set_Expression
-from    Z.Tree.Expression                   import  create_Tree_String
-from    Z.Tree.Expression                   import  create_Tree_Unary_Expression
-from    Z.Tree.Expression                   import  create_Tree_Yield_Expression
+from    Z.Tree.Convert_Parameter_V1         import  convert_parameters_all
+from    Z.Tree.Convert_Target_V1            import  convert_attribute_expression
+from    Z.Tree.Convert_Target_V1            import  convert_list_expression
+from    Z.Tree.Convert_Target_V1            import  convert_subscript_expression
+from    Z.Tree.Convert_Target_V1            import  convert_tuple_expression
+from    Z.Tree.Expression_V1                import  create_Tree_Backquote_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Binary_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Call_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Compare_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Generator_Comprehension
+from    Z.Tree.Expression_V1                import  create_Tree_If_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Lambda_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_List_Comprehension
+from    Z.Tree.Expression_V1                import  create_Tree_Logical_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Map_Comprehension
+from    Z.Tree.Expression_V1                import  create_Tree_Map_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Number
+from    Z.Tree.Expression_V1                import  create_Tree_Set_Comprehension
+from    Z.Tree.Expression_V1                import  create_Tree_Set_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_String
+from    Z.Tree.Expression_V1                import  create_Tree_Unary_Expression
+from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Backquote_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_Expression
@@ -151,28 +151,28 @@ if __debug__:
 
 
 #
-#   convert_value_comprehension(self)
+#   convert_value_comprehension(v)
 #
 #       Base code for `convert_generator_comprehension` & `convert_list_comprehension`.
 #
-def convert_value_comprehension(self, create):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_value_comprehension(v, create):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.elt)
-    assert fact_is_full_native_list                              (self.generators)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.elt)
+    assert fact_is_full_native_list                              (v.generators)
 
     return create(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression                 (self.elt),
-               convert_full_list_of_comprehensions(self.generators),
+               convert_expression                 (v.elt),
+               convert_full_list_of_comprehensions(v.generators),
            )
 
 
 #
-#   convert_backquote_expression(self)
+#   convert_backquote_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Backquote_Expression` (i.e.: `_ast.Repr`) to a `Tree_Backquote_Expression`.
 #
@@ -180,22 +180,22 @@ assert Native_AbstractSyntaxTree_Backquote_Expression._attributes == (('lineno',
 assert Native_AbstractSyntaxTree_Backquote_Expression._fields     == (('value',))
 
 
-def convert_backquote_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_backquote_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
     return create_Tree_Backquote_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression(self.value),
+               convert_expression(v.value),
           )
 
 
 #
-#   convert_binary_expression(self)
+#   convert_binary_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Binary_Expression` (i.e.: `_ast.BinOp`) to a `Tree_Binary_Expression`.
 #
@@ -203,26 +203,26 @@ assert Native_AbstractSyntaxTree_Binary_Expression._attributes == (('lineno', 'c
 assert Native_AbstractSyntaxTree_Binary_Expression._fields     == (('left', 'op', 'right'))
 
 
-def convert_binary_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_binary_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (self.left)
-    assert fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR(self.op)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (self.right)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (v.left)
+    assert fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR(v.op)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (v.right)
 
     return create_Tree_Binary_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression     (self.left),
-               convert_binary_operator(self.op),
-               convert_expression     (self.right),
+               convert_expression     (v.left),
+               convert_binary_operator(v.op),
+               convert_expression     (v.right),
           )
 
 
 #
-#   convert_call_expression(self)
+#   convert_call_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Call_Expression` (i.e.: `_ast.Call`) to a `Tree_Call`.
 #
@@ -230,30 +230,30 @@ assert Native_AbstractSyntaxTree_Call_Expression._attributes == (('lineno', 'col
 assert Native_AbstractSyntaxTree_Call_Expression._fields     == (('func', 'args', 'keywords', 'starargs', 'kwargs'))
 
 
-def convert_call_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_call_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                    (self.func)
-    assert fact_is_some_native_list                                                  (self.args)
-    assert fact_is_some_native_list                                                  (self.keywords)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.starargs)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.kwargs)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                    (v.func)
+    assert fact_is_some_native_list                                                  (v.args)
+    assert fact_is_some_native_list                                                  (v.keywords)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.starargs)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.kwargs)
 
-    return create_Tree_Call(
-               self.lineno,
-               self.col_offset,
+    return create_Tree_Call_Expression(
+               v.lineno,
+               v.col_offset,
 
-               convert_expression                    (self.func),
-               convert_some_list_of_expressions      (self.args),
-               convert_some_list_of_keyword_arguments(self.keywords),
-               convert_none_OR_expression            (self.starargs),
-               convert_none_OR_expression            (self.kwargs),
+               convert_expression                    (v.func),
+               convert_some_list_of_expressions      (v.args),
+               convert_some_list_of_keyword_arguments(v.keywords),
+               convert_none_OR_expression            (v.starargs),
+               convert_none_OR_expression            (v.kwargs),
            )
 
 
 #
-#   convert_compare_expression(self)
+#   convert_compare_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Compare_Expression` (i.e.: `_ast.Compare`) to a `Tree_Compare_Expression`.
 #
@@ -261,26 +261,26 @@ assert Native_AbstractSyntaxTree_Compare_Expression._attributes == (('lineno', '
 assert Native_AbstractSyntaxTree_Compare_Expression._fields     == (('left', 'ops', 'comparators'))
 
 
-def convert_compare_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_compare_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.left)
-    assert fact_is_full_native_list                              (self.ops)
-    assert fact_is_full_native_list                              (self.comparators)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.left)
+    assert fact_is_full_native_list                              (v.ops)
+    assert fact_is_full_native_list                              (v.comparators)
 
     return create_Tree_Compare_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression                    (self.left),
-               convert_full_list_of_compare_operators(self.ops),
-               convert_full_list_of_expressions      (self.comparators),
+               convert_expression                    (v.left),
+               convert_full_list_of_compare_operators(v.ops),
+               convert_full_list_of_expressions      (v.comparators),
           )
 
 
 #
-#   convert_generator_comprehension(self)
+#   convert_generator_comprehension(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Generator_Comprehension` (i.e.: `_ast.GeneratorExp`) to a
 #       `Tree_Generator_Comprehension`.
@@ -303,12 +303,12 @@ assert Native_AbstractSyntaxTree_Generator_Comprehension._attributes == (('linen
 assert Native_AbstractSyntaxTree_Generator_Comprehension._fields     == (('elt', 'generators'))
 
 
-def convert_generator_comprehension(self):
-    return convert_value_comprehension(self, create_Tree_Generator_Comprehension)
+def convert_generator_comprehension(v):
+    return convert_value_comprehension(v, create_Tree_Generator_Comprehension)
 
 
 #
-#   convert_if_expression(self)
+#   convert_if_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_If_Expression` (i.e.: `_ast.IfExp`) to a `Tree_If_Expression`.
 #
@@ -316,26 +316,26 @@ assert Native_AbstractSyntaxTree_If_Expression._attributes == (('lineno', 'col_o
 assert Native_AbstractSyntaxTree_If_Expression._fields     == (('test', 'body', 'orelse'))
 
 
-def convert_if_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_if_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.test)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.body)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.orelse)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.test)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.body)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.orelse)
 
     return create_Tree_If_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression(self.test),
-               convert_expression(self.body),
-               convert_expression(self.orelse),
+               convert_expression(v.test),
+               convert_expression(v.body),
+               convert_expression(v.orelse),
           )
 
 
 #
-#   convert_lambda_expression(self)
+#   convert_lambda_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_lambda_Expression` (i.e.: `_ast.Lambda`) to a `Tree_Lambda_Expression`.
 #
@@ -343,24 +343,24 @@ assert Native_AbstractSyntaxTree_Lambda_Expression._attributes == (('lineno', 'c
 assert Native_AbstractSyntaxTree_Lambda_Expression._fields     == (('args', 'body'))
 
 
-def convert_lambda_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_lambda_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__native__abstract_syntax_tree__parameters_all (self.args)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.body)
+    assert fact_is__native__abstract_syntax_tree__parameters_all (v.args)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.body)
 
     return create_Tree_Lambda_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_parameters_all(self.args),
-               convert_expression    (self.body),
+               convert_parameters_all(v.args),
+               convert_expression    (v.body),
           )
 
 
 #
-#   convert_list_comprehension(self)
+#   convert_list_comprehension(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_List_Comprehension` (i.e.: `_ast.ListComp`) to a `Tree_List_Comprehension`.
 #
@@ -377,12 +377,12 @@ assert Native_AbstractSyntaxTree_List_Comprehension._attributes == (('lineno', '
 assert Native_AbstractSyntaxTree_List_Comprehension._fields     == (('elt', 'generators'))
 
 
-def convert_list_comprehension(self):
-    return convert_value_comprehension(self, create_Tree_List_Comprehension)
+def convert_list_comprehension(v):
+    return convert_value_comprehension(v, create_Tree_List_Comprehension)
 
 
 #
-#   convert_logical_expression(self)
+#   convert_logical_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Logical_Expression` (i.e.: `_ast.BoolOp`) to a `Tree_Logical_Expression`.
 #
@@ -390,24 +390,24 @@ assert Native_AbstractSyntaxTree_Logical_Expression._attributes == (('lineno', '
 assert Native_AbstractSyntaxTree_Logical_Expression._fields     == (('op', 'values'))
 
 
-def convert_logical_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_logical_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR(self.op)
-    assert fact_is_full_native_list                                    (self.values)
+    assert fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR(v.op)
+    assert fact_is_full_native_list                                    (v.values)
 
     return create_Tree_Logical_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_logical_operator        (self.op),
-               convert_full_list_of_expressions(self.values),
+               convert_logical_operator        (v.op),
+               convert_full_list_of_expressions(v.values),
           )
 
 
 #
-#   convert_map_comprehension(self)
+#   convert_map_comprehension(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Map_Comprehension` (i.e.: `_ast.DictComp`) to a `Tree_Map_Comprehension`.
 #
@@ -424,26 +424,26 @@ assert Native_AbstractSyntaxTree_Map_Comprehension._attributes == (('lineno', 'c
 assert Native_AbstractSyntaxTree_Map_Comprehension._fields     == (('key', 'value', 'generators'))
 
 
-def convert_map_comprehension(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_map_comprehension(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.key)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
-    assert fact_is_full_native_list                              (self.generators)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.key)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
+    assert fact_is_full_native_list                              (v.generators)
 
     return create_Tree_Map_Comprehension(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression                 (self.key),
-               convert_expression                 (self.value),
-               convert_full_list_of_comprehensions(self.generators),
+               convert_expression                 (v.key),
+               convert_expression                 (v.value),
+               convert_full_list_of_comprehensions(v.generators),
            )
 
 
 #
-#   convert_map_expression(self)
+#   convert_map_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Map_Expression` (i.e.: `_ast.Dict`) to a `Tree_Map_Expression`.
 #
@@ -451,26 +451,26 @@ assert Native_AbstractSyntaxTree_Map_Expression._attributes == (('lineno', 'col_
 assert Native_AbstractSyntaxTree_Map_Expression._fields     == (('keys', 'values'))
 
 
-def convert_map_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_map_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_some_native_list(self.keys)
-    assert fact_is_some_native_list(self.values)
+    assert fact_is_some_native_list(v.keys)
+    assert fact_is_some_native_list(v.values)
 
-    assert len(self.keys) == len(self.values)
+    assert len(v.keys) == len(self.values)
 
     return create_Tree_Map_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_some_list_of_expressions(self.keys),
-               convert_some_list_of_expressions(self.values),
+               convert_some_list_of_expressions(v.keys),
+               convert_some_list_of_expressions(v.values),
            )
 
 
 #
-#   convert_number(self)
+#   convert_number(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Number` (i.e.: `_ast.Num`) to a `Tree_Number`.
 #
@@ -478,17 +478,17 @@ assert Native_AbstractSyntaxTree_Number._attributes == (('lineno', 'col_offset')
 assert Native_AbstractSyntaxTree_Number._fields     == (('n',))
 
 
-def convert_number(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_number(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_some_native_integer(self.n)
+    assert fact_is_some_native_integer(v.n)
 
-    return create_Tree_Number(self.lineno, self.col_offset, self.n)
+    return create_Tree_Number(v.lineno, self.col_offset, self.n)
 
 
 #
-#   convert_set_comprehension(self)
+#   convert_set_comprehension(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Set_Comprehension` (i.e.: `_ast.SetComp`) to a `Tree_Set_Comprehension`.
 #
@@ -505,12 +505,12 @@ assert Native_AbstractSyntaxTree_Set_Comprehension._attributes == (('lineno', 'c
 assert Native_AbstractSyntaxTree_Set_Comprehension._fields     == (('elt', 'generators'))
 
 
-def convert_set_comprehension(self):
-    return convert_value_comprehension(self, create_Tree_Set_Comprehension)
+def convert_set_comprehension(v):
+    return convert_value_comprehension(v, create_Tree_Set_Comprehension)
 
 
 #
-#   convert_set_expression(self)
+#   convert_set_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Set_Expression` (i.e.: `_ast.Set`) to a `Tree_Set_Expression`.
 #
@@ -518,22 +518,22 @@ assert Native_AbstractSyntaxTree_Set_Expression._attributes == (('lineno', 'col_
 assert Native_AbstractSyntaxTree_Set_Expression._fields     == (('elts',))
 
 
-def convert_set_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_set_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_some_native_list(self.elts)
+    assert fact_is_some_native_list(v.elts)
 
     return create_Tree_Set_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_some_list_of_expressions(self.elts),
+               convert_some_list_of_expressions(v.elts),
            )
 
 
 #
-#   convert_string(self)
+#   convert_string(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_String` (i.e.: `_ast.Str`) to a `Tree_String`.
 #
@@ -541,17 +541,17 @@ assert Native_AbstractSyntaxTree_String._attributes == (('lineno', 'col_offset')
 assert Native_AbstractSyntaxTree_String._fields     == (('s',))
 
 
-def convert_string(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_string(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_some_native_string(self.s)
+    assert fact_is_some_native_string(v.s)
 
-    return create_Tree_String(self.lineno, self.col_offset, self.s)
+    return create_Tree_String(v.lineno, self.col_offset, self.s)
 
 
 #
-#   convert_unary_expression(self)
+#   convert_unary_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Unary_Expression` (i.e.: `_ast.UnaryOp`) to a `Tree_Unary_Expression`.
 #
@@ -559,24 +559,24 @@ assert Native_AbstractSyntaxTree_Unary_Expression._attributes == (('lineno', 'co
 assert Native_AbstractSyntaxTree_Unary_Expression._fields     == (('op', 'operand'))
 
 
-def convert_unary_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_unary_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR(self.op)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION    (self.operand)
+    assert fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR(v.op)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION    (v.operand)
 
     return create_Tree_Unary_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_unary_operator(self.op),
-               convert_expression    (self.operand),
+               convert_unary_operator(v.op),
+               convert_expression    (v.operand),
           )
 
 
 #
-#   convert_yield_expression(self)
+#   convert_yield_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Yield_Expression` (i.e.: `_ast.Yield`) to a `Tree_Yield_Expression`.
 #
@@ -584,30 +584,30 @@ assert Native_AbstractSyntaxTree_Yield_Expression._attributes == (('lineno', 'co
 assert Native_AbstractSyntaxTree_Yield_Expression._fields     == (('value',))
 
 
-def convert_yield_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_yield_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(self.value)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
     return create_Tree_Yield_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_none_OR_expression(self.value),
+               convert_none_OR_expression(v.value),
           )
 
 
 #
 #   USED BY: convert_expression (at top of file).
 #
-#   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method
+#   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
 #           : Map { Native_AbstractSyntaxTree_* : Function }
 #
 #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_expression" psuedo method
 #       (actually to a function).
 #
-map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__pseudo_method = {
+map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = {
         Native_AbstractSyntaxTree_Attribute_Expression    : convert_attribute_expression,
         Native_AbstractSyntaxTree_Backquote_Expression    : convert_backquote_expression,
         Native_AbstractSyntaxTree_Binary_Expression       : convert_binary_expression,

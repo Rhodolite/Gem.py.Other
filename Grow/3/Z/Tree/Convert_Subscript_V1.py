@@ -13,8 +13,8 @@
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
-from    Z.Tree.Convert_Expression           import  convert_expression
-from    Z.Tree.Convert_Index                import  convert_index_clause
+from    Z.Tree.Convert_Expression_V1        import  convert_expression
+from    Z.Tree.Convert_Index_V1             import  convert_index_clause
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Subscript_V1                 import  create_Tree_Subscript_Expression
 
@@ -29,7 +29,7 @@ if __debug__:
 
 
 #
-#   convert_subscript_expression(self)
+#   convert_subscript_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Subscript_Expression` (i.e.: `_ast.Subscript`) to a
 #       `Tree_Subscript_Expression`.
@@ -38,19 +38,19 @@ assert Native_AbstractSyntaxTree_Subscript_Expression._attributes == (('lineno',
 assert Native_AbstractSyntaxTree_Subscript_Expression._fields     == (('value', 'slice', 'ctx'))
 
 
-def convert_subscript_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_subscript_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                  (self.value)
-    assert fact_is__ANY__native__abstract_syntax_tree__INDEX                       (self.slice)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(self.ctx)
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                  (v.value)
+    assert fact_is__ANY__native__abstract_syntax_tree__INDEX                       (v.slice)
+    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
     return create_Tree_Subscript_Expression(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               convert_expression                  (self.value),
-               convert_index_clause                (self.slice),
-               convert_delete_load_OR_store_context(self.ctx),
+               convert_expression                  (v.value),
+               convert_index_clause                (v.slice),
+               convert_delete_load_OR_store_context(v.ctx),
            )

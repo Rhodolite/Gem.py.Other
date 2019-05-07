@@ -4,28 +4,29 @@
 
 
 #
-#   Z.Tree.Convert_Argument_V2 - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes, Version 2.
+#   Z.Tree.Convert_Argument_V3 - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes, Version 3.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           Does not use `Convert_Zone`.
+#   Difference between Version 2 & Version 3.
 #
 #       Version 2:
 #
-#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
+#           The first argument to `create_Tree_Keyword_Argument` is a `FullNativeString`.
+#
+#       Version 3:
+#
+#           The first argument to `create_Tree_Keyword_Argument` is a `Parser_Symbol`.
 #
 
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Argument                     import  create_Tree_Keyword_Argument
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Parser.Symbol                     import  conjure_parser_symbol
 
 
 if __debug__:
@@ -52,8 +53,8 @@ def convert_keyword_argument(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
     return create_Tree_Keyword_Argument(
-               v.arg,
-               z.convert_expression(z, v.value),
+               conjure_parser_symbol(v.arg),
+               z.convert_expression (z, v.value),
            )
 
 
