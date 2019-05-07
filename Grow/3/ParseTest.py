@@ -4,97 +4,55 @@
 
 
 #
-#   Z.Tree.Convert_Context_V1 - Convert Python Abstract Syntax Tree Contexts to Tree classes, Version 1.
+#   Z.Tree.Convert_Decorator_V2 - Convert Python Abstract Syntax Tree Decorators to Tree classes, Version 2.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-#       See "Z/Tree/Context.py" for an explanation of "contexts".
+
+
+#
+#   Difference between Version 1 & Version 2.
+#
+#       Version 1:
+#
+#           Does not use `Convert_Zone`.
+#
+#       Version 2:
+#
+#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
 #
 
 
-from    Z.Tree.Context_V1                       import  tree_delete_context
-from    Z.Tree.Context_V1                       import  tree_load_context
-from    Z.Tree.Context_V1                       import  tree_parameter_context
-from    Z.Tree.Context_V1                       import  tree_store_context
-from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Delete_Context
-from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Load_Context
-from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Store_Context
-from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Parameter_Context
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__delete_context
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
+    from    Capital.Fact                    import  fact_is_some_native_list
 
 
 #
-#   convert_delete_context(v)
+#   convert_decorator(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_Delete_Context` to the singleton `tree_delete_context`.
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) to a `Tree_Expression`.
 #
-assert Native_AbstractSyntaxTree_Delete_Context._attributes == (())
-assert Native_AbstractSyntaxTree_Delete_Context._fields     == (())
-
-def convert_delete_context(v):
-    assert fact_is__native__abstract_syntax_tree__delete_context(v)
-
-    return tree_delete_context
-
-
+#   CURRENT:
 #
-#   convert_delete_load_OR_store_context(v)
+#       For now (since this is a 1-1 translation of `_ast`) a decorator is simply a `Tree_Expresion`.
 #
-#       Convert a "delete", "load", or "store" context to a `Tree_Context` enumerator.
+#       Hence, all we do is call `z.convert_expression`.
 #
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
-        Native_AbstractSyntaxTree_Delete_Context : tree_delete_context,
-        Native_AbstractSyntaxTree_Load_Context   : tree_load_context,
-        Native_AbstractSyntaxTree_Store_Context  : tree_store_context,
-    }
-
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
-
-
-def convert_delete_load_OR_store_context(v):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
+#   FUTURE:
+#
+#       We will have a special class for a decorator.
+#
+def convert_decorator(z, v):
+    return z.convert_expression(z, v)
 
 
 #
-#   convert_load_OR_store_context(v)
+#   convert_some_list_of_decorators(z, v)
 #
-#       Convert a "load" or "store" context to a `Tree_Context` enumerator.
+#       Convert some `NativeList of Native_AbstractSyntaxTree_Decorator` (i.e.: `list of _ast.decorator`) to a
+#       `NativeList of Tree_Decorator`.
 #
-map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
-        Native_AbstractSyntaxTree_Load_Context  : tree_load_context,
-        Native_AbstractSyntaxTree_Store_Context : tree_store_context,
-    }
-
-
-if __debug__:
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
-
-
-def convert_load_OR_store_context(v):
-    return map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
-
-
-#
-#   convert_parameter_context(v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Parameter_Context` to the singleton `tree_parameter_context`.
-#
-assert Native_AbstractSyntaxTree_Parameter_Context._attributes == (())
-assert Native_AbstractSyntaxTree_Parameter_Context._fields     == (())
-
-def convert_parameter_context(v):
-    assert fact_is__native__abstract_syntax_tree__parameter_context(v)
-
-    return tree_parameter_context
+convert_some_list_of_decorators = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_decorator)

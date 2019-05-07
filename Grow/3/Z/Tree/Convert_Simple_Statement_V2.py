@@ -23,7 +23,6 @@
 #
 
 
-from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Operator             import  convert_modify_operator
 
 

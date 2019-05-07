@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           Pass in a context to `create_Tree_Subscript_Expression`
+#           Pass in a context to `z.create_Tree_Subscript_Expression`
 #
 #       Version 3:
 #
@@ -35,7 +35,6 @@
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Subscript_V4                 import  create_Tree_Delete_Subscript
 from    Z.Tree.Subscript_V4                 import  create_Tree_Evaluate_Subscript
 from    Z.Tree.Subscript_V4                 import  create_Tree_Store_Subscript
@@ -48,6 +47,7 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__INDEX
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 
 
 #

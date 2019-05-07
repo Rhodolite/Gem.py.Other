@@ -218,6 +218,7 @@ class Convert_Zone(object):
 
         'create_Tree_Attribute',                    #   None | Function
         'create_Tree_List_Expression',              #   None | Function
+        'create_Tree_Subscript_Expression',         #   None | Function
         'create_Tree_Tuple_Expression',             #   None | Function
 
         'map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function',
@@ -642,29 +643,38 @@ def fill_convert_zone():
     #
     #   Target
     #
-    if target_version in ((2, 3, 4)):
-        from    Z.Tree.Convert_Target_V2    import  convert_full_list_of_targets
-        from    Z.Tree.Convert_Target_V2    import  convert_none_OR_target
-        from    Z.Tree.Convert_Target_V2    import  convert_target
+    if target_version == 2:
+        from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
+    elif target_version == 3:
+        from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
+    elif target_version == 4:
+        from    Z.Tree.Convert_Attribute_V4     import  convert_attribute_expression
     else:
         FATAL_unknown_version('target', target_version)
 
 
-    if target_version == 2:
-        from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
+    if target_version in ((2, 3)):
         from    Z.Tree.Convert_Many_V2          import  convert_list_expression
         from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression
-        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
-    elif target_version == 3:
-        from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
-        from    Z.Tree.Convert_Many_V2          import  convert_list_expression         #   "_V2" on purpose.
-        from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression        #   "_V2" on purpose.
-        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression    #   "_V2" on purpose.
     elif target_version == 4:
-        from    Z.Tree.Convert_Attribute_V4     import  convert_attribute_expression
         from    Z.Tree.Convert_Many_V4          import  convert_list_expression
         from    Z.Tree.Convert_Many_V4          import  convert_tuple_expression
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
+    if target_version in ((2, 3)):
+        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
+    elif target_version == 4:
         from    Z.Tree.Convert_Subscript_V4     import  convert_subscript_expression
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
+    if target_version in ((2, 3, 4)):
+        from    Z.Tree.Convert_Target_V2    import  convert_full_list_of_targets
+        from    Z.Tree.Convert_Target_V2    import  convert_none_OR_target
+        from    Z.Tree.Convert_Target_V2    import  convert_target
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -685,6 +695,14 @@ def fill_convert_zone():
     elif target_version == 4:
         create_Tree_List_Expression  = None
         create_Tree_Tuple_Expression = None
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
+    if target_version in ((2, 3)):
+        from    Z.Tree.Subscript_V1     import  create_Tree_Subscript_Expression        #   "_V1" on purpose.
+    elif target_version == 4:
+        create_Tree_Subscript_Expression = None
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -943,9 +961,10 @@ def fill_convert_zone():
     z.convert_none_OR_target       = convert_none_OR_target
     z.convert_target               = convert_target
 
-    z.create_Tree_Attribute        = create_Tree_Attribute
-    z.create_Tree_List_Expression  = create_Tree_List_Expression
-    z.create_Tree_Tuple_Expression = create_Tree_Tuple_Expression
+    z.create_Tree_Attribute            = create_Tree_Attribute
+    z.create_Tree_List_Expression      = create_Tree_List_Expression
+    z.create_Tree_Subscript_Expression = create_Tree_Subscript_Expression
+    z.create_Tree_Tuple_Expression     = create_Tree_Tuple_Expression
 
     z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = (
             map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function
