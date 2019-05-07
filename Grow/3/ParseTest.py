@@ -4,159 +4,50 @@
 
 
 #
-#   Z.Tree.Convert_Name_V4 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 4.
+#   Z.Tree.Index - Interface to tree classes that represent index clauses.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-
-
+#   Explanation:
 #
-#   Difference between Version 3 & Version 4
+#       In the statement:
 #
-#       Version 3:
+#           x = a[1] + a[:2] + a[3, 4]
 #
-#           Pass in a context to `z.create_Tree_Name`
+#       The following "index clauses" appear:
 #
-#       Version 4:
-#
-#           Do not pass in a context to create a `Tree_Name`, but instead create one of the following four classes:
-#
-#               Tree_Delete_Name
-#               Tree_Evaluate_Name
-#               Tree_Normal_Parameter
-#               Tree_Store_Name
+#           1       - A `Tree_Simple_Index`
+#           :2      - A `Tree_Slice_Index`
+#           3, 4    - A `Tree_Extended_Slice_Index`
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Name_V4                      import  create_Tree_Delete_Name
-from    Z.Tree.Name_V4                      import  create_Tree_Evaluate_Name
-from    Z.Tree.Name_V4                      import  create_Tree_Normal_Parameter
-from    Z.Tree.Name_V4                      import  create_Tree_Store_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+#
+#   interface Tree_Index_Clause - Interface to tree classes that represent index clauses.
+#       method
+#           dump_index_clause_tokens(f : Build_DumpToken)
+#
+#       debug
+#           is_tree_index_clause := true
+#
 
 
+#
+#   USAGE:
+#
+#       v.is_tree_index_clause              #   Test if `v` is a tree index clause.
+#
+#       v.dump_index_clause_tokens(f)       #   Dump the tokens representing the tree index clause to `f`.
+#
+#       assert fact_is_tree_index_clause(v) #   Assert that `v` is a tree index clause.
+#
+
+
+#
+#   fact_is_tree_index_clause(v) - Assert that `v` is a tree index clause.
+#
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
+    def fact_is_tree_index_clause(v):
+        assert v.is_tree_index_clause
 
-
-#
-#   convert__delete_load_OR_store_context__TO__create_name_function
-#
-#       Convert a "delete", "load", or "store" context to a create name function.
-#
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function = {
-        Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Name,
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Name,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Name,
-    }
-
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function)
-
-
-def convert__delete_load_OR_store_context__TO__create_name_function(v):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function[type(v)]
-
-
-#
-#   convert_name_expression(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to one of the following three classes:
-#
-#               Tree_Delete_Name
-#               Tree_Evaluate_Name
-#               Tree_Store_Name
-#
-#       The context (`.ctx` member) must be an instance of one of the following types:
-#
-#           Native_AbstractSyntaxTree_Delete_Context
-#           Native_AbstractSyntaxTree_Load_Context
-#           Native_AbstractSyntaxTree_Store_Context
-#
-#       The context (`.ctx` member) MAY NOT be an instance of `Native_AbstractSyntaxTree_Parameter_Context`.
-#
-#       To handle a context which is an instance of `Native_AbstractSyntaxTree_Parameter_Context`, call
-#       `convert_name_parameter` instead.
-#
-assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
-
-
-def convert_name_expression(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_full_native_string                                              (v.id)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
-
-    create_name = convert__delete_load_OR_store_context__TO__create_name_function(v.ctx)
-
-    return create_name(
-               v.lineno,
-               v.col_offset,
-
-               conjure_parser_symbol(v.id),
-           )
-
-
-#
-#   convert_name_parameter(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Normal_Parameter`
-#
-#       The context (`.ctx` member) MUST BE a `Native_AbstractSyntaxTree_Parameter_Context`.
-#
-#       To handle other contexts, please see `convert_name_expression`.
-#
-assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
-
-
-def convert_name_parameter(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_full_native_string                              (v.id)
-    assert fact_is__native__abstract_syntax_tree__parameter_context(v.ctx)
-
-    return create_Tree_Normal_Parameter(
-               v.lineno,
-               v.col_offset,
-
-               conjure_parser_symbol(v.id),
-           )
-
-
-#
-#   convert_some_list_of_name_parameters(z, v)
-#
-#       Convert a `SomeNativeList of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
-#       `SomeNativeList of SyntaxTree_Name`.
-#
-#       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
-#       of type `Native_AbstractSyntaxTree_Parameter`.
-#
-convert_some_list_of_name_parameters = (
-        produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_name_parameter)
-    )
+        return True

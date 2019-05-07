@@ -29,9 +29,6 @@
 
 
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Attribute_V4                 import  create_Tree_Delete_Attribute
-from    Z.Tree.Attribute_V4                 import  create_Tree_Evaluate_Attribute
-from    Z.Tree.Attribute_V4                 import  create_Tree_Store_Attribute
 
 
 if __debug__:

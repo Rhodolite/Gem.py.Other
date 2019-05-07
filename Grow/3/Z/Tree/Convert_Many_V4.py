@@ -57,39 +57,16 @@ if __debug__:
 
 
 #
-#   convert__load_OR_store_context__TO__create_{list,tuple}_function(v)
+#   convert__load_OR_store_context__TO__create_{list,tuple}_function(z, v)
 #
 #       Convert a "load" or "store" context to a create list or create tuple function.
 #
-map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function = {
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_List,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_List,
-    }
+def convert__load_OR_store_context__TO__create_list_function(z, v):
+    return z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function[type(v)]
 
 
-map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function = {
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Tuple,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Tuple,
-    }
-
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function)
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function)
-
-
-def convert__load_OR_store_context__TO__create_list_function(v):
-    return map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_list_function[type(v)]
-
-
-def convert__load_OR_store_context__TO__create_tuple_function(v):
-    return map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function[type(v)]
+def convert__load_OR_store_context__TO__create_tuple_function(z, v):
+    return z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function[type(v)]
 
 
 
@@ -128,7 +105,7 @@ def convert_list_expression(z, v):
 
     assert fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    create_list = convert__load_OR_store_context__TO__create_list_function(v.ctx)
+    create_list = convert__load_OR_store_context__TO__create_list_function(z, v.ctx)
 
     return convert_many_expression(z, v, create_list)
 
@@ -148,6 +125,6 @@ def convert_tuple_expression(z, v):
 
     assert fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    create_tuple = convert__load_OR_store_context__TO__create_tuple_function(v.ctx)
+    create_tuple = convert__load_OR_store_context__TO__create_tuple_function(z, v.ctx)
 
     return convert_many_expression(z, v, create_tuple)
