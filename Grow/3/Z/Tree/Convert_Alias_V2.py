@@ -23,16 +23,15 @@
 #
 
 
-from    Z.Tree.Alias_V1                     import  create_Tree_Alias_Clause
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
-    from    Capital.Fact                    import  fact_is_full_native_list
-    from    Capital.Fact                    import  fact_is_full_native_string
-    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
-    from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
+    from    Capital.Fact                        import  fact_is_full_native_list
+    from    Capital.Fact                        import  fact_is_full_native_string
+    from    Capital.Fact                        import  fact_is__native_none__OR__full_native_string
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
 
 
 #
@@ -44,7 +43,7 @@ if __debug__:
 #
 #           In version 2, `z.create_Tree_Module_Alias` maps to `Z.Tree.Alias_1.create_Tree_Alias_Clause`.
 #
-#           Hence, this routine is identical to `convert_symbol_alias`.
+#           Hence, in version 2, this routine is identical to `convert_symbol_alias`.
 #
 assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
@@ -68,7 +67,7 @@ def convert_module_alias(z, v):
 #
 #           In version 2, `z.create_Tree_Symbol_Alias` maps to `Z.Tree.Alias_1.create_Tree_Alias_Clause`.
 #
-#           Hence, this routine is identical to `convert_module_alias`.
+#           Hence, in version 2, this routine is identical to `convert_module_alias`.
 #
 assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))

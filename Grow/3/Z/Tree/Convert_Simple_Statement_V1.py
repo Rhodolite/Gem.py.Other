@@ -11,8 +11,8 @@
 
 
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Alias                import  convert_full_list_of_module_aliases
-from    Z.Tree.Convert_Alias                import  convert_full_list_of_symbol_aliases
+from    Z.Tree.Convert_Alias_V1             import  convert_full_list_of_module_aliases
+from    Z.Tree.Convert_Alias_V1             import  convert_full_list_of_symbol_aliases
 from    Z.Tree.Convert_Expression_V1        import  convert_expression
 from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
 from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_expression

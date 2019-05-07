@@ -1,74 +1,79 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-if __name__ == '__main__':
-    #
-    #   If called as the main program, then we are being imported as the module `__main__`.
-    #
-    #   If so:
-    #
-    #       1A. *REIMPORT* ourselves under the name `Z`
-    #       1B. import `Z.Main`
-    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
-    #       2.  Call `Z_main`
-    #
-    #   This means:
-    #
-    #       *   This module is imported   under the name `__main__`;
-    #       *   This module is reimported under the name `Z`.
-    #
-    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
-    #   and does something different in each case ... so there are in effect two `Z` modules:
-    #
-    #       *   the one named `__main__` [this code under the `if`   clause], and
-    #       *   the one named `Z`        [the  code under the `else` clause below].
-    #
-    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
 
 
-    Z_main()
-else:
-    from    os.path                     import  dirname     as  python_path_directory_name
-    from    os.path                     import  join        as  python_path_join
+#
+#   Z.Tree.Comprehension_V1 - Implementation of `Tree_Comprehension`, Version 1.
+#
+#       Copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
+#   See "Z/Tree/Comprehension.py" for an explanation of comprehensions.
+#
 
 
-    #
-    #   Load Z submodules from "Z/" directory.
-    #
-    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
+from    Capital.Core                    import  arrange
+from    Capital.Core                    import  creator
+from    Capital.Core                    import  trace
+from    Z.Tree.Comprehension            import  TRAIT_Tree_Comprehension_Clause
 
 
-    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
-    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
-    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
-    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
-    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
-    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
+if __debug__:
+    from    Capital.Fact                import  fact_is_some_native_list
+    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Target               import  fact_is_tree_store_target
+
+
+#
+#   Tree: Comprehension Clause
+#
+class Tree_Comprehension_Clause_Implementation(
+        TRAIT_Tree_Comprehension_Clause,
+):
+    __slots__ = ((
+        'target',                       #   Tree_Expression
+        'sequence',                     #   Tree_Expression
+        'if_tests',                     #   SomeNativeList of Tree_Expression
+    ))
 
 
     #
-    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
+    #   Private
     #
-    #   This implements the following commands:
-    #
-    #       Z.copyright         - Add a copyright.
-    #       Z.output            - Output a line of text.
-    #
-    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
-    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
-    #
-    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
-    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
-    #
-    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
+    def __init__(self, target, sequence, if_tests):
+        self.target   = target
+        self.sequence = sequence
+        self.if_tests = if_tests
 
 
     #
-    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
+    #   Interface Tree_Comprehension_Clause
     #
-    #       We run the code generator:
+    def dump_comprehension_clause_tokens(self, f):
+        f.write('<comprehension-clause for ')
+        self.target.dump_store_target_tokens(f)
+        f.write(' in ')
+        self.sequence.dump_evaluate_tokens(f)
+
+        for v in self.if_tests:
+            f.write(' if ')
+            v.dump_evaluate_tokens(f)
+
+        f.greater_than_sign()
+
+
     #
-    #       1.  Transform Crystal to Python.
-    #       2.  Output Python (to "Vision.py").
+    #   Public
     #
-    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()
+    def __repr__(self):
+        return arrange('<Tree_Comprehension_Clause_Implementation {!r}.{} {}>',
+                       self.target, self.sequence, self.if_tests)
+
+
+@creator
+def create_Tree_Comprehension_Clause(target, sequence, if_tests):
+    assert fact_is_tree_store_target(target)
+    assert fact_is_tree_expression  (sequence)
+    assert fact_is_some_native_list(if_tests)
+
+    return Tree_Comprehension_Clause_Implementation(target, sequence, if_tests)

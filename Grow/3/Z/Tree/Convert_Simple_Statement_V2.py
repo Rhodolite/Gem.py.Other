@@ -24,8 +24,6 @@
 
 
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Alias                import  convert_full_list_of_module_aliases
-from    Z.Tree.Convert_Alias                import  convert_full_list_of_symbol_aliases
 from    Z.Tree.Convert_Operator             import  convert_modify_operator
 
 
@@ -288,7 +286,7 @@ def convert_from_import_statement(z, v):
                v.col_offset,
 
                v.module,
-               convert_full_list_of_symbol_aliases(z, v.names),
+               z.convert_full_list_of_symbol_aliases(z, v.names),
                v.level,
            )
 
@@ -315,7 +313,7 @@ def convert_import_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_full_list_of_module_aliases(z, v.names),
+               z.convert_full_list_of_module_aliases(z, v.names),
            )
 
 

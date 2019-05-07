@@ -23,7 +23,6 @@
 #
 
 
-from    Z.Tree.Attribute_V1                 import  create_Tree_Attribute
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 
 
@@ -55,7 +54,7 @@ def convert_attribute_expression(z, v):
     assert fact_is_full_native_string                                              (v.attr)
     assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    return create_Tree_Attribute(
+    return z.create_Tree_Attribute(
                v.lineno,
                v.col_offset,
 

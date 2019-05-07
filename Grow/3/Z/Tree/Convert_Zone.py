@@ -97,17 +97,17 @@ class Convert_Zone(object):
         #
         #   Context
         #
-        'convert_delete_load_OR_store_context',     #   Function
-        'convert_parameter_context',                #   Function
+        'convert_delete_load_OR_store_context',     #   None | Function
+        'convert_parameter_context',                #   None | Function
 
-        'tree_delete_context',                      #   Tree_Context
-        'tree_parameter_context',                   #   Tree_Context
+        'tree_delete_context',                      #   None | Tree_Context
+        'tree_parameter_context',                   #   None | Tree_Context
 
         'map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context',
-                                                    #   Map { Native_AbstractSyntaxTree_* : Tree_Context }
+                                                    #   None | Map { Native_AbstractSyntaxTree_* : Tree_Context }
 
         'map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context',
-                                                    #   Map { Native_AbstractSyntaxTree_* : Tree_Context }
+                                                    #   None | Map { Native_AbstractSyntaxTree_* : Tree_Context }
 
 
         #
@@ -184,7 +184,7 @@ class Convert_Zone(object):
         #
         #   Suite
         #
-        'create_Tree_Suite',                        #   Function
+        'create_Tree_Suite',                        #   None | Function
 
 
         #
@@ -193,6 +193,8 @@ class Convert_Zone(object):
         'convert_full_list_of_targets',             #   Function
         'convert_none_OR_target',                   #   Function
         'convert_target',                           #   Function
+
+        'create_Tree_Attribute',                    #   None | Function
 
         'map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function',
                                                     #    Map { Native_AbstractSyntaxTree_* : Function }
@@ -586,14 +588,23 @@ def fill_convert_zone():
         from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
     elif target_version == 3:
         from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
-        from    Z.Tree.Convert_Many_V2          import  convert_list_expression
-        from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression
-        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
+        from    Z.Tree.Convert_Many_V2          import  convert_list_expression         #   "_V2" on purpose.
+        from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression        #   "_V2" on purpose.
+        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression    #   "_V2" on purpose.
     elif target_version == 4:
         from    Z.Tree.Convert_Attribute_V4     import  convert_attribute_expression
         from    Z.Tree.Convert_Many_V4          import  convert_list_expression
         from    Z.Tree.Convert_Many_V4          import  convert_tuple_expression
         from    Z.Tree.Convert_Subscript_V4     import  convert_subscript_expression
+    else:
+        FATAL_unknown_version('target', target_version)
+
+    if target_version == 2:
+        from    Z.Tree.Attribute_V1             import  create_Tree_Attribute           #   "_V1" on purpose.
+    elif target_version == 3:
+        from    Z.Tree.Attribute_V3             import  create_Tree_Attribute
+    elif target_version == 4:
+        create_Tree_Attribute = None
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -830,6 +841,8 @@ def fill_convert_zone():
     z.convert_full_list_of_targets = convert_full_list_of_targets
     z.convert_none_OR_target       = convert_none_OR_target
     z.convert_target               = convert_target
+
+    z.create_Tree_Attribute = create_Tree_Attribute
 
     z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = (
             map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function

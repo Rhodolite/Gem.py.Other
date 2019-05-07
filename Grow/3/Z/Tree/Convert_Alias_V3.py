@@ -23,9 +23,9 @@
 #
 #       Version 3:
 #
-#           1)  `z.create_Tree_Module_Alias`        maps to `Z.Tree.Alias_3.create_Tree_Module_Alias`.
+#           1)  `z.create_Tree_Module_Alias` maps to `Z.Tree.Alias_3.create_Tree_Module_Alias`.
 #
-#           2)  `z.create_Tree_Symbol_Alias` *ALSO* maps to `Z.Tree.Alias_3.create_Tree_Symbol_Alias`.
+#           2)  `z.create_Tree_Symbol_Alias` maps to `Z.Tree.Alias_3.create_Tree_Symbol_Alias`.
 #
 #           Hence for module alias it creates a `Tree_Module_Alias`,
 #           while for symbol alias it creates a `Tree_Symbol_Alias`.

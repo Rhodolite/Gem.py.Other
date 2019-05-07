@@ -15,11 +15,12 @@
 #
 #       Version 3:
 #
-#           Pass in a context to `create_Tree_Attribute`
+#           Pass in a context to `z.create_Tree_Attribute`
 #
 #       Version 4:
 #
-#           Do not pass in a context to create `Tree_Attribute`, but instead create one of the following three classes:
+#           Do not pass in a context to create `z.create_Tree_Attribute`, but instead create one of the following three
+#           classes:
 #
 #               Tree_Delete_Attribute
 #               Tree_Evaluate_Attribute
