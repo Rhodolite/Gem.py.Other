@@ -9,21 +9,24 @@
 
 
 version = 1
-version = 2
+#version = 2
 #version = 9
 #version = 15
 
+#version = 11
+#version = 12
 
-alias_version         = 1
-argument_version      = 1
+
+alias_version         = 1       #   1..6
+argument_version      = 1       #   1..3
 comprehension_version = '1'
-context_version       = 1
+context_version       = 1       #   0..3
 except_version        = '1'
-expression_version    = 1
-index_version         = 1
-module_name_version   = 0
-name_version          = 1
-operator_version      = 1
+expression_version    = 1       #   1..2
+index_version         = 1       #   1..2
+module_name_version   = 0       #   0, 2..3 (no version 1)
+name_version          = 1       #   1..4
+operator_version      = 1       #   1, 3
 parameter_version     = '1'
 statement_version     = 1
 symbol_version        = 0
@@ -54,7 +57,7 @@ if version >= 3:
     context_version = 3
 
 if version >= 4:
-    operator_version = 2
+    operator_version = 3
 
 
 #
@@ -94,7 +97,7 @@ if version >= 9:
 #
 if version >= 10:
     alias_version       = 4     #   `Tree_Module_Alias_Implementation.name` is a `Parser_Module_Name`.
-    module_name_version = 1
+    module_name_version = 2
     symbol_version      = 2     #   Symbol version 2 implements `Parser_Module_Name`
 
 
@@ -111,7 +114,7 @@ if version >= 11:
 
 if version >= 12:
     alias_version       = 6     #   Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
-    module_name_version = 2     #   `Parser_Module_Name_With_Dot` implements `Tree_Module_Alias`.
+    module_name_version = 3     #   `Parser_Module_Name_With_Dot` implements `Tree_Module_Alias`.
     symbol_version      = 4     #   Symbol version 4 implements `Tree_{Module,Symbol}_Alias`.
 
 

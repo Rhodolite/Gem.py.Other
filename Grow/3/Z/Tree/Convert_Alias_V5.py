@@ -32,7 +32,6 @@
 #
 
 
-from    Z.Parser.Conjure_Module_Name        import  conjure_parser_module_name
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Parser.Symbol                     import  conjure_parser_symbol_0
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
@@ -62,7 +61,7 @@ def convert_module_alias(z, v):
     assert fact_is__native_none__OR__full_native_string(v.asname)
 
     return z.create_Tree_Module_Alias(
-               conjure_parser_module_name(v.name),
+               z.conjure_parser_module_name(z, v.name),
                conjure_parser_symbol_0   (v.asname),
            )
 

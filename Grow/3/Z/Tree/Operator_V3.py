@@ -4,20 +4,24 @@
 
 
 #
-#   Z.Tree.Operator - Implementation of `Tree_Operator`, Version 2.
+#   Z.Tree.Operator_V3 - Implementation of `Tree_Operator`, Version 3.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1 & Version 2
+#   Difference between Version 1, Version 2, and Version 3.
 #
 #       Version 1:
 #
 #           One class per operator (so as to do a 1-1 emulation of `_ast`).
 #
 #       Version 2:
+#
+#           Does not exist.
+#
+#       Version 3:
 #
 #           A single enumeration named `Tree_Operator_Enumeration`.
 #

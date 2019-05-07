@@ -13,11 +13,11 @@
 #
 #       Version 1:
 #
-#           `Parser_Module_Name_With_Dot` does not implement `Tree_Module_Alias`.
+#           Does not exist.
 #
 #       Version 2:
 #
-#           `Parser_Module_Name_With_Dot` implements `Tree_Module_Alias`.
+#           Exists
 #
 
 
@@ -27,7 +27,6 @@ from    Capital.NativeString                import  NativeString
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
-from    Z.Tree.Alias                        import  TRAIT_Tree_Module_Alias
 
 
 if __debug__:
@@ -41,7 +40,6 @@ class Parser_Module_Name_With_Dot(
         NativeString,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
-        TRAIT_Tree_Module_Alias,
 ):
     __slots__ = (())
 
@@ -71,13 +69,6 @@ class Parser_Module_Name_With_Dot(
 
     def dump_module_name_token(self, f):
         f.arrange('<module-name-with-dot {}>', self)
-
-
-    #
-    #   Interface Tree_Module_Alias
-    #
-    def dump_module_alias_tokens(self, f):
-        f.arrange('<module-alias module-name-with-dot {}>', self)
 
 
     #

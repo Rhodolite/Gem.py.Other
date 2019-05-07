@@ -9,8 +9,12 @@
 
 
 from    Capital.NativeString            import  native_string__lookup_index__OR__MINUS_1
-from    Z.Parser.Module_Name            import  conjure_parser_module_name_with_dot
 from    Z.Parser.Symbol                 import  conjure_parser_symbol
+
+
+if __debug__:
+    from    Capital.Fact                import  fact_is_full_native_string
+    from    Z.Tree.Convert_Zone         import  fact_is_convert_zone
 
 
 #
@@ -27,10 +31,13 @@ from    Z.Parser.Symbol                 import  conjure_parser_symbol
 #           Both `Parser_Module_Name_With_Dot` and `Parser_Symbol` implement `Parser_Module_Name`, hence this routine
 #           is conjuring a parser module name.
 #
-def conjure_parser_module_name(s):
+def conjure_parser_module_name(z, s):
+    assert fact_is_convert_zone      (z)
+    assert fact_is_full_native_string(s)
+
     dot_index = native_string__lookup_index__OR__MINUS_1(s, '.')
 
     if dot_index == -1:
         return conjure_parser_symbol(s)
 
-    return conjure_parser_module_name_with_dot(s)
+    return z.conjure_parser_module_name_with_dot(s)

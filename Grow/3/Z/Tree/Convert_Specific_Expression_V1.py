@@ -16,10 +16,10 @@ from    Z.Tree.Convert_Expression_V1        import  convert_expression
 from    Z.Tree.Convert_Expression_V1        import  convert_full_list_of_expressions
 from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_expression
 from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
-from    Z.Tree.Convert_Operator             import  convert_binary_operator
-from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators
-from    Z.Tree.Convert_Operator             import  convert_logical_operator
-from    Z.Tree.Convert_Operator             import  convert_unary_operator
+from    Z.Tree.Convert_Operator_V1          import  convert_binary_operator
+from    Z.Tree.Convert_Operator_V1          import  convert_full_list_of_compare_operators
+from    Z.Tree.Convert_Operator_V1          import  convert_logical_operator
+from    Z.Tree.Convert_Operator_V1          import  convert_unary_operator
 from    Z.Tree.Convert_Parameter_V1         import  convert_parameters_all
 from    Z.Tree.Expression_V1                import  create_Tree_Backquote_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Binary_Expression

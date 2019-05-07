@@ -23,9 +23,6 @@
 #
 
 
-from    Z.Tree.Convert_Operator             import  convert_modify_operator
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Fact                        import  fact_is_full_native_string
@@ -339,9 +336,9 @@ def convert_modify_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_target       (z, v.target),
-               convert_modify_operator(v.op),
-               z.convert_expression   (z, v.value),
+               z.convert_target         (z, v.target),
+               z.convert_modify_operator(z, v.op),
+               z.convert_expression     (z, v.value),
            )
 
 

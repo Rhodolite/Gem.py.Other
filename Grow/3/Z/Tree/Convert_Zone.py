@@ -14,22 +14,37 @@ from    Capital.Core                        import  creator
 from    Capital.Core                        import  export
 from    Capital.Core                        import  FATAL
 from    Z.Parser.Global                     import  parser_globals
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Add_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Backquote_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_And_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_Exclusive_Or_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Break_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Call_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Different_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Equal_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Greater_Than_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Greater_Than_Or_Equal_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Identity_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Less_Than_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Less_Than_Or_Equal_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Compare_Not_Equal_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Contains_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Continue_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Divide_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ellipsis_Index
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Excludes_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Extended_Slice_Index
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Floor_Divide_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_For_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
@@ -38,20 +53,31 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Gl
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_If_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_If_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Invert_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Lambda_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Left_Shift_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Logical_And_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Logical_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Logical_Or_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modulus_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Multiply_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Negative_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Not_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Number
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Positive_Operator
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Power_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Raise_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Return_Statement
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Right_Shift_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
@@ -59,6 +85,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Sl
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subtract_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Except_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Try_Finally_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Tuple_Expression
@@ -167,7 +194,14 @@ class Convert_Zone(object):
         #
         #   Module
         #
-        'create_Tree_Module',
+        'create_Tree_Module',                       #   Function
+
+
+        #
+        #   Module_Name
+        #
+        'conjure_parser_module_name',               #   Function
+        'conjure_parser_module_name_with_dot',      #   Function
 
 
         #
@@ -176,6 +210,31 @@ class Convert_Zone(object):
         'convert_some_list_of_name_parameters',     #   Function
 
         'create_Tree_Name',                         #   None | Function
+
+
+        #
+        #   Operator
+        #
+        'convert_binary_operator',                      #   Function
+        'convert_full_list_of_compare_operators',       #   Function
+        'convert_logical_operator',                     #   Function
+        'convert_modify_operator',                      #   Function
+        'convert_unary_operator',                       #   Function
+
+        'map__Native_AbstractSyntaxTree_OPERATOR__to__BINARY__Tree_Operator',
+                                                        #    Map { Native_AbstractSyntaxTree_* : Tree_Opertor }
+
+        'map__Native_AbstractSyntaxTree_OPERATOR__to__COMPARE__Tree_Operator',
+                                                        #    Map { Native_AbstractSyntaxTree_* : Tree_Opertor }
+
+        'map__Native_AbstractSyntaxTree_OPERATOR__to__LOGICAL__Tree_Operator',
+                                                        #    Map { Native_AbstractSyntaxTree_* : Tree_Opertor }
+
+        'map__Native_AbstractSyntaxTree_OPERATOR__to__MODIFY__Tree_Operator',
+                                                        #    Map { Native_AbstractSyntaxTree_* : Tree_Opertor }
+
+        'map__Native_AbstractSyntaxTree_OPERATOR__to__UNARY__Tree_Operator',
+                                                        #    Map { Native_AbstractSyntaxTree_* : Tree_Opertor }
 
 
         #
@@ -487,6 +546,19 @@ def fill_convert_zone():
 
 
     #
+    #   Module_Name
+    #
+    from    Z.Parser.Conjure_Module_Name    import  conjure_parser_module_name
+
+    if module_name_version == 2:
+        from    Z.Parser.Module_Name_V2     import  conjure_parser_module_name_with_dot
+    elif module_name_version == 3:
+        from    Z.Parser.Module_Name_V3     import  conjure_parser_module_name_with_dot
+    else:
+        FATAL_unknown_version('module_name', module_name_version)
+
+
+    #
     #   Name
     #
     if name_version == 2:
@@ -510,6 +582,80 @@ def fill_convert_zone():
         create_Tree_Name = None
     else:
         FATAL_unknown_version('name', name_version)
+
+
+    #
+    #   Operator (version 1 or 3.  Version 2 does not exist).
+    #
+    from        Z.Tree.Convert_Operator_V2  import  convert_binary_operator
+    from        Z.Tree.Convert_Operator_V2  import  convert_full_list_of_compare_operators
+    from        Z.Tree.Convert_Operator_V2  import  convert_logical_operator
+    from        Z.Tree.Convert_Operator_V2  import  convert_modify_operator
+    from        Z.Tree.Convert_Operator_V2  import  convert_unary_operator
+
+
+    if operator_version == 1:
+        from    Z.Tree.Operator_V1          import  tree_add_operator
+        from    Z.Tree.Operator_V1          import  tree_binary_and_operator
+        from    Z.Tree.Operator_V1          import  tree_binary_exclusive_or_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_different_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_equal_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_greater_than_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_greater_than_or_equal_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_identity_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_less_than_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_less_than_or_equal_operator
+        from    Z.Tree.Operator_V1          import  tree_compare_not_equal_operator
+        from    Z.Tree.Operator_V1          import  tree_contains_operator
+        from    Z.Tree.Operator_V1          import  tree_divide_operator
+        from    Z.Tree.Operator_V1          import  tree_excludes_operator
+        from    Z.Tree.Operator_V1          import  tree_floor_divide_operator
+        from    Z.Tree.Operator_V1          import  tree_invert_operator
+        from    Z.Tree.Operator_V1          import  tree_left_shift_operator
+        from    Z.Tree.Operator_V1          import  tree_logical_and_operator
+        from    Z.Tree.Operator_V1          import  tree_logical_or_operator
+        from    Z.Tree.Operator_V1          import  tree_modulus_operator
+        from    Z.Tree.Operator_V1          import  tree_multiply_operator
+        from    Z.Tree.Operator_V1          import  tree_negative_operator
+        from    Z.Tree.Operator_V1          import  tree_not_operator
+        from    Z.Tree.Operator_V1          import  tree_positive_operator
+        from    Z.Tree.Operator_V1          import  tree_power_operator
+        from    Z.Tree.Operator_V1          import  tree_right_shift_operator
+        from    Z.Tree.Operator_V1          import  tree_subtract_operator
+    elif operator_version == 3:
+        from    Z.Tree.Operator_V3          import  Tree_Operator_Enumeration   as  TOE
+
+        tree_add_operator                           = TOE.tree_add_operator
+        tree_binary_and_operator                    = TOE.tree_binary_and_operator
+        tree_binary_exclusive_or_operator           = TOE.tree_binary_exclusive_or_operator
+        tree_compare_different_operator             = TOE.tree_compare_different_operator
+        tree_compare_equal_operator                 = TOE.tree_compare_equal_operator
+        tree_compare_greater_than_operator          = TOE.tree_compare_greater_than_operator
+        tree_compare_greater_than_or_equal_operator = TOE.tree_compare_greater_than_or_equal_operator
+        tree_compare_identity_operator              = TOE.tree_compare_identity_operator
+        tree_compare_less_than_operator             = TOE.tree_compare_less_than_operator
+        tree_compare_less_than_or_equal_operator    = TOE.tree_compare_less_than_or_equal_operator
+        tree_compare_not_equal_operator             = TOE.tree_compare_not_equal_operator
+        tree_contains_operator                      = TOE.tree_contains_operator
+        tree_divide_operator                        = TOE.tree_divide_operator
+        tree_excludes_operator                      = TOE.tree_excludes_operator
+        tree_floor_divide_operator                  = TOE.tree_floor_divide_operator
+        tree_invert_operator                        = TOE.tree_invert_operator
+        tree_left_shift_operator                    = TOE.tree_left_shift_operator
+        tree_logical_and_operator                   = TOE.tree_logical_and_operator
+        tree_logical_or_operator                    = TOE.tree_logical_or_operator
+        tree_modulus_operator                       = TOE.tree_modulus_operator
+        tree_multiply_operator                      = TOE.tree_multiply_operator
+        tree_negative_operator                      = TOE.tree_negative_operator
+        tree_not_operator                           = TOE.tree_not_operator
+        tree_positive_operator                      = TOE.tree_positive_operator
+        tree_power_operator                         = TOE.tree_power_operator
+        tree_right_shift_operator                   = TOE.tree_right_shift_operator
+        tree_subtract_operator                      = TOE.tree_subtract_operator
+
+        del TOE
+    else:
+        FATAL_unknown_version('operator', operator_version)
 
 
     #
@@ -910,6 +1056,89 @@ def fill_convert_zone():
 
 
     #
+    #   (Used by operator)
+    #
+    #   1)  map__Native_AbstractSyntaxTree_OPERATOR__to__BINARY__Tree_Operator
+    #               : Map { Native_AbstractSyntaxTree_* : Tree_Operator }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) that represents a binary operator to a
+    #           `Tree_Operator`.
+    #
+    #   2)  map__Native_AbstractSyntaxTree_OPERATOR__to__COMPARE__Tree_Operator
+    #               : Map { Native_AbstractSyntaxTree_* : Tree_Operator }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) that represents a compare operator to a
+    #           `Tree_Operator`.
+    #
+    #   3)  map__Native_AbstractSyntaxTree_OPERATOR__to__LOGICAL__Tree_Operator
+    #               : Map { Native_AbstractSyntaxTree_* : Tree_Operator }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) that represents a logical operator to a
+    #           `Tree_Operator`.
+    #
+    #   4)  map__Native_AbstractSyntaxTree_OPERATOR__to__MODIFY__Tree_Operator
+    #               : Map { Native_AbstractSyntaxTree_* : Tree_Operator }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) that represents a modify operator to a
+    #           `Tree_Operator`.
+    #
+    #           A "modify" operator is an operator is an operator that can appear in a modify statement
+    #           (i.e.: `+=`, `*=`, etc.).
+    #
+    #   5)  map__Native_AbstractSyntaxTree_OPERATOR__to__UNARY__Tree_Operator
+    #               : Map { Native_AbstractSyntaxTree_* : Tree_Operator }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) that represents a unary operator to a
+    #           `Tree_Operator`.
+    #
+    map__Native_AbstractSyntaxTree_OPERATOR__to__BINARY__Tree_Operator = {
+            Native_AbstractSyntaxTree_Add_Operator                 : tree_add_operator,
+            Native_AbstractSyntaxTree_Binary_And_Operator          : tree_binary_and_operator,
+            Native_AbstractSyntaxTree_Binary_Exclusive_Or_Operator : tree_binary_exclusive_or_operator,
+            Native_AbstractSyntaxTree_Divide_Operator              : tree_divide_operator,
+            Native_AbstractSyntaxTree_Floor_Divide_Operator        : tree_floor_divide_operator,
+            Native_AbstractSyntaxTree_Left_Shift_Operator          : tree_left_shift_operator,
+            Native_AbstractSyntaxTree_Modulus_Operator             : tree_modulus_operator,
+            Native_AbstractSyntaxTree_Multiply_Operator            : tree_multiply_operator,
+            Native_AbstractSyntaxTree_Power_Operator               : tree_power_operator,
+            Native_AbstractSyntaxTree_Right_Shift_Operator         : tree_right_shift_operator,
+            Native_AbstractSyntaxTree_Subtract_Operator            : tree_subtract_operator,
+        }
+
+    map__Native_AbstractSyntaxTree_OPERATOR__to__COMPARE__Tree_Operator = {
+            Native_AbstractSyntaxTree_Compare_Different_Operator : tree_compare_different_operator,
+            Native_AbstractSyntaxTree_Compare_Equal_Operator     : tree_compare_equal_operator,
+
+            Native_AbstractSyntaxTree_Compare_Greater_Than_Or_Equal_Operator:
+                tree_compare_greater_than_or_equal_operator,
+
+            Native_AbstractSyntaxTree_Compare_Greater_Than_Operator       : tree_compare_greater_than_operator,
+            Native_AbstractSyntaxTree_Compare_Identity_Operator           : tree_compare_identity_operator,
+            Native_AbstractSyntaxTree_Compare_Less_Than_Or_Equal_Operator : tree_compare_less_than_or_equal_operator,
+            Native_AbstractSyntaxTree_Compare_Less_Than_Operator          : tree_compare_less_than_operator,
+            Native_AbstractSyntaxTree_Compare_Not_Equal_Operator          : tree_compare_not_equal_operator,
+            Native_AbstractSyntaxTree_Contains_Operator                   : tree_contains_operator,
+            Native_AbstractSyntaxTree_Excludes_Operator                   : tree_excludes_operator,
+        }
+
+    map__Native_AbstractSyntaxTree_OPERATOR__to__LOGICAL__Tree_Operator = {
+            Native_AbstractSyntaxTree_Logical_And_Operator : tree_logical_and_operator,
+            Native_AbstractSyntaxTree_Logical_Or_Operator  : tree_logical_or_operator,
+        }
+
+    map__Native_AbstractSyntaxTree_OPERATOR__to__MODIFY__Tree_Operator = {
+            Native_AbstractSyntaxTree_Subtract_Operator : tree_subtract_operator,
+        }
+
+    map__Native_AbstractSyntaxTree_OPERATOR__to__UNARY__Tree_Operator = {
+            Native_AbstractSyntaxTree_Invert_Operator   : tree_invert_operator,
+            Native_AbstractSyntaxTree_Negative_Operator : tree_negative_operator,
+            Native_AbstractSyntaxTree_Positive_Operator : tree_positive_operator,
+            Native_AbstractSyntaxTree_Not_Operator      : tree_not_operator,
+        }
+
+
+    #
     #   (Used by statement)
     #
     #   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function
@@ -1147,11 +1376,48 @@ def fill_convert_zone():
 
 
     #
+    #   Module_Name
+    #
+    z.conjure_parser_module_name          = conjure_parser_module_name
+    z.conjure_parser_module_name_with_dot = conjure_parser_module_name_with_dot
+
+
+    #
     #   Name
     #
     z.convert_some_list_of_name_parameters = convert_some_list_of_name_parameters
 
     z.create_Tree_Name = create_Tree_Name
+
+
+    #
+    #   Operator (version 1 or 3.  Version 2 does not exist).
+    #
+    z.convert_binary_operator                = convert_binary_operator
+    z.convert_full_list_of_compare_operators = convert_full_list_of_compare_operators
+    z.convert_logical_operator               = convert_logical_operator
+    z.convert_modify_operator                = convert_modify_operator
+    z.convert_unary_operator                 = convert_unary_operator
+
+    z.map__Native_AbstractSyntaxTree_OPERATOR__to__BINARY__Tree_Operator = (
+            map__Native_AbstractSyntaxTree_OPERATOR__to__BINARY__Tree_Operator
+        )
+
+    z.map__Native_AbstractSyntaxTree_OPERATOR__to__COMPARE__Tree_Operator = (
+            map__Native_AbstractSyntaxTree_OPERATOR__to__COMPARE__Tree_Operator
+        )
+
+    z.map__Native_AbstractSyntaxTree_OPERATOR__to__LOGICAL__Tree_Operator = (
+            map__Native_AbstractSyntaxTree_OPERATOR__to__LOGICAL__Tree_Operator
+        )
+
+    z.map__Native_AbstractSyntaxTree_OPERATOR__to__MODIFY__Tree_Operator = (
+            map__Native_AbstractSyntaxTree_OPERATOR__to__MODIFY__Tree_Operator
+        )
+
+    z.map__Native_AbstractSyntaxTree_OPERATOR__to__UNARY__Tree_Operator = (
+            map__Native_AbstractSyntaxTree_OPERATOR__to__UNARY__Tree_Operator
+        )
 
 
     #

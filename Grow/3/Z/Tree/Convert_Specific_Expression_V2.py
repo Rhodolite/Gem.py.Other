@@ -23,10 +23,7 @@
 #
 
 
-from    Z.Tree.Convert_Operator             import  convert_binary_operator
-from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators
-from    Z.Tree.Convert_Operator             import  convert_logical_operator
-from    Z.Tree.Convert_Operator             import  convert_unary_operator
+from    Z.Tree.Convert_Operator_V1          import  convert_binary_operator
 
 
 if __debug__:
@@ -196,9 +193,9 @@ def convert_compare_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                  (z, v.left),
-               convert_full_list_of_compare_operators(v.ops),
-               z.convert_full_list_of_expressions    (z, v.comparators),
+               z.convert_expression                    (z, v.left),
+               z.convert_full_list_of_compare_operators(z, v.ops),
+               z.convert_full_list_of_expressions      (z, v.comparators),
           )
 
 
@@ -334,7 +331,7 @@ def convert_logical_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_logical_operator          (v.op),
+               z.convert_logical_operator        (z, v.op),
                z.convert_full_list_of_expressions(z, v.values),
           )
 
@@ -517,8 +514,8 @@ def convert_unary_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_unary_operator(v.op),
-               z.convert_expression  (z, v.operand),
+               z.convert_unary_operator(z, v.op),
+               z.convert_expression    (z, v.operand),
           )
 
 
