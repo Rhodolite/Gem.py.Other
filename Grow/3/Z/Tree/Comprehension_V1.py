@@ -25,9 +25,9 @@ if __debug__:
 
 
 #
-#   Tree: Comprehension Clause
+#   Tree: Comprehension Clause [Leaf]
 #
-class Tree_Comprehension_Clause_Implementation(
+class Tree_Comprehension_Clause_Leaf(
         TRAIT_Tree_Comprehension_Clause,
 ):
     __slots__ = ((
@@ -66,7 +66,7 @@ class Tree_Comprehension_Clause_Implementation(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Comprehension_Clause_Implementation {!r}.{} {}>',
+        return arrange('<Tree_Comprehension_Clause_Leaf {!r}.{} {}>',
                        self.target, self.sequence, self.if_tests)
 
 
@@ -76,4 +76,4 @@ def create_Tree_Comprehension_Clause(target, sequence, if_tests):
     assert fact_is_tree_expression  (sequence)
     assert fact_is_some_native_list(if_tests)
 
-    return Tree_Comprehension_Clause_Implementation(target, sequence, if_tests)
+    return Tree_Comprehension_Clause_Leaf(target, sequence, if_tests)

@@ -59,3 +59,9 @@ for [name, operator] in [
     display_operator = repr(operator)
 
     print '{} = create_TOE({} {})'.format(variable.ljust(35), display_MetaName.ljust(38), display_operator.ljust(10))
+#
+#       "_Leaf" is used:
+#
+#           1)  Indicate this is a leaf node (nothing derived from it); but
+#
+#           2)  *Mostly* so as to have a different name than interface `Tree_Suite`.

@@ -37,9 +37,9 @@ if __debug__:
 
 
 #
-#   Tree: Suite
+#   Tree: Suite [Leaf]
 #
-class Tree_Suite_Implementation(
+class Tree_Suite_Leaf(
         tuple,
         TRAIT_Tree_Suite,
         TRAIT_Tree_Suite_0,
@@ -64,7 +64,7 @@ class Tree_Suite_Implementation(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Suite_Implementation {}>', ','.join(repr(v)    for v in self))
+        return arrange('<Tree_Suite_Leaf {}>', ','.join(repr(v)    for v in self))
 
 
 @creator
@@ -73,4 +73,4 @@ def create_Tree_Suite(sequence):
 
     assert len(sequence) >= 2
 
-    return Tree_Suite_Implementation(sequence)
+    return Tree_Suite_Leaf(sequence)

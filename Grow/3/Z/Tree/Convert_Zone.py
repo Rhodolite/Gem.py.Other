@@ -13,7 +13,7 @@
 from    Capital.Core                        import  creator
 from    Capital.Core                        import  export
 from    Capital.Core                        import  FATAL
-from    Z.Parser.Global                     import  parser_globals
+from    Capital.Core                        import  trace
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Add_Operator
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assert_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Assign_Statement
@@ -93,6 +93,12 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Un
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_While_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_With_Statement
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yield_Expression
+
+
+if __debug__:
+    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Fact                import  fact_is_positive_integer
+    from    Capital.Fact                import  fact_is_substantial_integer
 
 
 class Convert_Zone(object):
@@ -210,7 +216,10 @@ class Convert_Zone(object):
         'convert_some_list_of_name_parameters',     #   Function
 
         'create_Tree_Name',                         #   None | Function
+        'create_Tree_Normal_Parameter',             #   None | Function
 
+        'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function',
+                                                    #   None |  Map { Native_AbstractSyntaxTree_* : Function }
 
         #
         #   Operator
@@ -307,14 +316,10 @@ class Convert_Zone(object):
 
         'create_Tree_Attribute',                    #   None | Function
         'create_Tree_List_Expression',              #   None | Function
-        'create_Tree_Normal_Parameter',             #   None | Function
         'create_Tree_Subscript_Expression',         #   None | Function
         'create_Tree_Tuple_Expression',             #   None | Function
 
         'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function',
-                                                    #   None |  Map { Native_AbstractSyntaxTree_* : Function }
-
-        'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function',
                                                     #   None |  Map { Native_AbstractSyntaxTree_* : Function }
 
         'map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function',
@@ -351,21 +356,139 @@ def FATAL_unknown_version(name, version):
 
 
 @export
-def fill_convert_zone():
-    alias_version         = parser_globals.alias_version
-    argument_version      = parser_globals.argument_version
-    comprehension_version = parser_globals.comprehension_version
-    context_version       = parser_globals.context_version
-    except_version        = parser_globals.except_version
-    expression_version    = parser_globals.expression_version
-    index_version         = parser_globals.index_version
-    module_name_version   = parser_globals.module_name_version
-    name_version          = parser_globals.name_version
-    operator_version      = parser_globals.operator_version
-    parameter_version     = parser_globals.parameter_version
-    statement_version     = parser_globals.statement_version
-    symbol_version        = parser_globals.symbol_version
-    target_version        = parser_globals.target_version
+def fill_convert_zone(version):
+    assert fact_is_positive_integer(version)
+
+    assert 2 <= version <= 15
+
+
+    #
+    #   Version 1
+    #
+    alias_version         = 1       #   1..6
+    argument_version      = 1       #   1..3
+    comprehension_version = '1'
+    context_version       = 1       #   1..3, 0
+    except_version        = '1'
+    expression_version    = 1       #   1..2
+    index_version         = 1       #   1..2
+    module_name_version   = 0       #   0, 2..3 (no version 1)
+    name_version          = 1       #   1..4
+    operator_version      = 1       #   1, 3    (no version 2)
+    parameter_version     = '1'
+    statement_version     = 1
+    symbol_version        = 0       #   0, 2..5 (no version 1)
+    target_version        = 1
+
+
+    #
+    #   Version 2: Introduce `Convert_Zone`
+    #
+    if version >= 2:
+        alias_version      = 2
+        argument_version   = 2
+        context_version    = 2
+        expression_version = 2
+        index_version      = 2
+        name_version       = 2
+        statement_version  = 2
+        target_version     = 2
+
+
+    #
+    #   Version 3 & 4: Introduce Enumerations
+    #
+    #       3:  Enumeration for `Tree_Context`
+    #       4:  Enumeration for `Tree_Operator`
+    #
+    if version >= 3:
+        context_version = 3
+
+    if version >= 4:
+        operator_version = 3
+
+
+    #
+    #   Version 5: Split `Tree_Alias_Clause` into `Tree_{Module,Symbol}_Alias_Leaf`.
+    #
+    if version >= 5:
+        alias_version = 3
+
+
+    #
+    #   Version 6, 7, 8, & 9: Introduce `Parser_Symbol`
+    #
+    #       6:  `Tree_Keyword_Argument`            uses symbols.
+    #
+    #       7:  `Tree_Name`                        uses symbols.
+    #
+    #       8:  `Tree_Target`                      uses symbols (affects `Tree_Attribute`).
+    #
+    #       9:  `Tree_{Class,Function}_Definition` uses symbols.
+    #
+    if version >= 6:
+        argument_version = 3                #   `Tree_Keyword_Argument` uses symbols.
+        symbol_version   = 2                #   Enable `Parser_Symbol`
+
+    if version >= 7:
+        name_version = 3                    #   `Tree_Name` uses symbols.
+
+    if version >= 8:
+        target_version = 3                  #   `Tree_Target` uses symbols (affects `Tree_Attribute`).
+
+    if version >= 9:
+        statement_version = 3               #   `Tree_{Class,Function}_Definition` uses symbols.
+
+
+    #
+    #   Version 10: Introduce `Parser_Module_Name`
+    #
+    if version >= 10:
+        alias_version       = 4     #   `Tree_Module_Alias_Leaf.name` is a `Parser_Module_Name`.
+        module_name_version = 2
+        symbol_version      = 3     #   Symbol version 3 implements `Parser_Module_Name`
+
+
+    #
+    #   Version 11 & 12: Improve `Tree_{Module,Symbol}_Alias_Leaf`.
+    #
+    #       11: `Tree_{Module,Symbol}_Alias_Leaf` use `Parser_Symbol` and `Parser_Symbol_0`.
+    #
+    #       12: Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
+    #
+    if version >= 11:
+        alias_version  = 5          #   `Tree_{Module,Symbol}_Alias` use `Parser_Symbol` and `Parser_Symbol_0`.
+        symbol_version = 4          #   Symbol version 4 implements `Parser_Symbol_0`
+
+    if version >= 12:
+        alias_version       = 6     #   Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
+        module_name_version = 3     #   `Parser_Module_Name_With_Dot` implements `Tree_Module_Alias`.
+        symbol_version      = 5     #   Symbol version 5 implements `Tree_{Module,Symbol}_Alias`.
+
+
+    #
+    #   Version 13 & 14: No longer use contexts
+    #
+    #       13: `Tree_Name`    no longer uses contexts.
+    #
+    #       14: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+    #                          `Tree_Subscript`).
+    #
+    if version >= 13:
+        name_version = 4
+
+    if version >= 14:
+        context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
+        target_version  = 4
+
+
+    #
+    #   Version 15
+    #
+    #       Add `Tree_Suite` & `Tree_Suite_0`
+    #
+    if version >= 15:
+        statement_version = 4
 
 
     #
@@ -385,6 +508,40 @@ def fill_convert_zone():
         from    Z.Tree.Argument_V3          import  create_Tree_Keyword_Argument
     else:
         FATAL_unknown_version('argument', argument_version)
+
+
+    #
+    #   Verify verions
+    #
+    assert fact_is_positive_integer   (version)
+    assert fact_is_positive_integer   (alias_version)
+    assert fact_is_positive_integer   (argument_version)
+    assert fact_is_full_native_string (comprehension_version)
+    assert fact_is_substantial_integer(context_version)
+    assert fact_is_full_native_string (except_version)
+    assert fact_is_positive_integer   (index_version)
+    assert fact_is_substantial_integer(module_name_version)
+    assert fact_is_positive_integer   (name_version)
+    assert fact_is_positive_integer   (operator_version)
+    assert fact_is_full_native_string (parameter_version)
+    assert fact_is_positive_integer   (expression_version)
+    assert fact_is_positive_integer   (statement_version)
+    assert fact_is_substantial_integer(symbol_version)
+    assert fact_is_positive_integer   (target_version)
+
+
+    #
+    #   Trace versions
+    #
+    trace('Versions: version={} alias={} argument={} comprehension={!r} context={} except={!r} ...',
+          version, alias_version, argument_version, comprehension_version, context_version, except_version)
+
+    trace('... expression={} index={} module_name={} name={} statement={} operator={} parameter={!r}',
+          expression_version, index_version, module_name_version, name_version, statement_version, operator_version,
+          parameter_version)
+
+    trace('... symbol={} target={}',
+          symbol_version, target_version)
 
 
     #
@@ -600,6 +757,25 @@ def fill_convert_zone():
         create_Tree_Name = None
     else:
         FATAL_unknown_version('name', name_version)
+
+
+    if name_version in ((2, 3)):
+        #
+        #    No need to define these, leave them vacant (i.e.: uninitialized).
+        #
+       #create_Tree_Delete_Name   = VACANT
+       #create_Tree_Evaluate_Name = VACANT
+       #create_Tree_Store_Name    = VACANT
+
+        create_Tree_Normal_Parameter = None
+    elif name_version == 4:
+        from    Z.Tree.Name_V4          import  create_Tree_Delete_Name
+        from    Z.Tree.Name_V4          import  create_Tree_Evaluate_Name
+        from    Z.Tree.Name_V4          import  create_Tree_Normal_Parameter
+        from    Z.Tree.Name_V4          import  create_Tree_Store_Name
+    else:
+        FATAL_unknown_version('target', target_version)
+
 
 
     #
@@ -966,24 +1142,6 @@ def fill_convert_zone():
 
 
     if target_version in ((2, 3)):
-        #
-        #    No need to define these, leave them vacant (i.e.: uninitialized).
-        #
-       #create_Tree_Delete_Name   = VACANT
-       #create_Tree_Evaluate_Name = VACANT
-       #create_Tree_Store_Name    = VACANT
-
-        create_Tree_Normal_Parameter = None
-    elif target_version == 4:
-        from    Z.Tree.Name_V4          import  create_Tree_Delete_Name
-        from    Z.Tree.Name_V4          import  create_Tree_Evaluate_Name
-        from    Z.Tree.Name_V4          import  create_Tree_Normal_Parameter
-        from    Z.Tree.Name_V4          import  create_Tree_Store_Name
-    else:
-        FATAL_unknown_version('target', target_version)
-
-
-    if target_version in ((2, 3)):
         from    Z.Tree.Subscript_V1     import  create_Tree_Subscript_Expression    #   "_V1" on purpose.
     elif target_version == 4:
         create_Tree_Subscript_Expression = None
@@ -1103,6 +1261,30 @@ def fill_convert_zone():
             Native_AbstractSyntaxTree_Simple_Index         : convert_simple_index,
             Native_AbstractSyntaxTree_Slice_Index          : convert_slice_index,
         }
+
+
+    #
+    #   (Used by name, version 4)
+    #
+    #   map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function
+    #           : Map { Native_AbstractSyntaxTree_* : Function }
+    #
+    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_name" function.
+    #
+    if name_version in ((2, 3)):
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function      = None
+    elif name_version == 4:
+        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function = {
+                Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Name,
+                Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Name,
+                Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Name,
+            }
+
+        assert fact_no_context_fields(
+                map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function,
+            )
+    else:
+        FATAL_unknown_version('name', name_version)
 
 
     #
@@ -1231,29 +1413,23 @@ def fill_convert_zone():
     #
     #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_attribute" function.
     #
-    #   2)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function
-    #               : Map { Native_AbstractSyntaxTree_* : Function }
-    #
-    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_name" function.
-    #
-    #   3)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function
+    #   2)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function
     #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
     #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_subscript" function.
     #
-    #   4)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_list_function
+    #   3)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_list_function
     #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
     #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_list" function.
     #
-    #   5)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function
+    #   4)  map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_tuple_function
     #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
     #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "create_tuple" function.
     #
     if target_version in ((2, 3)):
         map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function = None
-        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function      = None
         map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = None
         map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function             = None
         map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function            = None
@@ -1264,12 +1440,6 @@ def fill_convert_zone():
                 Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Attribute,
             }
 
-
-        map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function = {
-                Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Name,
-                Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Name,
-                Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Name,
-            }
 
         map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = {
                 Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Subscript,
@@ -1289,14 +1459,13 @@ def fill_convert_zone():
 
         for mapping in ((
                map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function,
-               map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function,
                map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function,
                map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function,
                map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function,
         )):
             assert fact_no_context_fields(mapping)
     else:
-        FATAL_unknown_version('target', taget_version)
+        FATAL_unknown_version('target', target_version)
 
 
     #
@@ -1437,8 +1606,12 @@ def fill_convert_zone():
     #
     z.convert_some_list_of_name_parameters = convert_some_list_of_name_parameters
 
-    z.create_Tree_Name = create_Tree_Name
+    z.create_Tree_Name             = create_Tree_Name
+    z.create_Tree_Normal_Parameter = create_Tree_Normal_Parameter
 
+    z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function = (
+            map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function
+        )
 
     #
     #   Operator (version 1 or 3.  Version 2 does not exist).
@@ -1541,16 +1714,11 @@ def fill_convert_zone():
 
     z.create_Tree_Attribute            = create_Tree_Attribute
     z.create_Tree_List_Expression      = create_Tree_List_Expression
-    z.create_Tree_Normal_Parameter     = create_Tree_Normal_Parameter
     z.create_Tree_Subscript_Expression = create_Tree_Subscript_Expression
     z.create_Tree_Tuple_Expression     = create_Tree_Tuple_Expression
 
     z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function = (
             map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function
-        )
-
-    z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function = (
-            map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name__function
         )
 
     z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = (

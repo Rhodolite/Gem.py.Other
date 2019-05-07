@@ -171,7 +171,8 @@ def create_Tree_Simple_Index(value):
 #           a[1:2]          #   `step` is `None`
 #           a[1:2:]         #   `step` is a `Tree_Name` (with the name being `None`).
 #
-#       The second `:` can be detected by whether the value of `step` is `None`, or in fact a `Tree_Name` (with the name `None`).
+#       The second `:` can be detected by whether the value of `step` is `None`, or in fact a `Tree_Name` (with the
+#       name `None`).
 #
 class Tree_Slice_Index(object):
     #

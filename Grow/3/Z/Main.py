@@ -3,6 +3,12 @@
 #
 
 
+version = 13
+
+
+#
+#   Imports
+#
 from    sys                             import  argv            as  python_program_arguments
 
 from    Capital.Core                    import  arrange
@@ -14,7 +20,6 @@ from    Capital.Global                  import  capital_globals
 from    Capital.String                  import  conjure_string
 from    Capital.String                  import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
-from    Z.Parser.Global                 import  parser_globals
 from    Z.Path                          import  path_to_file_in_Z_directory
 
 
@@ -37,13 +42,13 @@ def parent_path__good_enough_for_now(path):
     return python_path_absolute(python_path_join(path, '..'))
 
 
-def command_parse():
+def command_parse(version):
     vision_path = path_to_file_in_Z_directory('ParseTest.py')
 
     with open(vision_path) as f:
         source = f.read()
 
-    if parser_globals.version == 1:
+    if version == 1:
         from    Z.Tree.Convert_Module_V1    import  compile_to_syntax_tree_v1
 
         tree = compile_to_syntax_tree_v1(source, vision_path)
@@ -51,7 +56,7 @@ def command_parse():
         from    Z.Tree.Convert_Module_V2    import  compile_to_syntax_tree_v2
         from    Z.Tree.Convert_Zone         import  fill_convert_zone
 
-        z = fill_convert_zone()
+        z = fill_convert_zone(version)
 
         tree = compile_to_syntax_tree_v2(z, source, vision_path)
 
@@ -85,8 +90,8 @@ def command_string():
     trace('Passed: String Test (version {})', capital_globals.string_version)
 
 
-def command_development():
-    command_parse()
+def command_development(version):
+    command_parse(version)
    #command_string()
 
 
@@ -110,6 +115,14 @@ def Z_main():
     command = command_line_arguments[0]
 
     if command == 'development':
-        return command_development()
+        return command_development(version)
+
+    try:
+        v = int(command)
+    except ValueError:
+        v = None
+
+    if 1 <= v <= 15:
+        return command_development(v)
 
     return USAGE('unknown command: {}', command)

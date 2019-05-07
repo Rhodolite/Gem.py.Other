@@ -13,13 +13,13 @@
 #
 #       Version 3:
 #
-#           1)  `Parser_Symbol_Implementation` does not implement `Parser_Symbol_0`
+#           1)  `Parser_Symbol_Leaf` does not implement `Parser_Symbol_0`
 #
 #           2)  Does not define `conjure_parser_symbol_0`.
 #
 #       Version 4:
 #
-#           1)  `Parser_Symbol_Implementation` implements `Parser_Symbol_0`.
+#           1)  `Parser_Symbol_Leaf` implements `Parser_Symbol_0`.
 #
 #           2)  Defines `conjure_parser_symbol_0`.
 #
@@ -42,7 +42,10 @@ if __debug__:
     from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
 
 
-class Parser_Symbol_Implementation(
+#
+#   Parser: Symbol [Leaf]
+#
+class Parser_Symbol_Leaf(
         NativeString,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
@@ -57,14 +60,14 @@ class Parser_Symbol_Implementation(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL('{}: A Parser_Symbol_Implementation may not be created',
-                  "Parser_Symbol_Implementation.operator new (`__new__`)");
+            FATAL('{}: A Parser_Symbol_Leaf may not be created',
+                  "Parser_Symbol_Leaf.operator new (`__new__`)");
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL('{}: A Parser_Symbol_Implementation may not be constructed',
-                  "Parser_Symbol_Implementation.constructor (`__init__`)");
+            FATAL('{}: A Parser_Symbol_Leaf may not be constructed',
+                  "Parser_Symbol_Leaf.constructor (`__init__`)");
 
 
     #
@@ -90,10 +93,10 @@ class Parser_Symbol_Implementation(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Parser_Symbol_Implementation {}>', self)
+        return arrange('<Parser_Symbol_Leaf {}>', self)
 
 
-conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Implementation)
+conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Leaf)
 
 
 export(conjure_parser_symbol)

@@ -37,37 +37,40 @@
 #
 #       (again see "Z.Tree.Context" for more details).
 #
+#
 
 
 #
-#   Import the version of tree names we want to use.
+#   The rest of the files refer to a `Tree_Name`, this means:
 #
-from    Z.Parser.Global                 import  parser_globals
+#       1)  `Tree_Name_Version_1`, or
+#
+#       2)  `Tree_Name_Version_4`
+#
+#   as determined by `name_version` (see "Z.Tree.Convert_Zone.py" for `name_version`).
+#
 
 
-name_version = parser_globals.name_version
+#
+#   interface Tree_Name_Version_1
+#       documentation
+#           Interface to tree classes that represent names.
+#
+#       extends Tree_Delete_Target,
+#               Tree_Expression,
+#               Tree_Parameter,
+#               Tree_Store_Target
+#
+#   NOTE:
+#       `Tree_Name_Version_1` is used if `1 <= name_version <= 3` (see "Z.Tree.Convert_Zone.py" for `name_version`).
+#
 
 
-if name_version in ((1, 2, 3)):
-    #
-    #   interface Tree_Name
-    #       documentation
-    #           Interface to tree classes that represent names.
-    #
-    #       extends Tree_Delete_Target,
-    #               Tree_Expression,
-    #               Tree_Parameter,
-    #               Tree_Store_Target
-    #
-    pass
-elif name_version == 4:
-    #
-    #   interface Tree_Name
-    #       documentation
-    #           Interface to tree classes that represent names.
-    #
-    pass
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Name.py: unknown tree name version: {!r}', name_version)
+#
+#   interface Tree_Name_Version_4
+#       documentation
+#           Interface to tree classes that represent names.
+#
+#   NOTE:
+#       `Tree_Name_Version_4` is used if `name_version == 4` (see "Z.Tree.Convert_Zone.py" for `name_version`).
+#

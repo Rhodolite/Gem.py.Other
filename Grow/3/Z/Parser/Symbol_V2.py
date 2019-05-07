@@ -33,7 +33,10 @@ if __debug__:
     from    Capital.Core                    import  FATAL
 
 
-class Parser_Symbol_Implementation(
+#
+#   Parser: Symbol [Leaf]
+#
+class Parser_Symbol_Leaf(
         NativeString,
         TRAIT_TemporaryElement,
         TRAIT_Parser_Symbol,
@@ -46,14 +49,14 @@ class Parser_Symbol_Implementation(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL('{}: A Parser_Symbol_Implementation may not be created',
-                  "Parser_Symbol_Implementation.operator new (`__new__`)");
+            FATAL('{}: A Parser_Symbol_Leaf may not be created',
+                  "Parser_Symbol_Leaf.operator new (`__new__`)");
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL('{}: A Parser_Symbol_Implementation may not be constructed',
-                  "Parser_Symbol_Implementation.constructor (`__init__`)");
+            FATAL('{}: A Parser_Symbol_Leaf may not be constructed',
+                  "Parser_Symbol_Leaf.constructor (`__init__`)");
 
 
     #
@@ -73,10 +76,10 @@ class Parser_Symbol_Implementation(
 
 
     def __repr__(self):
-        return arrange('<Parser_Symbol_Implementation {}>', self)
+        return arrange('<Parser_Symbol_Leaf {}>', self)
 
 
-conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Implementation)
+conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Leaf)
 
 
 export(conjure_parser_symbol)

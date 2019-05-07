@@ -204,7 +204,7 @@ else:
 #
 #   EXAMPLE USAGE:
 #
-#       class Tree_Suite_Implementation(
+#       class Tree_Suite_Leaf(
 #               TRAIT_Tree_Suite,
 #       ):
 #           @replace
@@ -212,7 +212,7 @@ else:
 #               self.dump_statement_tokens(f)
 #
 #       The `dump_suite_tokens` that was declared `@virtual` in `TRAIT_Tree_Suite` is being replaced here
-#       in `Tree_Suite_Implementation`.
+#       in `Tree_Suite_Leaf`.
 #
 def replace(f):
     return f

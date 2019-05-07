@@ -77,7 +77,7 @@ def convert_name_expression(z, v):
 #
 #   convert_name_parameter(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Name`
+#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to a `Tree_Name`.
 #
 #       The context (`.ctx` member) MUST BE a `Native_AbstractSyntaxTree_Parameter_Context`.
 #

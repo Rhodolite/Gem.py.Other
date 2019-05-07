@@ -15,20 +15,20 @@
 #
 #       Version 5:
 #
-#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
+#           1)  `Tree_Module_Alias_Leaf.as_name` is a `Parser_Symbol_0`.
 #
-#           2)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol_0`.
+#           2)  `Tree_Symbol_Alias_Leaf.as_name` is a `Parser_Symbol_0`.
 #
 #       Version 6:
 #
-#           1)  `Tree_Module_Alias_Implementation.as_name` is a `Parser_Symbol`.
+#           1)  `Tree_Module_Alias_Leaf.as_name` is a `Parser_Symbol`.
 #
-#           2)  `Tree_Symbol_Alias_Implementation.as_name` is a `Parser_Symbol`.
+#           2)  `Tree_Symbol_Alias_Leaf.as_name` is a `Parser_Symbol`.
 #
-#           3)  Instead of creating either a `Tree_Module_Alias_Implementation` with a `.as_name` of `parser_none`;
+#           3)  Instead of creating either a `Tree_Module_Alias_Leaf` with a `.as_name` of `parser_none`;
 #               instead it simply uses the `Parser_Module_Name` as the `Tree_Alias`
 #
-#           4)  Instead of creating either a `Tree_Symbol_Alias_Implementation` with a `.as_name` of `parser_none`;
+#           4)  Instead of creating either a `Tree_Symbol_Alias_Leaf` with a `.as_name` of `parser_none`;
 #               instead it simply uses the `Parser_Symbol` as the `Tree_Alias`
 #
 
@@ -47,9 +47,9 @@ if __debug__:
 
 
 #
-#   Tree: Module Alias Implementation - An alias in an `import` statement.
+#   Tree: Module Alias [Leaf] - An alias in an `import` statement.
 #
-class Tree_Module_Alias_Implementation(
+class Tree_Module_Alias_Leaf(
         TRAIT_Tree_Module_Alias,
 ):
     __slots__ = ((
@@ -83,9 +83,9 @@ class Tree_Module_Alias_Implementation(
     #
     def __repr__(self):
         if self.as_name is None:
-            return arrange('<Tree_Module_Alias_Implementation {!r}>', self.name)
+            return arrange('<Tree_Module_Alias_Leaf {!r}>', self.name)
 
-        return arrange('<Tree_Module_Alias_Implementation {!r} as {!r}>', self.name, self.as_name)
+        return arrange('<Tree_Module_Alias_Leaf {!r} as {!r}>', self.name, self.as_name)
 
 
 @creator
@@ -93,13 +93,13 @@ def create_Tree_Module_Alias(name, as_name):
     assert fact_is_parser_module_name(name)
     assert fact_is_parser_symbol     (as_name)
 
-    return Tree_Module_Alias_Implementation(name, as_name)
+    return Tree_Module_Alias_Leaf(name, as_name)
 
 
 #
-#   Tree: Symbol Alias Implementation - An alias in a `from` statement.
+#   Tree: Symbol Alias [Leaf] - An alias in a `from` statement.
 #
-class Tree_Symbol_Alias_Implementation(
+class Tree_Symbol_Alias_Leaf(
         TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = ((
@@ -132,9 +132,9 @@ class Tree_Symbol_Alias_Implementation(
     #
     def __repr__(self):
         if self.as_name is None:
-            return arrange('<Tree_Symbol_Alias_Implementation {!r}>', self.name)
+            return arrange('<Tree_Symbol_Alias_Leaf {!r}>', self.name)
 
-        return arrange('<Tree_Symbol_Alias_Implementation {!r} as {!r}>', self.name, self.as_name)
+        return arrange('<Tree_Symbol_Alias_Leaf {!r} as {!r}>', self.name, self.as_name)
 
 
 @creator
@@ -142,4 +142,4 @@ def create_Tree_Symbol_Alias(name, as_name):
     assert fact_is_parser_symbol(name)
     assert fact_is_parser_symbol(as_name)
 
-    return Tree_Symbol_Alias_Implementation(name, as_name)
+    return Tree_Symbol_Alias_Leaf(name, as_name)
