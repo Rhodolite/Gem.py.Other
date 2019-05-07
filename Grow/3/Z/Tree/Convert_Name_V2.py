@@ -23,7 +23,6 @@
 #
 
 
-from    Z.Tree.Convert_Context_V1           import  convert_parameter_context
 from    Z.Tree.Name_V1                      import  create_Tree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 
@@ -102,5 +101,5 @@ def convert_name_parameter(z, v):
                v.col_offset,
 
                v.id,
-               convert_parameter_context(v.ctx),
+               z.convert_parameter_context(z, v.ctx),
            )

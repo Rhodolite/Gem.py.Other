@@ -90,6 +90,7 @@ class Convert_Zone(object):
         #   Context
         #
         'convert_delete_load_OR_store_context',     #   Function
+        'convert_parameter_context',                #   Function
 
         #
         #   Decorator
@@ -277,8 +278,10 @@ def fill_convert_zone():
     #
     if context_version == 0:
         convert_delete_load_OR_store_context = None
+        convert_parameter_context            = None
     elif context_version == 2:
         from    Z.Tree.Convert_Context_V2   import  convert_delete_load_OR_store_context
+        from    Z.Tree.Convert_Context_V2   import  convert_parameter_context
     else:
         FATAL_unknown_version('context', context_version)
 
@@ -339,10 +342,10 @@ def fill_convert_zone():
         from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
     elif name_version == 3:
         from    Z.Tree.Convert_Name_V3              import  convert_name_expression
-        from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V3              import  convert_name_parameter
     elif name_version == 4:
         from    Z.Tree.Convert_Name_V4              import  convert_name_expression
-        from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V4              import  convert_name_parameter
     else:
         FATAL_unknown_version('name', name_version)
 
@@ -652,6 +655,7 @@ def fill_convert_zone():
     #   Context
     #
     z.convert_delete_load_OR_store_context = convert_delete_load_OR_store_context
+    z.convert_parameter_context            = convert_parameter_context
 
 
     #
