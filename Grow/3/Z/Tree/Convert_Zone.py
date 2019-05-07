@@ -100,6 +100,7 @@ class Convert_Zone(object):
         #   Context
         #
         'convert_delete_load_OR_store_context',     #   None | Function
+        'convert_load_OR_store_context',            #   None | Function
         'convert_parameter_context',                #   None | Function
 
         'tree_delete_context',                      #   None | Tree_Context
@@ -144,15 +145,25 @@ class Convert_Zone(object):
 
 
         #
+        #   Module
+        #
+        'create_Tree_Module',
+
+
+        #
         #   Name
         #
-        'convert_some_list_of_name_parameters',
+        'convert_some_list_of_name_parameters',     #   Function
+
+        'create_Tree_Name',                         #   None | Function
 
 
         #
         #   Parameter
         #
-        'convert_parameters_all',
+        'convert_parameters_all',                   #   Function
+
+        'create_Tree_Parameters_All',               #   Function
         
 
         #
@@ -206,6 +217,8 @@ class Convert_Zone(object):
         'convert_target',                           #   Function
 
         'create_Tree_Attribute',                    #   None | Function
+        'create_Tree_List_Expression',              #   None | Function
+        'create_Tree_Tuple_Expression',             #   None | Function
 
         'map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function',
                                                     #    Map { Native_AbstractSyntaxTree_* : Function }
@@ -336,9 +349,11 @@ def fill_convert_zone():
 
     if context_version == 0:
         convert_delete_load_OR_store_context = None
+        convert_load_OR_store_context        = None
         convert_parameter_context            = None
     elif context_version in ((2, 3)):
         from    Z.Tree.Convert_Context_V2   import  convert_delete_load_OR_store_context
+        from    Z.Tree.Convert_Context_V2   import  convert_load_OR_store_context
         from    Z.Tree.Convert_Context_V2   import  convert_parameter_context
     else:
         FATAL_unknown_version('context', context_version)
@@ -422,12 +437,18 @@ def fill_convert_zone():
 
 
     if index_version == 2:
-        from    Z.Tree.Index_V1             import  create_Tree_Extended_Slice_Index
-        from    Z.Tree.Index_V1             import  create_Tree_Simple_Index
-        from    Z.Tree.Index_V1             import  create_Tree_Slice_Index
-        from    Z.Tree.Index_V1             import  tree_ellipses_index
+        from    Z.Tree.Index_V1         import  create_Tree_Extended_Slice_Index
+        from    Z.Tree.Index_V1         import  create_Tree_Simple_Index
+        from    Z.Tree.Index_V1         import  create_Tree_Slice_Index
+        from    Z.Tree.Index_V1         import  tree_ellipses_index
     else:
         FATAL_unknown_version('index', index_version)
+
+
+    #
+    #   Module
+    #
+    from    Z.Tree.Module               import  create_Tree_Module
 
 
     #
@@ -446,10 +467,21 @@ def fill_convert_zone():
         FATAL_unknown_version('name', name_version)
 
 
+    if name_version == 2:
+        from    Z.Tree.Name_V1          import  create_Tree_Name            #   "_V1" on purpose.
+    elif name_version == 3:
+        from    Z.Tree.Name_V3          import  create_Tree_Name
+    elif name_version == 4:
+        create_Tree_Name = None
+    else:
+        FATAL_unknown_version('name', name_version)
+
+
     #
     #   Parameter
     #
     from    Z.Tree.Convert_Parameter_V2     import  convert_parameters_all
+    from    Z.Tree.Parameters_All_V1        import  create_Tree_Parameters_All
 
 
     #
@@ -647,6 +679,16 @@ def fill_convert_zone():
         FATAL_unknown_version('target', target_version)
 
 
+    if target_version in ((2, 3)):
+        from    Z.Tree.Many_V1          import  create_Tree_List_Expression
+        from    Z.Tree.Many_V1          import  create_Tree_Tuple_Expression
+    elif target_version == 4:
+        create_Tree_List_Expression  = None
+        create_Tree_Tuple_Expression = None
+    else:
+        FATAL_unknown_version('target', target_version)
+
+
     #
     #   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
     #           : Map { Native_AbstractSyntaxTree_* : Function }
@@ -778,6 +820,7 @@ def fill_convert_zone():
     #   Context
     #
     z.convert_delete_load_OR_store_context = convert_delete_load_OR_store_context
+    z.convert_load_OR_store_context        = convert_load_OR_store_context
     z.convert_parameter_context            = convert_parameter_context
 
     z.tree_delete_context    = tree_delete_context
@@ -828,15 +871,25 @@ def fill_convert_zone():
 
 
     #
+    #   Module
+    #
+    z.create_Tree_Module = create_Tree_Module
+
+
+    #
     #   Name
     #
     z.convert_some_list_of_name_parameters = convert_some_list_of_name_parameters
+    
+    z.create_Tree_Name = create_Tree_Name
 
     
     #
     #   Parameter
     #
     z.convert_parameters_all = convert_parameters_all
+
+    z.create_Tree_Parameters_All = create_Tree_Parameters_All
 
 
     #
@@ -890,7 +943,9 @@ def fill_convert_zone():
     z.convert_none_OR_target       = convert_none_OR_target
     z.convert_target               = convert_target
 
-    z.create_Tree_Attribute = create_Tree_Attribute
+    z.create_Tree_Attribute        = create_Tree_Attribute
+    z.create_Tree_List_Expression  = create_Tree_List_Expression
+    z.create_Tree_Tuple_Expression = create_Tree_Tuple_Expression
 
     z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = (
             map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function

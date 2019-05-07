@@ -13,7 +13,6 @@
 from    Z.Tree.Convert_Context_V1           import  convert_delete_load_OR_store_context
 from    Z.Tree.Convert_Context_V1           import  convert_parameter_context
 from    Z.Tree.Name_V1                      import  create_Tree_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -23,6 +22,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_substantial_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 
 
 #

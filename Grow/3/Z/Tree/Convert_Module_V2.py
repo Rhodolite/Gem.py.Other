@@ -23,8 +23,6 @@
 #
 
 
-from    Z.Tree.Module                       import  create_Tree_Module
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Module
 from    Z.Tree.Native_AbstractSyntaxTree    import  native__compile__to__native__abstract_syntax_tree
 
 
@@ -32,6 +30,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__module
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Module
 
 
 #
@@ -50,7 +49,7 @@ def convert_module(z, v):
     assert fact_is__native__abstract_syntax_tree__module(v)
     assert fact_is_some_native_list                     (v.body)
 
-    return create_Tree_Module(
+    return z.create_Tree_Module(
                z.convert_some_list_of_statements(z, v.body),
            )
 

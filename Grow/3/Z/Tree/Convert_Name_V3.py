@@ -15,17 +15,15 @@
 #
 #       Version 2:
 #
-#           Pass in `v.id` as the `id` parameter (third parameter) to `create_Tree_Name`.
+#           Pass in `v.id` as the `id` parameter (third parameter) to `z.create_Tree_Name`.
 #
 #       Version 3:
 #
-#           Pass in `conjure_parser_symbol(v.id)` as the `symbol` parameter (third parameter) to `create_Tree_Name`.
+#           Pass in `conjure_parser_symbol(v.id)` as the `symbol` parameter (third parameter) to `z.create_Tree_Name`.
 #
 
 
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Name_V3                      import  create_Tree_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -36,6 +34,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_substantial_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 
 
 #
@@ -67,7 +66,7 @@ def convert_name_expression(z, v):
     assert fact_is_full_native_string                                              (v.id)
     assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    return create_Tree_Name(
+    return z.create_Tree_Name(
                v.lineno,
                v.col_offset,
 

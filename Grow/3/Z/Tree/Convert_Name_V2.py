@@ -23,8 +23,6 @@
 #
 
 
-from    Z.Tree.Name_V1                      import  create_Tree_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -35,6 +33,7 @@ if __debug__:
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 
 
 #
@@ -66,7 +65,7 @@ def convert_name_expression(z, v):
     assert fact_is_full_native_string                                              (v.id)
     assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    return create_Tree_Name(
+    return z.create_Tree_Name(
                v.lineno,
                v.col_offset,
 
@@ -97,7 +96,7 @@ def convert_name_parameter(z, v):
     assert fact_is_full_native_string                              (v.id)
     assert fact_is__native__abstract_syntax_tree__parameter_context(v.ctx)
 
-    return create_Tree_Name(
+    return z.create_Tree_Name(
                v.lineno,
                v.col_offset,
 

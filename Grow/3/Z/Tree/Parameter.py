@@ -217,20 +217,3 @@ if __debug__:
         assert v.is_tree_parameters_all
 
         return True
-
-
-#
-#   Import the version of tree parameters we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-version = parser_globals.parameter_version
-
-
-if version == '1':
-    from    Z.Tree.Parameters_All_V1     import  create_Tree_Parameters_All_V1       as  create_Tree_Parameters_All
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Parameter.py: unknown tree parameter version: {!r}', version)

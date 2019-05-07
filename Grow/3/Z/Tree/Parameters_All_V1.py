@@ -8,7 +8,7 @@
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
-#       `Tree_Parameters_All_V1` is a 1-1 implementation of `Native_AbstractSyntaxTree_Parameters_All`
+#       `Tree_Parameters_All` is a 1-1 implementation of `Native_AbstractSyntaxTree_Parameters_All`
 #       (i.e.: `_ast.Parameters`).
 #
 
@@ -23,9 +23,9 @@ if __debug__:
 
 
 #
-#   Tree_Parameters_All_V1 - All the parameters of a function definition, V1.
+#   Tree_Parameters_All - All the parameters of a function definition
 #
-class Tree_Parameters_All_V1(object):
+class Tree_Parameters_All(object):
     #
     #   Implements Tree_Parameter
     #
@@ -88,15 +88,15 @@ class Tree_Parameters_All_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Parameters_All_V1 {} {} {} {}>',
+        return arrange('<Tree_Parameters_All {} {} {} {}>',
                        self.normal_parameters, self.tuple_parameter, self.map_parameter, self.defaults)
 
 
 @creator
-def create_Tree_Parameters_All_V1(normal_parameters, tuple_parameter, map_parameter, defaults):
+def create_Tree_Parameters_All(normal_parameters, tuple_parameter, map_parameter, defaults):
     assert fact_is_some_native_list                    (normal_parameters)
     assert fact_is__native_none__OR__full_native_string(tuple_parameter)
     assert fact_is__native_none__OR__full_native_string(map_parameter)
     assert fact_is_some_native_list                    (defaults)
 
-    return Tree_Parameters_All_V1(normal_parameters, tuple_parameter, map_parameter, defaults)
+    return Tree_Parameters_All(normal_parameters, tuple_parameter, map_parameter, defaults)
