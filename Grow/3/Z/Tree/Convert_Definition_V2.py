@@ -23,9 +23,6 @@
 #
 
 
-from    Z.Tree.Convert_Parameter_V2         import  convert_parameters_all
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Fact                        import  fact_is_full_native_string
@@ -95,7 +92,7 @@ def convert_function_definition(z, v):
                v.col_offset,
 
                v.name,
-               convert_parameters_all           (v.args),
+               z.convert_parameters_all         (z, v.args),
                z.convert_full_list_of_statements(z, v.body),
                z.convert_some_list_of_decorators(z, v.decorator_list),
            )

@@ -42,7 +42,6 @@
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Zone                 import  convert_zone
 from    Z.Tree.Parameter                    import  create_Tree_Parameters_All
 
 
@@ -58,7 +57,7 @@ if __debug__:
 
 
 #
-#   convert_map_parameter
+#   convert_map_parameter(z, v)
 #
 #       "Convert" `None` to `None`.
 #
@@ -70,14 +69,16 @@ if __debug__:
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
 #       a full `NativeString` to the [same] full `NativeString`.
 #
-def convert_map_parameter(v):
+def convert_map_parameter(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is__native_none__OR__full_native_string(v)
 
     return v
 
 
 #
-#   convert_tuple_parameter
+#   convert_tuple_parameter(z, v)
 #
 #       "Convert" `None` to `None`.
 #
@@ -89,7 +90,9 @@ def convert_map_parameter(v):
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
 #       a full `NativeString` to the [same] full `NativeString`.
 #
-def convert_tuple_parameter(v):
+def convert_tuple_parameter(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is__native_none__OR__full_native_string(v)
 
     return v
@@ -111,7 +114,7 @@ def convert_list_of_name_parameters(z, sequence):
 
 
 #
-#   convert_parameters_all
+#   convert_parameters_all(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameters_All`.
 #
@@ -119,17 +122,17 @@ assert Native_AbstractSyntaxTree_Parameters_All._attributes == (())
 assert Native_AbstractSyntaxTree_Parameters_All._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
 
 
-def convert_parameters_all(v):
+def convert_parameters_all(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_some_native_list                    (v.args)
     assert fact_is__native_none__OR__full_native_string(v.vararg)
     assert fact_is__native_none__OR__full_native_string(v.kwarg)
     assert fact_is_some_native_list                    (v.defaults)
 
-    z = convert_zone
-
     return create_Tree_Parameters_All(
                convert_list_of_name_parameters   (z, v.args),
-               convert_tuple_parameter           (v.vararg),
-               convert_map_parameter             (v.kwarg),
+               convert_tuple_parameter           (z, v.vararg),
+               convert_map_parameter             (z, v.kwarg),
                z.convert_some_list_of_expressions(z, v.defaults),
            )

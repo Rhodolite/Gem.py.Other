@@ -27,21 +27,21 @@
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Comprehension                import  create_Tree_Comprehension_Clause
-from    Z.Tree.Convert_Zone                 import  convert_zone
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
     from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
 
 
 #
-#   convert_comprehension(v)
+#   convert_comprehension(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Comprehension_Clause` (i.e.: `_ast.comprehension` to a
 #       `Tree_Comprehension_Clause`.
@@ -50,12 +50,12 @@ assert Native_AbstractSyntaxTree_Comprehension_Clause._attributes == (())
 assert Native_AbstractSyntaxTree_Comprehension_Clause._fields     == (('target', 'iter', 'ifs'))
 
 
-def convert_comprehension_clause(v):
+def convert_comprehension_clause(z, v):
+    assert fact_is_convert_zone(z)
+
     assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (v.target)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.iter)
     assert fact_is_some_native_list                              (v.ifs)
-
-    z = convert_zone
 
     return create_Tree_Comprehension_Clause(
                z.convert_target                  (z, v.target),
@@ -65,7 +65,7 @@ def convert_comprehension_clause(v):
 
 
 #
-#   convert_full_list_of_comprehensions(sequence)
+#   convert_full_list_of_comprehensions(z, sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_Comprehension_Clause`
 #       (i.e.: `list of _ast.Comprehension`) to a `FullNativeList of Tree_Comprehension_Clause`.

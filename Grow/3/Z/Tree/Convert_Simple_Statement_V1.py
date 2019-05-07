@@ -67,9 +67,7 @@ if __debug__:
 
 
 #
-#   create_keyword_statement(v)
-#
-#       Common code for `convert_{break,continue,pass}_statement`.
+#   create_keyword_statement(v) - Common code for `convert_{break,continue,pass}_statement`.
 #
 def convert_keyword_statement(v, create):
     assert fact_is_positive_integer   (v.lineno)

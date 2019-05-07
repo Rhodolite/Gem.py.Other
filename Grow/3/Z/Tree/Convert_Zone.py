@@ -81,6 +81,11 @@ class Convert_Zone(object):
         'create_Tree_Symbol_Alias',                 #   Function
 
         #
+        #   Comprehension
+        #
+        'convert_full_list_of_comprehensions',      #   Function
+
+        #
         #   Decorator
         #
         'convert_some_list_of_decorators',          #   Function
@@ -106,6 +111,11 @@ class Convert_Zone(object):
         #   Name
         #
         'convert_name_parameter',
+
+        #
+        #   Parameter
+        #
+        'convert_parameters_all',
         
         #
         #   Statement
@@ -242,7 +252,12 @@ def fill_convert_zone():
 
 
     #
-    #   Decorators
+    #   Comprehension
+    #
+    from    Z.Tree.Convert_Comprehension_V2 import  convert_full_list_of_comprehensions
+
+    #
+    #   Decorator
     #
     from    Z.Tree.Convert_Decorator_V2     import  convert_some_list_of_decorators
 
@@ -293,16 +308,22 @@ def fill_convert_zone():
     #   Name
     #
     if name_version == 2:
-        from    Z.Tree.Convert_Name_V2                  import  convert_name_expression
-        from    Z.Tree.Convert_Name_V2                  import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V2              import  convert_name_expression
+        from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
     elif name_version == 3:
-        from    Z.Tree.Convert_Name_V3                  import  convert_name_expression
-        from    Z.Tree.Convert_Name_V2                  import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V3              import  convert_name_expression
+        from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
     elif name_version == 4:
-        from    Z.Tree.Convert_Name_V4                  import  convert_name_expression
-        from    Z.Tree.Convert_Name_V2                  import  convert_name_parameter
+        from    Z.Tree.Convert_Name_V4              import  convert_name_expression
+        from    Z.Tree.Convert_Name_V2              import  convert_name_parameter
     else:
         FATAL_unknown_version('name', name_version)
+
+
+    #
+    #   Parameter
+    #
+    from    Z.Tree.Convert_Parameter_V2             import  convert_parameters_all
 
 
     #
@@ -584,6 +605,12 @@ def fill_convert_zone():
 
 
     #
+    #   Comprehension
+    #
+    z.convert_full_list_of_comprehensions = convert_full_list_of_comprehensions
+
+
+    #
     #   Decorator
     #
     z.convert_some_list_of_decorators = convert_some_list_of_decorators
@@ -618,6 +645,12 @@ def fill_convert_zone():
     z.convert_name_parameter = convert_name_parameter
 
     
+    #
+    #   Parameter
+    #
+    z.convert_parameters_all = convert_parameters_all
+
+
     #
     #  Statement
     #

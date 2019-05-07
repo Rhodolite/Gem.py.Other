@@ -98,12 +98,10 @@ convert_some_list_of_expressions = produce__convert__some_list_of__Native_Abstra
 
 from    Capital.Core                        import  trace
 from    Capital.Types                       import  NoneType
-from    Z.Tree.Convert_Comprehension_V2     import  convert_full_list_of_comprehensions
 from    Z.Tree.Convert_Operator             import  convert_binary_operator
 from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators
 from    Z.Tree.Convert_Operator             import  convert_logical_operator
 from    Z.Tree.Convert_Operator             import  convert_unary_operator
-from    Z.Tree.Convert_Parameter_V2         import  convert_parameters_all
 from    Z.Tree.Expression_V1                import  create_Tree_Backquote_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Binary_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Call_Expression
@@ -178,8 +176,8 @@ def convert_value_comprehension(z, v, create):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression               (z, v.elt),
-               convert_full_list_of_comprehensions(v.generators),
+               z.convert_expression                 (z, v.elt),
+               z.convert_full_list_of_comprehensions(z, v.generators),
            )
 
 
@@ -380,8 +378,8 @@ def convert_lambda_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_parameters_all(v.args),
-               z.convert_expression  (z, v.body),
+               z.convert_parameters_all(z, v.args),
+               z.convert_expression    (z, v.body),
           )
 
 
@@ -468,9 +466,9 @@ def convert_map_comprehension(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression               (z, v.key),
-               z.convert_expression               (z, v.value),
-               convert_full_list_of_comprehensions(v.generators),
+               z.convert_expression                 (z, v.key),
+               z.convert_expression                 (z, v.value),
+               z.convert_full_list_of_comprehensions(z, v.generators),
            )
 
 
