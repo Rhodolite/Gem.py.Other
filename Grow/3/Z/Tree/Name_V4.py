@@ -35,6 +35,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
@@ -80,20 +81,16 @@ class Tree_Name(object):
 #
 #   Tree: Delete Name
 #
-class Tree_Delete_Name(Tree_Name):
-    #
-    #   Implements Tree_Delete_Target
-    #
+class Tree_Delete_Name(
+        Tree_Name,
+        TRAIT_Tree_Delete_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Delete_Target
     #
-    if __debug__:
-        is_tree_delete_target = True
-
-
     def dump_delete_target_tokens(self, f):
         f.arrange('<delete-name @{}:{} {}>', self.line_number, self.column, self.symbol)
 

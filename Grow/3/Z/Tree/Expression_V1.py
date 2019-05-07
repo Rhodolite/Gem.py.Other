@@ -22,6 +22,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  trace
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
 
 
 if __debug__:
@@ -42,10 +43,9 @@ if __debug__:
 #
 #       Base of `Tree_{Generator,List,Set}_Comprehension`.
 #
-class Tree_Value_Comprehension(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Value_Comprehension(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -69,9 +69,6 @@ class Tree_Value_Comprehension(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         first = True
 
@@ -107,10 +104,9 @@ def create_Tree_Value_Comprehension(Meta, line_number, column, element, generato
 #
 #   Tree: Backquote Expression
 #
-class Tree_Backquote_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Backquote_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -132,10 +128,6 @@ class Tree_Backquote_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<backquote @{}:{} ', self.line_number, self.column)
         self.value.dump_evaluate_tokens(f)
@@ -163,10 +155,9 @@ def create_Tree_Backquote_Expression(line_number, column, value):
 #
 #   Tree: Binary Expression
 #
-class Tree_Binary_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Binary_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -192,10 +183,6 @@ class Tree_Binary_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<binary @{}:{} ', self.line_number, self.column)
         self.left.dump_evaluate_tokens(f)
@@ -229,10 +216,9 @@ def create_Tree_Binary_Expression(line_number, column, left, operator, right):
 #
 #   Tree: Call Expression
 #
-class Tree_Call_Expression(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Call_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -262,10 +248,6 @@ class Tree_Call_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         first = True
 
@@ -344,10 +326,9 @@ def create_Tree_Call_Expression(
 #
 #   Tree: Compare Expression
 #
-class Tree_Compare_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Compare_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -373,10 +354,6 @@ class Tree_Compare_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<compare @{}:{} ', self.line_number, self.column)
         self.left.dump_evaluate_tokens(f)
@@ -427,10 +404,9 @@ def create_Tree_Generator_Comprehension(line_number, column, element, generators
 #
 #   Tree: If Expression
 #
-class Tree_If_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_If_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -456,10 +432,6 @@ class Tree_If_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<if-expression @{}:{} ', self.line_number, self.column)
         self.body.dump_evaluate_tokens(f)
@@ -493,10 +465,9 @@ def create_Tree_If_Expression(line_number, column, test, body, else_expression):
 #
 #   Tree: Logical Expression
 #
-class Tree_Logical_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Logical_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -520,10 +491,6 @@ class Tree_Logical_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         first = True
 
@@ -564,10 +531,9 @@ def create_Tree_Logical_Expression(line_number, column, operator, values):
 #
 #   Tree: Map Expression
 #
-class Tree_Map_Expression(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Map_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -591,9 +557,6 @@ class Tree_Map_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<map @{}:{}', self.line_number, self.column)
 
@@ -641,7 +604,9 @@ def create_Tree_Map_Expression(line_number, column, keys, values):
 #
 #   Tree: Lambda Expression
 #
-class Tree_Lambda_Expression(object):
+class Tree_Lambda_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -665,9 +630,6 @@ class Tree_Lambda_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         header = arrange('<lambda @{}:{}', self.line_number, self.column)
 
@@ -716,10 +678,9 @@ def create_Tree_List_Comprehension(line_number, column, element, generators):
 #
 #   Tree: Map Comprehension
 #
-class Tree_Map_Comprehension(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Map_Comprehension(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -745,9 +706,6 @@ class Tree_Map_Comprehension(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         first = True
 
@@ -786,10 +744,9 @@ def create_Tree_Map_Comprehension(line_number, column, key, value, generators):
 #
 #   Tree: Number
 #
-class Tree_Number(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Number(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -811,9 +768,6 @@ class Tree_Number(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<number @{}:{} {}>', self.line_number, self.column, self.n)
 
@@ -852,10 +806,9 @@ def create_Tree_Set_Comprehension(line_number, column, element, generators):
 #
 #   Tree: Set Expression
 #
-class Tree_Set_Expression(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Set_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -877,9 +830,6 @@ class Tree_Set_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<set @{}:{}', self.line_number, self.column)
 
@@ -917,10 +867,9 @@ def create_Tree_Set_Expression(line_number, column, values):
 #
 #   Tree: String
 #
-class Tree_String(object):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_String(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -942,9 +891,6 @@ class Tree_String(object):
     #
     #   Interface Tree_Expression
     #
-    is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<string @{}:{} ', self.line_number, self.column)
         f.write(repr(self.s))
@@ -971,10 +917,9 @@ def create_Tree_String(line_number, column, s):
 #
 #   Tree: Unary Expression
 #
-class Tree_Unary_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Unary_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -998,10 +943,6 @@ class Tree_Unary_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<unary @{}:{} ', self.line_number, self.column)
         self.operator.dump_operator_token(f)
@@ -1032,10 +973,9 @@ def create_Tree_Unary_Expression(line_number, column, operator, right):
 #
 #   Tree: Yield Expression
 #
-class Tree_Yield_Expression(object):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Yield_Expression(
+        TRAIT_Tree_Expression,
+):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -1057,10 +997,6 @@ class Tree_Yield_Expression(object):
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         f.arrange('<yield @{}:{}', self.line_number, self.column)
 

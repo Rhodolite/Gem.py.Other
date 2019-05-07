@@ -50,21 +50,41 @@
 
 
 #
-#   interface Tree_Delete_Target - Interface to tree classes that represent "delete" targets.
+#   interface Tree_Delete_Target
+#       documentation
+#           Interface to tree classes that represent "delete" targets.
+#
 #       method
 #           dump_delete_target_tokens(f : Build_DumpToken)
 #
 #       debug
 #           is_tree_delete_target := true
 #
+class TRAIT_Tree_Delete_Target(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_delete_target = True
+
+
 #
-#   interface Tree_Store_Target - Interface to tree classes that represent "store" targets.
+#   interface Tree_Store_Target
+#       documentation
+#           Interface to tree classes that represent "store" targets.
+#
 #       method
 #           dump_store_target_tokens (f : Build_DumpToken)
 #
 #       debug
 #           is_tree_store_target := true
 #
+class TRAIT_Tree_Store_Target(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_store_target = True
 
 
 #

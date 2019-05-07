@@ -3,114 +3,74 @@
 #
 
 
-#
-#   Z.Tree.Convert_Alias_V6 - Convert Python Abstract Syntax Tree Alias to `Tree_{Module,Symbol}_Alias`, Version 6.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
+if __name__ == '__main__':
+    #
+    #   If called as the main program, then we are being imported as the module `__main__`.
+    #
+    #   If so:
+    #
+    #       1A. *REIMPORT* ourselves under the name `Z`
+    #       1B. import `Z.Main`
+    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
+    #       2.  Call `Z_main`
+    #
+    #   This means:
+    #
+    #       *   This module is imported   under the name `__main__`;
+    #       *   This module is reimported under the name `Z`.
+    #
+    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
+    #   and does something different in each case ... so there are in effect two `Z` modules:
+    #
+    #       *   the one named `__main__` [this code under the `if`   clause], and
+    #       *   the one named `Z`        [the  code under the `else` clause below].
+    #
+    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
 
 
-#
-#   Difference between Version 5 & Version 6.
-#
-#       Version 5:
-#
-#           Creates either:
-#
-#               1)  `Tree_Module_Alias` (sometimes with a second argument of `parser_none`); or
-#
-#               2)  `Tree_Symbol_Alias` (sometimes with a second argument of `parser_none`).
-#
-#       Version 6:
-#
-#           Creates either:
-#
-#               1)  `Tree_Module_Alias`       (when second argument has a value);
-#
-#               2)  `Tree_Symbol_Alias`       (when second argument has a value):
-#
-#               3)  `Tree_Parser_Module_Name` (when `.asname` is `None`).
-#
-#               4)  `Tree_Parser_Symbol`      (when `.asname` is `None`).
-#
+    Z_main()
+else:
+    from    os.path                     import  dirname     as  python_path_directory_name
+    from    os.path                     import  join        as  python_path_join
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+    #
+    #   Load Z submodules from "Z/" directory.
+    #
+    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
 
 
-if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is__native_none__OR__full_native_string
-    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Alias_Clause
+    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
+    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
+    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
+    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
+    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
+    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
 
 
-#
-#   convert_module_alias(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Module_Alias`.
-#
-assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
-assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
+    #
+    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
+    #
+    #   This implements the following commands:
+    #
+    #       Z.copyright         - Add a copyright.
+    #       Z.output            - Output a line of text.
+    #
+    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
+    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
+    #
+    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
+    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
+    #
+    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
 
 
-def convert_module_alias(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_full_native_string                  (v.name)
-    assert fact_is__native_none__OR__full_native_string(v.asname)
-
-    name = z.conjure_parser_module_name(z, v.name)
-
-    if v.asname is None:
-        return name
-
-    return z.create_Tree_Module_Alias(
-               name,
-               z.conjure_parser_symbol(z, v.asname),
-           )
-
-
-#
-#   convert_symbol_alias(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `_ast.alias`) to a `Tree_Symbol_Alias`.
-#
-assert Native_AbstractSyntaxTree_Alias_Clause._attributes == (())
-assert Native_AbstractSyntaxTree_Alias_Clause._fields     == (('name', 'asname'))
-
-
-def convert_symbol_alias(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_full_native_string                  (v.name)
-    assert fact_is__native_none__OR__full_native_string(v.asname)
-
-    name = z.conjure_parser_symbol(z, v.name)
-
-    if v.asname is None:
-        return name
-
-    return z.create_Tree_Symbol_Alias(
-               name,
-               z.conjure_parser_symbol(z, v.asname),
-           )
-
-
-#
-#   convert_full_list_of_module_aliases(z, sequence)
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
-#       `FullNativeList of Tree_Module_Alias`.
-#
-convert_full_list_of_module_aliases = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_module_alias)
-
-
-#
-#   convert_full_list_of_symbol_aliases(z, sequence)
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
-#       `FullNativeList of Tree_Symbol_Alias`.
-#
-convert_full_list_of_symbol_aliases = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_symbol_alias)
+    #
+    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
+    #
+    #       We run the code generator:
+    #
+    #       1.  Transform Crystal to Python.
+    #       2.  Output Python (to "Vision.py").
+    #
+    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()

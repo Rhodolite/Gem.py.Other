@@ -12,6 +12,8 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Capital.Core                    import  replace
+from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
@@ -38,10 +40,11 @@ if __debug__:
 #
 #       The right hand side `c.d` will be an attribute access, and the context will be `load`.
 #
-class Tree_Attribute(object):
+class Tree_Attribute(
+        TRAIT_Tree_Delete_Target,
+):
     #
-    #   implements Tree_Delete_Target,
-    #              Tree_Expression,
+    #   Implements Tree_Expression,
     #              Tree_Store_Target
     #
     __slots__ = ((
@@ -80,6 +83,7 @@ class Tree_Attribute(object):
     #   Interface Tree_Delete_Target
     #
     if __debug__:
+        @replace
         @property
         def is_tree_delete_target(self):
             return self.context.is_tree_delete_context

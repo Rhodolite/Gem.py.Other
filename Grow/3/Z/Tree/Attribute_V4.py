@@ -34,6 +34,8 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
@@ -91,20 +93,16 @@ class Tree_Attribute(object):
 #
 #   Tree: Delete Attribute
 #
-class Tree_Delete_Attribute(Tree_Attribute):
-    #
-    #   implements Tree_Delete_Target
-    #
+class Tree_Delete_Attribute(
+        Tree_Attribute,
+        TRAIT_Tree_Delete_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Delete_Target
     #
-    if __debug__:
-        is_tree_delete_target = True
-
-
     def dump_delete_target_tokens(self, f):
         f.arrange('<delete-attribute @{}:{} ', self.line_number, self.column)
         self.value.dump_evaluate_tokens(f)
@@ -127,20 +125,16 @@ def create_Tree_Delete_Attribute(line_number, column, value, attribute):
 #
 #   Tree: Evaluate Attribute
 #
-class Tree_Evaluate_Attribute(Tree_Attribute):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Evaluate_Attribute(
+        Tree_Attribute,
+        TRAIT_Tree_Expression,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         #
         #   NOTE:

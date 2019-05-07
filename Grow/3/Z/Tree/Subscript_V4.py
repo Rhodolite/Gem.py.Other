@@ -37,6 +37,8 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
@@ -47,9 +49,7 @@ if __debug__:
 
 
 #
-#   Tree: Subscript Expression
-#
-#       Base of `Tree_Delete_Subscript`, `Tree_Evaluate_Subscript`, and `Tree_Store_Subscript`.
+#   Tree: Subscript Expression - Base of `Tree_{Delete,Evaluate,Store}_Subscript`.
 #
 class Tree_Subscript_Expression(object):
     __slots__ = ((
@@ -83,20 +83,16 @@ class Tree_Subscript_Expression(object):
 #
 #   Tree: Delete Subscript
 #
-class Tree_Delete_Subscript(Tree_Subscript_Expression):
-    #
-    #   implements Tree_Delete_Target
-    #
+class Tree_Delete_Subscript(
+        Tree_Subscript_Expression,
+        TRAIT_Tree_Delete_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Delete_Target
     #
-    if __debug__:
-        is_tree_delete_target = True
-
-
     def dump_delete_target_tokens(self, f):
         f.arrange('<delete-subscript @{}:{} ', self.line_number, self.column)
         self.value.dump_evaluate_tokens(f)
@@ -119,20 +115,16 @@ def create_Tree_Delete_Subscript(line_number, column, value, index):
 #
 #   Tree: Evaluate Subscript
 #
-class Tree_Evaluate_Subscript(Tree_Subscript_Expression):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Evaluate_Subscript(
+        Tree_Subscript_Expression,
+        TRAIT_Tree_Expression,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         #
         #   NOTE:

@@ -42,6 +42,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
 
 
 if __debug__:
@@ -105,9 +106,7 @@ def Tree_Many_Expresion__dump_store_target_tokens(self, f):
 
 
 #
-#   Tree: Evaluate Many
-#
-#       Base class of `Tree_Evaluate_List`, `Tree_Evaluate_Tuple`, `Tree_Store_List`, `Tree_Store_Tuple`
+#   Tree: Evaluate Many - Base class of `Tree_{Evaluate_List,Evaluate_Tuple,Store_List,Store_Tuple}`.
 #
 class Tree_Many_Expression(object):
     __slots__ = ((
@@ -148,20 +147,16 @@ def create_Tree_Many_Expression(Meta, line_number, column, elements):
 #
 #   Tree: Evaluate List
 #
-class Tree_Evaluate_List(Tree_Many_Expression):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Evaluate_List(
+        Tree_Many_Expression,
+        TRAIT_Tree_Expression,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     dump_evaluate_tokens = Tree_Many_Expresion__dump_evaluate_tokens
 
 
@@ -179,20 +174,16 @@ def create_Tree_Evaluate_List(line_number, column, elements):
 #
 #   Tree: Evaluate Tuple
 #
-class Tree_Evaluate_Tuple(Tree_Many_Expression):
-    #
-    #   implements Tree_Expression
-    #
+class Tree_Evaluate_Tuple(
+        Tree_Many_Expression,
+        TRAIT_Tree_Expression,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     dump_evaluate_tokens = Tree_Many_Expresion__dump_evaluate_tokens
 
 

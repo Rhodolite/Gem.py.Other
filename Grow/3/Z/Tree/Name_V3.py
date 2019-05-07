@@ -25,6 +25,8 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Capital.Core                    import  replace
+from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
@@ -47,10 +49,11 @@ if __debug__:
 #       Because a `Tree_Name` can appear both as an expression, as a parameter, and as a target, it implements the
 #       `Tree_Expression`, `Tree_Parameter`, and `Tree_Target` interfaces.
 #
-class Tree_Name(object):
+class Tree_Name(
+        TRAIT_Tree_Delete_Target,
+):
     #
-    #   Implements Tree_Delete_Target,
-    #              Tree_Expression,
+    #   Implements Tree_Expression,
     #              Tree_Parameter,
     #              Tree_Store_Target
     #
@@ -84,6 +87,7 @@ class Tree_Name(object):
     #   Interface Tree_Delete_Target
     #
     if __debug__:
+        @replace
         @property
         def is_tree_delete_target(self):
             return self.context.is_tree_delete_context

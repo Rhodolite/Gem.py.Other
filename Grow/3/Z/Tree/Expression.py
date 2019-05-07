@@ -21,6 +21,12 @@
 #       debug
 #           is_tree_expression := true
 #
+class TRAIT_Tree_Expression(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_expression = True
 
 
 #

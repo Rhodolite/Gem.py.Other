@@ -12,6 +12,9 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Capital.Core                    import  replace
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
@@ -28,11 +31,12 @@ if __debug__:
 #
 #   Tree: Subscript Expression
 #
-class Tree_Subscript_Expression(object):
+class Tree_Subscript_Expression(
+        TRAIT_Tree_Delete_Target,
+        TRAIT_Tree_Expression,
+):
     #
-    #   implements Tree_Delete_Target,
-    #              Tree_Expression,
-    #              Tree_Store_Target
+    #   implements Tree_Store_Target
     #
     __slots__ = ((
         'line_number',                  #   Positive_Integer
@@ -72,6 +76,7 @@ class Tree_Subscript_Expression(object):
     #   Interface Tree_Delete_Target
     #
     if __debug__:
+        @replace
         @property
         def is_tree_delete_target(self):
             return self.context.is_tree_delete_context
@@ -90,7 +95,10 @@ class Tree_Subscript_Expression(object):
     #   Interface Tree_Expression
     #
     if __debug__:
-        is_tree_expression = True
+        @replace
+        @property
+        def is_tree_expression(self):
+            return (self.context.is_tree_load_context) or (self.context.is_tree_store_context)
 
 
     if __debug__:
