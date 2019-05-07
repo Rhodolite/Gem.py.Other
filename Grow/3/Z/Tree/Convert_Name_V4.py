@@ -28,7 +28,6 @@
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -90,7 +89,7 @@ def convert_name_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol(v.id),
+               z.conjure_parser_symbol(z, v.id),
            )
 
 
@@ -120,7 +119,7 @@ def convert_name_parameter(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol(v.id),
+               z.conjure_parser_symbol(z, v.id),
            )
 
 

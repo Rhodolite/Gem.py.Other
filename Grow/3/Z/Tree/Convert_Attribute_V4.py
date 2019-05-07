@@ -28,9 +28,6 @@
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_positive_integer
@@ -88,6 +85,6 @@ def convert_attribute_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression (z, v.value),
-               conjure_parser_symbol(v.attr),
+               z.convert_expression   (z, v.value),
+               z.conjure_parser_symbol(z, v.attr),
           )

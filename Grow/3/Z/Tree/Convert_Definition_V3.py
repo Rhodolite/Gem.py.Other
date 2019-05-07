@@ -23,9 +23,6 @@
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Fact                        import  fact_is_full_native_string
@@ -62,7 +59,7 @@ def convert_class_definition(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol             (v.name),
+               z.conjure_parser_symbol           (z, v.name),
                z.convert_some_list_of_expressions(z, v.bases),
                z.convert_full_list_of_statements (z, v.body),
                z.convert_some_list_of_decorators (z, v.decorator_list),
@@ -94,7 +91,7 @@ def convert_function_definition(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol            (v.name),
+               z.conjure_parser_symbol          (z, v.name),
                z.convert_parameters_all         (z, v.args),
                z.convert_full_list_of_statements(z, v.body),
                z.convert_some_list_of_decorators(z, v.decorator_list),

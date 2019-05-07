@@ -4,24 +4,29 @@
 
 
 #
-#   Z.Parser.Symbol_V4 - Implementation of an identifier used in the Z parser, Version 4
+#   Z.Parser.Symbol_V5 - Implementation of an identifier used in the Z parser, Version 5
 #
 
 
 #
-#   Difference between Version 3 & Version 4.
-#
-#       Version 3:
-#
-#           1)  `Parser_Symbol_Implementation` does not implement `Parser_Symbol_0`
-#
-#           2)  Does not define `conjure_parser_symbol_0`.
+#   Difference between Version 4 & Version 5.
 #
 #       Version 4:
 #
-#           1)  `Parser_Symbol_Implementation` implements `Parser_Symbol_0`.
+#           1)  `Parser_Symbol_Implementation` does not implement `Tree_{Module,Symbol}_Alias`.
 #
-#           2)  Defines `conjure_parser_symbol_0`.
+#           2)  `Parser_Symbol_Implementation` implements `Parser_Symbol_0`.
+#
+#           3)  Defines `conjure_parser_symbol_0`.
+#
+#       Version 5:
+#
+#           1)  `Parser_Symbol_Implementation` implements `Tree_{Module,Symbol}_Alias`.
+#
+#           2)  `Parser_Symbol_Implementation` does not implement `Parser_Symbol_0`.
+#
+#           3)  Does not define `conjure_parser_symbol_0`.
+#
 #
 
 
@@ -33,13 +38,13 @@ from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.None                       import  parser_none
 from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
-from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol_0
+from    Z.Tree.Alias                        import  TRAIT_Tree_Module_Alias
+from    Z.Tree.Alias                        import  TRAIT_Tree_Symbol_Alias
 
 
 if __debug__:
     from    Capital.Core                    import  FATAL
     from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
-    from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
 
 
 class Parser_Symbol_Implementation(
@@ -47,7 +52,8 @@ class Parser_Symbol_Implementation(
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,
-        TRAIT_Parser_Symbol_0,
+        TRAIT_Tree_Module_Alias,
+        TRAIT_Tree_Symbol_Alias,
 ):
     __slots__ = (())
 
@@ -87,6 +93,20 @@ class Parser_Symbol_Implementation(
 
 
     #
+    #   Interface Tree_Module_Alias
+    #
+    def dump_module_alias_tokens(self, f):
+        f.arrange('<module-alias $ {}>', self)
+
+
+    #
+    #   Interface Tree_Symbol_Alias
+    #
+    def dump_symbol_alias_tokens(self, f):
+        f.arrange('<symbol-alias $ {}>', self)
+
+
+    #
     #   Public
     #
     def __repr__(self):
@@ -97,14 +117,3 @@ conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parse
 
 
 export(conjure_parser_symbol)
-
-
-@export
-def conjure_parser_symbol_0(z, s):
-    assert fact_is_convert_zone                        (z)
-    assert fact_is__native_none__OR__full_native_string(s)
-
-    if s is None:
-        return parser_none
-
-    return z.conjure_parser_symbol(z, s)

@@ -13,20 +13,19 @@
 #
 #       Version 1:
 #
-#           `Parser_Symbol_Implementation` does not implement `Parser_Module_Name`.
+#           Does not exist.
 #
 #       Version 2:
 #
-#           `Parser_Symbol_Implementation` implements `Parser_Module_Name`.
+#           Exists.
 #
 
 
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
 from    Capital.NativeString                import  NativeString
-from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
-from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
+from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
 
 
@@ -37,7 +36,6 @@ if __debug__:
 class Parser_Symbol_Implementation(
         NativeString,
         TRAIT_TemporaryElement,
-        TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,
 ):
     __slots__ = (())
@@ -59,32 +57,26 @@ class Parser_Symbol_Implementation(
 
 
     #
-    #   Interface Parser_Module_Name
-    #
-    @property
-    def native_string(self):
-        return self
-
-
-    def dump_module_name_token(self, f):
-        f.arrange('<module-name symbol {}>', self)
-
-
-    #
     #   Interface Parser_Symbol
     #
     def dump_symbol_token(self, f):
         f.arrange('<$ {}>', self)
 
 
+
     #
     #   Public
     #
+    @property
+    def native_string(self):
+        return self
+
+
     def __repr__(self):
         return arrange('<Parser_Symbol_Implementation {}>', self)
 
 
-conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_Implementation)
+conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Implementation)
 
 
 export(conjure_parser_symbol)

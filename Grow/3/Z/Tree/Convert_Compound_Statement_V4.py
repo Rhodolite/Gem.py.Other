@@ -65,8 +65,8 @@ def convert_test_statement(z, v, create):
                v.col_offset,
 
                z.convert_expression(z, v.test),
-               convert_suite       (z, v.body),
-               convert_suite_0     (z, v.orelse),
+               z.convert_suite     (z, v.body),
+               z.convert_suite_0   (z, v.orelse),
            )
 
 
@@ -96,8 +96,8 @@ def convert_for_statement(z, v):
 
                z.convert_target    (z, v.target),
                z.convert_expression(z, v.iter),
-               convert_suite       (z, v.body),
-               convert_suite_0     (z, v.orelse),
+               z.convert_suite     (z, v.body),
+               z.convert_suite_0   (z, v.orelse),
            )
 
 
@@ -140,9 +140,9 @@ def convert_try_except_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_suite                        (z, v.body),
+               z.convert_suite                      (z, v.body),
                z.convert_full_list_of_except_clauses(z, v.handlers),
-               convert_suite_0                      (z, v.orelse),
+               z.convert_suite_0                    (z, v.orelse),
            )
 
 
@@ -169,8 +169,8 @@ def convert_try_finally_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_suite(z, v.body),
-               convert_suite(z, v.finalbody),
+               z.convert_suite(z, v.body),
+               z.convert_suite(z, v.finalbody),
            )
 
 
@@ -214,7 +214,7 @@ def convert_with_statement(z, v):
 
                z.convert_expression    (z, v.context_expr),
                z.convert_none_OR_target(z, v.optional_vars),
-               convert_suite           (z, v.body),
+               z.convert_suite         (z, v.body),
            )
 
 
@@ -235,7 +235,6 @@ def convert_suite(z, sequence):
         return z.convert_statement(z, sequence[0])
 
     return z.create_Tree_Suite([z.convert_statement(z, v)   for v in sequence])
-
 
 
 #

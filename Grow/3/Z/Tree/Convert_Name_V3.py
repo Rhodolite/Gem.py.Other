@@ -15,15 +15,14 @@
 #
 #       Version 2:
 #
-#           Pass in `v.id` as the `id` parameter (third parameter) to `z.create_Tree_Name`.
+#           The `id` parameter (third parameter) to `z.create_Tree_Name` is a `NativeString`.
 #
 #       Version 3:
 #
-#           Pass in `conjure_parser_symbol(v.id)` as the `symbol` parameter (third parameter) to `z.create_Tree_Name`.
+#           The `id` parameter (third parameter) to `z.create_Tree_Name` is a `Parser_Symbol`.
 #
 
 
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -70,7 +69,7 @@ def convert_name_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol                 (v.id),
+               z.conjure_parser_symbol               (z, v.id),
                z.convert_delete_load_OR_store_context(z, v.ctx),
            )
 
@@ -101,7 +100,7 @@ def convert_name_parameter(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol      (v.id),
+               z.conjure_parser_symbol    (z, v.id),
                z.convert_parameter_context(z, v.ctx),
            )
 

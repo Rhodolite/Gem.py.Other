@@ -200,8 +200,8 @@ class Convert_Zone(object):
         #
         #   Module_Name
         #
-        'conjure_parser_module_name',               #   Function
-        'conjure_parser_module_name_with_dot',      #   Function
+        'conjure_parser_module_name',               #   None | Function
+        'conjure_parser_module_name_with_dot',      #   None | Function
 
 
         #
@@ -285,7 +285,17 @@ class Convert_Zone(object):
         #
         #   Suite
         #
+        'convert_suite',                            #   None | Function
+        'convert_suite_0',                          #   None | Function
+
         'create_Tree_Suite',                        #   None | Function
+
+
+        #
+        #   Symbol
+        #
+        'conjure_parser_symbol',                    #   Function
+        'conjure_parser_symbol_0',                  #   Function
 
 
         #
@@ -548,9 +558,17 @@ def fill_convert_zone():
     #
     #   Module_Name
     #
-    from    Z.Parser.Conjure_Module_Name    import  conjure_parser_module_name
+    if module_name_version == 0:
+        conjure_parser_module_name = None
+    elif module_name_version in ((2, 3)):
+        from    Z.Parser.Conjure_Module_Name    import  conjure_parser_module_name
+    else:
+        FATAL_unknown_version('module_name', module_name_version)
 
-    if module_name_version == 2:
+
+    if module_name_version == 0:
+        conjure_parser_module_name_with_dot = None
+    elif module_name_version == 2:
         from    Z.Parser.Module_Name_V2     import  conjure_parser_module_name_with_dot
     elif module_name_version == 3:
         from    Z.Parser.Module_Name_V3     import  conjure_parser_module_name_with_dot
@@ -807,17 +825,49 @@ def fill_convert_zone():
 
 
     #
-    #   Suite
+    #   Suite (only used in statement version 4)
     #
     if statement_version in ((2, 3)):
-        #
-        #   A "Suite" does not exist in statement versions 1 or 2.
-        #
+        convert_suite   = None
+        convert_suite_0 = None
+    elif statement_version == 4:
+        from    Z.Tree.Convert_Compound_Statement_V4    import  convert_suite
+        from    Z.Tree.Convert_Compound_Statement_V4    import  convert_suite_0
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((2, 3)):
         create_Tree_Suite = None
     elif statement_version == 4:
         from    Z.Tree.Suite_V4         import  create_Tree_Suite
     else:
         FATAL_unknown_version('statement', statement_version)
+
+
+    #
+    #   Symbol
+    #
+    if symbol_version == 0:
+        conjure_parser_symbol = None
+    elif symbol_version == 2:
+        from    Z.Parser.Symbol_V2          import  conjure_parser_symbol
+    elif symbol_version == 3:
+        from    Z.Parser.Symbol_V3          import  conjure_parser_symbol
+    elif symbol_version == 4:
+        from    Z.Parser.Symbol_V4          import  conjure_parser_symbol
+    elif symbol_version == 5:
+        from    Z.Parser.Symbol_V5          import  conjure_parser_symbol
+    else:
+        FATAL_unknown_version('symbol', symbol_version)
+
+
+    if symbol_version in ((0, 2, 3, 5)):
+        conjure_parser_symbol_0 = None
+    elif symbol_version == 4:
+        from    Z.Parser.Symbol_V4          import  conjure_parser_symbol_0
+    else:
+        FATAL_unknown_version('symbol', symbolversion)
 
 
     #
@@ -1469,7 +1519,17 @@ def fill_convert_zone():
     #
     #   Suite
     #
+    z.convert_suite   = convert_suite
+    z.convert_suite_0 = convert_suite_0
+
     z.create_Tree_Suite = create_Tree_Suite
+
+
+    #
+    #   Symbol
+    #
+    z.conjure_parser_symbol   = conjure_parser_symbol
+    z.conjure_parser_symbol_0 = conjure_parser_symbol_0
 
 
     #

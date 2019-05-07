@@ -8,12 +8,6 @@
 #
 
 
-from    Z.Parser.Global                 import  parser_globals
-
-
-symbol_version = parser_globals.symbol_version
-
-
 #
 #   interface Parser_Symbol
 #       documentation
@@ -36,31 +30,33 @@ class TRAIT_Parser_Symbol(object):
         is_parser_symbol = True
 
 
-if symbol_version >= 3:
-    #
-    #   interface Parser_Symbol_0
-    #       documentation
-    #           Interface to an identifier used in the Z parser; OR the `parser_none`.
-    #
-    #       attribute
-    #           has_parser_symbol : Boolean
-    #
-    #       if has_parser_symbol
-    #           implements Parser_Symbol
-    #
-    #       debug
-    #           is_parser_symbol_0 := true
-    #
-    class TRAIT_Parser_Symbol_0(object):
-        __slots__ = (())
+#
+#   interface Parser_Symbol_0
+#       documentation
+#           Interface to an identifier used in the Z parser; OR the `parser_none`.
+#
+#       attribute
+#           has_parser_symbol : Boolean
+#
+#       if has_parser_symbol
+#           implements Parser_Symbol
+#
+#       debug
+#           is_parser_symbol_0 := true
+#
+#   NOTE:
+#       `Parser_Symbol_0` is only used in `symbol_version >= 4` (see "Z.Tree.Convert_Zone.py" for `symbol_version`).
+#
+class TRAIT_Parser_Symbol_0(object):
+    __slots__ = (())
 
 
-        if __debug__:
-            is_parser_symbol_0 = True
+    if __debug__:
+        is_parser_symbol_0 = True
 
 
-       #@virtual
-        has_parser_symbol = True
+   #@virtual
+    has_parser_symbol = True
 
 
 #
@@ -101,23 +97,3 @@ if __debug__:
         assert v.is_parser_symbol_0
 
         return True
-
-
-#
-#   Import the version of symbol we want to use (must be after the "facts" above)
-#
-if symbol_version == 1:
-    from    Z.Parser.Symbol_V1          import  conjure_parser_symbol
-elif symbol_version == 2:
-    from    Z.Parser.Symbol_V2          import  conjure_parser_symbol
-elif symbol_version == 3:
-    from    Z.Parser.Symbol_V3          import  conjure_parser_symbol
-    from    Z.Parser.Symbol_V3          import  conjure_parser_symbol_0
-elif symbol_version == 4:
-    from    Z.Parser.Symbol_V4          import  conjure_parser_symbol
-else:
-    from    Capital.Core                import  FATAL
-
-    assert 0
-
-    FATAL('Z/Parser/Symbol.py: unknown symbol version: {!r}', symbol_version)

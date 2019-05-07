@@ -25,8 +25,8 @@ from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
 from    Capital.NativeString                import  NativeString
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
-from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
+from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 
 
 if __debug__:
@@ -78,7 +78,7 @@ class Parser_Module_Name_With_Dot(
         return arrange('<Parser_Module_Name_With_Dot {}>', self)
 
 
-conjure_parser_module_name_with_dot = produce_conjure_full_name(Parser_Module_Name_With_Dot)
+conjure_parser_module_name_with_dot = produce_conjure_full_name__with_unused_Z_parameter(Parser_Module_Name_With_Dot)
 
 
 export(conjure_parser_module_name_with_dot)

@@ -24,7 +24,6 @@
 
 
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Parser.Symbol                     import  conjure_parser_symbol
 
 
 if __debug__:
@@ -51,7 +50,7 @@ def convert_keyword_argument(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
     return z.create_Tree_Keyword_Argument(
-               conjure_parser_symbol(v.arg),
+               z.conjure_parser_symbol(z, v.arg),
                z.convert_expression (z, v.value),
            )
 

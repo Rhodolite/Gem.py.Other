@@ -4,15 +4,17 @@
 
 
 #
-#   Z.Parser.Produce_ConjureFullName - An identifier used in the Z parser.
+#   Capital.Produce_ConjureFullName - Produce a `conjure_full_name` function.
+#
+#       SEE: "Capital.Private.ConjureString_V6" for extensive comments.
 #
 
 
-from    Capital.Private.TemporaryString_V6      import  create_temporary_string
+from    Capital.TemporaryString_V6      import  create_temporary_string
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
+    from    Capital.Fact                import  fact_is_full_native_string
 
 
 #

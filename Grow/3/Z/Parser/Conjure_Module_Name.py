@@ -9,7 +9,6 @@
 
 
 from    Capital.NativeString            import  native_string__lookup_index__OR__MINUS_1
-from    Z.Parser.Symbol                 import  conjure_parser_symbol
 
 
 if __debug__:
@@ -38,6 +37,6 @@ def conjure_parser_module_name(z, s):
     dot_index = native_string__lookup_index__OR__MINUS_1(s, '.')
 
     if dot_index == -1:
-        return conjure_parser_symbol(s)
+        return z.conjure_parser_symbol(z, s)
 
-    return z.conjure_parser_module_name_with_dot(s)
+    return z.conjure_parser_module_name_with_dot(z, s)

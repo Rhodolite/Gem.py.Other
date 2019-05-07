@@ -45,12 +45,12 @@
 #
 
 
-from    Capital.Core                        import  export
-from    Capital.Core                        import  trace
-from    Capital.NativeString                import  intern_native_string
-from    Capital.Private.String_V6           import  empty_string
-from    Capital.Private.String_V6           import  FullString
-from    Capital.Private.TemporaryString_V6  import  create_temporary_string
+from    Capital.Core                    import  export
+from    Capital.Core                    import  trace
+from    Capital.NativeString            import  intern_native_string
+from    Capital.Private.String_V6       import  empty_string
+from    Capital.Private.String_V6       import  FullString
+from    Capital.TemporaryString_V6      import  create_temporary_string
 
 
 if __debug__:

@@ -13,32 +13,25 @@
 #
 #       Version 2:
 #
-#           1)  `Parser_Symbol_Implementation` does not implement `Parser_Symbol_0`
-#
-#           2)  Does not define `conjure_parser_symbol_0`.
+#           `Parser_Symbol_Implementation` does not implement `Parser_Module_Name`.
 #
 #       Version 3:
 #
-#           1)  `Parser_Symbol_Implementation` implements `Parser_Symbol_0`.
-#
-#           2)  Defines `conjure_parser_symbol_0`.
+#           `Parser_Symbol_Implementation` implements `Parser_Module_Name`.
 #
 
 
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
 from    Capital.NativeString                import  NativeString
-from    Capital.Produce_ConjureFullString   import  produce_conjure_full_name
 from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
-from    Z.Parser.None                       import  parser_none
+from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
-from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol_0
 
 
 if __debug__:
     from    Capital.Core                    import  FATAL
-    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
 
 
 class Parser_Symbol_Implementation(
@@ -46,7 +39,6 @@ class Parser_Symbol_Implementation(
         TRAIT_TemporaryElement,
         TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,
-        TRAIT_Parser_Symbol_0,
 ):
     __slots__ = (())
 
@@ -75,7 +67,7 @@ class Parser_Symbol_Implementation(
 
 
     def dump_module_name_token(self, f):
-        f.arrange('<module-name $ {}>', self)
+        f.arrange('<module-name symbol {}>', self)
 
 
     #
@@ -92,17 +84,7 @@ class Parser_Symbol_Implementation(
         return arrange('<Parser_Symbol_Implementation {}>', self)
 
 
-conjure_parser_symbol = produce_conjure_full_name(Parser_Symbol_Implementation)
+conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Implementation)
 
 
 export(conjure_parser_symbol)
-
-
-@export
-def conjure_parser_symbol_0(s):
-    assert fact_is__native_none__OR__full_native_string(s)
-
-    if s is None:
-        return parser_none
-
-    return conjure_parser_symbol(s)
