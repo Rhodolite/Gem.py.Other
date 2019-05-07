@@ -59,7 +59,7 @@ def convert_delete_context(z, v):
 def convert_delete_load_OR_store_context(z, v):
     assert fact_is_convert_zone(z)
 
-    return z.map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
+    return z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
 
 
 #
@@ -70,7 +70,7 @@ def convert_delete_load_OR_store_context(z, v):
 def convert_load_OR_store_context(z, v):
     assert fact_is_convert_zone(z)
 
-    return z.map__Native_AbstractSyntaxTree_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
+    return z.map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
 
 
 #

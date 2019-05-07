@@ -32,9 +32,6 @@ from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Attribute_V4                 import  create_Tree_Delete_Attribute
 from    Z.Tree.Attribute_V4                 import  create_Tree_Evaluate_Attribute
 from    Z.Tree.Attribute_V4                 import  create_Tree_Store_Attribute
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
 
 
 if __debug__:
@@ -48,31 +45,14 @@ if __debug__:
 
 
 #
-#   convert__delete_load_OR_store_context__TO__create_attribute_function
+#   convert__delete_load_OR_store_context__TO__create_attribute_function(z, v)
 #
 #       Convert a "delete", "load", or "store" context to a create attribute function.
 #
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function = {
-        Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Attribute,
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Attribute,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Attribute,
-    }
+def convert__delete_load_OR_store_context__TO__create_attribute_function(z, v):
+    assert fact_is_convert_zone(z)
 
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(
-            map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function,
-        )
-
-
-def convert__delete_load_OR_store_context__TO__create_attribute_function(v):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function[type(v)]
+    return z.map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function[type(v)]
 
 
 #
@@ -105,9 +85,9 @@ def convert_attribute_expression(z, v):
     assert fact_is_full_native_string                                              (v.attr)
     assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    create_attribute = convert__delete_load_OR_store_context__TO__create_attribute_function(v.ctx)
+    create_attribute__function = convert__delete_load_OR_store_context__TO__create_attribute_function(z, v.ctx)
 
-    return create_attribute(
+    return create_attribute__function(
                v.lineno,
                v.col_offset,
 

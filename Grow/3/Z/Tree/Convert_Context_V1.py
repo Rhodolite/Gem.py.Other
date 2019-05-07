@@ -46,7 +46,7 @@ def convert_delete_context(v):
 #
 #       Convert a "delete", "load", or "store" context to a `Tree_Context` enumerator.
 #
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
+map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context = {
         Native_AbstractSyntaxTree_Delete_Context : tree_delete_context,
         Native_AbstractSyntaxTree_Load_Context   : tree_load_context,
         Native_AbstractSyntaxTree_Store_Context  : tree_store_context,
@@ -60,11 +60,11 @@ if __debug__:
             assert k._fields     == (())
 
 
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
+    assert_no_context_fields(map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context)
 
 
 def convert_delete_load_OR_store_context(v):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
+    return map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__to__Tree_Context[type(v)]
 
 
 #
