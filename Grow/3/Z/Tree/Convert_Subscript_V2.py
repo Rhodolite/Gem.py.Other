@@ -25,7 +25,6 @@
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Subscript_V1                 import  create_Tree_Subscript_Expression
 
@@ -63,7 +62,7 @@ def convert_subscript_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                (z, v.value),
-               z.convert_index_clause              (z, v.slice),
-               convert_delete_load_OR_store_context(v.ctx),
+               z.convert_expression                  (z, v.value),
+               z.convert_index_clause                (z, v.slice),
+               z.convert_delete_load_OR_store_context(z, v.ctx),
            )

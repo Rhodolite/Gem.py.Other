@@ -21,7 +21,7 @@
 #
 #           A single enumeration named `Tree_Operator_Enumeration`.
 #
-#           See "Z.Tree.Context_V2" for an explanation of "enumeration".
+#           See "Z.Tree.Context_V3.py" for an explanation of "enumeration".
 #
 
 

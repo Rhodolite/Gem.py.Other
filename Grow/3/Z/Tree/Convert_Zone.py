@@ -71,6 +71,7 @@ class Convert_Zone(object):
         #   Argument
         #
         'convert_some_list_of_keyword_arguments',   #   Function
+        'create_Tree_Keyword_Argument',             #   Function
 
         #
         #   Alias
@@ -84,6 +85,11 @@ class Convert_Zone(object):
         #   Comprehension
         #
         'convert_full_list_of_comprehensions',      #   Function
+
+        #
+        #   Context
+        #
+        'convert_delete_load_OR_store_context',     #   Function
 
         #
         #   Decorator
@@ -209,8 +215,17 @@ def fill_convert_zone():
     #
     #   Argument
     #
-    if argument_version in ((2, 3)):
+    if argument_version == 2:
         from    Z.Tree.Convert_Argument_V2  import  convert_some_list_of_keyword_arguments
+    elif argument_version == 3:
+        from    Z.Tree.Convert_Argument_V3  import  convert_some_list_of_keyword_arguments
+    else:
+        FATAL_unknown_version('argument', argument_version)
+
+    if argument_version == 2:
+        from    Z.Tree.Argument_V1          import  create_Tree_Keyword_Argument
+    elif argument_version == 3:
+        from    Z.Tree.Argument_V3          import  create_Tree_Keyword_Argument
     else:
         FATAL_unknown_version('argument', argument_version)
         
@@ -255,6 +270,18 @@ def fill_convert_zone():
     #   Comprehension
     #
     from    Z.Tree.Convert_Comprehension_V2 import  convert_full_list_of_comprehensions
+
+    
+    #
+    #   Context
+    #
+    if context_version == 0:
+        convert_delete_load_OR_store_context = None
+    elif context_version == 2:
+        from    Z.Tree.Convert_Context_V2   import  convert_delete_load_OR_store_context
+    else:
+        FATAL_unknown_version('context', context_version)
+
 
     #
     #   Decorator
@@ -472,7 +499,7 @@ def fill_convert_zone():
     #
     #   Target
     #
-    if target_version == 2:
+    if target_version in ((2, 3, 4)):
         from    Z.Tree.Convert_Target_V2        import  convert_full_list_of_targets
         from    Z.Tree.Convert_Target_V2        import  convert_none_OR_target
         from    Z.Tree.Convert_Target_V2        import  convert_target
@@ -484,6 +511,16 @@ def fill_convert_zone():
         from    Z.Tree.Convert_Many_V2          import  convert_list_expression
         from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression
         from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
+    elif target_version == 3:
+        from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
+        from    Z.Tree.Convert_Many_V2          import  convert_list_expression
+        from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression
+        from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
+    elif target_version == 4:
+        from    Z.Tree.Convert_Attribute_V4     import  convert_attribute_expression
+        from    Z.Tree.Convert_Many_V4          import  convert_list_expression
+        from    Z.Tree.Convert_Many_V4          import  convert_tuple_expression
+        from    Z.Tree.Convert_Subscript_V4     import  convert_subscript_expression
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -593,6 +630,7 @@ def fill_convert_zone():
     #   Argument
     #
     z.convert_some_list_of_keyword_arguments = convert_some_list_of_keyword_arguments
+    z.create_Tree_Keyword_Argument           = create_Tree_Keyword_Argument
 
 
     #
@@ -608,6 +646,12 @@ def fill_convert_zone():
     #   Comprehension
     #
     z.convert_full_list_of_comprehensions = convert_full_list_of_comprehensions
+
+
+    #
+    #   Context
+    #
+    z.convert_delete_load_OR_store_context = convert_delete_load_OR_store_context
 
 
     #

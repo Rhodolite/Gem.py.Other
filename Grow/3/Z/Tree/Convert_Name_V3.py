@@ -24,8 +24,7 @@
 
 
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
-from    Z.Tree.Convert_Context              import  convert_parameter_context
+from    Z.Tree.Convert_Context_V1           import  convert_parameter_context
 from    Z.Tree.Name_V3                      import  create_Tree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
 
@@ -72,8 +71,8 @@ def convert_name_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               conjure_parser_symbol               (v.id),
-               convert_delete_load_OR_store_context(v.ctx),
+               conjure_parser_symbol                 (v.id),
+               z.convert_delete_load_OR_store_context(z, v.ctx),
            )
 
 

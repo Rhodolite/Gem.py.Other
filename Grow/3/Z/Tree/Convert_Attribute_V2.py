@@ -24,7 +24,6 @@
 
 
 from    Z.Tree.Attribute_V1                 import  create_Tree_Attribute
-from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 
 
@@ -60,7 +59,7 @@ def convert_attribute_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                (z, v.value),
+               z.convert_expression                  (z, v.value),
                v.attr,
-               convert_delete_load_OR_store_context(v.ctx),
+               z.convert_delete_load_OR_store_context(z, v.ctx),
           )
