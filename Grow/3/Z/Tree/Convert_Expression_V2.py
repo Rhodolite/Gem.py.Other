@@ -96,7 +96,6 @@ convert_some_list_of_expressions = produce__convert__some_list_of__Native_Abstra
 #</order>
 
 
-from    Capital.Core                        import  trace
 from    Capital.Types                       import  NoneType
 from    Z.Tree.Convert_Operator             import  convert_binary_operator
 from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators

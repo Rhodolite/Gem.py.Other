@@ -32,7 +32,6 @@ from    Z.Parser.Symbol                     import  conjure_parser_symbol
 from    Z.Tree.Attribute_V4                 import  create_Tree_Delete_Attribute
 from    Z.Tree.Attribute_V4                 import  create_Tree_Evaluate_Attribute
 from    Z.Tree.Attribute_V4                 import  create_Tree_Store_Attribute
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
@@ -45,6 +44,7 @@ if __debug__:
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 
 
 #

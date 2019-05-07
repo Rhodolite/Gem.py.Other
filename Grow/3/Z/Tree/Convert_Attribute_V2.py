@@ -23,9 +23,6 @@
 #
 
 
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_positive_integer
@@ -33,6 +30,7 @@ if __debug__:
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 
 
 #

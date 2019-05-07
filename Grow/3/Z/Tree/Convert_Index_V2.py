@@ -24,15 +24,6 @@
 #
 
 
-from    Capital.Core                        import  trace
-from    Z.Tree.Index                        import  create_Tree_Extended_Slice_Index
-from    Z.Tree.Index                        import  create_Tree_Simple_Index
-from    Z.Tree.Index                        import  create_Tree_Slice_Index
-from    Z.Tree.Index                        import  tree_ellipses_index
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ellipsis_Index
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Extended_Slice_Index
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Slice_Index
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -41,6 +32,10 @@ if __debug__:
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ellipsis_Index
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Extended_Slice_Index
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Slice_Index
 
 
 #
@@ -56,7 +51,7 @@ assert Native_AbstractSyntaxTree_Ellipsis_Index._fields     == (())
 def convert_ellipses_index(z, v):
     assert fact_is_convert_zone(z)
 
-    return tree_ellipses_index
+    return z.tree_ellipses_index
 
 
 #
@@ -74,8 +69,8 @@ def convert_extended_slice_index(z, v):
 
     assert fact_is_full_native_list(v.dims)
 
-    return create_Tree_Extended_Slice_Index(
-               convert_full_list_of_index_clauses(v.dims),
+    return z.create_Tree_Extended_Slice_Index(
+               convert_full_list_of_index_clauses(z, v.dims),
            )
 
 
@@ -93,7 +88,7 @@ def convert_simple_index(z, v):
 
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
-    return create_Tree_Simple_Index(
+    return z.create_Tree_Simple_Index(
                z.convert_expression(z, v.value),
            )
 
@@ -114,7 +109,7 @@ def convert_slice_index(z, v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.upper)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.step)
 
-    return create_Tree_Slice_Index(
+    return z.create_Tree_Slice_Index(
                z.convert_none_OR_expression(z, v.lower),
                z.convert_none_OR_expression(z, v.upper),
                z.convert_none_OR_expression(z, v.step),

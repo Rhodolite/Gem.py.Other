@@ -27,7 +27,7 @@ if __debug__:
 #
 #   Tree: Except Handler
 #
-class Tree_Except_Handler_V1(
+class Tree_Except_Handler(
         TRAIT_Tree_Except_Clause,
 ):
     __slots__ = ((
@@ -79,13 +79,13 @@ class Tree_Except_Handler_V1(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Except_Handler_V1 @{}:{} {!r} {!r} {!r}>',
+        return arrange('<Tree_Except_Handler @{}:{} {!r} {!r} {!r}>',
                        self.line_number, self.column, self.type_expression, self.name_expression, self.body)
 
 
 
 @creator
-def create_Tree_Except_Handler_V1(line_number, column, type_expression, name_expression, body):
+def create_Tree_Except_Handler(line_number, column, type_expression, name_expression, body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
@@ -96,4 +96,4 @@ def create_Tree_Except_Handler_V1(line_number, column, type_expression, name_exp
     if type_expression is None:
         assert fact_is_native_none(name_expression)
 
-    return Tree_Except_Handler_V1(line_number, column, type_expression, name_expression, body)
+    return Tree_Except_Handler(line_number, column, type_expression, name_expression, body)

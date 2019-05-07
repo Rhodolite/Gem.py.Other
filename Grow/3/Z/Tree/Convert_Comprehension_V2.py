@@ -25,9 +25,6 @@
 #
 
 
-from    Capital.Core                        import  trace
-from    Z.Tree.Comprehension                import  create_Tree_Comprehension_Clause
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -38,6 +35,7 @@ if __debug__:
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
 
 
 #
@@ -57,7 +55,7 @@ def convert_comprehension_clause(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.iter)
     assert fact_is_some_native_list                              (v.ifs)
 
-    return create_Tree_Comprehension_Clause(
+    return z.create_Tree_Comprehension_Clause(
                z.convert_target                  (z, v.target),
                z.convert_expression              (z, v.iter),
                z.convert_some_list_of_expressions(z, v.ifs),

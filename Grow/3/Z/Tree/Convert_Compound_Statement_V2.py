@@ -23,9 +23,6 @@
 #
 
 
-from    Z.Tree.Convert_Except_V2            import  convert_full_list_of_except_clauses
-
-
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Fact                        import  fact_is_positive_integer
@@ -136,9 +133,9 @@ def convert_try_except_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_full_list_of_statements  (z, v.body),
-               convert_full_list_of_except_clauses(z, v.handlers),
-               z.convert_some_list_of_statements  (z, v.orelse),
+               z.convert_full_list_of_statements    (z, v.body),
+               z.convert_full_list_of_except_clauses(z, v.handlers),
+               z.convert_some_list_of_statements    (z, v.orelse),
            )
 
 

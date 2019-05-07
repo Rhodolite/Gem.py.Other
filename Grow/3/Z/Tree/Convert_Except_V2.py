@@ -23,8 +23,6 @@
 #
 
 
-from    Z.Tree.Except                       import  create_Tree_Except_Handler
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Except_Handler
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
@@ -36,6 +34,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is__native_none__OR__full_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Except_Handler
 
 
 #
@@ -61,7 +60,7 @@ def convert_except_handler(z, v):
     if v.type is None:
         assert fact_is_native_none(v.name)
 
-    return create_Tree_Except_Handler(
+    return z.create_Tree_Except_Handler(
                v.lineno,
                v.col_offset,
 

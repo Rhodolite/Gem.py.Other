@@ -23,7 +23,6 @@
 #
 
 
-from    Capital.Core                        import  trace
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 

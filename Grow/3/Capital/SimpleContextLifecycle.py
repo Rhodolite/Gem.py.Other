@@ -9,8 +9,11 @@
 
 
 from    Capital.Core                    import  creator
-from    Capital.Fact                    import  fact_is_full_native_string
 from    Capital.NativeString            import  intern_native_string
+
+
+if __debug__:
+    from    Capital.Fact                import  fact_is_full_native_string
 
 
 #

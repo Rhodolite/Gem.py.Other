@@ -74,20 +74,3 @@ if __debug__:
 
         return True
 #</order>
-
-
-#
-#   Import the version of tree except clauses we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-version = parser_globals.except_version
-
-
-if version == '1':
-    from    Z.Tree.Except_V1            import  create_Tree_Except_Handler_V1   as  create_Tree_Except_Handler
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Except.py: unknown tree except version: {!r}', version)

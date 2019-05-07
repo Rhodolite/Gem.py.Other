@@ -92,20 +92,3 @@ if __debug__:
 
         return True
 #</order>
-
-
-#
-#   Import the version of tree comprehension clauses we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-version = parser_globals.comprehension_version
-
-
-if version == '1':
-    from    Z.Tree.Comprehension_V1     import  create_Tree_Comprehension_Clause
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Comprehension.py: unknown tree comprehension version: {!r}', version)

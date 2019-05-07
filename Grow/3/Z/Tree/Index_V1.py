@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Index_V1 - Implementation of `Tree_Index_Clause`, Version 1.
+#   Z.Tree.Index - Implementation of `Tree_Index_Clause`, Version 1.
 #
 #       Copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -22,9 +22,9 @@ if __debug__:
 
 
 #
-#   Tree: Ellipses Index, Version 1
+#   Tree: Ellipses Index
 #
-class Tree_Ellipses_Index_V1(object):
+class Tree_Ellipses_Index(object):
     #
     #   implements Tree_Index_Clause
     #
@@ -48,21 +48,21 @@ class Tree_Ellipses_Index_V1(object):
     #
     @staticmethod
     def __repr__():
-        return '<Tree_Ellipses_Index_V1>'
+        return '<Tree_Ellipses_Index>'
 
 
 @creator
-def create_Tree_Ellipses_Index_V1():
-    return Tree_Ellipses_Index_V1()
+def create_Tree_Ellipses_Index():
+    return Tree_Ellipses_Index()
 
 
-tree_ellipses_index_v1 = create_Tree_Ellipses_Index_V1()
+tree_ellipses_index = create_Tree_Ellipses_Index()
 
 
 #
-#   Tree: Extended Slice Index, Version 1
+#   Tree: Extended Slice Index
 #
-class Tree_Extended_Slice_Index_V1(object):
+class Tree_Extended_Slice_Index(object):
     #
     #   implements Tree_Index_Clause
     #
@@ -105,20 +105,20 @@ class Tree_Extended_Slice_Index_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Extended_Slice_Index_V1 {!r}>', self.many)
+        return arrange('<Tree_Extended_Slice_Index {!r}>', self.many)
 
 
 @creator
-def create_Tree_Extended_Slice_Index_V1(many):
+def create_Tree_Extended_Slice_Index(many):
     assert fact_is_full_native_list(many)
 
-    return Tree_Extended_Slice_Index_V1(many)
+    return Tree_Extended_Slice_Index(many)
 
 
 #
-#   Tree: Simple Index, Version 1
+#   Tree: Simple Index
 #
-class Tree_Simple_Index_V1(object):
+class Tree_Simple_Index(object):
     #
     #   implements Tree_Index_Clause
     #
@@ -151,18 +151,18 @@ class Tree_Simple_Index_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Simple_Index_V1 {!r}>', self.value)
+        return arrange('<Tree_Simple_Index {!r}>', self.value)
 
 
 @creator
-def create_Tree_Simple_Index_V1(value):
+def create_Tree_Simple_Index(value):
     assert fact_is_tree_expression(value)
 
-    return Tree_Simple_Index_V1(value)
+    return Tree_Simple_Index(value)
 
 
 #
-#   Tree: Slice Index, Version 1
+#   Tree: Slice Index
 #
 #   NOTE ON PYTHON PARSING:
 #
@@ -173,7 +173,7 @@ def create_Tree_Simple_Index_V1(value):
 #
 #       The second `:` can be detected by whether the value of `step` is `None`, or in fact a `Tree_Name` (with the name `None`).
 #
-class Tree_Slice_Index_V1(object):
+class Tree_Slice_Index(object):
     #
     #   implements Tree_Index_Clause
     #
@@ -231,13 +231,13 @@ class Tree_Slice_Index_V1(object):
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Slice_Index_V1 {!r} {!r} {!r}>', self.lower, self.upper, self.step)
+        return arrange('<Tree_Slice_Index {!r} {!r} {!r}>', self.lower, self.upper, self.step)
 
 
 @creator
-def create_Tree_Slice_Index_V1(lower, upper, step):
+def create_Tree_Slice_Index(lower, upper, step):
     assert fact_is__native_none__OR__tree_expression(lower)
     assert fact_is__native_none__OR__tree_expression(upper)
     assert fact_is__native_none__OR__tree_expression(step)
 
-    return Tree_Slice_Index_V1(lower, upper, step)
+    return Tree_Slice_Index(lower, upper, step)

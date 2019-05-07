@@ -4,76 +4,46 @@
 
 
 #
-#   Z.Tree.Comprehension_V1 - Implementation of `Tree_Comprehension`, Version 1.
+#   Z.Tree.Argument - Interface to tree classes that represent tree [function] argments.
 #
-#       Copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
-#   See "Z/Tree/Comprehension.py" for an explanation of comprehensions.
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
-from    Capital.Core                    import  arrange
-from    Capital.Core                    import  creator
-from    Capital.Core                    import  trace
-from    Z.Tree.Comprehension            import  TRAIT_Tree_Comprehension_Clause
+#
+#   interface Tree_Argument - Interface to tree classes that represent [function] arguments.
+#
+#       interface Tree_Argument
+#           method
+#               dump_argument_tokens(f : Build_DumpToken)
+#
+#           debug
+#               is_tree_argument := true
+#
+class TRAIT_Tree_Argument(object):
+    __slots__ = (())
 
 
+    if __debug__:
+        is_tree_argument = True
+
+
+#
+#   USAGE:
+#
+#       v.is_tree_argument                  #   Test if `v` is a `Tree_Argument`.
+#
+#       v.dump_argument_tokens(f)           #   Dump the tokens representing the tree [function] arguments to `f`.
+#
+#       assert fact_is_tree_argument(v)     #   Assert that `v` is a tree [function] argument.
+#
+
+
+#
+#   fact_is_tree_argument(v) - Assert the fact that `v` is a `Tree_Argument`.
+#
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
-    from    Z.Tree.Expression           import  fact_is_tree_expression
-    from    Z.Tree.Target               import  fact_is_tree_store_target
+    def fact_is_tree_argument(v):
+        assert v.is_tree_argument
 
-
-#
-#   Tree: Comprehension Clause
-#
-class Tree_Comprehension_Clause_Implementation(
-        TRAIT_Tree_Comprehension_Clause,
-):
-    __slots__ = ((
-        'target',                       #   Tree_Expression
-        'sequence',                     #   Tree_Expression
-        'if_tests',                     #   SomeNativeList of Tree_Expression
-    ))
-
-
-    #
-    #   Private
-    #
-    def __init__(self, target, sequence, if_tests):
-        self.target   = target
-        self.sequence = sequence
-        self.if_tests = if_tests
-
-
-    #
-    #   Interface Tree_Comprehension_Clause
-    #
-    def dump_comprehension_clause_tokens(self, f):
-        f.write('<comprehension-clause for ')
-        self.target.dump_store_target_tokens(f)
-        f.write(' in ')
-        self.sequence.dump_evaluate_tokens(f)
-
-        for v in self.if_tests:
-            f.write(' if ')
-            v.dump_evaluate_tokens(f)
-
-        f.greater_than_sign()
-
-
-    #
-    #   Public
-    #
-    def __repr__(self):
-        return arrange('<Tree_Comprehension_Clause_Implementation {!r}.{} {}>',
-                       self.target, self.sequence, self.if_tests)
-
-
-@creator
-def create_Tree_Comprehension_Clause(target, sequence, if_tests):
-    assert fact_is_tree_store_target(target)
-    assert fact_is_tree_expression  (sequence)
-    assert fact_is_some_native_list(if_tests)
-
-    return Tree_Comprehension_Clause_Implementation(target, sequence, if_tests)
+        return True

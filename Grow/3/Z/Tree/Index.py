@@ -44,17 +44,6 @@
 
 
 #
-#<order>
-#
-#   NOTE:
-#       Because "Z/Tree/Index_1.py" needs facts, then it imports this file.
-#
-#   HENCE:
-#       The "fact" functions *MUST* appear *BEFORE* the import of "Z.Tree/Index_1.py"
-#
-
-
-#
 #   fact_is_tree_index_clause(v) - Assert that `v` is a tree index clause.
 #
 if __debug__:
@@ -62,26 +51,3 @@ if __debug__:
         assert v.is_tree_index_clause
 
         return True
-#</order>
-
-
-#
-#   Import the version of tree index clauses we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-version = parser_globals.index_version
-
-
-if version in ((1, 2)):
-    from    Z.Tree.Index_V1         import  (
-                create_Tree_Extended_Slice_Index_V1     as  create_Tree_Extended_Slice_Index,
-                create_Tree_Simple_Index_V1             as  create_Tree_Simple_Index,
-                create_Tree_Slice_Index_V1              as  create_Tree_Slice_Index,
-                tree_ellipses_index_v1                  as  tree_ellipses_index,
-        )
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Index.py: unknown tree index version: {!r}', version)

@@ -28,7 +28,6 @@
 
 
 from    Z.Parser.None                       import  parser_none
-from    Z.Tree.Convert_Except_V2            import  convert_full_list_of_except_clauses
 
 
 if __debug__:
@@ -141,9 +140,9 @@ def convert_try_except_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_suite                      (z, v.body),
-               convert_full_list_of_except_clauses(z, v.handlers),
-               convert_suite_0                    (z, v.orelse),
+               convert_suite                        (z, v.body),
+               z.convert_full_list_of_except_clauses(z, v.handlers),
+               convert_suite_0                      (z, v.orelse),
            )
 
 
