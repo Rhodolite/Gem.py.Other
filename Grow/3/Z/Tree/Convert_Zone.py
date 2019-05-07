@@ -119,6 +119,7 @@ class Convert_Zone(object):
         #
         'convert_some_list_of_decorators',          #   Function
 
+
         #
         #   Expression
         #
@@ -126,6 +127,24 @@ class Convert_Zone(object):
         'convert_some_list_of_expressions',         #   Function
         'convert_expression',                       #   Function
         'convert_none_OR_expression',               #   Function
+
+        'create_Tree_Backquote_Expression',         #   Function
+        'create_Tree_Binary_Expression',            #   Function
+        'create_Tree_Call_Expression',              #   Function
+        'create_Tree_Compare_Expression',           #   Function
+        'create_Tree_Generator_Comprehension',      #   Function
+        'create_Tree_If_Expression',                #   Function
+        'create_Tree_Lambda_Expression',            #   Function
+        'create_Tree_List_Comprehension',           #   Function
+        'create_Tree_Logical_Expression',           #   Function
+        'create_Tree_Map_Comprehension',            #   Function
+        'create_Tree_Map_Expression',               #   Function
+        'create_Tree_Number',                       #   Function
+        'create_Tree_Set_Comprehension',            #   Function
+        'create_Tree_Set_Expression',               #   Function
+        'create_Tree_String',                       #   Function
+        'create_Tree_Unary_Expression',             #   Function
+        'create_Tree_Yield_Expression',             #   Function
 
         'map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function',
                                                     #    Map { Native_AbstractSyntaxTree_* : Function }
@@ -417,6 +436,28 @@ def fill_convert_zone():
         FATAL_unknown_version('expression', expression_version)
 
 
+    if expression_version == 2:
+        from    Z.Tree.Expression_V1    import  create_Tree_Backquote_Expression        #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Binary_Expression           #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Call_Expression             #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Compare_Expression          #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Generator_Comprehension     #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_If_Expression               #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Lambda_Expression           #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_List_Comprehension          #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Logical_Expression          #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Map_Comprehension           #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Map_Expression              #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Number                      #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Set_Comprehension           #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Set_Expression              #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_String                      #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Unary_Expression            #   "_V1" on purpose.
+        from    Z.Tree.Expression_V1    import  create_Tree_Yield_Expression            #   "_V1" on purpose.
+    else:
+        FATAL_unknown_version('expression', expression_version)
+
+
     #
     #   Index
     #
@@ -600,21 +641,21 @@ def fill_convert_zone():
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Raise_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Return_Statement        #   "_V1" on purpose.
     elif statement_version == 4:
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Assert_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Assign_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Break_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Continue_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Delete_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Execute_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Expression_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_From_Import_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Global_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Import_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Modify_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Pass_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Print_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Raise_Statement
-        from    Z.Tree.Simple_Statement_V3      import  create_Tree_Return_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Assert_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Assign_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Break_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Continue_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Delete_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Execute_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Expression_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_From_Import_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Global_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Import_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Modify_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Pass_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Print_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Raise_Statement
+        from    Z.Tree.Simple_Statement_V4      import  create_Tree_Return_Statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -1059,6 +1100,24 @@ def fill_convert_zone():
     z.convert_full_list_of_expressions = convert_full_list_of_expressions
     z.convert_none_OR_expression       = convert_none_OR_expression
     z.convert_some_list_of_expressions = convert_some_list_of_expressions
+
+    z.create_Tree_Backquote_Expression    = create_Tree_Backquote_Expression
+    z.create_Tree_Binary_Expression       = create_Tree_Binary_Expression
+    z.create_Tree_Call_Expression         = create_Tree_Call_Expression
+    z.create_Tree_Compare_Expression      = create_Tree_Compare_Expression
+    z.create_Tree_Generator_Comprehension = create_Tree_Generator_Comprehension
+    z.create_Tree_If_Expression           = create_Tree_If_Expression
+    z.create_Tree_Lambda_Expression       = create_Tree_Lambda_Expression
+    z.create_Tree_List_Comprehension      = create_Tree_List_Comprehension
+    z.create_Tree_Logical_Expression      = create_Tree_Logical_Expression
+    z.create_Tree_Map_Comprehension       = create_Tree_Map_Comprehension
+    z.create_Tree_Map_Expression          = create_Tree_Map_Expression
+    z.create_Tree_Number                  = create_Tree_Number
+    z.create_Tree_Set_Comprehension       = create_Tree_Set_Comprehension
+    z.create_Tree_Set_Expression          = create_Tree_Set_Expression
+    z.create_Tree_String                  = create_Tree_String
+    z.create_Tree_Unary_Expression        = create_Tree_Unary_Expression
+    z.create_Tree_Yield_Expression        = create_Tree_Yield_Expression
 
     z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = (
             map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function

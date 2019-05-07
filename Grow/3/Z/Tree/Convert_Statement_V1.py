@@ -11,15 +11,6 @@
 
 
 #
-#   Verify statement version 1
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-assert parser_globals.statement_version == 1
-
-
-#
 #<order>
 #
 #   NOTE:

@@ -10,7 +10,11 @@
 #
 
 
+from    Z.Tree.Convert_Attribute_V1         import  convert_attribute_expression
+from    Z.Tree.Convert_Many_V1              import  convert_list_expression
+from    Z.Tree.Convert_Many_V1              import  convert_tuple_expression
 from    Z.Tree.Convert_Name_V1              import  convert_name_expression
+from    Z.Tree.Convert_Subscript_V1         import  convert_subscript_expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
@@ -21,24 +25,9 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Un
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
 
 
+
 if __debug__:
     from    Capital.Fact                    import  fact_is_full_native_list
-
-
-#
-#   Import the version of tree targets we want to use.
-#
-from    Z.Parser.Global                 import  parser_globals
-
-
-assert parser_globals.target_version == 1
-
-
-from    Z.Tree.Convert_Attribute_V1     import  convert_attribute_expression
-from    Z.Tree.Convert_Many_V1          import  convert_list_expression
-from    Z.Tree.Convert_Many_V1          import  convert_tuple_expression
-from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression
-
 
 
 #

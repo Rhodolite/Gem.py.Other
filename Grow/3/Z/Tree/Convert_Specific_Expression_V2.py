@@ -27,23 +27,6 @@ from    Z.Tree.Convert_Operator             import  convert_binary_operator
 from    Z.Tree.Convert_Operator             import  convert_full_list_of_compare_operators
 from    Z.Tree.Convert_Operator             import  convert_logical_operator
 from    Z.Tree.Convert_Operator             import  convert_unary_operator
-from    Z.Tree.Expression_V1                import  create_Tree_Backquote_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Binary_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Call_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Compare_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Generator_Comprehension
-from    Z.Tree.Expression_V1                import  create_Tree_If_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Lambda_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_List_Comprehension
-from    Z.Tree.Expression_V1                import  create_Tree_Logical_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Map_Comprehension
-from    Z.Tree.Expression_V1                import  create_Tree_Map_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Number
-from    Z.Tree.Expression_V1                import  create_Tree_Set_Comprehension
-from    Z.Tree.Expression_V1                import  create_Tree_Set_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_String
-from    Z.Tree.Expression_V1                import  create_Tree_Unary_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
 
 
 if __debug__:
@@ -120,7 +103,7 @@ def convert_backquote_expression(z, v):
 
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
-    return create_Tree_Backquote_Expression(
+    return z.create_Tree_Backquote_Expression(
                v.lineno,
                v.col_offset,
 
@@ -147,7 +130,7 @@ def convert_binary_expression(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR(v.op)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (v.right)
 
-    return create_Tree_Binary_Expression(
+    return z.create_Tree_Binary_Expression(
                v.lineno,
                v.col_offset,
 
@@ -178,7 +161,7 @@ def convert_call_expression(z, v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.starargs)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.kwargs)
 
-    return create_Tree_Call_Expression(
+    return z.create_Tree_Call_Expression(
                v.lineno,
                v.col_offset,
 
@@ -209,7 +192,7 @@ def convert_compare_expression(z, v):
     assert fact_is_full_native_list                              (v.ops)
     assert fact_is_full_native_list                              (v.comparators)
 
-    return create_Tree_Compare_Expression(
+    return z.create_Tree_Compare_Expression(
                v.lineno,
                v.col_offset,
 
@@ -246,7 +229,7 @@ assert Native_AbstractSyntaxTree_Generator_Comprehension._fields     == (('elt',
 def convert_generator_comprehension(z, v):
     assert fact_is_convert_zone(z)
 
-    return convert_value_comprehension(z, v, create_Tree_Generator_Comprehension)
+    return convert_value_comprehension(z, v, z.create_Tree_Generator_Comprehension)
 
 
 #
@@ -268,7 +251,7 @@ def convert_if_expression(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.body)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.orelse)
 
-    return create_Tree_If_Expression(
+    return z.create_Tree_If_Expression(
                v.lineno,
                v.col_offset,
 
@@ -296,7 +279,7 @@ def convert_lambda_expression(z, v):
     assert fact_is__native__abstract_syntax_tree__parameters_all (v.args)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.body)
 
-    return create_Tree_Lambda_Expression(
+    return z.create_Tree_Lambda_Expression(
                v.lineno,
                v.col_offset,
 
@@ -326,7 +309,7 @@ assert Native_AbstractSyntaxTree_List_Comprehension._fields     == (('elt', 'gen
 def convert_list_comprehension(z, v):
     assert fact_is_convert_zone(z)
 
-    return convert_value_comprehension(z, v, create_Tree_List_Comprehension)
+    return convert_value_comprehension(z, v, z.create_Tree_List_Comprehension)
 
 
 #
@@ -347,7 +330,7 @@ def convert_logical_expression(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR(v.op)
     assert fact_is_full_native_list                                    (v.values)
 
-    return create_Tree_Logical_Expression(
+    return z.create_Tree_Logical_Expression(
                v.lineno,
                v.col_offset,
 
@@ -384,7 +367,7 @@ def convert_map_comprehension(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
     assert fact_is_full_native_list                              (v.generators)
 
-    return create_Tree_Map_Comprehension(
+    return z.create_Tree_Map_Comprehension(
                v.lineno,
                v.col_offset,
 
@@ -414,7 +397,7 @@ def convert_map_expression(z, v):
 
     assert len(v.keys) == len(v.values)
 
-    return create_Tree_Map_Expression(
+    return z.create_Tree_Map_Expression(
                v.lineno,
                v.col_offset,
 
@@ -440,7 +423,7 @@ def convert_number(z, v):
 
     assert fact_is_some_native_integer(v.n)
 
-    return create_Tree_Number(v.lineno, v.col_offset, v.n)
+    return z.create_Tree_Number(v.lineno, v.col_offset, v.n)
 
 
 #
@@ -464,7 +447,7 @@ assert Native_AbstractSyntaxTree_Set_Comprehension._fields     == (('elt', 'gene
 def convert_set_comprehension(z, v):
     assert fact_is_convert_zone(z)
 
-    return convert_value_comprehension(z, v, create_Tree_Set_Comprehension)
+    return convert_value_comprehension(z, v, z.create_Tree_Set_Comprehension)
 
 
 #
@@ -484,7 +467,7 @@ def convert_set_expression(z, v):
 
     assert fact_is_some_native_list(v.elts)
 
-    return create_Tree_Set_Expression(
+    return z.create_Tree_Set_Expression(
                v.lineno,
                v.col_offset,
 
@@ -509,7 +492,7 @@ def convert_string(z, v):
 
     assert fact_is_some_native_string(v.s)
 
-    return create_Tree_String(v.lineno, v.col_offset, v.s)
+    return z.create_Tree_String(v.lineno, v.col_offset, v.s)
 
 
 #
@@ -530,7 +513,7 @@ def convert_unary_expression(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR(v.op)
     assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION    (v.operand)
 
-    return create_Tree_Unary_Expression(
+    return z.create_Tree_Unary_Expression(
                v.lineno,
                v.col_offset,
 
@@ -556,7 +539,7 @@ def convert_yield_expression(z, v):
 
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
 
-    return create_Tree_Yield_Expression(
+    return z.create_Tree_Yield_Expression(
                v.lineno,
                v.col_offset,
 

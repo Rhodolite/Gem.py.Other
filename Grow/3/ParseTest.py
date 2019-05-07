@@ -3,71 +3,74 @@
 #
 
 
-#
-#   Z.Tree.Convert_Comprehension_V2 - Convert Python Abstract Syntax Tree Comprehension to Tree classes, Version 2.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
-#
-#   See "Z/Tree/Comprehension.py" for an explanation of "Comprehensions".
-#
+if __name__ == '__main__':
+    #
+    #   If called as the main program, then we are being imported as the module `__main__`.
+    #
+    #   If so:
+    #
+    #       1A. *REIMPORT* ourselves under the name `Z`
+    #       1B. import `Z.Main`
+    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
+    #       2.  Call `Z_main`
+    #
+    #   This means:
+    #
+    #       *   This module is imported   under the name `__main__`;
+    #       *   This module is reimported under the name `Z`.
+    #
+    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
+    #   and does something different in each case ... so there are in effect two `Z` modules:
+    #
+    #       *   the one named `__main__` [this code under the `if`   clause], and
+    #       *   the one named `Z`        [the  code under the `else` clause below].
+    #
+    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
 
 
-#
-#   Difference between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           Does not use `Convert_Zone`.
-#
-#       Version 2:
-#
-#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
-#
+    Z_main()
+else:
+    from    os.path                     import  dirname     as  python_path_directory_name
+    from    os.path                     import  join        as  python_path_join
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+    #
+    #   Load Z submodules from "Z/" directory.
+    #
+    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
 
 
-if __debug__:
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
+    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
+    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
+    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
+    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
+    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
+    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
 
 
-#
-#   convert_comprehension(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Comprehension_Clause` (i.e.: `_ast.comprehension` to a
-#       `Tree_Comprehension_Clause`.
-#
-assert Native_AbstractSyntaxTree_Comprehension_Clause._attributes == (())
-assert Native_AbstractSyntaxTree_Comprehension_Clause._fields     == (('target', 'iter', 'ifs'))
+    #
+    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
+    #
+    #   This implements the following commands:
+    #
+    #       Z.copyright         - Add a copyright.
+    #       Z.output            - Output a line of text.
+    #
+    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
+    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
+    #
+    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
+    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
+    #
+    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
 
 
-def convert_comprehension_clause(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (v.target)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.iter)
-    assert fact_is_some_native_list                              (v.ifs)
-
-    return z.create_Tree_Comprehension_Clause(
-               z.convert_target                  (z, v.target),
-               z.convert_expression              (z, v.iter),
-               z.convert_some_list_of_expressions(z, v.ifs),
-           )
-
-
-#
-#   convert_full_list_of_comprehensions(z, sequence)
-#
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Comprehension_Clause`
-#       (i.e.: `list of _ast.Comprehension`) to a `FullNativeList of Tree_Comprehension_Clause`.
-#
-convert_full_list_of_comprehensions = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_comprehension_clause)
-    )
+    #
+    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
+    #
+    #       We run the code generator:
+    #
+    #       1.  Transform Crystal to Python.
+    #       2.  Output Python (to "Vision.py").
+    #
+    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()
