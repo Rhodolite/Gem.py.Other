@@ -22,12 +22,12 @@ name_version = parser_globals.name_version
 if name_version == 1:
     from    Z.Tree.Convert_Name_V1      import  convert_name_expression
     from    Z.Tree.Convert_Name_V1      import  convert_name_parameter
-elif name_version == 2:
-    from    Z.Tree.Convert_Name_V2      import  convert_name_expression
-    from    Z.Tree.Convert_Name_V2      import  convert_name_parameter
 elif name_version == 3:
     from    Z.Tree.Convert_Name_V3      import  convert_name_expression
     from    Z.Tree.Convert_Name_V3      import  convert_name_parameter
+elif name_version == 4:
+    from    Z.Tree.Convert_Name_V4      import  convert_name_expression
+    from    Z.Tree.Convert_Name_V4      import  convert_name_parameter
 else:
     from    Capital.Core                import  FATAL
 

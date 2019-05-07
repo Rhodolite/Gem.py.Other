@@ -23,7 +23,6 @@
 #
 
 
-from    Z.Tree.Convert_Expression_V2        import  convert_none_OR_expression
 from    Z.Tree.Except                       import  create_Tree_Except_Handler
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Except_Handler
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
@@ -66,8 +65,8 @@ def convert_except_handler(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_expression       (v.type),
-               convert_none_OR_expression       (v.name),
+               z.convert_none_OR_expression     (z, v.type),
+               z.convert_none_OR_expression     (z, v.name),
                z.convert_full_list_of_statements(z, v.body),
            )
 

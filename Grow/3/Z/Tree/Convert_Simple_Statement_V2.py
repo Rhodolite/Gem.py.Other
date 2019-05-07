@@ -26,7 +26,6 @@
 from    Capital.Core                        import  trace
 from    Z.Tree.Convert_Alias                import  convert_full_list_of_module_aliases
 from    Z.Tree.Convert_Alias                import  convert_full_list_of_symbol_aliases
-from    Z.Tree.Convert_Expression_V2        import  convert_none_OR_expression
 from    Z.Tree.Convert_Operator             import  convert_modify_operator
 
 
@@ -96,8 +95,8 @@ def convert_assert_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression      (z, v.test),
-               convert_none_OR_expression(v.msg),
+               z.convert_expression        (z, v.test),
+               z.convert_none_OR_expression(z, v.msg),
            )
 
 
@@ -208,9 +207,9 @@ def convert_execute_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression      (z, v.body),
-               convert_none_OR_expression(v.globals),
-               convert_none_OR_expression(v.locals),
+               z.convert_expression        (z, v.body),
+               z.convert_none_OR_expression(z, v.globals),
+               z.convert_none_OR_expression(z, v.locals),
            )
 
 
@@ -389,7 +388,7 @@ def convert_print_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_expression        (v.dest),
+               z.convert_none_OR_expression      (z, v.dest),
                z.convert_some_list_of_expressions(z, v.values),
                v.nl,
            )
@@ -418,9 +417,9 @@ def convert_raise_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_expression(v.type),
-               convert_none_OR_expression(v.inst),
-               convert_none_OR_expression(v.tback),
+               z.convert_none_OR_expression(z, v.type),
+               z.convert_none_OR_expression(z, v.inst),
+               z.convert_none_OR_expression(z, v.tback),
            )
 
 
@@ -445,5 +444,5 @@ def convert_return_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_expression(v.value),
+               z.convert_none_OR_expression(z, v.value),
            )

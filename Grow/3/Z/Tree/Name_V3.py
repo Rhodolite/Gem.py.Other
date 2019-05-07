@@ -11,25 +11,15 @@
 
 
 #
-#   Difference between Version 2 & Version 3
+#   Difference between Version 2 & Version 3.
 #
 #       Version 2:
 #
-#           Tree_Name had a `.context` member which four possible values:
-#
-#               tree_delete_context
-#               tree_load_context
-#               tree_parameter_context
-#               tree_store_context
+#           `Tree_Name` had a `.id : NativeString` member.
 #
 #       Version 3:
 #
-#           Instead of a single class with a `.context` member, four classes exist instead:
-#
-#               Tree_Delete_Name            -   Replacement for the `tree_delete_context` value.
-#               Tree_Evaluate_Name          -   Replacement for the `tree_load_context` value.
-#               Tree_Normal_Parameter       -   Replacement for the `tree_parameter_context` value.
-#               Tree_Store_Name             -   Replacement for the `tree_store_context` value.
+#           `Tree_Name` removes the `.id` member, and replaces it with a `.symbol : Symbol` member.
 #
 
 
@@ -41,29 +31,133 @@ if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
+    from    Z.Tree.Context              import  fact_is_tree_context
+    from    Z.Tree.Context              import  fact_is_tree_delete_context
+    from    Z.Tree.Context              import  fact_is_tree_load_context
+    from    Z.Tree.Context              import  fact_is_tree_parameter_context
+    from    Z.Tree.Context              import  fact_is_tree_store_context
 
 
 
 #
-#   Tree: Name - Base of class that with a name.
+#   Tree: Name - A name (in a specific context)
+#
+#       See "Z.Tree.Context" for explanation of contexts.
+#
+#       Because a `Tree_Name` can appear both as an expression, as a parameter, and as a target, it implements the
+#       `Tree_Expression`, `Tree_Parameter`, and `Tree_Target` interfaces.
 #
 class Tree_Name(object):
+    #
+    #   Implements Tree_Delete_Target,
+    #              Tree_Expression,
+    #              Tree_Parameter,
+    #              Tree_Store_Target
+    #
     __slots__ = ((
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
         'symbol',                       #   Symbol
+        'context',                      #   Tree_Context
     ))
 
 
     #
-    #   Protected
+    #   Private
     #
-    def __init__(self, line_number, column, symbol):
+    def __init__(self, line_number, column, symbol, context):
         self.line_number = line_number
         self.column      = column
 
         self.symbol  = symbol
+        self.context = context
+
+
+    def _dump_tree_name_token(self, f):
+        f.arrange('<name @{}:{} {} ', self.line_number, self.column, self.symbol)
+        self.context.dump_context_token(f)
+        f.greater_than_sign()
+
+
+    #
+    #   Interface Tree_Delete_Target
+    #
+    if __debug__:
+        @property
+        def is_tree_delete_target(self):
+            return self.context.is_tree_delete_context
+
+
+    if __debug__:
+        def dump_delete_target_tokens(self, f):
+            assert fact_is_tree_delete_context(self.context)
+
+            self._dump_tree_name_token(f)
+    else:
+        dump_delete_target_tokens = _dump_tree_name_token
+
+
+    #
+    #   Interface Tree_Expression
+    #
+    if __debug__:
+        @property
+        def is_tree_expression(self):
+            return (self.context.is_tree_load_context) or (self.context.is_tree_store_context)
+
+
+    if __debug__:
+        def dump_evaluate_tokens(self, f):
+            assert fact_is_tree_load_context(self.context)
+
+            self._dump_tree_name_token(f)
+    else:
+        dump_evaluate_tokens = _dump_tree_name_token
+
+
+    #
+    #   Interface Tree_Parameter
+    #
+    if __debug__:
+        is_tree_keyword_parameter = False
+        is_tree_parameters_all    = False
+
+
+        @property
+        def is_tree_parameter(self):
+            return self.context.is_tree_parameter_context
+
+
+        is_tree_normal_parameter = is_tree_parameter
+
+
+
+    if __debug__:
+        def dump_parameter_tokens(self, f):
+            assert fact_is_tree_parameter_context(self.context)
+
+            self._dump_tree_name_token(f)
+    else:
+        dump_parameter_tokens = _dump_tree_name_token
+
+
+    #
+    #   Interface Tree_Store_Target
+    #
+    if __debug__:
+        @property
+        def is_tree_store_target(self):
+            return self.context.is_tree_store_context
+
+
+    if __debug__:
+        def dump_store_target_tokens(self, f):
+            assert fact_is_tree_store_context(self.context)
+
+            self._dump_tree_name_token(f)
+    else:
+        dump_store_target_tokens = _dump_tree_name_token
 
 
     #
@@ -73,136 +167,15 @@ class Tree_Name(object):
 
 
     def __repr__(self):
-        return arrange('<{} @{}:{} {!r} {}>',
-                       self.__class__.__name__, self.line_number, self.column, self.symbol, self.context)
-
-
-#
-#   Tree: Delete Name
-#
-class Tree_Delete_Name(Tree_Name):
-    #
-    #   Implements Tree_Delete_Target
-    #
-    __slots__ = (())
-
-
-    #
-    #   Interface Tree_Delete_Target
-    #
-    if __debug__:
-        is_tree_delete_target = True
-
-
-    def dump_delete_target_tokens(self, f):
-        f.arrange('<delete-name @{}:{} {}>', self.line_number, self.column, self.symbol)
+        return arrange('<Tree_Name @{}:{} {!r} {}>', self.line_number, self.column, self.symbol, self.context)
 
 
 @creator
-def create_Tree_Delete_Name(line_number, column, symbol):
+def create_Tree_Name(line_number, column, symbol, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
     assert fact_is_parser_symbol(symbol)
+    assert fact_is_tree_context (context)
 
-    return Tree_Delete_Name(line_number, column, symbol)
-
-
-#
-#   Tree: Evaluate Name
-#
-class Tree_Evaluate_Name(Tree_Name):
-    #
-    #   Implements Tree_Expression
-    #
-    __slots__ = (())
-
-
-    #
-    #   Interface Tree_Expression
-    #
-    if __debug__:
-        is_tree_expression = True
-
-
-    def dump_evaluate_tokens(self, f):
-        #
-        #   NOTE:
-        #       Omit the keyword "evaluate-name" on purpose to make the output shorter.
-        #
-        f.arrange('<@{}:{} {}>', self.line_number, self.column, self.symbol)
-
-
-@creator
-def create_Tree_Evaluate_Name(line_number, column, symbol):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_parser_symbol(symbol)
-
-    return Tree_Evaluate_Name(line_number, column, symbol)
-
-
-#
-#   Tree: Normal Parameter
-#
-class Tree_Normal_Parameter(Tree_Name):
-    #
-    #   Implements Tree_Parameter
-    #
-    __slots__ = (())
-
-
-    #
-    #   Interface Tree_Parameter
-    #
-    if __debug__:
-        is_tree_keyword_parameter = False
-        is_tree_parameters_all    = False
-        is_tree_parameter         = True
-        is_tree_normal_parameter  = True
-
-
-    def dump_parameter_tokens(self, f):
-        f.arrange('<normal-parameter @{}:{} {}>', self.line_number, self.column, self.symbol)
-
-
-@creator
-def create_Tree_Normal_Parameter(line_number, column, symbol):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_parser_symbol(symbol)
-
-    return Tree_Normal_Parameter(line_number, column, symbol)
-
-
-#
-#   Tree: Store Name
-#
-class Tree_Store_Name(Tree_Name):
-    #
-    #   Implements Tree_Store_Target
-    #
-    __slots__ = (())
-
-
-    #
-    #   Interface Tree_Store_Target
-    #
-    if __debug__:
-        is_tree_store_target = True
-
-
-    def dump_store_target_tokens(self, f):
-        f.arrange('<store-name @{}:{} {}>', self.line_number, self.column, self.symbol)
-
-
-@creator
-def create_Tree_Store_Name(line_number, column, symbol):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_parser_symbol(symbol)
-
-    return Tree_Store_Name(line_number, column, symbol)
+    return Tree_Name(line_number, column, symbol, context)

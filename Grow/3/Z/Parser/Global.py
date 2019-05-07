@@ -38,6 +38,7 @@ if version >= 2:
     argument_version   = 2
     expression_version = 2
     index_version      = 2
+    name_version       = 2
     statement_version  = 2
     target_version     = 2
 
@@ -78,7 +79,7 @@ if version >= 6:
     symbol_version   = 1                #   Enable `Parser_Symbol`
 
 if version >= 7:
-    name_version = 2                    #   `Tree_Name` uses symbols.
+    name_version = 3                    #   `Tree_Name` uses symbols.
 
 if version >= 8:
     target_version = 3                  #   `Tree_Target` uses symbols (affects `Tree_Attribute`).
@@ -122,7 +123,7 @@ if version >= 12:
 #                          `Tree_Subscript`).
 #
 if version >= 13:
-    name_version = 3
+    name_version = 4
 
 if version >= 14:
     context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts

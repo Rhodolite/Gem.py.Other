@@ -35,22 +35,23 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT
 
 
 #
-#   convert_many_expression(v) - Common code for `convert_list_expression` and `convert_tuple_expression`
+#   convert_many_expression(z, v, create) - Common code for `convert_{list,tuple}_expression`.
 #
 #       Convert a `Native_AbstractSyntaxTree_List_Expression` (i.e.: `_ast.List`) to a `Tree_List_Expression`.
 #
-def convert_many_expression(v, create):
+def convert_many_expression(z, v, create):
+    assert fact_is_convert_zone(z)
+
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
     assert fact_is_some_native_list                                         (v.elts)
     assert fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT(v.ctx)
-
-    z = convert_zone
 
     return create(
                v.lineno,
@@ -62,7 +63,7 @@ def convert_many_expression(v, create):
 
 
 #
-#   convert_list_expression(v)
+#   convert_list_expression(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_List_Expression` (i.e.: `_ast.List`) to a `Tree_List_Expression`.
 #
@@ -70,12 +71,14 @@ assert Native_AbstractSyntaxTree_List_Expression._attributes == (('lineno', 'col
 assert Native_AbstractSyntaxTree_List_Expression._fields     == (('elts', 'ctx'))
 
 
-def convert_list_expression(v):
-    return convert_many_expression(v, create_Tree_List_Expression)
+def convert_list_expression(z, v):
+    assert fact_is_convert_zone(z)
+
+    return convert_many_expression(z, v, create_Tree_List_Expression)
 
 
 #
-#   convert_tuple_expression(v)
+#   convert_tuple_expression(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Tuple_Expression` (i.e.: `_ast.Tuple`) to a `Tree_Tuple_Expression`.
 #
@@ -83,5 +86,7 @@ assert Native_AbstractSyntaxTree_Tuple_Expression._attributes == (('lineno', 'co
 assert Native_AbstractSyntaxTree_Tuple_Expression._fields     == (('elts', 'ctx'))
 
 
-def convert_tuple_expression(v):
-    return convert_many_expression(v, create_Tree_Tuple_Expression)
+def convert_tuple_expression(z, v):
+    assert fact_is_convert_zone(z)
+
+    return convert_many_expression(z, v, create_Tree_Tuple_Expression)

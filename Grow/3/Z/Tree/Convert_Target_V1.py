@@ -12,7 +12,7 @@
 
 from    Capital.Core                        import  FATAL
 from    Z.Tree.Convert_Expression_V1        import  convert_expression
-from    Z.Tree.Convert_Name                 import  convert_name_expression
+from    Z.Tree.Convert_Name_V1              import  convert_name_expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_List_Expression
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
@@ -33,28 +33,13 @@ if __debug__:
 from    Z.Parser.Global                 import  parser_globals
 
 
-target_version = parser_globals.target_version
+assert parser_globals.target_version == 1
 
 
-if target_version in ((1, 2)):
-    from    Z.Tree.Convert_Attribute_V1     import  convert_attribute_expression
-    from    Z.Tree.Convert_Many_V1          import  convert_list_expression
-    from    Z.Tree.Convert_Many_V1          import  convert_tuple_expression
-    from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression
-elif target_version == 3:
-    from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
-    from    Z.Tree.Convert_Many_V1          import  convert_list_expression             #   "_V1" on purpose
-    from    Z.Tree.Convert_Many_V1          import  convert_tuple_expression            #   "_V1" on purpose
-    from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression        #   "_V1" on purpose
-elif target_version == 4:
-    from    Z.Tree.Convert_Attribute_V4     import  convert_attribute_expression
-    from    Z.Tree.Convert_Many_V4          import  convert_list_expression
-    from    Z.Tree.Convert_Many_V4          import  convert_tuple_expression
-    from    Z.Tree.Convert_Subscript_V4     import  convert_subscript_expression
-else:
-    from    Capital.Core                import  FATAL
-
-    FATAL('Z/Tree/Convert_Target_V1.py: unknown tree target version: {!r}', target_version)
+from    Z.Tree.Convert_Attribute_V1     import  convert_attribute_expression
+from    Z.Tree.Convert_Many_V1          import  convert_list_expression
+from    Z.Tree.Convert_Many_V1          import  convert_tuple_expression
+from    Z.Tree.Convert_Subscript_V1     import  convert_subscript_expression
 
 
 

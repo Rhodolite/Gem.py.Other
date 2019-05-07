@@ -42,7 +42,6 @@
 
 from    Capital.Core                        import  FATAL
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Name                 import  convert_name_parameter
 from    Z.Tree.Convert_Zone                 import  convert_zone
 from    Z.Tree.Parameter                    import  create_Tree_Parameters_All
 
@@ -53,6 +52,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
 
@@ -96,17 +96,18 @@ def convert_tuple_parameter(v):
 
 
 #
-#   convert_list_of_name_parameters
+#   convert_list_of_name_parameters(z, sequence)
 #
 #       Convert a `list of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a `list of SyntaxTree_Name`.
 #
 #       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
 #       of type `Native_AbstractSyntaxTree_Parameter`.
 #
-def convert_list_of_name_parameters(sequence):
+def convert_list_of_name_parameters(z, sequence):
+    assert fact_is_convert_zone    (z)
     assert fact_is_some_native_list(sequence)
 
-    return [convert_name_parameter(v)   for v in sequence]
+    return [z.convert_name_parameter(z, v)   for v in sequence]
 
 
 #
@@ -127,7 +128,7 @@ def convert_parameters_all(v):
     z = convert_zone
 
     return create_Tree_Parameters_All(
-               convert_list_of_name_parameters   (v.args),
+               convert_list_of_name_parameters   (z, v.args),
                convert_tuple_parameter           (v.vararg),
                convert_map_parameter             (v.kwarg),
                z.convert_some_list_of_expressions(z, v.defaults),

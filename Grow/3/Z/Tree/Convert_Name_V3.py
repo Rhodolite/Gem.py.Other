@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Name_V3 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 2.
+#   Z.Tree.Convert_Name_V3 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 3.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -15,31 +15,23 @@
 #
 #       Version 2:
 #
-#           Pass in a context to `create_Tree_Name`
+#           Pass in `v.id` as the `id` parameter (third parameter) to `create_Tree_Name`.
 #
 #       Version 3:
 #
-#           Do not pass in a context to create `Tree_Name`, but instead create one of the following four classes:
-#
-#               Tree_Delete_Name
-#               Tree_Evaluate_Name
-#               Tree_Normal_Parameter
-#               Tree_Store_Name
+#           Pass in `conjure_parser_symbol(v.id)` as the `symbol` parameter (third parameter) to `create_Tree_Name`.
 #
 
 
 from    Z.Parser.Symbol                     import  conjure_parser_symbol
-from    Z.Tree.Name_V3                      import  create_Tree_Delete_Name
-from    Z.Tree.Name_V3                      import  create_Tree_Evaluate_Name
-from    Z.Tree.Name_V3                      import  create_Tree_Normal_Parameter
-from    Z.Tree.Name_V3                      import  create_Tree_Store_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
+from    Z.Tree.Convert_Context              import  convert_delete_load_OR_store_context
+from    Z.Tree.Convert_Context              import  convert_parameter_context
+from    Z.Tree.Name_V3                      import  create_Tree_Name
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
-from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
 
 
 if __debug__:
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Capital.Fact                        import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_substantial_integer
@@ -48,39 +40,9 @@ if __debug__:
 
 
 #
-#   convert__delete_load_OR_store_context__TO__create_name_function
+#   convert_name_expression(z, v)
 #
-#       Convert a "delete", "load", or "store" context to a create name function.
-#
-map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function = {
-        Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Name,
-        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Name,
-        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Name,
-    }
-
-
-if __debug__:
-    def assert_no_context_fields(mapping):
-        for k in mapping:
-            assert k._attributes == (())
-            assert k._fields     == (())
-
-
-    assert_no_context_fields(map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function)
-
-
-def convert__delete_load_OR_store_context__TO__create_name_function(self):
-    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_name_function[type(self)]
-
-
-#
-#   convert_name_expression(self)
-#
-#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to one of the following three classes:
-#
-#               Tree_Delete_Name
-#               Tree_Evaluate_Name
-#               Tree_Store_Name
+#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to a `Tree_Name`.
 #
 #       The context (`.ctx` member) must be an instance of one of the following types:
 #
@@ -97,27 +59,28 @@ assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
 assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
 
 
-def convert_name_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_name_expression(z, v):
+    assert fact_is_convert_zone(z)
 
-    assert fact_is_full_native_string                                              (self.id)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(self.ctx)
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    create_name = convert__delete_load_OR_store_context__TO__create_name_function(self.ctx)
+    assert fact_is_full_native_string                                              (v.id)
+    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
-    return create_name(
-               self.lineno,
-               self.col_offset,
+    return create_Tree_Name(
+               v.lineno,
+               v.col_offset,
 
-               conjure_parser_symbol(self.id),
+               conjure_parser_symbol               (v.id),
+               convert_delete_load_OR_store_context(v.ctx),
            )
 
 
 #
-#   convert_name_parameter(self)
+#   convert_name_parameter(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Normal_Parameter`
+#       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Name`
 #
 #       The context (`.ctx` member) MUST BE a `Native_AbstractSyntaxTree_Parameter_Context`.
 #
@@ -127,16 +90,19 @@ assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
 assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
 
 
-def convert_name_parameter(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_name_parameter(z, v):
+    assert fact_is_convert_zone(z)
 
-    assert fact_is_full_native_string                              (self.id)
-    assert fact_is__native__abstract_syntax_tree__parameter_context(self.ctx)
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    return create_Tree_Normal_Parameter(
-               self.lineno,
-               self.col_offset,
+    assert fact_is_full_native_string                              (v.id)
+    assert fact_is__native__abstract_syntax_tree__parameter_context(v.ctx)
 
-               conjure_parser_symbol(self.id),
+    return create_Tree_Name(
+               v.lineno,
+               v.col_offset,
+
+               conjure_parser_symbol    (v.id),
+               convert_parameter_context(v.ctx),
            )

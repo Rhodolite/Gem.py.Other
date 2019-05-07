@@ -32,7 +32,6 @@
 #
 
 
-from    Z.Tree.Convert_Index_V2             import  convert_index_clause
 from    Z.Tree.Convert_Zone                 import  convert_zone
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
 from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
@@ -106,6 +105,6 @@ def convert_subscript_expression(v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression(z, v.value),
-               convert_index_clause(v.slice),
+               z.convert_expression  (z, v.value),
+               z.convert_index_clause(z, v.slice),
            )

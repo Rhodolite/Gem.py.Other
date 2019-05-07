@@ -48,7 +48,7 @@ from    Z.Parser.Global                 import  parser_globals
 name_version = parser_globals.name_version
 
 
-if name_version in ((1, 2)):
+if name_version in ((1, 2, 3)):
     #
     #   interface Tree_Name
     #       documentation
@@ -60,7 +60,7 @@ if name_version in ((1, 2)):
     #               Tree_Store_Target
     #
     pass
-elif name_version == 3:
+elif name_version == 4:
     #
     #   interface Tree_Name
     #       documentation

@@ -27,7 +27,7 @@ if __debug__:
 
 
 #
-#   convert_many_expression(v) - Common code for `convert_list_expression` and `convert_tuple_expression`
+#   convert_many_expression(v, create) - Common code for `convert_{list,tuple}_expression`.
 #
 #       Convert a `Native_AbstractSyntaxTree_List_Expression` (i.e.: `_ast.List`) to a `Tree_List_Expression`.
 #

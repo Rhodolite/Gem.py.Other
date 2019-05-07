@@ -1,74 +1,115 @@
 #
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
-if __name__ == '__main__':
-    #
-    #   If called as the main program, then we are being imported as the module `__main__`.
-    #
-    #   If so:
-    #
-    #       1A. *REIMPORT* ourselves under the name `Z`
-    #       1B. import `Z.Main`
-    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
-    #       2.  Call `Z_main`
-    #
-    #   This means:
-    #
-    #       *   This module is imported   under the name `__main__`;
-    #       *   This module is reimported under the name `Z`.
-    #
-    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
-    #   and does something different in each case ... so there are in effect two `Z` modules:
-    #
-    #       *   the one named `__main__` [this code under the `if`   clause], and
-    #       *   the one named `Z`        [the  code under the `else` clause below].
-    #
-    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
 
 
-    Z_main()
-else:
-    from    os.path                     import  dirname     as  python_path_directory_name
-    from    os.path                     import  join        as  python_path_join
+#
+#   Z.Tree.Convert_Attribute_V4 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 4.
+#
+#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#
 
 
-    #
-    #   Load Z submodules from "Z/" directory.
-    #
-    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
+#
+#   Difference between Version 3 & Version 4.
+#
+#       Version 3:
+#
+#           Pass in a context to `create_Tree_Attribute`
+#
+#       Version 4:
+#
+#           Do not pass in a context to create `Tree_Attribute`, but instead create one of the following three classes:
+#
+#               Tree_Delete_Attribute
+#               Tree_Evaluate_Attribute
+#               Tree_Store_Attribute
+#
 
 
-    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
-    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
-    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
-    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
-    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
-    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
+from    Z.Parser.Symbol                     import  conjure_parser_symbol
+from    Z.Tree.Attribute_V4                 import  create_Tree_Delete_Attribute
+from    Z.Tree.Attribute_V4                 import  create_Tree_Evaluate_Attribute
+from    Z.Tree.Attribute_V4                 import  create_Tree_Store_Attribute
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Context
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Load_Context
+from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Store_Context
 
 
-    #
-    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
-    #
-    #   This implements the following commands:
-    #
-    #       Z.copyright         - Add a copyright.
-    #       Z.output            - Output a line of text.
-    #
-    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
-    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
-    #
-    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
-    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
-    #
-    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
+if __debug__:
+    from    Capital.Fact                        import  fact_is_full_native_string
+    from    Capital.Fact                        import  fact_is_positive_integer
+    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
 
 
-    #
-    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
-    #
-    #       We run the code generator:
-    #
-    #       1.  Transform Crystal to Python.
-    #       2.  Output Python (to "Vision.py").
-    #
-    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()
+#
+#   convert__delete_load_OR_store_context__TO__create_attribute_function
+#
+#       Convert a "delete", "load", or "store" context to a create attribute function.
+#
+map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function = {
+        Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Attribute,
+        Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Attribute,
+        Native_AbstractSyntaxTree_Store_Context  : create_Tree_Store_Attribute,
+    }
+
+
+if __debug__:
+    def assert_no_context_fields(mapping):
+        for k in mapping:
+            assert k._attributes == (())
+            assert k._fields     == (())
+
+
+    assert_no_context_fields(
+            map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function,
+        )
+
+
+def convert__delete_load_OR_store_context__TO__create_attribute_function(v):
+    return map__Native_AbstractSyntaxTree_DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute_function[type(v)]
+
+
+#
+#   convert_attribute_expression(z, v)
+#
+#       Convert a `Native_AbstractSyntaxTree_Attribute_Expression` (i.e.: `_ast.Attribute`) to one of the following
+#       three classes:
+#
+#           Tree_Delete_Attribute
+#           Tree_Evaluate_Attribute
+#           Tree_Store_Attribute
+#
+#       The context (`.ctx` member) must be an instance of one of the following types:
+#
+#           Native_AbstractSyntaxTree_Delete_Context
+#           Native_AbstractSyntaxTree_Load_Context
+#           Native_AbstractSyntaxTree_Store_Context
+#
+assert Native_AbstractSyntaxTree_Attribute_Expression._attributes == (('lineno', 'col_offset'))
+assert Native_AbstractSyntaxTree_Attribute_Expression._fields     == (('value', 'attr', 'ctx'))
+
+
+def convert_attribute_expression(z, v):
+    assert fact_is_convert_zone(z)
+
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
+
+    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                  (v.value)
+    assert fact_is_full_native_string                                              (v.attr)
+    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
+
+    create_attribute = convert__delete_load_OR_store_context__TO__create_attribute_function(v.ctx)
+
+    return create_attribute(
+               v.lineno,
+               v.col_offset,
+
+               z.convert_expression (z, v.value),
+               conjure_parser_symbol(v.attr),
+          )

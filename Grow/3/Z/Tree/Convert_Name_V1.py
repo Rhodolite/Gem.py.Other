@@ -25,7 +25,7 @@ if __debug__:
 
 
 #
-#   convert_name_expression(self)
+#   convert_name_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to a `Tree_Name`.
 #
@@ -44,24 +44,24 @@ assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
 assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
 
 
-def convert_name_expression(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_name_expression(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_full_native_string                                              (self.id)
-    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(self.ctx)
+    assert fact_is_full_native_string                                              (v.id)
+    assert fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT(v.ctx)
 
     return create_Tree_Name(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               self.id,
-               convert_delete_load_OR_store_context(self.ctx),
+               v.id,
+               convert_delete_load_OR_store_context(v.ctx),
            )
 
 
 #
-#   convert_name_parameter(self)
+#   convert_name_parameter(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) to `Tree_Name`
 #
@@ -73,17 +73,17 @@ assert Native_AbstractSyntaxTree_Name._attributes == (('lineno', 'col_offset'))
 assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
 
 
-def convert_name_parameter(self):
-    assert fact_is_positive_integer   (self.lineno)
-    assert fact_is_substantial_integer(self.col_offset)
+def convert_name_parameter(v):
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is_full_native_string                              (self.id)
-    assert fact_is__native__abstract_syntax_tree__parameter_context(self.ctx)
+    assert fact_is_full_native_string                              (v.id)
+    assert fact_is__native__abstract_syntax_tree__parameter_context(v.ctx)
 
     return create_Tree_Name(
-               self.lineno,
-               self.col_offset,
+               v.lineno,
+               v.col_offset,
 
-               self.id,
-               convert_parameter_context(self.ctx),
+               v.id,
+               convert_parameter_context(v.ctx),
            )

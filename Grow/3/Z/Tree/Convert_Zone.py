@@ -88,9 +88,10 @@ class Convert_Zone(object):
         #
         #   Expression
         #
-        'convert_full_list_of_expressions',          #   Function
-        'convert_some_list_of_expressions',          #   Function
-        'convert_expression',                        #   Function
+        'convert_full_list_of_expressions',         #   Function
+        'convert_some_list_of_expressions',         #   Function
+        'convert_expression',                       #   Function
+        'convert_none_OR_expression',               #   Function
 
         'map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function',
                                                     #    Map { Native_AbstractSyntaxTree_* : Function }
@@ -98,8 +99,13 @@ class Convert_Zone(object):
         #
         #   Index
         #
+        'convert_index_clause',
         'map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function',
 
+        #
+        #   Name
+        #
+        'convert_name_parameter',
         
         #
         #   Statement
@@ -245,13 +251,12 @@ def fill_convert_zone():
     #   Expressions
     #
     if expression_version == 2:
-        from    Z.Tree.Convert_Expression_V2            import  convert_expression
-        from    Z.Tree.Convert_Expression_V2            import  convert_full_list_of_expressions
-        from    Z.Tree.Convert_Expression_V2            import  convert_some_list_of_expressions
         from    Z.Tree.Convert_Expression_V2            import  convert_backquote_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_binary_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_call_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_compare_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_full_list_of_expressions
         from    Z.Tree.Convert_Expression_V2            import  convert_generator_comprehension
         from    Z.Tree.Convert_Expression_V2            import  convert_if_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_lambda_expression
@@ -259,10 +264,11 @@ def fill_convert_zone():
         from    Z.Tree.Convert_Expression_V2            import  convert_logical_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_map_comprehension
         from    Z.Tree.Convert_Expression_V2            import  convert_map_expression
-        from    Z.Tree.Convert_Expression_V2            import  convert_name_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_none_OR_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_number
         from    Z.Tree.Convert_Expression_V2            import  convert_set_comprehension
         from    Z.Tree.Convert_Expression_V2            import  convert_set_expression
+        from    Z.Tree.Convert_Expression_V2            import  convert_some_list_of_expressions
         from    Z.Tree.Convert_Expression_V2            import  convert_string
         from    Z.Tree.Convert_Expression_V2            import  convert_unary_expression
         from    Z.Tree.Convert_Expression_V2            import  convert_yield_expression
@@ -276,10 +282,27 @@ def fill_convert_zone():
     if index_version == 2:
         from    Z.Tree.Convert_Index_V2             import  convert_ellipses_index
         from    Z.Tree.Convert_Index_V2             import  convert_extended_slice_index
+        from    Z.Tree.Convert_Index_V2             import  convert_index_clause
         from    Z.Tree.Convert_Index_V2             import  convert_simple_index
         from    Z.Tree.Convert_Index_V2             import  convert_slice_index
     else:
         FATAL_unknown_version('index', index_version)
+
+
+    #
+    #   Name
+    #
+    if name_version == 2:
+        from    Z.Tree.Convert_Name_V2                  import  convert_name_expression
+        from    Z.Tree.Convert_Name_V2                  import  convert_name_parameter
+    elif name_version == 3:
+        from    Z.Tree.Convert_Name_V3                  import  convert_name_expression
+        from    Z.Tree.Convert_Name_V2                  import  convert_name_parameter
+    elif name_version == 4:
+        from    Z.Tree.Convert_Name_V4                  import  convert_name_expression
+        from    Z.Tree.Convert_Name_V2                  import  convert_name_parameter
+    else:
+        FATAL_unknown_version('name', name_version)
 
 
     #
@@ -571,6 +594,7 @@ def fill_convert_zone():
     #
     z.convert_expression               = convert_expression
     z.convert_full_list_of_expressions = convert_full_list_of_expressions
+    z.convert_none_OR_expression       = convert_none_OR_expression
     z.convert_some_list_of_expressions = convert_some_list_of_expressions
 
     z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = (
@@ -581,11 +605,19 @@ def fill_convert_zone():
     #
     #   Index
     #
+    z.convert_index_clause = convert_index_clause
+
     z.map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function = (
             map__Native_AbstractSyntaxTree_INDEX_CLAUSE__to__convert_index_clause__function
         )
 
 
+    #
+    #   Name
+    #
+    z.convert_name_parameter = convert_name_parameter
+
+    
     #
     #  Statement
     #

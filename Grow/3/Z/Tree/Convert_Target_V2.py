@@ -50,7 +50,7 @@ def convert_target(z, v):
             z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function[type(v)]
         )
 
-    return convert_target__function(v)
+    return convert_target__function(z, v)
 #</convert_target>
 
 
