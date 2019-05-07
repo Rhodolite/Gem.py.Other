@@ -62,9 +62,9 @@ class Tree_Class_Definition(
         'column',                       #   SubstantialInteger
 
         'name',                         #   Parser_Symbol
-        'bases',                        #   NativeList of Tree_Expression
-        'body',                         #   Tree_Statement
-        'decorator_list',               #   NativeList of Tree_Decorator
+        'bases',                        #   SomeNativeList of Tree_Expression
+        'body',                         #   Tree_Suite
+        'decorator_list',               #   Some_NativeList of Tree_Decorator
     ))
 
 
@@ -154,8 +154,8 @@ class Tree_Function_Definition(
 
         'name',                         #   Parser_Symbol
         'parameters',                   #   Tree_Parameter
-        'body',                         #   Tree_List
-        'decorator_list',               #   NativeList of Tree_Decorator
+        'body',                         #   Tree_Suite
+        'decorator_list',               #   SomeNativeList of Tree_Decorator
     ))
 
 

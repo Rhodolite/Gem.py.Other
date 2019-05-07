@@ -53,18 +53,6 @@ class TRAIT_Tree_Except_Clause(object):
 #
 
 
-
-#
-#<order>
-#
-#   NOTE:
-#       Because "Z.Tree.Except_1" needs facts, then it imports this file.
-#
-#   HENCE:
-#       The "fact" functions *MUST* appear *BEFORE* the import of "Z.Tree.Except_1"
-#
-
-
 #
 #   fact_is_tree_except_clause(v) - Assert that `v` is a tree except clause.
 #
@@ -73,4 +61,3 @@ if __debug__:
         assert v.is_tree_except_clause
 
         return True
-#</order>

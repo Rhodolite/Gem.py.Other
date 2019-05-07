@@ -23,13 +23,22 @@
 
 
 #
-#   interface Tree_Index_Clause - Interface to tree classes that represent index clauses.
+#   interface Tree_Index_Clause
+#       documentation
+#           Interface to tree classes that represent index clauses.
+#
 #       method
 #           dump_index_clause_tokens(f : Build_DumpToken)
 #
 #       debug
 #           is_tree_index_clause := true
 #
+class TRAIT_Tree_Index_Clause(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_index_clause = True
 
 
 #

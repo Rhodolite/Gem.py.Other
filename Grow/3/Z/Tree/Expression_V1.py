@@ -237,11 +237,11 @@ class Tree_Call_Expression(object):
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
-        'function',                     #   Tree_*_Expression
-        'arguments',                    #   NativeList of Tree_*_Expression
-        'keywords',                     #   NativeList of Tree_*_Expression
-        'star_arguments',               #   None | Tree_*_Expression
-        'keyword_arguments',            #   None | Tree_*_Expression
+        'function',                     #   Tree_Expression
+        'arguments',                    #   Some_NativeList of Tree_Expression
+        'keywords',                     #   Some_NativeList of Tree_Expression
+        'star_arguments',               #   None | Tree_Expression
+        'keyword_arguments',            #   None | Tree_Expression
     ))
 
 
@@ -502,7 +502,7 @@ class Tree_Logical_Expression(object):
         'column',                       #   SubstantialInteger
 
         'operator',                     #   Tree_Operator
-        'values',                       #   NativeList of Tree_Expression
+        'values',                       #   FullNativeList of Tree_Expression
     ))
 
 
@@ -925,7 +925,7 @@ class Tree_String(object):
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
-        's',                            #   NativeString
+        's',                            #   SomeNativeString
     ))
 
 

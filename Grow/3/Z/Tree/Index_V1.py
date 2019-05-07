@@ -13,6 +13,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  trace
+from    Z.Tree.Index                    import  TRAIT_Tree_Index_Clause
 
 
 if __debug__:
@@ -24,20 +25,15 @@ if __debug__:
 #
 #   Tree: Ellipses Index
 #
-class Tree_Ellipses_Index(object):
-    #
-    #   implements Tree_Index_Clause
-    #
+class Tree_Ellipses_Index(
+        TRAIT_Tree_Index_Clause,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Index_Clause
     #
-    if __debug__:
-        is_tree_index_clause = True
-
-
     @staticmethod
     def dump_index_clause_tokens(f):
         f.write('...')
@@ -62,10 +58,9 @@ tree_ellipses_index = create_Tree_Ellipses_Index()
 #
 #   Tree: Extended Slice Index
 #
-class Tree_Extended_Slice_Index(object):
-    #
-    #   implements Tree_Index_Clause
-    #
+class Tree_Extended_Slice_Index(
+        TRAIT_Tree_Index_Clause,
+):
     __slots__ = ((
         'many',                         #   NativeList of Tree_Index_Clause
     ))
@@ -81,10 +76,6 @@ class Tree_Extended_Slice_Index(object):
     #
     #   Interface Tree_Index_Clause
     #
-    if __debug__:
-        is_tree_index_clause = True
-
-
     def dump_index_clause_tokens(self, f):
         first = True
 
@@ -118,10 +109,9 @@ def create_Tree_Extended_Slice_Index(many):
 #
 #   Tree: Simple Index
 #
-class Tree_Simple_Index(object):
-    #
-    #   implements Tree_Index_Clause
-    #
+class Tree_Simple_Index(
+        TRAIT_Tree_Index_Clause,
+):
     __slots__ = ((
         'value',                        #   Tree_Expression
     ))
@@ -137,10 +127,6 @@ class Tree_Simple_Index(object):
     #
     #   Interface Tree_Index_Clause
     #
-    if __debug__:
-        is_tree_index_clause = True
-
-
     def dump_index_clause_tokens(self, f):
         f.write('<simple-index ')
         self.value.dump_evaluate_tokens(f)
@@ -174,10 +160,9 @@ def create_Tree_Simple_Index(value):
 #       The second `:` can be detected by whether the value of `step` is `None`, or in fact a `Tree_Name` (with the
 #       name `None`).
 #
-class Tree_Slice_Index(object):
-    #
-    #   implements Tree_Index_Clause
-    #
+class Tree_Slice_Index(
+        TRAIT_Tree_Index_Clause,
+):
     __slots__ = ((
         'lower',                        #   None | Tree_Expression
         'upper',                        #   None | Tree_Expression
@@ -197,10 +182,6 @@ class Tree_Slice_Index(object):
     #
     #   Interface Tree_Index_Clause
     #
-    if __debug__:
-        is_tree_index_clause = True
-
-
     def dump_index_clause_tokens(self, f):
         lower = self.lower
         upper = self.upper

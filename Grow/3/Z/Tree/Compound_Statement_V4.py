@@ -79,7 +79,7 @@ class Tree_Test_Statement(
 
         'test',                         #   Tree_Expression
         'body',                         #   Tree_Statement
-        'else_clause_0',                #   Tree_Statement_0
+        'else_clause_0',                #   Tree_Suite_0
     ))
 
 
@@ -145,10 +145,10 @@ class Tree_Class_Definition(
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
-        'name',                         #   NativeString
-        'bases',                        #   NativeList of Tree_Expression
+        'name',                         #   FullNativeString
+        'bases',                        #   SomeNativeList of Tree_Expression
         'body',                         #   Tree_Statement
-        'decorator_list',               #   NativeList of Tree_Decorator
+        'decorator_list',               #   SomeNativeList of Tree_Decorator
     ))
 
 
@@ -239,7 +239,7 @@ class Tree_For_Statement(
         'target',                       #   Tree_Target
         'sequence',                     #   Tree_Expression
         'body',                         #   Tree_Statement
-        'else_clause_0',                #   Tree_Statement_0
+        'else_clause_0',                #   Tree_Suite_0
     ))
 
 
@@ -309,10 +309,10 @@ class Tree_Function_Definition(
         'line_number',                  #   PositiveInteger
         'column',                       #   SubstantialInteger
 
-        'name',                         #   NativeString
+        'name',                         #   FullNativeString
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_List
-        'decorator_list',               #   NativeList of Tree_Decorator
+        'decorator_list',               #   SomeNativeList of Tree_Decorator
     ))
 
 
