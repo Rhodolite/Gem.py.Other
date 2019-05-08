@@ -20,6 +20,7 @@ from    Capital.BuildContextLifecycle   import  build_context_lifecycle_exited
 from    Capital.BuildContextLifecycle   import  build_context_lifecycle_iterating
 from    Capital.Build_NativeString      import  build_native_string
 from    Capital.ChangePrefix            import  change_prefix
+from    Capital.Exception               import  PREPARE_AttributeError
 from    Capital.Core                    import  bind_method
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  iterate

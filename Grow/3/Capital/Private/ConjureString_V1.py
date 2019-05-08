@@ -24,6 +24,7 @@
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
+from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V1       import  create_full_string
 from    Capital.Private.String_V1       import  empty_string
@@ -59,30 +60,90 @@ if __debug__:
 #
 #       All strings are stored in this as key/value pairs:
 #
-#           1)  The key   is an interned `Some_Native_String`; and
+#           1)  The key   is an interned `Full_Native_String`; and
 #
 #           2)  The value is a `String_Leaf`.
 #
-#       The type of `string_cache` is `Map { interned Some_Native_String } of String_Leaf`
+#       The type of `string_cache` is `Map { interned Full_Native_String } of String_Leaf`
 #
-#       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
-#       when the `conjure_some_string("")` is called.
-#
-string_cache = {
-                   intern_native_string("") : empty_string,
-               }
+string_cache = {}
 
 lookup_string  = string_cache.get
 provide_string = string_cache.setdefault
 
 
 #
-#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
-#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+#   EXCEPTIONS
+#
+#       If `s` is empty (i.e.: has 0 characters), throws the following exception:
+#
+#           ValueError(
+#                   (
+#                         "parameter `s` is empty;"
+#                       + "; `conjure_full_string` requires a non-empty string"
+#                       + " (i.e.: has a length greater than 0)",
+#                   ),
+#               )
+#
+#   SEE ALSO
 #
 #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
-#       version.s
+#       versions.
+#
+@export
+@creator
+def conjure_full_string(s):
+    #
+    #   The following test is "*_some_*" on purpose.
+    #
+    #   This is to allow the case of an empty string to be handled belows a `ValueError` (instead of in the assert).
+    #
+    assert fact_is_some_native_string(s)
+
+    r = lookup_string(s)
+
+    if r is not None:
+        return r
+
+    #
+    #   Handle an empty string here (even in release mode).
+    #
+    #       Hence the assert above is "*_some_*" on purpose, so this code can catch the empty strings instead of the
+    #       assert.
+    #
+    if len(s) == 0:
+        value_error = PREPARE_ValueError("parameter `s` is empty; {} {}",
+                                         "`conjure_full_string` requires a non-empty string",
+                                         "(i.e.: has a length greater than 0)");
+
+        raise value_error
+
+    interned_s = intern_native_string(s)
+
+    string__possibly_non_unique = create_full_string(interned_s)
+
+    #
+    #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
+    #   `String_Leaf` that is stored in `string_cache).
+    #
+    return provide_string(interned_s, string__possibly_non_unique)
+
+
+#
+#   conjure_some_string(s) - Conjure a `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be of a `Some_Native_String` (i.e.: `str`).
+#
+#       `s` may *NOT* be an instance of a subclass of `Some_Native_String` (i.e.: `str`).
+#
+#       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
+#       versions.
 #
 @export
 @creator
@@ -93,6 +154,9 @@ def conjure_some_string(s):
 
     if r is not None:
         return r
+
+    if len(s) == 0:
+        return empty_string
 
     interned_s = intern_native_string(s)
 

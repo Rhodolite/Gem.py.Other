@@ -3,7 +3,7 @@
 #
 
 
-version = 18
+version = 0
 
 
 #
@@ -18,6 +18,7 @@ from    Capital.Core                    import  NativeBoolean
 from    Capital.Core                    import  trace
 from    Capital.Global                  import  capital_globals
 from    Capital.Some_String             import  conjure_some_string
+from    Capital.Some_String             import  conjure_full_string
 from    Capital.Some_String             import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
 from    Z.Path                          import  path_to_file_in_Z_directory
@@ -75,7 +76,29 @@ def command_string():
 
     assert empty_string is conjure_some_string("")
     assert hello        is conjure_some_string("hello")
-    assert crystal      is conjure_some_string("crystal")
+    assert crystal      is conjure_full_string("crystal")
+
+    #
+    #<clique>
+    #
+    #       Verify that `conjure_full_string("")` throws a `ValueError`.
+    #
+    caught = None
+
+    try:
+        conjure_full_string("")
+    except ValueError as e:
+        caught = e
+
+    assert (
+               caught.args[0]
+            == (
+                     "parameter `s` is empty;"
+                   + " `conjure_full_string` requires a non-empty string"
+                   + " (i.e.: has a length greater than 0)"
+               )
+    )
+    #</clique>
 
     assert NativeBoolean(empty_string) is False
     assert NativeBoolean(hello)        is True

@@ -174,7 +174,10 @@ from    Capital.Global                  import  capital_globals
 string_version = capital_globals.string_version
 
 
-if string_version == 1:
+if string_version == 0:
+    pass
+elif string_version == 1:
+    from    Capital.Private.ConjureString_V1    import  conjure_full_string
     from    Capital.Private.ConjureString_V1    import  conjure_some_string
     from    Capital.Private.String_V1           import  empty_string
 elif string_version == 2:

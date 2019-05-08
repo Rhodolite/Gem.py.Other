@@ -12,7 +12,7 @@ from    Capital.System                  import  is_python_2
 
 
 #
-#   Empty_Native_String - An empty native string (i.e.: `str` that has 0 characaters).
+#   Empty_Native_String - An empty native string (i.e.: `str` that has 0 characters).
 #
 Empty_Native_String = str
 
