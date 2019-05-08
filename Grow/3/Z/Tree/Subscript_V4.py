@@ -39,6 +39,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
@@ -151,20 +152,16 @@ def create_Tree_Evaluate_Subscript(line_number, column, value, index):
 #
 #   Tree: Store Subscript
 #
-class Tree_Store_Subscript(Tree_Subscript_Expression):
-    #
-    #   implements Tree_Store_Target
-    #
+class Tree_Store_Subscript(
+        Tree_Subscript_Expression,
+        TRAIT_Tree_Store_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Store_Target
     #
-    if __debug__:
-        is_tree_store_target = True
-
-
     def dump_store_target_tokens(self, f):
         f.arrange('<store-subscript @{}:{} ', self.line_number, self.column)
         self.value.dump_evaluate_tokens(f)
