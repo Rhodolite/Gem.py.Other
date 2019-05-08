@@ -3,74 +3,168 @@
 #
 
 
-if __name__ == '__main__':
-    #
-    #   If called as the main program, then we are being imported as the module `__main__`.
-    #
-    #   If so:
-    #
-    #       1A. *REIMPORT* ourselves under the name `Z`
-    #       1B. import `Z.Main`
-    #       1C. import `Z.Main.Z_main` as the symbol `Z_main`.
-    #       2.  Call `Z_main`
-    #
-    #   This means:
-    #
-    #       *   This module is imported   under the name `__main__`;
-    #       *   This module is reimported under the name `Z`.
-    #
-    #   The `if` ... `else` ... clauses in this file detect these two separate cases,
-    #   and does something different in each case ... so there are in effect two `Z` modules:
-    #
-    #       *   the one named `__main__` [this code under the `if`   clause], and
-    #       *   the one named `Z`        [the  code under the `else` clause below].
-    #
-    from    Z.Main                      import  Z_main     #   Steps 1A, 1B, & 1C (see comment above).
+#
+#   Capital.BuildContextLifecyle - Lifecycle for a build context (`with` statement handler)
+#
 
 
-    Z_main()
-else:
-    from    os.path                     import  dirname     as  python_path_directory_name
-    from    os.path                     import  join        as  python_path_join
+from    Capital.Core                    import  creator
+from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_changing
+from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_created
+from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_entered
+from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_exited
 
 
-    #
-    #   Load Z submodules from "Z/" directory.
-    #
-    __path__ = [python_path_join(python_path_directory_name(__file__), 'Z')]
+#
+#   Build Context Lifecycles:
+#
+#       Same as Simple Context LifeCycle:
+#
+#           build_context_lifecycle_changing    - The context is changing states.
+#           build_context_lifecycle_created     - The context has been created.
+#           build_context_lifecycle_entered     - The context has been entered.
+#           build_context_lifecycle_exited      - The context has exited.
+#
+#       With two additional states:
+#
+#           build_context_lifecycle_exception   - The context exited with an exception.
+#
+#           build_context_lifecycle_iterating   - The context has exited, and is iterating
+#                                                 (or has finished iterating).
+#
+#
+#   NOTE #1:
+#       Similiar to `SimpleContextLifeCycle', this state machine does not [fully] represent exceptions.
+#
+#       Any exception leaves the state machine in it's last state, until the underlying structure is
+#       garbaged collected & reclaimed.
+#
+#       Thus, the state machine, can *end* in any state, before being destroyed.
+#
+#
+#   NOTE #2:
+#       An exception caught in the `.__exit__` is handled, and represented by `build_context_lifecycle_exception`.
+#
+#
+#   NOTE #3:
+#       Similiar to `SimpleContextLifeCycle', there is no state to indicate the underlying structure is being
+#       garbage collected & destroyed.
+#
+#
+#   NOTE #4:
+#       Due to the way iteration is handled, there is no state to indicate that the iteration has completed.
+#
+#       Instead `build_context_lifecycle_iterating` is used both to indicate iterating, and that iteration
+#       has finished.
+#
+#       Basically `build_context_lifecycle_iterating` is used to detect (in debug mode) that iteration is only
+#       *STARTED* once.
+#
+#       It is not used to detect (in debug mode) that iteration has finished.
+#
+#
+#   State Machine Picture:
+#
+#
+#                                               build_context_lifecycle_changing    - The context is being created.
+#                                                             |
+#                     +---------------------------------------+
+#                     |
+#                     v
+#       build_context_lifecycle_created                                             - The context has been created.
+#                     |
+#                     +---------------------------------------+
+#                                                             |
+#                                                             v
+#                                               build_context_lifecycle_changing    - The context is being entered.
+#                                                             |
+#                     +---------------------------------------+
+#                     |
+#                     v
+#       build_context_lifecycle_entered                                             - The context has been entered.
+#                     |
+#                     +---------------------------------------+
+#                                                             |
+#                                                             v
+#                                               build_context_lifecycle_changing    - The context is exiting.
+#                                                             |
+#                     +---------------------------------------+--------+
+#                     |                                                |
+#                     |                                                v
+#                     |                         build_context_lifecycle_exception   - The context has exited
+#                     |                                                               with an exception.
+#                     v
+#       build_context_lifecycle_exited                                              - The context has exited.
+#                     |
+#                     +---------------------------------------+
+#                                                             |
+#                                                             v
+#                                               build_context_lifecycle_changing    - The context has exited, and is
+#                                                             |                       starting to iterate.
+#                     +---------------------------------------+
+#                     |
+#                     v
+#       build_context_lifecycle_exited                                              - The context has exited,
+#                                                                                     and is iterating
+#                                                                                     (or has finished iterating).
+#
+#
+#   NOTE:
+#       These `lifecycles` are only used for debugging (by using assertions) in context handlers ...
+#
+#       Context handlers are quite complex to write properly (especially handling exceptions in the exception
+#       function of a context hander).
+#
+#       Hence the importance of debugging lifecycle management for context handlers.
+#
+class BuildContextLifecycle(object):
+    __slots__ = ((
+        'name',                     #   Full_Native_String
+        'exception',                #   Boolean
+        'iterating',                #   Boolean
+    ))
 
 
-    import  Z.Core                      #   "Z/Core.py"                 - Core Z support code
-    import  Z.Crystal_ParseTree         #   "Z/Crystal_ParseTree.py"    - A parse tree of Crystal statements.
-    import  Z.Extract                   #   "Z/Extract.py"              - Extract a parse tree from "Vision.z"
-    import  Z.Python_ParseTree          #   "Z/Python_ParseTree.py"     - A parse tree of Python statements.
-    import  Z.Transform_Crystal_to_Python   #           - Transform Crystal statements to Python statements.
-    import  Z.CodeGenerator_OnExit      #   "Z/CodeGenerator_OnExit.py" - Generate code when the program exits.
+    changing  = False
+    created   = False
+    entered   = False
+    exited    = False
 
 
-    #
-    #   Replace this (currently loading) Z module with a *NEW* Z Module that does the "extraction" phase.
-    #
-    #   This implements the following commands:
-    #
-    #       Z.copyright         - Add a copyright.
-    #       Z.output            - Output a line of text.
-    #
-    #   The reason we have to replace this (currently loading) Z module with a *NEW* Z Module is so that we can
-    #   add attributes to the module (a normal python module doesn't allow us to add attributes).
-    #
-    #       Specifically, we have added the `.copyright` attribute to call the function "copyright" defined
-    #       in "Z/Extract.py" (see the line marked `@property` in "Z/Extract.py").
-    #
-    Z.Extract.if_main_path_ends_in_dot_z__replace_Z_module()
+    def __init__(self, name, exception, iterating):
+        self.name      = name
+        self.exception = exception
+        self.iterating = iterating
 
 
-    #
-    #   After "Vizion.z" has fully run (and generated the Crsytal parse tree using the Z commands):
-    #
-    #       We run the code generator:
-    #
-    #       1.  Transform Crystal to Python.
-    #       2.  Output Python (to "Vision.py").
-    #
-    Z.CodeGenerator_OnExit.if_main_path_ends_in_dot_z__register_code_generator()
+    def __repr__(self):
+        return arrange('<BuildContextLifecycle {}>', self.name)
+
+
+@creator
+def create_BuildContextLifecycle(
+        name,
+
+        changing  = False,
+        created   = False,
+        entered   = False,
+        exception = False,
+        exited    = False,
+        iterating = False,
+):
+    assert changing  is False
+    assert created   is False
+    assert entered   is False
+    assert exited    is False
+    assert (exception + iterating == 1)
+
+    return BuildContextLifecycle(name, exception, iterating)
+
+
+build_context_lifecycle_changing = simple_context_lifecycle_changing
+build_context_lifecycle_created  = simple_context_lifecycle_created
+build_context_lifecycle_entered  = simple_context_lifecycle_entered
+build_context_lifecycle_exited   = simple_context_lifecycle_exited
+
+build_context_lifecycle_exception = create_BuildContextLifecycle('exception', exception = True)
+build_context_lifecycle_iterating = create_BuildContextLifecycle('iterating', iterating = True)

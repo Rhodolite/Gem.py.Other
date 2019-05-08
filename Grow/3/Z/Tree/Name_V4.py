@@ -35,7 +35,10 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
@@ -108,20 +111,16 @@ def create_Tree_Delete_Name(line_number, column, symbol):
 #
 #   Tree: Evaluate Name
 #
-class Tree_Evaluate_Name(Tree_Name):
-    #
-    #   Implements Tree_Expression
-    #
+class Tree_Evaluate_Name(
+        Tree_Name,
+        TRAIT_Tree_Expression,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Expression
     #
-    if __debug__:
-        is_tree_expression = True
-
-
     def dump_evaluate_tokens(self, f):
         #
         #   NOTE:
@@ -143,10 +142,10 @@ def create_Tree_Evaluate_Name(line_number, column, symbol):
 #
 #   Tree: Normal Parameter
 #
-class Tree_Normal_Parameter(Tree_Name):
-    #
-    #   Implements Tree_Parameter
-    #
+class Tree_Normal_Parameter(
+        Tree_Name,
+        TRAIT_Tree_Parameter,
+):
     __slots__ = (())
 
 
@@ -156,7 +155,6 @@ class Tree_Normal_Parameter(Tree_Name):
     if __debug__:
         is_tree_keyword_parameter = False
         is_tree_parameters_all    = False
-        is_tree_parameter         = True
         is_tree_normal_parameter  = True
 
 
@@ -177,20 +175,16 @@ def create_Tree_Normal_Parameter(line_number, column, symbol):
 #
 #   Tree: Store Name
 #
-class Tree_Store_Name(Tree_Name):
-    #
-    #   Implements Tree_Store_Target
-    #
+class Tree_Store_Name(
+        Tree_Name,
+        TRAIT_Tree_Store_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Store_Target
     #
-    if __debug__:
-        is_tree_store_target = True
-
-
     def dump_store_target_tokens(self, f):
         f.arrange('<store-name @{}:{} {}>', self.line_number, self.column, self.symbol)
 

@@ -13,6 +13,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  replace
+from    Z.Tree.Expression               import  TRAIT_Tree_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
@@ -42,10 +43,10 @@ if __debug__:
 #
 class Tree_Attribute(
         TRAIT_Tree_Delete_Target,
+        TRAIT_Tree_Expression,
 ):
     #
-    #   Implements Tree_Expression,
-    #              Tree_Store_Target
+    #   Implements Tree_Store_Target
     #
     __slots__ = ((
         'line_number',                  #   Positive_Integer
@@ -102,7 +103,10 @@ class Tree_Attribute(
     #   Interface Tree_Expression
     #
     if __debug__:
-        is_tree_expression = True
+        @replace
+        @property
+        def is_tree_expression(self):
+            return (self.context.is_tree_load_context) or (self.context.is_tree_store_context)
 
 
     if __debug__:

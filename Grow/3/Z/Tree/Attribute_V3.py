@@ -32,6 +32,7 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  replace
 from    Z.Tree.Expression               import  TRAIT_Tree_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
@@ -62,10 +63,8 @@ if __debug__:
 class Tree_Attribute(
         TRAIT_Tree_Delete_Target,
         TRAIT_Tree_Expression,
+        TRAIT_Tree_Store_Target,
 ):
-    #
-    #   implements Tree_Store_Target
-    #
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer

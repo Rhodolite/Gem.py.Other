@@ -15,6 +15,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
@@ -31,10 +32,8 @@ if __debug__:
 #
 class Tree_Many_Expression(
         TRAIT_Tree_Expression,
+        TRAIT_Tree_Store_Target,
 ):
-    #
-    #   implements Tree_Store_Target
-    #
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -143,9 +142,6 @@ def create_Tree_Many_Expression(Meta, line_number, column, elements, context):
 #   Tree: List Expression
 #
 class Tree_List_Expression(Tree_Many_Expression):
-    #
-    #   implements Tree_Store_Target
-    #
     __slots__ = (())
 
 
@@ -161,9 +157,6 @@ def create_Tree_List_Expression(line_number, column, elements, context):
 #   Tree: Tuple Expression
 #
 class Tree_Tuple_Expression(Tree_Many_Expression):
-    #
-    #   implements Tree_Store_Target
-    #
     __slots__ = (())
 
 

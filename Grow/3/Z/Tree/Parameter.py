@@ -124,12 +124,7 @@
 #                                           `.normal_parameters` member, and the `7` in the `.defaults` member),
 #                                           they will be combined into a `Tree_Keyword_Parameter` that stores
 
-#
-#   FUTURE:
-#       This is the future "interface" that defines `Tree_Parameter` (once interfaces are implemented in Crystal).
-#
-#       Thus in the future, the following lines will no longer be comments, but actual code.
-#
+
 #
 #   interface Tree_Parameter
 #       documentation
@@ -142,10 +137,16 @@
 #           is_tree_keyword_parameter := false          #   Not implemented in version 1
 #           is_tree_map_parameter     := false          #   Not implemented in version 1
 #           is_tree_normal_parameter  : boolean
-#           is_tree_tuple_parameter   := false          #   Not implemented in version 1
-#           is_tree_parameter         := true
 #           is_tree_parameters_all    : boolean
+#           is_tree_parameter         := true
+#           is_tree_tuple_parameter   := false          #   Not implemented in version 1
 #
+class TRAIT_Tree_Parameter(object):
+    __slots__ = (())
+
+
+    if __debug__:
+        is_tree_parameter = True
 
 
 #

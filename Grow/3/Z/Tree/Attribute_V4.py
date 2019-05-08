@@ -36,6 +36,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
@@ -161,20 +162,16 @@ def create_Tree_Evaluate_Attribute(line_number, column, value, attribute):
 #
 #   Tree: Store Attribute
 #
-class Tree_Store_Attribute(Tree_Attribute):
-    #
-    #   implements Tree_Store_Target
-    #
+class Tree_Store_Attribute(
+        Tree_Attribute,
+        TRAIT_Tree_Store_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Store_Target
     #
-    if __debug__:
-        is_tree_store_target = True
-
-
     def dump_store_target_tokens(self, f):
         f.arrange('<store-attribute @{}:{} ', self.line_number, self.column)
         self.value.dump_evaluate_tokens(f)

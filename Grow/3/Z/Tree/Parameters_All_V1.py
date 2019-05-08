@@ -14,6 +14,7 @@
 
 
 from    Capital.Core                    import  creator
+from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 
 
 if __debug__:
@@ -25,10 +26,9 @@ if __debug__:
 #
 #   Tree_Parameters_All - All the parameters of a function definition
 #
-class Tree_Parameters_All(object):
-    #
-    #   Implements Tree_Parameter
-    #
+class Tree_Parameters_All(
+        TRAIT_Tree_Parameter,
+):
     __slots__ = ((
         'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
         'tuple_parameter',              #   None | Full_Native_String
@@ -50,7 +50,6 @@ class Tree_Parameters_All(object):
     if __debug__:
         is_tree_keyword_parameter = False
         is_tree_normal_parameter  = False
-        is_tree_parameter         = True
         is_tree_parameters_all    = True
 
 

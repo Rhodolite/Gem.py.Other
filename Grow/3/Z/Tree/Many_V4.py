@@ -43,6 +43,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
@@ -201,20 +202,16 @@ def create_Tree_Evaluate_Tuple(line_number, column, elements):
 #
 #   Tree: Store List
 #
-class Tree_Store_List(Tree_Many_Expression):
-    #
-    #   implements Tree_Store_Target
-    #
+class Tree_Store_List(
+        Tree_Many_Expression,
+        TRAIT_Tree_Store_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Store_Target
     #
-    if __debug__:
-        is_tree_store_target = True
-
-
     dump_store_target_tokens = Tree_Many_Expresion__dump_store_target_tokens
 
 
@@ -232,20 +229,16 @@ def create_Tree_Store_List(line_number, column, elements):
 #
 #   Tree: Store Tuple
 #
-class Tree_Store_Tuple(Tree_Many_Expression):
-    #
-    #   implements Tree_Store_Target
-    #
+class Tree_Store_Tuple(
+        Tree_Many_Expression,
+        TRAIT_Tree_Store_Target,
+):
     __slots__ = (())
 
 
     #
     #   Interface Tree_Store_Target
     #
-    if __debug__:
-        is_tree_store_target = True
-
-
     dump_store_target_tokens = Tree_Many_Expresion__dump_store_target_tokens
 
 
