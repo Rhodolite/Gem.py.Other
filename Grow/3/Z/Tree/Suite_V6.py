@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Suite_V5 - Implementation of `Tree_Suite`, Version 5.
+#   Z.Tree.Suite_V6 - Implementation of `Tree_Suite`, Version 6.
 #
 #       A `Tree_Suite` is two or more statements (python calls more than one statement a "suite").
 #
@@ -13,13 +13,13 @@
 
 
 #
-#   Difference between Version 1, Version 2, Version 3, Version 4, and Version 5.
+#   Difference between Version 1..6.
 #
-#       Version 1, 2, 3, & 4:
+#       Version 1..5:
 #
 #           Does not exist.
 #
-#       Version 5:
+#       Version 6:
 #
 #           Exists.
 #

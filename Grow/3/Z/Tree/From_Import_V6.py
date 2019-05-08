@@ -4,24 +4,24 @@
 
 
 #
-#   Z.Tree.Import_V5 - Implementation of `from` and `import` statements, Version 5.
+#   Z.Tree.From_Import_V6 - Implementation of `from ... import` statement, Version 6.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1, Version 2, Version 3, Version 4, and Version 5.
+#   Difference between Versions 4..6.
 #
-#       Version 1:
+#       Version 4:
 #
 #           Tree Statements implement `Tree_Statement`.
 #
-#       Version 2, 3, & 4:
+#       Version 5:
 #
 #           Does not exist.
 #
-#       Version 5:
+#       Version 6:
 #
 #           Tree Statements implement `Tree_Statement`; and ...
 #
@@ -42,9 +42,9 @@ if __debug__:
 
 
 #
-#   Tree: `import` statement
+#   Tree: `from ... import ...` statement
 #
-class Tree_Import_Statement(
+class Tree_From_Import_Statement(
         TRAIT_Tree_Statement,
         TRAIT_Tree_Suite,
         TRAIT_Tree_Suite_0,
@@ -53,43 +53,52 @@ class Tree_Import_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'module_aliases',               #   NativeList of Tree_Module_Alias
+        'module',                       #   Parser_Module_Name
+        'names',                        #   FullNativeList of Tree_Symbol_Alias
+        'level',                        #   Substantial_Integer
     ))
 
 
     #
     #   Private
     #
-    def __init__(self, line_number, column, module_aliases):
+    def __init__(self, line_number, column, module, names, level):
         self.line_number = line_number
         self.column      = column
 
-        self.module_aliases = module_aliases
+        self.module = module
+        self.names  = names
+        self.level  = level
 
 
     #
     #   Interface Tree_Statement
     #
     def dump_statement_tokens(self, f):
-        f.arrange('<import @{}:{} ', self.line_number, self.column)
+        f.arrange('<from @{}:{} ', self.line_number, self.column)
+        self.module.dump_module_name_token(f)
+        f.write(' import ')
 
         #
-        #<module_aliases>
+        #<names>
         #
         f.write('[')
 
         first = True
 
-        for v in self.module_aliases:
+        for v in self.names:
             if first:
                 first = False
             else:
                 f.write(', ')
 
-            v.dump_module_alias_tokens(f)
+            v.dump_symbol_alias_tokens(f)
 
         f.write(']')
         #</>
+
+        if self.level:
+            f.arrange('; level<{}>', self.level)
 
         f.line('>')
 
@@ -98,14 +107,18 @@ class Tree_Import_Statement(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Tree_Import_Statement @{}:{} {!r}>', self.line_number, self.column, self.module_aliases)
+        return arrange('<Tree_From_Import_Statement @{}:{} {!r} {!r} {!r}>',
+                       self.line_number, self.column,
+                       self.module, self.names, self.level)
 
 
 @creator
-def create_Tree_Import_Statement(line_number, column, module_aliases):
+def create_Tree_From_Import_Statement(line_number, column, module, names, level):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_full_native_list(module_aliases)
+    assert fact_is_parser_module_name (module)
+    assert fact_is_full_native_list   (names)
+    assert fact_is_substantial_integer(level)
 
-    return Tree_Import_Statement(line_number, column, module_aliases)
+    return Tree_From_Import_Statement(line_number, column, module, names, level)

@@ -358,7 +358,7 @@ def FATAL_unknown_version(name, version):
 def fill_convert_zone(version):
     assert fact_is_positive_integer(version)
 
-    assert 2 <= version <= 16
+    assert 2 <= version <= 17
 
 
     #
@@ -375,7 +375,7 @@ def fill_convert_zone(version):
     name_version          = 1       #   1..4
     operator_version      = 1       #   1, 3    (no version 2)
     parameter_version     = '1'
-    statement_version     = 1
+    statement_version     = 1       #   1..6
     symbol_version        = 0       #   0, 2..5 (no version 1)
     target_version        = 1
 
@@ -473,28 +473,28 @@ def fill_convert_zone(version):
 
 
     #
-    #   Version 14 & 15: No longer use contexts
+    #   Version 15 & 16: No longer use contexts
     #
-    #       14: `Tree_Name`    no longer uses contexts.
+    #       15: `Tree_Name`    no longer uses contexts.
     #
-    #       15: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+    #       16: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
     #                          `Tree_Subscript`).
     #
-    if version >= 14:
+    if version >= 15:
         name_version = 4
 
-    if version >= 15:
+    if version >= 16:
         context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
         target_version  = 4
 
 
     #
-    #   Version 16
+    #   Version 17
     #
     #       Add `Tree_Suite` & `Tree_Suite_0`
     #
-    if version >= 16:
-        statement_version = 5
+    if version >= 17:
+        statement_version = 6
 
 
     #
@@ -868,7 +868,7 @@ def fill_convert_zone(version):
     #
     #   Statements
     #
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Convert_Except_V2    import  convert_full_list_of_except_clauses
     else:
         FATAL_unknown_version('statement', statement_version)
@@ -876,37 +876,37 @@ def fill_convert_zone(version):
 
     if statement_version in ((2, 3)):
         from    Z.Tree.Convert_From_Import_V2   import  convert_from_import_statement
-    elif statement_version in ((4, 5)):
+    elif statement_version in ((4, 5, 6)):
         from    Z.Tree.Convert_From_Import_V4   import  convert_from_import_statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Convert_Import_V2    import  convert_import_statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3, 4, 5)):
         from    Z.Tree.Compound_Statement_V1    import  create_Tree_For_Statement           #   "_V1" on purpose.
         from    Z.Tree.Compound_Statement_V1    import  create_Tree_If_Statement            #   "_V1" on purpose.
         from    Z.Tree.Compound_Statement_V1    import  create_Tree_Try_Except_Statement    #   "_V1" on purpose.
         from    Z.Tree.Compound_Statement_V1    import  create_Tree_Try_Finally_Statement   #   "_V1" on purpose.
         from    Z.Tree.Compound_Statement_V1    import  create_Tree_While_Statement         #   "_V1" on purpose.
         from    Z.Tree.Compound_Statement_V1    import  create_Tree_With_Statement          #   "_V1" on purpose.
-    elif statement_version == 5:
-        from    Z.Tree.Compound_Statement_V5    import  create_Tree_For_Statement
-        from    Z.Tree.Compound_Statement_V5    import  create_Tree_If_Statement
-        from    Z.Tree.Compound_Statement_V5    import  create_Tree_Try_Except_Statement
-        from    Z.Tree.Compound_Statement_V5    import  create_Tree_Try_Finally_Statement
-        from    Z.Tree.Compound_Statement_V5    import  create_Tree_While_Statement
-        from    Z.Tree.Compound_Statement_V5    import  create_Tree_With_Statement
+    elif statement_version == 6:
+        from    Z.Tree.Compound_Statement_V6    import  create_Tree_For_Statement
+        from    Z.Tree.Compound_Statement_V6    import  create_Tree_If_Statement
+        from    Z.Tree.Compound_Statement_V6    import  create_Tree_Try_Except_Statement
+        from    Z.Tree.Compound_Statement_V6    import  create_Tree_Try_Finally_Statement
+        from    Z.Tree.Compound_Statement_V6    import  create_Tree_While_Statement
+        from    Z.Tree.Compound_Statement_V6    import  create_Tree_With_Statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Convert_Statement_V2     import  convert_statement
         from    Z.Tree.Convert_Statement_V2     import  convert_full_list_of_statements
         from    Z.Tree.Convert_Statement_V2     import  convert_some_list_of_statements
@@ -914,7 +914,7 @@ def fill_convert_zone(version):
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_assert_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_assign_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_break_statement
@@ -935,30 +935,30 @@ def fill_convert_zone(version):
     if statement_version == 2:
         from    Z.Tree.Convert_Definition_V2    import  convert_class_definition
         from    Z.Tree.Convert_Definition_V2    import  convert_function_definition
-    elif statement_version in ((3, 4)):
+    elif statement_version in ((3, 4, 5)):
         from    Z.Tree.Convert_Definition_V3    import  convert_class_definition
         from    Z.Tree.Convert_Definition_V3    import  convert_function_definition
-    elif statement_version == 5:
-        from    Z.Tree.Convert_Definition_V5    import  convert_class_definition
-        from    Z.Tree.Convert_Definition_V5    import  convert_function_definition
+    elif statement_version == 6:
+        from    Z.Tree.Convert_Definition_V6    import  convert_class_definition
+        from    Z.Tree.Convert_Definition_V6    import  convert_function_definition
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3, 4, 5)):
         from    Z.Tree.Convert_Compound_Statement_V2    import  convert_for_statement
         from    Z.Tree.Convert_Compound_Statement_V2    import  convert_if_statement
         from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_except_statement
         from    Z.Tree.Convert_Compound_Statement_V2    import  convert_try_finally_statement
         from    Z.Tree.Convert_Compound_Statement_V2    import  convert_while_statement
         from    Z.Tree.Convert_Compound_Statement_V2    import  convert_with_statement
-    elif statement_version == 5:
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_for_statement
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_if_statement
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_try_except_statement
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_try_finally_statement
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_while_statement
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_with_statement
+    elif statement_version == 6:
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_for_statement
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_if_statement
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_try_except_statement
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_try_finally_statement
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_while_statement
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_with_statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -966,17 +966,17 @@ def fill_convert_zone(version):
     if statement_version == 2:
         from    Z.Tree.Definition_V1    import  create_Tree_Class_Definition        #   "_V1" on purpose.
         from    Z.Tree.Definition_V1    import  create_Tree_Function_Definition     #   "_V1" on purpose.
-    elif statement_version in ((3, 4)):
+    elif statement_version in ((3, 4, 5)):
         from    Z.Tree.Definition_V3    import  create_Tree_Class_Definition
         from    Z.Tree.Definition_V3    import  create_Tree_Function_Definition
-    elif statement_version == 5:
-        from    Z.Tree.Definition_V5    import  create_Tree_Class_Definition
-        from    Z.Tree.Definition_V5    import  create_Tree_Function_Definition
+    elif statement_version == 6:
+        from    Z.Tree.Definition_V6    import  create_Tree_Class_Definition
+        from    Z.Tree.Definition_V6    import  create_Tree_Function_Definition
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Except_V1        import  create_Tree_Except_Handler          #   "_V1" on purpose.
     else:
         FATAL_unknown_version('statement', statement_version)
@@ -984,23 +984,23 @@ def fill_convert_zone(version):
 
     if statement_version in ((2, 3)):
         from    Z.Tree.From_Import_V1   import  create_Tree_From_Import_Statement   #   "_V1" on purpose.
-    elif statement_version == 4:
+    elif statement_version in ((4, 5)):
         from    Z.Tree.From_Import_V4   import  create_Tree_From_Import_Statement
-    elif statement_version == 5:
-        from    Z.Tree.From_Import_V5   import  create_Tree_From_Import_Statement
+    elif statement_version == 6:
+        from    Z.Tree.From_Import_V6   import  create_Tree_From_Import_Statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3, 4, 5)):
         from    Z.Tree.Import_V1        import  create_Tree_Import_Statement        #   "_V1" on purpose.
-    elif statement_version == 5:
-        from    Z.Tree.Import_V5        import  create_Tree_Import_Statement
+    elif statement_version == 6:
+        from    Z.Tree.Import_V6        import  create_Tree_Import_Statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3, 4, 5)):
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Assert_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Assign_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Break_Statement         #   "_V1" on purpose.
@@ -1014,20 +1014,20 @@ def fill_convert_zone(version):
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Print_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Raise_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Return_Statement        #   "_V1" on purpose.
-    elif statement_version == 5:
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Assert_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Assign_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Break_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Continue_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Delete_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Execute_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Expression_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Global_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Modify_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Pass_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Print_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Raise_Statement
-        from    Z.Tree.Simple_Statement_V5      import  create_Tree_Return_Statement
+    elif statement_version == 6:
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Assert_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Assign_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Break_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Continue_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Delete_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Execute_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Expression_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Global_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Modify_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Pass_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Print_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Raise_Statement
+        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Return_Statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -1035,20 +1035,20 @@ def fill_convert_zone(version):
     #
     #   Suite (only used in statement version 5)
     #
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3, 4, 5)):
         convert_suite   = None
         convert_suite_0 = None
-    elif statement_version == 5:
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_suite
-        from    Z.Tree.Convert_Compound_Statement_V5    import  convert_suite_0
+    elif statement_version == 6:
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_suite
+        from    Z.Tree.Convert_Compound_Statement_V6    import  convert_suite_0
     else:
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3, 4, 5)):
         create_Tree_Suite = None
-    elif statement_version == 5:
-        from    Z.Tree.Suite_V5         import  create_Tree_Suite
+    elif statement_version == 6:
+        from    Z.Tree.Suite_V6         import  create_Tree_Suite
     else:
         FATAL_unknown_version('statement', statement_version)
 

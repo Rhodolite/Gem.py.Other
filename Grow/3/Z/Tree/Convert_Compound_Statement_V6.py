@@ -4,24 +4,24 @@
 
 
 #
-#   Z.Tree.Convert_Compound_Statement_V5 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 5.
+#   Z.Tree.Convert_Compound_Statement_V6 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 6.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 2, Version 3, Version 4, and Version 5.
+#   Difference between Versions 2..6.
 #
 #       Version 2:
 #
 #           Uses `FullNativeList of Tree_Statement` for a suite of statements.
 #
-#       Version 3 & 4:
+#       Version 3..5:
 #
 #           Does not exist.
 #
-#       Version 5:
+#       Version 6:
 #
 #           Uses `Tree_Suite` for a suite of statements.
 #
