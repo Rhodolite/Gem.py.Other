@@ -4,50 +4,23 @@
 
 
 #
-#   Z.Tree.Convert_Argument_V1 - Convert Python Abstract Syntax Tree [Function] Arguments to Tree classes, Version 1.
-#
-#       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
+#   Capital.BuiltIn - A wrapper around python `builtins` module (known as `__builtin__` in Python 2.*)
 #
 
 
-from    Capital.Core                        import  trace
-from    Z.Tree.Argument_V1                  import  create_Tree_Keyword_Argument
-from    Z.Tree.Convert_Expression_V1        import  convert_expression
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
-
-
-if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_some_native_list
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Keyword_Argument
+from    Capital.System                  import  is_python_2
 
 
 #
-#   convert_keyword_argument(v)
+#   Python_BuiltIn - The python `builtins` module (known as `__builtin__` in Python 2.*)
 #
-#       Convert a `Native_AbstractSyntaxTree_Keyword_Argument (i.e.: `_ast.keyword`) to a `Tree_Keyword_Argument`.
-#
-assert Native_AbstractSyntaxTree_Keyword_Argument._attributes == (())
-assert Native_AbstractSyntaxTree_Keyword_Argument._fields     == (('arg', 'value'))
-
-
-def convert_keyword_argument(v):
-    assert fact_is_full_native_string                            (v.arg)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
-
-    return create_Tree_Keyword_Argument(
-               v.arg,
-               convert_expression(v.value),
-           )
+if is_python_2:
+    import  __builtin__ as  Python_BuiltIn  #   The python "built-in" module is named `__builtin__` in Python 2.*
+else:
+    import  builtins    as  Python_BuiltIn  #   The python "built-in" module is named `builtins` in Python 3.*
 
 
 #
-#   convert_some_list_of_keywords(sequence)
+#   iterate(v) - create an iterator for `v`
 #
-#       Convert `SomeNativeList of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
-#       `SomeNativeList of Tree_Keyword_Argument`
-#
-convert_some_list_of_keyword_arguments = (
-        produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_keyword_argument)
-    )
+iterate = Python_BuiltIn.iter

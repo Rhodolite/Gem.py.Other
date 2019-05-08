@@ -25,7 +25,6 @@
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_native_boolean
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
@@ -43,10 +42,8 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Delete_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
@@ -254,62 +251,6 @@ def convert_global_statement(z, v):
                v.col_offset,
 
                v.names,
-           )
-
-
-#
-#   convert_from_import_statement(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_From_Import_Statement` (i.e.: `_ast.ImportFrom`) to a
-#       `Tree_From_Import_Statement`.
-#
-assert Native_AbstractSyntaxTree_From_Import_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_From_Import_Statement._fields     == (('module', 'names', 'level'))
-
-
-def convert_from_import_statement(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_full_native_string (v.module)
-    assert fact_is_full_native_list   (v.names)
-    assert fact_is_substantial_integer(v.level)
-
-    return z.create_Tree_From_Import_Statement(
-               v.lineno,
-               v.col_offset,
-
-               v.module,
-               z.convert_full_list_of_symbol_aliases(z, v.names),
-               v.level,
-           )
-
-
-
-#
-#   convert_import_statement(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Import_Statement` (i.e.: `_ast.Import`) to a `Tree_Import_Statement`.
-#
-assert Native_AbstractSyntaxTree_Import_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Import_Statement._fields     == (('names',))
-
-
-def convert_import_statement(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_full_native_list(v.names)
-
-    return z.create_Tree_Import_Statement(
-               v.lineno,
-               v.col_offset,
-
-               z.convert_full_list_of_module_aliases(z, v.names),
            )
 
 
