@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Convert_Import_V4 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 4.
+#   Z.Tree.Convert_From_Import_V4 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 4.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -37,7 +37,6 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_substantial_integer
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Import_Statement
 
 
 #
@@ -67,29 +66,4 @@ def convert_from_import_statement(z, v):
                z.conjure_parser_module_name         (z, v.module),
                z.convert_full_list_of_symbol_aliases(z, v.names),
                v.level,
-           )
-
-
-#
-#   convert_import_statement(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Import_Statement` (i.e.: `_ast.Import`) to a `Tree_Import_Statement`.
-#
-assert Native_AbstractSyntaxTree_Import_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Import_Statement._fields     == (('names',))
-
-
-def convert_import_statement(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_full_native_list(v.names)
-
-    return z.create_Tree_Import_Statement(
-               v.lineno,
-               v.col_offset,
-
-               z.convert_full_list_of_module_aliases(z, v.names),
            )

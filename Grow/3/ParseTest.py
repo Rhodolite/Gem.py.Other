@@ -3,168 +3,118 @@
 #
 
 
-#
-#   Capital.BuildContextLifecyle - Lifecycle for a build context (`with` statement handler)
-#
-
-
-from    Capital.Core                    import  creator
-from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_changing
-from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_created
-from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_entered
-from    Capital.SimpleContextLifecycle  import  simple_context_lifecycle_exited
+from    Capital.Core                    import  arrange
+from    Z.Crystal_ParseTree             import  Crystal_ParseTree
+from    Z.Crystal_ParseTree             import  Crystal_Statement_Copyright
+from    Z.Crystal_ParseTree             import  Crystal_Statement_Output_1
+from    Z.Python_ParseTree              import  Python_ParseTree
+from    Z.Python_ParseTree              import  Python_Statement_Comment_Many
+from    Z.Python_ParseTree              import  Python_Statement_Print_1
 
 
 #
-#   Build Context Lifecycles:
+#   Pseudo Methods
 #
-#       Same as Simple Context LifeCycle:
+#       Instead of declaring `.convert_crystal_to_python` methods in
+#       their classes in "Z/Crystal_ParseTree" we declare them here
+#       as "pseudo" methods (i.e.: as functions).
 #
-#           build_context_lifecycle_changing    - The context is changing states.
-#           build_context_lifecycle_created     - The context has been created.
-#           build_context_lifecycle_entered     - The context has been entered.
-#           build_context_lifecycle_exited      - The context has exited.
+#       REASON:
+#           We will eventually have 15+ converters (for all the different
+#           langauges).
 #
-#       With two additional states:
+#           It's way more organized, and readable, to put each set of converter
+#           code in it's own file instead of in the classes.
 #
-#           build_context_lifecycle_exception   - The context exited with an exception.
+#       FUTURE:
+#           In the future the Crystal Language will allow the following:
 #
-#           build_context_lifecycle_iterating   - The context has exited, and is iterating
-#                                                 (or has finished iterating).
+#               method Crystal_ParseTree.convert_crystal_to_python(input_path)
 #
+#           to make it clearer we are defining a method for a class.
 #
-#   NOTE #1:
-#       Similiar to `SimpleContextLifeCycle', this state machine does not [fully] represent exceptions.
+#           At that point, we will declare methods for classes outside of
+#           their class (once we have good support infrastructure and tools for
+#           querying, finding, and modifying these methods).
 #
-#       Any exception leaves the state machine in it's last state, until the underlying structure is
-#       garbaged collected & reclaimed.
-#
-#       Thus, the state machine, can *end* in any state, before being destroyed.
-#
-#
-#   NOTE #2:
-#       An exception caught in the `.__exit__` is handled, and represented by `build_context_lifecycle_exception`.
-#
-#
-#   NOTE #3:
-#       Similiar to `SimpleContextLifeCycle', there is no state to indicate the underlying structure is being
-#       garbage collected & destroyed.
-#
-#
-#   NOTE #4:
-#       Due to the way iteration is handled, there is no state to indicate that the iteration has completed.
-#
-#       Instead `build_context_lifecycle_iterating` is used both to indicate iterating, and that iteration
-#       has finished.
-#
-#       Basically `build_context_lifecycle_iterating` is used to detect (in debug mode) that iteration is only
-#       *STARTED* once.
-#
-#       It is not used to detect (in debug mode) that iteration has finished.
-#
-#
-#   State Machine Picture:
-#
-#
-#                                               build_context_lifecycle_changing    - The context is being created.
-#                                                             |
-#                     +---------------------------------------+
-#                     |
-#                     v
-#       build_context_lifecycle_created                                             - The context has been created.
-#                     |
-#                     +---------------------------------------+
-#                                                             |
-#                                                             v
-#                                               build_context_lifecycle_changing    - The context is being entered.
-#                                                             |
-#                     +---------------------------------------+
-#                     |
-#                     v
-#       build_context_lifecycle_entered                                             - The context has been entered.
-#                     |
-#                     +---------------------------------------+
-#                                                             |
-#                                                             v
-#                                               build_context_lifecycle_changing    - The context is exiting.
-#                                                             |
-#                     +---------------------------------------+--------+
-#                     |                                                |
-#                     |                                                v
-#                     |                         build_context_lifecycle_exception   - The context has exited
-#                     |                                                               with an exception.
-#                     v
-#       build_context_lifecycle_exited                                              - The context has exited.
-#                     |
-#                     +---------------------------------------+
-#                                                             |
-#                                                             v
-#                                               build_context_lifecycle_changing    - The context has exited, and is
-#                                                             |                       starting to iterate.
-#                     +---------------------------------------+
-#                     |
-#                     v
-#       build_context_lifecycle_exited                                              - The context has exited,
-#                                                                                     and is iterating
-#                                                                                     (or has finished iterating).
-#
-#
-#   NOTE:
-#       These `lifecycles` are only used for debugging (by using assertions) in context handlers ...
-#
-#       Context handlers are quite complex to write properly (especially handling exceptions in the exception
-#       function of a context hander).
-#
-#       Hence the importance of debugging lifecycle management for context handlers.
-#
-class BuildContextLifecycle(object):
-    __slots__ = ((
-        'name',                     #   Full_Native_String
-        'exception',                #   Boolean
-        'iterating',                #   Boolean
-    ))
 
 
-    changing  = False
-    created   = False
-    entered   = False
-    exited    = False
+#
+#   Crystal_Statement_Copyright.convert_crystal_to_python
+#
+#       Consider this a "pseudo" method of `Crystal_Statement_Copyright`.
+#
+def Crystal_Statement_Copyright__convert_crystal_to_python(self, path):
+    copyright = self.extract_copyright(path)
+
+    return Python_Statement_Comment_Many(
+               tuple([
+                   '#',
+                   arrange('#   {}', copyright),
+                   '#',
+               ]),
+           )
 
 
-    def __init__(self, name, exception, iterating):
-        self.name      = name
-        self.exception = exception
-        self.iterating = iterating
+#
+#   Crystal_Statement_Output_1.convert_crystal_to_python
+#
+def Crystal_Statement_Output_1__convert_crystal_to_python(self, path):
+    return Python_Statement_Print_1(self.argument)
 
 
-    def __repr__(self):
-        return arrange('<BuildContextLifecycle {}>', self.name)
+
+#
+#   map__Crystal_Statement_Type__to__psuedo_method : Map { Crystal_Statement_* : Function }
+#
+#       This maps a `Crystal_Statement_*` to a "psuedo method" (actually to a function).
+#
+#       EXPLANATION:
+#           What we really want to do, long term, is declare the
+#           `.convert_crysal_to_python` methods in this file (instead of the
+#           file the classes are declared in).
+#
+#           Since it is not standard in python, to declare methods outside of
+#           classes (although it can be done), for now, we don't declare these
+#           as methods, but as functions.
+#
+#           Thus we simply create a mapping table here and use it in
+#           `Crystal_ParseTree__convert_crystal_to_python` (see note there).
+#
+map__Crystal_Statement_Type__to__psuedo_method = {
+    Crystal_Statement_Copyright : Crystal_Statement_Copyright__convert_crystal_to_python,
+    Crystal_Statement_Output_1  : Crystal_Statement_Output_1__convert_crystal_to_python,
+}
 
 
-@creator
-def create_BuildContextLifecycle(
-        name,
+#
+#   convert_crystal_to_python
+#
+#       Consider this a "pseudo" method of `Crystal_ParseTree`.
+#
+#       (See note in `Crystal_Statement_Copyright__convert_crystal_to_python`
+#       for an explanation of "psuedo" method).
+#
+def Crystal_ParseTree__convert_crystal_to_python(self, input_path):
+    python_parse_tree = Python_ParseTree()
 
-        changing  = False,
-        created   = False,
-        entered   = False,
-        exception = False,
-        exited    = False,
-        iterating = False,
-):
-    assert changing  is False
-    assert created   is False
-    assert entered   is False
-    assert exited    is False
-    assert (exception + iterating == 1)
+    for v in self.crystal_statements:
+        #
+        #   Find out "psuedo" method using the mapping table (converting the
+        #   type of `v` to the "psuedo" method).
+        #
+        #   FUTURE:
+        #       Once the crystal language supports declaring methods outside of
+        #       their classes we can convert the next three lines of code to
+        #       the much more readable:
+        #
+        #           statement = v.convert_crstal_to_python(input_path)
+        #
+        v__convert_crystal_to_python__pseudo_method = map__Crystal_Statement_Type__to__psuedo_method[type(v)]
 
-    return BuildContextLifecycle(name, exception, iterating)
+        statement = v__convert_crystal_to_python__pseudo_method(v, input_path)
 
+        if statement:
+            python_parse_tree.append_python_statement(statement)
 
-build_context_lifecycle_changing = simple_context_lifecycle_changing
-build_context_lifecycle_created  = simple_context_lifecycle_created
-build_context_lifecycle_entered  = simple_context_lifecycle_entered
-build_context_lifecycle_exited   = simple_context_lifecycle_exited
-
-build_context_lifecycle_exception = create_BuildContextLifecycle('exception', exception = True)
-build_context_lifecycle_iterating = create_BuildContextLifecycle('iterating', iterating = True)
+    return python_parse_tree

@@ -73,7 +73,7 @@ from    Z.Tree.Convert_Compound_Statement_V1    import  convert_while_statement
 from    Z.Tree.Convert_Compound_Statement_V1    import  convert_with_statement
 from    Z.Tree.Convert_Definition_V1            import  convert_class_definition
 from    Z.Tree.Convert_Definition_V1            import  convert_function_definition
-from    Z.Tree.Convert_Import_V1                import  convert_from_import_statement
+from    Z.Tree.Convert_From_Import_V1           import  convert_from_import_statement
 from    Z.Tree.Convert_Import_V1                import  convert_import_statement
 from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assert_statement
 from    Z.Tree.Convert_Simple_Statement_V1      import  convert_assign_statement
