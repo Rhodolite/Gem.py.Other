@@ -53,7 +53,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
-from    Capital.String                  import  TRAIT_String
+from    Capital.Some_String             import  TRAIT_Some_String
 
 
 if __debug__:
@@ -71,7 +71,7 @@ if __debug__:
 #             "String" is still reserved for `interface String`).
 #
 class Base_String(
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Some_Native_String
@@ -186,7 +186,7 @@ class Full_String(Base_String):
     #
     #       Example:
     #
-    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #

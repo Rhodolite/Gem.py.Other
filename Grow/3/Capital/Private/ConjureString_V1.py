@@ -4,7 +4,9 @@
 
 
 #
-#   Capital.Private.ConjureString_V1 - Private implementation of `conjure_string` for `String` Interface, Version 1.
+#   Capital.Private.ConjureString_V1
+#
+#       Private implementation of `conjure_some_string` for `String` Interface, Version 1.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -22,10 +24,13 @@
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Fact                    import  fact_is_some_native_string
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V1       import  create_full_string
 from    Capital.Private.String_V1       import  empty_string
+
+
+if __debug__:
+    from    Capital.Native_String       import  fact_is_some_native_string
 
 
 #
@@ -33,7 +38,7 @@ from    Capital.Private.String_V1       import  empty_string
 #
 #       The following functions have a "verb" in their name:
 #
-#           conjure_string       - Lookup or "create & insert" a string.
+#           conjure_some_string  - Lookup or "create & insert" a string.
 #           lookup_string        - Lookup a string.
 #           provide_string       - Provide a `String_V1`.
 #
@@ -61,7 +66,7 @@ from    Capital.Private.String_V1       import  empty_string
 #       The type of `string_cache` is `Map { interned Some_Native_String } of String_Leaf`
 #
 #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
-#       when the `conjure_string("")` is called.
+#       when the `conjure_some_string("")` is called.
 #
 string_cache = {
                    intern_native_string("") : empty_string,
@@ -72,7 +77,7 @@ provide_string = string_cache.setdefault
 
 
 #
-#   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #
@@ -81,7 +86,7 @@ provide_string = string_cache.setdefault
 #
 @export
 @creator
-def conjure_string(s):
+def conjure_some_string(s):
     assert fact_is_some_native_string(s)
 
     r = lookup_string(s)

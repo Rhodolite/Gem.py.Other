@@ -37,21 +37,6 @@ if __debug__:
 
 
 #
-#   fact_is_empty_native_string(s)
-#
-#       Assert that `s` is a *DIRECT* `str` instance, and is "empty" (i.e.: has a length of 0).
-#
-#       `s` may *NOT* be an instance of a subclass of `str`.
-#
-if __debug__:
-    def fact_is_empty_native_string(s):
-        assert type(s) is str
-        assert len(s) == 0
-
-        return True
-
-
-#
 #   fact_is_full_native_list(v)
 #
 #       Assert that `v` is a *DIRECT* `list` instance, and is "full" (i.e.: is non-empty; i.e.: and has at
@@ -63,21 +48,6 @@ if __debug__:
     def fact_is_full_native_list(v):
         assert type(v) is list
         assert len(v) > 0
-
-        return True
-
-
-#
-#   fact_is_full_native_string(s)
-#
-#       Assert that `s` is a *DIRECT* `str` instance, and is "full" (i.e.: has a length greater than 0).
-#
-#       `s` may *NOT* be an instance of a subclass of `str`.
-#
-if __debug__:
-    def fact_is_full_native_string(s):
-        assert type(s) is str
-        assert len(s) > 0
 
         return True
 
@@ -98,28 +68,6 @@ if __debug__:
 if __debug__:
     def fact_is_native_none(v):
         assert v is None
-
-        return True
-
-
-#
-#   fact_is__native_none__OR__full_native_string(s)
-#
-#       Assert that `s` is either:
-#
-#           1)  `NONE`; OR
-#
-#           2)  a *DIRECT* `str` instance, and is "full" (i.e.: has a length greater than 0).
-#
-#               `s` may *NOT* be an instance of a subclass of `str`.
-#
-if __debug__:
-    def fact_is__native_none__OR__full_native_string(s):
-        if s is None:
-            return True
-
-        assert type(s) is str
-        assert len(s) > 0
 
         return True
 

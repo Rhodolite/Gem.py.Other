@@ -19,7 +19,7 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Tree.Context              import  fact_is_tree_context

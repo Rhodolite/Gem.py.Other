@@ -4,7 +4,9 @@
 
 
 #
-#   Capital.Private.ConjureString_V6 - Private implementation of `conjure_string` for `String` Interface, Version 6.
+#   Capital.Private.ConjureString_V6
+#
+#       Private implementation of `conjure_some_string` for `String` Interface, Version 6.
 #
 
 
@@ -54,7 +56,7 @@ from    Capital.Temporary_String_V6     import  create_temporary_string
 
 
 if __debug__:
-    from    Capital.Fact                    import  fact_is_some_native_string
+    from    Capital.Native_String       import  fact_is_some_native_string
 
 
 #
@@ -62,7 +64,7 @@ if __debug__:
 #
 #       The following functions have a "verb" in their name:
 #
-#           conjure_string       - Lookup or "create & insert" a string.
+#           conjure_some_string  - Lookup or "create & insert" a string.
 #           lookup_string        - Lookup a string.
 #           provide_string       - Provide a `Temporary_String`.
 #
@@ -88,7 +90,7 @@ if __debug__:
 #
 #       For example, the following function calls
 #
-#           conjure_string('')
+#           conjure_some_string('')
 #
 #       will return:
 #
@@ -107,8 +109,8 @@ if __debug__:
 #
 #       Or in other words:
 #
-#           assert "hello"       == conjure_string("hello")             #   Uses `str.__eq__`
-#           assert hash("hello") == hash(conjure_string("Hello"))       #   Uses `str.__hash__` [twice].
+#           assert "hello"       == conjure_some_string("hello")        #   Uses `str.__eq__`
+#           assert hash("hello") == hash(conjure_some_string("Hello"))  #   Uses `str.__hash__` [twice].
 #
 #       The "type" of `string_cache` is:
 #
@@ -119,9 +121,9 @@ if __debug__:
 
 
 #
-#   produce_conjure_string(empty_string, create_temporary_string, Meta) - Produce a `conjure_string(s)` function.
+#   produce_conjure_string(empty_string, create_temporary_string, Meta) - Produce a `conjure_some_string(s)` function.
 #
-#       Produces: `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
+#       Produces: `conjure_some_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
 #
 #           `s` must be of type some `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #
@@ -140,7 +142,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #       `Map { Empty_String | Meta | Temporary_String } of Empty_String | Meta | Temporary_String`.
     #
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
-    #       when the `conjure_string("")` is called.
+    #       when the `conjure_some_string("")` is called.
     #
     string_cache = { empty_string : empty_string }
 
@@ -149,7 +151,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
 
 
     #
-    #   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
+    #   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
     #
     #       `s` must be of type some `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
     #
@@ -163,7 +165,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #           2.  A different thread examines the stack frames of this thread.
     #
     #           3.  A different thread uses the python `gc` module (garbage collection) to look at the internal
-    #               instances of `conjure_string`.
+    #               instances of `conjure_some_string`.
     #
     #       By creating a `Temporary_String` instance, we make the following guarentee:
     #
@@ -175,7 +177,7 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
     #       A `Temporary_String` may at any moment be transformed (by another thread, or by multiple other threads) to
     #       a `Meta`.
     #
-    def conjure_string(s):
+    def conjure_some_string(s):
         assert fact_is_some_native_string(s)
 
         r = lookup_string(s)
@@ -267,10 +269,10 @@ def produce_conjure_string(empty_string, create_temporary_string, Meta):
         return r
 
 
-    return conjure_string
+    return conjure_some_string
 
 
-conjure_string = produce_conjure_string(empty_string, create_temporary_string, Full_String)
+conjure_some_string = produce_conjure_string(empty_string, create_temporary_string, Full_String)
 
 
-export(conjure_string)
+export(conjure_some_string)

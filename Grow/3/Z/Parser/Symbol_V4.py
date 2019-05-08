@@ -38,7 +38,7 @@ from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol_0
 
 if __debug__:
     from    Capital.Core                    import  FATAL
-    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
+    from    Capital.Native_String           import  fact_is__native_none__OR__full_native_string
     from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
 
 

@@ -14,7 +14,7 @@ from    Z.Tree.Argument                 import  TRAIT_Tree_Argument
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
 
 

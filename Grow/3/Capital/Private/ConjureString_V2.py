@@ -4,7 +4,9 @@
 
 
 #
-#   Capital.Private.ConjureString_V2 - Private implementation of `conjure_string` for `String` Interface, Version 2.
+#   Capital.Private.ConjureString_V2
+#
+#       Private implementation of `conjure_some_string` for `String` Interface, Version 2.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -25,24 +27,28 @@
 #
 #       Version 1:
 #
-#           Implementation of creator function `conjure_string`.
+#           Implementation of creator function `conjure_some_string`.
 #
 #       Version 2:
 #
-#           Producer function `produce_conjure_string` to produce `conjure_string` functions.
+#           Producer function `produce_conjure_string` to produce `conjure_some_string` functions.
 #
-#           The initially created `conjure_string` is identical to `Capital.Private.ConjureString_V1.conjure_string`
-#           (the only internal difference is using a closure for variables instead of global variables).
+#           The initially created `conjure_some_string` is identical to
+#           `Capital.Private.ConjureString_V1.conjure_some_string` (the only internal difference is using a closure for
+#           variables instead of global variables).
 #
 
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Fact                    import  fact_is_some_native_string
 from    Capital.Core                    import  trace
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V2       import  create_full_string
 from    Capital.Private.String_V2       import  empty_string
+
+
+if __debug__:
+    from    Capital.Native_String       import  fact_is_some_native_string
 
 
 #
@@ -50,7 +56,7 @@ from    Capital.Private.String_V2       import  empty_string
 #
 #       The following functions have a "verb" in their name:
 #
-#           conjure_string       - Lookup or "create & insert" a string.
+#           conjure_some_string  - Lookup or "create & insert" a string.
 #           lookup_string        - Lookup a string.
 #           provide_string       - Provide a `String_Leaf`.
 #
@@ -67,9 +73,9 @@ from    Capital.Private.String_V2       import  empty_string
 
 
 #
-#   produce_conjure_string(empty_string, create_string) - Produce a `conjure_string(s)` function.
+#   produce_conjure_string(empty_string, create_string) - Produce a `conjure_some_string(s)` function.
 #
-#       Produces: `conjure_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#       Produces: `conjure_some_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #           `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #
@@ -90,7 +96,7 @@ def produce_conjure_string(empty_string, create_full_string):
     #       The type of `string_cache` is `Map { interned Some_Native_String } of String`
     #
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
-    #       when the `conjure_string("")` is called.
+    #       when the `conjure_some_string("")` is called.
     #
     string_cache = { intern_native_string("") : empty_string }
 
@@ -99,7 +105,7 @@ def produce_conjure_string(empty_string, create_full_string):
 
 
     #
-    #   conjure_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
     #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
     #
@@ -107,7 +113,7 @@ def produce_conjure_string(empty_string, create_full_string):
     #       version.s
     #
     @creator
-    def conjure_string(s):
+    def conjure_some_string(s):
         assert fact_is_some_native_string(s)
 
         r = lookup_string(s)
@@ -128,13 +134,13 @@ def produce_conjure_string(empty_string, create_full_string):
 
    #trace('produce_conjure_string({!r}, <function {}>)', empty_string, create_full_string.__name__)
 
-    return conjure_string
+    return conjure_some_string
 
 
-conjure_string = produce_conjure_string(empty_string, create_full_string)
+conjure_some_string = produce_conjure_string(empty_string, create_full_string)
 
 
-export(conjure_string)
+export(conjure_some_string)
 
 
 #
@@ -144,9 +150,9 @@ export(conjure_string)
 #
 #       Above, `produce_conjure_string` is a function.
 #
-#       Inside of `produce_conjure_string` is the nested function `conjure_string`
+#       Inside of `produce_conjure_string` is the nested function `conjure_some_string`
 #
-#       There are local variables of `produce_conjure_string` that are used in `conjure_string`, in particular:
+#       There are local variables of `produce_conjure_string` that are used in `conjure_some_string`, in particular:
 #
 #           1)  `lookup_string`;
 #
@@ -156,17 +162,17 @@ export(conjure_string)
 #
 #       These are "cell variables" in `produce_conjure_string`.
 #
-#       These are "free variables" in `conjure_string`.
+#       These are "free variables" in `conjure_some_string`.
 #
-#       When a "closure" is created around `conjure_string`, then each of the "free variables" in `conjure_string`
-#       is bound to the "cell variable" in `produce_conjure_string` (with the same name).
+#       When a "closure" is created around `conjure_some_string`, then each of the "free variables" in
+#       `conjure_some_string` is bound to the "cell variable" in `produce_conjure_string` (with the same name).
 #
 #       By "bound" we mean the "free variable" is set as a pointer to the "cell variable".
 #
 #   "CELL VARIABLE"
 #
 #       A "cell variable" is a variable in a function (in our case in function `produce_conjure_string`) that can
-#       be used by a nested function (in our case the function `conjure_string) when a closure is produced around
+#       be used by a nested function (in our case the function `conjure_some_string) when a closure is produced around
 #       the nested function.
 #
 #       The following are the variables in `produce_conjure_string`:
@@ -178,8 +184,8 @@ export(conjure_string)
 #
 #           2)  `string_cache` is a local variable at index 2; and
 #
-#           3)  `conjure_string` is a local variable at index 3; (the value of `conjure_string` will be the closure
-#               around the nested function `conjure_string`).
+#           3)  `conjure_some_string` is a local variable at index 3; (the value of `conjure_some_string` will be the
+#               closure around the nested function `conjure_some_string`).
 #
 #       And also:
 #
@@ -192,12 +198,12 @@ export(conjure_string)
 #
 #   "FREE VARIABLE"
 #
-#       A "free variable" is a variable inside a nested function (in our case the nested function `conjure_string`)
-#       that is found to a "cell variable" in the enclosing function when a closure is produced around the nested
-#       function.
+#       A "free variable" is a variable inside a nested function (in our case the nested function
+#       `conjure_some_string`that is found to a "cell variable" in the enclosing function when a closure is produced
+#       around the nested function.
 #
-#       The following are the variables in the function `conjure_string` (not to be confused with the local variable
-#       `conjure_string`; which is used to store a closure around the function `conjure_string`):
+#       The following are the variables in the function `conjure_some_string` (not to be confused with the local
+#       variable `conjure_some_string`; which is used to store a closure around the function `conjure_some_string`):
 #
 #           0)  `s` is a local variable at index 0 (and it is also a parameter);
 #
@@ -220,8 +226,8 @@ export(conjure_string)
 #       A "closure" is created around a nested function, when the it's code is executed during execution of the
 #       outer function.
 #
-#       In out case a closure is created around nested function `conjure_string` when the code to define `conjure_string`
-#       is executed during the execution of `produce_conjure_string`.
+#       In out case a closure is created around nested function `conjure_some_string` when the code to define
+#       `conjure_some_string` is executed during the execution of `produce_conjure_string`.
 #
 #       To create this closure, each of it's free variable's is bound to a cell variable in the currently executing
 #       enclosing function (i.e.: in the current execution of `produce_conjure_string`).
@@ -229,7 +235,8 @@ export(conjure_string)
 #       As stated above, by "bound" we mean the "free variable" is set as a pointer to the "cell variable".
 #
 #       This closure is then assigned to a variable with the same name as the nested function (i.e.: in our case
-#       this closure is assigned to local variable `conjure_string` in the enclosing function `produce_conjure_string`).
+#       this closure is assigned to local variable `conjure_some_string` in the enclosing function
+#       `produce_conjure_string`).
 #
 #   DISABLED CODE BELOW.
 #
@@ -238,16 +245,16 @@ export(conjure_string)
 #           % ==== Code for produce_conjure_string ===
 #           % Constant #0: None
 #           % Constant #1: ''
-#           % Constant #2: <code object conjure_string at 0x..., file ".../Grow/3/Capital/Private/ConjureString_V2.py", line 145>
+#           % Constant #2: <code object conjure_some_string at 0x..., file ".../ConjureString_V2.py", line 145>
 #           % Local Variable & Function Parameter #0: 'empty_string'
 #           % Local Variable & Function Parameter #1: 'create_full_string'
 #           % Local Variable #2: 'string_cache'
-#           % Local Variable #3: 'conjure_string'
+#           % Local Variable #3: 'conjure_some_string'
 #           % Cell Variable #0: 'create_full_string'
 #           % Cell Variable #1: 'lookup_string'
 #           % Cell Variable #2: 'provide_string'
 #
-#           % ==== Code for conjure_string ===
+#           % ==== Code for conjure_some_string ===
 #           % Constant #0: None
 #           % Local Variable & Function Parameter #0: 's'
 #           % Local Variable #1: 'r'
@@ -264,11 +271,11 @@ export(conjure_string)
 #
 #       One comment on "Constant #2".  It's value is:
 #
-#           <code object conjure_string at 0x..., file "...//Grow/3/Capital/Private/ConjureString_V2.py", line 145>
+#           <code object conjure_some_string at 0x..., file ".../ConjureString_V2.py", line 145>
 #
-#       This is the original code object for `conjure_string`, all the closures for `conjure_string` use the same
-#       code object (NOTE: This is a code object, not a function object.  When creating a closure, a function object
-#       is created to refer to this common code object ... see below for more details).
+#       This is the original code object for `conjure_some_string`, all the closures for `conjure_some_string` use the
+#       same code object (NOTE: This is a code object, not a function object.  When creating a closure, a function
+#       object is created to refer to this common code object ... see below for more details).
 #
 #       When a closure is created, it is created from this original code object, and the new code object for the
 #       closure, is as explained above:
@@ -292,8 +299,8 @@ export(conjure_string)
 #
 #               2)  `provide_string`; (i.e.: `string_cache.setdefault`).
 #
-#       The code below which dumps the variables (and cells) for `conjure_string`, is dumping the variables for a
-#       closure of `conjure_string`.
+#       The code below which dumps the variables (and cells) for `conjure_some_string`, is dumping the variables for a
+#       closure of `conjure_some_string`.
 #
 if 0:
     def dump_code(code):
@@ -317,9 +324,9 @@ if 0:
 
     def dump_functions():
         dump_code(produce_conjure_string.func_code)
-        dump_code(conjure_string.func_code)
+        dump_code(conjure_some_string.func_code)
 
-        for [i, v] in enumerate(conjure_string.func_closure):
+        for [i, v] in enumerate(conjure_some_string.func_closure):
             trace('Cell #{}: {!r}', i, v.cell_contents)
 
     dump_functions()

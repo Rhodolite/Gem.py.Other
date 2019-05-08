@@ -28,10 +28,11 @@ from    Capital.Native_String           import  strip_trailing_whitespace
 
 if __debug__:
     from    Capital.Fact                    import  fact_is_native_none
-    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
     from    Capital.Fact                    import  fact_is_not_native_none
     from    Capital.Fact                    import  fact_is_positive_integer
-    from    Capital.Fact                    import  fact_is_some_native_string
+    from    Capital.Native_String           import  fact_is_empty_native_string
+    from    Capital.Native_String           import  fact_is__native_none__OR__full_native_string
+    from    Capital.Native_String           import  fact_is_some_native_string
     from    Capital.SimpleContextLifecycle  import  fact_is_lifecycle_created
     from    Capital.SimpleContextLifecycle  import  fact_is_lifecycle_entered
 

@@ -14,7 +14,7 @@ from    Capital.Temporary_String_V6     import  create_temporary_string
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
@@ -48,7 +48,7 @@ if __debug__:
 #
 #           `produce_conjure_string(empty_string, create_temporary_string, Meta)`:
 #
-#               1)  The produced function `conjure_string` allows empty strings.
+#               1)  The produced function `conjure_some_string` allows empty strings.
 #
 #               2)  `produce_conjure_string` takes a parameter named `empty_string`; and initilizes it's `string_cache`
 #                   as follows:
@@ -57,7 +57,7 @@ if __debug__:
 #
 #               3)  `produce_conjure_string` takes a parameter named `create_temporary_string`.
 #
-#               4)  The produced function `conjure_string` uses `fact_is_some_native_string(s)` (i.e.: it's `s`
+#               4)  The produced function `conjure_some_string` uses `fact_is_some_native_string(s)` (i.e.: it's `s`
 #                   parameter may be an empty or full native string).
 #
 #               5)  `produce_conjure_string` has extensive comments to explain the multi-threading and class

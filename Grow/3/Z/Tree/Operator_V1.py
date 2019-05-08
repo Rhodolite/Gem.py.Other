@@ -12,7 +12,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Capital.String                  import  conjure_string
+from    Capital.Some_String             import  conjure_some_string
 from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
 
 
@@ -56,7 +56,7 @@ from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
 #
 @creator
 def create_TOE(MetaName, operator_token):
-    operator = conjure_string(operator_token)
+    operator = conjure_some_string(operator_token)
     portrait = arrange('<{}>', MetaName)
 
 

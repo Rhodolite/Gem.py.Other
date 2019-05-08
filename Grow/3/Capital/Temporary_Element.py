@@ -98,7 +98,7 @@ class TRAIT_Temporary_Element(object):
 #
 #           class Unique_String_Example(
 #                   str,
-#                   TRAIT_String,
+#                   TRAIT_Some_String,
 #                   TRAIT_Temporary_Element,
 #           ):
 #               __slots__ = (())

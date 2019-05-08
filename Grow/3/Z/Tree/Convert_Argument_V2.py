@@ -27,7 +27,7 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_full_native_string
+    from    Capital.Native_String               import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION

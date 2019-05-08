@@ -57,9 +57,26 @@ native_string__lookup_index__OR__MINUS_1 = Some_Native_String.find
 
 
 #
+#   fact_is_empty_native_string(s)
+#
+#       Assert that `s` is a *DIRECT* `str` instance, and is "empty" (i.e.: has a length of 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+if __debug__:
+    def fact_is_empty_native_string(s):
+        assert type(s) is str
+        assert len(s) == 0
+
+        return True
+
+
+#
 #   fact_is_empty_INTERNED_native_string(s)
 #
-#       Assert that `s` is a `str` instance that has been interned, and is empty (i.e.: is the string `""`).
+#       Assert that `s` is a *DIRECT* `str` instance that has been interned, and is empty (i.e.: is the string `""`).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
 #
 if __debug__:
     def fact_is_empty_INTERNED_native_string(s):
@@ -73,7 +90,10 @@ if __debug__:
 #
 #   fact_is_full_INTERNED_native_string(s)
 #
-#       Assert that `s` is a `str` instance that has been interned, and is "full" (i.e.: has a length greater than 0).
+#       Assert that `s` is a *DIRECT* `str` instance that has been interned, and is "full" (i.e.: has a length greater
+#       than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
 #
 if __debug__:
     def fact_is_full_INTERNED_native_string(s):
@@ -85,11 +105,60 @@ if __debug__:
 
 
 #
+#   fact_is_full_native_string(s)
+#
+#       Assert that `s` is a *DIRECT* `str` instance, and is "full" (i.e.: has a length greater than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+if __debug__:
+    def fact_is_full_native_string(s):
+        assert type(s) is str
+        assert len(s) > 0
+
+        return True
+
+
+#
+#   fact_is__native_none__OR__full_native_string(s)
+#
+#       Assert that `s` is either:
+#
+#           1)  `NONE`; OR
+#
+#           2)  a *DIRECT* `str` instance, and is "full" (i.e.: has a length greater than 0).
+#
+#               `s` may *NOT* be an instance of a subclass of `str`.
+#
+if __debug__:
+    def fact_is__native_none__OR__full_native_string(s):
+        if s is None:
+            return True
+
+        assert type(s) is str
+        assert len(s) > 0
+
+        return True
+
+
+#
 #   fact_is_some_INTERNED_native_string(s) - Assert that `s` is a `str` instance that has been interned.
 #
 if __debug__:
     def fact_is_some_INTERNED_native_string(s):
         assert type(s) is str
         assert s       is intern_native_string(s)
+
+        return True
+
+
+#
+#   fact_is_some_native_string(s) - Assert that `s` is a *DIRECT* `str` instance.
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+if __debug__:
+    def fact_is_some_native_string(s):
+        assert type(s) is str
 
         return True

@@ -45,8 +45,8 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_some_native_string
     from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Native_String               import  fact_is_some_native_string
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR

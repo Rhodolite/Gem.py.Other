@@ -4,7 +4,9 @@
 
 
 #
-#   Capital.Private.ConjureString_V2 - Private implementation of `conjure_string` for `String` Interface, Version 2.
+#   Capital.Private.ConjureString_V2
+#
+#       Private implementation of `conjure_some_string` for `String` Interface, Version 2.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -25,7 +27,7 @@
 #
 #       Version 2:
 #
-#           Producer function `produce_conjure_string` to produce `conjure_string` functions.
+#           Producer function `produce_conjure_string` to produce `conjure_some_string` functions.
 #
 #           The arguments to `produce_conjure_string` are:
 #
@@ -55,7 +57,7 @@ from    Capital.Private.String_V3           import  create_full_string
 from    Capital.Private.String_V3           import  empty_string
 
 
-conjure_string = produce_conjure_string(empty_string, create_full_string)
+conjure_some_string = produce_conjure_string(empty_string, create_full_string)
 
 
-export(conjure_string)
+export(conjure_some_string)

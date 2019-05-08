@@ -17,8 +17,8 @@ from    Capital.Core                    import  FATAL
 from    Capital.Core                    import  NativeBoolean
 from    Capital.Core                    import  trace
 from    Capital.Global                  import  capital_globals
-from    Capital.String                  import  conjure_string
-from    Capital.String                  import  empty_string
+from    Capital.Some_String             import  conjure_some_string
+from    Capital.Some_String             import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
 from    Z.Path                          import  path_to_file_in_Z_directory
 
@@ -70,12 +70,12 @@ def command_parse(version):
 
 
 def command_string():
-    hello   = conjure_string("hello")
-    crystal = conjure_string("crystal")
+    hello   = conjure_some_string("hello")
+    crystal = conjure_some_string("crystal")
 
-    assert empty_string is conjure_string("")
-    assert hello        is conjure_string("hello")
-    assert crystal      is conjure_string("crystal")
+    assert empty_string is conjure_some_string("")
+    assert hello        is conjure_some_string("hello")
+    assert crystal      is conjure_some_string("crystal")
 
     assert NativeBoolean(empty_string) is False
     assert NativeBoolean(hello)        is True
@@ -91,8 +91,10 @@ def command_string():
 
 
 def command_development(version):
-   #command_parse(version)
-    command_string()
+    if version:
+        command_parse(version)
+    else:
+        command_string()
 
 
 def USAGE(format, *arguments):

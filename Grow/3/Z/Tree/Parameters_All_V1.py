@@ -19,7 +19,7 @@ from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 
 if __debug__:
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Fact                import  fact_is__native_none__OR__full_native_string
+    from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
 
 
 

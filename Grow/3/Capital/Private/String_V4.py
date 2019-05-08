@@ -68,10 +68,10 @@
 #
 #               EXAMPLE (what we want to do):
 #
-#                   class TRAIT_String(object):                                     __slots__ = (())
+#                   class TRAIT_Some_String(object):                                __slots__ = (())
 #                   class TRAIT_Temporary_Element(object):                          __slots__ = (())
 #                   class Temporary_String(TRAIT_Temporary_Element):                __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_String):                            __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Some_String):                       __slots__ = (('interned_s',))
 #                   class Full_String    (Base_String, TRAIT_Temporary_Element):    __slots__ = (())
 #
 #                   x = Temporary_String()
@@ -83,10 +83,10 @@
 #
 #               Removing `Base_String`, allows us to simplfy this:
 #
-#                   class TRAIT_String(object):                                     __slots__ = (())
-#                   class TRAIT_Temporary_Element(object):                          __slots__ = (())
-#                   class Temporary_String(TRAIT_Temporary_Element):                __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_String, TRAIT_Temporary_Element):   __slots__ = (('interned_s',))
+#                   class TRAIT_Some_String(object):                                    __slots__ = (())
+#                   class TRAIT_Temporary_Element(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Temporary_Element):                    __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Some_String, TRAIT_Temporary_Element):  __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String
@@ -98,10 +98,10 @@
 #               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String`
 #               (since we eliminated `Base_String`):
 #
-#                   class TRAIT_String(object):                                     __slots__ = (())
-#                   class TRAIT_Temporary_Element(object):                          __slots__ = (())
-#                   class Temporary_String(TRAIT_Temporary_Element):                __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_Temporary_Element, TRAIT_String):   __slots__ = (('interned_s',))
+#                   class TRAIT_Some_String(object):                                    __slots__ = (())
+#                   class TRAIT_Temporary_Element(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Temporary_Element):                    __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Temporary_Element, TRAIT_Some_String):  __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String
@@ -121,7 +121,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
-from    Capital.String                  import  TRAIT_String
+from    Capital.Some_String             import  TRAIT_Some_String
 
 
 if __debug__:
@@ -169,7 +169,7 @@ def method__Base_String__operator_format(self, format_specification):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String(
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Empty_Native_String
@@ -236,7 +236,7 @@ class Empty_String(
 #   Full String - A wrapper around a full native string.
 #
 class Full_String(
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Full_Native_String
@@ -288,7 +288,7 @@ class Full_String(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #

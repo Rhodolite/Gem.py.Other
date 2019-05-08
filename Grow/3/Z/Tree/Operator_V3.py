@@ -32,12 +32,12 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
-from    Capital.String                  import  conjure_string
+from    Capital.Some_String             import  conjure_some_string
 from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
@@ -86,7 +86,7 @@ def create_TOE(name, operator_token):
     assert fact_is_full_native_string(operator_token)
 
     return Tree_Operator_Enumeration(
-               conjure_string(operator_token),
+               conjure_some_string(operator_token),
            )
 
 

@@ -14,7 +14,7 @@ from    Capital.Temporary_String_V6     import  create_temporary_string
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
     from    Z.Tree.Convert_Zone         import  fact_is_convert_zone
 
 

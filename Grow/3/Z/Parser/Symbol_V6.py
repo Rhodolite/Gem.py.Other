@@ -36,7 +36,6 @@ from    Z.Tree.Alias                        import  TRAIT_Tree_Symbol_Alias
 
 if __debug__:
     from    Capital.Core                    import  FATAL
-    from    Capital.Fact                    import  fact_is__native_none__OR__full_native_string
 
 
 #

@@ -32,13 +32,13 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
-from    Capital.String                  import  conjure_string
+from    Capital.Some_String             import  conjure_some_string
 from    Z.Tree.Context                  import  TRAIT_Tree_Context
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_native_boolean
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
@@ -211,7 +211,7 @@ def create_Tree_Context_Enumeration(
     assert (is_tree_delete_context + is_tree_load_context + is_tree_parameter_context + is_tree_store_context) == 1
 
     return Tree_Context_Enumeration(
-               conjure_string(name),
+               conjure_some_string(name),
 
                is_tree_delete_context    = is_tree_delete_context,
                is_tree_load_context      = is_tree_load_context,

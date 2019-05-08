@@ -40,7 +40,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
-from    Capital.String                  import  TRAIT_String
+from    Capital.Some_String             import  TRAIT_Some_String
 from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
@@ -82,7 +82,7 @@ def method__Base_String__operator_format(self, format_specification):
 #
 class Empty_String(
         TRAIT_Temporary_Element,
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Empty_Native_String
@@ -151,7 +151,7 @@ class Empty_String(
 #
 class Full_String(
         TRAIT_Temporary_Element,
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Full_Native_String
@@ -214,7 +214,7 @@ class Full_String(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #

@@ -20,7 +20,7 @@ string_version = 1
 
 
 #
-#   Version 2: Producer function `produce_conjure_string` to produce `conjure_string` functions.
+#   Version 2: Producer function `produce_conjure_string` to produce `conjure_some_string` functions.
 #
 if version >= 2:
     string_version = 2
@@ -69,7 +69,6 @@ from    Capital.Core                    import  trace
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_string
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
 

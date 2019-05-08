@@ -31,13 +31,13 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
-from    Capital.String                  import  TRAIT_String
+from    Capital.Some_String             import  TRAIT_Some_String
 from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_empty_native_string
-    from    Capital.Fact                import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_empty_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
@@ -66,7 +66,7 @@ def property__Base_String__native_string(self):
 class Empty_String(
         Empty_Native_String,
         TRAIT_Temporary_Element,
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = (())
 
@@ -130,7 +130,7 @@ method__Full_Native_String__representation = Full_Native_String.__repr__
 class Full_String(
         Full_Native_String,
         TRAIT_Temporary_Element,
-        TRAIT_String,
+        TRAIT_Some_String,
 ):
     __slots__ = (())
 
@@ -180,7 +180,7 @@ class Full_String(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #
