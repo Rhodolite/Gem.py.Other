@@ -4,32 +4,33 @@
 
 
 #
-#   Z.Tree.Global_V6 - Implementation of tree `global` statement, Version 6.
+#   Z.Tree.Global_V5 - Implementation of tree `global` statement, Version 5.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Versions 5 & 6.
+#   Difference between Versions 1..5.
+#
+#       Version 1:
+#
+#           The `Tree_Global_Statement.names` member is a `FullNativeList of Full_Native_String`.
+#
+#       Version 2..5:
+#
+#           Does not exist.
 #
 #       Version 5:
 #
-#           Tree Statements implement `Tree_Statement`.
-#
-#       Version 6:
-#
-#           Tree Statements implement `Tree_Statement`; and ...
-#
-#           ... in addition also implement `Tree_Suite`, and `Tree_Suite_0`.
+#           The `Tree_Global_Statement.names` member is renamed to `.symbols` and it's type changes to a
+#           `FullNativeList of Parser_Symbol`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Statement                import  TRAIT_Tree_Statement
-from    Z.Tree.Suite                    import  TRAIT_Tree_Suite
-from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 if __debug__:
@@ -43,8 +44,6 @@ if __debug__:
 #
 class Tree_Global_Statement(
         TRAIT_Tree_Statement,
-        TRAIT_Tree_Suite,
-        TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Integer

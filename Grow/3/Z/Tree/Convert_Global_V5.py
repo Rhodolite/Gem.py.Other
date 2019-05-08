@@ -4,22 +4,26 @@
 
 
 #
-#   Z.Tree.Convert_Global_V2 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 2.
+#   Z.Tree.Convert_Global_V5 - Convert Python Abstract Syntax Tree Statements to Tree classes, Version 5.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           Does not use `Convert_Zone`.
+#   Difference between Version 2..5.
 #
 #       Version 2:
 #
-#           All convert functions take a `z` parameter of type `Convert_Zone.
+#           The third argument to `z.create_Tree_Global_Statement` is a `FullNativeList of Full_Native_String`.
+#
+#       Versions 3..4:
+#
+#           Do not exist.
+#
+#       Version 5:
+#
+#           The third argument to `z.create_Tree_Global_Statement` is a `FullNativeList of Parser_Symbol`.
 #
 
 
@@ -53,5 +57,18 @@ def convert_global_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               v.names,
+               convert_list_of_parser_symbols(z, v.names),
            )
+
+
+#
+#   convert_list_of_parser_symbols(z, v)
+#
+#       Convert a `FullNativeList of Full_Native_String` to a `FullNativeList of Parser_Symbol`.
+#
+def convert_list_of_parser_symbols(z, v):
+    assert fact_is_convert_zone(z)
+
+    assert fact_is_full_native_list(v)
+
+    return [z.conjure_parser_symbol(z, w)   for w in v]

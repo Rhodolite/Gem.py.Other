@@ -473,6 +473,12 @@ def fill_convert_zone(version):
 
 
     #
+    #   Version 14: `Tree_Global_Statement` uses `Parser_Symbol`
+    #
+    if version >= 14:
+        statement_version = 5       #   `Tree_Global_Statement` uses `Parser_Symbol`
+
+    #
     #   Version 15 & 16: No longer use contexts
     #
     #       15: `Tree_Name`    no longer uses contexts.
@@ -906,8 +912,10 @@ def fill_convert_zone(version):
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5, 6)):
+    if statement_version in ((2, 3, 4)):
         from    Z.Tree.Convert_Global_V2    import  convert_global_statement
+    elif statement_version in ((5, 6)):
+        from    Z.Tree.Convert_Global_V5    import  convert_global_statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -1005,8 +1013,10 @@ def fill_convert_zone(version):
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3, 4)):
         from    Z.Tree.Global_V1        import  create_Tree_Global_Statement        #   "_V1" on purpose.
+    elif statement_version == 5:
+        from    Z.Tree.Global_V5        import  create_Tree_Global_Statement
     elif statement_version == 6:
         from    Z.Tree.Global_V6        import  create_Tree_Global_Statement
     else:
