@@ -4,14 +4,14 @@
 
 
 #
-#   Z.Tree.Compound_Statement_V6 - Implementation of `Tree_Statement`, Version 6.
+#   Z.Tree.Compound_Statement_V7 - Implementation of `Tree_Statement`, Version 7.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Versions 2..6.
+#   Difference between Versions 2..7.
 #
 #       Version 2:
 #
@@ -21,11 +21,11 @@
 #
 #           3)  An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
 #
-#       Version 3-5:
+#       Version 3-7:
 #
-#           Does not exist.
+#           Do not exist.
 #
-#       Version 6:
+#       Version 7:
 #
 #           1)  Tree Statements implement `Tree_Statement`; and ...
 #

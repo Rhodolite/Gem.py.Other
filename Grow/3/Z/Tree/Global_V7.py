@@ -4,20 +4,20 @@
 
 
 #
-#   Z.Tree.Global_V6 - Implementation of tree `global` statement, Version 6.
+#   Z.Tree.Global_V7 - Implementation of tree `global` statement, Version 7.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Versions 5 & 6.
+#   Difference between Versions 6 & 7.
 #
-#       Version 5:
+#       Version 6:
 #
 #           Tree Statements implement `Tree_Statement`.
 #
-#       Version 6:
+#       Version 7:
 #
 #           Tree Statements implement `Tree_Statement`; and ...
 #

@@ -4,24 +4,24 @@
 
 
 #
-#   Z.Tree.Simple_Statement_V6 - Implementation of simple tree statements, Version 6.
+#   Z.Tree.Simple_Statement_V7 - Implementation of simple tree statements, Version 7.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Versions 1..6.
+#   Difference between Versions 1..7.
 #
 #       Version 1:
 #
 #           Tree Statements implement `Tree_Statement`.
 #
-#       Version 2..5:
+#       Version 2..6:
 #
-#           Does not exist.
+#           Do not exist.
 #
-#       Version 6:
+#       Version 7:
 #
 #           Tree Statements implement `Tree_Statement`; and ...
 #
