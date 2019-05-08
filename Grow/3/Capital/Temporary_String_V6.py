@@ -27,7 +27,7 @@
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  Full_Native_String
-from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
+from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
 if __debug__:
@@ -45,7 +45,7 @@ method__Full_Native_String__representation = Full_Native_String.__repr__
 #
 class Temporary_String(
         Full_Native_String,
-        TRAIT_TemporaryElement,
+        TRAIT_Temporary_Element,
         #
         #   NOTE:
         #       Does *NOT* implement the String interface.
@@ -61,7 +61,7 @@ class Temporary_String(
 
 
     #
-    #   Interface TemporaryElement
+    #   Interface Temporary_Element
     #
    #@replace
     temporary_element_has_definitively_been_transformed = False

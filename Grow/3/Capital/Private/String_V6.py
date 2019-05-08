@@ -9,7 +9,7 @@
 #       Strings are Unique (always).
 #
 #       Uniqueness is implemented in "Capital.Private.ConjureString_V5.py" (which uses the interface
-#       `TemporaryElement` to implement uniqueness).
+#       `Temporary_Element` to implement uniqueness).
 #
 
 
@@ -32,7 +32,7 @@ from    Capital.Core                    import  export
 from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
 from    Capital.String                  import  TRAIT_String
-from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
+from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
 if __debug__:
@@ -65,7 +65,7 @@ def property__Base_String__native_string(self):
 #
 class Empty_String(
         Empty_Native_String,
-        TRAIT_TemporaryElement,
+        TRAIT_Temporary_Element,
         TRAIT_String,
 ):
     __slots__ = (())
@@ -129,7 +129,7 @@ method__Full_Native_String__representation = Full_Native_String.__repr__
 #
 class Full_String(
         Full_Native_String,
-        TRAIT_TemporaryElement,
+        TRAIT_Temporary_Element,
         TRAIT_String,
 ):
     __slots__ = (())

@@ -35,7 +35,7 @@
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.TemporaryElement        import  TRAIT_TemporaryElement
+from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
 if __debug__:
@@ -46,7 +46,7 @@ if __debug__:
 #   StringKey - String Key Implementation, Version 5.
 #
 class Temporary_String(
-        TRAIT_TemporaryElement,
+        TRAIT_Temporary_Element,
         #
         #   NOTE:
         #       Does *NOT* implement the String interface.
@@ -71,7 +71,7 @@ class Temporary_String(
 
 
     #
-    #   Interface TemporaryElement
+    #   Interface Temporary_Element
     #
    #@replace
     temporary_element_has_definitively_been_transformed = False

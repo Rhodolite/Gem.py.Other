@@ -91,8 +91,8 @@ def command_string():
 
 
 def command_development(version):
-    command_parse(version)
-   #command_string()
+   #command_parse(version)
+    command_string()
 
 
 def USAGE(format, *arguments):

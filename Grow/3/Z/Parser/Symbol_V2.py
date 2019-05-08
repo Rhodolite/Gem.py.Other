@@ -24,7 +24,7 @@
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
 from    Capital.Native_String               import  Full_Native_String
-from    Capital.TemporaryElement            import  TRAIT_TemporaryElement
+from    Capital.Temporary_Element           import  TRAIT_Temporary_Element
 from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
 
@@ -38,7 +38,7 @@ if __debug__:
 #
 class Parser_Symbol_Leaf(
         Full_Native_String,
-        TRAIT_TemporaryElement,
+        TRAIT_Temporary_Element,
         TRAIT_Parser_Symbol,
 ):
     __slots__ = (())

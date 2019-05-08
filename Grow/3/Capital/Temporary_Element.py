@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.TemporaryElement - Temporary Element Interface (Only used internally to help create other unique objects).
+#   Capital.Temporary_Element - Temporary Element Interface (Only used internally to help create other unique objects).
 #
 #   See long explnation below.
 #
@@ -14,11 +14,11 @@
 #
 #   Since interfaces are not native to python, for now, we just show them in comments
 #
-#       interface TemporaryElement
+#       interface Temporary_Element
 #           attribute
 #               temporary_element_has_definitively_been_transformed : NativeBoolean
 #
-class TRAIT_TemporaryElement(object):
+class TRAIT_Temporary_Element(object):
     __slots__ = (())
 
 
@@ -81,12 +81,12 @@ class TRAIT_TemporaryElement(object):
 #
 #           class Temporary_String_Key(
 #                   str,
-#                   TRAIT_TemporaryElement,
+#                   TRAIT_Temporary_Element,
 #           ):
 #               __slots__ = (())
 #
 #               #
-#               #   Interface TemporaryElement
+#               #   Interface Temporary_Element
 #               #
 #              #@replace
 #               temporary_element_has_definitively_been_transformed = False
@@ -99,12 +99,12 @@ class TRAIT_TemporaryElement(object):
 #           class Unique_String_Example(
 #                   str,
 #                   TRAIT_String,
-#                   TRAIT_TemporaryElement,
+#                   TRAIT_Temporary_Element,
 #           ):
 #               __slots__ = (())
 #
 #               #
-#               #   Inherited from `TRAIT_TemporaryElement`:
+#               #   Inherited from `TRAIT_Temporary_Element`:
 #               #
 #               #       `temporary_element_has_definitively_been_transformed = True`
 #               #
