@@ -35,7 +35,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
@@ -113,15 +113,15 @@ def create_Tree_Delete_Name(line_number, column, symbol):
 #
 class Tree_Evaluate_Name(
         Tree_Name,
-        TRAIT_Tree_Expression,
+        TRAIT_Tree_Value_Expression,
 ):
     __slots__ = (())
 
 
     #
-    #   Interface Tree_Expression
+    #   Interface Tree_Value_Expression
     #
-    def dump_evaluate_tokens(self, f):
+    def dump_value_expression_tokens(self, f):
         #
         #   NOTE:
         #       Omit the keyword "evaluate-name" on purpose to make the output shorter.

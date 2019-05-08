@@ -37,7 +37,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
@@ -45,7 +45,7 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Index                import  fact_is_tree_index_clause
 
 
@@ -57,7 +57,7 @@ class Tree_Subscript_Expression(object):
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
         'index',                        #   Tree_Index_Clause
     ))
 
@@ -96,7 +96,7 @@ class Tree_Delete_Subscript(
     #
     def dump_delete_target_tokens(self, f):
         f.arrange('<delete-subscript @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.write(' [')
         self.index.dump_index_clause_tokens(f)
         f.write(']>')
@@ -107,8 +107,8 @@ def create_Tree_Delete_Subscript(line_number, column, value, index):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression  (value)
-    assert fact_is_tree_index_clause(index)
+    assert fact_is_tree_value_expression(value)
+    assert fact_is_tree_index_clause    (index)
 
     return Tree_Delete_Subscript(line_number, column, value, index)
 
@@ -118,21 +118,21 @@ def create_Tree_Delete_Subscript(line_number, column, value, index):
 #
 class Tree_Evaluate_Subscript(
         Tree_Subscript_Expression,
-        TRAIT_Tree_Expression,
+        TRAIT_Tree_Value_Expression,
 ):
     __slots__ = (())
 
 
     #
-    #   Interface Tree_Expression
+    #   Interface Tree_Value_Expression
     #
-    def dump_evaluate_tokens(self, f):
+    def dump_value_expression_tokens(self, f):
         #
         #   NOTE:
         #       Omit the keyword "evaluate-subscript" on purpose to make the output shorter.
         #
         f.arrange('<@{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.write(' [')
         self.index.dump_index_clause_tokens(f)
         f.write(']>')
@@ -143,8 +143,8 @@ def create_Tree_Evaluate_Subscript(line_number, column, value, index):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression  (value)
-    assert fact_is_tree_index_clause(index)
+    assert fact_is_tree_value_expression(value)
+    assert fact_is_tree_index_clause    (index)
 
     return Tree_Evaluate_Subscript(line_number, column, value, index)
 
@@ -164,7 +164,7 @@ class Tree_Store_Subscript(
     #
     def dump_store_target_tokens(self, f):
         f.arrange('<store-subscript @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.write(' [')
         self.index.dump_index_clause_tokens(f)
         f.write(']>')
@@ -175,7 +175,7 @@ def create_Tree_Store_Subscript(line_number, column, value, index):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression  (value)
-    assert fact_is_tree_index_clause(index)
+    assert fact_is_tree_value_expression(value)
+    assert fact_is_tree_index_clause    (index)
 
     return Tree_Store_Subscript(line_number, column, value, index)

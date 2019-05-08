@@ -26,7 +26,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  replace
-from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
@@ -49,12 +49,12 @@ if __debug__:
 #       See "Z.Tree.Context" for explanation of contexts.
 #
 #       Because a `Tree_Name` can appear both as an expression, as a parameter, and as a target, it implements the
-#       `Tree_Expression`, `Tree_Parameter`, and `Tree_Target` interfaces.
+#       `Tree_Parameter`, `Tree_Target`, and `Tree_Value_Expression` interfaces.
 #
 class Tree_Name(
         TRAIT_Tree_Delete_Target,
-        TRAIT_Tree_Expression,
         TRAIT_Tree_Parameter,
+        TRAIT_Tree_Value_Expression,
 ):
     #
     #   Implements Tree_Store_Target
@@ -105,25 +105,6 @@ class Tree_Name(
 
 
     #
-    #   Interface Tree_Expression
-    #
-    if __debug__:
-        @replace
-        @property
-        def is_tree_expression(self):
-            return (self.context.is_tree_load_context) or (self.context.is_tree_store_context)
-
-
-    if __debug__:
-        def dump_evaluate_tokens(self, f):
-            assert fact_is_tree_load_context(self.context)
-
-            self._dump_tree_name_token(f)
-    else:
-        dump_evaluate_tokens = _dump_tree_name_token
-
-
-    #
     #   Interface Tree_Parameter
     #
     if __debug__:
@@ -166,6 +147,25 @@ class Tree_Name(
             self._dump_tree_name_token(f)
     else:
         dump_store_target_tokens = _dump_tree_name_token
+
+
+    #
+    #   Interface Tree_Value_Expression
+    #
+    if __debug__:
+        @replace
+        @property
+        def is_tree_value_expression(self):
+            return self.context.is_tree_load_context
+
+
+    if __debug__:
+        def dump_value_expression_tokens(self, f):
+            assert fact_is_tree_load_context(self.context)
+
+            self._dump_tree_name_token(f)
+    else:
+        dump_value_expression_tokens = _dump_tree_name_token
 
 
     #

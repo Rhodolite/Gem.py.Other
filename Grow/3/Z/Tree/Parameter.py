@@ -72,7 +72,7 @@
 #                                       `.map_parameter`        - Stored `**h` as a `Full_Native_String`.
 #
 #                                       `.defaults'             - Stores `7, "eight"` as a
-#                                                                 `NativeList of Tree_Expression`.
+#                                                                 `NativeList of Tree_Value_Expression`.
 #
 #               In the current version, the following are *NOT* `Tree_Parameter`:
 #

@@ -33,7 +33,7 @@ class Tree_Parameters_All(
         'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
         'tuple_parameter',              #   None | Full_Native_String
         'map_parameter',                #   None | Full_Native_String
-        'defaults',                     #   SomeNativeList of Tree_Expression
+        'defaults',                     #   SomeNativeList of Tree_Value_Expression
     ))
 
 
@@ -79,7 +79,7 @@ class Tree_Parameters_All(
                 if defaults:
                     for v in defaults:
                         f.write('= ')
-                        v.dump_evaluate_tokens(f)
+                        v.dump_value_expression_tokens(f)
                         f.line(',')
 
 

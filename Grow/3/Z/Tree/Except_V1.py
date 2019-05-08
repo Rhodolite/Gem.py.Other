@@ -21,7 +21,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_expression
+    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
 
 
 #
@@ -34,8 +34,8 @@ class Tree_Except_Handler(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'type_expression',              #   None | Tree_Expression
-        'name_expression',              #   None | Tree_Expression
+        'type_expression',              #   None | Tree_Value_Expression
+        'name_expression',              #   None | Tree_Value_Expression
         'body',                         #   FullNativeList of Tree_Statement
     ))
 
@@ -60,7 +60,7 @@ class Tree_Except_Handler(
 
         if self.type_expression is not None:
             f.space()
-            self.type_expression.dump_evaluate_tokens(f)
+            self.type_expression.dump_value_expression_tokens(f)
 
             if self.name_expression is not None:
                 f.write(' as ')
@@ -89,9 +89,9 @@ def create_Tree_Except_Handler(line_number, column, type_expression, name_expres
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is__native_none__OR__tree_expression(type_expression)
-    assert fact_is__native_none__OR__tree_expression(name_expression)
-    assert fact_is_full_native_list                 (body)
+    assert fact_is__native_none__OR__tree_value_expression(type_expression)
+    assert fact_is__native_none__OR__tree_value_expression(name_expression)
+    assert fact_is_full_native_list                       (body)
 
     if type_expression is None:
         assert fact_is_native_none(name_expression)

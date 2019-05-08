@@ -41,9 +41,7 @@ def convert_none_OR_target(z, v):
 #
 #   convert_target(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
-#
-#       The expression must be a "target" expression.
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Delete_Target` or `Tree_Store_Target`.
 #
 def convert_target(z, v):
     convert_target__function = (
@@ -58,7 +56,7 @@ def convert_target(z, v):
 #   convert_full_list_of_targets(z, sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Expression`.
+#       `FullNativeList of Tree_Value_Expression`.
 #
 #       Each of the expressions must be a target expresion.
 #

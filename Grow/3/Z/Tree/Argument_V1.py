@@ -15,7 +15,7 @@ from    Z.Tree.Argument                 import  TRAIT_Tree_Argument
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_string
-    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
 
 
 #
@@ -26,7 +26,7 @@ class Tree_Keyword_Argument(
 ):
     __slots__ = ((
         'name',                         #   Full_Native_String
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
     ))
 
 
@@ -43,7 +43,7 @@ class Tree_Keyword_Argument(
     #
     def dump_argument_tokens(self, f):
         f.arrange('<keyword_argument {} = ', self.name)
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.greater_than_sign()
 
 
@@ -56,7 +56,7 @@ class Tree_Keyword_Argument(
 
 @creator
 def create_Tree_Keyword_Argument(name, value):
-    assert fact_is_full_native_string(name)
-    assert fact_is_tree_expression   (value)
+    assert fact_is_full_native_string   (name)
+    assert fact_is_tree_value_expression(value)
 
     return Tree_Keyword_Argument(name, value)

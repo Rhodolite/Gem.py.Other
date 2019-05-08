@@ -32,7 +32,7 @@ from    Z.Tree.Argument                 import  TRAIT_Tree_Argument
 
 if __debug__:
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
-    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
 
 
 #
@@ -43,7 +43,7 @@ class Tree_Keyword_Argument(
 ):
     __slots__ = ((
         'symbol',                       #   Parser_Symbol
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
     ))
 
 
@@ -62,7 +62,7 @@ class Tree_Keyword_Argument(
         f.arrange('<keyword-argument ')
         self.symbol.dump_symbol_token(f)
         f.write(' = ')
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.greater_than_sign()
 
 
@@ -75,7 +75,7 @@ class Tree_Keyword_Argument(
 
 @creator
 def create_Tree_Keyword_Argument(symbol, value):
-    assert fact_is_parser_symbol  (symbol)
-    assert fact_is_tree_expression(value)
+    assert fact_is_parser_symbol        (symbol)
+    assert fact_is_tree_value_expression(value)
 
     return Tree_Keyword_Argument(symbol, value)

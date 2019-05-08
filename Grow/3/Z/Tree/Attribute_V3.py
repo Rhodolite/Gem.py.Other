@@ -30,7 +30,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  replace
-from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
@@ -44,7 +44,7 @@ if __debug__:
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
-    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
 
 
 #
@@ -62,14 +62,14 @@ if __debug__:
 #
 class Tree_Attribute(
         TRAIT_Tree_Delete_Target,
-        TRAIT_Tree_Expression,
         TRAIT_Tree_Store_Target,
+        TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
         'attribute',                    #   Parser_Symbol
         'context',                      #   Tree_Context
     ))
@@ -89,7 +89,7 @@ class Tree_Attribute(
 
     def _dump_tree_attribute_token(self, f):
         f.arrange('<attribute @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.write('.')
         f.write(self.attribute)
         f.space()
@@ -117,25 +117,6 @@ class Tree_Attribute(
 
 
     #
-    #   Interface Tree_Expression
-    #
-    if __debug__:
-        @replace
-        @property
-        def is_tree_expression(self):
-            return (self.context.is_tree_load_context) or (self.context.is_tree_store_context)
-
-
-    if __debug__:
-        def dump_evaluate_tokens(self, f):
-            assert fact_is_tree_load_context(self.context)
-
-            self._dump_tree_attribute_token(f)
-    else:
-        dump_evaluate_tokens = _dump_tree_attribute_token
-
-
-    #
     #   Interface Tree_Store_Target
     #
     if __debug__:
@@ -154,6 +135,25 @@ class Tree_Attribute(
 
 
     #
+    #   Interface Tree_Value_Expression
+    #
+    if __debug__:
+        @replace
+        @property
+        def is_tree_value_expression(self):
+            return self.context.is_tree_load_context
+
+
+    if __debug__:
+        def dump_value_expression_tokens(self, f):
+            assert fact_is_tree_load_context(self.context)
+
+            self._dump_tree_attribute_token(f)
+    else:
+        dump_value_expression_tokens = _dump_tree_attribute_token
+
+
+    #
     #   Public
     #
     def __repr__(self):
@@ -166,8 +166,8 @@ def create_Tree_Attribute(line_number, column, value, attribute, context):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression(value)
-    assert fact_is_parser_symbol  (attribute)
-    assert fact_is_tree_context   (context)
+    assert fact_is_tree_value_expression(value)
+    assert fact_is_parser_symbol        (attribute)
+    assert fact_is_tree_context         (context)
 
     return Tree_Attribute(line_number, column, value, attribute, context)

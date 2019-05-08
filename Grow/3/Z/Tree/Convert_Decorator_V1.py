@@ -21,11 +21,11 @@ if __debug__:
 #
 #   convert_decorator(v)
 #
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) to a `Tree_Expression`.
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) to a `Tree_Value_Expression`.
 #
 #   CURRENT:
 #
-#       For now (since this is a 1-1 translation of `_ast`) a decorator is simply a `Tree_Expresion`.
+#       For now (since this is a 1-1 translation of `_ast`) a decorator is simply a `Tree_Value_Expression`.
 #
 #       Hence, all we do is call `convert_expression`.
 #

@@ -34,7 +34,7 @@ if __debug__:
 #
 #   convert_expression(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
 #
 #       Calls all the other `convert_*` pseudo methods.
 #
@@ -49,7 +49,8 @@ def convert_expression(z, v):
 #
 #   convert_none_OR_expression(z, v)
 #
-#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
+#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a
+#       `Tree_Value_Expression`.
 #
 def convert_none_OR_expression(z, v):
     assert fact_is_convert_zone(z)
@@ -64,7 +65,7 @@ def convert_none_OR_expression(z, v):
 #   convert_full_list_of_expressions(z, sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Expression`.
+#       `FullNativeList of Tree_Value_Expression`.
 #
 convert_full_list_of_expressions = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
 
@@ -73,6 +74,6 @@ convert_full_list_of_expressions = produce__convert__full_list_of__Native_Abstra
 #   convert_some_list_of_expressions(z, sequence)
 #
 #       Convert a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `SomeNativeList of Tree_Expression`.
+#       `SomeNativeList of Tree_Value_Expression`.
 #
 convert_some_list_of_expressions = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)

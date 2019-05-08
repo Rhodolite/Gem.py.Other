@@ -46,8 +46,8 @@ if __debug__:
     from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_expression
-    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
     from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
     from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
@@ -110,8 +110,8 @@ class Tree_Assert_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'test',                         #   Tree_Expression
-        'message',                      #   None | Tree_Expression
+        'test',                         #   Tree_Value_Expression
+        'message',                      #   None | Tree_Value_Expression
     ))
 
 
@@ -131,11 +131,11 @@ class Tree_Assert_Statement(
     #
     def dump_statement_tokens(self, f):
         f.arrange('<assert @{}:{} ', self.line_number, self.column)
-        self.test.dump_evaluate_tokens(f)
+        self.test.dump_value_expression_tokens(f)
 
         if self.message is not None:
             f.write(', ')
-            self.message.dump_evaluate_tokens(f)
+            self.message.dump_value_expression_tokens(f)
 
         f.line('>')
 
@@ -154,8 +154,8 @@ def create_Tree_Assert_Statement(line_number, column, test, message):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression                  (test)
-    assert fact_is__native_none__OR__tree_expression(message)
+    assert fact_is_tree_value_expression                  (test)
+    assert fact_is__native_none__OR__tree_value_expression(message)
 
     return Tree_Assert_Statement(line_number, column, test, message)
 
@@ -184,8 +184,8 @@ class Tree_Assign_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'targets',                      #   NativeList of Tree_Expression
-        'value',                        #   Tree_Expression
+        'targets',                      #   NativeList of Tree_Store_Target
+        'value',                        #   Tree_Value_Expression
     ))
 
 
@@ -210,7 +210,7 @@ class Tree_Assign_Statement(
             v.dump_store_target_tokens(f)
             f.write(' = ')
 
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.line('>')
 
 
@@ -227,8 +227,8 @@ def create_Tree_Assign_Statement(line_number, column, targets, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_full_native_list(targets)
-    assert fact_is_tree_expression (value)
+    assert fact_is_full_native_list     (targets)
+    assert fact_is_tree_value_expression(value)
 
     return Tree_Assign_Statement(line_number, column, targets, value)
 
@@ -344,9 +344,9 @@ class Tree_Execute_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'body',                         #   Tree_Expression
-        'globals',                      #   None | Tree_Expression
-        'locals',                       #   None | Tree_Expression
+        'body',                         #   Tree_Value_Expression
+        'globals',                      #   None | Tree_Value_Expression
+        'locals',                       #   None | Tree_Value_Expression
     ))
 
 
@@ -367,15 +367,15 @@ class Tree_Execute_Statement(
     #
     def dump_statement_tokens(self, f):
         f.arrange('<execute-statement @{}:{} ', self.line_number, self.column)
-        self.body.dump_evaluate_tokens(f)
+        self.body.dump_value_expression_tokens(f)
 
         if self.globals is not None:
             f.write(' in ')
-            self.globals.dump_evaluate_tokens(f)
+            self.globals.dump_value_expression_tokens(f)
 
             if self.locals is not None:
                 f.write(', ')
-                self.locals.dump_evaluate_tokens(f)
+                self.locals.dump_value_expression_tokens(f)
 
         f.line('>')
 
@@ -393,9 +393,9 @@ def create_Tree_Execute_Statement(line_number, column, body, globals, locals):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression                  (body)
-    assert fact_is__native_none__OR__tree_expression(globals)
-    assert fact_is__native_none__OR__tree_expression(locals)
+    assert fact_is_tree_value_expression                  (body)
+    assert fact_is__native_none__OR__tree_value_expression(globals)
+    assert fact_is__native_none__OR__tree_value_expression(locals)
 
     if globals is None:
         assert fact_is_native_none(locals)
@@ -421,7 +421,7 @@ class Tree_Expression_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
     ))
 
 
@@ -440,7 +440,7 @@ class Tree_Expression_Statement(
     #
     def dump_statement_tokens(self, f):
         f.arrange('<expression-statement @{}:{} ', self.line_number, self.column)
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.line('>')
 
 
@@ -457,7 +457,7 @@ def create_Tree_Expression_Statement(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_expression(value)
+    assert fact_is_tree_value_expression(value)
 
     return Tree_Expression_Statement(line_number, column, value)
 
@@ -690,9 +690,9 @@ class Tree_Modify_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'left',                         #   Tree_Expression
+        'left',                         #   Tree_Value_Expression
         'operator',                     #   Tree_Operator
-        'right',                        #   Tree_Expression
+        'right',                        #   Tree_Value_Expression
     ))
 
 
@@ -717,7 +717,7 @@ class Tree_Modify_Statement(
         f.space()
         self.operator.dump_operator_token(f)
         f.space()
-        self.right.dump_evaluate_tokens(f)
+        self.right.dump_value_expression_tokens(f)
         f.greater_than_sign()
 
 
@@ -734,9 +734,9 @@ def create_Tree_Modify_Statement(line_number, column, left, operator, right):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_store_target(left)
-    assert fact_is_tree_operator    (operator)
-    assert fact_is_tree_expression  (right)
+    assert fact_is_tree_store_target    (left)
+    assert fact_is_tree_operator        (operator)
+    assert fact_is_tree_value_expression(right)
 
     return Tree_Modify_Statement(line_number, column, left, operator, right)
 
@@ -768,8 +768,8 @@ class Tree_Print_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'destination',                  #   None | Tree_Expression
-        'values',                       #   SomeNativeList of Tree_Expression
+        'destination',                  #   None | Tree_Value_Expression
+        'values',                       #   SomeNativeList of Tree_Value_Expression
         'newline',                      #   NativeBoolean
     ))
 
@@ -798,7 +798,7 @@ class Tree_Print_Statement(
             first = False
 
             f.write(' {>>} ')
-            self.destination.dump_evaluate_tokens(f)
+            self.destination.dump_value_expression_tokens(f)
 
         for v in self.values:
             if first:
@@ -807,7 +807,7 @@ class Tree_Print_Statement(
                 f.write(',')
 
             f.space()
-            v.dump_evaluate_tokens(f)
+            v.dump_value_expression_tokens(f)
 
         if not self.newline:
             f.write(',')
@@ -828,9 +828,9 @@ def create_Tree_Print_Statement(line_number, column, destination, values, newlin
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is__native_none__OR__tree_expression(destination)
-    assert fact_is_some_native_list                 (values)
-    assert fact_is_native_boolean                   (newline)
+    assert fact_is__native_none__OR__tree_value_expression(destination)
+    assert fact_is_some_native_list                       (values)
+    assert fact_is_native_boolean                         (newline)
 
     return Tree_Print_Statement(line_number, column, destination, values, newline)
 
@@ -847,7 +847,7 @@ class Tree_Return_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'value',                        #   Tree_Expression
+        'value',                        #   None | Tree_Value_Expression
     ))
 
 
@@ -869,7 +869,7 @@ class Tree_Return_Statement(
 
         if self.value is not None:
             f.space()
-            self.value.dump_evaluate_tokens(f)
+            self.value.dump_value_expression_tokens(f)
 
         f.line('>')
 
@@ -887,7 +887,7 @@ def create_Tree_Return_Statement(line_number, column, value):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is__native_none__OR__tree_expression(value)
+    assert fact_is__native_none__OR__tree_value_expression(value)
 
     return Tree_Return_Statement(line_number, column, value)
 
@@ -904,9 +904,9 @@ class Tree_Raise_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'type',                         #   None | Tree_Expression
-        'instance',                     #   None | Tree_Expression
-        'traceback',                    #   None | Tree_Expression
+        'type',                         #   None | Tree_Value_Expression
+        'instance',                     #   None | Tree_Value_Expression
+        'traceback',                    #   None | Tree_Value_Expression
     ))
 
 
@@ -932,17 +932,17 @@ class Tree_Raise_Statement(
             assert self.instance is self.traceback is None
         else:
             f.space()
-            self.type.dump_evaluate_tokens(f)
+            self.type.dump_value_expression_tokens(f)
 
             if self.instance is None:
                 assert self.traceback is None
             else:
                 f.write(', ')
-                self.instance.dump_evaluate_tokens(f)
+                self.instance.dump_value_expression_tokens(f)
 
                 if self.traceback is not None:
                     f.write(', ')
-                    self.traceback.dump_evaluate_tokens(f)
+                    self.traceback.dump_value_expression_tokens(f)
 
         f.line('>')
 
@@ -960,9 +960,9 @@ def create_Tree_Raise_Statement(line_number, column, type, instance, traceback):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is__native_none__OR__tree_expression(type)
-    assert fact_is__native_none__OR__tree_expression(instance)
-    assert fact_is__native_none__OR__tree_expression(traceback)
+    assert fact_is__native_none__OR__tree_value_expression(type)
+    assert fact_is__native_none__OR__tree_value_expression(instance)
+    assert fact_is__native_none__OR__tree_value_expression(traceback)
 
     if type is None:
         assert fact_is_native_none(instance)

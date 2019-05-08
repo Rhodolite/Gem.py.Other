@@ -57,9 +57,9 @@
 #           Interface to tree classes that represent names.
 #
 #       extends Tree_Delete_Target,
-#               Tree_Expression,
 #               Tree_Parameter,
-#               Tree_Store_Target
+#               Tree_Store_Target,
+#               Tree_Value_Expression
 #
 #   NOTE:
 #       `Tree_Name_Version_1` is used if `1 <= name_version <= 3` (see "Z.Tree.Convert_Zone.py" for `name_version`).

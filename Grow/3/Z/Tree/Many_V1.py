@@ -14,7 +14,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Tree.Expression               import  TRAIT_Tree_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
@@ -31,14 +31,14 @@ if __debug__:
 #   Tree: Many Expression - Base class of `Tree_List_Expression` and `Tree_Tuple_Expression`
 #
 class Tree_Many_Expression(
-        TRAIT_Tree_Expression,
         TRAIT_Tree_Store_Target,
+        TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'elements',                     #   SomeNativeList of Tree_Expression
+        'elements',                     #   SomeNativeList of Tree_Value_Expression
         'context',                      #   Tree_Context
     ))
 
@@ -55,9 +55,9 @@ class Tree_Many_Expression(
 
 
     #
-    #   Interface Tree_Expression
+    #   Interface Tree_Value_Expression
     #
-    def dump_evaluate_tokens(self, f):
+    def dump_value_expression_tokens(self, f):
         assert fact_is_tree_load_context(self.context)
 
         first = True
@@ -73,7 +73,7 @@ class Tree_Many_Expression(
                 f.write(',')
 
             f.space()
-            v.dump_evaluate_tokens(f)
+            v.dump_value_expression_tokens(f)
 
         f.write('; ')
         self.context.dump_context_token(f)
@@ -84,10 +84,11 @@ class Tree_Many_Expression(
     #   Interface Tree_Store_Target
     #
     #   NOTE:
-    #       The method `.dump_store_target_tokens` below has TWO lines different from method `.dump_evaluate_tokens`
-    #       above:
+    #       The method `.dump_store_target_tokens` below has TWO lines different from method
+    #       `.dump_value_expression_tokens` above:
     #
     #           1)  assert fact_is_tree_store_context(self.context)
+    #
     #           2)  v.dump_store_target_tokens(f)
     #
     if __debug__:

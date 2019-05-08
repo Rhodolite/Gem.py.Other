@@ -20,7 +20,7 @@ from    Z.Tree.Comprehension            import  TRAIT_Tree_Comprehension_Clause
 
 if __debug__:
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Z.Tree.Expression           import  fact_is_tree_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Target               import  fact_is_tree_store_target
 
 
@@ -31,9 +31,9 @@ class Tree_Comprehension_Clause_Leaf(
         TRAIT_Tree_Comprehension_Clause,
 ):
     __slots__ = ((
-        'target',                       #   Tree_Expression
-        'sequence',                     #   Tree_Expression
-        'if_tests',                     #   SomeNativeList of Tree_Expression
+        'target',                       #   Tree_Value_Expression
+        'sequence',                     #   Tree_Value_Expression
+        'if_tests',                     #   SomeNativeList of Tree_Value_Expression
     ))
 
 
@@ -53,11 +53,11 @@ class Tree_Comprehension_Clause_Leaf(
         f.write('<comprehension-clause for ')
         self.target.dump_store_target_tokens(f)
         f.write(' in ')
-        self.sequence.dump_evaluate_tokens(f)
+        self.sequence.dump_value_expression_tokens(f)
 
         for v in self.if_tests:
             f.write(' if ')
-            v.dump_evaluate_tokens(f)
+            v.dump_value_expression_tokens(f)
 
         f.greater_than_sign()
 
@@ -72,8 +72,8 @@ class Tree_Comprehension_Clause_Leaf(
 
 @creator
 def create_Tree_Comprehension_Clause(target, sequence, if_tests):
-    assert fact_is_tree_store_target(target)
-    assert fact_is_tree_expression  (sequence)
+    assert fact_is_tree_store_target    (target)
+    assert fact_is_tree_value_expression(sequence)
     assert fact_is_some_native_list(if_tests)
 
     return Tree_Comprehension_Clause_Leaf(target, sequence, if_tests)

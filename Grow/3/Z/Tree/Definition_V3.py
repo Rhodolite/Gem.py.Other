@@ -52,7 +52,7 @@ class Tree_Class_Definition(
         'column',                       #   Substantial_Integer
 
         'name',                         #   Parser_Symbol
-        'bases',                        #   SomeNativeList of Tree_Expression
+        'bases',                        #   SomeNativeList of Tree_Value_Expression
         'body',                         #   FullNativeList of Tree_Statement
         'decorator_list',               #   SomeNativeList of Tree_Decorator
     ))
@@ -74,7 +74,7 @@ class Tree_Class_Definition(
     def _dump_bases_tokens(self, f, header, trailer):
         with f.indent_2(header, trailer):
             for v in self.bases:
-                v.dump_evaluate_tokens(f)
+                v.dump_value_expression_tokens(f)
                 f.line()
 
 
@@ -88,7 +88,7 @@ class Tree_Class_Definition(
         with f.indent_2(header, trailer):
             for v in self.decorator_list:
                 f.write('@')
-                v.dump_evaluate_tokens(f)
+                v.dump_value_expression_tokens(f)
                 f.line()
 
 
@@ -171,7 +171,7 @@ class Tree_Function_Definition(
         with f.indent_2(header, trailer):
             for v in self.decorator_list:
                 f.write('@')
-                v.dump_evaluate_tokens(f)
+                v.dump_value_expression_tokens(f)
                 f.line()
 
 

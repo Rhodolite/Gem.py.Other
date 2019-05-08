@@ -18,8 +18,8 @@ from    Z.Tree.Index                    import  TRAIT_Tree_Index_Clause
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Z.Tree.Expression           import  fact_is_tree_expression
-    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression
+    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
 
 
 #
@@ -113,7 +113,7 @@ class Tree_Simple_Index(
         TRAIT_Tree_Index_Clause,
 ):
     __slots__ = ((
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
     ))
 
 
@@ -129,7 +129,7 @@ class Tree_Simple_Index(
     #
     def dump_index_clause_tokens(self, f):
         f.write('<simple-index ')
-        self.value.dump_evaluate_tokens(f)
+        self.value.dump_value_expression_tokens(f)
         f.greater_than_sign()
 
 
@@ -142,7 +142,7 @@ class Tree_Simple_Index(
 
 @creator
 def create_Tree_Simple_Index(value):
-    assert fact_is_tree_expression(value)
+    assert fact_is_tree_value_expression(value)
 
     return Tree_Simple_Index(value)
 
@@ -164,9 +164,9 @@ class Tree_Slice_Index(
         TRAIT_Tree_Index_Clause,
 ):
     __slots__ = ((
-        'lower',                        #   None | Tree_Expression
-        'upper',                        #   None | Tree_Expression
-        'step',                         #   None | Tree_Expression
+        'lower',                        #   None | Tree_Value_Expression
+        'upper',                        #   None | Tree_Value_Expression
+        'step',                         #   None | Tree_Value_Expression
     ))
 
 
@@ -190,21 +190,21 @@ class Tree_Slice_Index(
         f.write('<slice-index ')
 
         if lower is not None:
-            lower.dump_evaluate_tokens(f)
+            lower.dump_value_expression_tokens(f)
             f.space()
 
         f.write(':')
 
         if upper is not None:
             f.space()
-            upper.dump_evaluate_tokens(f)
+            upper.dump_value_expression_tokens(f)
 
         if step is not None:
             if upper is not None:
                 f.space()
 
             f.write(': ')
-            step.dump_evaluate_tokens(f)
+            step.dump_value_expression_tokens(f)
 
         f.greater_than_sign()
 
@@ -218,8 +218,8 @@ class Tree_Slice_Index(
 
 @creator
 def create_Tree_Slice_Index(lower, upper, step):
-    assert fact_is__native_none__OR__tree_expression(lower)
-    assert fact_is__native_none__OR__tree_expression(upper)
-    assert fact_is__native_none__OR__tree_expression(step)
+    assert fact_is__native_none__OR__tree_value_expression(lower)
+    assert fact_is__native_none__OR__tree_value_expression(upper)
+    assert fact_is__native_none__OR__tree_value_expression(step)
 
     return Tree_Slice_Index(lower, upper, step)

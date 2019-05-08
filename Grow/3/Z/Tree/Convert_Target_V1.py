@@ -62,7 +62,7 @@ map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = {
 #
 #   convert_target(v)
 #
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Expression`.
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
 #
 #       The expression must be a "target" expression.
 #
@@ -79,7 +79,7 @@ def convert_target(v):
 #   convert_full_list_of_targets(sequence)
 #
 #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Expression`.
+#       `FullNativeList of Tree_Value_Expression`.
 #
 #       Each of the expressions must be a target expresion.
 #
