@@ -907,6 +907,12 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5, 6)):
+        from    Z.Tree.Convert_Global_V2    import  convert_global_statement
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Convert_Statement_V2     import  convert_statement
         from    Z.Tree.Convert_Statement_V2     import  convert_full_list_of_statements
         from    Z.Tree.Convert_Statement_V2     import  convert_some_list_of_statements
@@ -922,7 +928,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_delete_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_execute_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_expression_statement
-        from    Z.Tree.Convert_Simple_Statement_V2  import  convert_global_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_modify_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_pass_statement
         from    Z.Tree.Convert_Simple_Statement_V2  import  convert_print_statement
@@ -1001,6 +1006,14 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5)):
+        from    Z.Tree.Global_V1        import  create_Tree_Global_Statement        #   "_V1" on purpose.
+    elif statement_version == 6:
+        from    Z.Tree.Global_V6        import  create_Tree_Global_Statement
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((2, 3, 4, 5)):
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Assert_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Assign_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Break_Statement         #   "_V1" on purpose.
@@ -1008,7 +1021,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Delete_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Execute_Statement       #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Expression_Statement    #   "_V1" on purpose.
-        from    Z.Tree.Simple_Statement_V1      import  create_Tree_Global_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Modify_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Pass_Statement          #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Print_Statement         #   "_V1" on purpose.
@@ -1022,7 +1034,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Simple_Statement_V6      import  create_Tree_Delete_Statement
         from    Z.Tree.Simple_Statement_V6      import  create_Tree_Execute_Statement
         from    Z.Tree.Simple_Statement_V6      import  create_Tree_Expression_Statement
-        from    Z.Tree.Simple_Statement_V6      import  create_Tree_Global_Statement
         from    Z.Tree.Simple_Statement_V6      import  create_Tree_Modify_Statement
         from    Z.Tree.Simple_Statement_V6      import  create_Tree_Pass_Statement
         from    Z.Tree.Simple_Statement_V6      import  create_Tree_Print_Statement

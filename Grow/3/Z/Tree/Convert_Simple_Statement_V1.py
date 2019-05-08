@@ -23,7 +23,6 @@ from    Z.Tree.Simple_Statement_V1          import  create_Tree_Continue_Stateme
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Delete_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Execute_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Expression_Statement
-from    Z.Tree.Simple_Statement_V1          import  create_Tree_Global_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Modify_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Pass_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Print_Statement
@@ -50,7 +49,6 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Execute_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Expression_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Modify_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Pass_Statement
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Print_Statement
@@ -218,30 +216,6 @@ def convert_expression_statement(v):
                v.col_offset,
 
                convert_expression(v.value),
-           )
-
-
-#
-#   convert_global_statement(v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Global_Statement` (i.e.: `_ast.Global`) to a
-#       `Tree_Global_Statement`.
-#
-assert Native_AbstractSyntaxTree_Global_Statement._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Global_Statement._fields     == (('names',))
-
-
-def convert_global_statement(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_full_native_list(v.names)
-
-    return create_Tree_Global_Statement(
-               v.lineno,
-               v.col_offset,
-
-               v.names,
            )
 
 
