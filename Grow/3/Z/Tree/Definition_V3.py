@@ -98,9 +98,11 @@ class Tree_Class_Definition(
     def dump_statement_tokens(self, f):
         decorator_list = self.decorator_list
 
-        header = arrange('<class-definition @{}:{} <$ {}>', self.line_number, self.column, self.name.native_string)
+        f.arrange('<class-definition @{}:{} ', self.line_number, self.column)
+        self.name.dump_symbol_token(f)
+        f.line()
 
-        with f.indent_2(header, '>'):
+        with f.indent_2(None, '>'):
             self._dump_bases_tokens(f, 'bases: {', None)
 
             if len(self.decorator_list) == 0:
@@ -181,9 +183,11 @@ class Tree_Function_Definition(
     def dump_statement_tokens(self, f):
         decorator_list = self.decorator_list
 
-        header = arrange('<function-definition @{}:{} <$ {}>', self.line_number, self.column, self.name.native_string)
+        f.arrange('<function-definition @{}:{} ', self.line_number, self.column)
+        self.name.dump_symbol_token(f)
+        f.line()
 
-        with f.indent_2(header, '>'):
+        with f.indent_2(None, '>'):
             self.parameters.dump_parameter_tokens(f)
 
             if len(self.decorator_list) == 0:

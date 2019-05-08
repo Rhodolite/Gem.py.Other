@@ -64,11 +64,6 @@ class Parser_Module_Name_With_Dot(
     #
     #   Interface Parser_Module_Name
     #
-    @property
-    def native_string(self):
-        return self
-
-
     def dump_module_name_token(self, f):
         f.arrange('<module-name-with-dot {}>', self)
 

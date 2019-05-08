@@ -305,6 +305,8 @@ class Convert_Zone(object):
         'conjure_parser_symbol',                    #   Function
         'conjure_parser_symbol_0',                  #   Function
 
+        'create_Parser_Symbol_Tuple',               #   None | Function
+
 
         #
         #   Target
@@ -358,7 +360,7 @@ def FATAL_unknown_version(name, version):
 def fill_convert_zone(version):
     assert fact_is_positive_integer(version)
 
-    assert 2 <= version <= 17
+    assert 2 <= version <= 18
 
 
     #
@@ -376,7 +378,7 @@ def fill_convert_zone(version):
     operator_version      = 1       #   1, 3    (no version 2)
     parameter_version     = '1'
     statement_version     = 1       #   1..7
-    symbol_version        = 0       #   0, 2..5 (no version 1)
+    symbol_version        = 0       #   0, 2..6 (no version 1)
     target_version        = 1
 
 
@@ -469,37 +471,45 @@ def fill_convert_zone(version):
     if version >= 13:
         alias_version       = 6     #   Only use `Tree_{Module,Symbol}_Alias.as_name` when it has a value.
         module_name_version = 3     #   `Parser_Module_Name_With_Dot` implements `Tree_Module_Alias`.
-        symbol_version      = 5     #   Symbol version 5 implements `Tree_{Module,Symbol}_Alias`.
+        symbol_version      = 5     #   Symbol version 6 implements `Tree_{Module,Symbol}_Alias`.
 
 
     #
-    #   Version 14: `Tree_Global_Statement` uses `Parser_Symbol`
+    #   Version 14: `Tree_Global_Statement` uses `Parser_Symbol` & `Parser_Symbol_Tuple`
+    #
+    #       14: `Tree_Global_Statement` uses `Parser_Symbol`
+    #
+    #       15: `Tree_Global_Statement` uses `Parser_Symbol_Tuple`
     #
     if version >= 14:
         statement_version = 5       #   `Tree_Global_Statement` uses `Parser_Symbol`
 
+    if version >= 15:
+        symbol_version    = 6       #   `Parser_Symbol` implements `Parser_Symbol_Tuple`.
+        statement_version = 6       #   `Tree_Global_Statement` uses `Parser_Symbol`
+
     #
-    #   Version 15 & 16: No longer use contexts
+    #   Version 16 & 17: No longer use contexts
     #
-    #       15: `Tree_Name`    no longer uses contexts.
+    #       16: `Tree_Name`    no longer uses contexts.
     #
-    #       16: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
+    #       17: `Tree_Target`  no longer uses contexts (affects `Tree_Attribute`, `Tree_{List,Tuple}_Expression`, and
     #                          `Tree_Subscript`).
     #
-    if version >= 15:
+    if version >= 16:
         name_version = 4
 
-    if version >= 16:
+    if version >= 17:
         context_version = 0     #   Nothing uses contexts anymore ... so totally disable tree contexts
         target_version  = 4
 
 
     #
-    #   Version 17
+    #   Version 18
     #
     #       Add `Tree_Suite` & `Tree_Suite_0`
     #
-    if version >= 17:
+    if version >= 18:
         statement_version = 7
 
 
@@ -914,8 +924,10 @@ def fill_convert_zone(version):
 
     if statement_version in ((2, 3, 4)):
         from    Z.Tree.Convert_Global_V2    import  convert_global_statement
-    elif statement_version in ((5, 6, 7)):
+    elif statement_version == 5:
         from    Z.Tree.Convert_Global_V5    import  convert_global_statement
+    elif statement_version in ((6, 7)):
+        from    Z.Tree.Convert_Global_V6    import  convert_global_statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -1015,8 +1027,10 @@ def fill_convert_zone(version):
 
     if statement_version in ((2, 3, 4)):
         from    Z.Tree.Global_V1        import  create_Tree_Global_Statement        #   "_V1" on purpose.
-    elif statement_version in ((5, 6)):
+    elif statement_version == 5:
         from    Z.Tree.Global_V5        import  create_Tree_Global_Statement
+    elif statement_version == 6:
+        from    Z.Tree.Global_V6        import  create_Tree_Global_Statement
     elif statement_version == 7:
         from    Z.Tree.Global_V7        import  create_Tree_Global_Statement
     else:
@@ -1087,16 +1101,28 @@ def fill_convert_zone(version):
         from    Z.Parser.Symbol_V4          import  conjure_parser_symbol
     elif symbol_version == 5:
         from    Z.Parser.Symbol_V5          import  conjure_parser_symbol
+    elif symbol_version == 6:
+        from    Z.Parser.Symbol_V6          import  conjure_parser_symbol
     else:
         FATAL_unknown_version('symbol', symbol_version)
 
 
-    if symbol_version in ((0, 2, 3, 5)):
+    if symbol_version in ((0, 2, 3)):
         conjure_parser_symbol_0 = None
     elif symbol_version == 4:
         from    Z.Parser.Symbol_V4          import  conjure_parser_symbol_0
+    elif symbol_version in ((5, 6)):
+        conjure_parser_symbol_0 = None
     else:
-        FATAL_unknown_version('symbol', symbolversion)
+        FATAL_unknown_version('symbol', symbol_version)
+
+
+    if symbol_version in ((0, 2, 3, 4, 5)):
+        create_Parser_Symbol_Tuple = None
+    elif symbol_version == 6:
+        from    Z.Parser.Symbol_Tuple_V6    import  create_Parser_Symbol_Tuple
+    else:
+        FATAL_unknown_version('symbol', symbol_version)
 
 
     #
@@ -1756,6 +1782,8 @@ def fill_convert_zone(version):
     #
     z.conjure_parser_symbol   = conjure_parser_symbol
     z.conjure_parser_symbol_0 = conjure_parser_symbol_0
+
+    z.create_Parser_Symbol_Tuple = create_Parser_Symbol_Tuple
 
 
     #

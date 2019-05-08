@@ -70,11 +70,6 @@ class Parser_Symbol_Leaf(
     #
     #   Public
     #
-    @property
-    def native_string(self):
-        return self
-
-
     def __repr__(self):
         return arrange('<Parser_Symbol_Leaf {}>', self)
 

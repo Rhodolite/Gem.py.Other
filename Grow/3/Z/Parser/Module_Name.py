@@ -15,9 +15,6 @@
 #           debug
 #               is_parser_module_name := true
 #
-#           attribute
-#               native_string : Full_Native_String
-#
 #           method
 #               dump_module_name_token(f : Build_DumpToken)
 #
