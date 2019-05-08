@@ -447,8 +447,9 @@ def fill_convert_zone(version):
     #       11: `Tree_Module_Alias_Leaf.name` is a `Parser_Module_Name`.
     #
     if version >= 10:
-        module_name_version = 2     #   Implement `Parser_Module_Name`
-        symbol_version      = 3     #   Symbol version 3 implements `Parser_Module_Name`
+        module_name_version = 2     #   Enable                        `Parser_Module_Name`.
+        statement_version   = 4     #   `Tree_From_Import.module`is a `Parser_Module_Name`.
+        symbol_version      = 3     #   Symbol version 3 implements   `Parser_Module_Name`.
 
     if version >= 11:
         alias_version       = 4     #   `Tree_Module_Alias_Leaf.name` is a `Parser_Module_Name`.
@@ -873,9 +874,12 @@ def fill_convert_zone(version):
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5)):
+    if statement_version in ((2, 3)):
         from    Z.Tree.Convert_Import_V2    import  convert_from_import_statement
         from    Z.Tree.Convert_Import_V2    import  convert_import_statement
+    elif statement_version in ((4, 5)):
+        from    Z.Tree.Convert_Import_V4    import  convert_from_import_statement
+        from    Z.Tree.Convert_Import_V4    import  convert_import_statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -974,9 +978,12 @@ def fill_convert_zone(version):
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4)):
+    if statement_version in ((2, 3)):
         from    Z.Tree.Import_V1        import  create_Tree_From_Import_Statement   #   "_V1" on purpose.
         from    Z.Tree.Import_V1        import  create_Tree_Import_Statement        #   "_V1" on purpose.
+    elif statement_version == 4:
+        from    Z.Tree.Import_V4        import  create_Tree_From_Import_Statement
+        from    Z.Tree.Import_V4        import  create_Tree_Import_Statement
     elif statement_version == 5:
         from    Z.Tree.Import_V5        import  create_Tree_From_Import_Statement
         from    Z.Tree.Import_V5        import  create_Tree_Import_Statement

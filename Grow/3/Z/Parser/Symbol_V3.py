@@ -70,7 +70,7 @@ class Parser_Symbol_Leaf(
 
 
     def dump_module_name_token(self, f):
-        f.arrange('<module-name symbol {}>', self)
+        f.arrange('<module-name $ {}>', self)
 
 
     #
