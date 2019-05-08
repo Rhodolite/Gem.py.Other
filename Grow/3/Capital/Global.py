@@ -15,7 +15,7 @@ string_version = 1
 
 
 #
-#   Version 1: Introduce `String_V1`, a very simple string wrapper.
+#   Version 1: Introduce `String_Leaf`, a very simple string wrapper.
 #
 
 

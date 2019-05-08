@@ -32,6 +32,14 @@
 #
 #           Identical to version 1, imports `create_full_string` and `empty_string` from version 1.
 #
+#           Actual differences are between the two files:
+#
+#               1)  "Capital.Private.ConjureString_V1.py"
+#
+#               2)  "Capital.Private.ConjureString_V2.py"
+#
+#           This file only exists so it can be imported from "Capital.Private.ConjureString_V2.py",
+#
 
 
 from    Capital.Core                    import  export

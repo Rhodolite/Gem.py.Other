@@ -26,7 +26,7 @@
 #
 #       Version 1:
 #
-#           1)  Both empty & full strings are managed by `String_V1`;
+#           1)  Both empty & full strings are managed by `String_Leaf`;
 #
 #           2)  Implementation of `.is_empty_string` and `.is_full_string` is done by properties.
 #

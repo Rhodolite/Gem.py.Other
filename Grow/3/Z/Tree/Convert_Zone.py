@@ -979,13 +979,20 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3)):
-        from    Z.Tree.Import_V1        import  create_Tree_From_Import_Statement   #   "_V1" on purpose.
-        from    Z.Tree.Import_V1        import  create_Tree_Import_Statement        #   "_V1" on purpose.
+        from    Z.Tree.From_Import_V1   import  create_Tree_From_Import_Statement   #   "_V1" on purpose.
     elif statement_version == 4:
         from    Z.Tree.Import_V4        import  create_Tree_From_Import_Statement
-        from    Z.Tree.Import_V4        import  create_Tree_Import_Statement
     elif statement_version == 5:
         from    Z.Tree.Import_V5        import  create_Tree_From_Import_Statement
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((2, 3)):
+        from    Z.Tree.Import_V1        import  create_Tree_Import_Statement        #   "_V1" on purpose.
+    elif statement_version == 4:
+        from    Z.Tree.Import_V4        import  create_Tree_Import_Statement
+    elif statement_version == 5:
         from    Z.Tree.Import_V5        import  create_Tree_Import_Statement
     else:
         FATAL_unknown_version('statement', statement_version)

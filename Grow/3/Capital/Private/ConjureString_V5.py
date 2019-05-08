@@ -69,7 +69,7 @@ if __debug__:
 #
 #           conjure_string       - Lookup or "create & insert" a string.
 #           lookup_string        - Lookup a string.
-#           provide_string       - Provide a `String_V1`.
+#           provide_string       - Provide a `Temporary_String`.
 #
 #       The verb "conjure" in Capital code means "lookup, and if not found, create & insert a new one".
 #

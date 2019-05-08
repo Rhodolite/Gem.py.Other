@@ -56,9 +56,9 @@ from    Capital.Private.String_V1       import  empty_string
 #
 #           1)  The key   is an interned `Some_Native_String`; and
 #
-#           2)  The value is a `String_V1`.
+#           2)  The value is a `String_Leaf`.
 #
-#       The type of `string_cache` is `Map { interned Some_Native_String } of String_V1`
+#       The type of `string_cache` is `Map { interned Some_Native_String } of String_Leaf`
 #
 #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
 #       when the `conjure_string("")` is called.
@@ -95,6 +95,6 @@ def conjure_string(s):
 
     #
     #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
-    #   `String_V1` that is stored in `string_cache).
+    #   `String_Leaf` that is stored in `string_cache).
     #
     return provide_string(interned_s, string__possibly_non_unique)

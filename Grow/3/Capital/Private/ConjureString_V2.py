@@ -52,7 +52,7 @@ from    Capital.Private.String_V2       import  empty_string
 #
 #           conjure_string       - Lookup or "create & insert" a string.
 #           lookup_string        - Lookup a string.
-#           provide_string       - Provide a `String_V1`.
+#           provide_string       - Provide a `String_Leaf`.
 #
 #       The verb "conjure" in Capital code means "lookup, and if not found, create & insert a new one".
 #
@@ -121,7 +121,7 @@ def produce_conjure_string(empty_string, create_full_string):
 
         #
         #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
-        #   `String_V1` that is stored in `string_cache).
+        #   `String_Leaf` that is stored in `string_cache).
         #
         return provide_string(interned_s, string__possibly_non_unique)
 

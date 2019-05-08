@@ -13,7 +13,7 @@
 #
 #       Version 1:
 #
-#           Does not exist (not used to transform to `Capital.Private.String_V1.String_V1`).
+#           Does not exist (not used to transform to `Capital.Private.String_V1.String_Leaf`).
 #
 #       Version 2:
 #
