@@ -6,75 +6,70 @@
 #
 #   Z.Parser.Produce_ConjureFullName - Produce a `conjure_full_name__with_unused_Z_parameter` function.
 #
-#       SEE: "Capital.Produce_ConjureFullName" for the code this is copied from.
-#
 
 
-from    Capital.Temporary_String_V7     import  create_temporary_string
+from    Capital.Core                        import  creator
+from    Capital.Produce_ConjureFullString   import  produce_conjure_full_string
 
 
 if __debug__:
-    from    Capital.Native_String       import  fact_is_full_native_string
-    from    Z.Tree.Convert_Zone         import  fact_is_convert_zone
+    from    Capital.Native_String           import  fact_is_some_native_string
+    from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
 
 
 #
-#   produce_conjure_full_name__with_unused_Z_parameter(Meta)
+#   produce_conjure_full_name__with_unused_Z_parameter(Full_Name_Type)
 #
-#       Produce a `conjure_full_name_with_unused_Z_parameter(s)` method.
+#       Produce a `conjure_full_name__with_unused_Z_parameter(s)` method.
 #
-#           Identical to `conjure_full_name` above, but with an extra unused `z` parameter.
+#       PARAMETER:
 #
-#   This is a copy of "Capital.Produce_ConjureFullName.produce_conjure_full_name`:
+#           1)  Full_Name_Type  - The type to transform a Temporary_String to when creating a new name.
 #
-#       The only difference is the extra unused `z` parameter.
+#       PRODUCED FUNCTION:
 #
-def produce_conjure_full_name__with_unused_Z_parameter(Meta):
-    string_cache  = {}                  #   Map { TemporaryKey | Meta } of { TemporaryKey | Meta }
-
-    lookup_string  = string_cache.get
-    provide_string = string_cache.setdefault
+#           conjure_full_name(z, name) - Conjure a `Full_Name_Type`, based on `name`.  Guarantees Uniqueness.
+#
+#                `z` must be a `Convert_Zone`, but is otherwise ignored.
+#
+#                `name` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#                `name` may *NOT* be an instance of a subclass of `str`.
+#
+#           EXCEPTION
+#
+#               If `name` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
+def produce_conjure_full_name__with_unused_Z_parameter(Full_Name_Type):
+    conjure_full_name = produce_conjure_full_string('conjure_full_name', Full_Name_Type)
 
 
     #
-    #   conjure_full_name__with_unused_Z_parameter(z, s) - Conjure a `Meta`, based on `s`.  Guarentees Uniqueness.
+    #   conjure_full_name(z, name) - Conjure a `Full_Name_Type`, based on `name`.  Guarantees Uniqueness.
     #
-    #       The `z` parameter is unused.
+    #        `z` must be a `Convert_Zone`, but is otherwise ignored.
     #
-    #       `s` must be of type `Full_Native_String` (or a type that is a subclass of `Full_Native_String`).
+    #        `name` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
     #
-    #       `s` must be a "full" string (i.e.: length greater than 0).
+    #        `name` may *NOT* be an instance of a subclass of `str`.
     #
-    #   See comments in "Capital.Private.ConjureString_V7.py" to understand this code.
+    #   EXCEPTION
     #
-    def conjure_full_name__with_unused_Z_parameter(z, s):
-        assert fact_is_convert_zone      (z)
-        assert fact_is_full_native_string(s)
+    #       If `name` is empty (i.e.: has 0 characters), throws a `ValueError`.
+    #
+    @creator
+    def conjure_full_name__with_unused_Z_parameter(z, name):
+        assert fact_is_convert_zone(z)
 
-        r = lookup_string(s)
+        #
+        #   The following test is "*_some_*" on purpose.
+        #
+        #   This is to allow the case of `s` is `""` to throw a `ValueError` (the `ValueError` is thrown by
+        #   `convert_full_name`).
+        #
+        assert fact_is_some_native_string(name)
 
-        if r is not None:
-            if r.definitively_not_temporary:
-                return r
-
-            r.__class__ = Meta
-
-            assert r.definitively_not_temporary
-
-            return r
-
-        temporary_string__maybe_duplicate = create_temporary_string(s)
-
-        r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
-
-        if r.definitively_not_temporary:
-            return r
-
-        r.__class__ = Meta
-
-        assert r.definitively_not_temporary
-
-        return r
+        return conjure_full_name(name)
 
 
     return conjure_full_name__with_unused_Z_parameter

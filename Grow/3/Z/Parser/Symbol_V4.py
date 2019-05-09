@@ -26,6 +26,7 @@
 
 
 from    Capital.Core                        import  arrange
+from    Capital.Core                        import  creator
 from    Capital.Core                        import  export
 from    Capital.Native_String               import  Full_Native_String
 from    Capital.Maybe_Temporary             import  TRAIT_Maybe_Temporary_0
@@ -94,15 +95,52 @@ class Parser_Symbol_Leaf(
 conjure_parser_symbol = produce_conjure_full_name__with_unused_Z_parameter(Parser_Symbol_Leaf)
 
 
+#
+#   conjure_parser_symbol(z, name)
+#
+#       Conjure a `Parser_Symbol`, based on `name`.  Guarantees Uniqueness.
+#
+#       PARAMETERS:
+#
+#            `z` must be a `Convert_Zone`, but is otherwise ignored.
+#
+#            `name` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#            `name` may *NOT* be an instance of a subclass of `str`.
+#
+#       EXCEPTION
+#
+#           If `name` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
 export(conjure_parser_symbol)
 
 
+#
+#   conjure_parser_symbol_0(z, name)
+#
+#       Either return `parser_none`, or conjure a `Parser_Symbol`, based on `name`.  Guarantees Uniqueness.
+#
+#       PARAMETERS:
+#
+#            `z` must be a `Convert_Zone`, but is otherwise ignored.
+#
+#            `name` may be `None`, in which case `parser_none` is returned.
+#
+#            `name` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#            `name` may *NOT* be an instance of a subclass of `str`.
+#
+#       EXCEPTION
+#
+#           If `name` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
 @export
-def conjure_parser_symbol_0(z, s):
+@creator
+def conjure_parser_symbol_0(z, name):
     assert fact_is_convert_zone                        (z)
-    assert fact_is__native_none__OR__full_native_string(s)
+    assert fact_is__native_none__OR__full_native_string(name)
 
-    if s is None:
+    if name is None:
         return parser_none
 
-    return z.conjure_parser_symbol(z, s)
+    return z.conjure_parser_symbol(z, name)

@@ -47,7 +47,7 @@ from    Capital.Private.String_V8           import  empty_string
 
 
 #
-#   conjure_full_string(s) - Conjure a `Full_String`, based on `s`.  Guarentees Uniqueness (in all cases).
+#   conjure_full_string(s) - Conjure a `Full_String`, based on `s`.  Guarantees Uniqueness (in all cases).
 #
 #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -61,7 +61,7 @@ export(conjure_full_string)
 
 
 #
-#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in all cases).
+#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in all cases).
 #
 #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #

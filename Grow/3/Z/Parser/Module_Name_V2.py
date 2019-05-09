@@ -76,4 +76,21 @@ class Parser_Module_Name_With_Dot(
 conjure_parser_module_name_with_dot = produce_conjure_full_name__with_unused_Z_parameter(Parser_Module_Name_With_Dot)
 
 
+#
+#   conjure_parser_module_name_with_dot(z, name)
+#
+#       Conjure a `Parser_Module_Name_With_Dot`, based on `name`.  Guarantees Uniqueness.
+#
+#       PARAMETERS:
+#
+#            `z` must be a `Convert_Zone`, but is otherwise ignored.
+#
+#            `name` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#            `name` may *NOT* be an instance of a subclass of `str`.
+#
+#       EXCEPTION
+#
+#           If `name` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
 export(conjure_parser_module_name_with_dot)

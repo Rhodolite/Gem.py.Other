@@ -4,109 +4,79 @@
 
 
 #
-#   Capital.Produce_ConjureFullName - Produce a `conjure_full_name` function.
-#
-#       See: "Capital/Private/ConjureString_V7.py" for extensive comments.
+#   Capital.Produce_ConjureFullString - Produce a `conjure_full_string` function.
 #
 
 
-from    Capital.Temporary_String_V7     import  create_temporary_string
+from    Capital.Private.ConjureString_V7    import  produce_conjure_X_string
 
 
 if __debug__:
-    from    Capital.Native_String       import  fact_is_full_native_string
+    from    Capital.Native_String           import  fact_is_full_native_string
+    from    Capital.Fact                    import  fact_is_native_type
 
 
 #
-#   produce_conjure_full_name(Meta)
+#   produce_conjure_full_string(function_name, Full_String_Type) - Produce a `conjure_full_string` method.
 #
-#       Produce a `conjure_full_name(s)` method.
+#       PARAMETERS:
 #
-#       This produce method is pretty much a copy of `produduce_conjure_string` in "Capital.Private.ConjureString_V7".
+#           1)  function_name           - Function name produced:
 #
-#       Differences betweeen `produce_conjure_full_name` and `produce_conjure_string`:
+#                   1a) For Value_Error message;
 #
-#           `produce_conjure_full_name(Meta)`:
+#                   1b) In the future, will also rename the internal conjure_X_routine to this name
+#                       (for debugging purposes).
 #
-#               1)  The produced function `conjure_full_name` does not allow empty strings.
+#           2)  Full_String_Type        - The type to transform a Temporary_String to when creating a new string.
 #
-#               2)  `produce_conjure_full_name` does *NOT* take a parameter named `empty_string`; and
-#                   instead initializes it's `string_cache` as follows:
+#       PRODUCED FUNCTION:
 #
-#                       string_cache = {}
+#           `conjure_full_string(s)` - Conjure a `Full_String_Type`, based on `s`.  Guarantees Uniqueness.
 #
-#               3)  `produce_conjure_full_name` does *NOT* take a parameter named `create_temporary_string`; instead
-#                   it always uses `Capital.Private.Temporary_String_V7.create_temporary_string` (defined above).
+#                `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
-#               4)  The produced function `conjure_full_name` uses `fact_is_full_native_string(s)` (i.e.: it's `s`
-#                   parameter must be a *FULL* native string).
+#                `s` may *NOT* be an instance of a subclass of `str`.
 #
-#               5)  `produce_conjure_full_name` does not have extensive comments.
+#           EXCEPTION
 #
-#                   Instead, read the comments in `produce_conjure_string`, to understand the multi-threading and class
-#                   transformation issues.
+#               If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
 #
-#           `produce_conjure_string(empty_string, create_temporary_string, Meta)`:
+#   NOTE:
 #
-#               1)  The produced function `conjure_some_string` allows empty strings.
+#       This code is based on `Capital.Private.ConjureString_V7.produce_conjure_string_functions`.
 #
-#               2)  `produce_conjure_string` takes a parameter named `empty_string`; and initilizes it's `string_cache`
-#                   as follows:
+#       Differences from `Capital.Private.ConjureString_V7.produce_conjure_X_functions`:
 #
-#                       string_cache = { empty_string : empty_string }
+#           `Capital.Private.ConjureString_V7.produce_conjure_X_functions`:
 #
-#               3)  `produce_conjure_string` takes a parameter named `create_temporary_string`.
+#               1)  Does not take a `function_name`, but always names the function `"conjure_full_string"`.
 #
-#               4)  The produced function `conjure_some_string` uses `fact_is_some_native_string(s)` (i.e.: it's `s`
-#                   parameter may be an empty or full native string).
+#               2)  Produces two functions, a `conjure_some_string` function and a `conjure_full_string` function.
 #
-#               5)  `produce_conjure_string` has extensive comments to explain the multi-threading and class
-#                   transformation issues.
+#           `produce_conjure_full_string` below:
 #
-def produce_conjure_full_name(Meta):
-    string_cache  = {}                  #   Map { TemporaryKey | Meta } of { TemporaryKey | Meta }
+#               1)  Takes a `function_name` parameter.
+#
+#               2)  Only produces one function, the `conjure_full_string` funtion.
+#
+def produce_conjure_full_string(function_name, Full_String_Type):
+    assert fact_is_full_native_string(function_name)
+    assert fact_is_native_type       (Full_String_Type)
+
+    #
+    #   string_cache - A cache of `Full_String_Type` (and possibly some temporary strings).
+    #
+    #       All strings are stored in this as key/value pairs:
+    #
+    #           1)  The key is `Full_String_Type` or a `Temporary_String`.
+    #
+    #           2)  The value is the same as the key.
+    #
+    string_cache = {}                   #   Map { Full_String_Full | Temporary_String
+                                        #       : Full_String_Type | Temporary_String }
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault
 
-
-    #
-    #   conjure_full_name(s) - Conjure a `Meta`, based on `s`.  Guarentees Uniqueness.
-    #
-    #       `s` must be of type `Full_Native_String` (or a type that is a subclass of `Full_Native_String`).
-    #
-    #       `s` must be a "full" string (i.e.: length greater than 0).
-    #
-    def conjure_full_name(s):
-        #
-        #   See comments in "Capital.Private.ConjureString_V7.py" to understand this code.
-        #
-        assert fact_is_full_native_string(s)
-
-        r = lookup_string(s)
-
-        if r is not None:
-            if r.definitively_not_temporary:
-                return r
-
-            r.__class__ = Meta
-
-            assert r.definitively_not_temporary
-
-            return r
-
-        temporary_string__maybe_duplicate = create_temporary_string(s)
-
-        r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
-
-        if r.definitively_not_temporary:
-            return r
-
-        r.__class__ = Meta
-
-        assert r.definitively_not_temporary
-
-        return r
-
-
-    return conjure_full_name
+    return produce_conjure_X_string(function_name, lookup_string, provide_string, Full_String_Type)

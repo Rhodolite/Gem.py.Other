@@ -1,4 +1,4 @@
-#
+
 #   Copyright (c) 2019 Joy Diamond.  All rights reserved.
 #
 
@@ -147,7 +147,7 @@ if __debug__:
 #
 #           3)  provide_string          - Provide a string in string_cache.
 #
-#           4)  Full_String_Type        - Type type to transform a Temporary_String to when creating a new string.
+#           4)  Full_String_Type        - The type to transform a Temporary_String to when creating a new string.
 #
 #           5)  allow_empty_string      - True if s may be "", in which case return empty_string.
 #
@@ -157,17 +157,17 @@ if __debug__:
 #
 #       PRODUCED FUNCTION:
 #
-#           `conjure_X_string(s)` - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#           `conjure_X_string(s)` - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
-#                   `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#               `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
-#                   `s` may *NOT* be an instance of a subclass of `str`.
+#               `s` may *NOT* be an instance of a subclass of `str`.
 #
-#               EXCEPTION
+#           EXCEPTION
 #
-#                   If `allow_empty_string` is `False`, then the produced function has this behavior:
+#               If `allow_empty_string` is `False`, then the produced function has this behavior:
 #
-#                       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#                   If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
 #
 #   SEE ALSO
 #
@@ -206,7 +206,7 @@ def produce_conjure_X_string(
     #   
     #                   conjure_full_string(s)
     #
-    #                       Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #                       Conjure a full `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
     #
     #                       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
     #
@@ -220,7 +220,7 @@ def produce_conjure_X_string(
     #
     #                   conjure_some_string(s)
     #
-    #                       Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #                       Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
     #
     #                       `s` must be of a `Some_Native_String` (i.e.: `str`).
     #
@@ -356,17 +356,18 @@ def produce_conjure_string_functions(empty_string, Full_String_Type):
     assert fact_is_not_native_none(empty_string)
     assert fact_is_native_type    (Full_String_Type)
 
+
     #
-    #   string_cache - A cache of strings
+    #   string_cache - A cache of `Full_String_Type` (and possibly some temporary strings).
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key is `Full_String_Leaf` or a `Temporary_String`.
+    #           1)  The key is `Full_String_Type` or a `Temporary_String`.
     #
     #           2)  The value is the same as the key.
     #
-    string_cache = {}                   #   Map { Full_String_Leaf | Temporary_String
-                                        #       : Full_String_Leaf | Temporary_String }
+    string_cache = {}                   #   Map { Full_String_Type | Temporary_String
+                                        #       : Full_String_Type | Temporary_String }
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault
@@ -397,7 +398,7 @@ def produce_conjure_string_functions(empty_string, Full_String_Type):
 
 
 #
-#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
 #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -411,7 +412,7 @@ export(conjure_full_string)
 
 
 #
-#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
 #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #
