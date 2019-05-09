@@ -201,6 +201,7 @@ elif string_version == 5:
     from    Capital.Private.ConjureString_V5    import  conjure_some_string
     from    Capital.Private.String_V5           import  empty_string
 elif string_version == 6:
+    from    Capital.Private.ConjureString_V6    import  conjure_full_string
     from    Capital.Private.ConjureString_V6    import  conjure_some_string
     from    Capital.Private.String_V6           import  empty_string
 else:

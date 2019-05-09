@@ -8,7 +8,7 @@
 #
 
 
-version = 7
+version = 8
 
 
 exception_version = 1
