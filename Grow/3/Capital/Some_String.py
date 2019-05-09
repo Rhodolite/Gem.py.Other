@@ -183,26 +183,41 @@ if string_version == 0:
 elif string_version == 1:
     from    Capital.Private.ConjureString_V1    import  conjure_full_string
     from    Capital.Private.ConjureString_V1    import  conjure_some_string
-    from    Capital.Private.String_V1           import  empty_string
+elif string_version == 2:
+    from    Capital.Private.ConjureString_V2    import  conjure_full_string
+    from    Capital.Private.ConjureString_V2    import  conjure_some_string
 elif string_version == 3:
     from    Capital.Private.ConjureString_V3    import  conjure_full_string
     from    Capital.Private.ConjureString_V3    import  conjure_some_string
-    from    Capital.Private.String_V3           import  empty_string
 elif string_version == 4:
     from    Capital.Private.ConjureString_V4    import  conjure_full_string
     from    Capital.Private.ConjureString_V4    import  conjure_some_string
-    from    Capital.Private.String_V4           import  empty_string
 elif string_version == 5:
     from    Capital.Private.ConjureString_V5    import  conjure_full_string
     from    Capital.Private.ConjureString_V5    import  conjure_some_string
-    from    Capital.Private.String_V5           import  empty_string
 elif string_version == 6:
     from    Capital.Private.ConjureString_V6    import  conjure_full_string
     from    Capital.Private.ConjureString_V6    import  conjure_some_string
-    from    Capital.Private.String_V6           import  empty_string
 elif string_version == 7:
     from    Capital.Private.ConjureString_V7    import  conjure_full_string
     from    Capital.Private.ConjureString_V7    import  conjure_some_string
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Capital/String.py: unknown string version: {!r}', string_version)
+
+
+if string_version == 0:
+    pass
+elif string_version in ((1, 2, 3)):
+    from    Capital.Private.String_V1           import  empty_string
+elif string_version == 4:
+    from    Capital.Private.String_V4           import  empty_string
+elif string_version == 5:
+    from    Capital.Private.String_V5           import  empty_string
+elif string_version == 6:
+    from    Capital.Private.String_V6           import  empty_string
+elif string_version == 7:
     from    Capital.Private.String_V7           import  empty_string
 else:
     from    Capital.Core                import  FATAL

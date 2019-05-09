@@ -53,7 +53,7 @@
 
 
 from    Capital.Core                        import  export
-from    Capital.Private.ConjureString_V2    import  produce_conjure_string_functions
+from    Capital.Private.ConjureString_V3    import  produce_conjure_string_functions
 from    Capital.Private.String_V4           import  create_full_string
 from    Capital.Private.String_V4           import  empty_string
 

@@ -4,9 +4,9 @@
 
 
 #
-#   Capital.Private.ConjureString_V1
+#   Capital.Private.ConjureString_V2
 #
-#       Private implementation of `conjure_some_string` for `String` Interface, Version 1.
+#       Private implementation of `conjure_some_string` for `String` Interface, Version 2.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -42,7 +42,11 @@ from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V1       import  create_full_string
 from    Capital.Private.String_V1       import  empty_string
 
+
 if __debug__:
+    from    Capital.Fact                import  fact_is_native_boolean
+    from    Capital.Fact                import  fact_is_native_none
+    from    Capital.Fact                import  fact_is_not_native_none
     from    Capital.Native_String       import  fact_is_some_native_string
 
 
@@ -83,17 +87,28 @@ string_cache = {}
 lookup_string  = string_cache.get
 provide_string = string_cache.setdefault
 
-
+ 
 #
-#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_X_string(s, allow_empty_string = False, empty_string = None)
 #
-#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#       Internal helper routine for `conjure_{full,some}_string`.
 #
-#       `s` may *NOT* be an instance of a subclass of `str`.
+#   PARAMETERS
+#
+#       1)  `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#           `s` may *NOT* be an instance of a subclass of `str`.
+#
+#       2)  `allow_empty_string` - `True` if s may be `""`, in which case return `empty_string`.
+#
+#       3)  `empty_string` - The singleton to return when the conjuring an empty string.
+#
+#                            Must be `None` if `allow_empty_string` is not set.
+#
 #
 #   EXCEPTIONS
 #
-#       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#       If `allow_empty_string` is `False`, and `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
 #
 #   SEE ALSO
 #
@@ -102,14 +117,20 @@ provide_string = string_cache.setdefault
 #
 @export
 @creator
-def conjure_full_string(s):
+def conjure_X_string(s, allow_empty_string = False, empty_string = None):
     #
-    #   The following test is "*_some_*" on purpose.
+    #   The following test is "*_some_*" on purpose (even when `allow_empty_string` is `False`).
     #
-    #   This is to allow the case of an empty string to be handled belows a `ValueError` (instead of in the assert).
+    #   This is to allow the case of `s` is `""` to throw a `ValueError` below.
     #
-    assert fact_is_some_native_string(s)
+    assert fact_is_some_native_string (s)
+    assert fact_is_native_boolean     (allow_empty_string)
 
+    if allow_empty_string:
+        assert fact_is_not_native_none(empty_string)
+    else:
+        assert fact_is_native_none    (empty_string)
+        
     r = lookup_string(s)
 
     if r is not None:
@@ -118,10 +139,13 @@ def conjure_full_string(s):
     #
     #   Handle an empty string here (even in release mode).
     #
-    #       Hence the assert above is "*_some_*" on purpose, so this code can catch the empty strings instead of the
-    #       assert.
+    #       Hence the assert above is "*_some_*" on purpose (even when `allow_empty_string` is `False`), so this code
+    #       can throw a `ValueError` when an `s` is `""` (instead of the assert above catching it in debug mode).
     #
     if len(s) == 0:
+        if allow_empty_string:
+            return empty_string
+          
         value_error = PREPARE_ValueError(
                 "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
                 'conjure_full_string',
@@ -141,6 +165,23 @@ def conjure_full_string(s):
 
 
 #
+#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+#   EXCEPTIONS
+#
+#       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
+@export
+@creator
+def conjure_full_string(s):
+    return conjure_X_string(s)
+
+
+#
 #   conjure_some_string(s) - Conjure a `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be of a `Some_Native_String` (i.e.: `str`).
@@ -150,27 +191,4 @@ def conjure_full_string(s):
 @export
 @creator
 def conjure_some_string(s):
-    assert fact_is_some_native_string(s)
-
-    r = lookup_string(s)
-
-    if r is not None:
-        return r
-
-    #
-    #   NOTE:
-    #
-    #       The next two lines are the only code difference between `conjure_full_string` and `conjure_some_string`.
-    #
-    if len(s) == 0:
-        return empty_string
-
-    interned_s = intern_native_string(s)
-
-    string__possibly_non_unique = create_full_string(interned_s)
-
-    #
-    #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
-    #   `String_Leaf` that is stored in `string_cache).
-    #
-    return provide_string(interned_s, string__possibly_non_unique)
+    return conjure_X_string(s, allow_empty_string = True, empty_string = empty_string)

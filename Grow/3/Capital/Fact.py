@@ -19,6 +19,7 @@
 
 
 from    Capital.Types       import  Native_Function
+from    Capital.Types       import  Native_Built_In_Method
 from    Capital.Types       import  Python_Type
 
 
@@ -64,7 +65,17 @@ if __debug__:
 
 
 #
-#   fact_is_native_function(f) - Assert that `f` is `Native_Function`.
+#   fact_is_native_built_in_method(method) - Assert that `method` is a `Native_Built_In_Method`.
+#
+if __debug__:
+    def fact_is_native_built_in_method(f):
+        assert type(f) is Native_Built_In_Method
+
+        return True
+
+
+#
+#   fact_is_native_function(f) - Assert that `f` is a `Native_Function`.
 #
 if __debug__:
     def fact_is_native_function(f):

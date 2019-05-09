@@ -28,6 +28,12 @@ assert BoundMethod.__name__ == 'instancemethod'
 
 
 #
+#   Native_Built_In_Function
+#
+Native_Built_In_Method = types.BuiltinMethodType
+
+
+#
 #   Native_Function - A native funtion (i.e.: `types.FunctionType`).
 #
 Native_Function = types.FunctionType
