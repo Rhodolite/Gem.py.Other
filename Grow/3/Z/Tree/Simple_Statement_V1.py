@@ -516,7 +516,7 @@ class Tree_Print_Statement(
 
         'destination',                  #   None | Tree_Value_Expression
         'values',                       #   SomeNativeList of Tree_Value_Expression
-        'newline',                      #   NativeBoolean
+        'newline',                      #   Native_Boolean
     ))
 
 

@@ -16,7 +16,7 @@
 #
 #       interface Temporary_Element
 #           attribute
-#               temporary_element_has_definitively_been_transformed : NativeBoolean
+#               temporary_element_has_definitively_been_transformed : Native_Boolean
 #
 class TRAIT_Temporary_Element(object):
     __slots__ = (())

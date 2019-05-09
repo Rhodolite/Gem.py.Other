@@ -84,10 +84,9 @@ provide_string = string_cache.setdefault
 #       If `s` is empty (i.e.: has 0 characters), throws the following exception:
 #
 #           ValueError(
-#                   (
-#                         "parameter `s` is empty;"
-#                       + "; `conjure_full_string` requires a non-empty string"
-#                       + " (i.e.: has a length greater than 0)",
+#                   arrange(
+#                       "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
+#                       'conjure_full_string',
 #                   ),
 #               )
 #
@@ -118,9 +117,10 @@ def conjure_full_string(s):
     #       assert.
     #
     if len(s) == 0:
-        value_error = PREPARE_ValueError("parameter `s` is empty; {} {}",
-                                         "`conjure_full_string` requires a non-empty string",
-                                         "(i.e.: has a length greater than 0)");
+        value_error = PREPARE_ValueError(
+                "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
+                'conjure_full_string',
+            )
 
         raise value_error
 
@@ -141,6 +141,8 @@ def conjure_full_string(s):
 #       `s` must be of a `Some_Native_String` (i.e.: `str`).
 #
 #       `s` may *NOT* be an instance of a subclass of `Some_Native_String` (i.e.: `str`).
+#
+#   SEE ALSO
 #
 #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
 #       versions.

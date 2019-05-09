@@ -48,7 +48,7 @@ from    Capital.Core                    import  trace
 #
 #   produce_PREPARE_Exception(function_name, Exception_Class)
 #
-#       Produce a functoin to prepare an exception using `Exception_Class`.
+#       Produce a function to prepare an exception (using `Exception_Class` for the exception).
 #
 #       Signature of produced function:
 #

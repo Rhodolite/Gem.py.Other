@@ -172,9 +172,9 @@ if 0:                                                                   #   DISA
 
 
 #
-#   NativeBoolean - A native boolean (i.e.: `bool`)
+#   Native_Boolean - A native boolean (i.e.: `bool`)
 #
-NativeBoolean = bool
+Native_Boolean = bool
 
 
 #

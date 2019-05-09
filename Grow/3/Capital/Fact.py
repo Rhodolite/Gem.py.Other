@@ -18,6 +18,7 @@
 #
 
 
+from    Capital.Types       import  Native_Function
 from    Capital.Types       import  Python_Type
 
 
@@ -58,6 +59,16 @@ if __debug__:
 if __debug__:
     def fact_is_native_boolean(v):
         assert type(v) is bool
+
+        return True
+
+
+#
+#   fact_is_native_function(f) - Assert that `f` is `Native_Function`.
+#
+if __debug__:
+    def fact_is_native_function(f):
+        assert type(f) is Native_Function
 
         return True
 

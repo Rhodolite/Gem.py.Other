@@ -28,6 +28,12 @@ assert BoundMethod.__name__ == 'instancemethod'
 
 
 #
+#   Native_Function - A native funtion (i.e.: `types.FunctionType`).
+#
+Native_Function = types.FunctionType
+
+
+#
 #   Python_Type - The base type (metaclass) of all classes and types.
 #
 #       See comments in "Capital/Python_Type.py" that explains how we use `type` .vs. `Python_Type`.

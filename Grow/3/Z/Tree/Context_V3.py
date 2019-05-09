@@ -154,13 +154,13 @@ class Tree_Context_Enumeration(
         #   Interface Tree_Context
         #
        #@replace
-        'is_tree_delete_context',       #   NativeBoolean
+        'is_tree_delete_context',       #   Native_Boolean
        #@replace
-        'is_tree_load_context',         #   NativeBoolean
+        'is_tree_load_context',         #   Native_Boolean
        #@replace
-        'is_tree_parameter_context',    #   NativeBoolean
+        'is_tree_parameter_context',    #   Native_Boolean
        #@replace
-        'is_tree_store_context',        #   NativeBoolean
+        'is_tree_store_context',        #   Native_Boolean
     ))
 
 

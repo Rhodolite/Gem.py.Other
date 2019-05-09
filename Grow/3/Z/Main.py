@@ -14,7 +14,7 @@ from    sys                             import  argv            as  python_progr
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  ERROR
 from    Capital.Core                    import  FATAL
-from    Capital.Core                    import  NativeBoolean
+from    Capital.Core                    import  Native_Boolean
 from    Capital.Core                    import  trace
 from    Capital.Global                  import  capital_globals
 from    Capital.Some_String             import  conjure_some_string
@@ -90,19 +90,21 @@ def command_string():
     except ValueError as e:
         caught = e
 
+    trace(caught.args[0])
+
     assert (
                caught.args[0]
             == (
                      "parameter `s` is empty;"
                    + " `conjure_full_string` requires a non-empty string"
-                   + " (i.e.: has a length greater than 0)"
+                   + "; (i.e.: has a length greater than 0)"
                )
     )
     #</clique>
 
-    assert NativeBoolean(empty_string) is False
-    assert NativeBoolean(hello)        is True
-    assert NativeBoolean(crystal)      is True
+    assert Native_Boolean(empty_string) is False
+    assert Native_Boolean(hello)        is True
+    assert Native_Boolean(crystal)      is True
 
     assert len(empty_string) == 0
     assert len(hello)        == 5

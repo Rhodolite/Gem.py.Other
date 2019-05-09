@@ -42,13 +42,18 @@
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Core                    import  trace
+from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V2       import  create_full_string
 from    Capital.Private.String_V2       import  empty_string
 
 
 if __debug__:
+    from    Capital.Fact                import  fact_is_native_none
+    from    Capital.Fact                import  fact_is_native_function
+    from    Capital.Fact                import  fact_is_not_native_none
     from    Capital.Native_String       import  fact_is_some_native_string
+    from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
 
 
 #
@@ -73,17 +78,84 @@ if __debug__:
 
 
 #
-#   produce_conjure_string(empty_string, create_string) - Produce a `conjure_some_string(s)` function.
+#   produce_conjure_string_functions(       #   - produce conjure string functions
+#           conjure_some_string__function_name,
+#           empty_string,
+#           create_full_string,
+#   ):
 #
-#       Produces: `conjure_some_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#       1)  Produced function:
 #
-#           `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#               `conjure_full_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
-#           Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
-#           version.
+#                   `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#                   `s` may *NOT* be an instance of a subclass of `str`.
+#
+#               EXCEPTIONS
+#
+#                   If `s` is empty (i.e.: has 0 characters), throws the following exception:
+#
+#                       ValueError(
+#                               arrange(
+#                                   (
+#                                         "parameter `s` is empty; `{}` requires a non-empty string;"
+#                                       + " (i.e.: has a length greater than 0)"
+#                                   ),
+#                                   "conjure_full_string",
+#                               ),
+#                       )
+#
+#               SEE ALSO
+#
+#                   Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in
+#                   future versions.
+#
+#
+#       2)  Optional produced function (only produced if `empty_string is not None`):
+#
+#               `conjure_some_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#                   `s` must be of a `Some_Native_String` (i.e.: `str`).
+#
+#                   `s` may *NOT* be an instance of a subclass of `Some_Native_String` (i.e.: `str`).
+#
+#               SEE ALSO
+#
+#                   Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in
+#                   future versions.
+#
+#       3)  Returns a tuple:
+#
+#               3A) If `empty_string is none`:
+#
+#                       Returns a tuple of 1 element:
+#
+#                           ((conjure_string_full,))
+#
+#               3B) If `empty_string is not none`:
+#
+#                       Returns a tuple of 2 elements:
+#
+#                           ((conjure_string_full, conjure_some_string))
+#
+#   NOTE:
+#       This is a single function to produce two function, so they can share the following "cell" variables:
+#
+#           A)  `lookup_string`;
+#
+#           B)  `provide_string`.
+#
+#       This means both produced functions share the same cache (i.e.: `string_cache`).
+#
+#       See "Capital.Private.Execption_V2.py" for an explanation of "closure", "cell variable", "free variable", and
+#       "produce" functions.
 #
 @export
-def produce_conjure_string(empty_string, create_full_string):
+def produce_conjure_string_functions(empty_string, create_full_string):
+    assert fact_is_native_function(create_full_string)
+
+
     #
     #   string_cache - A cache of strings
     #
@@ -98,28 +170,65 @@ def produce_conjure_string(empty_string, create_full_string):
     #       The cache is initialized with `empty_string`, to make sure that `empty_string` is returned uniquely
     #       when the `conjure_some_string("")` is called.
     #
-    string_cache = { intern_native_string("") : empty_string }
+    #   As mentioned above, the string cache is *SHARED* between `conjure_full_string` and `conjure_some_string`.
+    #
+    string_cache = {}
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault
 
 
     #
-    #   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
-    #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+    #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+    #
+    #       `s` may *NOT* be an instance of a subclass of `str`.
+    #
+    #   EXCEPTIONS
+    #
+    #       If `s` is empty (i.e.: has 0 characters), throws the following exception:
+    #
+    #           ValueError(
+    #                   arrange(
+    #                       "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
+    #                       'conjure_full_string',
+    #                   ),
+    #               )
+    #
+    #   SEE ALSO
     #
     #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
-    #       version.s
+    #       versions.
     #
+    @export
     @creator
-    def conjure_some_string(s):
+    def conjure_full_string(s):
+        #
+        #   The following test is "*_some_*" on purpose.
+        #
+        #   This is to allow the case of an empty string to be handled belows a `ValueError` (instead of in the assert).
+        #
         assert fact_is_some_native_string(s)
 
         r = lookup_string(s)
 
         if r is not None:
             return r
+
+        #
+        #   Handle an empty string here (even in release mode).
+        #
+        #       Hence the assert above is "*_some_*" on purpose, so this code can catch the empty strings instead of the
+        #       assert.
+        #
+        if len(s) == 0:
+            value_error = PREPARE_ValueError(
+                    "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
+                    'conjure_full_string',
+                )
+
+            raise value_error
 
         interned_s = intern_native_string(s)
 
@@ -132,201 +241,73 @@ def produce_conjure_string(empty_string, create_full_string):
         return provide_string(interned_s, string__possibly_non_unique)
 
 
-   #trace('produce_conjure_string({!r}, <function {}>)', empty_string, create_full_string.__name__)
+    #
+    #   NOTE:
+    #
+    #       See above for explanation of case 3A.
+    #
+    #   ==========
+    #
+    #   3A) If `empty_string is None`:
+    #
+    #           Returns a tuple of 1 element:
+    #
+    #               ((conjure_string_full,))
+    #
+    if empty_string is None:
+        return ((conjure_full_string,))
 
-    return conjure_some_string
+
+    #
+    #   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #
+    #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+    #
+    #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
+    #       version.
+    #
+    @creator
+    def conjure_some_string(s):
+        assert fact_is_some_native_string(s)
+
+        r = lookup_string(s)
+
+        if r is not None:
+            return r
+
+        if len(s) == 0:
+            return empty_string
+
+        interned_s = intern_native_string(s)
+
+        string__possibly_non_unique = create_full_string(interned_s)
+
+        #
+        #   The result of `provide_string` will be unique (in the contect of `string_cache`; i.e.: the unique version of
+        #   `String_Leaf` that is stored in `string_cache).
+        #
+        return provide_string(interned_s, string__possibly_non_unique)
 
 
-conjure_some_string = produce_conjure_string(empty_string, create_full_string)
+    #
+    #   NOTE:
+    #
+    #       See above for explanation of case 3B.
+    #
+    #   ==========
+    #
+    #   3B) If `empty_string is not None':
+    #
+    #               Returns a tuple of 2 elements:
+    #
+    #                   ((conjure_string_full, conjure_some_string))
+    #
+    return ((conjure_full_string, conjure_some_string))
 
 
+
+[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
+
+
+export(conjure_full_string)
 export(conjure_some_string)
-
-
-#
-#   EXPLANATION OF THE PYTHON TERMINOLOGY: "closure", "cell variable", and "free variable".
-#
-#   SUMMARY of "closure" (more details below)
-#
-#       Above, `produce_conjure_string` is a function.
-#
-#       Inside of `produce_conjure_string` is the nested function `conjure_some_string`
-#
-#       There are local variables of `produce_conjure_string` that are used in `conjure_some_string`, in particular:
-#
-#           1)  `lookup_string`;
-#
-#           2)  `create_full_string`; and
-#
-#           3)  `provide_string`
-#
-#       These are "cell variables" in `produce_conjure_string`.
-#
-#       These are "free variables" in `conjure_some_string`.
-#
-#       When a "closure" is created around `conjure_some_string`, then each of the "free variables" in
-#       `conjure_some_string` is bound to the "cell variable" in `produce_conjure_string` (with the same name).
-#
-#       By "bound" we mean the "free variable" is set as a pointer to the "cell variable".
-#
-#   "CELL VARIABLE"
-#
-#       A "cell variable" is a variable in a function (in our case in function `produce_conjure_string`) that can
-#       be used by a nested function (in our case the function `conjure_some_string) when a closure is produced around
-#       the nested function.
-#
-#       The following are the variables in `produce_conjure_string`:
-#
-#           0)  `empty_string` is local variable at index 0 (and it is also a parameter);
-#
-#           1)  `create_full_string` is local variable at index 0 (and it is also a parameter); it is also a
-#               "cell variable" at index 0;
-#
-#           2)  `string_cache` is a local variable at index 2; and
-#
-#           3)  `conjure_some_string` is a local variable at index 3; (the value of `conjure_some_string` will be the
-#               closure around the nested function `conjure_some_string`).
-#
-#       And also:
-#
-#           0)  As already mentioned, `create_full_string` is a cell variable at index 0; and it is also
-#               a local variable at index 0 (and it is also a parameter);
-#
-#           1)  `lookup_string` is a cell variable at index 1; and
-#
-#           2)  `provide_string` is a cell variable at index 2.
-#
-#   "FREE VARIABLE"
-#
-#       A "free variable" is a variable inside a nested function (in our case the nested function
-#       `conjure_some_string`that is found to a "cell variable" in the enclosing function when a closure is produced
-#       around the nested function.
-#
-#       The following are the variables in the function `conjure_some_string` (not to be confused with the local
-#       variable `conjure_some_string`; which is used to store a closure around the function `conjure_some_string`):
-#
-#           0)  `s` is a local variable at index 0 (and it is also a parameter);
-#
-#           1)  `r` is a local variable at index 1;
-#
-#           2)  `interned_s` is a local variable at index 2; and
-#
-#           3)  `string__possibly_non_unique` is a local variabl at index 3.
-#
-#       And also:
-#
-#           0)  `create_full_string` is a free variable at index 0;
-#
-#           1)  `lookup_string` is a free variable at index 1; and
-#
-#           2)  `provide_string` is a free variable at index 2.
-#
-#   "CLOSURE"
-#
-#       A "closure" is created around a nested function, when the it's code is executed during execution of the
-#       outer function.
-#
-#       In out case a closure is created around nested function `conjure_some_string` when the code to define
-#       `conjure_some_string` is executed during the execution of `produce_conjure_string`.
-#
-#       To create this closure, each of it's free variable's is bound to a cell variable in the currently executing
-#       enclosing function (i.e.: in the current execution of `produce_conjure_string`).
-#
-#       As stated above, by "bound" we mean the "free variable" is set as a pointer to the "cell variable".
-#
-#       This closure is then assigned to a variable with the same name as the nested function (i.e.: in our case
-#       this closure is assigned to local variable `conjure_some_string` in the enclosing function
-#       `produce_conjure_string`).
-#
-#   DISABLED CODE BELOW.
-#
-#       The disable code below prints the following when enabled:
-#
-#           % ==== Code for produce_conjure_string ===
-#           % Constant #0: None
-#           % Constant #1: ''
-#           % Constant #2: <code object conjure_some_string at 0x..., file ".../ConjureString_V2.py", line 145>
-#           % Local Variable & Function Parameter #0: 'empty_string'
-#           % Local Variable & Function Parameter #1: 'create_full_string'
-#           % Local Variable #2: 'string_cache'
-#           % Local Variable #3: 'conjure_some_string'
-#           % Cell Variable #0: 'create_full_string'
-#           % Cell Variable #1: 'lookup_string'
-#           % Cell Variable #2: 'provide_string'
-#
-#           % ==== Code for conjure_some_string ===
-#           % Constant #0: None
-#           % Local Variable & Function Parameter #0: 's'
-#           % Local Variable #1: 'r'
-#           % Local Variable #2: 'interned_s'
-#           % Local Variable #3: 'string__possibly_non_unique'
-#           % Free Variable #0: 'create_full_string'
-#           % Free Variable #1: 'lookup_string'
-#           % Free Variable #2: 'provide_string'
-#           % Cell #0: <function create_full_string at 0x...>
-#           % Cell #1: <built-in method get of dict object at 0x...>
-#           % Cell #2: <built-in method setdefault of dict object at 0x...>
-#
-#       As can be seen, this matched what has been explaied above.
-#
-#       One comment on "Constant #2".  It's value is:
-#
-#           <code object conjure_some_string at 0x..., file ".../ConjureString_V2.py", line 145>
-#
-#       This is the original code object for `conjure_some_string`, all the closures for `conjure_some_string` use the
-#       same code object (NOTE: This is a code object, not a function object.  When creating a closure, a function
-#       object is created to refer to this common code object ... see below for more details).
-#
-#       When a closure is created, it is created from this original code object, and the new code object for the
-#       closure, is as explained above:
-#
-#           "each of it's free variable's is bound to a cell variable in the currently executing enclosing function
-#           (i.e.: in the current execution of `produce_conjure_string`)."
-#
-#           The value for the cells is stored in the function object for each closure.
-#
-#           This is seen below where it reads:
-#
-#               % Cell #0: <function create_full_string at 0x...>
-#               % Cell #1: <built-in method get of dict object at 0x...>
-#               % Cell #2: <built-in method setdefault of dict object at 0x...>
-#
-#           This is showing the value of the three cells is:
-#
-#               1)  `create_full_string`;
-#
-#               2)  `lookup_string`; (i.e.: `string_cache.get`).
-#
-#               2)  `provide_string`; (i.e.: `string_cache.setdefault`).
-#
-#       The code below which dumps the variables (and cells) for `conjure_some_string`, is dumping the variables for a
-#       closure of `conjure_some_string`.
-#
-if 0:
-    def dump_code(code):
-        trace('==== Code for {} ===', code.co_name)
-       #trace('dir: {}', dir(code))
-
-        for [i, v] in enumerate(code.co_consts):
-            trace('Constant #{}: {!r}', i, v)
-
-        for [i, v] in enumerate(code.co_varnames):
-            if i < code.co_argcount:
-                trace('Local Variable & Function Parameter #{}: {!r}', i, v)
-            else:
-                trace('Local Variable #{}: {!r}', i, v)
-
-        for [i, v] in enumerate(code.co_cellvars):
-            trace('Cell Variable #{}: {!r}', i, v)
-
-        for [i, v] in enumerate(code.co_freevars):
-            trace('Free Variable #{}: {!r}', i, v)
-
-    def dump_functions():
-        dump_code(produce_conjure_string.func_code)
-        dump_code(conjure_some_string.func_code)
-
-        for [i, v] in enumerate(conjure_some_string.func_closure):
-            trace('Cell #{}: {!r}', i, v.cell_contents)
-
-    dump_functions()
