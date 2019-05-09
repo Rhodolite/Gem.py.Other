@@ -86,12 +86,12 @@ def produce_conjure_full_name(Meta):
         r = lookup_string(s)
 
         if r is not None:
-            if r.temporary_element_has_definitively_been_transformed:
+            if r.definitively_not_temporary:
                 return r
 
             r.__class__ = Meta
 
-            assert r.temporary_element_has_definitively_been_transformed
+            assert r.definitively_not_temporary
 
             return r
 
@@ -99,12 +99,12 @@ def produce_conjure_full_name(Meta):
 
         r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
 
-        if r.temporary_element_has_definitively_been_transformed:
+        if r.definitively_not_temporary:
             return r
 
         r.__class__ = Meta
 
-        assert r.temporary_element_has_definitively_been_transformed
+        assert r.definitively_not_temporary
 
         return r
 

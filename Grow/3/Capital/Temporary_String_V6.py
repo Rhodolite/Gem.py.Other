@@ -66,7 +66,7 @@ class Temporary_String(
     #   Interface Maybe_Temporary
     #
    #@replace
-    temporary_element_has_definitively_been_transformed = False
+    definitively_not_temporary = False
 
 
     #

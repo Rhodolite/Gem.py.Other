@@ -16,14 +16,14 @@
 #
 #       interface Maybe_Temporary
 #           attribute
-#               temporary_element_has_definitively_been_transformed : Native_Boolean
+#               definitively_not_temporary : Native_Boolean
 #
 class TRAIT_Temporary_Element(object):
     __slots__ = (())
 
 
    #@virtual
-    temporary_element_has_definitively_been_transformed = True
+    definitively_not_temporary = True
 
 
 #
@@ -89,7 +89,7 @@ class TRAIT_Temporary_Element(object):
 #               #   Interface Maybe_Temporary
 #               #
 #              #@replace
-#               temporary_element_has_definitively_been_transformed = False
+#               definitively_not_temporary = False
 #
 #
 #           def create_temporary_string_key(s):
@@ -106,9 +106,9 @@ class TRAIT_Temporary_Element(object):
 #               #
 #               #   Inherited from `TRAIT_Temporary_Element`:
 #               #
-#               #       `temporary_element_has_definitively_been_transformed = True`
+#               #       `definitively_not_temporary = True`
 #               #
-#              #temporary_element_has_definitively_been_transformed = True
+#              #definitively_not_temporary = True
 #
 #
 #
@@ -149,7 +149,7 @@ class TRAIT_Temporary_Element(object):
 #               #
 #               #   Has `r` already been transformed, and is no longer a temporary key?
 #               #
-#               if r.temporary_element_has_definitively_been_transformed:
+#               if r.definitively_not_temporary:
 #                   return r
 #
 #               #
@@ -169,7 +169,7 @@ class TRAIT_Temporary_Element(object):
 #               #
 #               #   After the transformation `r` had *BETTER* be known to have definitively transformed.
 #               #
-#               assert r.temporary_element_has_definitively_been_transformed
+#               assert r.definitively_not_temporary
 #
 #               return r
 #
@@ -184,9 +184,8 @@ class TRAIT_Temporary_Element(object):
 #
 #       #
 #       #   NOTE:
-#       #       This is named `.temporary_element_has_definitively_been_transformed` instead of
-#       #       `.temporary_element_transformed` to *STRONLY* indicate that the test may be *INCONCLUSIVE* when
-#       #       returning false.
+#       #       This is named `.definitively_not_temporary` instead of `.not_temporary` to *STRONLY* indicate that the
+#       #       test may be *INCONCLUSIVE* when returning false.
 #       #
 #       #       I.E.:  A value of false means the key is not definitively known to have transformed; but it *MAY* have
 #       #              have transformed (although we don't know it yet)!
@@ -194,11 +193,11 @@ class TRAIT_Temporary_Element(object):
 #       #       If the above test returns false; then at any moment (including right after the above test), `v` may be
 #       #       transformed by another thread, and no longer be a temporary key.
 #       #
-#       #       Thus, if `v.temporary_element_has_definitively_been_transformed` returns true:
+#       #       Thus, if `v.definitively_not_temporary` returns true:
 #       #
 #       #           1.  We can say "v was a temporary key; but has been transformed, and is no longer a temporary key".
 #       #
-#       #       However, if `v.temporary_element_has_definitively_been_transformed` returns false:
+#       #       However, if `v.definitively_not_temporary` returns false:
 #       #
 #       #           2.  We *CANNOT* say that "v has not transformed and is still a temporary key"
 #       #               (it may have been transformed to a non-temporary key by another thread since our test);
@@ -206,6 +205,5 @@ class TRAIT_Temporary_Element(object):
 #       #           3.  All we can say is that "v was a temporary key, may or may not have transformed, and may or
 #       #               may not still be a temporary key".
 #       #
-#       v.temporary_element_has_definitively_been_transformed   #   Test if `v` is definitively known to have been
-#                                                           #   transformed, and is no longer a temporary key.
+#       v.definitively_not_temporary        #   Test if `v` is definitively known to not be a temporary key.
 #

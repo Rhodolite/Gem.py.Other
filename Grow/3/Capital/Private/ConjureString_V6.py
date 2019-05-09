@@ -253,7 +253,7 @@ def produce_conjure_string_functions(
             #
             #   Has `r` already definitively been transformed?
             #
-            if r.temporary_element_has_definitively_been_transformed:
+            if r.definitively_not_temporary:
                 return r
 
             #
@@ -262,9 +262,9 @@ def produce_conjure_string_functions(
             #
             #   NOTE -- DO NOT OPTIMIZE:
             #
-            #       Do *NOT* remove the `r.temporary_element_has_definitively_been_transformed` above.
+            #       Do *NOT* remove the `r.definitively_not_temporary` above.
             #
-            #       The test `r.temporary_element_has_definitively_been_transformed` above is needed for the following
+            #       The test `r.definitively_not_temporary` above is needed for the following
             #       reason:
             #
             #           1.  `r` may have been a `Empty_String` -- It would be incorrect to transform `r` in such a
@@ -274,12 +274,12 @@ def produce_conjure_string_functions(
             #
             #           2.  There is a very minor expense to transforming a string, so we don't want to attempt to
             #               [identity] transform a `Full_String` to a `Full_String` -- it's safe, but no need to try
-            #               when we can avoid it with the `r.temporary_element_has_definitively_been_transformed`
+            #               when we can avoid it with the `r.definitively_not_temporary`
             #               above.
             #
             r.__class__ = Full_String                                              #   THREAD SAFE: Make `r` a string.
 
-            assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
+            assert r.definitively_not_temporary    #   `r` has definitively been transformed now.
 
             return r
 
@@ -323,7 +323,7 @@ def produce_conjure_string_functions(
         #
         r = provide_string(interned_s, temporary_string__maybe_duplicate)
 
-        if r.temporary_element_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
+        if r.definitively_not_temporary:   #   Has `r` already definitively been transformed?
             return r
 
         #
@@ -338,7 +338,7 @@ def produce_conjure_string_functions(
         #   At this point `r` is now a `Full_String` (either we transformed it, or we & other threads all attempted to
         #   transformed it [and one thread actually did transform it]).
         #
-        assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
+        assert r.definitively_not_temporary    #   `r` has definitively been transformed now.
 
         return r
 
@@ -375,12 +375,12 @@ def produce_conjure_string_functions(
         r = lookup_string(s)
 
         if r is not None:
-            if r.temporary_element_has_definitively_been_transformed:
+            if r.definitively_not_temporary:
                 return r
 
             r.__class__ = Full_String
 
-            assert r.temporary_element_has_definitively_been_transformed
+            assert r.definitively_not_temporary
 
             return r
 
@@ -398,12 +398,12 @@ def produce_conjure_string_functions(
 
         r = provide_string(interned_s, temporary_string__maybe_duplicate)
 
-        if r.temporary_element_has_definitively_been_transformed:
+        if r.definitively_not_temporary:
             return r
 
         r.__class__ = Full_String
 
-        assert r.temporary_element_has_definitively_been_transformed 
+        assert r.definitively_not_temporary 
 
         return r
 

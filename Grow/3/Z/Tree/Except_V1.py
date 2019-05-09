@@ -22,6 +22,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
+    from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
 
 
 #
@@ -90,7 +91,7 @@ def create_Tree_Except_Handler(line_number, column, type_expression, name_expres
     assert fact_is_substantial_integer(column)
 
     assert fact_is__native_none__OR__tree_value_expression(type_expression)
-    assert fact_is__native_none__OR__tree_value_expression(name_expression)
+    assert fact_is__native_none__OR__tree_store_target    (name_expression)
     assert fact_is_full_native_list                       (body)
 
     if type_expression is None:
