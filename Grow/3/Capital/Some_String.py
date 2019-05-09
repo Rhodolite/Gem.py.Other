@@ -27,6 +27,10 @@
 #
 
 
+from    Capital.Core                    import  export
+from    Capital.Core                    import  FATAL
+
+
 #
 #   interface Some_String - Some String Interface.
 #
@@ -203,3 +207,30 @@ else:
     from    Capital.Core                import  FATAL
 
     FATAL('Capital/String.py: unknown string version: {!r}', string_version)
+
+
+#
+#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+#   EXCEPTIONS
+#
+#       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
+export(conjure_full_string)
+
+#
+#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#
+export(conjure_some_string)
+
+
+#
+#   empty_string - The empty string singleton.
+#
+export(empty_string)

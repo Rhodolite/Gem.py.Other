@@ -81,14 +81,7 @@ provide_string = string_cache.setdefault
 #
 #   EXCEPTIONS
 #
-#       If `s` is empty (i.e.: has 0 characters), throws the following exception:
-#
-#           ValueError(
-#                   arrange(
-#                       "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
-#                       'conjure_full_string',
-#                   ),
-#               )
+#       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
 #
 #   SEE ALSO
 #

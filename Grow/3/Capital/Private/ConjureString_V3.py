@@ -61,5 +61,23 @@ from    Capital.Private.String_V3           import  empty_string
 [conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
 
 
+#
+#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+#   EXCEPTIONS
+#
+#       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
 export(conjure_full_string)
+
+
+#
+#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#
 export(conjure_some_string)

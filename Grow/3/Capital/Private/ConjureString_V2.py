@@ -102,7 +102,7 @@ if __debug__:
 #           4)  `make_conjure_some_string` - Set to `True` if a `conjure_some_string` should be produced.
 #
 #
-#       Produced function:
+#       Produced function(s):
 #
 #           1)  `conjure_full_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
@@ -203,21 +203,13 @@ def produce_conjure_string_functions(
     #
     #   EXCEPTIONS
     #
-    #       If `s` is empty (i.e.: has 0 characters), throws the following exception:
-    #
-    #           ValueError(
-    #                   arrange(
-    #                       "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
-    #                       'conjure_full_string',
-    #                   ),
-    #               )
+    #       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
     #
     #   SEE ALSO
     #
     #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
     #       versions.
     #
-    @export
     @creator
     def conjure_full_string(s):
         #
@@ -325,5 +317,23 @@ def produce_conjure_string_functions(
 [conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
 
 
+#
+#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+#   EXCEPTIONS
+#
+#       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
+#
 export(conjure_full_string)
+
+
+#
+#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#
+#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#
 export(conjure_some_string)
