@@ -41,7 +41,7 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Some_String             import  TRAIT_Some_String
-from    Capital.Maybe_Temporary         import  TRAIT_Temporary_Element
+from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
@@ -81,7 +81,7 @@ def method__Base_String__operator_format(self, format_specification):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String(
-        TRAIT_Temporary_Element,
+        TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
 ):
     __slots__ = ((
@@ -150,7 +150,7 @@ class Empty_String(
 #   Full String - A wrapper around a full native string.
 #
 class Full_String(
-        TRAIT_Temporary_Element,
+        TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
 ):
     __slots__ = ((

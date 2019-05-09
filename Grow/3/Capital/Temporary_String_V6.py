@@ -27,7 +27,7 @@
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Maybe_Temporary         import  TRAIT_Temporary_Element
+from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
@@ -38,7 +38,7 @@ if __debug__:
 #   StringKey - String Key Implementation, Version 5.
 #
 class Temporary_String(
-        TRAIT_Temporary_Element,
+        TRAIT_Maybe_Temporary_0,
         #
         #   NOTE:
         #       Does *NOT* implement the String interface.

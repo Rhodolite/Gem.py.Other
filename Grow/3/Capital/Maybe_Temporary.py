@@ -11,14 +11,11 @@
 
 
 #
+#   interface Maybe_Temporary_0
+#       attribute
+#           definitively_not_temporary : Native_Boolean
 #
-#   Since interfaces are not native to python, for now, we just show them in comments
-#
-#       interface Maybe_Temporary
-#           attribute
-#               definitively_not_temporary : Native_Boolean
-#
-class TRAIT_Temporary_Element(object):
+class TRAIT_Maybe_Temporary_0(object):
     __slots__ = (())
 
 
@@ -81,7 +78,7 @@ class TRAIT_Temporary_Element(object):
 #
 #           class Temporary_String_Key(
 #                   str,
-#                   TRAIT_Temporary_Element,
+#                   TRAIT_Maybe_Temporary_0,
 #           ):
 #               __slots__ = (())
 #
@@ -99,12 +96,12 @@ class TRAIT_Temporary_Element(object):
 #           class Unique_String_Example(
 #                   str,
 #                   TRAIT_Some_String,
-#                   TRAIT_Temporary_Element,
+#                   TRAIT_Maybe_Temporary_0,
 #           ):
 #               __slots__ = (())
 #
 #               #
-#               #   Inherited from `TRAIT_Temporary_Element`:
+#               #   Inherited from `TRAIT_Maybe_Temporary_0`:
 #               #
 #               #       `definitively_not_temporary = True`
 #               #

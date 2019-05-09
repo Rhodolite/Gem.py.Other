@@ -32,7 +32,7 @@ from    Capital.Core                    import  export
 from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
 from    Capital.Some_String             import  TRAIT_Some_String
-from    Capital.Maybe_Temporary         import  TRAIT_Temporary_Element
+from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
@@ -65,7 +65,7 @@ def property__Base_String__native_string(self):
 #
 class Empty_String(
         Empty_Native_String,
-        TRAIT_Temporary_Element,
+        TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
 ):
     __slots__ = (())
@@ -129,7 +129,7 @@ method__Full_Native_String__representation = Full_Native_String.__repr__
 #
 class Full_String(
         Full_Native_String,
-        TRAIT_Temporary_Element,
+        TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
 ):
     __slots__ = (())

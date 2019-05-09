@@ -69,10 +69,10 @@
 #               EXAMPLE (what we want to do):
 #
 #                   class TRAIT_Some_String(object):                                __slots__ = (())
-#                   class TRAIT_Temporary_Element(object):                          __slots__ = (())
-#                   class Temporary_String(TRAIT_Temporary_Element):                __slots__ = (('interned_s',))
+#                   class TRAIT_Maybe_Temporary_0(object):                          __slots__ = (())
+#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                __slots__ = (('interned_s',))
 #                   class Full_String    (TRAIT_Some_String):                       __slots__ = (('interned_s',))
-#                   class Full_String    (Base_String, TRAIT_Temporary_Element):    __slots__ = (())
+#                   class Full_String    (Base_String, TRAIT_Maybe_Temporary_0):    __slots__ = (())
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String
@@ -84,9 +84,9 @@
 #               Removing `Base_String`, allows us to simplfy this:
 #
 #                   class TRAIT_Some_String(object):                                    __slots__ = (())
-#                   class TRAIT_Temporary_Element(object):                              __slots__ = (())
-#                   class Temporary_String(TRAIT_Temporary_Element):                    __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_Some_String, TRAIT_Temporary_Element):  __slots__ = (('interned_s',))
+#                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Some_String, TRAIT_Maybe_Temporary_0):  __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String
@@ -99,9 +99,9 @@
 #               (since we eliminated `Base_String`):
 #
 #                   class TRAIT_Some_String(object):                                    __slots__ = (())
-#                   class TRAIT_Temporary_Element(object):                              __slots__ = (())
-#                   class Temporary_String(TRAIT_Temporary_Element):                    __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_Temporary_Element, TRAIT_Some_String):  __slots__ = (('interned_s',))
+#                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Maybe_Temporary_0, TRAIT_Some_String):  __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String
