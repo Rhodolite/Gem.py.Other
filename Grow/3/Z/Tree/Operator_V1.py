@@ -74,7 +74,7 @@ def create_TOE(MetaName, operator_token):
         #
         @staticmethod
         def dump_operator_token(f):
-            f.write(operator)
+            f.write(operator.native_string)
 
 
         @staticmethod

@@ -9,7 +9,7 @@
 #       Strings are Unique (always).
 #
 #       Uniqueness is implemented in "Capital.Private.ConjureString_V6.py" (which uses the interface
-#       `Temporary_Element` to implement uniqueness).
+#       `Maybe_Temporary` to implement uniqueness).
 #
 
 
@@ -32,7 +32,7 @@ from    Capital.Core                    import  export
 from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
 from    Capital.Some_String             import  TRAIT_Some_String
-from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
+from    Capital.Maybe_Temporary         import  TRAIT_Temporary_Element
 
 
 if __debug__:

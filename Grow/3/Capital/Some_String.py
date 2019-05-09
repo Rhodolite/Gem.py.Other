@@ -39,11 +39,11 @@ from    Capital.Core                    import  FATAL
 #           interface String
 #               method
 #                   python_code()   : Full_Native_String
-#                   native_string() : Some_Native_String
 #
 #               attribute
 #                   is_empty_string : Boolean
 #                   is_full_string  : Boolean
+#                   native_string   : Some_Native_String
 #
 #               debug
 #                   is_some_string  : Boolean

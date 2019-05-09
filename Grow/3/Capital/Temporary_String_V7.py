@@ -27,7 +27,7 @@
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  Full_Native_String
-from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
+from    Capital.Maybe_Temporary         import  TRAIT_Temporary_Element
 
 
 if __debug__:
@@ -61,7 +61,7 @@ class Temporary_String(
 
 
     #
-    #   Interface Temporary_Element
+    #   Interface Maybe_Temporary
     #
    #@replace
     temporary_element_has_definitively_been_transformed = False

@@ -74,9 +74,18 @@ class String_Leaf(
     #   Public
     #
 
+
+    #
+    #   .__contains__(item) - Implement membership test.
+    #
+    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
+    #
+    def __contains__(self, item):
+        return self.interned_s.__contains__(item)
+
     
     #
-    #   .__format__ (format_specification)  - Format `String`
+    #   .__format__(format_specification)   - Format `String`
     #
     #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
     #

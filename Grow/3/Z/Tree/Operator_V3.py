@@ -63,7 +63,7 @@ class Tree_Operator_Enumeration(
     #   Interface Tree_Operator
     #
     def dump_operator_token(self, f):
-        f.write(self.operator_token)
+        f.write(self.operator_token.native_string)
 
 
     #

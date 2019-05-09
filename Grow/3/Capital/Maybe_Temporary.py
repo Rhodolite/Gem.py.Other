@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Temporary_Element - Temporary Element Interface (Only used internally to help create other unique objects).
+#   Capital.Maybe_Temporary - "Maybe" Temporary Interface (Only used internally to help create other unique objects).
 #
 #   See long explnation below.
 #
@@ -14,7 +14,7 @@
 #
 #   Since interfaces are not native to python, for now, we just show them in comments
 #
-#       interface Temporary_Element
+#       interface Maybe_Temporary
 #           attribute
 #               temporary_element_has_definitively_been_transformed : Native_Boolean
 #
@@ -86,7 +86,7 @@ class TRAIT_Temporary_Element(object):
 #               __slots__ = (())
 #
 #               #
-#               #   Interface Temporary_Element
+#               #   Interface Maybe_Temporary
 #               #
 #              #@replace
 #               temporary_element_has_definitively_been_transformed = False

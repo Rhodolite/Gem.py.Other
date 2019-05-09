@@ -8,11 +8,11 @@
 #
 
 
-version = 5                 #   1..9
+version = 2                 #   1..9
 
 
 exception_version = 1       #   1..2
-string_version    = 0       #   0..7
+string_version    = 1       #   0..7
 
 
 #
@@ -20,13 +20,6 @@ string_version    = 0       #   0..7
 #
 if version >= 2:
     exception_version = 2               #   "Capital/Private/Exception_V2.py" implements `produce_PREPARE_Exception`
-
-
-#
-#   Version 3: Introduce `String_Leaf`, a very simple string wrapper.
-#
-if version >= 3:
-    string_version = 1                  #   "Capital/Private/String_1.py" implements `String_Leaf`
 
 
 #
