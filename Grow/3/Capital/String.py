@@ -29,24 +29,27 @@
 
 from    Capital.Core                    import  export
 from    Capital.Core                    import  FATAL
+from    Capital.Global                  import  capital_globals
+
+
+string_version = capital_globals.string_version
 
 
 #
-#   interface String - String Interface.
-#
+#   NOTE:
 #       Since interfaces are not native to python, for now, we just show them in comments:
 #
-#           interface String
-#               method
-#                   python_code()   : Full_Native_String
+#   interface String
+#       method
+#           python_code()   : Full_Native_String
 #
-#               attribute
-#                   is_empty_string : Boolean
-#                   is_full_string  : Boolean
-#                   native_string   : Some_Native_String
+#       attribute
+#           is_empty_string : Boolean
+#           is_full_string  : Boolean
+#           native_string   : Some_Native_String
 #
-#               debug
-#                   is_some_string  : Boolean
+#       debug
+#           is_some_string  : Boolean
 #
 #   FUTURE:
 #
@@ -59,6 +62,41 @@ class TRAIT_Some_String(object):
 
     if __debug__:
         is_some_string = True
+
+
+#
+#   NOTE:
+#       Interfaces `Emtpy_String` and `Full_String` are only implement for string version >= 8.
+#
+if string_version >= 8:
+    #
+    #   interface Empty_String
+    #       extends
+    #           String
+    #
+    #       attribute
+    #           is_empty_string := true
+    #
+    class TRAIT_Empty_String(object):
+        __slots__ = (())
+
+
+        is_empty_string = True
+
+
+    #
+    #   interface Full_String
+    #       extends
+    #           String
+    #
+    #       attribute
+    #           is_full_string := thue
+    #
+    class TRAIT_Full_String(object):
+        __slots__ = (())
+
+
+        is_full_string = True
 
 
 #
@@ -201,6 +239,9 @@ elif string_version == 6:
 elif string_version == 7:
     from    Capital.Private.ConjureString_V7    import  conjure_full_string
     from    Capital.Private.ConjureString_V7    import  conjure_some_string
+elif string_version == 8:
+    from    Capital.Private.ConjureString_V8    import  conjure_full_string
+    from    Capital.Private.ConjureString_V8    import  conjure_some_string
 else:
     from    Capital.Core                import  FATAL
 
@@ -219,6 +260,8 @@ elif string_version == 6:
     from    Capital.Private.String_V6           import  empty_string
 elif string_version == 7:
     from    Capital.Private.String_V7           import  empty_string
+elif string_version == 8:
+    from    Capital.Private.String_V8           import  empty_string
 else:
     from    Capital.Core                import  FATAL
 

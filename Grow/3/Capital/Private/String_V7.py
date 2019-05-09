@@ -42,12 +42,12 @@ if __debug__:
 
 #
 #<methods>
-#   common methods of `Empty_String` and `Full_String`.
+#   common methods of `{Empty,Full}_String_Leaf`.
 #
 #       As explained in "Capital.Private.String_V5.py" we had to get rid of `Base_String`.
 #
 #       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
-#       `Empty_String` and `Full_String` below.
+#       `Empty_String_Leaf` and `Full_String_Leaf` below.
 #
 
 
@@ -63,7 +63,7 @@ def property__Base_String__native_string(self):
 #
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
-class Empty_String(
+class Empty_String_Leaf(
         Empty_Native_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
@@ -92,7 +92,7 @@ class Empty_String(
     #
     #   .__len__()  - Return the length.
     #
-    #       Always returns `0` for an `Empty_String`.
+    #       Always returns `0` for an `Empty_String_Leaf`.
     #
     @staticmethod
     def __len__():
@@ -127,7 +127,7 @@ method__Full_Native_String__representation = Full_Native_String.__repr__
 #
 #   Full String - A wrapper around a full native string.
 #
-class Full_String(
+class Full_String_Leaf(
         Full_Native_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
@@ -140,15 +140,15 @@ class Full_String(
     #
     if __debug__:
         def __new__(Meta, s):
-            FATAL('{}: A Full_String may not be {}',
-                  "Capital.Private.FullString_V6.Full_String.operator new (`__new__`)",
+            FATAL('{}: A Full_String_Leaf may not be {}',
+                  "Capital.Private.FullString_V6.Full_String_Leaf.operator new (`__new__`)",
                   'created')
 
 
     if __debug__:
         def __init__(self, s):
-            FATAL('{}: A Full_String may not be {}',
-                  "Capital.Private.FullString_V6.Full_String.constructor (`__init__`)",
+            FATAL('{}: A Full_String_Leaf may not be {}',
+                  "Capital.Private.FullString_V6.Full_String_Leaf.constructor (`__init__`)",
                   'constructed')
 
 
@@ -217,7 +217,7 @@ class Full_String(
 def create_empty_string(s):
     assert fact_is_empty_native_string(s)
 
-    return Empty_String(s)
+    return Empty_String_Leaf(s)
 
 
 @export
@@ -225,7 +225,7 @@ def create_empty_string(s):
 def create_full_string(s):
     assert fact_is_full_native_string(interned_s)
 
-    return Full_String(s)
+    return Full_String_Leaf(s)
 
 
 empty_string = create_empty_string("")

@@ -71,40 +71,42 @@
 #                   class TRAIT_Some_String(object):                                __slots__ = (())
 #                   class TRAIT_Maybe_Temporary_0(object):                          __slots__ = (())
 #                   class Temporary_String(TRAIT_Maybe_Temporary_0):                __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_Some_String):                       __slots__ = (('interned_s',))
-#                   class Full_String    (Base_String, TRAIT_Maybe_Temporary_0):    __slots__ = (())
+#                   class Base_String(TRAIT_Some_String):                           __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(Base_String, TRAIT_Maybe_Temporary_0):   __slots__ = (())
 #
 #                   x = Temporary_String()
-#                   x.__class__ = Full_String
+#                   x.__class__ = Full_String_Leaf
 #
 #               However, this fails with:
 #
-#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from 'Full_String'.
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from
+#                               'Full_String_Leaf'.
 #
 #               Removing `Base_String`, allows us to simplfy this:
 #
 #                   class TRAIT_Some_String(object):                                    __slots__ = (())
 #                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
 #                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_Some_String, TRAIT_Maybe_Temporary_0):  __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(TRAIT_Some_String, TRAIT_Maybe_Temporary_0): __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
-#                   x.__class__ = Full_String
+#                   x.__class__ = Full_String_Leaf
 #
 #               ALTHOUGH, this still fails with the same error as above:
 #
-#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from 'Full_String'.
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from
+#                               'Full_String_Leaf'.
 #
-#               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String`
+#               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String_Leaf`
 #               (since we eliminated `Base_String`):
 #
 #                   class TRAIT_Some_String(object):                                    __slots__ = (())
 #                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
 #                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
-#                   class Full_String    (TRAIT_Maybe_Temporary_0, TRAIT_Some_String):  __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(TRAIT_Maybe_Temporary_0, TRAIT_Some_String): __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
-#                   x.__class__ = Full_String
+#                   x.__class__ = Full_String_Leaf
 #
 #               NOW, python accepts out transformation.
 #
@@ -131,12 +133,12 @@ if __debug__:
 
 #
 #<methods>
-#   Base_String methods - A very simple string wrapper, common methods of `Empty_String` and `Full_String`.
+#   Base_String methods - A very simple string wrapper, common methods of `{Empty,Full}_String_Leaf`.
 #
 #       As explained above we had to get rid of `Base_String`.
 #
 #       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
-#       `Empty_String` and `Full_String` below.
+#       `Empty_String_Leaf` and `Full_String_Leaf` below.
 #
 
 
@@ -166,9 +168,9 @@ def method__Base_String__operator_format(self, format_specification):
 
 
 #
-#   Empty String - A singleton wrapper around the native empty string `""`.
+#   Empty String [Leaf] - A singleton wrapper around the native empty string `""`.
 #
-class Empty_String(
+class Empty_String_Leaf(
         TRAIT_Some_String,
 ):
     __slots__ = ((
@@ -206,7 +208,7 @@ class Empty_String(
     #
     #   .__len__()  - Return the length.
     #
-    #       Always returns `0` for an `Empty_String`.
+    #       Always returns `0` for an `Empty_String_Leaf`.
     #
     @staticmethod
     def __len__():
@@ -233,9 +235,9 @@ class Empty_String(
 
 
 #
-#   Full String - A wrapper around a full native string.
+#   Full String [Leaf] - A wrapper around a full native string.
 #
-class Full_String(
+class Full_String_Leaf(
         TRAIT_Some_String,
 ):
     __slots__ = ((
@@ -326,7 +328,7 @@ class Full_String(
 def create_empty_string(interned_s):
     assert fact_is_empty_INTERNED_native_string(interned_s)
 
-    return Empty_String(interned_s)
+    return Empty_String_Leaf(interned_s)
 
 
 @export
@@ -334,7 +336,7 @@ def create_empty_string(interned_s):
 def create_full_string(interned_s):
     assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return Full_String(interned_s)
+    return Full_String_Leaf(interned_s)
 
 
 empty_string = create_empty_string(intern_native_string(""))

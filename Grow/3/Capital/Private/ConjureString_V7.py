@@ -15,9 +15,9 @@
 #
 #           The key/value pairs in `string_cache` are:
 #
-#               1)  Key is an interned `Some_Native_String`;
+#               1)  Key is an interned `Full_Native_String`;
 #
-#               2)  Value is one of `Full_String | Temporary_String`.
+#               2)  Value is one of `Full_String_Leaf | Temporary_String`.
 #
 #       Version 7:
 #
@@ -25,7 +25,7 @@
 #
 #               1)  Key is the same as value;
 #
-#               2)  Value is one of `Full_String | Temporary_String` (same as Version 5).
+#               2)  Value is one of `Full_String_Leaf | Temporary_String` (same as Version 5).
 #
 
 
@@ -50,7 +50,7 @@ from    Capital.Core                    import  export
 from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V7       import  empty_string
-from    Capital.Private.String_V7       import  Full_String
+from    Capital.Private.String_V7       import  Full_String_Leaf
 from    Capital.Temporary_None          import  temporary_none
 from    Capital.Temporary_String_V7     import  create_temporary_string
 
@@ -89,7 +89,7 @@ if __debug__:
 #
 #   COMMENT ON KEYS in `string_cache`.
 #
-#       The keys in `string_cache` are the same as the values (i.e.: one of `Full_String` or `Temporary_String`).
+#       The keys in `string_cache` are the same as the values (i.e.: one of `Full_String_Leaf` or `Temporary_String`).
 #
 #       However, you can still do a lookup using a native string, and it will still work.
 #
@@ -99,7 +99,7 @@ if __debug__:
 #
 #       will return:
 #
-#           The `Full_String` with a value of `"Hello"`.
+#           The `Full_String_Leaf` with a value of `"Hello"`.
 #
 #       This is because we have *NOT* overridden the following methods:
 #
@@ -116,7 +116,7 @@ if __debug__:
 #
 #       The "type" of `string_cache` is:
 #
-#           Map { Full_String | Temporary_String : Full_String | Temporary_String }
+#           Map { Full_String_Leaf | Temporary_String : Full_String_Leaf | Temporary_String }
 #
 
 
@@ -126,7 +126,7 @@ if __debug__:
 #
 #           lookup_string,
 #           provide_string,
-#           Full_String,
+#           Full_String_Type,
 #
 #           allow_empty_string = False,
 #           empty_string       = None,
@@ -147,7 +147,7 @@ if __debug__:
 #
 #           3)  provide_string          - Provide a string in string_cache.
 #
-#           4)  Full_String             - Type type to transform a Temporary_String to when creating a new string.
+#           4)  Full_String_Type        - Type type to transform a Temporary_String to when creating a new string.
 #
 #           5)  allow_empty_string      - True if s may be "", in which case return empty_string.
 #
@@ -180,7 +180,7 @@ def produce_conjure_X_string(
 
         lookup_string,
         provide_string,
-        Full_String,
+        Full_String_Type,
 
         allow_empty_string = False,
         empty_string       = None,
@@ -188,7 +188,7 @@ def produce_conjure_X_string(
     assert fact_is_full_native_string    (function_name)
     assert fact_is_native_built_in_method(lookup_string)
     assert fact_is_native_built_in_method(provide_string)
-    assert fact_is_native_type           (Full_String)
+    assert fact_is_native_type           (Full_String_Type)
     assert fact_is_native_boolean        (allow_empty_string)
 
     if allow_empty_string:
@@ -304,7 +304,7 @@ def produce_conjure_X_string(
 
             #
             #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
-            #   `Temporary_String` or a `Full_String`).
+            #   `Temporary_String` or a `Full_String_Type`).
             #
             #   NOTE:
             #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is
@@ -323,15 +323,16 @@ def produce_conjure_X_string(
 
         #
         #   NOTE:
-        #       Multiple threads may be simultaneously transforming `r` from a `Temporary_String` to a `Full_String`.
+        #       Multiple threads may be simultaneously transforming `r` from a `Temporary_String` to a
+        #       `Full_String_Type`.
         #
         #       This is thread safe.
         #
-        r.__class__ = Full_String
+        r.__class__ = Full_String_Type
 
         #
-        #   At this point `r` is now a `Full_String` (either we transformed it, or we & other threads all attempted to
-        #   transformed it [and one thread actually did transform it]).
+        #   At this point `r` is now a `Full_String_Type` (either we transformed it, or we & other threads all
+        #   attempted to transformed it [and one thread actually did transform it]).
         #
         assert r.definitively_not_temporary    #   `r` has definitively been transformed now.
 
@@ -351,22 +352,21 @@ def produce_conjure_X_string(
 #       `string_cache` is shared between `conjure_some_string` and `conjure_full_string`.
 #
 @export
-def produce_conjure_string_functions(empty_string, Full_String):
+def produce_conjure_string_functions(empty_string, Full_String_Type):
     assert fact_is_not_native_none(empty_string)
-    assert fact_is_native_type    (Full_String)
+    assert fact_is_native_type    (Full_String_Type)
 
     #
     #   string_cache - A cache of strings
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key is an interned `Some_Native_String`; and
+    #           1)  The key is `Full_String_Leaf` or a `Temporary_String`.
     #
-    #           2)  The value is a `String`.
+    #           2)  The value is the same as the key.
     #
-    #       The type of `string_cache` is `Map { interned Some_Native_String } of (Full_String | String_Leaf)`
-    #
-    string_cache = {}
+    string_cache = {}                   #   Map { Full_String_Leaf | Temporary_String
+                                        #       : Full_String_Leaf | Temporary_String }
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault
@@ -376,11 +376,11 @@ def produce_conjure_string_functions(empty_string, Full_String):
     #   Produce both functions, sharing `string_cache` (via `{lookup,provide}_cache`).
     #
     conjure_full_string = produce_conjure_X_string(
-            'conjure_full_string', lookup_string, provide_string, Full_String,
+            'conjure_full_string', lookup_string, provide_string, Full_String_Type,
         )
 
     conjure_some_string = produce_conjure_X_string(
-            'conjure_some_string', lookup_string, provide_string, Full_String,
+            'conjure_some_string', lookup_string, provide_string, Full_String_Type,
 
             allow_empty_string = True,
             empty_string       = empty_string,
@@ -393,7 +393,7 @@ def produce_conjure_string_functions(empty_string, Full_String):
 
 
 
-[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, Full_String)
+[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, Full_String_Leaf)
 
 
 #

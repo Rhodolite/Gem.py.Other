@@ -4,55 +4,51 @@
 
 
 #
-#   Capital.Private.String_V6 - Private implementation of the public `String` Interface, Version 6.
+#   Capital.Private.String_V8 - Private implementation of the public `String` Interface, Version 8.
 #
 #       Strings are Unique (always).
 #
-#       Uniqueness is implemented in "Capital.Private.ConjureString_V5.py" (which uses the interface
+#       Uniqueness is implemented in "Capital.Private.ConjureString_V6.py" (which uses the interface
 #       `Maybe_Temporary` to implement uniqueness).
 #
 
 
 #
-#   Difference between Version 5 & Version 6.
+#   Difference between Version 7 & Version 8.
 #
-#       Version 5:
+#       Version 7:
 #
-#           1)  Strings are unique (in normal cases).
+#           1)  `Empty_String_Leaf` does not implement `Empty_String`.
 #
-#           2)  Has creator function `create_full_string` for `Full_String_Leaf`.
+#           2)  `Full_String_Leaf`  does not implement `Full_String`.
 #
-#       Version 6:
+#       Version 8:
 #
-#           1)  Strings are unique (always).
+#           1)  `Empty_String_Leaf` implements `Empty_String`.
 #
-#           2)  Does *NOT* have creator function for `Full_String_Leaf` (since `Full_String_Leaf` cannot be created,
-#               but only transformed from a `Capital.Private.Temporary_String_V6.Temporary_String`).
-#
-#               Also in debug mode, `Full_String_Leaf` has disabled the create (`__new__`) and construct (`__init__`)
-#               methods.
-#
-#           3)  `Full_String_Leaf` implements interface `Maybe_Temporary` (needed to make strings unique always).
+#           2)  `Full_String_Leaf`  implements `Full_String`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Native_String           import  intern_native_string
+from    Capital.Native_String           import  Empty_Native_String
+from    Capital.Native_String           import  Full_Native_String
 from    Capital.String                  import  TRAIT_Some_String
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
-    from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_empty_native_string
+    from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
 #<methods>
 #   common methods of `{Empty,Full}_String_Leaf`.
 #
-#       As explained in "Capital.Private.String_V4.py" we had to get rid of `Base_String`.
+#       As explained in "Capital.Private.String_V5.py" we had to get rid of `Base_String`.
 #
 #       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
 #       `Empty_String_Leaf` and `Full_String_Leaf` below.
@@ -64,16 +60,7 @@ if __debug__:
 #
 @property
 def property__Base_String__native_string(self):
-    return self.interned_s
-
-
-#
-#   Base_String.__format__ (format_specification)  - Format `String`
-#
-#       Delegated to the `Some_Native_String` implementation via `.interned_s`.
-#
-def method__Base_String__operator_format(self, format_specification):
-    return self.interned_s.__format__(format_specification)
+    return self
 #</methods>
 
 
@@ -81,19 +68,11 @@ def method__Base_String__operator_format(self, format_specification):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String_Leaf(
+        Empty_Native_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
 ):
-    __slots__ = ((
-        'interned_s',                   #   Empty_Native_String
-    ))
-
-
-    #
-    #   Private
-    #
-    def __init__(self, interned_s):
-        self.interned_s = interned_s
+    __slots__ = (())
 
 
     #
@@ -110,11 +89,8 @@ class Empty_String_Leaf(
 
 
     #
-    #   .__format__ (format_specification)  - Format `String`
+    #   .format(format_specification) - Inherited from `Empty_Native_String`.
     #
-    #       Delegated to the `Empty_Native_String` implementation via `.interned_s`.
-    #
-    __format__ = method__Base_String__operator_format
 
 
     #
@@ -138,8 +114,8 @@ class Empty_String_Leaf(
     #
     #   .python_code()
     #
-    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the same
-    #       characters.
+    #       Return a `Full_Native_String` that is the python code that python will compile to a `Empty_Native_String`
+    #       with the same characters.
     #
     @staticmethod
     def python_code():
@@ -147,15 +123,20 @@ class Empty_String_Leaf(
 
 
 #
+#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#
+method__Full_Native_String__representation = Full_Native_String.__repr__
+
+
+#
 #   Full String - A wrapper around a full native string.
 #
 class Full_String_Leaf(
+        Full_Native_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Some_String,
 ):
-    __slots__ = ((
-        'interned_s',                   #   Full_Native_String
-    ))
+    __slots__ = (())
 
 
     #
@@ -164,14 +145,14 @@ class Full_String_Leaf(
     if __debug__:
         def __new__(Meta, s):
             FATAL('{}: A Full_String_Leaf may not be {}',
-                  "Capital.Private.FullString_V5.Full_String_Leaf.operator new (`__new__`)",
+                  "Capital.Private.FullString_V6.Full_String_Leaf.operator new (`__new__`)",
                   'created')
 
 
     if __debug__:
         def __init__(self, s):
             FATAL('{}: A Full_String_Leaf may not be {}',
-                  "Capital.Private.FullString_V5.Full_String_Leaf.constructor (`__init__`)",
+                  "Capital.Private.FullString_V6.Full_String_Leaf.constructor (`__init__`)",
                   'constructed')
 
 
@@ -189,20 +170,9 @@ class Full_String_Leaf(
 
 
     #
-    #   .__format__ (format_specification)  - Format `String`
+    #   .format(format_specification) - Inherited from `str`.
+    #   .__len__()                    - Inherited from `str`.
     #
-    #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
-    #
-    __format__ = method__Base_String__operator_format
-
-
-    #
-    #   .__len__()  - Return the length.
-    #
-    #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
-    #
-    def __len__(self):
-        return self.interned_s.__len__()
 
 
     #
@@ -232,7 +202,7 @@ class Full_String_Leaf(
     #
     #   CURRENT
     #
-    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__`).
     #
     #   FUTURE:
     #
@@ -244,26 +214,25 @@ class Full_String_Leaf(
     #       Also, really, we want to code generate the `portray_python_string` ... so will wait until the
     #       code generator can generate that function, before using it.
     #
-    def python_code(self):
-        return repr(self.interned_s)
+    python_code = method__Full_Native_String__representation
 
 
 @creator
-def create_empty_string(interned_s):
-    assert fact_is_empty_INTERNED_native_string(interned_s)
+def create_empty_string(s):
+    assert fact_is_empty_native_string(s)
 
-    return Empty_String_Leaf(interned_s)
+    return Empty_String_Leaf(s)
 
 
 @export
 @creator
-def create_full_string(interned_s):
-    assert fact_is_full_INTERNED_native_string(interned_s)
+def create_full_string(s):
+    assert fact_is_full_native_string(interned_s)
 
-    return Full_String_Leaf(interned_s)
+    return Full_String_Leaf(s)
 
 
-empty_string = create_empty_string(intern_native_string(""))
+empty_string = create_empty_string("")
 
 
 export(empty_string)

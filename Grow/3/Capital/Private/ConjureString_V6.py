@@ -18,7 +18,7 @@
 #           1)  Strings are unique (in normal cases).
 #
 #           2)  Uses `create_full_string` to create a full string, before attempting to put it in `string_cache`
-#               (as explained there, in abnormal cases, this `Full_String` may leak).
+#               (as explained there, in abnormal cases, this `Full_String_Leaf` may leak).
 #
 #           3)  The second argument to `produce_conjure_string_functions` is `create_full_string` (to create a
 #               full string)
@@ -31,12 +31,12 @@
 #               `string_cache`.
 #
 #               Only after the temporary string is guaranteed unique (in the contect of `string_cache`), is it
-#               then transformed to a unique `Full_String`.
+#               then transformed to a unique `Full_String_Leaf`.
 #
 #               See all the comments below for more details.
 #
-#           3)  The second argument to `produce_conjure_string_functions` is a `Full_String` (the type to
-#               tranform `Temporary_String` to).
+#           3)  The second argument to `produce_conjure_string_functions` is a `Full_String_Leaf` (the type to
+#               tranform `Temporary_String` to when creating a new string).
 #
 
 
@@ -61,7 +61,7 @@ from    Capital.Core                    import  export
 from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V6       import  empty_string
-from    Capital.Private.String_V6       import  Full_String
+from    Capital.Private.String_V6       import  Full_String_Leaf
 from    Capital.Temporary_None          import  temporary_none
 from    Capital.Temporary_String_V6     import  create_temporary_string
 
@@ -103,7 +103,7 @@ if __debug__:
 #
 #           lookup_string,
 #           provide_string,
-#           Full_String,
+#           Full_String_Type,
 #
 #           allow_empty_string = False,
 #           empty_string       = None,
@@ -124,7 +124,7 @@ if __debug__:
 #
 #           3)  provide_string          - Provide a string in string_cache.
 #
-#           4)  Full_String             - Type type to transform a Temporary_String to when creating a new string.
+#           4)  Full_String_Type        - Type type to transform a Temporary_String to when creating a new string.
 #
 #           5)  allow_empty_string      - True if s may be "", in which case return empty_string.
 #
@@ -157,7 +157,7 @@ def produce_conjure_X_string(
 
         lookup_string,
         provide_string,
-        Full_String,
+        Full_String_Type,
 
         allow_empty_string = False,
         empty_string       = None,
@@ -165,7 +165,7 @@ def produce_conjure_X_string(
     assert fact_is_full_native_string    (function_name)
     assert fact_is_native_built_in_method(lookup_string)
     assert fact_is_native_built_in_method(provide_string)
-    assert fact_is_native_type           (Full_String)
+    assert fact_is_native_type           (Full_String_Type)
     assert fact_is_native_boolean        (allow_empty_string)
 
     if allow_empty_string:
@@ -283,7 +283,7 @@ def produce_conjure_X_string(
 
             #
             #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
-            #   `Temporary_String` or a `Full_String`).
+            #   `Temporary_String` or a `Full_String_Type`).
             #
             #   NOTE:
             #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is
@@ -302,15 +302,16 @@ def produce_conjure_X_string(
 
         #
         #   NOTE:
-        #       Multiple threads may be simultaneously transforming `r` from a `Temporary_String` to a `Full_String`.
+        #       Multiple threads may be simultaneously transforming `r` from a `Temporary_String` to a
+        #       `Full_String_Type`.
         #
         #       This is thread safe.
         #
-        r.__class__ = Full_String
+        r.__class__ = Full_String_Type
 
         #
-        #   At this point `r` is now a `Full_String` (either we transformed it, or we & other threads all attempted to
-        #   transformed it [and one thread actually did transform it]).
+        #   At this point `r` is now a `Full_String_Type` (either we transformed it, or we & other threads all
+        #   attempted to transformed it [and one thread actually did transform it]).
         #
         assert r.definitively_not_temporary    #   `r` has definitively been transformed now.
 
@@ -330,22 +331,20 @@ def produce_conjure_X_string(
 #       `string_cache` is shared between `conjure_some_string` and `conjure_full_string`.
 #
 @export
-def produce_conjure_string_functions(empty_string, Full_String):
+def produce_conjure_string_functions(empty_string, Full_String_Type):
     assert fact_is_not_native_none(empty_string)
-    assert fact_is_native_type    (Full_String)
+    assert fact_is_native_type    (Full_String_Type)
 
     #
     #   string_cache - A cache of strings
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key is an interned `Some_Native_String`; and
+    #           1)  The key is an interned `Full_Native_String`; and
     #
-    #           2)  The value is a `String`.
+    #           2)  The value is a `String` (`Full_String_Leaf` or `String_Leaf`).
     #
-    #       The type of `string_cache` is `Map { interned Some_Native_String } of (Full_String | String_Leaf)`
-    #
-    string_cache = {}
+    string_cache = {}                   #   Map { interned Full_Native_String : Full_String_Leaf | String_Leaf }
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault
@@ -355,11 +354,11 @@ def produce_conjure_string_functions(empty_string, Full_String):
     #   Produce both functions, sharing `string_cache` (via `{lookup,provide}_cache`).
     #
     conjure_full_string = produce_conjure_X_string(
-            'conjure_full_string', lookup_string, provide_string, Full_String,
+            'conjure_full_string', lookup_string, provide_string, Full_String_Type,
         )
 
     conjure_some_string = produce_conjure_X_string(
-            'conjure_some_string', lookup_string, provide_string, Full_String,
+            'conjure_some_string', lookup_string, provide_string, Full_String_Type,
 
             allow_empty_string = True,
             empty_string       = empty_string,
@@ -372,7 +371,7 @@ def produce_conjure_string_functions(empty_string, Full_String):
 
 
 
-[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, Full_String)
+[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, Full_String_Leaf)
 
 
 #

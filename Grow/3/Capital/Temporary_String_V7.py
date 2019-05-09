@@ -54,8 +54,8 @@ class Temporary_String(
         #
 ):
     #
-    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V7.Full_String` (which an instance of this
-    #   class is transformed to).
+    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V7.Full_String_Leaf` (which an instance of
+    #   this class is transformed to).
     #
     __slots__ = (())
 

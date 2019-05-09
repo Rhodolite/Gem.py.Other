@@ -17,11 +17,11 @@
 #
 #       Version 3..5:
 #
-#           Do not exist (not used to transform to `Capital.Private.String_V{3,4,5}.Full_String`)
+#           Do not exist (not used to transform to `Capital.Private.String_V{3,4,5}.Full_String_Leaf`)
 #
 #       Version 6:
 #
-#           Exists (and transformed to a `Capital.Private.String_V6.Full_String`).
+#           Exists (and transformed to a `Capital.Private.String_V6.Full_String_Leaf`).
 #
 
 
@@ -47,8 +47,8 @@ class Temporary_String(
         #
 ):
     #
-    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V6.Full_String` (which an instance of this
-    #   class is transformed to).
+    #   `__slots__` are equivalent to the slots of `Capital.Private.String_V6.Full_String_Leaf` (which an instance of
+    #   this class is transformed to).
     #
     __slots__ = ((
         'interned_s',                   #   Full_Native_String

@@ -4,9 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V1
-#
-#       Private implementation of `conjure_some_string` for `String` Interface, Version 1.
+#   Capital.Private.ConjureString_V1 - Private implementation of the public `String` Interface, Version 1.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -76,9 +74,7 @@ if __debug__:
 #
 #           2)  The value is a `String_Leaf`.
 #
-#       The type of `string_cache` is `Map { interned Full_Native_String } of String_Leaf`
-#
-string_cache = {}
+string_cache = {}                       #   Map { interned Full_Native_String : String_Leaf }
 
 lookup_string  = string_cache.get
 provide_string = string_cache.setdefault

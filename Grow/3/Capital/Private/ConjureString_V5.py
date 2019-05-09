@@ -4,9 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V5
-#
-#       Private implementation of `conjure_some_string` for `String` Interface, Version 5.
+#   Capital.Private.ConjureString_V5 - Private implementation of the public `String` Interface, Version 5.
 #
 #       Strings are Unique (in normal cases).
 #

@@ -38,9 +38,9 @@
 #
 #           There are seperate classes for empty & full strings:
 #
-#               1A)     `Empty_String` is used to handle the singleton `empty_string`; and
+#               1A)     `Empty_String_Leaf` is used to handle the singleton `empty_string`; and
 #
-#               1B)     `Full_String` is used to handle full strings.
+#               1B)     `Full_String_Leaf` is used to handle full strings.
 #
 #           And also:
 #
@@ -62,7 +62,7 @@ if __debug__:
 
 
 #
-#   Base_String - A very simple string wrapper, base class of `Empty_String` and `Full_String`.
+#   Base_String - A very simple string wrapper, base class of `{Empty,Full}_String_Leaf`.
 #
 #       NOTE: Named `Base_String` instead of `String`, since the name "String" is reserved for `interface String`.
 #
@@ -102,7 +102,7 @@ class Base_String(
         return self.interned_s.__format__(format_specification)
 
 
-class Empty_String(Base_String):
+class Empty_String_Leaf(Base_String):
     __slots__ = ((
     #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Empty_Native_String`.
     ))
@@ -123,7 +123,7 @@ class Empty_String(Base_String):
     #
     #   .__len__()  - Return the length.
     #
-    #       Always returns `0` for an `Empty_String`.
+    #       Always returns `0` for an `Empty_String_Leaf`.
     #
     @staticmethod
     def __len__():
@@ -150,7 +150,7 @@ class Empty_String(Base_String):
 
 
 
-class Full_String(Base_String):
+class Full_String_Leaf(Base_String):
     __slots__ = ((
     #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Full_Native_String`.
     ))
@@ -224,7 +224,7 @@ class Full_String(Base_String):
 def create_empty_string(interned_s):
     assert fact_is_empty_INTERNED_native_string(interned_s)
 
-    return Empty_String(interned_s)
+    return Empty_String_Leaf(interned_s)
 
 
 @export
@@ -232,7 +232,7 @@ def create_empty_string(interned_s):
 def create_full_string(interned_s):
     assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return Full_String(interned_s)
+    return Full_String_Leaf(interned_s)
 
 
 empty_string = create_empty_string(intern_native_string(""))

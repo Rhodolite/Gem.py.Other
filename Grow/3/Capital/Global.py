@@ -8,7 +8,7 @@
 #
 
 
-version = 8                 #   1..8
+version = 9                 #   1..9
 
 
 exception_version = 1       #   1..2
@@ -37,7 +37,7 @@ if version >= 4:
 
 
 #
-#   Version 5: Add `Base_String`, `Empty_String` and `Full_String`.
+#   Version 5: Add `Base_String`, `Empty_String_Leaf` and `Full_String_Leaf`.
 #
 if version >= 5:
     string_version = 4
@@ -51,7 +51,8 @@ if version >= 6:
 
 
 #
-#   Version 7: Guarantee Uniqueness of `Full_String` always (see "Capital/Private/ConjureString_V6.py for details).
+#   Version 7: Guarantee Uniqueness of `Full_String_Leaf` always
+#              (see "Capital/Private/ConjureString_V6.py for details).
 #
 if version >= 7:
     string_version = 6
@@ -63,6 +64,12 @@ if version >= 7:
 if version >= 8:
     string_version = 7
 
+
+#
+#   Version 9: String classes implement interfaces `Empty_String` and `Full_String_Leaf`
+#
+if version >= 9:
+    string_version = 8
 
 
 #
@@ -106,9 +113,9 @@ def create_capital_globals(version, exception_version, string_version):
     assert fact_is_positive_integer   (exception_version)
     assert fact_is_substantial_integer(string_version)
 
-    assert 1 <= version           <= 8
-    assert 1 <= exception_version <= 2
-    assert 0 <= string_version    <= 7
+    assert 1 <= version           <= 9
+    assert 1 <= exception_version <= 8
+    assert 0 <= string_version    <= 8
 
     r = Capital_Globals(
             version           = version,

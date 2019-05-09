@@ -4,9 +4,7 @@
 
 
 #
-#   Capital.Private.ConjureString_V3
-#
-#       Private implementation of `conjure_some_string` for `String` Interface, Version 3.
+#   Capital.Private.ConjureString_V3 - Private implementation of the public `String` Interface, Version 3.
 #
 #       Strings are Unique (in normal cases).
 #
@@ -249,13 +247,11 @@ def produce_conjure_string_functions(empty_string, create_full_string):
     #
     #       All strings are stored in this as key/value pairs:
     #
-    #           1)  The key is an interned `Some_Native_String`; and
+    #           1)  The key is an interned `Full_Native_String`; and
     #
-    #           2)  The value is a `String`.
+    #           2)  The value is a `String` (`Full_String_Leaf` or `String_Leaf`).
     #
-    #       The type of `string_cache` is `Map { interned Some_Native_String } of (Full_String | String_Leaf)`
-    #
-    string_cache = {}
+    string_cache = {}                   #   Map { interned Full_Native_String : Full_String_Leaf | String_Leaf }
 
     lookup_string  = string_cache.get
     provide_string = string_cache.setdefault
