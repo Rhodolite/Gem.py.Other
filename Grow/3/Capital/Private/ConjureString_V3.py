@@ -22,12 +22,13 @@
 #
 #
 
+
 #
 #   Difference between Version 2 & Version 3.
 #
 #       Version 2:
 #
-#           Producer function `produce_conjure_string` to produce `conjure_some_string` functions.
+#           Producer function `produce_conjure_string_functions` to produce `conjure_{full,some}_string` functions.
 #
 #           The arguments to `produce_conjure_string` are:
 #
@@ -52,12 +53,13 @@
 
 
 from    Capital.Core                        import  export
-from    Capital.Private.ConjureString_V2    import  produce_conjure_string
+from    Capital.Private.ConjureString_V2    import  produce_conjure_string_functions
 from    Capital.Private.String_V3           import  create_full_string
 from    Capital.Private.String_V3           import  empty_string
 
 
-conjure_some_string = produce_conjure_string(empty_string, create_full_string)
+[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
 
 
+export(conjure_full_string)
 export(conjure_some_string)

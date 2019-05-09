@@ -83,6 +83,16 @@ if __debug__:
         return True
 
 
+#
+#   fact_is_native_type(v) - Assert that `v` is a `Type` (i.e.: probably a `class`).
+#
+if __debug__:
+    def fact_is_native_type(v):
+        assert isinstance(type(v), Python_Type)
+
+        return True
+
+
 if 0:
     #
     #   DISABLED (not currently used, will be enabled & used in the future)

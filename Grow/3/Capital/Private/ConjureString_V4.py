@@ -30,7 +30,7 @@
 #
 #           Uses the same producer function from Version 2.
 #
-#           The arguments to `produce_conjure_string` are:
+#           The arguments to `produce_conjure_string_functions` are:
 #
 #               1)  `Capital.Privage.String_V3.empty_string`; and
 #
@@ -42,7 +42,7 @@
 #
 #           Uses the same producer function from Version 2.
 #
-#           The arguments to `produce_conjure_string` are:
+#           The arguments to `produce_conjure_string_functions` are:
 #
 #               1)  `Capital.Privage.String_V4.empty_string`; and
 #
@@ -53,12 +53,13 @@
 
 
 from    Capital.Core                        import  export
-from    Capital.Private.ConjureString_V2    import  produce_conjure_string
+from    Capital.Private.ConjureString_V2    import  produce_conjure_string_functions
 from    Capital.Private.String_V4           import  create_full_string
 from    Capital.Private.String_V4           import  empty_string
 
 
-conjure_some_string = produce_conjure_string(empty_string, create_full_string)
+[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
 
 
+export(conjure_full_string)
 export(conjure_some_string)

@@ -49,6 +49,7 @@ from    Capital.Private.String_V2       import  empty_string
 
 
 if __debug__:
+    from    Capital.Fact                import  fact_is_native_boolean
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Fact                import  fact_is_native_function
     from    Capital.Fact                import  fact_is_not_native_none
@@ -78,15 +79,32 @@ if __debug__:
 
 
 #
-#   produce_conjure_string_functions(       #   - produce conjure string functions
-#           conjure_some_string__function_name,
+#   produce_conjure_string_functions(
 #           empty_string,
 #           create_full_string,
-#   ):
 #
-#       1)  Produced function:
+#           make_conjure_full_string = True,
+#           make_conjure_some_string = True,
+#   )
 #
-#               `conjure_full_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#       Produce 1 or 2 conjure string functions (see below for details).
+#
+#       Parameters:
+#
+#           1)  `empty_string` - The singleton to return when the user attemps to conjure an empty string.
+#
+#               (if `make_conjure_some_string is `False`, then `empty_string` must be `None`).
+#
+#           2)  `create_full_string` - The function to create a full string.
+#
+#           3)  `make_conjure_full_string` - Must be `True`; will always produce a `conjure_full_string` function.
+#
+#           4)  `make_conjure_some_string` - Set to `True` if a `conjure_some_string` should be produced.
+#
+#
+#       Produced function:
+#
+#           1)  `conjure_full_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #                   `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -94,17 +112,7 @@ if __debug__:
 #
 #               EXCEPTIONS
 #
-#                   If `s` is empty (i.e.: has 0 characters), throws the following exception:
-#
-#                       ValueError(
-#                               arrange(
-#                                   (
-#                                         "parameter `s` is empty; `{}` requires a non-empty string;"
-#                                       + " (i.e.: has a length greater than 0)"
-#                                   ),
-#                                   "conjure_full_string",
-#                               ),
-#                       )
+#                   If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
 #
 #               SEE ALSO
 #
@@ -112,32 +120,26 @@ if __debug__:
 #                   future versions.
 #
 #
-#       2)  Optional produced function (only produced if `empty_string is not None`):
-#
-#               `conjure_some_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#           2)  `conjure_some_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #                   `s` must be of a `Some_Native_String` (i.e.: `str`).
 #
 #                   `s` may *NOT* be an instance of a subclass of `Some_Native_String` (i.e.: `str`).
 #
-#               SEE ALSO
 #
-#                   Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in
-#                   future versions.
+#       Returns a tuple:
 #
-#       3)  Returns a tuple:
+#           1)  If `not make_conjure_some_string`:
 #
-#               3A) If `empty_string is none`:
+#                   Returns a tuple of 1 element:
 #
-#                       Returns a tuple of 1 element:
+#                       ((conjure_string_full,))
 #
-#                           ((conjure_string_full,))
+#           2)  If `make_conjure_some_string`:
 #
-#               3B) If `empty_string is not none`:
+#                   Returns a tuple of 2 elements:
 #
-#                       Returns a tuple of 2 elements:
-#
-#                           ((conjure_string_full, conjure_some_string))
+#                       ((conjure_string_full, conjure_some_string))
 #
 #   NOTE:
 #       This is a single function to produce two function, so they can share the following "cell" variables:
@@ -152,9 +154,23 @@ if __debug__:
 #       "produce" functions.
 #
 @export
-def produce_conjure_string_functions(empty_string, create_full_string):
-    assert fact_is_native_function(create_full_string)
+def produce_conjure_string_functions(
+        empty_string,
+        create_full_string,
 
+        make_conjure_full_string = True,
+        make_conjure_some_string = True,
+):
+    if make_conjure_full_string:
+        assert fact_is_not_native_none(empty_string)
+    else:
+        assert fact_is_native_none    (empty_string)
+
+    assert fact_is_native_function    (create_full_string)
+    assert fact_is_native_boolean     (make_conjure_full_string)
+    assert fact_is_native_boolean     (make_conjure_some_string)
+
+    assert make_conjure_full_string is True
 
     #
     #   string_cache - A cache of strings
@@ -248,13 +264,13 @@ def produce_conjure_string_functions(empty_string, create_full_string):
     #
     #   ==========
     #
-    #   3A) If `empty_string is None`:
+    #   3A) If `not make_conjure_some_string`:
     #
     #           Returns a tuple of 1 element:
     #
     #               ((conjure_string_full,))
     #
-    if empty_string is None:
+    if not make_conjure_some_string:
         return ((conjure_full_string,))
 
 
@@ -296,7 +312,7 @@ def produce_conjure_string_functions(empty_string, create_full_string):
     #
     #   ==========
     #
-    #   3B) If `empty_string is not None':
+    #   3B) If `make_conjure_some_string':
     #
     #               Returns a tuple of 2 elements:
     #

@@ -90,8 +90,6 @@ def command_string():
     except ValueError as e:
         caught = e
 
-    trace(caught.args[0])
-
     assert (
                caught.args[0]
             == (
