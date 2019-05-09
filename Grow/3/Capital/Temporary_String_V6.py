@@ -9,42 +9,35 @@
 
 
 #
-#   Difference between Version 5 & Version 6.
+#   Differences between Versions 1..6
 #
-#       Version 5:
+#       Version 1..2:
 #
-#           String classes use `object` as their base class.
+#           Do not exist (not used to transform to `Capital.Private.String_V{1,2}.String_Leaf`).
+#
+#       Version 3..5:
+#
+#           Do not exist (not used to transform to `Capital.Private.String_V{3,4,5}.Full_String`)
 #
 #       Version 6:
 #
-#           String classes use `Some_Native_String` (i.e.: `str`) as their base class.
-#
-#           (although some string classes use `Full_Native_String` (also: `str`) as their base class,
-#           to indicate they only handle "full" strings).
+#           Exists (and transformed to a `Capital.Private.String_V6.Full_String`).
 #
 
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Native_String           import  Full_Native_String
 from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
 if __debug__:
-    from    Capital.Native_String       import  fact_is_full_native_string
+    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
 
 
 #
-#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
-#
-method__Full_Native_String__representation = Full_Native_String.__repr__
-
-
-#
-#   Temporary_String - Temporary String Implementation, Version 6.
+#   StringKey - String Key Implementation, Version 5.
 #
 class Temporary_String(
-        Full_Native_String,
         TRAIT_Temporary_Element,
         #
         #   NOTE:
@@ -57,7 +50,16 @@ class Temporary_String(
     #   `__slots__` are equivalent to the slots of `Capital.Private.String_V6.Full_String` (which an instance of this
     #   class is transformed to).
     #
-    __slots__ = (())
+    __slots__ = ((
+        'interned_s',                   #   Full_Native_String
+    ))
+
+
+    #
+    #   Private
+    #
+    def __init__(self, interned_s):
+        self.interned_s = interned_s
 
 
     #
@@ -71,12 +73,12 @@ class Temporary_String(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Temporary_String {!r}>', method__Full_Native_String__representation(self))
+        return arrange('<Temporary_String {!r}>', repr(self.interned_s))
 
 
 @export
 @creator
-def create_temporary_string(s):
-    assert fact_is_full_native_string(s)
+def create_temporary_string(interned_s):
+    assert fact_is_full_INTERNED_native_string(interned_s)
 
-    return Temporary_String(s)
+    return Temporary_String(interned_s)

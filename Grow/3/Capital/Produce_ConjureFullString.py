@@ -6,11 +6,11 @@
 #
 #   Capital.Produce_ConjureFullName - Produce a `conjure_full_name` function.
 #
-#       SEE: "Capital.Private.ConjureString_V6" for extensive comments.
+#       See: "Capital/Private/ConjureString_V7.py" for extensive comments.
 #
 
 
-from    Capital.Temporary_String_V6     import  create_temporary_string
+from    Capital.Temporary_String_V7     import  create_temporary_string
 
 
 if __debug__:
@@ -22,7 +22,7 @@ if __debug__:
 #
 #       Produce a `conjure_full_name(s)` method.
 #
-#       This produce method is pretty much a copy of `produduce_conjure_string` in "Capital.Private.ConjureString_V6".
+#       This produce method is pretty much a copy of `produduce_conjure_string` in "Capital.Private.ConjureString_V7".
 #
 #       Differences betweeen `produce_conjure_full_name` and `produce_conjure_string`:
 #
@@ -36,7 +36,7 @@ if __debug__:
 #                       string_cache = {}
 #
 #               3)  `produce_conjure_full_name` does *NOT* take a parameter named `create_temporary_string`; instead
-#                   it always uses `Capital.Private.Temporary_String_V6.create_temporary_string` (defined above).
+#                   it always uses `Capital.Private.Temporary_String_V7.create_temporary_string` (defined above).
 #
 #               4)  The produced function `conjure_full_name` uses `fact_is_full_native_string(s)` (i.e.: it's `s`
 #                   parameter must be a *FULL* native string).
@@ -79,7 +79,7 @@ def produce_conjure_full_name(Meta):
     #
     def conjure_full_name(s):
         #
-        #   See comments in "Capital.Private.ConjureString_V6.py" to understand this code.
+        #   See comments in "Capital.Private.ConjureString_V7.py" to understand this code.
         #
         assert fact_is_full_native_string(s)
 

@@ -4,39 +4,30 @@
 
 
 #
-#   Capital.Private.ConjureString_V6 - Private implementation of the public `String` Interface, Version 6.
+#   Capital.Private.ConjureString_V7
+#
+#       Private implementation of `conjure_some_string` for `String` Interface, Version 7.
 #
 
 
 #
-#   Difference between Version 5 & Version 6.
-#
-#       Version 5:
-#
-#           Uses the same producer function from Version 2.
-#
-#           1)  Strings are unique (in normal cases).
-#
-#           2)  Uses `create_full_string` to create a full string, before attempting to put it in `string_cache`
-#               (as explained there, in abnormal cases, this `Full_String` may leak).
-#
-#           3)  The second argument to `produce_conjure_string_functions` is `create_full_string` (to create a
-#               full string)
+#   Difference between Version 6 & Version 7.
 #
 #       Version 6:
 #
-#           1)  Strings are unique (always).
+#           The key/value pairs in `string_cache` are:
 #
-#           2)  Uses `create_temporary_string` to create a temporary string, before attempting to put it in
-#               `string_cache`.
+#               1)  Key is an interned `Some_Native_String`;
 #
-#               Only after the temporary string is guaranteed unique (in the contect of `string_cache`), is it
-#               then transformed to a unique `Full_String`.
+#               2)  Value is one of `Full_String | Temporary_String`.
 #
-#               See all the comments below for more details.
+#       Version 7:
 #
-#           3)  The second argument to `produce_conjure_string_functions` is a `Full_String` (the type to
-#               tranform `Temporary_String` to).
+#           The key/value pairs in `string_cache` are:
+#
+#               1)  Key is the same as value;
+#
+#               2)  Value is one of `Full_String | Temporary_String` (same as Version 5).
 #
 
 
@@ -56,21 +47,20 @@
 #
 
 
-from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
+from    Capital.Core                    import  trace
 from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
-from    Capital.Private.String_V6       import  empty_string
-from    Capital.Private.String_V6       import  Full_String
-from    Capital.Temporary_String_V6     import  create_temporary_string
+from    Capital.Private.String_V7       import  empty_string
+from    Capital.Private.String_V7       import  Full_String
+from    Capital.Temporary_String_V7     import  create_temporary_string
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_native_boolean
-    from    Capital.Fact                import  fact_is_native_none
-    from    Capital.Fact                import  fact_is_native_type
-    from    Capital.Fact                import  fact_is_not_native_none
     from    Capital.Native_String       import  fact_is_some_native_string
+    from    Capital.Fact                import  fact_is_not_native_none
+    from    Capital.Fact                import  fact_is_native_type
 
 
 #
@@ -91,6 +81,46 @@ if __debug__:
 #           Returns the value used (either the one found with lookup, or the one inserted).
 #
 #           In python code this is `dict.setdefault` ("provide" is a used as it is a clearer name than "setdefault").
+#
+
+
+#
+#   COMMENT ON KEYS in `string_cache`.
+#
+#       The keys in `string_cache` are the same as the values (i.e.: one of `Empty_String`, `Full_String`, or
+#       `Temporary_String`).
+#
+#       However, you can still do a lookup using a native string, and it will still work.
+#
+#       For example, the following function calls
+#
+#           conjure_some_string('')
+#
+#       will return:
+#
+#           empty_string
+#
+#       This is because we have *NOT* overridden the following methods:
+#
+#           str.__eq__
+#           str.__hash__
+#
+#       Since these methods, treat all strings (direct instance of `str`, or instances of any subclass of `str`)
+#       as equal if their characters match.
+#
+#       Likewise, we can use the string key `"Hello"` to lookup a `Full_String("hello")` key,
+#       as they will these two different instances as equal (and having the same hash)..
+#
+#       Or in other words:
+#
+#           assert "hello"       == conjure_some_string("hello")        #   Uses `str.__eq__`
+#           assert hash("hello") == hash(conjure_some_string("Hello"))  #   Uses `str.__hash__` [twice].
+#
+#       The "type" of `string_cache` is:
+#
+#           Map { String } of String
+#
+#       where `String` can be one of `Empty_String`, `FulllString`, or `StringKey`.
 #
 
 
@@ -226,7 +256,34 @@ def produce_conjure_string_functions(
     #       Please see comment at the top about non-uniqueness in abnormal cases, and how this will be fixed in future
     #       versions.
     #
-    @creator
+
+    #
+    #   conjure_full_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
+    #
+    #       `s` must be of type some `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+    #
+    #   NOTE:
+    #       There exists the possibility that internal instances of `Temporary_String* may "leak" from this code.
+    #
+    #       Three common ways of "leakage" are:
+    #
+    #           1.  An `MemoryException` is thrown -- the instance will leak through tracebacks.
+    #
+    #           2.  A different thread examines the stack frames of this thread.
+    #
+    #           3.  A different thread uses the python `gc` module (garbage collection) to look at the internal
+    #               instances of `conjure_some_string`.
+    #
+    #       By creating a `Temporary_String` instance, we make the following guarentee:
+    #
+    #           Any leakage of `Full_String` instance is unique.
+    #
+    #   NOTE:
+    #       A `Temporary_String` may leak -- it may not be unique.
+    #
+    #       A `Temporary_String` may at any moment be transformed (by another thread, or by multiple other threads) to
+    #       a `Full_String`.
+    #
     def conjure_full_string(s):
         #
         #   The following test is "*_some_*" on purpose.
@@ -277,12 +334,11 @@ def produce_conjure_string_functions(
             #               when we can avoid it with the `r.temporary_element_has_definitively_been_transformed`
             #               above.
             #
-            r.__class__ = Full_String                                              #   THREAD SAFE: Make `r` a string.
+            r.__class__ = Full_String                                       #   THREAD SAFE: Make `r` a string.
 
             assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
             return r
-
 
         #
         #   Handle an empty string here (even in release mode).
@@ -298,7 +354,6 @@ def produce_conjure_string_functions(
 
             raise value_error
 
-
         #
         #   NOTE:
         #       Due to multi-threading `temporary_string__maybe_duplicate` may be a duplicate (not unique).
@@ -306,9 +361,7 @@ def produce_conjure_string_functions(
         #       There may be two or more seperate threads, all of which, simultaneously, create a `Temporary_String`
         #       with the same internal characters.
         #
-        interned_s = intern_native_string(s)
-
-        temporary_string__maybe_duplicate = create_temporary_string(interned_s)
+        temporary_string__maybe_duplicate = create_temporary_string(s)
 
         #
         #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
@@ -321,7 +374,7 @@ def produce_conjure_string_functions(
         #       If two (or more) threads, simultaneously, create a `Temporary_String` with the same internal
         #       characters, then `provide_string_key` will return the same instance in all threads.
         #
-        r = provide_string(interned_s, temporary_string__maybe_duplicate)
+        r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
 
         if r.temporary_element_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
             return r
@@ -336,7 +389,7 @@ def produce_conjure_string_functions(
 
         #
         #   At this point `r` is now a `Full_String` (either we transformed it, or we & other threads all attempted to
-        #   transformed it [and one thread actually did transform it]).
+        #   transformd it [and one thread actually did transform it]).
         #
         assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
@@ -361,11 +414,32 @@ def produce_conjure_string_functions(
 
 
     #
-    #   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (always).
     #
-    #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+    #       `s` must be of type some `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
     #
-    @creator
+    #   NOTE:
+    #       There exists the possibility that internal instances of `Temporary_String* may "leak" from this code.
+    #
+    #       Three common ways of "leakage" are:
+    #
+    #           1.  An `MemoryException` is thrown -- the instance will leak through tracebacks.
+    #
+    #           2.  A different thread examines the stack frames of this thread.
+    #
+    #           3.  A different thread uses the python `gc` module (garbage collection) to look at the internal
+    #               instances of `conjure_some_string`.
+    #
+    #       By creating a `Temporary_String` instance, we make the following guarentee:
+    #
+    #           Any leakage of `Full_String` instance is unique.
+    #
+    #   NOTE:
+    #       A `Temporary_String` may leak -- it may not be unique.
+    #
+    #       A `Temporary_String` may at any moment be transformed (by another thread, or by multiple other threads) to
+    #       a `Full_String`.
+    #
     def conjure_some_string(s):
         #
         #   NOTE: See comments in `conjure_full_string`
@@ -375,12 +449,48 @@ def produce_conjure_string_functions(
         r = lookup_string(s)
 
         if r is not None:
+            #
+            #   MULTI-THREADING NOTE:
+            #
+            #       Due to multithreading `r` may actually be a `Temporary_String`.
+            #
+            #       In this case, transform it to a `Full_String`
+            #
+            #       This is thread safe, as the fact it made it *INTO* `string_cache`, is a guarentee of it's
+            #       uniqueness.
+            #
+
+
+            #
+            #   Has `r` already definitively been transformed?
+            #
             if r.temporary_element_has_definitively_been_transformed:
                 return r
 
-            r.__class__ = Full_String
+            #
+            #   NOTE:
+            #       See note below on "multiple threads may be simultaneously transforming `r`" being thread safe.
+            #
+            #   NOTE -- DO NOT OPTIMIZE:
+            #
+            #       Do *NOT* remove the `r.temporary_element_has_definitively_been_transformed` above.
+            #
+            #       The test `r.temporary_element_has_definitively_been_transformed` above is needed for the following
+            #       reason:
+            #
+            #           1.  `r` may have been a `Empty_String` -- It would be incorrect to transform `r` in such a
+            #               case.
+            #
+            #       Also, as a secondary consideration:
+            #
+            #           2.  There is a very minor expense to transforming a string, so we don't want to attempt to
+            #               [identity] transform a `Full_String` to a `Full_String` -- it's safe, but no need to try
+            #               when we can avoid it with the `r.temporary_element_has_definitively_been_transformed`
+            #               above.
+            #
+            r.__class__ = Full_String                                       #   THREAD SAFE: Make `r` a string.
 
-            assert r.temporary_element_has_definitively_been_transformed
+            assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
             return r
 
@@ -392,18 +502,44 @@ def produce_conjure_string_functions(
         if len(s) == 0:
             return empty_string
 
-        interned_s = intern_native_string(s)
+        #
+        #   NOTE:
+        #       Due to multi-threading `temporary_string__maybe_duplicate` may be a duplicate (not unique).
+        #
+        #       There may be two or more seperate threads, all of which, simultaneously, create a `Temporary_String`
+        #       with the same internal characters.
+        #
+        temporary_string__maybe_duplicate = create_temporary_string(s)
 
-        temporary_string__maybe_duplicate = create_temporary_string(interned_s)
+        #
+        #   `provide_string` is thread safe, and all threads will return the same instance (which may be a
+        #   `Temporary_String` or a `Full_String`).
+        #
+        #   NOTE:
+        #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is thread
+        #       safe).
+        #
+        #       If two (or more) threads, simultaneously, create a `Temporary_String` with the same internal
+        #       characters, then `provide_string_key` will return the same instance in all threads.
+        #
+        r = provide_string(temporary_string__maybe_duplicate, temporary_string__maybe_duplicate)
 
-        r = provide_string(interned_s, temporary_string__maybe_duplicate)
-
-        if r.temporary_element_has_definitively_been_transformed:
+        if r.temporary_element_has_definitively_been_transformed:   #   Has `r` already definitively been transformed?
             return r
 
+        #
+        #   NOTE:
+        #       Multiple threads may be simultaneously transforming `r` from a `Temporary_String` to a `Full_String`.
+        #
+        #       This is thread safe.
+        #
         r.__class__ = Full_String
 
-        assert r.temporary_element_has_definitively_been_transformed 
+        #
+        #   At this point `r` is now a `Full_String` (either we transformed it, or we & other threads all attempted to
+        #   transformd it [and one thread actually did transform it]).
+        #
+        assert r.temporary_element_has_definitively_been_transformed    #   `r` has definitively been transformed now.
 
         return r
 

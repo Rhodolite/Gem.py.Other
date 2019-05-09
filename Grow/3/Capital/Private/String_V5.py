@@ -6,33 +6,114 @@
 #
 #   Capital.Private.String_V5 - Private implementation of the public `String` Interface, Version 5.
 #
-#       Strings are Unique (always).
+#       Strings are Unique (in normal cases).
 #
-#       Uniqueness is implemented in "Capital.Private.ConjureString_V5.py" (which uses the interface
-#       `Temporary_Element` to implement uniqueness).
+#       In abnormal cases, Non-unique strings can "leak".  Abnormal cases are:
+#
+#           1.  Multithreading race conditions;
+#           2.  Tracebacks due to MemoryError (out of memory);
+#           3.  Using `gc` (garbage collection) module to examine instances in another thread.
+#
+#       Later versions fix this issue (of non-uniqueness in abnormal cases), and strings are always unique
+#       in later versions.
 #
 
 
 #
-#   Difference between Version 4 & Version 5.
+#   Difference between Version 4 and Version 5:
 #
 #       Version 4:
 #
-#           1)  Strings are unique (in normal cases).
-#
-#           2)  Has creator function `create_full_string` for `Full_String`.
+#           Has a `Base_String` to avoid duplicate code.
 #
 #       Version 5:
 #
-#           1)  Strings are unique (always).
+#           Removes `Base_String`, and instead duplicates code (See below)
 #
-#           2)  Does *NOT* have creator function for `Full_String` (since `Full_String` cannot be created, but
-#               only transformed from a `Capital.Private.Temporary_String_V5.Temporary_String`).
+
+
 #
-#               Also in debug mode, `Full_String` has disabled the create (`__new__`) and construct (`__init__`)
-#               methods.
+#   WHY DUPLICATE CODE IN REMOVING `Base_String`?
 #
-#           3)  `Full_String` implements interface `Temporary_Element` (needed to make strings unique always).
+#   SUMMARY:
+#
+#       To avoid a limitation in python related to it's implementation of multiple inheritance, in version 6
+#       of String Implementation, where we need to do class transformations using `.__class__` assignment.
+#
+#       (See "Capital.Private.ConjureString_V6.py" for details).
+#
+#   DETAILS:
+#
+#       Python has a few limitations with with it's implementation of multiple inheritance;
+#
+#           1)  Python does not allow multiple inheritance to have `__slots__` in multiple bases:
+#
+#               If you attempt to do this:
+#
+#                   class A(object): __slots__ = (('a',))
+#                   class B(object): __slots__ = (('b',))
+#                   class C(A, B): pass
+#
+#               You get the error:
+#
+#                   TypeError: Error when calling the metclass bases
+#                       multiple bases have instance lay-out conflict
+#
+#               Which, interpreted, means:
+#
+#                   multiple bases (A & B) both have __slots__ that are non-empty.
+#
+#           2)  When figuring out if `.__class__` assignment is allowed, python typically only allows the
+#               [non-empty] `__slots__` to be in the "same" place in the inheritance diagram.
+#
+#               EXAMPLE (what we want to do):
+#
+#                   class TRAIT_Some_String(object):                                __slots__ = (())
+#                   class TRAIT_Temporary_Element(object):                          __slots__ = (())
+#                   class Temporary_String(TRAIT_Temporary_Element):                __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Some_String):                       __slots__ = (('interned_s',))
+#                   class Full_String    (Base_String, TRAIT_Temporary_Element):    __slots__ = (())
+#
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String
+#
+#               However, this fails with:
+#
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from 'Full_String'.
+#
+#               Removing `Base_String`, allows us to simplfy this:
+#
+#                   class TRAIT_Some_String(object):                                    __slots__ = (())
+#                   class TRAIT_Temporary_Element(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Temporary_Element):                    __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Some_String, TRAIT_Temporary_Element):  __slots__ = (('interned_s',))
+#
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String
+#
+#               ALTHOUGH, this still fails with the same error as above:
+#
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from 'Full_String'.
+#
+#               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String`
+#               (since we eliminated `Base_String`):
+#
+#                   class TRAIT_Some_String(object):                                    __slots__ = (())
+#                   class TRAIT_Temporary_Element(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Temporary_Element):                    __slots__ = (('interned_s',))
+#                   class Full_String    (TRAIT_Temporary_Element, TRAIT_Some_String):  __slots__ = (('interned_s',))
+#
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String
+#
+#               NOW, python accepts out transformation.
+#
+#   CONCLUSION:
+#
+#       To avoid a limitation in python related to it's implementation of multiple inheritance, we have to eliminate
+#       `Base_String`, and duplicate a few lines of code.
+#
+#       This will allos us to use `.__class__` assignment in version 4 implementation.
 #
 
 
@@ -41,22 +122,29 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Some_String             import  TRAIT_Some_String
-from    Capital.Temporary_Element       import  TRAIT_Temporary_Element
 
 
 if __debug__:
     from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
+    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
 
 
 #
 #<methods>
-#   common methods of `Empty_String` and `Full_String`.
+#   Base_String methods - A very simple string wrapper, common methods of `Empty_String` and `Full_String`.
 #
-#       As explained in "Capital.Private.String_V4.py" we had to get rid of `Base_String`.
+#       As explained above we had to get rid of `Base_String`.
 #
 #       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
 #       `Empty_String` and `Full_String` below.
 #
+
+
+#
+#   Base_String: contructor
+#
+def method__Base_String__constructor(self, interned_s):
+    self.interned_s = interned_s
 
 
 #
@@ -81,7 +169,6 @@ def method__Base_String__operator_format(self, format_specification):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String(
-        TRAIT_Temporary_Element,
         TRAIT_Some_String,
 ):
     __slots__ = ((
@@ -92,8 +179,7 @@ class Empty_String(
     #
     #   Private
     #
-    def __init__(self, interned_s):
-        self.interned_s = interned_s
+    __init__ = method__Base_String__constructor
 
 
     #
@@ -150,7 +236,6 @@ class Empty_String(
 #   Full String - A wrapper around a full native string.
 #
 class Full_String(
-        TRAIT_Temporary_Element,
         TRAIT_Some_String,
 ):
     __slots__ = ((
@@ -161,18 +246,7 @@ class Full_String(
     #
     #   Private
     #
-    if __debug__:
-        def __new__(Meta, s):
-            FATAL('{}: A Full_String may not be {}',
-                  "Capital.Private.FullString_V5.Full_String.operator new (`__new__`)",
-                  'created')
-
-
-    if __debug__:
-        def __init__(self, s):
-            FATAL('{}: A Full_String may not be {}',
-                  "Capital.Private.FullString_V5.Full_String.constructor (`__init__`)",
-                  'constructed')
+    __init__ = method__Base_String__constructor
 
 
     #

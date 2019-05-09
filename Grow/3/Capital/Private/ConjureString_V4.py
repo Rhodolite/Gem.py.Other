@@ -28,13 +28,13 @@
 #
 #       Version 3:
 #
-#           Uses the same producer function from Version 2.
+#           Producer function `produce_conjure_string_functions` to produce `conjure_{full,some}_string` functions.
 #
-#           The arguments to `produce_conjure_string_functions` are:
+#           The arguments to `produce_conjure_string` are:
 #
-#               1)  `Capital.Privage.String_V3.empty_string`; and
+#               1)  `Capital.Privage.String_V2.empty_string`; and
 #
-#               2)  `Capital.Privage.String_V3.create_full_string`.
+#               2)  `Capital.Privage.String_V2.create_full_string`.
 #
 #           (i.e.: "*_V3.*").
 #
@@ -42,7 +42,7 @@
 #
 #           Uses the same producer function from Version 2.
 #
-#           The arguments to `produce_conjure_string_functions` are:
+#           The arguments to `produce_conjure_string` are:
 #
 #               1)  `Capital.Privage.String_V4.empty_string`; and
 #

@@ -10,7 +10,7 @@
 #
 
 
-from    Capital.Temporary_String_V6     import  create_temporary_string
+from    Capital.Temporary_String_V7     import  create_temporary_string
 
 
 if __debug__:
@@ -45,7 +45,7 @@ def produce_conjure_full_name__with_unused_Z_parameter(Meta):
     #
     #       `s` must be a "full" string (i.e.: length greater than 0).
     #
-    #   See comments in "Capital.Private.ConjureString_V6.py" to understand this code.
+    #   See comments in "Capital.Private.ConjureString_V7.py" to understand this code.
     #
     def conjure_full_name__with_unused_Z_parameter(z, s):
         assert fact_is_convert_zone      (z)

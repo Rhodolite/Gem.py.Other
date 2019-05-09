@@ -22,220 +22,30 @@
 
 
 #
-#   Difference between Version 1, Version 2, and Version 3
-#
-#       Version 1:
-#
-#           1)  Both empty & full strings are managed by `String_Leaf`;
-#
-#           2)  Implementation of `.is_empty_string` and `.is_full_string` is done by properties.
+#   Difference between Version 2 & Version 3.
 #
 #       Version 2:
 #
-#           Identical to version 1.
+#           Implementation of creator function `create_full_string` and singleton `empty_string`.
 #
 #       Version 3:
 #
-#           There are seperate classes for empty & full strings:
+#           Identical to version 1, imports `create_full_string` and `empty_string` from version 2.
 #
-#               1A)     `Empty_String` is used to handle the singleton `empty_string`; and
+#           Actual differences are between the two files:
 #
-#               1B)     `Full_String` is used to handle full strings.
+#               1)  "Capital.Private.ConjureString_V2.py"
 #
-#           And also:
+#               2)  "Capital.Private.ConjureString_V3.py"
 #
-#               2)      Implementation of `.is_empty_string` and `.is_full_stting done by members (which is much
-#                       simplier & faster than properties used in version 1).
+#           This file only exists so it can be imported from "Capital.Private.ConjureString_V3.py",
 #
 
 
-from    Capital.Core                    import  arrange
-from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Native_String           import  intern_native_string
-from    Capital.Some_String             import  TRAIT_Some_String
+from    Capital.Private.String_V1       import  create_full_string
+from    Capital.Private.String_V1       import  empty_string
 
 
-if __debug__:
-    from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
-    from    Capital.Native_String       import  fact_is_full_INTERNED_native_string
-
-
-#
-#   Base_String - A very simple string wrapper, base class of `Empty_String` and `Full_String`.
-#
-#       NOTE: Named `Base_String` instead of `String`, since the name "String" is reserved for `interface String`.
-#
-#             (even though in the current implementation python (which does not have interfaces in python) does not
-#             actually have anything really named `interface String` -- conceptually it does, and thus the name
-#             "String" is still reserved for `interface String`).
-#
-class Base_String(
-        TRAIT_Some_String,
-):
-    __slots__ = ((
-        'interned_s',                   #   Some_Native_String
-    ))
-
-
-    #
-    #   Private
-    #
-    def __init__(self, interned_s):
-        self.interned_s = interned_s
-
-
-    #
-    #   Interface String
-    #
-    @property
-    def native_string(self):
-        return self.interned_s
-
-
-    #
-    #   .__format__ (format_specification)  - Format `String`
-    #
-    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
-    #
-    def __format__(self, format_specification):
-        return self.interned_s.__format__(format_specification)
-
-
-class Empty_String(Base_String):
-    __slots__ = ((
-    #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Empty_Native_String`.
-    ))
-
-
-    #
-    #   Interface String
-    #
-    is_empty_string = True
-    is_full_string  = False
-
-
-    #
-    #   Public
-    #
-
-
-    #
-    #   .__len__()  - Return the length.
-    #
-    #       Always returns `0` for an `Empty_String`.
-    #
-    @staticmethod
-    def __len__():
-        return 0
-
-
-    #
-    #   .__repr__() - Return the representation of a `String`
-    #
-    @staticmethod
-    def __repr__():
-        return '<"">'
-
-
-    #
-    #   .python_code()
-    #
-    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the same
-    #       characters.
-    #
-    @staticmethod
-    def python_code():
-        return '""'
-
-
-
-class Full_String(Base_String):
-    __slots__ = ((
-    #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Full_Native_String`.
-    ))
-
-
-    #
-    #   Interface String
-    #
-    is_empty_string = False
-    is_full_string  = True
-
-
-    #
-    #   Public
-    #
-
-
-    #
-    #   .__len__()  - Return the length.
-    #
-    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
-    #
-    def __len__(self):
-        return self.interned_s.__len__()
-
-
-    #
-    #   .__repr__() - Return the representation of a `String`
-    #
-    #   CURRENT
-    #
-    #       Surround the the result of `.python_code` with angle brackets.
-    #
-    #       Example:
-    #
-    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
-    #
-    #   FUTURE
-    #
-    #       See `.python_code` for an explanation of how `.python_code` will behave differently in the future.
-    #
-    def __repr__(self):
-        return arrange('<{}>', self.python_code())
-
-
-    #
-    #   .python_code()
-    #
-    #       Return a `str` instance that is the python code that python will compile to a `str` instance with the same
-    #       characters.
-    #
-    #   CURRENT
-    #
-    #       For now, we just use the `Some_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
-    #
-    #   FUTURE:
-    #
-    #       We will use the function `portray_python_string` which does a really good job of a python
-    #       represenation (much more readable than `str.__repr__` when presented with a "raw" string).
-    #
-    #       However, that code is quite large, so we are not including it for now.
-    #
-    #       Also, really, we want to code generate the `portray_python_string` ... so will wait until the
-    #       code generator can generate that function, before using it.
-    #
-    def python_code(self):
-        return repr(self.interned_s)
-
-
-@creator
-def create_empty_string(interned_s):
-    assert fact_is_empty_INTERNED_native_string(interned_s)
-
-    return Empty_String(interned_s)
-
-
-@export
-@creator
-def create_full_string(interned_s):
-    assert fact_is_full_INTERNED_native_string(interned_s)
-
-    return Full_String(interned_s)
-
-
-empty_string = create_empty_string(intern_native_string(""))
-
-
+export(create_full_string)
 export(empty_string)
