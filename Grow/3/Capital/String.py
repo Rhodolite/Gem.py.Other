@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Some_String - Some String Interface.  Strings are Unique (in normal case).
+#   Capital.String - Some String Interface.  Strings are Unique (in normal case).
 #
 #       By "Unique" we mean is only one string for each unique value.
 #
@@ -19,7 +19,7 @@
 #           .is_empty_string
 #           .is_full_string
 #
-#       In debug mode, testing can also be done for a `Some_String` with:
+#       In debug mode, testing can also be done for a `String` with:
 #
 #           .is_some_string
 #
@@ -32,7 +32,7 @@ from    Capital.Core                    import  FATAL
 
 
 #
-#   interface Some_String - Some String Interface.
+#   interface String - String Interface.
 #
 #       Since interfaces are not native to python, for now, we just show them in comments:
 #
@@ -68,7 +68,7 @@ class TRAIT_Some_String(object):
 #
 #       s.is_full_string                    #   Test if `s` is a  full  string.
 #
-#       conjure_some_string(s)              #   Conjure a string.
+#       conjure_some_string(s)              #   Conjure a `String`.
 #
 #       empty_string                        #   The empty string singleton.
 #
@@ -204,7 +204,7 @@ elif string_version == 7:
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Capital/String.py: unknown string version: {!r}', string_version)
+    FATAL('Capital/String.py: unknown string version: {}', string_version)
 
 
 if string_version == 0:
@@ -222,11 +222,11 @@ elif string_version == 7:
 else:
     from    Capital.Core                import  FATAL
 
-    FATAL('Capital/String.py: unknown string version: {!r}', string_version)
+    FATAL('Capital/String.py: unknown string version: {}', string_version)
 
 
 #
-#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -239,7 +239,7 @@ else:
 export(conjure_full_string)
 
 #
-#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #

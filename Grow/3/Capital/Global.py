@@ -8,7 +8,7 @@
 #
 
 
-version = 7                 #   1..8
+version = 8                 #   1..8
 
 
 exception_version = 1       #   1..2

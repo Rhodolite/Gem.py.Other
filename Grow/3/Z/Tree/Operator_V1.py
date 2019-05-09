@@ -12,7 +12,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Capital.Some_String             import  conjure_some_string
+from    Capital.String                  import  conjure_some_string
 from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
 
 

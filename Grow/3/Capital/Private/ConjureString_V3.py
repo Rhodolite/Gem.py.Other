@@ -116,7 +116,7 @@ if __debug__:
 #
 #       PRODUCED FUNCTION:
 #
-#           `conjure_X_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#           `conjure_X_string(s)` - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #                   `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -165,7 +165,7 @@ def produce_conjure_X_string(
     #   
     #                   conjure_full_string(s)
     #
-    #                       Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #                       Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
     #                       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
     #
@@ -179,7 +179,7 @@ def produce_conjure_X_string(
     #
     #                   conjure_some_string(s)
     #
-    #                       Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #                       Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
     #                       `s` must be of a `Some_Native_String` (i.e.: `str`).
     #
@@ -286,7 +286,7 @@ def produce_conjure_string_functions(empty_string, create_full_string):
 
 
 #
-#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -300,7 +300,7 @@ export(conjure_full_string)
 
 
 #
-#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #

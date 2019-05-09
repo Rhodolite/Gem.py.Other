@@ -165,7 +165,7 @@ def conjure_X_string(s, allow_empty_string = False, empty_string = None):
 
 
 #
-#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -182,7 +182,7 @@ def conjure_full_string(s):
 
 
 #
-#   conjure_some_string(s) - Conjure a `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be of a `Some_Native_String` (i.e.: `str`).
 #

@@ -62,8 +62,8 @@ from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V6       import  empty_string
 from    Capital.Private.String_V6       import  Full_String
-from    Capital.Temporary_String_V6     import  create_temporary_string
 from    Capital.Temporary_None          import  temporary_none
+from    Capital.Temporary_String_V6     import  create_temporary_string
 
 
 if __debug__:
@@ -134,7 +134,7 @@ if __debug__:
 #
 #       PRODUCED FUNCTION:
 #
-#           `conjure_X_string(s)` - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#           `conjure_X_string(s)` - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #                   `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -183,7 +183,7 @@ def produce_conjure_X_string(
     #   
     #                   conjure_full_string(s)
     #
-    #                       Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #                       Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
     #                       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
     #
@@ -197,7 +197,7 @@ def produce_conjure_X_string(
     #
     #                   conjure_some_string(s)
     #
-    #                       Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+    #                       Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
     #
     #                       `s` must be of a `Some_Native_String` (i.e.: `str`).
     #
@@ -274,8 +274,8 @@ def produce_conjure_X_string(
             #   NOTE:
             #       Due to multi-threading `temporary_string__maybe_duplicate` may be a duplicate (not unique).
             #
-            #       There may be two or more seperate threads, all of which, simultaneously, create a `Temporary_String`
-            #       with the same internal characters.
+            #       There may be two or more seperate threads, all of which, simultaneously, create a
+            #       `Temporary_String` with the same internal characters.
             #
             interned_s = intern_native_string(s)
 
@@ -286,8 +286,8 @@ def produce_conjure_X_string(
             #   `Temporary_String` or a `Full_String`).
             #
             #   NOTE:
-            #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is thread
-            #       safe).
+            #       `provide_string` is thread safe since it is the python builtin method `dict.setdefault` (which is
+            #       thread safe).
             #
             #       If two (or more) threads, simultaneously, create a `Temporary_String` with the same internal
             #       characters, then `provide_string_key` will return the same instance in all threads.
@@ -376,7 +376,7 @@ def produce_conjure_string_functions(empty_string, Full_String):
 
 
 #
-#   conjure_full_string(s) - Conjure a full `Some_String`, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
 #
@@ -390,7 +390,7 @@ export(conjure_full_string)
 
 
 #
-#   conjure_some_string(s) - Conjure a string, based on `s`.  Guarentees Uniqueness (in normal cases).
+#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarentees Uniqueness (in normal cases).
 #
 #       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
 #

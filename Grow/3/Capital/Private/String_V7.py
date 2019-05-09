@@ -31,7 +31,7 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
-from    Capital.Some_String             import  TRAIT_Some_String
+from    Capital.String                  import  TRAIT_Some_String
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 

@@ -17,9 +17,9 @@ from    Capital.Core                    import  FATAL
 from    Capital.Core                    import  Native_Boolean
 from    Capital.Core                    import  trace
 from    Capital.Global                  import  capital_globals
-from    Capital.Some_String             import  conjure_some_string
-from    Capital.Some_String             import  conjure_full_string
-from    Capital.Some_String             import  empty_string
+from    Capital.String                  import  conjure_some_string
+from    Capital.String                  import  conjure_full_string
+from    Capital.String                  import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
 from    Z.Path                          import  path_to_file_in_Z_directory
 

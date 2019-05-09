@@ -32,7 +32,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
-from    Capital.Some_String             import  conjure_some_string
+from    Capital.String                  import  conjure_some_string
 from    Z.Tree.Context                  import  TRAIT_Tree_Context
 
 
