@@ -35,11 +35,11 @@ if __debug__:
     from    Capital.Native_String               import  fact_is_some_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameters_all
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Backquote_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Call_Expression
@@ -71,8 +71,8 @@ def convert_value_comprehension(z, v, create):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.elt)
-    assert fact_is_full_native_list                              (v.generators)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.elt)
+    assert fact_is_full_native_list                                    (v.generators)
 
     return create(
                v.lineno,
@@ -98,7 +98,7 @@ def convert_backquote_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
     return z.create_Tree_Backquote_Expression(
                v.lineno,
@@ -123,9 +123,9 @@ def convert_binary_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (v.left)
-    assert fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR(v.op)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION     (v.right)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.left)
+    assert fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR (v.op)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.right)
 
     return z.create_Tree_Binary_Expression(
                v.lineno,
@@ -152,11 +152,11 @@ def convert_call_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION                    (v.func)
-    assert fact_is_some_native_list                                                  (v.args)
-    assert fact_is_some_native_list                                                  (v.keywords)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.starargs)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.kwargs)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION                    (v.func)
+    assert fact_is_some_native_list                                                        (v.args)
+    assert fact_is_some_native_list                                                        (v.keywords)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.starargs)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.kwargs)
 
     return z.create_Tree_Call_Expression(
                v.lineno,
@@ -185,8 +185,8 @@ def convert_compare_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.left)
-    assert fact_is_full_native_list                              (v.ops)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.left)
+    assert fact_is_full_native_list                                    (v.ops)
     assert fact_is_full_native_list                              (v.comparators)
 
     return z.create_Tree_Compare_Expression(
@@ -244,9 +244,9 @@ def convert_if_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.test)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.body)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.orelse)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.test)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.body)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.orelse)
 
     return z.create_Tree_If_Expression(
                v.lineno,
@@ -273,15 +273,15 @@ def convert_lambda_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__native__abstract_syntax_tree__parameters_all (v.args)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.body)
+    assert fact_is__native__abstract_syntax_tree__parameters_all       (v.args)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.body)
 
     return z.create_Tree_Lambda_Expression(
                v.lineno,
                v.col_offset,
 
-               z.convert_parameters_all(z, v.args),
-               z.convert_expression    (z, v.body),
+               z.convert_parameter_tuple_0(z, v.args),
+               z.convert_expression       (z, v.body),
           )
 
 
@@ -360,9 +360,9 @@ def convert_map_comprehension(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.key)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
-    assert fact_is_full_native_list                              (v.generators)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.key)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
+    assert fact_is_full_native_list                                    (v.generators)
 
     return z.create_Tree_Map_Comprehension(
                v.lineno,
@@ -507,8 +507,8 @@ def convert_unary_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR(v.op)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION    (v.operand)
+    assert fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR  (v.op)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.operand)
 
     return z.create_Tree_Unary_Expression(
                v.lineno,
@@ -534,7 +534,7 @@ def convert_yield_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
     return z.create_Tree_Yield_Expression(
                v.lineno,

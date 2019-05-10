@@ -38,7 +38,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
-    from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
+    from    Z.Tree.Parameter_Tuple      import  fact_is_tree_parameter_tuple_0
 
 
 #
@@ -188,7 +188,7 @@ class Tree_Function_Definition(
         f.line()
 
         with f.indent_2(None, '>'):
-            self.parameters.dump_parameter_tokens(f)
+            self.parameters.dump_parameter_tuple_tokens(f)
 
             if len(self.decorator_list) == 0:
                 self._dump_body_tokens     (f, '{',                    '}')
@@ -210,9 +210,9 @@ def create_Tree_Function_Definition(line_number, column, name, parameters, body,
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_parser_symbol      (name)
-    assert fact_is_tree_parameters_all(parameters)
-    assert fact_is_full_native_list   (body)
-    assert fact_is_some_native_list   (decorator_list)
+    assert fact_is_parser_symbol         (name)
+    assert fact_is_tree_parameter_tuple_0(parameters)
+    assert fact_is_full_native_list      (body)
+    assert fact_is_some_native_list      (decorator_list)
 
     return Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list)

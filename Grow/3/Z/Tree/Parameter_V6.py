@@ -4,22 +4,22 @@
 
 
 #
-#   Z.Tree.Parameter_V5 - Implementation of tree parameters, Version 5.
+#   Z.Tree.Parameter_V6 - Implementation of tree parameters, Version 6.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 4 & Version 5.
+#   Difference between Version 5 & Version 6.
 #
-#       Version 4.
+#       Version 5.
 #
-#           Does not have a `Tree_Map_Parameter`.
+#           Parameters do not implement `Tree_Parameter_Tuple_0`.
 #
 #       Version 4:
 #
-#           Has a `Tree_Map_Parameter`
+#           Parameters implement `Tree_Parameter_Tuple_0`.
 #
 
 
@@ -33,12 +33,13 @@ from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
-    from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
-    from    Z.Parser.Symbol             import  fact_is_parser_symbol
-    from    Z.Tree.Parameter            import  fact_is_tree_parameter_0
+    from    Capital.Fact                        import  fact_is_positive_integer
+    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Native_String               import  fact_is__native_none__OR__full_native_string
+    from    Z.Parser.Symbol                     import  fact_is_parser_symbol
+    from    Z.Tree.Expression                   import  fact_is_tree_value_expression
+    from    Z.Tree.Parameter                    import  fact_is_tree_parameter_0
 
 
 #
@@ -71,6 +72,8 @@ class Tree_Map_Parameter(
         Tree_Special_Parameter,
         TRAIT_Tree_Parameter,
         TRAIT_Tree_Parameter_0,
+        TRAIT_Tree_Parameter_Tuple,
+        TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = (())
 
@@ -87,6 +90,13 @@ class Tree_Map_Parameter(
         f.arrange('<map-parameter **{}>', self.symbol)
 
 
+    #
+    #   Interface Tree_Parameter_Tuple
+    #
+    def dump_parameter_tuple_tokens(self, f):
+        f.line('<parameter-tuple map-parameter **{}>', self.symbol)
+
+
 @creator
 def create_Tree_Map_Parameter(symbol):
     assert fact_is_parser_symbol(symbol)
@@ -95,11 +105,87 @@ def create_Tree_Map_Parameter(symbol):
 
 
 #
+#   Tree: Keyword Parameter
+#
+class Tree_Keyword_Parameter(
+        TRAIT_Tree_Parameter,
+        TRAIT_Tree_Parameter_Tuple,
+        TRAIT_Tree_Parameter_Tuple_0,
+):
+    __slots__ = ((
+        'line_number',                  #   Positive_Integer
+        'column',                       #   Substantial_Integer
+
+        'symbol',                       #   Symbol
+        'value',                        #   Tree_Expression
+    ))
+
+
+    #
+    #   Protected
+    #
+    def __init__(self, line_number, column, symbol, value):
+        self.line_number = line_number
+        self.column      = column
+
+        self.symbol = symbol
+        self.value  = value
+
+
+    #
+    #   Interface Tree_Parameter
+    #
+    if __debug__:
+       #@replace
+        is_tree_keyword_parameter = True
+
+
+    def dump_parameter_tokens(self, f):
+        f.arrange('<keyword-parameter @{}:{} ', self.line_number, self.column)
+        self.symbol.dump_symbol_token(f)
+        f.write(' = ')
+        self.value.dump_value_expression_tokens(f)
+        f.greater_than_sign()
+
+
+    #
+    #   Interface Tree_Parameter_Tuple
+    #
+    def dump_parameter_tuple_tokens(self, f):
+        f.arrange('<parameter-tuple keyword-parameter @{}:{} ', self.line_number, self.column)
+        self.symbol.dump_symbol_token(f)
+        f.write(' = ')
+        self.value.dump_value_expression_tokens(f)
+        f.line('>')
+
+
+    #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<{} @{}:{} {} {}>',
+                      self.__class__.__name__, self.line_number, self.column, self.symbol, self.value)
+
+
+@creator
+def create_Tree_Keyword_Parameter(line_number, column, symbol, value):
+    assert fact_is_positive_integer   (line_number)
+    assert fact_is_substantial_integer(column)
+
+    assert fact_is_parser_symbol        (symbol)
+    assert fact_is_tree_value_expression(value)
+
+    return Tree_Keyword_Parameter(line_number, column, symbol, value)
+
+
+#
 #   Tree: Normal Parameter
 #
 class Tree_Normal_Parameter(
         Tree_Name_Branch,
         TRAIT_Tree_Parameter,
+        TRAIT_Tree_Parameter_Tuple,
+        TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = (())
 
@@ -113,7 +199,18 @@ class Tree_Normal_Parameter(
 
 
     def dump_parameter_tokens(self, f):
-        f.arrange('<normal-parameter @{}:{} {}>', self.line_number, self.column, self.symbol)
+        f.arrange('<normal-parameter @{}:{} ', self.line_number, self.column)
+        self.symbol.dump_symbol_token(f)
+        f.greater_than_sign()
+
+
+    #
+    #   Interface Tree_Parameter_Tuple
+    #
+    def dump_parameter_tuple_tokens(self, f):
+        f.arrange('<parameter-tuple normal-parameter @{}:{} ', self.line_number, self.column)
+        self.symbol.dump_symbol_token(f)
+        f.line('>')
 
 
 @creator
@@ -210,6 +307,8 @@ class Tree_Tuple_Parameter(
         Tree_Special_Parameter,
         TRAIT_Tree_Parameter,
         TRAIT_Tree_Parameter_0,
+        TRAIT_Tree_Parameter_Tuple,
+        TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = (())
 
@@ -224,6 +323,13 @@ class Tree_Tuple_Parameter(
 
     def dump_parameter_tokens(self, f):
         f.arrange('<tuple-parameter *{}>', self.symbol)
+
+
+    #
+    #   Interface Tree_Parameter_Tuple
+    #
+    def dump_parameter_tuple_tokens(self, f):
+        f.line('<parameter-tuple tuple-parameter **{}>', self.symbol)
 
 
 @creator

@@ -16,6 +16,7 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Z.Parser.Symbol                 import  TRAIT_Parser_Symbol_0
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter_0
+from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
@@ -25,6 +26,7 @@ from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 class Parser_None(
         TRAIT_Parser_Symbol_0,
         TRAIT_Tree_Parameter_0,
+        TRAIT_Tree_Parameter_Tuple_0,
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = (())
@@ -45,10 +47,21 @@ class Parser_None(
 
 
     #
-    #   Interface Tree_Suite_0
+    #   Interface Tree_Parameter_Tuple_0
     #
    #@replace
     suite_estimate = 0
+
+
+    def dump_parameter_tuple_tokens(self, f):
+        f.line('<parameters-tuple-0>')
+
+
+    #
+    #   Interface Tree_Suite_0
+    #
+   #@replace
+   #suite_estimate = 0      #   Done above in interface Tree_Parameter_Tuple_0
 
 
     #

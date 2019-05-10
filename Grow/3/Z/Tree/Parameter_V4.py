@@ -47,6 +47,8 @@
 
 from    Capital.Core                    import  creator
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
+from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple
+from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 from    Z.Tree.Name_V4                  import  Tree_Name_Branch
 
 
@@ -97,7 +99,8 @@ def create_Tree_Normal_Parameter(line_number, column, symbol):
 #       (i.e.: `_ast.Parameters`).
 #
 class Tree_Parameters_All(
-        TRAIT_Tree_Parameter,
+        TRAIT_Tree_Parameter_Tuple,
+        TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = ((
         'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
@@ -117,12 +120,7 @@ class Tree_Parameters_All(
     #
     #   Interface Tree_Parameter
     #
-    if __debug__:
-       #@replace
-        is_tree_parameters_all = True
-
-
-    def dump_parameter_tokens(self, f):
+    def dump_parameter_tuple_tokens(self, f):
         if (len(self.normal_parameters) == 0) and (self.tuple_parameter is self.map_parameter is None):
             assert len(self.defaults) == 0
 

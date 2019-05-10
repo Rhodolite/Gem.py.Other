@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Parser.Parser_Symbol_Tuple_V6 - Interface to a tuple of `Parser_Symbol`, Version 6.
+#   Z.Parser.Symbol_Tuple_V6 - Interface to a tuple of `Parser_Symbol`, Version 6.
 #
 
 

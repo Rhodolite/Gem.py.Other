@@ -30,8 +30,8 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Ellipsis_Index
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Extended_Slice_Index
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Simple_Index
@@ -86,7 +86,7 @@ assert Native_AbstractSyntaxTree_Simple_Index._fields     == (('value',))
 def convert_simple_index(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
     return z.create_Tree_Simple_Index(
                z.convert_expression(z, v.value),
@@ -105,9 +105,9 @@ assert Native_AbstractSyntaxTree_Slice_Index._fields     == (('lower', 'upper', 
 def convert_slice_index(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.lower)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.upper)
-    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v.step)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.lower)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.upper)
+    assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.step)
 
     return z.create_Tree_Slice_Index(
                z.convert_none_OR_expression(z, v.lower),

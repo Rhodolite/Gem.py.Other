@@ -35,7 +35,7 @@ if __debug__:
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
-    from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
+    from    Z.Tree.Parameter_Tuple      import  fact_is_tree_parameter_tuple_0
 
 
 #
@@ -637,7 +637,7 @@ class Tree_Lambda_Expression(
 
         with f.indent_2():
             with f.indent_2(header, '>'):
-                self.parameters.dump_parameter_tokens(f)
+                self.parameters.dump_parameter_tuple_tokens(f)
                 self.body.dump_value_expression_tokens(f)
                 f.line()
 
@@ -655,8 +655,8 @@ def create_Tree_Lambda_Expression(line_number, column, parameters, body):
     assert fact_is_positive_integer   (line_number)
     assert fact_is_substantial_integer(column)
 
-    assert fact_is_tree_parameters_all  (parameters)
-    assert fact_is_tree_value_expression(body)
+    assert fact_is_tree_parameter_tuple_0(parameters)
+    assert fact_is_tree_value_expression (body)
 
     return Tree_Lambda_Expression(line_number, column, parameters, body)
 

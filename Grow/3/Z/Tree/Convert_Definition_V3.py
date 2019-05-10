@@ -92,7 +92,7 @@ def convert_function_definition(z, v):
                v.col_offset,
 
                z.conjure_parser_symbol          (z, v.name),
-               z.convert_parameters_all         (z, v.args),
+               z.convert_parameter_tuple_0      (z, v.args),
                z.convert_full_list_of_statements(z, v.body),
                z.convert_some_list_of_decorators(z, v.decorator_list),
            )

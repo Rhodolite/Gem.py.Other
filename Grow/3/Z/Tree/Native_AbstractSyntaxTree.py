@@ -8,7 +8,6 @@
 
 
 from    _ast                            import  PyCF_ONLY_AST   as  native__COMPILE_FLAGS__ONLY__ABSTRACT_SYNTAX_TREE
-from    Capital.Core                    import  trace
 
 
 if __debug__:
@@ -367,50 +366,7 @@ if __debug__:
 
 
     def fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR(v):
-        if not isinstance(v, ANY__native__abstract_syntax_tree__BINARY_OPERATOR):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__BINARY_OPERATOR)
-
-        return True
-
-
-#
-#   fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v)
-#
-#       Assert that `v` is a `_ast.*` class that represents an expression.
-#
-#       (see `ANY__native__abstract_syntax_tree__EXPRESSION` below for the `_ast.*` classes that represent an
-#       expression).
-#
-if __debug__:
-    ANY__native__abstract_syntax_tree__EXPRESSION = ((
-            Native_AbstractSyntaxTree_Attribute_Expression,
-            Native_AbstractSyntaxTree_Backquote_Expression,
-            Native_AbstractSyntaxTree_Binary_Expression,
-            Native_AbstractSyntaxTree_Call_Expression,
-            Native_AbstractSyntaxTree_Compare_Expression,
-            Native_AbstractSyntaxTree_Generator_Comprehension,
-            Native_AbstractSyntaxTree_If_Expression,
-            Native_AbstractSyntaxTree_Lambda_Expression,
-            Native_AbstractSyntaxTree_List_Comprehension,
-            Native_AbstractSyntaxTree_List_Expression,
-            Native_AbstractSyntaxTree_Logical_Expression,
-            Native_AbstractSyntaxTree_Map_Comprehension,
-            Native_AbstractSyntaxTree_Map_Expression,
-            Native_AbstractSyntaxTree_Name,
-            Native_AbstractSyntaxTree_Number,
-            Native_AbstractSyntaxTree_Set_Comprehension,
-            Native_AbstractSyntaxTree_Set_Expression,
-            Native_AbstractSyntaxTree_String,
-            Native_AbstractSyntaxTree_Subscript_Expression,
-            Native_AbstractSyntaxTree_Tuple_Expression,
-            Native_AbstractSyntaxTree_Unary_Expression,
-        ))
-
-
-    def fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v):
-        assert isinstance(v, ANY__native__abstract_syntax_tree__EXPRESSION)
 
         return True
 
@@ -452,9 +408,6 @@ if __debug__:
 
 
     def fact_is__ANY__native__abstract_syntax_tree__INDEX(v):
-        if not isinstance(v, ANY__native__abstract_syntax_tree__INDEX):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__INDEX)
 
         return True
@@ -494,9 +447,6 @@ if __debug__:
 
 
     def fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR(v):
-        if not isinstance(v, ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR)
 
         return True
@@ -520,9 +470,6 @@ if __debug__:
 
 
     def fact_is__ANY__native__abstract_syntax_tree__MODIFY_OPERATOR(v):
-        if not isinstance(v, ANY__native__abstract_syntax_tree__MODIFY_OPERATOR):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__MODIFY_OPERATOR)
 
         return True
@@ -547,9 +494,6 @@ if __debug__:
 
 
     def fact_is__ANY__native__abstract_syntax_tree__TARGET(v):
-        if not isinstance(v, ANY__native__abstract_syntax_tree__TARGET):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__TARGET)
 
         return True
@@ -573,10 +517,47 @@ if __debug__:
 
 
     def fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR(v):
-        if not isinstance(v, ANY__native__abstract_syntax_tree__UNARY_OPERATOR):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__UNARY_OPERATOR)
+
+        return True
+
+
+#
+#   fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v)
+#
+#       Assert that `v` is a `_ast.*` class that represents a value expression.
+#
+#       (see `ANY__native__abstract_syntax_tree__VALUE_EXPRESSION` below for the `_ast.*` classes that represent a
+#       value expression).
+#
+if __debug__:
+    ANY__native__abstract_syntax_tree__VALUE_EXPRESSION = ((
+            Native_AbstractSyntaxTree_Attribute_Expression,
+            Native_AbstractSyntaxTree_Backquote_Expression,
+            Native_AbstractSyntaxTree_Binary_Expression,
+            Native_AbstractSyntaxTree_Call_Expression,
+            Native_AbstractSyntaxTree_Compare_Expression,
+            Native_AbstractSyntaxTree_Generator_Comprehension,
+            Native_AbstractSyntaxTree_If_Expression,
+            Native_AbstractSyntaxTree_Lambda_Expression,
+            Native_AbstractSyntaxTree_List_Comprehension,
+            Native_AbstractSyntaxTree_List_Expression,
+            Native_AbstractSyntaxTree_Logical_Expression,
+            Native_AbstractSyntaxTree_Map_Comprehension,
+            Native_AbstractSyntaxTree_Map_Expression,
+            Native_AbstractSyntaxTree_Name,
+            Native_AbstractSyntaxTree_Number,
+            Native_AbstractSyntaxTree_Set_Comprehension,
+            Native_AbstractSyntaxTree_Set_Expression,
+            Native_AbstractSyntaxTree_String,
+            Native_AbstractSyntaxTree_Subscript_Expression,
+            Native_AbstractSyntaxTree_Tuple_Expression,
+            Native_AbstractSyntaxTree_Unary_Expression,
+        ))
+
+
+    def fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v):
+        assert isinstance(v, ANY__native__abstract_syntax_tree__VALUE_EXPRESSION)
 
         return True
 
@@ -606,6 +587,18 @@ if __debug__:
 
 
 #
+#   fact_is__native__abstract_syntax_tree__name(v)
+#
+#       Assert that `v` is a `Native_AbstractSyntaxTree_Name` instance.
+#
+if __debug__:
+    def fact_is__native__abstract_syntax_tree__name(v):
+        assert type(v) is Native_AbstractSyntaxTree_Name
+
+        return True
+
+
+#
 #   fact_is__native__abstract_syntax_tree__parameter_context(v)
 #
 #       Assert that `v` is a `Native_AbstractSyntaxTree_Parameter_Context` (i.e.: `_ast.Param`)
@@ -630,27 +623,6 @@ if __debug__:
 
 
 #
-#   fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v)
-#
-#       Assert that `v` is either `None` or a `_ast.*` class that represents an expression.
-#
-#       (see `ANY__native__abstract_syntax_tree__EXPRESSION` above for the `_ast.*` classes that represent an
-#       expression).
-#
-if __debug__:
-    def fact_is___native_none___OR___ANY__native__abstract_syntax_tree__EXPRESSION(v):
-        if v is None:
-            return True
-
-        if not isinstance(v, ANY__native__abstract_syntax_tree__EXPRESSION):
-            trace('v: {}', v)
-
-        assert isinstance(v, ANY__native__abstract_syntax_tree__EXPRESSION)
-
-        return True
-
-
-#
 #   fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET(v)
 #
 #       Assert that `v` is either `None` or a `_ast.*` class that represents an target.
@@ -662,10 +634,25 @@ if __debug__:
         if v is None:
             return True
 
-        if not isinstance(v, ANY__native__abstract_syntax_tree__TARGET):
-            trace('v: {}', v)
-
         assert isinstance(v, ANY__native__abstract_syntax_tree__TARGET)
+
+        return True
+
+
+#
+#   fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v)
+#
+#       Assert that `v` is either `None` or a `_ast.*` class that represents a value expression.
+#
+#       (see `ANY__native__abstract_syntax_tree__VALUE_EXPRESSION` above for the `_ast.*` classes that represent a
+#       value expression).
+#
+if __debug__:
+    def fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v):
+        if v is None:
+            return True
+
+        assert isinstance(v, ANY__native__abstract_syntax_tree__VALUE_EXPRESSION)
 
         return True
 

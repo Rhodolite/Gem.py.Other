@@ -53,7 +53,6 @@ if __debug__:
     from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
-    from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
     from    Z.Tree.Suite                import  fact_is_tree_suite
     from    Z.Tree.Suite                import  fact_is_tree_suite_0
     from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target

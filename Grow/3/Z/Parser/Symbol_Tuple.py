@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Parser.Parser_Symbol_Tuple - Interface to a tuple of `Parser_Symbol`.
+#   Z.Parser.Symbol_Tuple - Interface to a tuple of `Parser_Symbol`.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -36,6 +36,7 @@ class TRAIT_Parser_Symbol_Tuple(object):
 
     if __debug__:
         is_parser_symbol_tuple = True
+        
 
 
 #

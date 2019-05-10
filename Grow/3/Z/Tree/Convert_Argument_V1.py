@@ -19,7 +19,7 @@ from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_
 if __debug__:
     from    Capital.Native_String               import  fact_is_full_native_string
     from    Capital.Fact                        import  fact_is_some_native_list
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Keyword_Argument
 
 
@@ -33,8 +33,8 @@ assert Native_AbstractSyntaxTree_Keyword_Argument._fields     == (('arg', 'value
 
 
 def convert_keyword_argument(v):
-    assert fact_is_full_native_string                            (v.arg)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.value)
+    assert fact_is_full_native_string                                  (v.arg)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
     return create_Tree_Keyword_Argument(
                v.arg,

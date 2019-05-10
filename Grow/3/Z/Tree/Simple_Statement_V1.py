@@ -25,7 +25,6 @@ if __debug__:
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
-    from    Z.Tree.Parameter            import  fact_is_tree_parameters_all
     from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
     from    Z.Tree.Target               import  fact_is_tree_store_target
 

@@ -91,7 +91,7 @@ def convert_name_parameter(z, v):
 
 
 #
-#   convert_parameters_all(z, v)
+#   convert_parameter_tuple_0(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameters_All`.
 #
@@ -99,7 +99,7 @@ assert Native_AbstractSyntaxTree_Parameters_All._attributes == (())
 assert Native_AbstractSyntaxTree_Parameters_All._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
 
 
-def convert_parameters_all(z, v):
+def convert_parameter_tuple_0(z, v):
     assert fact_is_convert_zone(z)
 
     assert fact_is_some_native_list                    (v.args)
@@ -108,10 +108,10 @@ def convert_parameters_all(z, v):
     assert fact_is_some_native_list                    (v.defaults)
 
     return z.create_Tree_Parameters_All(
-               z.convert_some_list_of_name_parameters(z, v.args),
-               convert_tuple_parameter               (z, v.vararg),
-               convert_map_parameter                 (z, v.kwarg),
-               z.convert_some_list_of_expressions    (z, v.defaults),
+               convert_some_list_of_name_parameters(z, v.args),
+               convert_tuple_parameter             (z, v.vararg),
+               convert_map_parameter               (z, v.kwarg),
+               z.convert_some_list_of_expressions  (z, v.defaults),
            )
 
 

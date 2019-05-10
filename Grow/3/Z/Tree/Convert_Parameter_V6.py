@@ -4,35 +4,26 @@
 
 
 #
-#   Z.Tree.Convert_Parameter_V5 - Convert Python Abstract Syntax Tree Parameters to Tree classes, Version 5.
+#   Z.Tree.Convert_Parameter_V6 - Convert Python Abstract Syntax Tree Parameters to Tree classes, Version 6.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 4 & Version 5.
+#   Difference between Version 5 & Version 6.
 #
 #       Version 4:
 #
-#           1)  `convert_map_parameter`   converts to either `None` or the [same] `Full_Native_String`.
-#
-#           2)  `convert_tuple_parameter` converts to either `None` or the [same] `Full_Native_String`.
-#
-#           3)  The other routines are the same as in Version 4.
+#           `convert_parameter_tuple_0` converts to `Tree_Parameters_All`
 #
 #       Version 5:
 #
-#           1)  `convert_map_parameter`   converts to `Tree_Parameter_0`.
-#
-#           2)  `convert_tuple_parameter` converts to `Tree_Parameter_0`.
-#
-#           3)  The other routines are the same as in Version 3.
+#           `convert_parameter_tuple_0` converts to `Tree_Parameter_Tuple_0`
 #
 
 
 from    Z.Parser.None                       import  parser_none
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -42,9 +33,42 @@ if __debug__:
     from    Capital.Native_String               import  fact_is_full_native_string
     from    Capital.Native_String               import  fact_is__native_none__OR__full_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__name
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
+
+
+#
+#   convert_map_parameter(z, v, value)
+#
+#       Convert a `v` and `value` to `Tree_Keyword_Parameter`.
+#
+#       `v` must be a `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`), and the context (`.ctx` member) MUST BE a
+#       `Native_AbstractSyntaxTree_Parameter_Context`.
+#
+#   SEE ALSO
+#
+#       `convert_name_parameter` below, which is very similiar, but without a `value`.
+#
+def convert_keyword_parameter(z, v, value):
+    assert fact_is_convert_zone(z)
+
+    assert fact_is_positive_integer   (v.lineno)
+    assert fact_is_substantial_integer(v.col_offset)
+
+    assert fact_is_full_native_string                                  (v.id)
+    assert fact_is__native__abstract_syntax_tree__parameter_context    (v.ctx)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(value)
+
+    return z.create_Tree_Keyword_Parameter(
+               v.lineno,
+               v.col_offset,
+
+               z.conjure_parser_symbol(z, v.id),
+               z.convert_expression   (z, value),
+           )
 
 
 #
@@ -104,7 +128,7 @@ def convert_name_parameter(z, v):
 #
 #   convert_parameter_tuple_0(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameters_All`.
+#       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameter_Tuple_0`.
 #
 assert Native_AbstractSyntaxTree_Parameters_All._attributes == (())
 assert Native_AbstractSyntaxTree_Parameters_All._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
@@ -118,12 +142,71 @@ def convert_parameter_tuple_0(z, v):
     assert fact_is__native_none__OR__full_native_string(v.kwarg)
     assert fact_is_some_native_list                    (v.defaults)
 
-    return z.create_Tree_Parameters_All(
-               convert_some_list_of_name_parameters(z, v.args),
-               convert_tuple_parameter             (z, v.vararg),
-               convert_map_parameter               (z, v.kwarg),
-               z.convert_some_list_of_expressions  (z, v.defaults),
-           )
+    total = 0
+
+    #
+    #<name-parameters>
+    #
+    #   Also handles `Tree_Keyword_Parameter`
+    #
+    start_keywords = len(v.args) - len(v.defaults)
+
+    for [index, w] in enumerate(v.args):
+        if index < start_keywords:
+            x = convert_name_parameter(z, w)
+        else:
+            x = convert_keyword_parameter(z, w, v.defaults[index - start_keywords])
+
+        if total == 0:
+            first = x
+            total = 1
+        elif total == 1:
+            many  = [first, x]
+            total = 2
+        else:
+            many.append(x)
+    #</name-parameters>
+
+    #
+    #<tuple-parameter>
+    #
+    x = convert_tuple_parameter(z, v.vararg)
+
+    if x.has_tree_parameter:
+        if total == 0:
+            first = x
+            total = 1
+        elif total == 1:
+            many  = [first, x]
+            total = 2
+        else:
+            many.append(x)
+    #</tuple-parameter>
+
+
+    #
+    #<map-parameter>
+    #
+    x = convert_tuple_parameter(z, v.kwarg)
+
+    if x.has_tree_parameter:
+        if total == 0:
+            total = 1
+            first = x
+        elif total == 1:
+            many  = [first, x]
+            total = 2
+        else:
+            many.append(x)
+    #</tuple-parameter>
+
+    if total == 0:
+        return parser_none
+
+    if total == 1:
+        return first
+
+    return z.create_Tree_Parameter_Tuple(many)
 
 
 #
@@ -148,17 +231,3 @@ def convert_tuple_parameter(z, v):
     return z.create_Tree_Tuple_Parameter(
                z.conjure_parser_symbol(z, v),
            )
-
-
-#
-#   convert_some_list_of_name_parameters(z, v)
-#
-#       Convert a `SomeNativeList of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
-#       `SomeNativeList of SyntaxTree_Name`.
-#
-#       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
-#       of type `Native_AbstractSyntaxTree_Parameter`.
-#
-convert_some_list_of_name_parameters = (
-        produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_name_parameter)
-    )

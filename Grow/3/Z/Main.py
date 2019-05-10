@@ -3,7 +3,8 @@
 #
 
 
-version = 18
+version = 16
+#version = 19
 
 
 #
@@ -147,7 +148,7 @@ def Z_main():
     except ValueError:
         v = None
 
-    if 1 <= v <= 18:
+    if 1 <= v <= 20:
         return command_development(v)
 
     return USAGE('unknown command: {}', command)

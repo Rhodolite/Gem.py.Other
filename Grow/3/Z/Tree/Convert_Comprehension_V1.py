@@ -23,7 +23,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_positive_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__EXPRESSION
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Comprehension_Clause
 
@@ -39,9 +39,9 @@ assert Native_AbstractSyntaxTree_Comprehension_Clause._fields     == (('target',
 
 
 def convert_comprehension_clause(v):
-    assert fact_is__ANY__native__abstract_syntax_tree__TARGET    (v.target)
-    assert fact_is__ANY__native__abstract_syntax_tree__EXPRESSION(v.iter)
-    assert fact_is_some_native_list                              (v.ifs)
+    assert fact_is__ANY__native__abstract_syntax_tree__TARGET          (v.target)
+    assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.iter)
+    assert fact_is_some_native_list                                    (v.ifs)
 
     return create_Tree_Comprehension_Clause(
                convert_target                  (v.target),

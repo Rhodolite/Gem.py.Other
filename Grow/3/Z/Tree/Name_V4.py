@@ -82,7 +82,7 @@ class Tree_Name_Branch(object):
         self.line_number = line_number
         self.column      = column
 
-        self.symbol  = symbol
+        self.symbol = symbol
 
 
     #

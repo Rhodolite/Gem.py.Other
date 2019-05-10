@@ -109,7 +109,7 @@ tree_load_context = create_Tree_Load_Context()
 
 
 #
-#   Tree: Parameter Context - A "parameter" context in `Tree_Parameters_All`.
+#   Tree: Parameter Context - A "parameter" context.
 #
 class Tree_Parameter_Context(
         TRAIT_Tree_Context,

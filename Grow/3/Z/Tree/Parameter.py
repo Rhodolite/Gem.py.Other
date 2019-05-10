@@ -13,7 +13,7 @@
 #
 #   TREE_PARAMETER
 #
-#       Currently:
+#       Version 1:
 #
 #           `Tree_Parameter`            - Base interface of parameters.
 #
@@ -23,7 +23,7 @@
 #
 #           `Tree_Parameters_All`       - All the parameters.
 #
-#       Future:
+#       Version 6:
 #
 #           `Tree_Normal_Parameter`     - A normal parameter.
 #
@@ -31,7 +31,7 @@
 #
 #           `Tree_Tuple_Parameter`      - A tuple parameter (representing a variable argument list).
 #
-#           `Tree_Parameters_Many`      - More than one parameter.
+#           `Tree_Parameter_Tuple`      - More than one parameter.
 #
 #       Example:
 #
@@ -39,7 +39,7 @@
 #
 #               def f(a, b, c, d = 7, e = "eight", *g, **h): pass
 #
-#           Currently:
+#           Verify 1:
 #
 #               Has the following parameters:
 #
@@ -137,7 +137,6 @@
 #           is_tree_keyword_parameter : boolean
 #           is_tree_map_parameter     : boolean
 #           is_tree_normal_parameter  : boolean
-#           is_tree_parameters_all    : boolean
 #           is_tree_parameter         := true
 #           is_tree_tuple_parameter   : boolean
 #
@@ -153,9 +152,6 @@ class TRAIT_Tree_Parameter(object):
         is_tree_normal_parameter = False
     
         is_tree_parameter = True
-
-       #@virtual
-        is_tree_parameters_all = False
 
 
 
@@ -201,8 +197,6 @@ class TRAIT_Tree_Parameter_0(object):
 #
 #       v.is_tree_parameter_0                       #   Test if `v` is a `Tree_Parameter_0`.
 #
-#       v.is_tree_parameters_all                    #   Test if `v` is a `Tree_Parameters_All`.
-#
 #       v.is_tree_tuple_parameter                   #   Test if `v` is a [tree] tuple parameter.
 #
 #       assert fact_is_tree_keyword_parameter(v)    #   Assert that `v` is a [tree] keyword parameter.
@@ -214,8 +208,6 @@ class TRAIT_Tree_Parameter_0(object):
 #       assert fact_is_tree_parameter(v)            #   Assert that `v` is a `Tree_Parameter`.
 #
 #       assert fact_is_tree_parameter_0(v)          #   Assert that `v` is a `Tree_Parameter_0`.
-#
-#       assert fact_is_tree_parameters_all(v)       #   Assert that `v` is a `Tree_Parameters_All`.
 #
 #       assert fact_is_tree_tuple_parameter(v)      #   Assert that `v` is a [tree] tuple parameter.
 #
@@ -247,15 +239,5 @@ if __debug__:
 if __debug__:
     def fact_is_tree_parameter_0(v):
         assert v.is_tree_parameter_0
-
-        return True
-
-
-#
-#   fact_is_tree_parameters_all(v) - Assert that `v` is a `Tree_Parameters_All`.
-#
-if __debug__:
-    def fact_is_tree_parameters_all(v):
-        assert v.is_tree_parameters_all
 
         return True
