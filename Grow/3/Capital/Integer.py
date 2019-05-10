@@ -46,7 +46,7 @@ from    Capital.Core                    import  export
 #
 #   interface Some_Integer
 #       method
-#           python_code()   : Full_Native_String
+#           python_code() => Full_Native_String
 #
 #       attribute
 #           is_contrary_integer : Boolean

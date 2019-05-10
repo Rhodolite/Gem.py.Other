@@ -28,7 +28,7 @@
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  creator
 from    Capital.Core                        import  export
-from    Capital.Native_String               import  Full_Native_String
+from    Capital.Native_String               import  Native_String
 from    Capital.Maybe_Temporary             import  TRAIT_Maybe_Temporary_0
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.None                       import  parser_none
@@ -48,7 +48,7 @@ if __debug__:
 #   Parser: Symbol [Leaf]
 #
 class Parser_Symbol_Leaf(
-        Full_Native_String,
+        Native_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Parser_Module_Name,
         TRAIT_Parser_Symbol,

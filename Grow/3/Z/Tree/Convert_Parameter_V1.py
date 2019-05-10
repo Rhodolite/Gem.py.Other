@@ -33,13 +33,13 @@ if __debug__:
 #
 #       "Convert" `None` to `None`.
 #
-#       "Convert" a full `Full_Native_String` to the [same] `Full_Native_String`
+#       "Convert" a `Full_Native_String` to the [same] `Full_Native_String`
 #
 #   FUTURE:
 #       Will convert `Full_Native_String` to `Tree_Map_Parameter`.
 #
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
-#       a full `Full_Native_String` to the [same] `Full_Native_String`.
+#       a `Full_Native_String` to the [same] `Full_Native_String`.
 #
 def convert_map_parameter(v):
     assert fact_is__native_none__OR__full_native_string(v)

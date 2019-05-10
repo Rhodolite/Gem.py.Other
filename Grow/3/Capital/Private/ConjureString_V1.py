@@ -83,9 +83,9 @@ provide_string = string_cache.setdefault
 #
 #   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
-#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#       `s` must be a `Full_Native_String` (i.e.: `str` instance, with a length greater than 0).
 #
-#       `s` may *NOT* be an instance of a subclass of `str`.
+#       `s` may *NOT* be an instance of a subclass of `Native_String` (i.e.: `str`).
 #
 #   EXCEPTIONS
 #
@@ -139,7 +139,7 @@ def conjure_full_string(s):
 #
 #   conjure_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
-#       `s` must be of a `Native_String` (i.e.: `str`).
+#       `s` must be a `Native_String` (i.e.: `str` instance).
 #
 #       `s` may *NOT* be an instance of a subclass of `Native_String` (i.e.: `str`).
 #

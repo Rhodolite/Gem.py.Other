@@ -19,9 +19,6 @@
 #
 #           String classes use `Native_String` (i.e.: `str`) as their base class.
 #
-#           (although some string classes use `Full_Native_String` (also: `str`) as their base class,
-#           to indicate they only handle "full" strings).
-#
 
 
 from    Capital.Core                    import  creator

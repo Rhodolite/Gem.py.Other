@@ -64,7 +64,7 @@ def convert_global_statement(z, v):
 #
 #   convert_list_of_parser_symbols(z, v)
 #
-#       Convert a `Full_Native_List of Full_Native_String` to a `Full_Native_List of Parser_Symbol`.
+#       Convert a `Full_Native_List of Native_String` to a `Full_Native_List of Parser_Symbol`.
 #
 def convert_list_of_parser_symbols(z, v):
     assert fact_is_convert_zone(z)

@@ -34,9 +34,9 @@ if __debug__:
 #
 #           `conjure_full_string(s)` - Conjure a `Full_String_Type`, based on `s`.  Guarantees Uniqueness.
 #
-#                `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#                `s` must be a `Full_Native_String` (i.e.: `str` instance, with a length greater than 0).
 #
-#                `s` may *NOT* be an instance of a subclass of `str`.
+#                `s` may *NOT* be an instance of a subclass of `Native_String` (i.e.: `str`).
 #
 #           EXCEPTION
 #
@@ -50,7 +50,7 @@ if __debug__:
 #
 #           `Capital.Private.ConjureString_V7.produce_conjure_X_functions`:
 #
-#               1)  Does not take a `function_name`, but always names the function `"conjure_full_string"`.
+#               1)  Does not take a `function_name`.
 #
 #               2)  Produces two functions, a `conjure_full_string` function and a `conjure_string` function.
 #

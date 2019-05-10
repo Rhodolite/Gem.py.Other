@@ -112,7 +112,7 @@ class Empty_String_Leaf(
     #
     #   .__format__ (format_specification)  - Format `String`
     #
-    #       Delegated to the `Empty_Native_String` implementation via `.interned_s`.
+    #       Delegated to the `Native_String` implementation via `.interned_s`.
     #
     __format__ = method__String__operator_format
 
@@ -184,7 +184,7 @@ class Full_String_Leaf(
     #
     #   .__format__ (format_specification)  - Format `String`
     #
-    #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
+    #       Delegated to the `Native_String` implementation via `.interned_s`.
     #
     __format__ = method__String__operator_format
 
@@ -192,7 +192,7 @@ class Full_String_Leaf(
     #
     #   .__len__()  - Return the length.
     #
-    #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
+    #       Delegated to the `Native_String` implementation via `.interned_s`.
     #
     def __len__(self):
         return self.interned_s.__len__()
@@ -225,7 +225,7 @@ class Full_String_Leaf(
     #
     #   CURRENT
     #
-    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `Native_String` representation (i.e: `str.__repr__`) via `.interned_s`.
     #
     #   FUTURE:
     #

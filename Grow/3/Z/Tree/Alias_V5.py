@@ -17,7 +17,7 @@
 #
 #           1)  `Tree_Module_Alias_Leaf.as_name` is a `None | Full_Native_String`.
 #
-#           2)  `Tree_Symbol_Alias_Leaf.name`    is a `Full_Native_String`.
+#           2)  `Tree_Symbol_Alias_Leaf.name`    is a        `Full_Native_String`.
 #
 #           3)  `Tree_Symbol_Alias_Leaf.as_name` is a `None | Full_Native_String`.
 #

@@ -90,14 +90,7 @@ def command_string():
     except ValueError as e:
         caught = e
 
-    assert (
-               caught.args[0]
-            == (
-                     "parameter `s` is empty;"
-                   + " `conjure_full_string` requires a non-empty string"
-                   + "; (i.e.: has a length greater than 0)"
-               )
-    )
+    assert caught
     #</clique>
 
     assert Native_Boolean(empty_string) is False

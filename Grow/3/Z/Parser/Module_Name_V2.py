@@ -23,21 +23,22 @@
 
 from    Capital.Core                        import  arrange
 from    Capital.Core                        import  export
-from    Capital.Native_String               import  Full_Native_String
+from    Capital.Native_String               import  Native_String
 from    Capital.Maybe_Temporary             import  TRAIT_Maybe_Temporary_0
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
 
 
 if __debug__:
-    from    Capital.Core                    import  FATAL
+    from    Capital.Cannot                  import  raise__CANNOT__create__ERROR
+    from    Capital.Cannot                  import  raise__CANNOT__construct__ERROR
 
 
 #
 #   Parser: Module Name With Dot
 #
 class Parser_Module_Name_With_Dot(
-        Full_Native_String,
+        Native_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Parser_Module_Name,
 ):
@@ -48,15 +49,8 @@ class Parser_Module_Name_With_Dot(
     #   Private
     #
     if __debug__:
-        def __new__(Meta, s):
-            FATAL('{}, A Parser_Module_Name_With_Dot not be created'
-                  "Parser_Module_Name_With_Dot.operator new (`__new__`)")
-
-
-    if __debug__:
-        def __init__(self, s):
-            FATAL('{}, A Parser_Module_Name_With_Dot not be constructed'
-                  "Parser_Module_Name_With_Dot.constructor (`__init__`)")
+        __init__ = raise__CANNOT__construct__ERROR
+        __new__  = raise__CANNOT__create__ERROR
 
 
     #

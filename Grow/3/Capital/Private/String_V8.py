@@ -34,8 +34,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
-from    Capital.Native_String           import  Empty_Native_String
-from    Capital.Native_String           import  Full_Native_String
+from    Capital.Native_String           import  Native_String
 from    Capital.String                  import  TRAIT_Empty_String
 from    Capital.String                  import  TRAIT_Full_String
 from    Capital.String                  import  TRAIT_String
@@ -69,7 +68,7 @@ def property__String__native_string_subclass(self):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String_Leaf(
-        Empty_Native_String,
+        Native_String,
         TRAIT_Empty_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_String,
@@ -92,7 +91,7 @@ class Empty_String_Leaf(
 
 
     #
-    #   .format(format_specification) - Inherited from `Empty_Native_String`.
+    #   .format(format_specification) - Inherited from `Native_String`.
     #
 
 
@@ -117,7 +116,7 @@ class Empty_String_Leaf(
     #
     #   .python_code()
     #
-    #       Return a `Full_Native_String` that is the python code that python will compile to a `Empty_Native_String`
+    #       Return a `Full_Native_String` that is the python code that python will compile to a `Native_String`
     #       with the same characters.
     #
     @staticmethod
@@ -126,16 +125,16 @@ class Empty_String_Leaf(
 
 
 #
-#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#   method__Native_String__representation - The python implemention of `repr` for `Native_String` (i.e.: `str.__repr__`).
 #
-method__Full_Native_String__representation = Full_Native_String.__repr__
+method__Native_String__representation = Native_String.__repr__
 
 
 #
 #   Full String - A wrapper around a full native string.
 #
 class Full_String_Leaf(
-        Full_Native_String,
+        Native_String,
         TRAIT_Full_String,
         TRAIT_Maybe_Temporary_0,
         TRAIT_String,
@@ -198,7 +197,7 @@ class Full_String_Leaf(
     #
     #   CURRENT
     #
-    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__`).
+    #       For now, we just use the `Native_String` representation (i.e: `str.__repr__`).
     #
     #   FUTURE:
     #
@@ -210,7 +209,7 @@ class Full_String_Leaf(
     #       Also, really, we want to code generate the `portray_python_string` ... so will wait until the
     #       code generator can generate that function, before using it.
     #
-    python_code = method__Full_Native_String__representation
+    python_code = method__Native_String__representation
 
 
 @creator

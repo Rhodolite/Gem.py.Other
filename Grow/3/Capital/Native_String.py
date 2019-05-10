@@ -12,19 +12,19 @@ from    Capital.System                  import  is_python_2
 
 
 #
-#   Empty_Native_String - An empty native string (i.e.: `str` that has 0 characters).
+#   Empty_Native_String - An empty native string (i.e.: `str` that has a length of 0).
 #
 Empty_Native_String = str
 
 
 #
-#   Full_Native_String - A full native string (i.e.: `str` that has at least 1 characater).
+#   Full_Native_String - A full native string (i.e.: `str` that has a length greater than 0).
 #
 Full_Native_String = str
 
 
 #
-#   Native_String - A native string (i.e.: `str`)
+#   Native_String - A native string (i.e.: `str`).  Either empty or full.
 #
 Native_String = str
 
@@ -114,7 +114,9 @@ if __debug__:
 
 
 #
-#   fact_is_native_string(s) - Assert that `s` is a *DIRECT* `Native_String` (i.e.: `str`) instance.
+#   fact_is_native_string(s)
+#
+#       Assert that `s` is a *DIRECT* `Native_String` (i.e.: `str`) instance.
 #
 #       `s` may *NOT* be an instance of a subclass of `Native_String` (i.e.: `str`).
 #

@@ -14,8 +14,6 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
-from    Capital.Native_String           import  Empty_Native_String
-from    Capital.Native_String           import  Full_Native_String
 from    Capital.String                  import  TRAIT_Empty_String
 from    Capital.String                  import  TRAIT_Full_String
 
@@ -85,7 +83,7 @@ class Zero_Leaf(
     #
     #   .python_code()
     #
-    #       Return a `Full_Native_String` that is the python code that python will compile to a `Some_Native_Integer`
+    #       Return a `Full_Native_String` that is the python code that python will compile to a `Native_Integer`
     #       with the same value as the `Some_Native_Integer` that `self` wraps.
     #
     @staticmethod
@@ -94,9 +92,9 @@ class Zero_Leaf(
 
 
 #
-#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#   method__Native_String__representation - The python implemention of `repr` for `Native_String` (i.e.: `str.__repr__`).
 #
-method__Some_Native_Integer__representation = Some_Native_Integer.__repr__
+method__Native_String__representation = Some_Native_Integer.__repr__
 
 
 #
@@ -167,7 +165,7 @@ class Negative_Integer_Leaf(
     #
     #   CURRENT
     #
-    #       For now, we just use the `Full_Native_String` representation (i.e: `str.__repr__`).
+    #       For now, we just use the `Native_Integer` representation (i.e: `int.__repr__`).
     #
     #   FUTURE:
     #
@@ -179,7 +177,7 @@ class Negative_Integer_Leaf(
     #       Also, really, we want to code generate the `portray_python_string` ... so will wait until the
     #       code generator can generate that function, before using it.
     #
-    python_code = method__Full_Native_String__representation
+    python_code = method__Native_Integer__representation
 
 
 @creator
