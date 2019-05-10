@@ -15,7 +15,7 @@ from    Capital.Core                    import  creator
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
 
 
 #
@@ -23,7 +23,7 @@ if __debug__:
 #
 class Tree_Module(object):
     __slots__ = ((
-        'body',                         #   Some_Native_List of Tree_Statement
+        'body',                         #   Native_List of Tree_Statement
     ))
 
 
@@ -43,6 +43,6 @@ class Tree_Module(object):
 
 @creator
 def create_Tree_Module(body):
-    assert fact_is_some_native_list(body)
+    assert fact_is_native_list(body)
 
     return Tree_Module(body)

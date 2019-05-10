@@ -19,7 +19,7 @@
 #
 #           2)  A           list of statements is stored as `Full_Native_List of Tree_Statement`.
 #
-#           3)  An optional list of statements is stored as `Some_Native_List of Tree_Statement`.
+#           3)  An optional list of statements is stored as `Native_List of Tree_Statement`.
 #
 #       Version 4..6:
 #
@@ -45,9 +45,9 @@ from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Parameter_Tuple      import  fact_is_tree_parameter_tuple_0
     from    Z.Tree.Suite                import  fact_is_tree_suite
@@ -66,9 +66,9 @@ class Tree_Class_Definition(
         'column',                       #   Keen_Native_Integer
 
         'name',                         #   Parser_Symbol
-        'bases',                        #   Some_Native_List of Tree_Value_Expression
+        'bases',                        #   Native_List of Tree_Value_Expression
         'body',                         #   Tree_Suite
-        'decorator_list',               #   Some_Native_List of Tree_Decorator
+        'decorator_list',               #   Native_List of Tree_Decorator
     ))
 
 
@@ -138,10 +138,10 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_parser_symbol     (name)
-    assert fact_is_some_native_list  (bases)
-    assert fact_is_tree_suite        (body)
-    assert fact_is_some_native_list  (decorator_list)
+    assert fact_is_parser_symbol(name)
+    assert fact_is_native_list  (bases)
+    assert fact_is_tree_suite   (body)
+    assert fact_is_native_list  (decorator_list)
 
     return Tree_Class_Definition(line_number, column, name, bases, body, decorator_list)
 
@@ -161,7 +161,7 @@ class Tree_Function_Definition(
         'name',                         #   Parser_Symbol
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_Suite
-        'decorator_list',               #   Some_Native_List of Tree_Decorator
+        'decorator_list',               #   Native_List of Tree_Decorator
     ))
 
 
@@ -227,6 +227,6 @@ def create_Tree_Function_Definition(line_number, column, name, parameters, body,
     assert fact_is_parser_symbol         (name)
     assert fact_is_tree_parameter_tuple_0(parameters)
     assert fact_is_tree_suite            (body)
-    assert fact_is_some_native_list      (decorator_list)
+    assert fact_is_native_list           (decorator_list)
 
     return Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list)

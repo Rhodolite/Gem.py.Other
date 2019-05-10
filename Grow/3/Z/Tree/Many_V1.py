@@ -19,9 +19,9 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
@@ -38,7 +38,7 @@ class Tree_Many_Expression(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
+        'elements',                     #   Native_List of (Tree_Store_Target | Tree_Value_Expression)
         'context',                      #   Tree_Context
     ))
 
@@ -133,8 +133,8 @@ def create_Tree_Many_Expression(Meta, line_number, column, elements, context):
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_some_native_list(elements)
-    assert fact_is_tree_context    (context)
+    assert fact_is_native_list (elements)
+    assert fact_is_tree_context(context)
 
     return Meta(line_number, column, elements, context)
 

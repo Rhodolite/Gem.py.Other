@@ -27,7 +27,7 @@ from    Z.Parser.None                       import  parser_none
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_String               import  fact_is_full_native_string
@@ -137,10 +137,10 @@ assert Native_AbstractSyntaxTree_All_Parameters._fields     == (('args', 'vararg
 def convert_parameter_tuple_0(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is_some_native_list                    (v.args)
+    assert fact_is_native_list                         (v.args)
     assert fact_is__native_none__OR__full_native_string(v.vararg)
     assert fact_is__native_none__OR__full_native_string(v.kwarg)
-    assert fact_is_some_native_list                    (v.defaults)
+    assert fact_is_native_list                         (v.defaults)
 
     total = 0
 

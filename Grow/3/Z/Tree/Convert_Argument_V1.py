@@ -18,7 +18,6 @@ from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_
 
 if __debug__:
     from    Capital.Native_String               import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_some_native_list
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Keyword_Argument
 
@@ -45,8 +44,8 @@ def convert_keyword_argument(v):
 #
 #   convert_some_list_of_keywords(sequence)
 #
-#       Convert `Some_Native_List of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
-#       `Some_Native_List of Tree_Keyword_Argument`
+#       Convert `Native_List of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
+#       `Native_List of Tree_Keyword_Argument`
 #
 convert_some_list_of_keyword_arguments = (
         produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_keyword_argument)

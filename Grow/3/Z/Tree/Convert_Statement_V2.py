@@ -61,7 +61,7 @@ convert_full_list_of_statements = produce__convert__full_list_of__Native_Abstrac
 #
 #   convert_some_list_of_statements(z, sequence)
 #
-#       Convert a `Some_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `Some_Native_List of Tree_Statement`.
+#       Convert a `Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `Native_List of Tree_Statement`.
 #
 convert_some_list_of_statements = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)

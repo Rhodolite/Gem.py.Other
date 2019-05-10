@@ -19,9 +19,9 @@ if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_native_boolean
     from    Capital.Fact                import  fact_is_native_none
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
@@ -514,7 +514,7 @@ class Tree_Print_Statement(
         'column',                       #   Keen_Native_Integer
 
         'destination',                  #   None | Tree_Value_Expression
-        'values',                       #   Some_Native_List of Tree_Value_Expression
+        'values',                       #   Native_List of Tree_Value_Expression
         'newline',                      #   Native_Boolean
     ))
 
@@ -574,7 +574,7 @@ def create_Tree_Print_Statement(line_number, column, destination, values, newlin
     assert fact_is_avid_native_integer    (column)
 
     assert fact_is__native_none__OR__tree_value_expression(destination)
-    assert fact_is_some_native_list                       (values)
+    assert fact_is_native_list                            (values)
     assert fact_is_native_boolean                         (newline)
 
     return Tree_Print_Statement(line_number, column, destination, values, newline)

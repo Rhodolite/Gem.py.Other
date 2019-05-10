@@ -64,7 +64,7 @@
 #                                     It has the following four members:
 #
 #                                       `.normal_parameters`    - Stores `a, b, c, d, e` as a
-#                                                                 `Some_Native_List of Tree_Name` (each `Tree_Name` has
+#                                                                 `Native_List of Tree_Name` (each `Tree_Name` has
 #                                                                 a context of `Tree_Context_Parameter`).
 #
 #                                       `.star_parameter`       - Stores `*g` as a `Full_Native_String`.
@@ -72,7 +72,7 @@
 #                                       `.map_parameter`        - Stored `**h` as a `Full_Native_String`.
 #
 #                                       `.defaults'             - Stores `7, "eight"` as a
-#                                                                 `Some_Native_List of Tree_Value_Expression`.
+#                                                                 `Native_List of Tree_Value_Expression`.
 #
 #               In the current version, the following are *NOT* `Tree_Parameter`:
 #

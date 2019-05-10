@@ -30,7 +30,7 @@
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Native_String               import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
@@ -55,9 +55,9 @@ def convert_class_definition(z, v):
     assert fact_is_avid_native_integer    (v.col_offset)
 
     assert fact_is_full_native_string(v.name)
-    assert fact_is_some_native_list  (v.bases)
+    assert fact_is_native_list       (v.bases)
     assert fact_is_full_native_list  (v.body)
-    assert fact_is_some_native_list  (v.decorator_list)
+    assert fact_is_native_list       (v.decorator_list)
 
     return z.create_Tree_Class_Definition(
                v.lineno,
@@ -89,7 +89,7 @@ def convert_function_definition(z, v):
     assert fact_is_full_native_string                           (v.name)
     assert fact_is__native__abstract_syntax_tree__all_parameters(v.args)
     assert fact_is_full_native_list                             (v.body)
-    assert fact_is_some_native_list                             (v.decorator_list)
+    assert fact_is_native_list                                  (v.decorator_list)
 
     return z.create_Tree_Function_Definition(
                v.lineno,

@@ -28,9 +28,9 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
@@ -224,8 +224,8 @@ class Tree_Call_Expression(
         'column',                       #   Keen_Native_Integer
 
         'function',                     #   Tree_Value_Expression
-        'arguments',                    #   Some_Native_List of Tree_Value_Expression
-        'keywords',                     #   Some_Native_List of Tree_Value_Expression
+        'arguments',                    #   Native_List of Tree_Value_Expression
+        'keywords',                     #   Native_List of Tree_Value_Expression
         'star_arguments',               #   None | Tree_Value_Expression
         'keyword_arguments',            #   None | Tree_Value_Expression
     ))
@@ -313,8 +313,8 @@ def create_Tree_Call_Expression(
     assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression                  (function)
-    assert fact_is_some_native_list                       (arguments)
-    assert fact_is_some_native_list                       (keywords)
+    assert fact_is_native_list                            (arguments)
+    assert fact_is_native_list                            (keywords)
     assert fact_is__native_none__OR__tree_value_expression(star_arguments)
     assert fact_is__native_none__OR__tree_value_expression(keyword_arguments)
 
@@ -538,8 +538,8 @@ class Tree_Map_Expression(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'keys',                         #   Some_Native_List of Tree_Value_Expression
-        'values',                       #   Some_Native_List of Tree_Value_Expression
+        'keys',                         #   Native_List of Tree_Value_Expression
+        'values',                       #   Native_List of Tree_Value_Expression
     ))
 
 
@@ -593,8 +593,8 @@ def create_Tree_Map_Expression(line_number, column, keys, values):
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_some_native_list(keys)
-    assert fact_is_some_native_list(values)
+    assert fact_is_native_list(keys)
+    assert fact_is_native_list(values)
 
     assert len(keys) == len(values)
 
@@ -813,7 +813,7 @@ class Tree_Set_Expression(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'values',                       #   Some_Native_List of Tree_Value_Expression
+        'values',                       #   Native_List of Tree_Value_Expression
     ))
 
 
@@ -859,7 +859,7 @@ def create_Tree_Set_Expression(line_number, column, values):
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_some_native_list(values)
+    assert fact_is_native_list(values)
 
     return Tree_Set_Expression(line_number, column, values)
 

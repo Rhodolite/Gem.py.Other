@@ -47,9 +47,9 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
 
 
 #
@@ -114,7 +114,7 @@ class Tree_Many_Expression(object):
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
+        'elements',                     #   Native_List of (Tree_Store_Target | Tree_Value_Expression)
     ))
 
 
@@ -140,7 +140,7 @@ def create_Tree_Many_Expression(Meta, line_number, column, elements):
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_some_native_list(elements)
+    assert fact_is_native_list(elements)
 
     return Meta(line_number, column, elements)
 
@@ -154,7 +154,7 @@ class Tree_Evaluate_List(
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
-    #                                   #       Some_Native_List of Tree_Value_Expression
+    #                                   #       Native_List of Tree_Value_Expression
     ))
 
 
@@ -184,7 +184,7 @@ class Tree_Evaluate_Tuple(
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
-    #                                   #       Some_Native_List of Tree_Value_Expression
+    #                                   #       Native_List of Tree_Value_Expression
     ))
 
 
@@ -216,7 +216,7 @@ class Tree_Store_List(
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
-    #                                   #       Some_Native_List of Tree_Store_Target
+    #                                   #       Native_List of Tree_Store_Target
     ))
 
 
@@ -246,7 +246,7 @@ class Tree_Store_Tuple(
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
-    #                                   #       Some_Native_List of Tree_Store_Target
+    #                                   #       Native_List of Tree_Store_Target
     ))
 
 

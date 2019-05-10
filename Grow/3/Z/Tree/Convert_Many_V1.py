@@ -16,7 +16,7 @@ from    Z.Tree.Many_V1                      import  create_Tree_Tuple_Expression
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT
@@ -34,7 +34,7 @@ def convert_many_expression(v, create):
     assert fact_is_positive_native_integer(v.lineno)
     assert fact_is_avid_native_integer    (v.col_offset)
 
-    assert fact_is_some_native_list                                         (v.elts)
+    assert fact_is_native_list                                              (v.elts)
     assert fact_is__ANY__native__abstract_syntax_tree__LOAD_OR_STORE_CONTEXT(v.ctx)
 
     return create(

@@ -18,9 +18,9 @@ from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Z.Tree.Parameter_Tuple      import  fact_is_tree_parameter_tuple_0
 
 
@@ -35,9 +35,9 @@ class Tree_Class_Definition(
         'column',                       #   Keen_Native_Integer
 
         'name',                         #   Full_Native_String
-        'bases',                        #   Some_Native_List of Tree_Value_Expression
+        'bases',                        #   Native_List of Tree_Value_Expression
         'body',                         #   Full_Native_List of Tree_Statement
-        'decorator_list',               #   Some_Native_List of Tree_Decorator
+        'decorator_list',               #   Native_List of Tree_Decorator
     ))
 
 
@@ -107,9 +107,9 @@ def create_Tree_Class_Definition(line_number, column, name, bases, body, decorat
     assert fact_is_avid_native_integer    (column)
 
     assert fact_is_full_native_string(name)
-    assert fact_is_some_native_list  (bases)
+    assert fact_is_native_list       (bases)
     assert fact_is_full_native_list  (body)
-    assert fact_is_some_native_list  (decorator_list)
+    assert fact_is_native_list       (decorator_list)
 
     return Tree_Class_Definition(line_number, column, name, bases, body, decorator_list)
 
@@ -127,7 +127,7 @@ class Tree_Function_Definition(
         'name',                         #   Full_Native_String
         'parameters',                   #   Tree_Parameter
         'body',                         #   Full_Native_List of Tree_Statement
-        'decorator_list',               #   Some_Native_List of Tree_Decorator
+        'decorator_list',               #   Native_List of Tree_Decorator
     ))
 
 
@@ -192,6 +192,6 @@ def create_Tree_Function_Definition(line_number, column, name, parameters, body,
     assert fact_is_full_native_string    (name)
     assert fact_is_tree_parameter_tuple_0(parameters)
     assert fact_is_full_native_list      (body)
-    assert fact_is_some_native_list      (decorator_list)
+    assert fact_is_native_list           (decorator_list)
 
     return Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list)

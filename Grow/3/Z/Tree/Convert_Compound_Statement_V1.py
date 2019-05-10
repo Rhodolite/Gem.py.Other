@@ -27,7 +27,7 @@ from    Z.Tree.Convert_Target_V1            import  convert_target
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
@@ -50,7 +50,7 @@ def convert_test_statement(v, create):
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.test)
     assert fact_is_full_native_list                                    (v.body)
-    assert fact_is_some_native_list                                    (v.orelse)
+    assert fact_is_native_list                                         (v.orelse)
 
     return create(
                v.lineno,
@@ -78,7 +78,7 @@ def convert_for_statement(v):
     assert fact_is__ANY__native__abstract_syntax_tree__TARGET          (v.target)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.iter)
     assert fact_is_full_native_list                                    (v.body)
-    assert fact_is_some_native_list                                    (v.orelse)
+    assert fact_is_native_list                                         (v.orelse)
 
     return create_Tree_For_Statement(
                v.lineno,
@@ -120,7 +120,7 @@ def convert_try_except_statement(v):
 
     assert fact_is_full_native_list(v.body)
     assert fact_is_full_native_list(v.handlers)
-    assert fact_is_some_native_list(v.orelse)
+    assert fact_is_native_list     (v.orelse)
 
     return create_Tree_Try_Except_Statement(
                v.lineno,

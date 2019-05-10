@@ -29,7 +29,7 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  native__compile__to__native_
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__module
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Module
 
@@ -46,7 +46,7 @@ assert Native_AbstractSyntaxTree_Module._fields     == (('body',))
 
 def convert_module(v):
     assert fact_is__native__abstract_syntax_tree__module(v)
-    assert fact_is_some_native_list                     (v.body)
+    assert fact_is_native_list                          (v.body)
 
     return create_Tree_Module(
                convert_some_list_of_statements(v.body),

@@ -33,9 +33,8 @@ from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Expression           import  fact_is_tree_value_expression

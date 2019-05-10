@@ -27,7 +27,7 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_String               import  fact_is_full_native_string
@@ -102,10 +102,10 @@ assert Native_AbstractSyntaxTree_All_Parameters._fields     == (('args', 'vararg
 def convert_parameter_tuple_0(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is_some_native_list                    (v.args)
+    assert fact_is_native_list                         (v.args)
     assert fact_is__native_none__OR__full_native_string(v.vararg)
     assert fact_is__native_none__OR__full_native_string(v.kwarg)
-    assert fact_is_some_native_list                    (v.defaults)
+    assert fact_is_native_list                         (v.defaults)
 
     return z.create_Tree_All_Parameters(
                convert_some_list_of_name_parameters(z, v.args),
@@ -139,8 +139,8 @@ def convert_star_parameter(z, v):
 #
 #   convert_some_list_of_name_parameters(z, v)
 #
-#       Convert a `Some_Native_List of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
-#       `Some_Native_List of SyntaxTree_Name`.
+#       Convert a `Native_List of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
+#       `Native_List of SyntaxTree_Name`.
 #
 #       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
 #       of type `Native_AbstractSyntaxTree_Parameter`.

@@ -19,7 +19,7 @@
 #
 #           2)  A           list of statements is stored as `Full_Native_List of Tree_Statement`.
 #
-#           3)  An optional list of statements is stored as `Some_Native_List of Tree_Statement`.
+#           3)  An optional list of statements is stored as `Native_List of Tree_Statement`.
 #
 #       Version 3-7:
 #
@@ -48,7 +48,6 @@ if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_native_boolean
     from    Capital.Fact                import  fact_is_native_none
-    from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Expression           import  fact_is_tree_value_expression

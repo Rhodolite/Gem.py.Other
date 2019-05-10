@@ -16,7 +16,7 @@ from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_some_native_list
+    from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
 
 
@@ -32,10 +32,10 @@ class Tree_All_Parameters(
         TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = ((
-        'normal_parameters',            #   Some_Native_List of Tree_NormalParameter
+        'normal_parameters',            #   Native_List of Tree_NormalParameter
         'star_parameter',               #   None | Full_Native_String
         'map_parameter',                #   None | Full_Native_String
-        'defaults',                     #   Some_Native_List of Tree_Value_Expression
+        'defaults',                     #   Native_List of Tree_Value_Expression
     ))
 
 
@@ -84,9 +84,9 @@ class Tree_All_Parameters(
 
 @creator
 def create_Tree_All_Parameters(normal_parameters, star_parameter, map_parameter, defaults):
-    assert fact_is_some_native_list                    (normal_parameters)
+    assert fact_is_native_list                         (normal_parameters)
     assert fact_is__native_none__OR__full_native_string(star_parameter)
     assert fact_is__native_none__OR__full_native_string(map_parameter)
-    assert fact_is_some_native_list                    (defaults)
+    assert fact_is_native_list                         (defaults)
 
     return Tree_All_Parameters(normal_parameters, star_parameter, map_parameter, defaults)

@@ -84,6 +84,20 @@ if __debug__:
 
 
 #
+#   fact_is_native_list(v)
+#
+#       Assert that `v` is a `Native_List` (i.e.: `list`).
+#
+#       `v` may *NOT* be an instance of a subclass of `Native_List` (i.e.: `list`).
+#
+if __debug__:
+    def fact_is_native_list(v):
+        assert type(v) is list
+
+        return True
+
+
+#
 #   fact_is_native_none(v) - Assert that `v` is `None`.
 #
 if __debug__:
@@ -130,19 +144,5 @@ if 0:
 if __debug__:
     def fact_is_not_native_none(v):
         assert v is not None
-
-        return True
-
-
-#
-#   fact_is_some_native_list(v)
-#
-#       Assert that `v` is a `Native_List` (i.e.: `list`).
-#
-#       `v` may *NOT* be an instance of a subclass of `Native_List (i.e.: `list`).
-#
-if __debug__:
-    def fact_is_some_native_list(v):
-        assert type(v) is list
 
         return True

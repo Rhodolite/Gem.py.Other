@@ -93,7 +93,7 @@ if __debug__:
 #       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #
 #   NOTE:
-#       
+#
 #       By definition "positive" means greater than 0.
 #
 #       See: https://simple.wikipedia.org/wiki/Positive_number

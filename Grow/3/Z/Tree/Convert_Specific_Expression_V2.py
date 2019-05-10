@@ -28,7 +28,7 @@ from    Z.Tree.Convert_Operator_V1          import  convert_binary_operator
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_some_native_list
+    from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_Integer              import  fact_is_native_integer
@@ -151,8 +151,8 @@ def convert_call_expression(z, v):
     assert fact_is_avid_native_integer    (v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION                    (v.func)
-    assert fact_is_some_native_list                                                        (v.args)
-    assert fact_is_some_native_list                                                        (v.keywords)
+    assert fact_is_native_list                                                             (v.args)
+    assert fact_is_native_list                                                             (v.keywords)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.starargs)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.kwargs)
 
@@ -387,8 +387,8 @@ def convert_map_expression(z, v):
     assert fact_is_positive_native_integer(v.lineno)
     assert fact_is_avid_native_integer    (v.col_offset)
 
-    assert fact_is_some_native_list(v.keys)
-    assert fact_is_some_native_list(v.values)
+    assert fact_is_native_list(v.keys)
+    assert fact_is_native_list(v.values)
 
     assert len(v.keys) == len(v.values)
 
@@ -460,7 +460,7 @@ def convert_set_expression(z, v):
     assert fact_is_positive_native_integer(v.lineno)
     assert fact_is_avid_native_integer    (v.col_offset)
 
-    assert fact_is_some_native_list(v.elts)
+    assert fact_is_native_list(v.elts)
 
     return z.create_Tree_Set_Expression(
                v.lineno,
