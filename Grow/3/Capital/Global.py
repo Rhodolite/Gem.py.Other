@@ -90,9 +90,9 @@ if __debug__:
 #
 class Capital_Globals(object):
     __slots__ = ((
-        'version',                      #   Native_Positive_Integer
-        'exception_version',            #   Native_Positive_Integer
-        'string_version',               #   Native_Substantial_Integer
+        'version',                      #   Positive_Native_Integer
+        'exception_version',            #   Positive_Native_Integer
+        'string_version',               #   Substantial_Native_Integer
     ))
 
 

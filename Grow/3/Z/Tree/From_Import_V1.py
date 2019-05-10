@@ -29,12 +29,12 @@ class Tree_From_Import_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'module',                       #   Full_Native_String
         'names',                        #   Full_Native_List of Tree_Symbol_Alias
-        'level',                        #   Native_Substantial_Integer
+        'level',                        #   Substantial_Native_Integer
     ))
 
 

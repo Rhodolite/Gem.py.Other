@@ -35,8 +35,8 @@ class Tree_Many_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
         'context',                      #   Tree_Context

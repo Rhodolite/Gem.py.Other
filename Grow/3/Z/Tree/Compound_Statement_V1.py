@@ -37,8 +37,8 @@ class Tree_Test_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'test',                         #   Tree_Value_Expression
         'body',                         #   Full_Native_List of Tree_Statement
@@ -106,8 +106,8 @@ class Tree_For_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'target',                       #   Tree_Target
         'sequence',                     #   Tree_Value_Expression
@@ -193,8 +193,8 @@ class Tree_Try_Except_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'body',                         #   Full_Native_List of Tree_Statement
         'except_handlers',              #   Full_Native_List of Tree_Except_Handler
@@ -265,8 +265,8 @@ class Tree_Try_Finally_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'body',                         #   Full_Native_List of Tree_Statement
         'finally_body',                 #   Full_Native_List of Tree_Statement
@@ -341,8 +341,8 @@ class Tree_With_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'target',                       #   None | Tree_Target

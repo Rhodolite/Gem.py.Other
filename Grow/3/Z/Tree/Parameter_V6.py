@@ -113,8 +113,8 @@ class Tree_Keyword_Parameter(
         TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'symbol',                       #   Symbol
         'value',                        #   Tree_Value_Expression

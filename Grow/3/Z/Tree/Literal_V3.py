@@ -43,8 +43,8 @@ class Tree_String(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         's',                            #   Some_String
     ))

@@ -32,8 +32,8 @@ class Tree_Except_Handler(
         TRAIT_Tree_Except_Clause,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'type_expression',              #   None | Tree_Value_Expression
         'name_expression',              #   None | Tree_Value_Expression

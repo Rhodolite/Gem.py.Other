@@ -68,8 +68,8 @@ if __debug__:
 #
 class Tree_Name_Branch(object):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'symbol',                       #   Symbol
     ))

@@ -47,8 +47,8 @@ class Tree_Value_Comprehension(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'element',                      #   Tree_Value_Expression
         'generators',                   #   Full_Native_List of Tree_Comprehension
@@ -108,8 +108,8 @@ class Tree_Backquote_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'value',                        #   Tree_Value_Expression
     ))
@@ -159,8 +159,8 @@ class Tree_Binary_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'left',                         #   Tree_Value_Expression
         'operator',                     #   Tree_Operator
@@ -220,8 +220,8 @@ class Tree_Call_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'function',                     #   Tree_Value_Expression
         'arguments',                    #   Some_Native_List of Tree_Value_Expression
@@ -330,8 +330,8 @@ class Tree_Compare_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'left',                         #   Tree_Value_Expression
         'operators',                    #   Full_Native_List of Tree_Operator
@@ -408,8 +408,8 @@ class Tree_If_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'test',                         #   Tree_Value_Expression
         'body',                         #   Tree_Value_Expression
@@ -469,8 +469,8 @@ class Tree_Logical_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'operator',                     #   Tree_Operator
         'values',                       #   Full_Native_List of Tree_Value_Expression
@@ -535,8 +535,8 @@ class Tree_Map_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'keys',                         #   Some_Native_List of Tree_Value_Expression
         'values',                       #   Some_Native_List of Tree_Value_Expression
@@ -608,8 +608,8 @@ class Tree_Lambda_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_Value_Expression
@@ -682,8 +682,8 @@ class Tree_Map_Comprehension(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'key',                          #   Tree_Value_Expression
         'value',                        #   Tree_Value_Expression
@@ -748,8 +748,8 @@ class Tree_Number(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'n',                            #   Native_Integer
     ))
@@ -810,8 +810,8 @@ class Tree_Set_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'values',                       #   Some_Native_List of Tree_Value_Expression
     ))
@@ -871,8 +871,8 @@ class Tree_Unary_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'operator',                     #   Tree_Operator
         'right',                        #   Tree_Value_Expression
@@ -927,8 +927,8 @@ class Tree_Yield_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'value',                        #   None | Tree_Value_Expression
     ))

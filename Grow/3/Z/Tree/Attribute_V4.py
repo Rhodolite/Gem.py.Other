@@ -64,8 +64,8 @@ if __debug__:
 #
 class Tree_Attribute(object):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'attribute',                    #   Symbol

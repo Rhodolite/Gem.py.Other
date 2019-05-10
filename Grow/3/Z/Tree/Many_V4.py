@@ -111,8 +111,8 @@ def Tree_Many_Expresion__dump_store_target_tokens(self, f):
 #
 class Tree_Many_Expression(object):
     __slots__ = ((
-        'line_number',                  #   Native_Positive_Integer
-        'column',                       #   Native_Substantial_Integer
+        'line_number',                  #   Positive_Native_Integer
+        'column',                       #   Substantial_Native_Integer
 
         'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
     ))
