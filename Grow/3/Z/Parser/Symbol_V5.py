@@ -43,7 +43,8 @@ from    Z.Tree.Alias                        import  TRAIT_Tree_Symbol_Alias
 
 
 if __debug__:
-    from    Capital.Core                    import  FATAL
+    from    Capital.Cannot                  import  raise__CANNOT__create__ERROR
+    from    Capital.Cannot                  import  raise__CANNOT__construct__ERROR
 
 
 #
@@ -64,15 +65,8 @@ class Parser_Symbol_Leaf(
     #   Private
     #
     if __debug__:
-        def __new__(Meta, s):
-            FATAL('{}: A Parser_Symbol_Leaf may not be created',
-                  "Parser_Symbol_Leaf.operator new (`__new__`)");
-
-
-    if __debug__:
-        def __init__(self, s):
-            FATAL('{}: A Parser_Symbol_Leaf may not be constructed',
-                  "Parser_Symbol_Leaf.constructor (`__init__`)");
+        __init__ = raise__CANNOT__construct__ERROR
+        __new__  = raise__CANNOT__create__ERROR
 
 
     #

@@ -52,7 +52,7 @@ if __debug__:
 #
 #               1)  Does not take a `function_name`, but always names the function `"conjure_full_string"`.
 #
-#               2)  Produces two functions, a `conjure_some_string` function and a `conjure_full_string` function.
+#               2)  Produces two functions, a `conjure_full_string` function and a `conjure_string` function.
 #
 #           `produce_conjure_full_string` below:
 #

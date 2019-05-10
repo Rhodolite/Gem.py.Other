@@ -40,39 +40,37 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
-from    Capital.String                  import  TRAIT_Some_String
+from    Capital.String                  import  TRAIT_String
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
+    from    Capital.Cannot              import  raise__CANNOT__create__ERROR
+    from    Capital.Cannot              import  raise__CANNOT__construct__ERROR
     from    Capital.Native_String       import  fact_is_empty_INTERNED_native_string
 
 
 #
 #<methods>
-#   common methods of `{Empty,Full}_String_Leaf`.
 #
-#       As explained in "Capital.Private.String_V4.py" we had to get rid of `Base_String`.
-#
-#       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
-#       `Empty_String_Leaf` and `Full_String_Leaf` below.
+#   Common methods of `{Empty,Full}_String_Leaf`.
 #
 
 
 #
-#   Base_String: Interface String
+#   Interface String
 #
 @property
-def property__Base_String__native_string(self):
+def property__String__native_string_subclass(self):
     return self.interned_s
 
 
 #
-#   Base_String.__format__ (format_specification)  - Format `String`
+#   .__format__ (format_specification)  - Format `String`
 #
-#       Delegated to the `Some_Native_String` implementation via `.interned_s`.
+#       Delegated to the `Native_String` (i.e.: `str`) implementation via `.interned_s`.
 #
-def method__Base_String__operator_format(self, format_specification):
+def method__String__operator_format(self, format_specification):
     return self.interned_s.__format__(format_specification)
 #</methods>
 
@@ -82,7 +80,7 @@ def method__Base_String__operator_format(self, format_specification):
 #
 class Empty_String_Leaf(
         TRAIT_Maybe_Temporary_0,
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Empty_Native_String
@@ -101,7 +99,9 @@ class Empty_String_Leaf(
     #
     is_empty_string = True
     is_full_string  = False
-    native_string   = property__Base_String__native_string
+
+
+    native_string_subclass = property__String__native_string_subclass
 
 
     #
@@ -114,7 +114,7 @@ class Empty_String_Leaf(
     #
     #       Delegated to the `Empty_Native_String` implementation via `.interned_s`.
     #
-    __format__ = method__Base_String__operator_format
+    __format__ = method__String__operator_format
 
 
     #
@@ -151,7 +151,7 @@ class Empty_String_Leaf(
 #
 class Full_String_Leaf(
         TRAIT_Maybe_Temporary_0,
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Full_Native_String
@@ -162,17 +162,8 @@ class Full_String_Leaf(
     #   Private
     #
     if __debug__:
-        def __new__(Meta, s):
-            FATAL('{}: A Full_String_Leaf may not be {}',
-                  "Capital.Private.FullString_V5.Full_String_Leaf.operator new (`__new__`)",
-                  'created')
-
-
-    if __debug__:
-        def __init__(self, s):
-            FATAL('{}: A Full_String_Leaf may not be {}',
-                  "Capital.Private.FullString_V5.Full_String_Leaf.constructor (`__init__`)",
-                  'constructed')
+        __init__ = raise__CANNOT__construct__ERROR
+        __new__  = raise__CANNOT__create__ERROR
 
 
     #
@@ -180,7 +171,9 @@ class Full_String_Leaf(
     #
     is_empty_string = False
     is_full_string  = True
-    native_string   = property__Base_String__native_string
+
+
+    native_string_subclass = property__String__native_string_subclass
 
 
     #
@@ -193,7 +186,7 @@ class Full_String_Leaf(
     #
     #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
     #
-    __format__ = method__Base_String__operator_format
+    __format__ = method__String__operator_format
 
 
     #
@@ -214,7 +207,7 @@ class Full_String_Leaf(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #

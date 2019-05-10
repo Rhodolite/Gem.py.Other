@@ -25,11 +25,12 @@
 #
 #       Version 1:
 #
-#           Duplicate code in `conjure_full_string` and `conjure_some_string`.
+#           Duplicate code in `conjure_full_string` and `conjure_string`.
 #
 #       Version 2:
 #
-#           Helper routine `conjure_X_string` to remove duplicate code between `conjure_{full,some}_string`.
+#           Helper routine `conjure_X_string` to remove duplicate code between `conjure_full_string` and
+#           `conjure_string`.
 #
 
 
@@ -45,7 +46,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_native_boolean
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Fact                import  fact_is_not_native_none
-    from    Capital.Native_String       import  fact_is_some_native_string
+    from    Capital.Native_String       import  fact_is_native_string
 
 
 #
@@ -53,9 +54,9 @@ if __debug__:
 #
 #       The following functions have a "verb" in their name:
 #
-#           conjure_some_string  - Lookup or "create & insert" a string.
-#           lookup_string        - Lookup a string.
-#           provide_string       - Provide a `String_V1`.
+#           conjure_string      - Lookup or "create & insert" a string.
+#           lookup_string       - Lookup a string.
+#           provide_string      - Provide a `String_V1`.
 #
 #       The verb "conjure" in Capital code means "lookup, and if not found, create & insert a new one".
 #
@@ -115,11 +116,11 @@ provide_string = string_cache.setdefault
 @creator
 def conjure_X_string(s, allow_empty_string = False, empty_string = None):
     #
-    #   The following test is "*_some_*" on purpose (even when `allow_empty_string` is `False`).
+    #   The following test is `fact_is_native_string` on purpose (even when `allow_empty_string` is `False`).
     #
     #   This is to allow the case of `s` is `""` to throw a `ValueError` below.
     #
-    assert fact_is_some_native_string (s)
+    assert fact_is_native_string      (s)
     assert fact_is_native_boolean     (allow_empty_string)
 
     if allow_empty_string:
@@ -178,13 +179,13 @@ def conjure_full_string(s):
 
 
 #
-#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
+#   conjure_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
-#       `s` must be of a `Some_Native_String` (i.e.: `str`).
+#       `s` must be a *DIRECT* `Native_String` instance.
 #
-#       `s` may *NOT* be an instance of a subclass of `Some_Native_String` (i.e.: `str`).
+#       `s` may *NOT* be an instance of a subclass of `str`.
 #
 @export
 @creator
-def conjure_some_string(s):
+def conjure_string(s):
     return conjure_X_string(s, allow_empty_string = True, empty_string = empty_string)

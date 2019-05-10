@@ -30,7 +30,7 @@ if version >= 3:
 
 
 #
-#   Version 4: Producer function `produce_conjure_string` to produce `conjure_some_string` functions.
+#   Version 4: Producer function `produce_conjure_string` to produce `conjure_string` functions.
 #
 if version >= 4:
     string_version = 3

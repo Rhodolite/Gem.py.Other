@@ -25,15 +25,14 @@
 #
 #       Version 2:
 #
-#           Implementation of creator function `conjure_some_string`.
+#           Implementation of creator function `conjure_string`.
 #
 #       Version 3:
 #
-#           Producer function `produce_conjure_string` to produce `conjure_some_string` functions.
+#           Producer function `produce_conjure_string` to produce `conjure_string` functions.
 #
-#           The initially created `conjure_some_string` is identical to
-#           `Capital.Private.ConjureString_V1.conjure_some_string` (the only internal difference is using a closure for
-#           variables instead of global variables).
+#           The initially created `conjure_string` is identical to `Capital.Private.ConjureString_V1.conjure_string`
+#           (the only internal difference is using a closure for variables instead of global variables).
 #
 
 
@@ -53,7 +52,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Fact                import  fact_is_not_native_none
     from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Native_String       import  fact_is_some_native_string
+    from    Capital.Native_String       import  fact_is_native_string
 
 
 #
@@ -61,9 +60,9 @@ if __debug__:
 #
 #       The following functions have a "verb" in their name:
 #
-#           conjure_some_string  - Lookup or "create & insert" a string.
-#           lookup_string        - Lookup a string.
-#           provide_string       - Provide a `String_Leaf`.
+#           conjure_string      - Lookup or "create & insert" a string.
+#           lookup_string       - Lookup a string.
+#           provide_string      - Provide a `String_Leaf`.
 #
 #       The verb "conjure" in Capital code means "lookup, and if not found, create & insert a new one".
 #
@@ -89,7 +88,7 @@ if __debug__:
 #           empty_string       = None,
 #   )
 #
-#       Produce a `conjure_some_string` or `conjure_full_string` function.
+#       Produce a `conjure_full_string` or `conjure_string` function.
 #
 #       PARAMETERS:
 #
@@ -163,7 +162,7 @@ def produce_conjure_X_string(
     #
     #                   conjure_full_string(s)
     #
-    #                       Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
+    #                       Conjure a full `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
     #
     #                       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
     #
@@ -175,22 +174,22 @@ def produce_conjure_X_string(
     #
     #           2)  ELSE
     #
-    #                   conjure_some_string(s)
+    #                   conjure_string(s)
     #
     #                       Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
     #
-    #                       `s` must be of a `Some_Native_String` (i.e.: `str`).
+    #                       `s` must be a *DIRECT* `Native_String` instance.
     #
     #                       `s` may *NOT* be an instance of a subclass of `str`.
     #
     @creator
     def conjure_X_string(s):
         #
-        #   The following test is "*_some_*" on purpose (even when `allow_empty_string` is `False`).
+        #   The following test is `fact_is_native_string` on purpose (even when `allow_empty_string` is `False`).
         #
         #   This is to allow the case of `s` is `""` to throw a `ValueError` below.
         #
-        assert fact_is_some_native_string(s)
+        assert fact_is_native_string(s)
 
         r = lookup_string(s)
 
@@ -231,11 +230,11 @@ def produce_conjure_X_string(
 #
 #   produce_conjure_string_functions(empty_string, create_full_string)
 #
-#       Produce `conjure_some_string` and `conjure_full_string` functions.
+#       Produce `conjure_full_string` and `conjure_string` functions.
 #
 #   NOTE:
 #
-#       `string_cache` is shared between `conjure_some_string` and `conjure_full_string`.
+#       `string_cache` is shared between `conjure_full_string` and `conjure_string`.
 #
 @export
 def produce_conjure_string_functions(empty_string, create_full_string):
@@ -264,8 +263,8 @@ def produce_conjure_string_functions(empty_string, create_full_string):
             'conjure_full_string', lookup_string, provide_string, create_full_string,
         )
 
-    conjure_some_string = produce_conjure_X_string(
-            'conjure_some_string', lookup_string, provide_string, create_full_string,
+    conjure_string = produce_conjure_X_string(
+            'conjure_string', lookup_string, provide_string, create_full_string,
 
             allow_empty_string = True,
             empty_string       = empty_string,
@@ -274,11 +273,11 @@ def produce_conjure_string_functions(empty_string, create_full_string):
     #
     #   Return both produced functions.
     #
-    return ((conjure_full_string, conjure_some_string))
+    return ((conjure_full_string, conjure_string))
 
 
 
-[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
+[conjure_full_string, conjure_string] = produce_conjure_string_functions(empty_string, create_full_string)
 
 
 #
@@ -296,8 +295,10 @@ export(conjure_full_string)
 
 
 #
-#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
+#   conjure_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
-#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#       `s` must be a *DIRECT* `Native_String` instance.
 #
-export(conjure_some_string)
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+export(conjure_string)

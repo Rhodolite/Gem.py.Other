@@ -17,7 +17,7 @@
 #
 #       Version 7:
 #
-#           String classes use `Some_Native_String` (i.e.: `str`) as their base class.
+#           String classes use `Native_String` (i.e.: `str`) as their base class.
 #
 #           (although some string classes use `Full_Native_String` (also: `str`) as their base class,
 #           to indicate they only handle "full" strings).
@@ -26,7 +26,7 @@
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Native_String           import  Full_Native_String
+from    Capital.Native_String           import  Native_String
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
@@ -35,16 +35,16 @@ if __debug__:
 
 
 #
-#   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#   method__Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
 #
-method__Full_Native_String__representation = Full_Native_String.__repr__
+method__Native_String__representation = Native_String.__repr__
 
 
 #
 #   Temporary_String - Temporary String Implementation, Version 6.
 #
 class Temporary_String(
-        Full_Native_String,
+        Native_String,
         TRAIT_Maybe_Temporary_0,
         #
         #   NOTE:
@@ -71,7 +71,7 @@ class Temporary_String(
     #   Public
     #
     def __repr__(self):
-        return arrange('<Temporary_String {!r}>', method__Full_Native_String__representation(self))
+        return arrange('<Temporary_String {!r}>', method__Native_String__representation(self))
 
 
 @export

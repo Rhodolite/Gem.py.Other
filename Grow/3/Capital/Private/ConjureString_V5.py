@@ -56,7 +56,7 @@ from    Capital.Private.String_V5           import  create_full_string
 from    Capital.Private.String_V5           import  empty_string
 
 
-[conjure_full_string, conjure_some_string] = produce_conjure_string_functions(empty_string, create_full_string)
+[conjure_full_string, conjure_string] = produce_conjure_string_functions(empty_string, create_full_string)
 
 
 #
@@ -74,8 +74,10 @@ export(conjure_full_string)
 
 
 #
-#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
+#   conjure_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
 #
-#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#       `s` must be a *DIRECT* `Native_String` instance.
 #
-export(conjure_some_string)
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+export(conjure_string)

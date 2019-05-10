@@ -13,7 +13,7 @@ from    Capital.Produce_ConjureFullString   import  produce_conjure_full_string
 
 
 if __debug__:
-    from    Capital.Native_String           import  fact_is_some_native_string
+    from    Capital.Native_String           import  fact_is_native_string
     from    Z.Tree.Convert_Zone             import  fact_is_convert_zone
 
 
@@ -62,12 +62,12 @@ def produce_conjure_full_name__with_unused_Z_parameter(Full_Name_Type):
         assert fact_is_convert_zone(z)
 
         #
-        #   The following test is "*_some_*" on purpose.
+        #   The following test is `fact_is_native_string` on purpose.
         #
         #   This is to allow the case of `s` is `""` to throw a `ValueError` (the `ValueError` is thrown by
         #   `convert_full_name`).
         #
-        assert fact_is_some_native_string(name)
+        assert fact_is_native_string(name)
 
         return conjure_full_name(name)
 

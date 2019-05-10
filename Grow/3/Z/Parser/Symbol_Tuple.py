@@ -36,7 +36,6 @@ class TRAIT_Parser_Symbol_Tuple(object):
 
     if __debug__:
         is_parser_symbol_tuple = True
-        
 
 
 #

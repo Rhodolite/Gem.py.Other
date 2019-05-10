@@ -11,7 +11,7 @@ from    _ast                            import  PyCF_ONLY_AST   as  native__COMP
 
 
 if __debug__:
-    from    Capital.Native_String       import  fact_is_some_native_string
+    from    Capital.Native_String       import  fact_is_native_string
     from    Capital.Native_String       import  fact_is_full_native_string
 
 
@@ -660,13 +660,13 @@ if __debug__:
 #
 #   native__compile__to__native__abstract_syntax_tree(source, filename)
 #
-#       Compile the `source` (a `Some_Native_String` that represents the source code) to an python abstract syntax tree.
+#       Compile the `source` (a `Native_String` that represents the source code) to an python abstract syntax tree.
 #
 #       Use `filename` as the filename for error purposes only (`filename` is not read, instead the code is supplied in
 #       the argument `source`).
 #
 def native__compile__to__native__abstract_syntax_tree(source, filename):
-    assert fact_is_some_native_string(source)
+    assert fact_is_native_string     (source)
     assert fact_is_full_native_string(filename)
 
     return compile(                                 #   Call the python built-in `compile` function.

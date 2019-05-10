@@ -33,7 +33,7 @@ class ChangePrefix(object):
         'lifecycle',                    #   SimpleContextLifeCycle
 
         'old__prefix',                  #   None | Full_Native_String
-        'old__prefix_blank',            #   None | Some_Native_String
+        'old__prefix_blank',            #   None | Native_String
 
         'method__line',                 #   None | BoundMethod
         'method__query_position',       #   None | BoundMethod
@@ -43,7 +43,7 @@ class ChangePrefix(object):
         'ending',                       #   None | Full_Native_String
 
         'new__prefix',                  #   Full_Native_String
-        'new__prefix_blank',            #   None | Some_Native_String
+        'new__prefix_blank',            #   None | Native_String
     ))
 
 

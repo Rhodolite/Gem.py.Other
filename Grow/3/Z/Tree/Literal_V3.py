@@ -16,11 +16,11 @@
 #
 #       Version 3:
 #
-#           `Tree_String.s` is a `Some_Native_String`.
+#           `Tree_String.s` is a `Native_String`.
 #
 #       Version 2:
 #
-#           `Tree_String.s` is a `Some_String`.
+#           `Tree_String.s` is a `String`.
 #
 
 
@@ -46,7 +46,7 @@ class Tree_String(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Substantial_Native_Integer
 
-        's',                            #   Some_String
+        's',                            #   String
     ))
 
 

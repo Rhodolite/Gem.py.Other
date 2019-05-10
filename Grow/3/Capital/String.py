@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.String - Some String Interface.  Strings are Unique (in normal case).
+#   Capital.String - String Interface.  Strings are Unique.
 #
 #       By "Unique" we mean is only one string for each unique value.
 #
@@ -46,7 +46,8 @@ string_version = capital_globals.string_version
 #       attribute
 #           is_empty_string : Boolean
 #           is_full_string  : Boolean
-#           native_string   : Some_Native_String
+#
+#           native_string_subclass : Native_String
 #
 #       debug
 #           is_some_string  : Boolean
@@ -56,7 +57,7 @@ string_version = capital_globals.string_version
 #       The code generator will be able to accept interfaces, in a syntax similiar to the above, and verify them when
 #       generating code.
 #
-class TRAIT_Some_String(object):
+class TRAIT_String(object):
     __slots__ = (())
 
 
@@ -106,12 +107,12 @@ if string_version >= 8:
 #
 #       s.is_full_string                    #   Test if `s` is a  full  string.
 #
-#       conjure_some_string(s)              #   Conjure a `String`.
+#       conjure_string(s)                   #   Conjure a `String`.
 #
 #       empty_string                        #   The empty string singleton.
 #
-#       s.native_string                     #   The `Some_Native_String` that `s` represents (may be a subclass of
-#                                           #   `Some_Native_String).
+#       s.native_string_subclass            #   The `Native_String` that `s` represents (may be a subclass of
+#                                           #   `Native_String`).
 #
 #       s.python_code()                     #   Return a `Full_Native_String` that is the python code that python will
 #                                           #   compile to a `str` with the same characters as `s`.
@@ -158,7 +159,7 @@ if string_version >= 8:
 #
 #       Do this instead:
 #
-#           s = conjure_some_string('hi')
+#           s = conjure_string('hi')
 #
 #           if s.is_full_string:        #   How to test if something is a string.
 #               trace('Yes, s is a String!')
@@ -220,28 +221,28 @@ if string_version == 0:
     pass
 elif string_version == 1:
     from    Capital.Private.ConjureString_V1    import  conjure_full_string
-    from    Capital.Private.ConjureString_V1    import  conjure_some_string
+    from    Capital.Private.ConjureString_V1    import  conjure_string
 elif string_version == 2:
     from    Capital.Private.ConjureString_V2    import  conjure_full_string
-    from    Capital.Private.ConjureString_V2    import  conjure_some_string
+    from    Capital.Private.ConjureString_V2    import  conjure_string
 elif string_version == 3:
     from    Capital.Private.ConjureString_V3    import  conjure_full_string
-    from    Capital.Private.ConjureString_V3    import  conjure_some_string
+    from    Capital.Private.ConjureString_V3    import  conjure_string
 elif string_version == 4:
     from    Capital.Private.ConjureString_V4    import  conjure_full_string
-    from    Capital.Private.ConjureString_V4    import  conjure_some_string
+    from    Capital.Private.ConjureString_V4    import  conjure_string
 elif string_version == 5:
     from    Capital.Private.ConjureString_V5    import  conjure_full_string
-    from    Capital.Private.ConjureString_V5    import  conjure_some_string
+    from    Capital.Private.ConjureString_V5    import  conjure_string
 elif string_version == 6:
     from    Capital.Private.ConjureString_V6    import  conjure_full_string
-    from    Capital.Private.ConjureString_V6    import  conjure_some_string
+    from    Capital.Private.ConjureString_V6    import  conjure_string
 elif string_version == 7:
     from    Capital.Private.ConjureString_V7    import  conjure_full_string
-    from    Capital.Private.ConjureString_V7    import  conjure_some_string
+    from    Capital.Private.ConjureString_V7    import  conjure_string
 elif string_version == 8:
     from    Capital.Private.ConjureString_V8    import  conjure_full_string
-    from    Capital.Private.ConjureString_V8    import  conjure_some_string
+    from    Capital.Private.ConjureString_V8    import  conjure_string
 else:
     from    Capital.Core                import  FATAL
 
@@ -269,9 +270,9 @@ else:
 
 
 #
-#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
+#   conjure_full_string(s) - Conjure a full `String`, based on `s`.  Guarantees Uniqueness.
 #
-#       `s` must be a *DIRECT* `str` instance, and "full" (i.e.: has a length greater than 0).
+#       `s` must be a *DIRECT* `Native_String` instance, and "full" (i.e.: has a length greater than 0).
 #
 #       `s` may *NOT* be an instance of a subclass of `str`.
 #
@@ -279,14 +280,27 @@ else:
 #
 #       If `s` is empty (i.e.: has 0 characters), throws a `ValueError`.
 #
+#   NOTE:
+#       The "Guarantees Uniqueness" clause above applies when `string_version >= 7`.
+#
+#       For `string_version < 7` it is more accuate to say "Guarantees Uniqueness (in normal cases)".
+#
 export(conjure_full_string)
 
 #
-#   conjure_some_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
+#   conjure_string(s) - Conjure a `String`, based on `s`.  Guarantees Uniqueness.
 #
-#       `s` must be of type `Some_Native_String` (i.e.: `str` or a subclass derived from `str`).
+#       `s` must be a *DIRECT* `Native_String` instance.
 #
-export(conjure_some_string)
+#       `s` may *NOT* be an instance of a subclass of `str`.
+#
+#
+#   NOTE:
+#       The "Guarantees Uniqueness" clause above applies when `string_version >= 7`.
+#
+#       For `string_version < 7` it is more accuate to say "Guarantees Uniqueness (in normal cases)".
+#
+export(conjure_string)
 
 
 #

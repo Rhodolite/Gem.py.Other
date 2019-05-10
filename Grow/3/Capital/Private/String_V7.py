@@ -22,7 +22,7 @@
 #
 #       Version 7:
 #
-#           String classes use `Some_Native_String` as their base class.
+#           String classes use `Native_String` as their base class.
 #
 
 
@@ -31,23 +31,21 @@ from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
-from    Capital.String                  import  TRAIT_Some_String
+from    Capital.String                  import  TRAIT_String
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
+    from    Capital.Cannot              import  raise__CANNOT__construct__ERROR
+    from    Capital.Cannot              import  raise__CANNOT__create__ERROR
     from    Capital.Native_String       import  fact_is_empty_native_string
     from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
 #<methods>
-#   common methods of `{Empty,Full}_String_Leaf`.
 #
-#       As explained in "Capital.Private.String_V5.py" we had to get rid of `Base_String`.
-#
-#       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
-#       `Empty_String_Leaf` and `Full_String_Leaf` below.
+#   Common methods of `{Empty,Full}_String_Leaf`.
 #
 
 
@@ -55,7 +53,7 @@ if __debug__:
 #   Base_String: Interface String
 #
 @property
-def property__Base_String__native_string(self):
+def property__String__native_string_subclass(self):
     return self
 #</methods>
 
@@ -66,7 +64,7 @@ def property__Base_String__native_string(self):
 class Empty_String_Leaf(
         Empty_Native_String,
         TRAIT_Maybe_Temporary_0,
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = (())
 
@@ -76,7 +74,9 @@ class Empty_String_Leaf(
     #
     is_empty_string = True
     is_full_string  = False
-    native_string   = property__Base_String__native_string
+
+
+    native_string_subclass = property__String__native_string_subclass
 
 
     #
@@ -130,7 +130,7 @@ method__Full_Native_String__representation = Full_Native_String.__repr__
 class Full_String_Leaf(
         Full_Native_String,
         TRAIT_Maybe_Temporary_0,
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = (())
 
@@ -139,17 +139,8 @@ class Full_String_Leaf(
     #   Private
     #
     if __debug__:
-        def __new__(Meta, s):
-            FATAL('{}: A Full_String_Leaf may not be {}',
-                  "Capital.Private.FullString_V6.Full_String_Leaf.operator new (`__new__`)",
-                  'created')
-
-
-    if __debug__:
-        def __init__(self, s):
-            FATAL('{}: A Full_String_Leaf may not be {}',
-                  "Capital.Private.FullString_V6.Full_String_Leaf.constructor (`__init__`)",
-                  'constructed')
+        __init__ = raise__CANNOT__construct__ERROR
+        __new__  = raise__CANNOT__create__ERROR
 
 
     #
@@ -157,7 +148,9 @@ class Full_String_Leaf(
     #
     is_empty_string = False
     is_full_string  = True
-    native_string   = property__Base_String__native_string
+
+
+    native_string_subclass = property__String__native_string_subclass
 
 
     #
@@ -180,7 +173,7 @@ class Full_String_Leaf(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #

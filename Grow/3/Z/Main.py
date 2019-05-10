@@ -17,7 +17,7 @@ from    Capital.Core                    import  FATAL
 from    Capital.Core                    import  Native_Boolean
 from    Capital.Core                    import  trace
 from    Capital.Global                  import  capital_globals
-from    Capital.String                  import  conjure_some_string
+from    Capital.String                  import  conjure_string
 from    Capital.String                  import  conjure_full_string
 from    Capital.String                  import  empty_string
 from    Z.Build_DumpToken               import  build_dump_token
@@ -71,12 +71,12 @@ def command_parse(version):
 
 
 def command_string():
-    hello   = conjure_some_string("hello")
-    crystal = conjure_some_string("crystal")
+    hello   = conjure_string("hello")
+    crystal = conjure_string("crystal")
 
-    assert empty_string is conjure_some_string("")
-    assert hello        is conjure_some_string("hello")
-    assert crystal      is conjure_full_string("crystal")
+    assert empty_string is conjure_string("")
+    assert hello        is conjure_string("hello")
+    assert crystal      is conjure_full_string("crystal")       #   Test: `conjure_string` .vs. `conjure_full_string`
 
     #
     #<clique>

@@ -25,7 +25,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
-from    Capital.String                  import  TRAIT_Some_String
+from    Capital.String                  import  TRAIT_String
 
 
 if __debug__:
@@ -38,10 +38,10 @@ if __debug__:
 #
 @export
 class String_Leaf(
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = ((
-        'interned_s',                   #   Some_Native_String
+        'interned_s',                   #   Native_String
     ))
 
 
@@ -66,7 +66,7 @@ class String_Leaf(
 
 
     @property
-    def native_string(self):
+    def native_string_subclass(self):
         return self.interned_s
 
 
@@ -78,7 +78,7 @@ class String_Leaf(
     #
     #   .__contains__(item) - Implement membership test.
     #
-    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
+    #       Delegated to the `Native_String` implementation via `.interned_s`.
     #
     def __contains__(self, item):
         return self.interned_s.__contains__(item)
@@ -87,7 +87,7 @@ class String_Leaf(
     #
     #   .__format__(format_specification)   - Format `String`
     #
-    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
+    #       Delegated to the `Native_String` implementation via `.interned_s`.
     #
     def __format__(self, format_specification):
         return self.interned_s.__format__(format_specification)
@@ -96,7 +96,7 @@ class String_Leaf(
     #
     #   .__len__()  - Return the length.
     #
-    #       Delegated to the `Some_Native_String` implementation via `.interned_s`.
+    #       Delegated to the `Native_String` implementation via `.interned_s`.
     #
     def __len__(self):
         return self.interned_s.__len__()
@@ -111,7 +111,7 @@ class String_Leaf(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #
@@ -129,7 +129,7 @@ class String_Leaf(
     #
     #   CURRENT
     #
-    #       For now, we just use the `Some_Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
+    #       For now, we just use the `Native_String` representation (i.e: `str.__repr__` via `.interned_s`).
     #
     #   FUTURE:
     #

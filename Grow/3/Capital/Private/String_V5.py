@@ -68,10 +68,10 @@
 #
 #               EXAMPLE (what we want to do):
 #
-#                   class TRAIT_Some_String(object):                                __slots__ = (())
+#                   class TRAIT_String(object):                                     __slots__ = (())
 #                   class TRAIT_Maybe_Temporary_0(object):                          __slots__ = (())
 #                   class Temporary_String(TRAIT_Maybe_Temporary_0):                __slots__ = (('interned_s',))
-#                   class Base_String(TRAIT_Some_String):                           __slots__ = (('interned_s',))
+#                   class Base_String(TRAIT_String):                                __slots__ = (('interned_s',))
 #                   class Full_String_Leaf(Base_String, TRAIT_Maybe_Temporary_0):   __slots__ = (())
 #
 #                   x = Temporary_String()
@@ -84,10 +84,10 @@
 #
 #               Removing `Base_String`, allows us to simplfy this:
 #
-#                   class TRAIT_Some_String(object):                                    __slots__ = (())
+#                   class TRAIT_String(object):                                         __slots__ = (())
 #                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
 #                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
-#                   class Full_String_Leaf(TRAIT_Some_String, TRAIT_Maybe_Temporary_0): __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(TRAIT_String, TRAIT_Maybe_Temporary_0):      __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String_Leaf
@@ -100,10 +100,10 @@
 #               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String_Leaf`
 #               (since we eliminated `Base_String`):
 #
-#                   class TRAIT_Some_String(object):                                    __slots__ = (())
+#                   class TRAIT_String(object):                                         __slots__ = (())
 #                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
 #                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
-#                   class Full_String_Leaf(TRAIT_Maybe_Temporary_0, TRAIT_Some_String): __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(TRAIT_Maybe_Temporary_0, TRAIT_String):      __slots__ = (('interned_s',))
 #
 #                   x = Temporary_String()
 #                   x.__class__ = Full_String_Leaf
@@ -123,7 +123,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Native_String           import  intern_native_string
-from    Capital.String                  import  TRAIT_Some_String
+from    Capital.String                  import  TRAIT_String
 
 
 if __debug__:
@@ -133,7 +133,8 @@ if __debug__:
 
 #
 #<methods>
-#   Base_String methods - A very simple string wrapper, common methods of `{Empty,Full}_String_Leaf`.
+#
+#   String methods - A very simple string wrapper, common methods of `{Empty,Full}_String_Leaf`.
 #
 #       As explained above we had to get rid of `Base_String`.
 #
@@ -143,26 +144,26 @@ if __debug__:
 
 
 #
-#   Base_String: contructor
+#   Constructor
 #
-def method__Base_String__constructor(self, interned_s):
+def method__String__constructor(self, interned_s):
     self.interned_s = interned_s
 
 
 #
-#   Base_String: Interface String
+#   Interface String
 #
 @property
-def property__Base_String__native_string(self):
+def property__String__native_string_subclass(self):
     return self.interned_s
 
 
 #
-#   Base_String.__format__ (format_specification)  - Format `String`
+#   .__format__ (format_specification)  - Format `String`
 #
-#       Delegated to the `Some_Native_String` implementation via `.interned_s`.
+#       Delegated to the `Native_String` (i.e.: `str`) implementation via `.interned_s`.
 #
-def method__Base_String__operator_format(self, format_specification):
+def method__String__operator_format(self, format_specification):
     return self.interned_s.__format__(format_specification)
 #</methods>
 
@@ -171,7 +172,7 @@ def method__Base_String__operator_format(self, format_specification):
 #   Empty String [Leaf] - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String_Leaf(
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Empty_Native_String
@@ -181,7 +182,7 @@ class Empty_String_Leaf(
     #
     #   Private
     #
-    __init__ = method__Base_String__constructor
+    __init__ = method__String__constructor
 
 
     #
@@ -189,7 +190,9 @@ class Empty_String_Leaf(
     #
     is_empty_string = True
     is_full_string  = False
-    native_string   = property__Base_String__native_string
+
+
+    native_string_subclass = property__String__native_string_subclass
 
 
     #
@@ -202,7 +205,7 @@ class Empty_String_Leaf(
     #
     #       Delegated to the `Empty_Native_String` implementation via `.interned_s`.
     #
-    __format__ = method__Base_String__operator_format
+    __format__ = method__String__operator_format
 
 
     #
@@ -238,7 +241,7 @@ class Empty_String_Leaf(
 #   Full String [Leaf] - A wrapper around a full native string.
 #
 class Full_String_Leaf(
-        TRAIT_Some_String,
+        TRAIT_String,
 ):
     __slots__ = ((
         'interned_s',                   #   Full_Native_String
@@ -248,7 +251,7 @@ class Full_String_Leaf(
     #
     #   Private
     #
-    __init__ = method__Base_String__constructor
+    __init__ = method__String__constructor
 
 
     #
@@ -256,7 +259,9 @@ class Full_String_Leaf(
     #
     is_empty_string = False
     is_full_string  = True
-    native_string   = property__Base_String__native_string
+
+
+    native_string_subclass = property__String__native_string_subclass
 
 
     #
@@ -269,7 +274,7 @@ class Full_String_Leaf(
     #
     #       Delegated to the `Full_Native_String` implementation via `.interned_s`.
     #
-    __format__ = method__Base_String__operator_format
+    __format__ = method__String__operator_format
 
 
     #
@@ -290,7 +295,7 @@ class Full_String_Leaf(
     #
     #       Example:
     #
-    #           assert __repr__(conjure_some_string('hello')) == "<'hello'>"
+    #           assert __repr__(conjure_string('hello')) == "<'hello'>"
     #
     #   FUTURE
     #

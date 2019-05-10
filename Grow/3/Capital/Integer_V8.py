@@ -4,29 +4,9 @@
 
 
 #
-#   Capital.Private.String_V8 - Private implementation of the public `String` Interface, Version 8.
+#   Capital.Private.Integer_V8 - Private implementation of the public `*_Integer` Interfaces, Version 8.
 #
-#       Strings are Unique (always).
-#
-#       Uniqueness is implemented in "Capital.Private.ConjureString_V6.py" (which uses the interface
-#       `Maybe_Temporary` to implement uniqueness).
-#
-
-
-#
-#   Difference between Version 7 & Version 8.
-#
-#       Version 7:
-#
-#           1)  `Empty_String_Leaf` does not implement `Empty_String`.
-#
-#           2)  `Full_String_Leaf`  does not implement `Full_String`.
-#
-#       Version 8:
-#
-#           1)  `Empty_String_Leaf` implements `Empty_String`.
-#
-#           2)  `Full_String_Leaf`  implements `Full_String`.
+#       Integers are Unique (always).
 #
 
 
@@ -38,52 +18,50 @@ from    Capital.Native_String           import  Empty_Native_String
 from    Capital.Native_String           import  Full_Native_String
 from    Capital.String                  import  TRAIT_Empty_String
 from    Capital.String                  import  TRAIT_Full_String
-from    Capital.String                  import  TRAIT_String
-
 
 
 if __debug__:
-    from    Capital.Cannot              import  raise__CANNOT__create__ERROR
     from    Capital.Cannot              import  raise__CANNOT__construct__ERROR
+    from    Capital.Cannot              import  raise__CANNOT__create__ERROR
     from    Capital.Native_String       import  fact_is_empty_native_string
     from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
 #<methods>
-#
-#   Common methods of `{Empty,Full}_String_Leaf`.
+#   common methods of `{Positive,Negative}_Integer_Leaf` & `Zero_Leaf`.
 #
 
 
-#
-#   Base_String: Interface String
-#
 @property
-def property__String__native_string_subclass(self):
+def property__Integer__native_integer_subclass(self):
     return self
 #</methods>
 
 
+
 #
-#   Empty String - A singleton wrapper around the native empty string `""`.
+#   Zero [Leaf] Integer - A singleton wrapper around `0`.
 #
-class Empty_String_Leaf(
-        Empty_Native_String,
-        TRAIT_Empty_String,
+class Zero_Leaf(
+        Some_Native_Integer,
+        TRAIT_Contrary_Integer,
+        TRAIT_Keen_Integer,
         TRAIT_Maybe_Temporary_0,
-        TRAIT_String,
+        TRAIT_Some_Integer,
+        TRAIT_Zero,
 ):
     __slots__ = (())
 
 
     #
-    #   Interface String
+    #   Interface Some_Integer
     #
-    is_full_string = False
+    is_negative_integer = False
+    is_positive_integer = False
 
 
-    native_string_subclass = property__String__native_string_subclass
+    native_integer_subclass = property__Integer__native_integer_subclass
 
 
     #
@@ -92,53 +70,44 @@ class Empty_String_Leaf(
 
 
     #
-    #   .format(format_specification) - Inherited from `Empty_Native_String`.
+    #   .format(format_specification) - Inherited from `Some_Native_Integer`.
     #
 
 
     #
-    #   .__len__()  - Return the length.
-    #
-    #       Always returns `0` for an `Empty_String_Leaf`.
-    #
-    @staticmethod
-    def __len__():
-        return 0
-
-
-    #
-    #   .__repr__() - Return the representation of a `String`
+    #   .__repr__() - Return the representation of a `Zero_Integer`
     #
     @staticmethod
     def __repr__():
-        return '<"">'
+        return '<0>'
 
 
     #
     #   .python_code()
     #
-    #       Return a `Full_Native_String` that is the python code that python will compile to a `Empty_Native_String`
-    #       with the same characters.
+    #       Return a `Full_Native_String` that is the python code that python will compile to a `Some_Native_Integer`
+    #       with the same value as the `Some_Native_Integer` that `self` wraps.
     #
     @staticmethod
     def python_code():
-        return '""'
+        return '0'
 
 
 #
 #   method__Full_Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
 #
-method__Full_Native_String__representation = Full_Native_String.__repr__
+method__Some_Native_Integer__representation = Some_Native_Integer.__repr__
 
 
 #
-#   Full String - A wrapper around a full native string.
+#   Negative Integer [Leaf] - A wrapper around a negative native integer (i.e.: `int` with a value less than 0).
 #
-class Full_String_Leaf(
-        Full_Native_String,
-        TRAIT_Full_String,
+class Negative_Integer_Leaf(
+        Some_Native_Integer,
+        TRAIT_Contrary_Integer,
         TRAIT_Maybe_Temporary_0,
-        TRAIT_String,
+        TRAIT_Negative_Integer,
+        TRAIT_Some_Integer,
 ):
     __slots__ = (())
 

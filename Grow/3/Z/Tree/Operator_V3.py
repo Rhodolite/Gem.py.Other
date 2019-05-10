@@ -32,7 +32,7 @@
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  enumeration
-from    Capital.String                  import  conjure_some_string
+from    Capital.String                  import  conjure_full_string
 from    Z.Tree.Operator                 import  TRAIT_Tree_Operator
 
 
@@ -48,7 +48,7 @@ class Tree_Operator_Enumeration(
         TRAIT_Tree_Operator,
 ):
     __slots__ = ((
-        'operator_token',               #   String
+        'operator_token',               #   Full_String
     ))
 
 
@@ -63,7 +63,7 @@ class Tree_Operator_Enumeration(
     #   Interface Tree_Operator
     #
     def dump_operator_token(self, f):
-        f.write(self.operator_token.native_string)
+        f.write(self.operator_token.native_string_subclass)
 
 
     #
@@ -86,7 +86,7 @@ def create_TOE(name, operator_token):
     assert fact_is_full_native_string(operator_token)
 
     return Tree_Operator_Enumeration(
-               conjure_some_string(operator_token),
+               conjure_full_string(operator_token),
            )
 
 

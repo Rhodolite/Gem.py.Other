@@ -20,7 +20,7 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 if __debug__:
     from    Capital.Fact                import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_substantial_native_integer
-    from    Capital.Native_String       import  fact_is_some_native_string
+    from    Capital.Native_String       import  fact_is_native_string
 
 
 #
@@ -33,7 +33,7 @@ class Tree_String(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Substantial_Native_Integer
 
-        's',                            #   Some_Native_String
+        's',                            #   Native_String
     ))
 
 
@@ -66,6 +66,6 @@ def create_Tree_String(line_number, column, s):
     assert fact_is_positive_native_integer   (line_number)
     assert fact_is_substantial_native_integer(column)
 
-    assert fact_is_some_native_string(s)
+    assert fact_is_native_string(s)
 
     return Tree_String(line_number, column, s)

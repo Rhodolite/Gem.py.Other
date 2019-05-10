@@ -15,21 +15,21 @@
 #
 #       Version 1:
 #
-#           The third parameter to `z.create_Tree_String` is a `Some_Native_String`.
+#           The third parameter to `z.create_Tree_String` is a `Native_String`.
 #
 #       Version 2:
 #
-#           The third parameter to `z.create_Tree_String` is a `Some_String`.
+#           The third parameter to `z.create_Tree_String` is a `String`.
 #
 
 
-from    Capital.String                          import  conjure_some_string
+from    Capital.String                          import  conjure_string
 
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_positive_native_integer
     from    Capital.Fact                        import  fact_is_substantial_native_integer
-    from    Capital.Native_String               import  fact_is_some_native_string
+    from    Capital.Native_String               import  fact_is_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String_Literal
 
@@ -49,10 +49,10 @@ def convert_string_literal(z, v):
     assert fact_is_positive_native_integer   (v.lineno)
     assert fact_is_substantial_native_integer(v.col_offset)
 
-    assert fact_is_some_native_string(v.s)
+    assert fact_is_native_string(v.s)
 
     return z.create_Tree_String(
                v.lineno,
                v.col_offset,
-               conjure_some_string(v.s),
+               conjure_string(v.s),
            )

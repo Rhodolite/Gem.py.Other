@@ -175,18 +175,6 @@ if __debug__:
 
 
 #
-#   fact_is_some_native_string(s) - Assert that `s` is a *DIRECT* `str` instance.
-#
-#       `s` may *NOT* be an instance of a subclass of `str`.
-#
-if __debug__:
-    def fact_is_some_native_string(s):
-        assert type(s) is str
-
-        return True
-
-
-#
 #   fact_is_substantial_native_integer(v)
 #
 #       Assert that `v` is a *DIRECT* `Native_Integer` (i.e.: `int`) instance, and is greater than or equal to 0.

@@ -33,7 +33,7 @@ if __debug__:
     from    Capital.Fact                    import  fact_is_positive_native_integer
     from    Capital.Native_String           import  fact_is_empty_native_string
     from    Capital.Native_String           import  fact_is__native_none__OR__full_native_string
-    from    Capital.Native_String           import  fact_is_some_native_string
+    from    Capital.Native_String           import  fact_is_native_string
     from    Capital.SimpleContextLifecycle  import  fact_is_lifecycle_created
     from    Capital.SimpleContextLifecycle  import  fact_is_lifecycle_entered
 
@@ -72,11 +72,11 @@ class Build_Lines_of_NativeString(object):
     __slots__ = ((
         'lifecycle',                #   BuildContextLifeCycle
 
-        'lines',                    #   Some_Native_List of Some_Native_String
+        'lines',                    #   Some_Native_List of Native_String
         '_append_line',             #   NativeMethod
 
         'prefix',                   #   None | Full_Native_String
-        'prefix_blank',             #   Some_Native_String
+        'prefix_blank',             #   Native_String
 
         'position',                 #   SignificantInteger
         'f',                        #   None | BuildNativeString
@@ -294,7 +294,7 @@ class Build_Lines_of_NativeString(object):
     def change_prefix(self, prefix):
         assert fact_is_native_none        (self.prefix)
         assert fact_is_empty_native_string(self.prefix_blank)
-        assert fact_is_some_native_string (prefix)
+        assert fact_is_native_string      (prefix)
 
         new__prefix_blank = strip_trailing_whitespace(prefix)
 

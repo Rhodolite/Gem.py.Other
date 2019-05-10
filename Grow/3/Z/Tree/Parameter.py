@@ -76,10 +76,10 @@
 #
 #               In the current version, the following are *NOT* `Tree_Parameter`:
 #
-#                   `*g`            - Instead is a `Native_String` (stored in the `.tuple_parameters` member of
+#                   `*g`            - Instead is a `Full_Native_String` (stored in the `.tuple_parameters` member of
 #                                     `Tree_All_Parameters`).
 #
-#                   `**h`           - Instead is a `Native_String` (stored in the `.map_parameters` members of
+#                   `**h`           - Instead is a `Full_Native_String` (stored in the `.map_parameters` members of
 #                                     `Tree_All_Parameters`).
 #
 #               Why are `*g`, and `**h` *NOT* currently a `Tree_Parameter`:
@@ -150,7 +150,7 @@ class TRAIT_Tree_Parameter(object):
 
        #@virtual
         is_tree_normal_parameter = False
-    
+
         is_tree_parameter = True
 
 

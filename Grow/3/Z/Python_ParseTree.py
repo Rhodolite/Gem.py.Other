@@ -34,7 +34,7 @@ class Python_ParseTree(object):
 #
 class Python_Statement_Comment_Many(object):
     __slots__ = ((
-        'commment_tuple',               #   Full_Native_Tuple of Some_Native_String
+        'commment_tuple',               #   Full_Native_Tuple of Native_String
     ))
 
 

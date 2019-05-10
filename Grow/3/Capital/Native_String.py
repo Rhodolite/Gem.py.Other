@@ -24,19 +24,13 @@ Full_Native_String = str
 
 
 #
-#   NativeString - A native string (i.e.: `str`)
+#   Native_String - A native string (i.e.: `str`)
 #
-NativeString = str
+Native_String = str
 
 
 #
-#   Some_Native_String - A native string (i.e.: `str`).
-#
-Some_Native_String = str
-
-
-#
-#   intern_native_string - intern a `Some_Native_String` (i.e.: `str`).
+#   intern_native_string - intern a `Native_String` (i.e.: `str`).
 #
 if is_python_2:
     from    __builtin__                 import  intern as intern_native_string
@@ -47,13 +41,13 @@ else:
 #
 #   strip_trailing_whitespace - strip trailing whitespace
 #
-strip_trailing_whitespace = Some_Native_String.rstrip
+strip_trailing_whitespace = Native_String.rstrip
 
 
 #
 #   native_string__lookup_index__OR__MINUS_1(s, sub) - Look for `sub` in `s`.  Return `-1` on failure.
 #
-native_string__lookup_index__OR__MINUS_1 = Some_Native_String.find
+native_string__lookup_index__OR__MINUS_1 = Native_String.find
 
 
 #
@@ -120,6 +114,18 @@ if __debug__:
 
 
 #
+#   fact_is_native_string(s) - Assert that `s` is a *DIRECT* `Native_String` (i.e.: `str`) instance.
+#
+#       `s` may *NOT* be an instance of a subclass of `Native_String` (i.e.: `str`).
+#
+if __debug__:
+    def fact_is_native_string(s):
+        assert type(s) is str
+
+        return True
+
+
+#
 #   fact_is__native_none__OR__full_native_string(s)
 #
 #       Assert that `s` is either:
@@ -148,17 +154,5 @@ if __debug__:
     def fact_is_some_INTERNED_native_string(s):
         assert type(s) is str
         assert s       is intern_native_string(s)
-
-        return True
-
-
-#
-#   fact_is_some_native_string(s) - Assert that `s` is a *DIRECT* `str` instance.
-#
-#       `s` may *NOT* be an instance of a subclass of `str`.
-#
-if __debug__:
-    def fact_is_some_native_string(s):
-        assert type(s) is str
 
         return True
