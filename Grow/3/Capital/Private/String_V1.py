@@ -83,7 +83,7 @@ class String_Leaf(
     def __contains__(self, item):
         return self.interned_s.__contains__(item)
 
-    
+
     #
     #   .__format__(format_specification)   - Format `String`
     #

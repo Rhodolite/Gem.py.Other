@@ -339,7 +339,7 @@ if 0:
 #                       create a closure for `PREPARE_Exception` with the tuple ((`Exception_Class`, `function_name`)
 #                       call                 @creator (with 1 argument, the closure)
 #                       store result in      `PREPARE_Exception`
-#                   
+#
 #           line 86     return              `PREPARE_Exception`
 #
 #       Here for comparasion is the code for `produce_PREPARE_Exception`:

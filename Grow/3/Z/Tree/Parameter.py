@@ -134,19 +134,51 @@
 #           dump_parameter_tokens(f : Build_DumpToken) => void
 #
 #       debug
-#           is_tree_keyword_parameter := false          #   Not implemented in version 1
-#           is_tree_map_parameter     := false          #   Not implemented in version 1
+#           is_tree_keyword_parameter : boolean
+#           is_tree_map_parameter     : boolean
 #           is_tree_normal_parameter  : boolean
 #           is_tree_parameters_all    : boolean
 #           is_tree_parameter         := true
-#           is_tree_tuple_parameter   := false          #   Not implemented in version 1
+#           is_tree_tuple_parameter   : boolean
 #
 class TRAIT_Tree_Parameter(object):
     __slots__ = (())
 
 
     if __debug__:
+       #@virtual
+        is_tree_keyword_parameter = False
+
+       #@virtual
+        is_tree_normal_parameter = False
+    
         is_tree_parameter = True
+
+       #@virtual
+        is_tree_parameters_all = False
+
+
+
+#
+#   interface Tree_Parameter_0
+#       documentation
+#           Interface to `parser_none` or tree classes that represent parameters.
+#
+#       attribute
+#           has_tree_parameter : boolean
+#
+#       if has_tree_parameter:
+#           implement Tree_Parameter
+#
+class TRAIT_Tree_Parameter_0(object):
+    __slots__ = (())
+
+   #@virtual
+    has_tree_parameter = True
+
+
+    if __debug__:
+        is_tree_parameter_0 = True
 
 
 #
@@ -159,32 +191,31 @@ class TRAIT_Tree_Parameter(object):
 #
 #   USAGE (debug mode):
 #
-#       v.is_tree_normal_parameter                  #   Test if `v` is a [tree] normal parameter.
-#
-#       v.is_tree_parameter                         #   Test if `v` is a tree parameter.
-#
-#       v.is_tree_parameters_all                    #   Test if `v` is a `Tree_Parameters_All`.
-#
-#       assert fact_is_tree_normal_parameter(v)     #   Assert that `v` is a [tree] normal parameter.
-#
-#       assert fact_is_tree_parameter(v)            #   Assert that `v` is a tree parameter.
-#
-#       assert fact_is_tree_parameters_all(v)       #   Assert that `v` is a `Tree_Parameters_All`.
-#
-
-
-#
-#   FUTURE USAGE (debug mode) - Not implemented in version 1:
-#
 #       v.is_tree_keyword_parameter                 #   Test if `v` is a [tree] keyword parameter.
 #
 #       v.is_tree_map_parameter                     #   Test if `v` is a [tree] map parameter.
+#
+#       v.is_tree_normal_parameter                  #   Test if `v` is a [tree] normal parameter.
+#
+#       v.is_tree_parameter                         #   Test if `v` is a `Tree_Parameter`.
+#
+#       v.is_tree_parameter_0                       #   Test if `v` is a `Tree_Parameter_0`.
+#
+#       v.is_tree_parameters_all                    #   Test if `v` is a `Tree_Parameters_All`.
 #
 #       v.is_tree_tuple_parameter                   #   Test if `v` is a [tree] tuple parameter.
 #
 #       assert fact_is_tree_keyword_parameter(v)    #   Assert that `v` is a [tree] keyword parameter.
 #
 #       assert fact_is_tree_map_parameter(v)        #   Assert that `v` is a [tree] map parameter.
+#
+#       assert fact_is_tree_normal_parameter(v)     #   Assert that `v` is a [tree] normal parameter.
+#
+#       assert fact_is_tree_parameter(v)            #   Assert that `v` is a `Tree_Parameter`.
+#
+#       assert fact_is_tree_parameter_0(v)          #   Assert that `v` is a `Tree_Parameter_0`.
+#
+#       assert fact_is_tree_parameters_all(v)       #   Assert that `v` is a `Tree_Parameters_All`.
 #
 #       assert fact_is_tree_tuple_parameter(v)      #   Assert that `v` is a [tree] tuple parameter.
 #
@@ -206,6 +237,16 @@ if __debug__:
 if __debug__:
     def fact_is_tree_parameter(v):
         assert v.is_tree_parameter
+
+        return True
+
+
+#
+#   fact_is_tree_parameter_0(v) - Assert that `v` is a `Tree_Parameter_0`
+#
+if __debug__:
+    def fact_is_tree_parameter_0(v):
+        assert v.is_tree_parameter_0
 
         return True
 

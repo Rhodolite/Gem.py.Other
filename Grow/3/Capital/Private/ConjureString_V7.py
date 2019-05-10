@@ -203,7 +203,7 @@ def produce_conjure_X_string(
     #       One of the following two functions:
     #
     #           1)  IF `allow_empty_string` is `FALSE`, THEN
-    #   
+    #
     #                   conjure_full_string(s)
     #
     #                       Conjure a full `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
@@ -253,7 +253,7 @@ def produce_conjure_X_string(
         #
         #           This is the second most common case.
         #
-        #       3)  Found a temporary key.  
+        #       3)  Found a temporary key.
         #           The `if` statement will fail.
         #
         #           This is a very rare case (only happens in multi threading race conditions).

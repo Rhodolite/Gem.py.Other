@@ -94,18 +94,14 @@ class Tree_Name(
     #   Interface Tree_Parameter
     #
     if __debug__:
-        is_tree_keyword_parameter = False
-        is_tree_parameters_all    = False
-
-
         @replace
         @property
         def is_tree_parameter(self):
             return self.context.is_tree_parameter_context
 
 
+       #@replace
         is_tree_normal_parameter = is_tree_parameter
-
 
 
     if __debug__:
@@ -156,9 +152,6 @@ class Tree_Name(
     #
     #   Public
     #
-    is_tree_token_name = True
-
-
     def __repr__(self):
         return arrange('<Tree_Name @{}:{} {!r} {}>', self.line_number, self.column, self.id, self.context)
 

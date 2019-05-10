@@ -160,7 +160,7 @@ def produce_conjure_X_string(
     #       One of the following two functions:
     #
     #           1)  IF `allow_empty_string` is `FALSE`, THEN
-    #   
+    #
     #                   conjure_full_string(s)
     #
     #                       Conjure a `String`, based on `s`.  Guarantees Uniqueness (in normal cases).
@@ -206,7 +206,7 @@ def produce_conjure_X_string(
         if len(s) == 0:
             if allow_empty_string:
                 return empty_string
-                
+
             value_error = PREPARE_ValueError(
                     "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
                     function_name,

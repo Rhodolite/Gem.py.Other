@@ -15,6 +15,7 @@
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Z.Parser.Symbol                 import  TRAIT_Parser_Symbol_0
+from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter_0
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
@@ -23,6 +24,7 @@ from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 #
 class Parser_None(
         TRAIT_Parser_Symbol_0,
+        TRAIT_Tree_Parameter_0,
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = (())
@@ -36,6 +38,13 @@ class Parser_None(
 
 
     #
+    #   Interface Tree_Parameter_0
+    #
+   #@replace
+    has_tree_parameter = False
+
+
+    #
     #   Interface Tree_Suite_0
     #
    #@replace
@@ -45,6 +54,19 @@ class Parser_None(
     #
     #   Public
     #
+
+
+    #
+    #   Technically, the `.__nonzero__` method should be as follows:
+    #
+    #       @staticmethod
+    #       def __nonzero__():
+    #           return False
+    #
+    #   However, since `parser_none` is never used in a boolean context, and hence we don't need a `.__nonzero__` method.
+    #
+
+
     @staticmethod
     def __repr__():
         return '<parser-none>'

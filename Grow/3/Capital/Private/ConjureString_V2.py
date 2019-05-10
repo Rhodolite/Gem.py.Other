@@ -83,7 +83,7 @@ string_cache = {}                       #   Map { interned Full_Native_String : 
 lookup_string  = string_cache.get
 provide_string = string_cache.setdefault
 
- 
+
 #
 #   conjure_X_string(s, allow_empty_string = False, empty_string = None)
 #
@@ -126,7 +126,7 @@ def conjure_X_string(s, allow_empty_string = False, empty_string = None):
         assert fact_is_not_native_none(empty_string)
     else:
         assert fact_is_native_none    (empty_string)
-        
+
     r = lookup_string(s)
 
     if r is not None:
@@ -141,7 +141,7 @@ def conjure_X_string(s, allow_empty_string = False, empty_string = None):
     if len(s) == 0:
         if allow_empty_string:
             return empty_string
-          
+
         value_error = PREPARE_ValueError(
                 "parameter `s` is empty; `{}` requires a non-empty string; (i.e.: has a length greater than 0)",
                 'conjure_full_string',

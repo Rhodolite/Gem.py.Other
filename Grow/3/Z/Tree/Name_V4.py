@@ -15,21 +15,36 @@
 #
 #       Version 3:
 #
-#           Tree_Name had a `.context` member which four possible values:
+#           `Tree_Name` had a `.context` member which four possible values:
 #
 #               tree_delete_context
+#
 #               tree_load_context
+#
 #               tree_parameter_context
+#
 #               tree_store_context
 #
 #       Version 4:
 #
 #           Instead of a single class with a `.context` member, four classes exist instead:
 #
-#               Tree_Delete_Name            -   Replacement for the `tree_delete_context` value.
-#               Tree_Evaluate_Name          -   Replacement for the `tree_load_context` value.
-#               Tree_Normal_Parameter       -   Replacement for the `tree_parameter_context` value.
-#               Tree_Store_Name             -   Replacement for the `tree_store_context` value.
+#               A)  Tree_Delete_Name            -   Replacement for the `tree_delete_context` value.
+#
+#               B)  Tree_Evaluate_Name          -   Replacement for the `tree_load_context` value.
+#
+#               C)  Tree_Normal_Parameter       -   Replacement for the `tree_parameter_context` value.
+#
+#                       *NOT* Implemented in this file, but implemented in `Capital.Tree.Parameter_V4`.
+#
+#               D)  Tree_Store_Name             -   Replacement for the `tree_store_context` value.
+#
+#           Of these four classes, `Tree_{Delete,Evaluate,Store}_Name` are implemented in this file.
+#
+#
+#   SEE ALSO
+#
+#       See "Z.Tree.Parameter_V4.py" for `Tree_Normal_Parameter`.
 #
 
 
@@ -49,9 +64,9 @@ if __debug__:
 
 
 #
-#   Tree: Name - Base of class that with a name.
+#   Tree: Name Branch - Base of class of `Tree_{Delete,Evaluate,Store}_Name` (and also of `Tree_Parameter_Name`).
 #
-class Tree_Name(object):
+class Tree_Name_Branch(object):
     __slots__ = ((
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
@@ -73,19 +88,15 @@ class Tree_Name(object):
     #
     #   Public
     #
-    is_tree_token_name = True
-
-
     def __repr__(self):
-        return arrange('<{} @{}:{} {!r} {}>',
-                       self.__class__.__name__, self.line_number, self.column, self.symbol, self.context)
+        return arrange('<{} @{}:{} {}>', self.__class__.__name__, self.line_number, self.column, self.symbol)
 
 
 #
 #   Tree: Delete Name
 #
 class Tree_Delete_Name(
-        Tree_Name,
+        Tree_Name_Branch,
         TRAIT_Tree_Delete_Target,
 ):
     __slots__ = (())
@@ -112,7 +123,7 @@ def create_Tree_Delete_Name(line_number, column, symbol):
 #   Tree: Evaluate Name
 #
 class Tree_Evaluate_Name(
-        Tree_Name,
+        Tree_Name_Branch,
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = (())
@@ -140,43 +151,10 @@ def create_Tree_Evaluate_Name(line_number, column, symbol):
 
 
 #
-#   Tree: Normal Parameter
-#
-class Tree_Normal_Parameter(
-        Tree_Name,
-        TRAIT_Tree_Parameter,
-):
-    __slots__ = (())
-
-
-    #
-    #   Interface Tree_Parameter
-    #
-    if __debug__:
-        is_tree_keyword_parameter = False
-        is_tree_parameters_all    = False
-        is_tree_normal_parameter  = True
-
-
-    def dump_parameter_tokens(self, f):
-        f.arrange('<normal-parameter @{}:{} {}>', self.line_number, self.column, self.symbol)
-
-
-@creator
-def create_Tree_Normal_Parameter(line_number, column, symbol):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
-
-    assert fact_is_parser_symbol(symbol)
-
-    return Tree_Normal_Parameter(line_number, column, symbol)
-
-
-#
 #   Tree: Store Name
 #
 class Tree_Store_Name(
-        Tree_Name,
+        Tree_Name_Branch,
         TRAIT_Tree_Store_Target,
 ):
     __slots__ = (())
