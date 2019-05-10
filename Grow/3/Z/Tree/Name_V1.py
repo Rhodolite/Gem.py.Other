@@ -20,8 +20,8 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 
 if __debug__:
     from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
@@ -47,7 +47,7 @@ class Tree_Name(
     #
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'id',                           #   Full_Native_String
         'context',                      #   Tree_Context
@@ -158,8 +158,8 @@ class Tree_Name(
 
 @creator
 def create_Tree_Name(line_number, column, id, context):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_full_native_string(id)
     assert fact_is_tree_context      (context)

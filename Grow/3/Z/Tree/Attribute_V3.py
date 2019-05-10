@@ -36,8 +36,8 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
@@ -66,7 +66,7 @@ class Tree_Attribute(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'attribute',                    #   Parser_Symbol
@@ -162,8 +162,8 @@ class Tree_Attribute(
 
 @creator
 def create_Tree_Attribute(line_number, column, value, attribute, context):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_parser_symbol        (attribute)

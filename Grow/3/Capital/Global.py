@@ -81,8 +81,8 @@ from    Capital.Core                    import  trace
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
 
 
 #
@@ -92,7 +92,7 @@ class Capital_Globals(object):
     __slots__ = ((
         'version',                      #   Positive_Native_Integer
         'exception_version',            #   Positive_Native_Integer
-        'string_version',               #   Substantial_Native_Integer
+        'string_version',               #   Keen_Native_Integer
     ))
 
 
@@ -109,9 +109,9 @@ class Capital_Globals(object):
 
 @creator
 def create_capital_globals(version, exception_version, string_version):
-    assert fact_is_positive_native_integer   (version)
-    assert fact_is_positive_native_integer   (exception_version)
-    assert fact_is_substantial_native_integer(string_version)
+    assert fact_is_positive_native_integer(version)
+    assert fact_is_positive_native_integer(exception_version)
+    assert fact_is_avid_native_integer    (string_version)
 
     assert 1 <= version           <= 9
     assert 1 <= exception_version <= 8

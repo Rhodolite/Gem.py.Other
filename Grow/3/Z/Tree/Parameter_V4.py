@@ -49,8 +49,8 @@ from    Z.Tree.Name_V4                  import  Tree_Name_Branch
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_some_native_list
     from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
@@ -80,8 +80,8 @@ class Tree_Normal_Parameter(
 
 @creator
 def create_Tree_Normal_Parameter(line_number, column, symbol):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_parser_symbol(symbol)
 

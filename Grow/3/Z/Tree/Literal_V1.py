@@ -18,8 +18,8 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Capital.Native_String       import  fact_is_native_string
 
 
@@ -31,7 +31,7 @@ class Tree_String(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         's',                            #   Native_String
     ))
@@ -63,8 +63,8 @@ class Tree_String(
 
 @creator
 def create_Tree_String(line_number, column, s):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_native_string(s)
 

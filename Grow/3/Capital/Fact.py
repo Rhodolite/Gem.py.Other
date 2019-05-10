@@ -26,9 +26,9 @@ from    Capital.Types       import  Python_Type
 #
 #   fact_is_empty_native_list(v)
 #
-#       Assert that `v` is a empty *DIRECT* `list` instance (i.e.: has zero elements).
+#       Assert that `v` is a `Native_List`, and is "empty" (i.e.: `list` with zero elements).
 #
-#       `v` may *NOT* be an instance of a subclass of `list`.
+#       `v` may *NOT* be an instance of a subclass of `Native_List`.
 #
 if __debug__:
     def fact_is_empty_native_list(v):
@@ -41,10 +41,9 @@ if __debug__:
 #
 #   fact_is_full_native_list(v)
 #
-#       Assert that `v` is a *DIRECT* `list` instance, and is "full" (i.e.: is non-empty; i.e.: and has at
-#       least one element).
+#       Assert that `v` is a `Native_List`, and is "full" (i.e.: `list` with at least one element).
 #
-#       `v` may *NOT* be an instance of a subclass of `list`.
+#       `v` may *NOT* be an instance of a subclass of `Native_List`.
 #
 if __debug__:
     def fact_is_full_native_list(v):
@@ -136,57 +135,14 @@ if __debug__:
 
 
 #
-#   fact_is_positive_native_integer(v)
-#
-#       Assert that `v` is a *DIRECT* `int` instance, and is greater than 0.
-#
-#       `v` may *NOT* be an instance of a subclass of `int`.
-#
-if __debug__:
-    def fact_is_positive_native_integer(v):
-        assert type(v) is int
-        assert v > 0
-
-        return True
-
-
-#
-#   fact_is_some_native_integer(v) - Assert that the `v` is an `int`.
-#
-if __debug__:
-    def fact_is_some_native_integer(v):
-        assert isinstance(v, int)
-
-        return True
-
-
-#
 #   fact_is_some_native_list(v)
 #
-#       Assert that `v` is a *DIRECT* `list` instance.
+#       Assert that `v` is a `Native_List` (i.e.: `list`).
 #
-#       `v` may *NOT* be an instance of a subclass of `list`.
+#       `v` may *NOT* be an instance of a subclass of `Native_List (i.e.: `list`).
 #
 if __debug__:
     def fact_is_some_native_list(v):
         assert type(v) is list
-
-        return True
-
-
-#
-#   fact_is_substantial_native_integer(v)
-#
-#       Assert that `v` is a *DIRECT* `Native_Integer` (i.e.: `int`) instance, and is greater than or equal to 0.
-#
-#       `s` may *NOT* be an instance of a subclass of `int`.
-#
-#   NOTE:
-#       "substantial" was chosen to mean "positive" or "zero".
-#
-if __debug__:
-    def fact_is_substantial_native_integer(v):
-        assert type(v) is int
-        assert v >= 0
 
         return True

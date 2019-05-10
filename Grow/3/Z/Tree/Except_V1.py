@@ -19,8 +19,8 @@ if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
 
@@ -33,7 +33,7 @@ class Tree_Except_Handler(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'type_expression',              #   None | Tree_Value_Expression
         'name_expression',              #   None | Tree_Value_Expression
@@ -87,8 +87,8 @@ class Tree_Except_Handler(
 
 @creator
 def create_Tree_Except_Handler(line_number, column, type_expression, name_expression, body):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is__native_none__OR__tree_value_expression(type_expression)
     assert fact_is__native_none__OR__tree_store_target    (name_expression)

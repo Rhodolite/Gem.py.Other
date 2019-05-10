@@ -15,8 +15,8 @@ from    Z.Tree.Global_V1                    import  create_Tree_Global_Statement
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_positive_native_integer
-    from    Capital.Fact                        import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
 
 
@@ -31,8 +31,8 @@ assert Native_AbstractSyntaxTree_Global_Statement._fields     == (('names',))
 
 
 def convert_global_statement(v):
-    assert fact_is_positive_native_integer   (v.lineno)
-    assert fact_is_substantial_native_integer(v.col_offset)
+    assert fact_is_positive_native_integer(v.lineno)
+    assert fact_is_avid_native_integer    (v.col_offset)
 
     assert fact_is_full_native_list(v.names)
 

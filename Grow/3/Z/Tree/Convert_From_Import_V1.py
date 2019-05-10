@@ -17,8 +17,8 @@ from    Z.Tree.From_Import_V1               import  create_Tree_From_Import_Stat
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Native_String               import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_positive_native_integer
-    from    Capital.Fact                        import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_From_Import_Statement
 
 
@@ -33,12 +33,12 @@ assert Native_AbstractSyntaxTree_From_Import_Statement._fields     == (('module'
 
 
 def convert_from_import_statement(v):
-    assert fact_is_positive_native_integer   (v.lineno)
-    assert fact_is_substantial_native_integer(v.col_offset)
+    assert fact_is_positive_native_integer(v.lineno)
+    assert fact_is_avid_native_integer    (v.col_offset)
 
-    assert fact_is_full_native_string        (v.module)
-    assert fact_is_full_native_list          (v.names)
-    assert fact_is_substantial_native_integer(v.level)
+    assert fact_is_full_native_string (v.module)
+    assert fact_is_full_native_list   (v.names)
+    assert fact_is_avid_native_integer(v.level)
 
     return create_Tree_From_Import_Statement(
                v.lineno,

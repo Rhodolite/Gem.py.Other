@@ -19,8 +19,8 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
@@ -39,7 +39,7 @@ class Tree_Subscript_Expression(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'index',                        #   Tree_Index_Clause
@@ -138,8 +138,8 @@ class Tree_Subscript_Expression(
 
 @creator
 def create_Tree_Subscript_Expression(line_number, column, value, index, context):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_tree_index_clause    (index)

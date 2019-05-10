@@ -40,8 +40,8 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
 
@@ -65,7 +65,7 @@ if __debug__:
 class Tree_Attribute(object):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'attribute',                    #   Symbol
@@ -113,8 +113,8 @@ class Tree_Delete_Attribute(
 
 @creator
 def create_Tree_Delete_Attribute(line_number, column, value, attribute):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_parser_symbol        (attribute)
@@ -149,8 +149,8 @@ class Tree_Evaluate_Attribute(
 
 @creator
 def create_Tree_Evaluate_Attribute(line_number, column, value, attribute):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_parser_symbol        (attribute)
@@ -181,8 +181,8 @@ class Tree_Store_Attribute(
 
 @creator
 def create_Tree_Store_Attribute(line_number, column, value, attribute):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_parser_symbol        (attribute)

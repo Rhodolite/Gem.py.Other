@@ -47,9 +47,9 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
 
 
 #
@@ -112,7 +112,7 @@ def Tree_Many_Expresion__dump_store_target_tokens(self, f):
 class Tree_Many_Expression(object):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
     ))
@@ -137,8 +137,8 @@ class Tree_Many_Expression(object):
 
 @creator
 def create_Tree_Many_Expression(Meta, line_number, column, elements):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_some_native_list(elements)
 

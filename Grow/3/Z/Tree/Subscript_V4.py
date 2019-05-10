@@ -43,8 +43,8 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Index                import  fact_is_tree_index_clause
 
@@ -55,7 +55,7 @@ if __debug__:
 class Tree_Subscript_Expression(object):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'index',                        #   Tree_Index_Clause
@@ -104,8 +104,8 @@ class Tree_Delete_Subscript(
 
 @creator
 def create_Tree_Delete_Subscript(line_number, column, value, index):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_tree_index_clause    (index)
@@ -140,8 +140,8 @@ class Tree_Evaluate_Subscript(
 
 @creator
 def create_Tree_Evaluate_Subscript(line_number, column, value, index):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_tree_index_clause    (index)
@@ -172,8 +172,8 @@ class Tree_Store_Subscript(
 
 @creator
 def create_Tree_Store_Subscript(line_number, column, value, index):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
     assert fact_is_tree_index_clause    (index)

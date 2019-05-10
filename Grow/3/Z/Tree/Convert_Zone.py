@@ -96,9 +96,9 @@ from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yi
 
 
 if __debug__:
-    from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer          import  fact_is_positive_native_integer
+    from    Capital.Native_String           import  fact_is_full_native_string
 
 
 class Convert_Zone(object):
@@ -558,21 +558,21 @@ def fill_convert_zone(version):
     #
     #   Verify verions
     #
-    assert fact_is_positive_native_integer   (version)
-    assert fact_is_positive_native_integer   (alias_version)
-    assert fact_is_positive_native_integer   (argument_version)
-    assert fact_is_full_native_string        (comprehension_version)
-    assert fact_is_substantial_native_integer(context_version)
-    assert fact_is_full_native_string        (except_version)
-    assert fact_is_positive_native_integer   (index_version)
-    assert fact_is_substantial_native_integer(module_name_version)
-    assert fact_is_positive_native_integer   (name_version)
-    assert fact_is_positive_native_integer   (operator_version)
-    assert fact_is_positive_native_integer   (parameter_version)
-    assert fact_is_positive_native_integer   (expression_version)
-    assert fact_is_positive_native_integer   (statement_version)
-    assert fact_is_substantial_native_integer(symbol_version)
-    assert fact_is_positive_native_integer   (target_version)
+    assert fact_is_positive_native_integer(version)
+    assert fact_is_positive_native_integer(alias_version)
+    assert fact_is_positive_native_integer(argument_version)
+    assert fact_is_full_native_string     (comprehension_version)
+    assert fact_is_avid_native_integer    (context_version)
+    assert fact_is_full_native_string     (except_version)
+    assert fact_is_positive_native_integer(index_version)
+    assert fact_is_avid_native_integer    (module_name_version)
+    assert fact_is_positive_native_integer(name_version)
+    assert fact_is_positive_native_integer(operator_version)
+    assert fact_is_positive_native_integer(parameter_version)
+    assert fact_is_positive_native_integer(expression_version)
+    assert fact_is_positive_native_integer(statement_version)
+    assert fact_is_avid_native_integer    (symbol_version)
+    assert fact_is_positive_native_integer(target_version)
 
     assert 2   <= version               <= 21
     assert 1   <= alias_version         <= 6

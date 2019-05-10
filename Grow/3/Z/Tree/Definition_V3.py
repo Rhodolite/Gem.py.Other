@@ -34,9 +34,9 @@ from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Capital.Fact                import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
     from    Z.Tree.Parameter_Tuple      import  fact_is_tree_parameter_tuple_0
 
@@ -49,7 +49,7 @@ class Tree_Class_Definition(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'name',                         #   Parser_Symbol
         'bases',                        #   Some_Native_List of Tree_Value_Expression
@@ -122,8 +122,8 @@ class Tree_Class_Definition(
 
 @creator
 def create_Tree_Class_Definition(line_number, column, name, bases, body, decorator_list):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_parser_symbol   (name)
     assert fact_is_some_native_list(bases)
@@ -141,7 +141,7 @@ class Tree_Function_Definition(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'name',                         #   Parser_Symbol
         'parameters',                   #   Tree_Parameter
@@ -207,8 +207,8 @@ class Tree_Function_Definition(
 
 @creator
 def create_Tree_Function_Definition(line_number, column, name, parameters, body, decorator_list):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_parser_symbol         (name)
     assert fact_is_tree_parameter_tuple_0(parameters)

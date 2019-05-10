@@ -29,8 +29,8 @@
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_positive_native_integer
-    from    Capital.Fact                        import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Global_Statement
 
@@ -48,8 +48,8 @@ assert Native_AbstractSyntaxTree_Global_Statement._fields     == (('names',))
 def convert_global_statement(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is_positive_native_integer   (v.lineno)
-    assert fact_is_substantial_native_integer(v.col_offset)
+    assert fact_is_positive_native_integer(v.lineno)
+    assert fact_is_avid_native_integer    (v.col_offset)
 
     assert fact_is_full_native_list(v.names)
 

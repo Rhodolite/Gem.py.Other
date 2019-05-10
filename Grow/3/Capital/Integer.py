@@ -17,17 +17,19 @@
 #
 #       In addition, there are two other groups:
 #
-#           keen        - A value greater than or equal to 0 (i.e.: non-negative).
+#           avid        - A value greater than or equal to 0 (i.e.: non-negative).
 #           contrary    - A value less    than or equal to 0 (i.e.: non-positive).
 #
-#       The verb "keen"     was chosen for lack of a better verb; and at least it sound better than "non-negative".
+#       The verb "avid"     was chosen for lack of a better verb; it sounds "positive"; and at least it sound better
+#       than "non-negative".
 #
-#       The verb "contrary" was chosen for lack of a better verb; at at least is sounds better than "non-positive".
+#       The verb "contrary" was chosen for lack of a better verb; it sounds "negative"; at at least is sounds better
+#       than "non-positive".
 #
 #       Testing for these groups is done with:
 #
+#           .is_avid_integer
 #           .is_contrary_integer
-#           .is_keen_integer
 #           .is_negative_integer
 #           .is_positive_integer
 #           .is_zero
@@ -49,8 +51,8 @@ from    Capital.Core                    import  export
 #           python_code() => Full_Native_String
 #
 #       attribute
+#           is_avid_integer     : Boolean
 #           is_contrary_integer : Boolean
-#           is_keen_integer     : Boolean
 #           is_negative_integer : Boolean
 #           is_positive_integer : Boolean
 #           is_zero             : Boolean
@@ -84,6 +86,21 @@ class TRAIT_Zero(object):
 
 
 #
+#   interface Avid_Integer
+#       extends
+#           Some_Integer, Zero
+#
+#       attribute
+#           is_avid_integer := true
+#
+class TRAIT_Avid_Integer(object):
+    __slots__ = (())
+
+
+    is_avid_integer = True
+
+
+#
 #   interface Contrary_Integer
 #       extends
 #           Some_Integer, Zero
@@ -96,21 +113,6 @@ class TRAIT_Contrary_Integer(object):
 
 
     is_contrary_integer = True
-
-
-#
-#   interface Keen_Integer
-#       extends
-#           Some_Integer, Zero
-#
-#       attribute
-#           is_keen_integer := true
-#
-class TRAIT_Keen_Integer(object):
-    __slots__ = (())
-
-
-    is_keen_integer = True
 
 
 #
@@ -147,19 +149,19 @@ class TRAIT_Positive_Integer(object):
 #
 #   USAGE:
 #
-#       v.is_zero                           #   Test if `v` is `Zero`.
+#       v.is_avid_integer                   #   Test if `v` is a `Avid_Integer`     (greater than or equal to 0).
 #
 #       v.is_contrary_integer               #   Test if `v` is a `Contrary_Integer` (less    than or equal to 0).
-#
-#       v.is_keen_integer                   #   Test if `v` is a `Keen_Integer`     (greater than or equal to 0).
 #
 #       v.is_negative_integer               #   Test if `v` is a `Negative_Integer` (less    than             0).
 #
 #       v.is_positive_integer               #   Test if `v` is a `Positive_Integer` (greater than             0).
 #
-#       conjure_contrary_integer(v)         #   Conjure a `Contrary_Integer`.
+#       v.is_zero                           #   Test if `v` is `Zero`.
 #
-#       conjure_keen_integer(v)             #   Conjure a `Keen_Integer`.
+#       conjure_avid_integer(v)             #   Conjure a `Avid_Integer`.
+#
+#       conjure_contrary_integer(v)         #   Conjure a `Contrary_Integer`.
 #
 #       conjure_negative_integer(v)         #   Conjure a `Negative_Integer`.
 #
@@ -183,9 +185,9 @@ class TRAIT_Positive_Integer(object):
 #
 #       v.is_some_integer                   #   Test if `v` is a `Some_Integer`.
 #
-#       assert fact_is_contrary_integer(v)  #   Assert that `v` is a `Contrary_Integer`.
+#       assert fact_avid_integer(v)         #   Assert that `v` is a `Avid_Integer`.
 #
-#       assert fact_keen_integer(v)         #   Assert that `v` is a `Keen_Integer`.
+#       assert fact_is_contrary_integer(v)  #   Assert that `v` is a `Contrary_Integer`.
 #
 #       assert fact_negative_integer(v)     #   Assert that `v` is a `Negative_Integer`.
 #
@@ -213,21 +215,21 @@ class TRAIT_Positive_Integer(object):
 
 
 #
-#   fact_is_contrary_integer(v) - Assert that `v` is a `Contrary_Integer`.
+#   fact_is_avid_integer(v) - Assert that `v` is a `Avid_Integer`.
 #
 if __debug__:
-    def fact_is_contrary_integer(v):
-        assert v.is_contrary_integer
+    def fact_is_avid_integer(v):
+        assert v.is_avid_integer
 
         return True
 
 
 #
-#   fact_is_keen_integer(v) - Assert that `v` is a `Keen_Integer`.
+#   fact_is_contrary_integer(v) - Assert that `v` is a `Contrary_Integer`.
 #
 if __debug__:
-    def fact_is_keen_integer(v):
-        assert v.is_keen_integer
+    def fact_is_contrary_integer(v):
+        assert v.is_contrary_integer
 
         return True
 
@@ -278,19 +280,33 @@ if __debug__:
 #       (imports must be after the "fact_*" functions, in case the imported file needs the "fact_*" functions).
 #
 from    Capital.Private.Integer_V8  import  zero_integer
+from    Capital.Private.Integer_V8  import  conjure_avid_integer
 from    Capital.Private.Integer_V8  import  conjure_contrary_integer
-from    Capital.Private.Integer_V8  import  conjure_keen_integer
 from    Capital.Private.Integer_V8  import  conjure_negative_integer
 from    Capital.Private.Integer_V8  import  conjure_positive_integer
 from    Capital.Private.Integer_V8  import  conjure_some_integer
 
 
 #
+#   conjure_avid_integer(v) - Conjure a `Avid_Integer`, based on `v`.  Guarantees Uniqueness.
+#
+#       `v` must be a `Native_Integer` (i.e.: `int`), and greater than or equal to 0.
+#
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
+#
+#   EXCEPTIONS
+#
+#       If `v` is negative, throws a `ValueError`.
+#
+export(conjure_avid_integer)
+
+
+#
 #   conjure_contrary_integer(v) - Conjure a `Contrary_Integer`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a *DIRECT* `int` instance, and less than or equal to 0.
+#       `v` must be a `Native_Integer` (i.e.: `int`), and less than or equal to 0.
 #
-#       `v` may *NOT* be an instance of a subclass of `int`.
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #
 #   EXCEPTIONS
 #
@@ -300,25 +316,11 @@ export(conjure_contrary_integer)
 
 
 #
-#   conjure_keen_integer(v) - Conjure a `Keen_Integer`, based on `v`.  Guarantees Uniqueness.
-#
-#       `v` must be a *DIRECT* `int` instance, and greater than or equal to 0.
-#
-#       `v` may *NOT* be an instance of a subclass of `int`.
-#
-#   EXCEPTIONS
-#
-#       If `v` is negative, throws a `ValueError`.
-#
-export(conjure_keen_integer)
-
-
-#
 #   conjure_negative_integer(v) - Conjure a `Negative_Integer`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a *DIRECT* `int` instance, and less than to 0.
+#       `v` must be a `Native_Integer` (i.e.: `int`), and less than to 0.
 #
-#       `v` may *NOT* be an instance of a subclass of `int`.
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #
 #   EXCEPTIONS
 #
@@ -330,9 +332,9 @@ export(conjure_negative_integer
 #
 #   conjure_positive_integer(v) - Conjure a `Positive_Integer`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a *DIRECT* `int` instance, and greater than to 0.
+#       `v` must be a `Native_Integer` (i.e.: `int`), and greater than to 0.
 #
-#       `v` may *NOT* be an instance of a subclass of `int`.
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #
 #   EXCEPTIONS
 #
@@ -344,9 +346,9 @@ export(conjure_positive_integer)
 #
 #   conjure_some_integer(v) - Conjure a `Some_Integer`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a *DIRECT* `int` instance.
+#       `v` must be a `Native_Integer` (i.e.: `int`).
 #
-#       `v` may *NOT* be an instance of a subclass of `int`.
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #
 export(conjure_some_integer)
 

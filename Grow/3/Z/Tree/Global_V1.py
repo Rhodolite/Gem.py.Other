@@ -17,8 +17,8 @@ from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Capital.Fact                import  fact_is_positive_native_integer
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
 
 
 #
@@ -29,7 +29,7 @@ class Tree_Global_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'names',                        #   Full_Native_List of Full_Native_String
     ))
@@ -74,8 +74,8 @@ class Tree_Global_Statement(
 
 @creator
 def create_Tree_Global_Statement(line_number, column, names):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_full_native_list(names)
 

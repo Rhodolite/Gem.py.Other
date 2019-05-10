@@ -19,9 +19,9 @@ if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_native_boolean
     from    Capital.Fact                import  fact_is_native_none
-    from    Capital.Fact                import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Fact                import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
@@ -37,7 +37,7 @@ class Tree_Keyword_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
     ))
 
 
@@ -65,8 +65,8 @@ class Tree_Keyword_Statement(
 
 @creator
 def create_Tree_Keyword_Statement(Meta, line_number, column):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     return Meta(line_number, column)
 
@@ -79,7 +79,7 @@ class Tree_Assert_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'test',                         #   Tree_Value_Expression
         'message',                      #   None | Tree_Value_Expression
@@ -122,8 +122,8 @@ class Tree_Assert_Statement(
 
 @creator
 def create_Tree_Assert_Statement(line_number, column, test, message):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression                  (test)
     assert fact_is__native_none__OR__tree_value_expression(message)
@@ -151,7 +151,7 @@ class Tree_Assign_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'targets',                      #   Full_Native_List of Tree_Store_Target
         'value',                        #   Tree_Value_Expression
@@ -193,8 +193,8 @@ class Tree_Assign_Statement(
 
 @creator
 def create_Tree_Assign_Statement(line_number, column, targets, value):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_full_native_list     (targets)
     assert fact_is_tree_value_expression(value)
@@ -240,7 +240,7 @@ class Tree_Delete_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'targets',                      #   Full_Native_List of Tree_Target
     ))
@@ -285,8 +285,8 @@ class Tree_Delete_Statement(
 
 @creator
 def create_Tree_Delete_Statement(line_number, column, targets):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_full_native_list(targets)
 
@@ -307,7 +307,7 @@ class Tree_Execute_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'body',                         #   Tree_Value_Expression
         'globals',                      #   None | Tree_Value_Expression
@@ -355,8 +355,8 @@ class Tree_Execute_Statement(
 
 @creator
 def create_Tree_Execute_Statement(line_number, column, body, globals, locals):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression                  (body)
     assert fact_is__native_none__OR__tree_value_expression(globals)
@@ -382,7 +382,7 @@ class Tree_Expression_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'value',                        #   Tree_Value_Expression
     ))
@@ -417,8 +417,8 @@ class Tree_Expression_Statement(
 
 @creator
 def create_Tree_Expression_Statement(line_number, column, value):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_value_expression(value)
 
@@ -435,7 +435,7 @@ class Tree_Modify_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'left',                         #   Tree_Value_Expression
         'operator',                     #   Tree_Operator
@@ -478,8 +478,8 @@ class Tree_Modify_Statement(
 
 @creator
 def create_Tree_Modify_Statement(line_number, column, left, operator, right):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is_tree_store_target    (left)
     assert fact_is_tree_operator        (operator)
@@ -511,7 +511,7 @@ class Tree_Print_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'destination',                  #   None | Tree_Value_Expression
         'values',                       #   Some_Native_List of Tree_Value_Expression
@@ -570,8 +570,8 @@ class Tree_Print_Statement(
 
 @creator
 def create_Tree_Print_Statement(line_number, column, destination, values, newline):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is__native_none__OR__tree_value_expression(destination)
     assert fact_is_some_native_list                       (values)
@@ -588,7 +588,7 @@ class Tree_Return_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'value',                        #   None | Tree_Value_Expression
     ))
@@ -627,8 +627,8 @@ class Tree_Return_Statement(
 
 @creator
 def create_Tree_Return_Statement(line_number, column, value):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is__native_none__OR__tree_value_expression(value)
 
@@ -643,7 +643,7 @@ class Tree_Raise_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Substantial_Native_Integer
+        'column',                       #   Keen_Native_Integer
 
         'type',                         #   None | Tree_Value_Expression
         'instance',                     #   None | Tree_Value_Expression
@@ -698,8 +698,8 @@ class Tree_Raise_Statement(
 
 @creator
 def create_Tree_Raise_Statement(line_number, column, type, instance, traceback):
-    assert fact_is_positive_native_integer   (line_number)
-    assert fact_is_substantial_native_integer(column)
+    assert fact_is_positive_native_integer(line_number)
+    assert fact_is_avid_native_integer    (column)
 
     assert fact_is__native_none__OR__tree_value_expression(type)
     assert fact_is__native_none__OR__tree_value_expression(instance)

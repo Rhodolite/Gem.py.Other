@@ -36,9 +36,9 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_positive_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_native_integer
+    from    Capital.Native_Integer              import  fact_is_positive_native_integer
+    from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_String               import  fact_is_full_native_string
     from    Capital.Native_String               import  fact_is__native_none__OR__full_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
@@ -87,8 +87,8 @@ assert Native_AbstractSyntaxTree_Name._fields     == (('id', 'ctx'))
 def convert_name_parameter(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is_positive_native_integer   (v.lineno)
-    assert fact_is_substantial_native_integer(v.col_offset)
+    assert fact_is_positive_native_integer(v.lineno)
+    assert fact_is_avid_native_integer    (v.col_offset)
 
     assert fact_is_full_native_string                              (v.id)
     assert fact_is__native__abstract_syntax_tree__parameter_context(v.ctx)
