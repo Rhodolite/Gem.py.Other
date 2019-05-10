@@ -44,8 +44,6 @@ from    Z.Tree.Alias                    import  TRAIT_Tree_Symbol_Alias
 if __debug__:
     from    Capital.Native_String       import  fact_is_full_native_string
     from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
 
 
 #

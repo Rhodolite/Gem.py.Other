@@ -14,8 +14,8 @@ from    Z.Tree.Literal_V1                   import  create_Tree_String
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Fact                        import  fact_is_positive_native_integer
+    from    Capital.Fact                        import  fact_is_substantial_native_integer
     from    Capital.Native_String               import  fact_is_some_native_string
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String_Literal
 
@@ -30,8 +30,8 @@ assert Native_AbstractSyntaxTree_String_Literal._fields     == (('s',))
 
 
 def convert_string_literal(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is_some_native_string(v.s)
 

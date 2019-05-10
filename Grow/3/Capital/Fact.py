@@ -136,14 +136,14 @@ if __debug__:
 
 
 #
-#   fact_is_positive_integer(v)
+#   fact_is_positive_native_integer(v)
 #
 #       Assert that `v` is a *DIRECT* `int` instance, and is greater than 0.
 #
 #       `v` may *NOT* be an instance of a subclass of `int`.
 #
 if __debug__:
-    def fact_is_positive_integer(v):
+    def fact_is_positive_native_integer(v):
         assert type(v) is int
         assert v > 0
 
@@ -187,16 +187,18 @@ if __debug__:
 
 
 #
-#   fact_is_substantial_integer(v)
+#   fact_is_substantial_native_integer(v)
 #
-#       Assert that `v` is a *DIRECT* `int` instance, and is greater than or equal to 0.
+#       Assert that `v` is a *DIRECT* `Native_Integer` (i.e.: `int`) instance, and is greater than or equal to 0.
+#
+#       `s` may *NOT* be an instance of a subclass of `int`.
 #
 #   NOTE:
 #       "substantial" was chosen to mean "positive" or "zero".
 #
 if __debug__:
-    def fact_is_substantial_integer(v):
-        assert isinstance(v, int)
+    def fact_is_substantial_native_integer(v):
+        assert type(v) is int
         assert v >= 0
 
         return True

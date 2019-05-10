@@ -19,9 +19,9 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_integer
+    from    Capital.Fact                import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Fact                import  fact_is_substantial_integer
+    from    Capital.Fact                import  fact_is_substantial_native_integer
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
@@ -35,8 +35,8 @@ class Tree_Many_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
         'context',                      #   Tree_Context
@@ -130,8 +130,8 @@ class Tree_Many_Expression(
 
 @creator
 def create_Tree_Many_Expression(Meta, line_number, column, elements, context):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_some_native_list(elements)
     assert fact_is_tree_context    (context)

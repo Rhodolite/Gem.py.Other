@@ -31,8 +31,8 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
+    from    Capital.Fact                import  fact_is_positive_native_integer
+    from    Capital.Fact                import  fact_is_substantial_native_integer
     from    Capital.String              import  fact_is_some_string
 
 
@@ -43,8 +43,8 @@ class Tree_String(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         's',                            #   Some_String
     ))
@@ -64,9 +64,7 @@ class Tree_String(
     #   Interface Tree_Value_Expression
     #
     def dump_value_expression_tokens(self, f):
-        f.arrange('<string @{}:{} ', self.line_number, self.column)
-        f.write(repr(self.s))
-        f.greater_than_sign()
+        f.arrange('<string @{}:{} {!r}>', self.line_number, self.column, self.s)
 
 
     #
@@ -78,8 +76,8 @@ class Tree_String(
 
 @creator
 def create_Tree_String(line_number, column, s):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_some_string(s)
 

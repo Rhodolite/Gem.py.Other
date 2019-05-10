@@ -17,8 +17,8 @@ from    Z.Tree.Convert_Expression_V1        import  convert_expression
 
 if __debug__:
     from    Capital.Native_String               import  fact_is_full_native_string
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Fact                        import  fact_is_positive_native_integer
+    from    Capital.Fact                        import  fact_is_substantial_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__DELETE_LOAD_OR_STORE_CONTEXT
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Attribute_Expression
@@ -34,8 +34,8 @@ assert Native_AbstractSyntaxTree_Attribute_Expression._fields     == (('value', 
 
 
 def convert_attribute_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION            (v.value)
     assert fact_is_full_native_string                                              (v.attr)

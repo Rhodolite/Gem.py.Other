@@ -41,10 +41,10 @@ from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_positive_integer
+    from    Capital.Fact                        import  fact_is_positive_native_integer
     from    Capital.Fact                        import  fact_is_some_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Fact                        import  fact_is_substantial_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR
@@ -76,8 +76,8 @@ if __debug__:
 #       Base code for `convert_generator_comprehension` & `convert_list_comprehension`.
 #
 def convert_value_comprehension(v, create):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.elt)
     assert fact_is_full_native_list                                    (v.generators)
@@ -101,8 +101,8 @@ assert Native_AbstractSyntaxTree_Backquote_Expression._fields     == (('value',)
 
 
 def convert_backquote_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
@@ -124,8 +124,8 @@ assert Native_AbstractSyntaxTree_Binary_Expression._fields     == (('left', 'op'
 
 
 def convert_binary_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.left)
     assert fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR (v.op)
@@ -151,8 +151,8 @@ assert Native_AbstractSyntaxTree_Call_Expression._fields     == (('func', 'args'
 
 
 def convert_call_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION                    (v.func)
     assert fact_is_some_native_list                                                        (v.args)
@@ -182,8 +182,8 @@ assert Native_AbstractSyntaxTree_Compare_Expression._fields     == (('left', 'op
 
 
 def convert_compare_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.left)
     assert fact_is_full_native_list                                    (v.ops)
@@ -237,8 +237,8 @@ assert Native_AbstractSyntaxTree_If_Expression._fields     == (('test', 'body', 
 
 
 def convert_if_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.test)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.body)
@@ -264,8 +264,8 @@ assert Native_AbstractSyntaxTree_Lambda_Expression._fields     == (('args', 'bod
 
 
 def convert_lambda_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__native__abstract_syntax_tree__all_parameters       (v.args)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.body)
@@ -311,8 +311,8 @@ assert Native_AbstractSyntaxTree_Logical_Expression._fields     == (('op', 'valu
 
 
 def convert_logical_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR(v.op)
     assert fact_is_full_native_list                                    (v.values)
@@ -345,8 +345,8 @@ assert Native_AbstractSyntaxTree_Map_Comprehension._fields     == (('key', 'valu
 
 
 def convert_map_comprehension(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.key)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
@@ -372,8 +372,8 @@ assert Native_AbstractSyntaxTree_Map_Expression._fields     == (('keys', 'values
 
 
 def convert_map_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is_some_native_list(v.keys)
     assert fact_is_some_native_list(v.values)
@@ -399,8 +399,8 @@ assert Native_AbstractSyntaxTree_Number._fields     == (('n',))
 
 
 def convert_number(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is_some_native_integer(v.n)
 
@@ -439,8 +439,8 @@ assert Native_AbstractSyntaxTree_Set_Expression._fields     == (('elts',))
 
 
 def convert_set_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is_some_native_list(v.elts)
 
@@ -462,8 +462,8 @@ assert Native_AbstractSyntaxTree_Unary_Expression._fields     == (('op', 'operan
 
 
 def convert_unary_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR  (v.op)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.operand)
@@ -487,8 +487,8 @@ assert Native_AbstractSyntaxTree_Yield_Expression._fields     == (('value',))
 
 
 def convert_yield_expression(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 

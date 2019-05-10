@@ -18,8 +18,8 @@ from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
+    from    Capital.Fact                import  fact_is_positive_native_integer
+    from    Capital.Fact                import  fact_is_substantial_native_integer
 
 
 #
@@ -29,12 +29,12 @@ class Tree_From_Import_Statement(
         TRAIT_Tree_Statement,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'module',                       #   Full_Native_String
         'names',                        #   Full_Native_List of Tree_Symbol_Alias
-        'level',                        #   Substantial_Integer
+        'level',                        #   Native_Substantial_Integer
     ))
 
 
@@ -91,11 +91,11 @@ class Tree_From_Import_Statement(
 
 @creator
 def create_Tree_From_Import_Statement(line_number, column, module, names, level):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
-    assert fact_is_full_native_string (module)
-    assert fact_is_full_native_list   (names)
-    assert fact_is_substantial_integer(level)
+    assert fact_is_full_native_string        (module)
+    assert fact_is_full_native_list          (names)
+    assert fact_is_substantial_native_integer(level)
 
     return Tree_From_Import_Statement(line_number, column, module, names, level)

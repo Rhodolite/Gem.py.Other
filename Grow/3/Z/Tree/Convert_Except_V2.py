@@ -29,8 +29,8 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
     from    Capital.Fact                        import  fact_is_native_none
-    from    Capital.Fact                        import  fact_is_positive_integer
-    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Fact                        import  fact_is_positive_native_integer
+    from    Capital.Fact                        import  fact_is_substantial_native_integer
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
@@ -50,8 +50,8 @@ assert Native_AbstractSyntaxTree_Except_Handler._fields     == (('type', 'name',
 def convert_except_handler(z, v):
     assert fact_is_convert_zone(z)
 
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.type)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET          (v.name)

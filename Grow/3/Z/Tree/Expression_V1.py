@@ -28,10 +28,10 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Capital.Fact                import  fact_is_positive_integer
+    from    Capital.Fact                import  fact_is_positive_native_integer
     from    Capital.Fact                import  fact_is_some_native_integer
     from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Fact                import  fact_is_substantial_integer
+    from    Capital.Fact                import  fact_is_substantial_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
@@ -47,8 +47,8 @@ class Tree_Value_Comprehension(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'element',                      #   Tree_Value_Expression
         'generators',                   #   Full_Native_List of Tree_Comprehension
@@ -92,8 +92,8 @@ class Tree_Value_Comprehension(
 
 @creator
 def create_Tree_Value_Comprehension(Meta, line_number, column, element, generators):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression(element)
     assert fact_is_full_native_list     (generators)
@@ -108,8 +108,8 @@ class Tree_Backquote_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'value',                        #   Tree_Value_Expression
     ))
@@ -144,8 +144,8 @@ class Tree_Backquote_Expression(
 
 @creator
 def create_Tree_Backquote_Expression(line_number, column, value):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression(value)
 
@@ -159,8 +159,8 @@ class Tree_Binary_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'left',                         #   Tree_Value_Expression
         'operator',                     #   Tree_Operator
@@ -203,8 +203,8 @@ class Tree_Binary_Expression(
 
 @creator
 def create_Tree_Binary_Expression(line_number, column, left, operator, right):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression(left)
     assert fact_is_tree_operator        (operator)
@@ -220,8 +220,8 @@ class Tree_Call_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'function',                     #   Tree_Value_Expression
         'arguments',                    #   Some_Native_List of Tree_Value_Expression
@@ -309,8 +309,8 @@ class Tree_Call_Expression(
 def create_Tree_Call_Expression(
         line_number, column, function, arguments, keywords, star_arguments, keyword_arguments,
 ):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression                  (function)
     assert fact_is_some_native_list                       (arguments)
@@ -330,8 +330,8 @@ class Tree_Compare_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'left',                         #   Tree_Value_Expression
         'operators',                    #   Full_Native_List of Tree_Operator
@@ -377,8 +377,8 @@ class Tree_Compare_Expression(
 
 @creator
 def create_Tree_Compare_Expression(line_number, column, left, operators, comparators):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression(left)
     assert fact_is_full_native_list     (operators)
@@ -408,8 +408,8 @@ class Tree_If_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'test',                         #   Tree_Value_Expression
         'body',                         #   Tree_Value_Expression
@@ -452,8 +452,8 @@ class Tree_If_Expression(
 
 @creator
 def create_Tree_If_Expression(line_number, column, test, body, else_expression):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression(test)
     assert fact_is_tree_value_expression(body)
@@ -469,8 +469,8 @@ class Tree_Logical_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'operator',                     #   Tree_Operator
         'values',                       #   Full_Native_List of Tree_Value_Expression
@@ -519,8 +519,8 @@ class Tree_Logical_Expression(
 
 @creator
 def create_Tree_Logical_Expression(line_number, column, operator, values):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_operator   (operator)
     assert fact_is_full_native_list(values)
@@ -535,8 +535,8 @@ class Tree_Map_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'keys',                         #   Some_Native_List of Tree_Value_Expression
         'values',                       #   Some_Native_List of Tree_Value_Expression
@@ -590,8 +590,8 @@ class Tree_Map_Expression(
 
 @creator
 def create_Tree_Map_Expression(line_number, column, keys, values):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_some_native_list(keys)
     assert fact_is_some_native_list(values)
@@ -608,8 +608,8 @@ class Tree_Lambda_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_Value_Expression
@@ -652,8 +652,8 @@ class Tree_Lambda_Expression(
 
 @creator
 def create_Tree_Lambda_Expression(line_number, column, parameters, body):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_parameter_tuple_0(parameters)
     assert fact_is_tree_value_expression (body)
@@ -682,8 +682,8 @@ class Tree_Map_Comprehension(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'key',                          #   Tree_Value_Expression
         'value',                        #   Tree_Value_Expression
@@ -731,8 +731,8 @@ class Tree_Map_Comprehension(
 
 @creator
 def create_Tree_Map_Comprehension(line_number, column, key, value, generators):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_value_expression(key)
     assert fact_is_tree_value_expression(value)
@@ -748,10 +748,10 @@ class Tree_Number(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
-        'n',                            #   int
+        'n',                            #   Native_Integer
     ))
 
 
@@ -781,8 +781,8 @@ class Tree_Number(
 
 @creator
 def create_Tree_Number(line_number, column, n):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_some_native_integer(n)
 
@@ -810,8 +810,8 @@ class Tree_Set_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'values',                       #   Some_Native_List of Tree_Value_Expression
     ))
@@ -856,8 +856,8 @@ class Tree_Set_Expression(
 
 @creator
 def create_Tree_Set_Expression(line_number, column, values):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_some_native_list(values)
 
@@ -871,8 +871,8 @@ class Tree_Unary_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'operator',                     #   Tree_Operator
         'right',                        #   Tree_Value_Expression
@@ -911,8 +911,8 @@ class Tree_Unary_Expression(
 
 @creator
 def create_Tree_Unary_Expression(line_number, column, operator, right):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_tree_operator        (operator)
     assert fact_is_tree_value_expression(right)
@@ -927,8 +927,8 @@ class Tree_Yield_Expression(
         TRAIT_Tree_Value_Expression,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'value',                        #   None | Tree_Value_Expression
     ))
@@ -967,8 +967,8 @@ class Tree_Yield_Expression(
 
 @creator
 def create_Tree_Yield_Expression(line_number, column, value):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is__native_none__OR__tree_value_expression(value)
 

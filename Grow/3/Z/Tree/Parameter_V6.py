@@ -33,9 +33,9 @@ from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 
 
 if __debug__:
-    from    Capital.Fact                        import  fact_is_positive_integer
+    from    Capital.Fact                        import  fact_is_positive_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Fact                        import  fact_is_substantial_native_integer
     from    Capital.Native_String               import  fact_is__native_none__OR__full_native_string
     from    Z.Parser.Symbol                     import  fact_is_parser_symbol
     from    Z.Tree.Expression                   import  fact_is_tree_value_expression
@@ -113,8 +113,8 @@ class Tree_Keyword_Parameter(
         TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'symbol',                       #   Symbol
         'value',                        #   Tree_Value_Expression
@@ -169,8 +169,8 @@ class Tree_Keyword_Parameter(
 
 @creator
 def create_Tree_Keyword_Parameter(line_number, column, symbol, value):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_parser_symbol        (symbol)
     assert fact_is_tree_value_expression(value)
@@ -215,8 +215,8 @@ class Tree_Normal_Parameter(
 
 @creator
 def create_Tree_Normal_Parameter(line_number, column, symbol):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_parser_symbol(symbol)
 

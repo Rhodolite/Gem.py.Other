@@ -40,8 +40,6 @@ from    Z.Tree.Alias                    import  TRAIT_Tree_Symbol_Alias
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
     from    Z.Parser.Module_Name        import  fact_is_parser_module_name
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
 

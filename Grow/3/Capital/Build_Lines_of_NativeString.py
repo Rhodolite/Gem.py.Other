@@ -30,7 +30,7 @@ from    Capital.Native_String           import  strip_trailing_whitespace
 if __debug__:
     from    Capital.Fact                    import  fact_is_native_none
     from    Capital.Fact                    import  fact_is_not_native_none
-    from    Capital.Fact                    import  fact_is_positive_integer
+    from    Capital.Fact                    import  fact_is_positive_native_integer
     from    Capital.Native_String           import  fact_is_empty_native_string
     from    Capital.Native_String           import  fact_is__native_none__OR__full_native_string
     from    Capital.Native_String           import  fact_is_some_native_string
@@ -325,7 +325,7 @@ class Build_Lines_of_NativeString(object):
     def indent(self, header = None, ending = None, prefix = 4):
         assert fact_is__native_none__OR__full_native_string(header)
         assert fact_is__native_none__OR__full_native_string(ending)
-        assert fact_is_positive_integer                    (prefix)
+        assert fact_is_positive_native_integer             (prefix)
 
         if header is not None:
             self.line(header)

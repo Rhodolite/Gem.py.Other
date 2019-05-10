@@ -33,8 +33,8 @@ from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_positive_integer
-    from    Capital.Fact                import  fact_is_substantial_integer
+    from    Capital.Fact                import  fact_is_positive_native_integer
+    from    Capital.Fact                import  fact_is_substantial_native_integer
     from    Z.Parser.Symbol_Tuple       import  fact_is_parser_symbol_tuple
 
 
@@ -47,8 +47,8 @@ class Tree_Global_Statement(
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = ((
-        'line_number',                  #   Positive_Integer
-        'column',                       #   Substantial_Integer
+        'line_number',                  #   Native_Positive_Integer
+        'column',                       #   Native_Substantial_Integer
 
         'symbols',                      #   Parser_Symbol_Tuple
     ))
@@ -82,8 +82,8 @@ class Tree_Global_Statement(
 
 @creator
 def create_Tree_Global_Statement(line_number, column, symbols):
-    assert fact_is_positive_integer   (line_number)
-    assert fact_is_substantial_integer(column)
+    assert fact_is_positive_native_integer   (line_number)
+    assert fact_is_substantial_native_integer(column)
 
     assert fact_is_parser_symbol_tuple(symbols)
 

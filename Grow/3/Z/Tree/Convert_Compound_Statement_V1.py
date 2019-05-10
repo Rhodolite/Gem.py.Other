@@ -27,9 +27,9 @@ from    Z.Tree.Convert_Target_V1            import  convert_target
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_positive_integer
+    from    Capital.Fact                        import  fact_is_positive_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
-    from    Capital.Fact                        import  fact_is_substantial_integer
+    from    Capital.Fact                        import  fact_is_substantial_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__TARGET
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET
@@ -45,8 +45,8 @@ if __debug__:
 #   convert_test_statement(v, create) - common code for `convert_{if,while}_statement`.
 #
 def convert_test_statement(v, create):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.test)
     assert fact_is_full_native_list                                    (v.body)
@@ -72,8 +72,8 @@ assert Native_AbstractSyntaxTree_For_Statement._fields     == (('target', 'iter'
 
 
 def convert_for_statement(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__TARGET          (v.target)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.iter)
@@ -115,8 +115,8 @@ assert Native_AbstractSyntaxTree_Try_Except_Statement._fields     == (('body', '
 
 
 def convert_try_except_statement(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is_full_native_list(v.body)
     assert fact_is_full_native_list(v.handlers)
@@ -162,8 +162,8 @@ def convert_try_finally_statement(v):
         trace('{}.body:      {!r}', function_name, v.body)
         trace('{}.finalbody: {!r}', function_name, v.finalbody)
 
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is_full_native_list(v.body)
     assert fact_is_full_native_list(v.finalbody)
@@ -200,8 +200,8 @@ assert Native_AbstractSyntaxTree_With_Statement._fields     == (('context_expr',
 
 
 def convert_with_statement(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
+    assert fact_is_positive_native_integer   (v.lineno)
+    assert fact_is_substantial_native_integer(v.col_offset)
 
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION          (v.context_expr)
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__TARGET(v.optional_vars)
