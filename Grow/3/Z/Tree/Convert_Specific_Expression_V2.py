@@ -32,7 +32,6 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_some_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Capital.Native_String               import  fact_is_some_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
@@ -55,7 +54,6 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Number
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Comprehension
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yield_Expression
 
@@ -470,26 +468,6 @@ def convert_set_expression(z, v):
 
                z.convert_some_list_of_expressions(z, v.elts),
            )
-
-
-#
-#   convert_string(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_String` (i.e.: `_ast.Str`) to a `Tree_String`.
-#
-assert Native_AbstractSyntaxTree_String._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_String._fields     == (('s',))
-
-
-def convert_string(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_some_native_string(v.s)
-
-    return z.create_Tree_String(v.lineno, v.col_offset, v.s)
 
 
 #

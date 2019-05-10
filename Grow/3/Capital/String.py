@@ -179,7 +179,7 @@ if string_version >= 8:
 #   fact_is_empty_string(s) - Assert that `s` is an empty string.
 #
 if __debug__:
-    def fact_is_empty_string(v):
+    def fact_is_empty_string(s):
         assert s.is_empty_string
 
         return True
@@ -189,7 +189,7 @@ if __debug__:
 #   fact_is_full_string(s) - Assert that `s` is an full string.
 #
 if __debug__:
-    def fact_is_full_string(v):
+    def fact_is_full_string(s):
         assert s.is_full_string
 
         return True
@@ -199,7 +199,7 @@ if __debug__:
 #   fact_is_some_string(s) - Assert that `s` is a string.
 #
 if __debug__:
-    def fact_is_some_string(v):
+    def fact_is_some_string(s):
         assert s.is_some_string
 
         return True

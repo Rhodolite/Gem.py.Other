@@ -35,7 +35,6 @@ from    Z.Tree.Expression_V1                import  create_Tree_Map_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Number
 from    Z.Tree.Expression_V1                import  create_Tree_Set_Comprehension
 from    Z.Tree.Expression_V1                import  create_Tree_Set_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_String
 from    Z.Tree.Expression_V1                import  create_Tree_Unary_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
 
@@ -46,7 +45,6 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_some_native_integer
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
-    from    Capital.Native_String               import  fact_is_some_native_string
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR
@@ -68,7 +66,6 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Number
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Comprehension
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_String
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Yield_Expression
 
@@ -453,24 +450,6 @@ def convert_set_expression(v):
 
                convert_some_list_of_expressions(v.elts),
            )
-
-
-#
-#   convert_string(v)
-#
-#       Convert a `Native_AbstractSyntaxTree_String` (i.e.: `_ast.Str`) to a `Tree_String`.
-#
-assert Native_AbstractSyntaxTree_String._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_String._fields     == (('s',))
-
-
-def convert_string(v):
-    assert fact_is_positive_integer   (v.lineno)
-    assert fact_is_substantial_integer(v.col_offset)
-
-    assert fact_is_some_native_string(v.s)
-
-    return create_Tree_String(v.lineno, v.col_offset, v.s)
 
 
 #

@@ -79,6 +79,7 @@ convert_some_list_of_expressions = produce__convert__some_list_of__Native_Abstra
 
 
 from    Z.Tree.Convert_Attribute_V1             import  convert_attribute_expression
+from    Z.Tree.Convert_Literal_V1               import  convert_string_literal
 from    Z.Tree.Convert_Many_V1                  import  convert_list_expression
 from    Z.Tree.Convert_Many_V1                  import  convert_tuple_expression
 from    Z.Tree.Convert_Name_V1                  import  convert_name_expression
@@ -96,7 +97,6 @@ from    Z.Tree.Convert_Specific_Expression_V1   import  convert_map_expression
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_number
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_set_comprehension
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_set_expression
-from    Z.Tree.Convert_Specific_Expression_V1   import  convert_string
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_unary_expression
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_yield_expression
 from    Z.Tree.Convert_Subscript_V1             import  convert_subscript_expression
@@ -117,7 +117,7 @@ from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTre
 from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Number
 from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Set_Comprehension
 from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Set_Expression
-from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_String
+from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_String_Literal
 from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Subscript_Expression
 from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Tuple_Expression
 from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTree_Unary_Expression
@@ -151,7 +151,7 @@ map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = {
         Native_AbstractSyntaxTree_Number                  : convert_number,
         Native_AbstractSyntaxTree_Set_Comprehension       : convert_set_comprehension,
         Native_AbstractSyntaxTree_Set_Expression          : convert_set_expression,
-        Native_AbstractSyntaxTree_String                  : convert_string,
+        Native_AbstractSyntaxTree_String_Literal          : convert_string_literal,
         Native_AbstractSyntaxTree_Subscript_Expression    : convert_subscript_expression,
         Native_AbstractSyntaxTree_Tuple_Expression        : convert_tuple_expression,
         Native_AbstractSyntaxTree_Unary_Expression        : convert_unary_expression,
