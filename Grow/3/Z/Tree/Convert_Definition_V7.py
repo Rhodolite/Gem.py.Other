@@ -34,7 +34,7 @@ if __debug__:
     from    Capital.Fact                        import  fact_is_some_native_list
     from    Capital.Fact                        import  fact_is_substantial_integer
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameters_all
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__all_parameters
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Class_Definition
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Function_Definition
 
@@ -87,7 +87,7 @@ def convert_function_definition(z, v):
     assert fact_is_substantial_integer(v.col_offset)
 
     assert fact_is_full_native_string                           (v.name)
-    assert fact_is__native__abstract_syntax_tree__parameters_all(v.args)
+    assert fact_is__native__abstract_syntax_tree__all_parameters(v.args)
     assert fact_is_full_native_list                             (v.body)
     assert fact_is_some_native_list                             (v.decorator_list)
 

@@ -15,7 +15,7 @@
 #
 #       Version 4:
 #
-#           `convert_parameter_tuple_0` converts to `Tree_Parameters_All`
+#           `convert_parameter_tuple_0` converts to `Tree_All_Parameters`
 #
 #       Version 5:
 #
@@ -36,8 +36,8 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__name
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_All_Parameters
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
 
 
 #
@@ -128,10 +128,10 @@ def convert_name_parameter(z, v):
 #
 #   convert_parameter_tuple_0(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameter_Tuple_0`.
+#       Convert a `Native_AbstractSyntaxTree_All_Parameters` (i.e.: `_ast.args`) to a `Tree_Parameter_Tuple_0`.
 #
-assert Native_AbstractSyntaxTree_Parameters_All._attributes == (())
-assert Native_AbstractSyntaxTree_Parameters_All._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
+assert Native_AbstractSyntaxTree_All_Parameters._attributes == (())
+assert Native_AbstractSyntaxTree_All_Parameters._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
 
 
 def convert_parameter_tuple_0(z, v):
@@ -168,9 +168,9 @@ def convert_parameter_tuple_0(z, v):
     #</name-parameters>
 
     #
-    #<tuple-parameter>
+    #<star-parameter>
     #
-    x = convert_tuple_parameter(z, v.vararg)
+    x = convert_star_parameter(z, v.vararg)
 
     if x.has_tree_parameter:
         if total == 0:
@@ -181,13 +181,13 @@ def convert_parameter_tuple_0(z, v):
             total = 2
         else:
             many.append(x)
-    #</tuple-parameter>
+    #</star-parameter>
 
 
     #
     #<map-parameter>
     #
-    x = convert_tuple_parameter(z, v.kwarg)
+    x = convert_map_parameter(z, v.kwarg)
 
     if x.has_tree_parameter:
         if total == 0:
@@ -198,7 +198,7 @@ def convert_parameter_tuple_0(z, v):
             total = 2
         else:
             many.append(x)
-    #</tuple-parameter>
+    #</map-parameter>
 
     if total == 0:
         return parser_none
@@ -210,7 +210,7 @@ def convert_parameter_tuple_0(z, v):
 
 
 #
-#   convert_tuple_parameter(z, v)
+#   convert_star_parameter(z, v)
 #
 #       Convert `v` to a `Tree_Parameter_0`.
 #
@@ -218,9 +218,9 @@ def convert_parameter_tuple_0(z, v):
 #
 #           1)  Convert `None` to `parser_none`.
 #
-#           2)  Convert a `Full_Native_String` to a `Tree_Tuple_Parameter`.
+#           2)  Convert a `Full_Native_String` to a `Tree_Star_Parameter`.
 #
-def convert_tuple_parameter(z, v):
+def convert_star_parameter(z, v):
     assert fact_is_convert_zone(z)
 
     assert fact_is__native_none__OR__full_native_string(v)
@@ -228,6 +228,6 @@ def convert_tuple_parameter(z, v):
     if v is None:
         return parser_none
 
-    return z.create_Tree_Tuple_Parameter(
+    return z.create_Tree_Star_Parameter(
                z.conjure_parser_symbol(z, v),
            )

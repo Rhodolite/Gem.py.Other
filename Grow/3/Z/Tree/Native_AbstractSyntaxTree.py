@@ -189,7 +189,7 @@ if __debug__:
 #
 #   HENCE
 #
-#       We rename `_ast.arguments` (which are function parameters) to `Tree_Parameters_All`.
+#       We rename `_ast.arguments` (which are function parameters) to `Tree_All_Parameters`.
 #
 #       Likewise we rename `_ast.FuncDef.args` (which are function parameters) to `Tree_FunctionDefinition.parameters`.
 #
@@ -254,7 +254,7 @@ from    _ast                            import (
             Add             as  Native_AbstractSyntaxTree_Add_Operator,
             alias           as  Native_AbstractSyntaxTree_Alias_Clause,
             And             as  Native_AbstractSyntaxTree_Logical_And_Operator,
-            arguments       as  Native_AbstractSyntaxTree_Parameters_All,
+            arguments       as  Native_AbstractSyntaxTree_All_Parameters,
             Assert          as  Native_AbstractSyntaxTree_Assert_Statement,
             Assign          as  Native_AbstractSyntaxTree_Assign_Statement,
             Attribute       as  Native_AbstractSyntaxTree_Attribute_Expression,
@@ -563,6 +563,18 @@ if __debug__:
 
 
 #
+#   fact_is__native__abstract_syntax_tree__all_parameters(v)
+#
+#       Assert that `v` is a `Native_AbstractSyntaxTree_All_Parameters` instance.
+#
+if __debug__:
+    def fact_is__native__abstract_syntax_tree__all_parameters(v):
+        assert type(v) is Native_AbstractSyntaxTree_All_Parameters
+
+        return True
+
+
+#
 #   fact_is__native__abstract_syntax_tree__delete_context(v)
 #
 #       Assert that `v` is a `Native_AbstractSyntaxTree_Delete_Context` (i.e.: `_ast.Del`)
@@ -606,18 +618,6 @@ if __debug__:
 if __debug__:
     def fact_is__native__abstract_syntax_tree__parameter_context(v):
         assert type(v) is Native_AbstractSyntaxTree_Parameter_Context
-
-        return True
-
-
-#
-#   fact_is__native__abstract_syntax_tree__parameters_all(v)
-#
-#       Assert that `v` is a `Native_AbstractSyntaxTree_Parameters_All` instance.
-#
-if __debug__:
-    def fact_is__native__abstract_syntax_tree__parameters_all(v):
-        assert type(v) is Native_AbstractSyntaxTree_Parameters_All
 
         return True
 

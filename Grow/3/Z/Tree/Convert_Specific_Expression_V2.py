@@ -38,7 +38,7 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameters_all
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__all_parameters
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Backquote_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Binary_Expression
@@ -273,7 +273,7 @@ def convert_lambda_expression(z, v):
     assert fact_is_positive_integer   (v.lineno)
     assert fact_is_substantial_integer(v.col_offset)
 
-    assert fact_is__native__abstract_syntax_tree__parameters_all       (v.args)
+    assert fact_is__native__abstract_syntax_tree__all_parameters       (v.args)
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.body)
 
     return z.create_Tree_Lambda_Expression(

@@ -15,11 +15,11 @@
 #
 #       Version 4.
 #
-#           Does not have a `Tree_Map_Parameter`.
+#           Does not have a `Tree_{Map,Star}_Parameter`.
 #
 #       Version 4:
 #
-#           Has a `Tree_Map_Parameter`
+#           Has a `Tree_{Map,Star}_Parameter`
 #
 
 
@@ -28,17 +28,12 @@ from    Capital.Core                    import  creator
 from    Z.Tree.Name_V4                  import  Tree_Name_Branch
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter_0
-from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple
-from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_positive_integer
     from    Capital.Fact                import  fact_is_substantial_integer
-    from    Capital.Fact                import  fact_is_some_native_list
-    from    Capital.Native_String       import  fact_is__native_none__OR__full_native_string
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
-    from    Z.Tree.Parameter            import  fact_is_tree_parameter_0
 
 
 #
@@ -127,86 +122,9 @@ def create_Tree_Normal_Parameter(line_number, column, symbol):
 
 
 #
-#   Tree_Parameters_All - All the parameters of a function definition
+#   Tree: Star Parameter
 #
-#       `Tree_Parameters_All` is a 1-1 implementation of `Native_AbstractSyntaxTree_Parameters_All`
-#       (i.e.: `_ast.Parameters`).
-#
-class Tree_Parameters_All(
-        TRAIT_Tree_Parameter_Tuple,
-        TRAIT_Tree_Parameter_Tuple_0,
-):
-    __slots__ = ((
-        'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
-        'tuple_parameter',              #   Tree_Parameter_0
-        'map_parameter',                #   Tree_Parameter_0
-        'defaults',                     #   SomeNativeList of Tree_Value_Expression
-    ))
-
-
-    def __init__(self, normal_parameters, tuple_parameter, map_parameter, defaults):
-        self.normal_parameters = normal_parameters
-        self.tuple_parameter   = tuple_parameter
-        self.map_parameter     = map_parameter
-        self.defaults          = defaults
-
-
-    #
-    #   Interface Tree_Parameter_Tuple
-    #
-    def dump_parameter_tuple_tokens(self, f):
-        if (
-                len(self.normal_parameters) == 0
-            and not self.tuple_parameter.has_tree_parameter
-            and not self.map_parameter  .has_tree_parameter
-        ):
-            assert len(self.defaults) == 0
-
-            f.line('<parameters-all>')
-        else:
-            with f.indent_2('<parameters-all', '>'):
-                if self.normal_parameters:
-                    for v in self.normal_parameters:
-                        v.dump_parameter_tokens(f)
-                        f.line(',')
-
-                if self.tuple_parameter.has_tree_parameter:
-                    self.tuple_parameter.dump_parameter_tokens(f)
-                    f.line(',')
-
-                if self.map_parameter.has_tree_parameter:
-                    self.map_parameter.dump_parameter_tokens(f)
-                    f.line(',')
-
-                if self.defaults:
-                    for v in self.defaults:
-                        f.write('= ')
-                        v.dump_value_expression_tokens(f)
-                        f.line(',')
-
-
-    #
-    #   Public
-    #
-    def __repr__(self):
-        return arrange('<Tree_Parameters_All {} {} {} {}>',
-                       self.normal_parameters, self.tuple_parameter, self.map_parameter, self.defaults)
-
-
-@creator
-def create_Tree_Parameters_All(normal_parameters, tuple_parameter, map_parameter, defaults):
-    assert fact_is_some_native_list(normal_parameters)
-    assert fact_is_tree_parameter_0(tuple_parameter)
-    assert fact_is_tree_parameter_0(map_parameter)
-    assert fact_is_some_native_list(defaults)
-
-    return Tree_Parameters_All(normal_parameters, tuple_parameter, map_parameter, defaults)
-
-
-#
-#   Tree: Tuple Parameter
-#
-class Tree_Tuple_Parameter(
+class Tree_Star_Parameter(
         Tree_Special_Parameter,
         TRAIT_Tree_Parameter,
         TRAIT_Tree_Parameter_0,
@@ -219,15 +137,15 @@ class Tree_Tuple_Parameter(
     #
     if __debug__:
        #@replace
-        is_tree_tuple_parameter = True
+        is_tree_star_parameter = True
 
 
     def dump_parameter_tokens(self, f):
-        f.arrange('<tuple-parameter *{}>', self.symbol)
+        f.arrange('<star-parameter *{}>', self.symbol)
 
 
 @creator
-def create_Tree_Tuple_Parameter(symbol):
+def create_Tree_Star_Parameter(symbol):
     assert fact_is_parser_symbol(symbol)
 
-    return Tree_Tuple_Parameter(symbol)
+    return Tree_Star_Parameter(symbol)

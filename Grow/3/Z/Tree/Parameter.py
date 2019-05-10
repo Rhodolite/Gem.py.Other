@@ -15,13 +15,13 @@
 #
 #       Version 1:
 #
+#           `Tree_All_Parameters`       - All the parameters.
+#
 #           `Tree_Parameter`            - Base interface of parameters.
 #
 #           `Tree_Keyword_Parameter`    - A keyword parameter.
 #
 #           `Tree_Name`                 - A name (with a context of `Tree_Context_Parameter`).
-#
-#           `Tree_Parameters_All`       - All the parameters.
 #
 #       Version 6:
 #
@@ -29,7 +29,7 @@
 #
 #           `Tree_Map_Parameter`        - A map parameter (representing variable keywords);
 #
-#           `Tree_Tuple_Parameter`      - A tuple parameter (representing a variable argument list).
+#           `Tree_Star_Parameter`       - A star parameter (representing a variable argument list).
 #
 #           `Tree_Parameter_Tuple`      - More than one parameter.
 #
@@ -51,15 +51,15 @@
 #
 #                   `d = 7`         - A `Tree_Name` with a context of `Tree_Context_Parameter, representing `d`
 #                                     (NOTE: The value `7` is stored separately in the `.defaults` member of
-#                                     `Tree_Parameters_All`).
+#                                     `Tree_All_Parameters`).
 #
 #                   `e = "eight"`   - A `Tree_Name` with a context of `Tree_Context_Parameter, representing `e`
 #                                     (NOTE: The value `"eight"` is stored separately in the `.defaults` member of
-#                                     `Tree_Parameters_All`).
+#                                     `Tree_All_Parameters`).
 #
 #                   `a, b, c, d = 7, e = "eight", *g, **h`
 #
-#                                   - A `Tree_Parameters_All`, representing all the parameters.
+#                                   - A `Tree_All_Parameters`, representing all the parameters.
 #
 #                                     It has the following four members:
 #
@@ -67,7 +67,7 @@
 #                                                                 (each `Tree_Name` has a context of
 #                                                                 `Tree_Context_Parameter`).
 #
-#                                       `.tuple_parameter`      - Stores `*g` as a `Full_Native_String`.
+#                                       `.star_parameter`       - Stores `*g` as a `Full_Native_String`.
 #
 #                                       `.map_parameter`        - Stored `**h` as a `Full_Native_String`.
 #
@@ -104,7 +104,7 @@
 #
 #                   `e = "eight"`   - Will be a `Tree_Keyword_Paramter`.
 #
-#                   `*g`            - Will be a `Tree_Tuple_Parameter`, representing `d` (which takes a variable
+#                   `*g`            - Will be a `Tree_Star_Parameter`, representing `d` (which takes a variable
 #                                     argument list
 #
 #                   `**h`           - Will be a `Tree_Map_Parameter`, representing `e` (which takes a variable
@@ -138,7 +138,7 @@
 #           is_tree_map_parameter     : boolean
 #           is_tree_normal_parameter  : boolean
 #           is_tree_parameter         := true
-#           is_tree_tuple_parameter   : boolean
+#           is_tree_star_parameter    : boolean
 #
 class TRAIT_Tree_Parameter(object):
     __slots__ = (())
@@ -197,7 +197,7 @@ class TRAIT_Tree_Parameter_0(object):
 #
 #       v.is_tree_parameter_0                       #   Test if `v` is a `Tree_Parameter_0`.
 #
-#       v.is_tree_tuple_parameter                   #   Test if `v` is a [tree] tuple parameter.
+#       v.is_tree_star_parameter                    #   Test if `v` is a [tree] star parameter.
 #
 #       assert fact_is_tree_keyword_parameter(v)    #   Assert that `v` is a [tree] keyword parameter.
 #
@@ -209,7 +209,7 @@ class TRAIT_Tree_Parameter_0(object):
 #
 #       assert fact_is_tree_parameter_0(v)          #   Assert that `v` is a `Tree_Parameter_0`.
 #
-#       assert fact_is_tree_tuple_parameter(v)      #   Assert that `v` is a [tree] tuple parameter.
+#       assert fact_is_tree_star_parameter(v)       #   Assert that `v` is a [tree] star parameter.
 #
 
 

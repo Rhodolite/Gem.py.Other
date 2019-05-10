@@ -247,12 +247,12 @@ class Convert_Zone(object):
         #
         'convert_parameter_tuple_0',                #   None | Function
 
+        'create_Tree_All_Parameters',               #   None | Function
         'create_Tree_Keyword_Parameter',            #   None | Function
         'create_Tree_Map_Parameter',                #   None | Function
         'create_Tree_Normal_Parameter',             #   None | Function
-        'create_Tree_Parameters_All',               #   Function
         'create_Tree_Parameter_Tuple',              #   None | Function
-        'create_Tree_Tuple_Parameter',              #   None | Function
+        'create_Tree_Star_Parameter',               #   None | Function
 
 
         #
@@ -518,7 +518,7 @@ def fill_convert_zone(version):
         parameter_version = 5           #   Add `Tree_{Map,Tuple}_Parameter`
 
     if version >= 19:
-        parameter_version = 6           #   Add `Tree_Parameter_Tuple_Leaf`.  Remove `Tree_Parameters_All`.
+        parameter_version = 6           #   Add `Tree_Parameter_Tuple_Leaf`.  Remove `Tree_All_Parameters`.
 
 
     #
@@ -922,38 +922,40 @@ def fill_convert_zone(version):
         create_Tree_Keyword_Parameter = None
         create_Tree_Map_Parameter     = None
         create_Tree_Normal_Parameter  = None
-
-        from    Z.Tree.Parameter_V1         import  create_Tree_Parameters_All
-
-        create_Tree_Tuple_Parameter = None
+        create_Tree_Star_Parameter = None
     elif parameter_version == 4:
         create_Tree_Keyword_Parameter = None
         create_Tree_Map_Parameter     = None
 
         from    Z.Tree.Parameter_V4         import  create_Tree_Normal_Parameter
-        from    Z.Tree.Parameter_V4         import  create_Tree_Parameters_All
 
-        create_Tree_Tuple_Parameter = None
+        create_Tree_Star_Parameter = None
     elif parameter_version == 5:
         create_Tree_Keyword_Parameter = None
 
         from    Z.Tree.Parameter_V5         import  create_Tree_Map_Parameter
         from    Z.Tree.Parameter_V5         import  create_Tree_Normal_Parameter
-        from    Z.Tree.Parameter_V5         import  create_Tree_Parameters_All
-        from    Z.Tree.Parameter_V5         import  create_Tree_Tuple_Parameter
+        from    Z.Tree.Parameter_V5         import  create_Tree_Star_Parameter
     elif parameter_version == 6:
         from    Z.Tree.Parameter_V6         import  create_Tree_Keyword_Parameter
         from    Z.Tree.Parameter_V6         import  create_Tree_Map_Parameter
         from    Z.Tree.Parameter_V6         import  create_Tree_Normal_Parameter
-        from    Z.Tree.Parameter_V6         import  create_Tree_Parameters_All
-        from    Z.Tree.Parameter_V6         import  create_Tree_Tuple_Parameter
+        from    Z.Tree.Parameter_V6         import  create_Tree_Star_Parameter
     else:
         FATAL_unknown_version('parameter', parameter_version)
 
 
-    if parameter_version in ((2, 3, 4, 5)):
+    if parameter_version in ((2, 3, 4)):
+        from    Z.Tree.Parameter_Tuple_V1   import  create_Tree_All_Parameters
+        
+        create_Tree_Parameter_Tuple = None
+    elif parameter_version == 5:
+        from    Z.Tree.Parameter_Tuple_V5   import  create_Tree_All_Parameters
+        
         create_Tree_Parameter_Tuple = None
     elif parameter_version == 6:
+        create_Tree_All_Parameters = None
+
         from    Z.Tree.Parameter_Tuple_V6   import  create_Tree_Parameter_Tuple
     else:
         FATAL_unknown_version('parameter', parameter_version)
@@ -1802,12 +1804,12 @@ def fill_convert_zone(version):
     #
     z.convert_parameter_tuple_0 = convert_parameter_tuple_0
 
+    z.create_Tree_All_Parameters    = create_Tree_All_Parameters
     z.create_Tree_Keyword_Parameter = create_Tree_Keyword_Parameter
     z.create_Tree_Map_Parameter     = create_Tree_Map_Parameter
     z.create_Tree_Normal_Parameter  = create_Tree_Normal_Parameter
-    z.create_Tree_Parameters_All    = create_Tree_Parameters_All
     z.create_Tree_Parameter_Tuple   = create_Tree_Parameter_Tuple
-    z.create_Tree_Tuple_Parameter   = create_Tree_Tuple_Parameter
+    z.create_Tree_Star_Parameter    = create_Tree_Star_Parameter
 
 
     #

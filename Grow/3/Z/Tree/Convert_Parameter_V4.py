@@ -44,8 +44,8 @@ if __debug__:
     from    Capital.Native_String               import  fact_is__native_none__OR__full_native_string
     from    Z.Tree.Convert_Zone                 import  fact_is_convert_zone
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__parameter_context
+    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_All_Parameters
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Parameters_All
 
 
 #
@@ -102,10 +102,10 @@ def convert_name_parameter(z, v):
 #
 #   convert_parameter_tuple_0(z, v)
 #
-#       Convert a `Native_AbstractSyntaxTree_Parameters_All` (i.e.: `_ast.args`) to a `Tree_Parameters_All`.
+#       Convert a `Native_AbstractSyntaxTree_All_Parameters` (i.e.: `_ast.args`) to a `Tree_All_Parameters`.
 #
-assert Native_AbstractSyntaxTree_Parameters_All._attributes == (())
-assert Native_AbstractSyntaxTree_Parameters_All._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
+assert Native_AbstractSyntaxTree_All_Parameters._attributes == (())
+assert Native_AbstractSyntaxTree_All_Parameters._fields     == (('args', 'vararg', 'kwarg', 'defaults'))
 
 
 def convert_parameter_tuple_0(z, v):
@@ -116,28 +116,28 @@ def convert_parameter_tuple_0(z, v):
     assert fact_is__native_none__OR__full_native_string(v.kwarg)
     assert fact_is_some_native_list                    (v.defaults)
 
-    return z.create_Tree_Parameters_All(
+    return z.create_Tree_All_Parameters(
                convert_some_list_of_name_parameters(z, v.args),
-               convert_tuple_parameter             (z, v.vararg),
+               convert_star_parameter              (z, v.vararg),
                convert_map_parameter               (z, v.kwarg),
                z.convert_some_list_of_expressions  (z, v.defaults),
            )
 
 
 #
-#   convert_tuple_parameter(z, v)
+#   convert_star_parameter(z, v)
 #
 #       "Convert" `None` to `None`.
 #
 #       "Convert" a `Full_Native_String` to the [same] `Full_Native_String`.
 #
 #   FUTURE:
-#       Will convert a `Full_Native_String` to `Tree_Tuple_Parameter`.
+#       Will convert a `Full_Native_String` to `Tree_Star_Parameter`.
 #
 #       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
 #       a `Full_Native_String` to the [same] `Full_Native_String`.
 #
-def convert_tuple_parameter(z, v):
+def convert_star_parameter(z, v):
     assert fact_is_convert_zone(z)
 
     assert fact_is__native_none__OR__full_native_string(v)
