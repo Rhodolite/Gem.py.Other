@@ -15,7 +15,7 @@
 #
 #       Version 5:
 #
-#           The third argument to `z.create_Tree_Global_Statement` is a `FullNativeList of Parser_Symbol`.
+#           The third argument to `z.create_Tree_Global_Statement` is a `Full_Native_List of Parser_Symbol`.
 #
 #       Version 6:
 #
@@ -60,7 +60,7 @@ def convert_global_statement(z, v):
 #
 #   convert_parser_symbol_tuple(z, sequence)
 #
-#       Convert a `FullNativeList of Full_Native_String` to a `Parser_Symbol_Tuple`.
+#       Convert a `Full_Native_List of Full_Native_String` to a `Parser_Symbol_Tuple`.
 #
 def convert_parser_symbol_tuple(z, sequence):
     assert fact_is_convert_zone    (z)

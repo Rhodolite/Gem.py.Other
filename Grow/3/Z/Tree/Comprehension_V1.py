@@ -33,7 +33,7 @@ class Tree_Comprehension_Clause_Leaf(
     __slots__ = ((
         'target',                       #   Tree_Value_Expression
         'sequence',                     #   Tree_Value_Expression
-        'if_tests',                     #   SomeNativeList of Tree_Value_Expression
+        'if_tests',                     #   Some_Native_List of Tree_Value_Expression
     ))
 
 

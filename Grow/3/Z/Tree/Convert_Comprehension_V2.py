@@ -65,8 +65,8 @@ def convert_comprehension_clause(z, v):
 #
 #   convert_full_list_of_comprehensions(z, sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Comprehension_Clause`
-#       (i.e.: `list of _ast.Comprehension`) to a `FullNativeList of Tree_Comprehension_Clause`.
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_Comprehension_Clause`
+#       (i.e.: `list of _ast.Comprehension`) to a `Full_Native_List of Tree_Comprehension_Clause`.
 #
 convert_full_list_of_comprehensions = (
         produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_comprehension_clause)

@@ -91,8 +91,8 @@ convert_except_clause = convert_except_handler
 #
 #   convert_full_list_of_except_clauses
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Except_Handler` (i.e.: `list of _ast.ExceptHandler`) to
-#       a `NativeList of Tree_Except_Clause`.
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_Except_Handler` (i.e.: `list of _ast.ExceptHandler`) to
+#       a `Full_Native_List of Tree_Except_Clause`.
 #
 convert_full_list_of_except_clauses = (
         produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_except_clause)

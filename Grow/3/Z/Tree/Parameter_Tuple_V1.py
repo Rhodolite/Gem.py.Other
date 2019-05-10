@@ -32,10 +32,10 @@ class Tree_All_Parameters(
         TRAIT_Tree_Parameter_Tuple_0,
 ):
     __slots__ = ((
-        'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
+        'normal_parameters',            #   Some_Native_List of Tree_NormalParameter
         'star_parameter',               #   None | Full_Native_String
         'map_parameter',                #   None | Full_Native_String
-        'defaults',                     #   SomeNativeList of Tree_Value_Expression
+        'defaults',                     #   Some_Native_List of Tree_Value_Expression
     ))
 
 

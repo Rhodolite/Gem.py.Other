@@ -51,7 +51,7 @@ class Tree_Value_Comprehension(
         'column',                       #   Substantial_Integer
 
         'element',                      #   Tree_Value_Expression
-        'generators',                   #   FullNativeList of Tree_Comprehension
+        'generators',                   #   Full_Native_List of Tree_Comprehension
     ))
 
 
@@ -224,8 +224,8 @@ class Tree_Call_Expression(
         'column',                       #   Substantial_Integer
 
         'function',                     #   Tree_Value_Expression
-        'arguments',                    #   Some_NativeList of Tree_Value_Expression
-        'keywords',                     #   Some_NativeList of Tree_Value_Expression
+        'arguments',                    #   Some_Native_List of Tree_Value_Expression
+        'keywords',                     #   Some_Native_List of Tree_Value_Expression
         'star_arguments',               #   None | Tree_Value_Expression
         'keyword_arguments',            #   None | Tree_Value_Expression
     ))
@@ -334,8 +334,8 @@ class Tree_Compare_Expression(
         'column',                       #   Substantial_Integer
 
         'left',                         #   Tree_Value_Expression
-        'operators',                    #   FullNativeList of Tree_Operator
-        'comparators',                  #   FullNativeList of Tree_Value_Expression
+        'operators',                    #   Full_Native_List of Tree_Operator
+        'comparators',                  #   Full_Native_List of Tree_Value_Expression
     ))
 
 
@@ -473,7 +473,7 @@ class Tree_Logical_Expression(
         'column',                       #   Substantial_Integer
 
         'operator',                     #   Tree_Operator
-        'values',                       #   FullNativeList of Tree_Value_Expression
+        'values',                       #   Full_Native_List of Tree_Value_Expression
     ))
 
 
@@ -538,8 +538,8 @@ class Tree_Map_Expression(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'keys',                         #   SomeNativeList of Tree_Value_Expression
-        'values',                       #   SomeNativeList of Tree_Value_Expression
+        'keys',                         #   Some_Native_List of Tree_Value_Expression
+        'values',                       #   Some_Native_List of Tree_Value_Expression
     ))
 
 
@@ -687,7 +687,7 @@ class Tree_Map_Comprehension(
 
         'key',                          #   Tree_Value_Expression
         'value',                        #   Tree_Value_Expression
-        'generators',                   #   FullNativeList of Tree_Comprehension
+        'generators',                   #   Full_Native_List of Tree_Comprehension
     ))
 
 
@@ -813,7 +813,7 @@ class Tree_Set_Expression(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'values',                       #   SomeNativeList of Tree_Value_Expression
+        'values',                       #   Some_Native_List of Tree_Value_Expression
     ))
 
 

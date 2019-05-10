@@ -85,8 +85,8 @@ def convert_symbol_alias(z, v):
 #
 #   convert_full_list_of_module_aliases(z, sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
-#       `FullNativeList of Tree_Alias_Clause`.
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
+#       `Full_Native_List of Tree_Alias_Clause`.
 #
 convert_full_list_of_module_aliases = (
         produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_module_alias)
@@ -96,8 +96,8 @@ convert_full_list_of_module_aliases = (
 #
 #   convert_full_list_of_symbol_aliases(z, sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
-#       `FullNativeList of Tree_Alias_Clause`.
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_Alias_Clause` (i.e.: `list of _ast.alias`) to a
+#       `Full_Native_List of Tree_Alias_Clause`.
 #
 #       In Version 1, identical to `convert_full_list_of_alias_clauses` (since `convert_module_alias` is
 #       identical to `convert_symbol_alias`).

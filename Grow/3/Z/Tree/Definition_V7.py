@@ -17,9 +17,9 @@
 #
 #           1)  Tree Statements implement `Tree_Statement`.
 #
-#           2)  A           list of statements is stored as `FullNativeList of Tree_Statement`.
+#           2)  A           list of statements is stored as `Full_Native_List of Tree_Statement`.
 #
-#           3)  An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
+#           3)  An optional list of statements is stored as `Some_Native_List of Tree_Statement`.
 #
 #       Version 4..6:
 #
@@ -66,9 +66,9 @@ class Tree_Class_Definition(
         'column',                       #   Substantial_Integer
 
         'name',                         #   Parser_Symbol
-        'bases',                        #   SomeNativeList of Tree_Value_Expression
+        'bases',                        #   Some_Native_List of Tree_Value_Expression
         'body',                         #   Tree_Suite
-        'decorator_list',               #   Some_NativeList of Tree_Decorator
+        'decorator_list',               #   Some_Native_List of Tree_Decorator
     ))
 
 
@@ -161,7 +161,7 @@ class Tree_Function_Definition(
         'name',                         #   Parser_Symbol
         'parameters',                   #   Tree_Parameter
         'body',                         #   Tree_Suite
-        'decorator_list',               #   SomeNativeList of Tree_Decorator
+        'decorator_list',               #   Some_Native_List of Tree_Decorator
     ))
 
 

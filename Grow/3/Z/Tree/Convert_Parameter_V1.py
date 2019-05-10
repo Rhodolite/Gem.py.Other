@@ -121,8 +121,8 @@ def convert_star_parameter(v):
 #
 #   convert_some_list_of_name_parameters(v)
 #
-#       Convert a `SomeNativeList of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
-#       `SomeNativeList of SyntaxTree_Name`.
+#       Convert a `Some_Native_List of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
+#       `Some_Native_List of SyntaxTree_Name`.
 #
 #       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
 #       of type `Native_AbstractSyntaxTree_Parameter`.

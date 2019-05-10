@@ -117,7 +117,7 @@ class Tree_Keyword_Parameter(
         'column',                       #   Substantial_Integer
 
         'symbol',                       #   Symbol
-        'value',                        #   Tree_Expression
+        'value',                        #   Tree_Value_Expression
     ))
 
 

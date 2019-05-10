@@ -15,7 +15,7 @@
 #
 #       Version 5:
 #
-#           The `Tree_Global_Statement.symbols` member is a `FullNativeList of Parser_Symbol`.
+#           The `Tree_Global_Statement.symbols` member is a `Full_Native_List of Parser_Symbol`.
 #
 #       Version 6:
 #

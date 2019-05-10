@@ -33,7 +33,7 @@ class Tree_From_Import_Statement(
         'column',                       #   Substantial_Integer
 
         'module',                       #   Full_Native_String
-        'names',                        #   FullNativeList of Tree_Symbol_Alias
+        'names',                        #   Full_Native_List of Tree_Symbol_Alias
         'level',                        #   Substantial_Integer
     ))
 

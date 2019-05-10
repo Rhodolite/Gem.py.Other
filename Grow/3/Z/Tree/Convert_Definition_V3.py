@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           The class or function name is `FullNativeList`.
+#           The class or function name is `Full_Native_String`.
 #
 #       Version 3:
 #

@@ -31,7 +31,7 @@ class Tree_Import_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'module_aliases',               #   NativeList of Tree_Module_Alias
+        'module_aliases',               #   Full_Native_List of Tree_Module_Alias
     ))
 
 

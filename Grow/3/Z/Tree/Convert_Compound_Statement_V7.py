@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           Uses `FullNativeList of Tree_Statement` for a suite of statements.
+#           Uses `Full_Native_List of Tree_Statement` for a suite of statements.
 #
 #       Version 3..6:
 #
@@ -221,7 +221,7 @@ def convert_with_statement(z, v):
 #
 #   convert_suite(z, sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
 #
 #           1)  a single statement; or
 #
@@ -240,7 +240,7 @@ def convert_suite(z, sequence):
 #
 #   convert_suite_0(z, sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
+#       Convert a `Some_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to either:
 #
 #           1)  `parser_none`;
 #

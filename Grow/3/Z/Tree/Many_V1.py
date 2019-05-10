@@ -38,7 +38,7 @@ class Tree_Many_Expression(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'elements',                     #   SomeNativeList of Tree_Value_Expression
+        'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
         'context',                      #   Tree_Context
     ))
 

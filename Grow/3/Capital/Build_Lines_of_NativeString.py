@@ -72,7 +72,7 @@ class Build_Lines_of_NativeString(object):
     __slots__ = ((
         'lifecycle',                #   BuildContextLifeCycle
 
-        'lines',                    #   SomeNativeList of Some_Native_String
+        'lines',                    #   Some_Native_List of Some_Native_String
         '_append_line',             #   NativeMethod
 
         'prefix',                   #   None | Full_Native_String

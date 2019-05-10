@@ -15,7 +15,7 @@
 #
 #       Version 3:
 #
-#           Uses `FullNativeList of Tree_Statement` for a suite of statements.
+#           Uses `Full_Native_List of Tree_Statement` for a suite of statements.
 #
 #       Version 4..6:
 #

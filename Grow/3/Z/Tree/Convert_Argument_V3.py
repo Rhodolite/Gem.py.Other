@@ -58,8 +58,8 @@ def convert_keyword_argument(z, v):
 #
 #   convert_some_list_of_keywords(sequence)
 #
-#       Convert `SomeNativeList of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
-#       `SomeNativeList of Tree_Keyword_Argument`
+#       Convert `Some_Native_List of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
+#       `Some_Native_List of Tree_Keyword_Argument`
 #
 convert_some_list_of_keyword_arguments = (
         produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_keyword_argument)

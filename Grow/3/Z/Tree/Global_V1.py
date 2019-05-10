@@ -31,7 +31,7 @@ class Tree_Global_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'names',                        #   FullNativeList of Full_Native_String
+        'names',                        #   Full_Native_List of Full_Native_String
     ))
 
 

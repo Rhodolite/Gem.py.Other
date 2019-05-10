@@ -41,8 +41,8 @@ class Tree_Test_Statement(
         'column',                       #   Substantial_Integer
 
         'test',                         #   Tree_Value_Expression
-        'body',                         #   FullNativeList of Tree_Statement
-        'else_clause_0',                #   SomeNativeList of Tree_Statement
+        'body',                         #   Full_Native_List of Tree_Statement
+        'else_clause_0',                #   Some_Native_List of Tree_Statement
     ))
 
 
@@ -111,8 +111,8 @@ class Tree_For_Statement(
 
         'target',                       #   Tree_Target
         'sequence',                     #   Tree_Value_Expression
-        'body',                         #   FullNativeList of Tree_Statement
-        'else_clause_0',                #   SomeNativeList of Tree_Statement
+        'body',                         #   Full_Native_List of Tree_Statement
+        'else_clause_0',                #   Some_Native_List of Tree_Statement
     ))
 
 
@@ -196,9 +196,9 @@ class Tree_Try_Except_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'body',                         #   FullNativeList of Tree_Statement
-        'except_handlers',              #   FullNativeList of Tree_Except_Handler
-        'else_clause_0',                #   SomeNativeList of Tree_Statement
+        'body',                         #   Full_Native_List of Tree_Statement
+        'except_handlers',              #   Full_Native_List of Tree_Except_Handler
+        'else_clause_0',                #   Some_Native_List of Tree_Statement
     ))
 
 
@@ -268,8 +268,8 @@ class Tree_Try_Finally_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'body',                         #   FullNativeList of Tree_Statement
-        'finally_body',                 #   FullNativeList of Tree_Statement
+        'body',                         #   Full_Native_List of Tree_Statement
+        'finally_body',                 #   Full_Native_List of Tree_Statement
     ))
 
 
@@ -346,7 +346,7 @@ class Tree_With_Statement(
 
         'value',                        #   Tree_Value_Expression
         'target',                       #   None | Tree_Target
-        'body',                         #   FullNativeList of Tree_Statement
+        'body',                         #   Full_Native_List of Tree_Statement
     ))
 
 

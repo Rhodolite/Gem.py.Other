@@ -23,7 +23,7 @@ if __debug__:
 #
 class Tree_Module(object):
     __slots__ = ((
-        'body',                         #   NativeList of Tree_Statement
+        'body',                         #   Some_Native_List of Tree_Statement
     ))
 
 

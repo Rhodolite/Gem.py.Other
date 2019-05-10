@@ -62,7 +62,7 @@ class Tree_Extended_Slice_Index(
         TRAIT_Tree_Index_Clause,
 ):
     __slots__ = ((
-        'many',                         #   NativeList of Tree_Index_Clause
+        'many',                         #   Full_Native_List of Tree_Index_Clause
     ))
 
 

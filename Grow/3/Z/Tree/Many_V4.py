@@ -114,7 +114,7 @@ class Tree_Many_Expression(object):
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'elements',                     #   SomeNativeList of Tree_Value_Expression
+        'elements',                     #   Some_Native_List of (Tree_Store_Target | Tree_Value_Expression)
     ))
 
 
@@ -152,7 +152,10 @@ class Tree_Evaluate_List(
         Tree_Many_Expression,
         TRAIT_Tree_Value_Expression,
 ):
-    __slots__ = (())
+    __slots__ = ((
+    #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
+    #                                   #       Some_Native_List of Tree_Value_Expression
+    ))
 
 
     #
@@ -179,7 +182,12 @@ class Tree_Evaluate_Tuple(
         Tree_Many_Expression,
         TRAIT_Tree_Value_Expression,
 ):
-    __slots__ = (())
+    __slots__ = ((
+    #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
+    #                                   #       Some_Native_List of Tree_Value_Expression
+    ))
+
+
 
 
     #
@@ -206,7 +214,10 @@ class Tree_Store_List(
         Tree_Many_Expression,
         TRAIT_Tree_Store_Target,
 ):
-    __slots__ = (())
+    __slots__ = ((
+    #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
+    #                                   #       Some_Native_List of Tree_Store_Target
+    ))
 
 
     #
@@ -233,7 +244,10 @@ class Tree_Store_Tuple(
         Tree_Many_Expression,
         TRAIT_Tree_Store_Target,
 ):
-    __slots__ = (())
+    __slots__ = ((
+    #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
+    #                                   #       Some_Native_List of Tree_Store_Target
+    ))
 
 
     #

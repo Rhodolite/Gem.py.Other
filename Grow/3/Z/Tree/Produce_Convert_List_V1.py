@@ -20,15 +20,15 @@ if __debug__:
 #
 #       Produces: `convert__full_list_of__Native_AbstractSyntaxTree_STAR(sequence)`
 #
-#           Converts a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
-#           `FullNativeList of Tree_*`.
+#           Converts a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
+#           `Full_Native_List of Tree_*`.
 #
 def produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert):
     #
     #   convert__full_list_of__Native_AbstractSyntaxTree_STAR(sequence)
     #
-    #       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
-    #       `FullNativeList of Tree_*`.
+    #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
+    #       `Full_Native_List of Tree_*`.
     #
     def convert__full_list_of__Native_AbstractSyntaxTree_STAR(sequence):
         assert fact_is_full_native_list(sequence)
@@ -46,15 +46,15 @@ def produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert):
 #
 #       Produces: `convert__some_list_of__Native_AbstractSyntaxTree_STAR(sequence)`
 #
-#           Converts a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
-#           `SomeNativeList of Tree_*`.
+#           Converts a `Some_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
+#           `Some_Native_List of Tree_*`.
 #
 def produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert):
     #
     #   convert__some_list_of__Native_AbstractSyntaxTree_STAR(sequence)
     #
-    #       Convert a `SomeNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
-    #       `SomeNativeList of Tree_*`.
+    #       Convert a `Some_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
+    #       `Some_Native_List of Tree_*`.
     #
     def convert__some_list_of__Native_AbstractSyntaxTree_STAR(sequence):
         assert fact_is_some_native_list(sequence)

@@ -134,8 +134,8 @@ def convert_index_clause(z, v):
 #
 #   convert_full_list_of_index_clauses(sequence)
 #
-#       Convert `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Index_clause`.
+#       Convert `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `Full_Native_List of Tree_Index_clause`.
 #
 convert_full_list_of_index_clauses = (
         produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_index_clause)

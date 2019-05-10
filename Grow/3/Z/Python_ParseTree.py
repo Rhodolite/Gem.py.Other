@@ -11,7 +11,7 @@ from    Capital.Core                    import  arrange
 #
 class Python_ParseTree(object):
     __slots__ = ((
-        'python_statements',               #   NativeList of Python_Statement_*
+        'python_statements',               #   Some_Native_List of Python_Statement_*
     ))
 
 

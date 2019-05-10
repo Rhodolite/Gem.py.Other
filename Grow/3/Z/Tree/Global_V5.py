@@ -15,7 +15,7 @@
 #
 #       Version 1:
 #
-#           The `Tree_Global_Statement.names` member is a `FullNativeList of Full_Native_String`.
+#           The `Tree_Global_Statement.names` member is a `Full_Native_List of Full_Native_String`.
 #
 #       Version 2..5:
 #
@@ -24,7 +24,7 @@
 #       Version 5:
 #
 #           The `Tree_Global_Statement.names` member is renamed to `.symbols` and it's type changes to a
-#           `FullNativeList of Parser_Symbol`.
+#           `Full_Native_List of Parser_Symbol`.
 #
 
 
@@ -49,7 +49,7 @@ class Tree_Global_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'symbols',                      #   FullNativeList of Parser_Symbol
+        'symbols',                      #   Full_Native_List of Parser_Symbol
     ))
 
 

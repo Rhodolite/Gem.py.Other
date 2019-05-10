@@ -163,7 +163,7 @@ def create_Tree_Assert_Statement(line_number, column, test, message):
 #
 #       [a, b, c] = d = e
 #
-#   In the above example the targets will be `NativeList` with two elements:
+#   In the above example the targets will be `Full_Native_List` with two elements:
 #
 #       `[ [a, b, c], d ]`
 #
@@ -180,7 +180,7 @@ class Tree_Assign_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'targets',                      #   NativeList of Tree_Store_Target
+        'targets',                      #   Full_Native_List of Tree_Store_Target
         'value',                        #   Tree_Value_Expression
     ))
 
@@ -271,7 +271,7 @@ class Tree_Delete_Statement(
         'line_number',                  #   Positive_Integer
         'column',                       #   Substantial_Integer
 
-        'targets',                      #   FullNativeList of Tree_Target
+        'targets',                      #   Full_Native_List of Tree_Target
     ))
 
 
@@ -551,7 +551,7 @@ class Tree_Print_Statement(
         'column',                       #   Substantial_Integer
 
         'destination',                  #   None | Tree_Value_Expression
-        'values',                       #   SomeNativeList of Tree_Value_Expression
+        'values',                       #   Some_Native_List of Tree_Value_Expression
         'newline',                      #   Native_Boolean
     ))
 

@@ -52,7 +52,7 @@ def convert_decorator(z, v):
 #
 #   convert_some_list_of_decorators(z, v)
 #
-#       Convert some `NativeList of Native_AbstractSyntaxTree_Decorator` (i.e.: `list of _ast.decorator`) to a
-#       `NativeList of Tree_Decorator`.
+#       Convert some `Some_Native_List of Native_AbstractSyntaxTree_Decorator` (i.e.: `list of _ast.decorator`) to a
+#       `Some_Native_List of Tree_Decorator`.
 #
 convert_some_list_of_decorators = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_decorator)

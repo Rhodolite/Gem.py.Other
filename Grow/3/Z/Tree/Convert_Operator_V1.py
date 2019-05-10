@@ -205,8 +205,8 @@ def convert_unary_operator(v):
 #
 #   convert_full_list_of_compare_operarors
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Operator`.
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `Full_Native_List of Tree_Operator`.
 #
 #       Each of the elements must be a compare operator.
 #

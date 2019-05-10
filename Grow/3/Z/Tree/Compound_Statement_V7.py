@@ -17,9 +17,9 @@
 #
 #           1)  Tree Statements implement `Tree_Statement`.
 #
-#           2)  A           list of statements is stored as `FullNativeList of Tree_Statement`.
+#           2)  A           list of statements is stored as `Full_Native_List of Tree_Statement`.
 #
-#           3)  An optional list of statements is stored as `SomeNativeList of Tree_Statement`.
+#           3)  An optional list of statements is stored as `Some_Native_List of Tree_Statement`.
 #
 #       Version 3-7:
 #
@@ -229,7 +229,7 @@ class Tree_Try_Except_Statement(
         'column',                       #   Substantial_Integer
 
         'body',                         #   Tree_Statement
-        'except_handlers',              #   FullNativeList of Tree_Except_Handler
+        'except_handlers',              #   Full_Native_List of Tree_Except_Handler
         'else_clause_0',                #   Tree_Suite_0
     ))
 

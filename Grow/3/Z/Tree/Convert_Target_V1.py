@@ -78,8 +78,8 @@ def convert_target(v):
 #
 #   convert_full_list_of_targets(sequence)
 #
-#       Convert a `FullNativeList of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `FullNativeList of Tree_Value_Expression`.
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `Full_Native_List of Tree_Value_Expression`.
 #
 #       Each of the expressions must be a target expresion.
 #
