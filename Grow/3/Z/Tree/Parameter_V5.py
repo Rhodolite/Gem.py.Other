@@ -40,12 +40,9 @@ if __debug__:
 
 
 #
-#   Tree: Map Parameter
+#   Tree: Special Parameter - Base class of Tree_{Map,Tuple}_Parameter
 #
-class Tree_Map_Parameter(
-        TRAIT_Tree_Parameter,
-        TRAIT_Tree_Parameter_0,
-):
+class Tree_Special_Parameter(object):
     __slots__ = ((
         'symbol',                       #   Symbol
     ))
@@ -59,6 +56,24 @@ class Tree_Map_Parameter(
 
 
     #
+    #   Public
+    #
+    def __repr__(self):
+        return arrange('<{} {}>', self.__class__.__name__, self.symbol)
+
+
+#
+#   Tree: Map Parameter
+#
+class Tree_Map_Parameter(
+        Tree_Special_Parameter,
+        TRAIT_Tree_Parameter,
+        TRAIT_Tree_Parameter_0,
+):
+    __slots__ = (())
+
+
+    #
     #   Interface Tree_Parameter
     #
     if __debug__:
@@ -66,18 +81,8 @@ class Tree_Map_Parameter(
         is_tree_map_parameter = True
 
 
-    #
-    #   Public
-    #
     def dump_parameter_tokens(self, f):
         f.arrange('<map-parameter **{}>', self.symbol)
-
-
-    #
-    #   Public
-    #
-    def __repr__(self):
-        return arrange('<{} {}>', self.__class__.__name__, self.symbol)
 
 
 @creator
@@ -130,8 +135,8 @@ class Tree_Parameters_All(
 ):
     __slots__ = ((
         'normal_parameters',            #   SomeNativeList of Tree_NormalParameter
-        'tuple_parameter',              #   None | Full_Native_String
-        'map_parameter',                #   None | Full_Native_String
+        'tuple_parameter',              #   Tree_Parameter_0
+        'map_parameter',                #   Tree_Parameter_0
         'defaults',                     #   SomeNativeList of Tree_Value_Expression
     ))
 
@@ -152,7 +157,11 @@ class Tree_Parameters_All(
 
 
     def dump_parameter_tokens(self, f):
-        if (len(self.normal_parameters) == 0) and (self.tuple_parameter is self.map_parameter is None):
+        if (
+                len(self.normal_parameters) == 0
+            and not self.tuple_parameter.has_tree_parameter
+            and not self.map_parameter  .has_tree_parameter
+        ):
             assert len(self.defaults) == 0
 
             f.line('<parameters-all>')
@@ -163,8 +172,9 @@ class Tree_Parameters_All(
                         v.dump_parameter_tokens(f)
                         f.line(',')
 
-                if self.tuple_parameter:
-                    f.line('*{},', self.tuple_parameter)
+                if self.tuple_parameter.has_tree_parameter:
+                    self.tuple_parameter.dump_parameter_tokens(f)
+                    f.line(',')
 
                 if self.map_parameter.has_tree_parameter:
                     self.map_parameter.dump_parameter_tokens(f)
@@ -187,9 +197,39 @@ class Tree_Parameters_All(
 
 @creator
 def create_Tree_Parameters_All(normal_parameters, tuple_parameter, map_parameter, defaults):
-    assert fact_is_some_native_list                    (normal_parameters)
-    assert fact_is__native_none__OR__full_native_string(tuple_parameter)
-    assert fact_is_tree_parameter_0                    (map_parameter)
-    assert fact_is_some_native_list                    (defaults)
+    assert fact_is_some_native_list(normal_parameters)
+    assert fact_is_tree_parameter_0(tuple_parameter)
+    assert fact_is_tree_parameter_0(map_parameter)
+    assert fact_is_some_native_list(defaults)
 
     return Tree_Parameters_All(normal_parameters, tuple_parameter, map_parameter, defaults)
+
+
+#
+#   Tree: Tuple Parameter
+#
+class Tree_Tuple_Parameter(
+        Tree_Special_Parameter,
+        TRAIT_Tree_Parameter,
+        TRAIT_Tree_Parameter_0,
+):
+    __slots__ = (())
+
+
+    #
+    #   Interface Tree_Parameter
+    #
+    if __debug__:
+       #@replace
+        is_tree_tuple_parameter = True
+
+
+    def dump_parameter_tokens(self, f):
+        f.arrange('<tuple-parameter *{}>', self.symbol)
+
+
+@creator
+def create_Tree_Tuple_Parameter(symbol):
+    assert fact_is_parser_symbol(symbol)
+
+    return Tree_Tuple_Parameter(symbol)

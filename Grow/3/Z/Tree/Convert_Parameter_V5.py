@@ -50,15 +50,13 @@ if __debug__:
 #
 #   convert_map_parameter(z, v)
 #
-#       "Convert" `None` to `None`.
+#       Convert `v` to a `Tree_Parameter_0`.
 #
-#       "Convert" a `Full_Native_String` to the [same] `Full_Native_String`.
+#       Specifically:
 #
-#   FUTURE:
-#       Will convert a `Full_Native_String` to a `Tree_Map_Parameter`.
+#           1)  Convert `None` to `parser_none`.
 #
-#       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
-#       a `Full_Native_String` to the [same] `Full_Native_String`.
+#           2)  Convert a `Full_Native_String` to a `Tree_Map_Parameter`.
 #
 def convert_map_parameter(z, v):
     assert fact_is_convert_zone(z)
@@ -131,22 +129,25 @@ def convert_parameters_all(z, v):
 #
 #   convert_tuple_parameter(z, v)
 #
-#       "Convert" `None` to `None`.
+#       Convert `v` to a `Tree_Parameter_0`.
 #
-#       "Convert" a `Full_Native_String` to the [same] `Full_Native_String`.
+#       Specifically:
 #
-#   FUTURE:
-#       Will convert a `Full_Native_String` to `Tree_Tuple_Parameter`.
+#           1)  Convert `None` to `parser_none`.
 #
-#       For now, we are not doing any translations of native python types, so just "converting" `None` as `None`, and
-#       a `Full_Native_String` to the [same] `Full_Native_String`.
+#           2)  Convert a `Full_Native_String` to a `Tree_Tuple_Parameter`.
 #
 def convert_tuple_parameter(z, v):
     assert fact_is_convert_zone(z)
 
     assert fact_is__native_none__OR__full_native_string(v)
 
-    return v
+    if v is None:
+        return parser_none
+
+    return z.create_Tree_Tuple_Parameter(
+               z.conjure_parser_symbol(z, v),
+           )
 
 
 #

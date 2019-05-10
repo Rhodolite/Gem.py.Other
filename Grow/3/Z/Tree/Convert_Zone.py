@@ -251,6 +251,7 @@ class Convert_Zone(object):
         'create_Tree_Normal_Parameter',             #   None | Function
         'create_Tree_Map_Parameter',                #   None | Function
         'create_Tree_Parameters_All',               #   Function
+        'create_Tree_Tuple_Parameter',              #   None | Function
 
 
         #
@@ -918,15 +919,20 @@ def fill_convert_zone(version):
         create_Tree_Normal_Parameter = None
 
         from    Z.Tree.Parameter_V1         import  create_Tree_Parameters_All
+
+        create_Tree_Tuple_Parameter  = None
     elif parameter_version == 4:
         create_Tree_Map_Parameter = None
 
         from    Z.Tree.Parameter_V4         import  create_Tree_Normal_Parameter
         from    Z.Tree.Parameter_V4         import  create_Tree_Parameters_All
+
+        create_Tree_Tuple_Parameter = None
     elif parameter_version == 5:
         from    Z.Tree.Parameter_V5         import  create_Tree_Map_Parameter
         from    Z.Tree.Parameter_V5         import  create_Tree_Normal_Parameter
         from    Z.Tree.Parameter_V5         import  create_Tree_Parameters_All
+        from    Z.Tree.Parameter_V5         import  create_Tree_Tuple_Parameter
     else:
         FATAL_unknown_version('parameter', parameter_version)
 
@@ -1778,6 +1784,7 @@ def fill_convert_zone(version):
     z.create_Tree_Map_Parameter    = create_Tree_Map_Parameter
     z.create_Tree_Normal_Parameter = create_Tree_Normal_Parameter
     z.create_Tree_Parameters_All   = create_Tree_Parameters_All
+    z.create_Tree_Tuple_Parameter  = create_Tree_Tuple_Parameter
 
 
     #
