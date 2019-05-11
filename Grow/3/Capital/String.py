@@ -67,9 +67,9 @@ class TRAIT_String(object):
 
 #
 #   NOTE:
-#       Interfaces `Emtpy_String` and `Full_String` are only implement for string version >= 8.
+#       Interfaces `Empty_String` and `Full_String` are only implement for string version >= 2.
 #
-if string_version >= 8:
+if string_version >= 2:
     #
     #   interface Empty_String
     #       extends
@@ -91,7 +91,7 @@ if string_version >= 8:
     #           String
     #
     #       attribute
-    #           is_full_string := thue
+    #           is_full_string := true
     #
     class TRAIT_Full_String(object):
         __slots__ = (())
@@ -240,9 +240,6 @@ elif string_version == 6:
 elif string_version == 7:
     from    Capital.Private.ConjureString_V7    import  conjure_full_string
     from    Capital.Private.ConjureString_V7    import  conjure_string
-elif string_version == 8:
-    from    Capital.Private.ConjureString_V8    import  conjure_full_string
-    from    Capital.Private.ConjureString_V8    import  conjure_string
 else:
     from    Capital.Core                import  FATAL
 
@@ -261,8 +258,6 @@ elif string_version == 6:
     from    Capital.Private.String_V6           import  empty_string
 elif string_version == 7:
     from    Capital.Private.String_V7           import  empty_string
-elif string_version == 8:
-    from    Capital.Private.String_V8           import  empty_string
 else:
     from    Capital.Core                import  FATAL
 

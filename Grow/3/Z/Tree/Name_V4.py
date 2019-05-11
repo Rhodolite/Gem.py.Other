@@ -71,7 +71,7 @@ class Tree_Name_Branch(object):
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'symbol',                       #   Symbol
+        'symbol',                       #   Parser_Symbol
     ))
 
 

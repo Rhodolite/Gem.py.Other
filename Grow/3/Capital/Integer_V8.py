@@ -4,37 +4,37 @@
 
 
 #
-#   Capital.Private.Integer_V8 - Private implementation of the public `*_Integer` Interfaces, Version 8.
+#   Capital.Private.Integer_V8 - Private implementation of the public "Integer" Interfaces, Version 8.
 #
-#       Integers are Unique (always).
+#       Integers are Unique.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
+from    Capital.Integer                 import  TRAIT_Contrary_Integer
+from    Capital.Integer                 import  TRAIT_Integer
+from    Capital.Integer                 import  TRAIT_Keen_Integer
+from    Capital.Integer                 import  TRAIT_Negative_Integer
+from    Capital.Integer                 import  TRAIT_Positive_Integer
+from    Capital.Integer                 import  TRAIT_Zero
 from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
-from    Capital.String                  import  TRAIT_Empty_String
-from    Capital.String                  import  TRAIT_Full_String
 
 
 if __debug__:
     from    Capital.Cannot              import  raise__CANNOT__construct__ERROR
     from    Capital.Cannot              import  raise__CANNOT__create__ERROR
-    from    Capital.Native_String       import  fact_is_empty_native_string
-    from    Capital.Native_String       import  fact_is_full_native_string
 
 
 #
-#<methods>
-#   common methods of `{Positive,Negative}_Integer_Leaf` & `Zero_Leaf`.
+#   Common Methods
 #
 
 
 @property
 def property__Integer__native_integer_subclass(self):
     return self
-#</methods>
 
 
 
@@ -46,7 +46,7 @@ class Zero_Leaf(
         TRAIT_Contrary_Integer,
         TRAIT_Keen_Integer,
         TRAIT_Maybe_Temporary_0,
-        TRAIT_Some_Integer,
+        TRAIT_Integer,
         TRAIT_Zero,
 ):
     __slots__ = (())
@@ -105,7 +105,7 @@ class Negative_Integer_Leaf(
         TRAIT_Contrary_Integer,
         TRAIT_Maybe_Temporary_0,
         TRAIT_Negative_Integer,
-        TRAIT_Some_Integer,
+        TRAIT_Integer,
 ):
     __slots__ = (())
 

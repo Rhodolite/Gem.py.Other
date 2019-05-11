@@ -46,7 +46,7 @@ if __debug__:
 #
 class Tree_Special_Parameter(object):
     __slots__ = ((
-        'symbol',                       #   Symbol
+        'symbol',                       #   Parser_Symbol
     ))
 
 
@@ -115,7 +115,7 @@ class Tree_Keyword_Parameter(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'symbol',                       #   Symbol
+        'symbol',                       #   Parser_Symbol
         'value',                        #   Tree_Value_Expression
     ))
 

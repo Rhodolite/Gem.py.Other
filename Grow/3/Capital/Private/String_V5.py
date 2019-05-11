@@ -24,98 +24,11 @@
 #
 #       Version 4:
 #
-#           Has a `Base_String` to avoid duplicate code.
+#           Has a `String_Branch` to avoid duplicate code.
 #
 #       Version 5:
 #
-#           Removes `Base_String`, and instead duplicates code (See below)
-#
-
-
-#
-#   WHY DUPLICATE CODE IN REMOVING `Base_String`?
-#
-#   SUMMARY:
-#
-#       To avoid a limitation in python related to it's implementation of multiple inheritance, in version 6
-#       of String Implementation, where we need to do class transformations using `.__class__` assignment.
-#
-#       (See "Capital.Private.ConjureString_V6.py" for details).
-#
-#   DETAILS:
-#
-#       Python has a few limitations with with it's implementation of multiple inheritance;
-#
-#           1)  Python does not allow multiple inheritance to have `__slots__` in multiple bases:
-#
-#               If you attempt to do this:
-#
-#                   class A(object): __slots__ = (('a',))
-#                   class B(object): __slots__ = (('b',))
-#                   class C(A, B): pass
-#
-#               You get the error:
-#
-#                   TypeError: Error when calling the metclass bases
-#                       multiple bases have instance lay-out conflict
-#
-#               Which, interpreted, means:
-#
-#                   multiple bases (A & B) both have __slots__ that are non-empty.
-#
-#           2)  When figuring out if `.__class__` assignment is allowed, python typically only allows the
-#               [non-empty] `__slots__` to be in the "same" place in the inheritance diagram.
-#
-#               EXAMPLE (what we want to do):
-#
-#                   class TRAIT_String(object):                                     __slots__ = (())
-#                   class TRAIT_Maybe_Temporary_0(object):                          __slots__ = (())
-#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                __slots__ = (('interned_s',))
-#                   class Base_String(TRAIT_String):                                __slots__ = (('interned_s',))
-#                   class Full_String_Leaf(Base_String, TRAIT_Maybe_Temporary_0):   __slots__ = (())
-#
-#                   x = Temporary_String()
-#                   x.__class__ = Full_String_Leaf
-#
-#               However, this fails with:
-#
-#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from
-#                               'Full_String_Leaf'.
-#
-#               Removing `Base_String`, allows us to simplfy this:
-#
-#                   class TRAIT_String(object):                                         __slots__ = (())
-#                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
-#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
-#                   class Full_String_Leaf(TRAIT_String, TRAIT_Maybe_Temporary_0):      __slots__ = (('interned_s',))
-#
-#                   x = Temporary_String()
-#                   x.__class__ = Full_String_Leaf
-#
-#               ALTHOUGH, this still fails with the same error as above:
-#
-#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from
-#                               'Full_String_Leaf'.
-#
-#               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String_Leaf`
-#               (since we eliminated `Base_String`):
-#
-#                   class TRAIT_String(object):                                         __slots__ = (())
-#                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
-#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
-#                   class Full_String_Leaf(TRAIT_Maybe_Temporary_0, TRAIT_String):      __slots__ = (('interned_s',))
-#
-#                   x = Temporary_String()
-#                   x.__class__ = Full_String_Leaf
-#
-#               NOW, python accepts out transformation.
-#
-#   CONCLUSION:
-#
-#       To avoid a limitation in python related to it's implementation of multiple inheritance, we have to eliminate
-#       `Base_String`, and duplicate a few lines of code.
-#
-#       This will allos us to use `.__class__` assignment in version 4 implementation.
+#           Removes `String_Branch`, and instead duplicates code (See below at end of this file).
 #
 
 
@@ -134,11 +47,11 @@ if __debug__:
 #
 #<methods>
 #
-#   String methods - A very simple string wrapper, common methods of `{Empty,Full}_String_Leaf`.
+#   String methods - Common methods of `{Empty,Full}_String_Leaf`.
 #
-#       As explained above we had to get rid of `Base_String`.
+#       As explained below (at end of this file) we had to get rid of `String_Branch`.
 #
-#       So instead we just list the [no longer existing] `Base_String` methods, and copy them into
+#       So instead we just list the [no longer existing] `String_Branch` methods, and copy them into
 #       `Empty_String_Leaf` and `Full_String_Leaf` below.
 #
 
@@ -156,6 +69,7 @@ def method__String__constructor(self, interned_s):
 @property
 def property__String__native_string_subclass(self):
     return self.interned_s
+#</methods>
 
 
 #
@@ -173,6 +87,9 @@ def method__String__operator_format(self, format_specification):
 #
 class Empty_String_Leaf(
         TRAIT_String,
+        #
+        #   Implements Empty_String
+        #
 ):
     __slots__ = ((
         'interned_s',                   #   Empty_Native_String
@@ -242,6 +159,9 @@ class Empty_String_Leaf(
 #
 class Full_String_Leaf(
         TRAIT_String,
+        #
+        #   Implements Full_String
+        #
 ):
     __slots__ = ((
         'interned_s',                   #   Full_Native_String
@@ -347,4 +267,94 @@ def create_full_string(interned_s):
 empty_string = create_empty_string(intern_native_string(""))
 
 
+#
+#   empty_string - The empty string singleton.
+#
 export(empty_string)
+
+
+#
+#   WHY DUPLICATE CODE IN REMOVING `String_Branch`?
+#
+#   SUMMARY:
+#
+#       To avoid a limitation in python related to it's implementation of multiple inheritance, in version 6
+#       of String Implementation, where we need to do class transformations using `.__class__` assignment.
+#
+#       (See "Capital.Private.ConjureString_V6.py" for details).
+#
+#   DETAILS:
+#
+#       Python has a few limitations with with it's implementation of multiple inheritance;
+#
+#           1)  Python does not allow multiple inheritance to have `__slots__` in multiple bases:
+#
+#               If you attempt to do this:
+#
+#                   class A(object): __slots__ = (('a',))
+#                   class B(object): __slots__ = (('b',))
+#                   class C(A, B): pass
+#
+#               You get the error:
+#
+#                   TypeError: Error when calling the metclass bases
+#                       multiple bases have instance lay-out conflict
+#
+#               Which, interpreted, means:
+#
+#                   multiple bases (A & B) both have __slots__ that are non-empty.
+#
+#           2)  When figuring out if `.__class__` assignment is allowed, python typically only allows the
+#               [non-empty] `__slots__` to be in the "same" place in the inheritance diagram.
+#
+#               EXAMPLE (what we want to do):
+#
+#                   class TRAIT_String(object):                                     __slots__ = (())
+#                   class TRAIT_Maybe_Temporary_0(object):                          __slots__ = (())
+#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                __slots__ = (('interned_s',))
+#                   class String_Branch(TRAIT_String):                              __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(String_Branch, TRAIT_Maybe_Temporary_0): __slots__ = (())
+#
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String_Leaf
+#
+#               However, this fails with:
+#
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from
+#                               'Full_String_Leaf'.
+#
+#               Removing `String_Branch`, allows us to simplfy this:
+#
+#                   class TRAIT_String(object):                                         __slots__ = (())
+#                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(TRAIT_String, TRAIT_Maybe_Temporary_0):      __slots__ = (('interned_s',))
+#
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String_Leaf
+#
+#               ALTHOUGH, this still fails with the same error as above:
+#
+#                   Type Error: __class__ assignment: 'Temporary_String' and object layout diffes from
+#                               'Full_String_Leaf'.
+#
+#               However, we can now REVERSE the order we declare the multiple inheritance for `Full_String_Leaf`
+#               (since we eliminated `String_Branch`):
+#
+#                   class TRAIT_String(object):                                         __slots__ = (())
+#                   class TRAIT_Maybe_Temporary_0(object):                              __slots__ = (())
+#                   class Temporary_String(TRAIT_Maybe_Temporary_0):                    __slots__ = (('interned_s',))
+#                   class Full_String_Leaf(TRAIT_Maybe_Temporary_0, TRAIT_String):      __slots__ = (('interned_s',))
+#
+#                   x = Temporary_String()
+#                   x.__class__ = Full_String_Leaf
+#
+#               NOW, python accepts out transformation.
+#
+#   CONCLUSION:
+#
+#       To avoid a limitation in python related to it's implementation of multiple inheritance, we have to eliminate
+#       `String_Branch`, and duplicate a few lines of code.
+#
+#       This will allos us to use `.__class__` assignment in version 4 implementation.
+#

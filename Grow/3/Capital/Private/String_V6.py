@@ -79,6 +79,9 @@ def method__String__operator_format(self, format_specification):
 #   Empty String - A singleton wrapper around the native empty string `""`.
 #
 class Empty_String_Leaf(
+        #
+        #   Implements Empty_String
+        #
         TRAIT_Maybe_Temporary_0,
         TRAIT_String,
 ):
@@ -150,6 +153,9 @@ class Empty_String_Leaf(
 #   Full String - A wrapper around a full native string.
 #
 class Full_String_Leaf(
+        #
+        #   Implements Full_String
+        #
         TRAIT_Maybe_Temporary_0,
         TRAIT_String,
 ):
@@ -259,4 +265,7 @@ def create_full_string(interned_s):
 empty_string = create_empty_string(intern_native_string(""))
 
 
+#
+#   empty_string - The empty string singleton.
+#
 export(empty_string)

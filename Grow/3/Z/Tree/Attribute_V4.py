@@ -68,7 +68,7 @@ class Tree_Attribute(object):
         'column',                       #   Keen_Native_Integer
 
         'value',                        #   Tree_Value_Expression
-        'attribute',                    #   Symbol
+        'attribute',                    #   Parser_Symbol
     ))
 
 

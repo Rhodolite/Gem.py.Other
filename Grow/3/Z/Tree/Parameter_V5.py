@@ -41,7 +41,7 @@ if __debug__:
 #
 class Tree_Special_Parameter(object):
     __slots__ = ((
-        'symbol',                       #   Symbol
+        'symbol',                       #   Parser_Symbol
     ))
 
 

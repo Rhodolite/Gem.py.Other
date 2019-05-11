@@ -45,12 +45,12 @@ if __debug__:
 #
 #<methods>
 #
-#   Common methods of `{Empty,Full}_String_Leaf`.
+#   String methods - Common methods of `{Empty,Full}_String_Leaf`.
 #
 
 
 #
-#   Base_String: Interface String
+#   Interface String
 #
 @property
 def property__String__native_string_subclass(self):
@@ -63,6 +63,9 @@ def property__String__native_string_subclass(self):
 #
 class Empty_String_Leaf(
         Native_String,
+        #
+        #   Implements Empty_String
+        #
         TRAIT_Maybe_Temporary_0,
         TRAIT_String,
 ):
@@ -129,6 +132,9 @@ method__Native_String__representation = Native_String.__repr__
 #
 class Full_String_Leaf(
         Native_String,
+        #
+        #   Implements Full_String
+        #
         TRAIT_Maybe_Temporary_0,
         TRAIT_String,
 ):
@@ -224,4 +230,7 @@ def create_full_string(s):
 empty_string = create_empty_string("")
 
 
+#
+#   empty_string - The empty string singleton.
+#
 export(empty_string)

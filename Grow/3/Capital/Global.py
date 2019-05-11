@@ -8,11 +8,11 @@
 #
 
 
-version = 9                 #   1..9
+version = 8                 #   1..8
 
 
 exception_version = 1       #   1..2
-string_version    = 1       #   0..7
+string_version    = 1       #   0..6
 
 
 #
@@ -37,14 +37,14 @@ if version >= 4:
 
 
 #
-#   Version 5: Add `Base_String`, `Empty_String_Leaf` and `Full_String_Leaf`.
+#   Version 5: Add `String_Branch` and `{Empty,Full}_String_Leaf`.
 #
 if version >= 5:
     string_version = 4
 
 
 #
-#   Version 6: Remove `Base_String`.
+#   Version 6: Remove `String_Branch`.
 #
 if version >= 6:
     string_version = 5
@@ -63,13 +63,6 @@ if version >= 7:
 #
 if version >= 8:
     string_version = 7
-
-
-#
-#   Version 9: String classes implement interfaces `Empty_String` and `Full_String_Leaf`
-#
-if version >= 9:
-    string_version = 8
 
 
 #
@@ -113,9 +106,9 @@ def create_capital_globals(version, exception_version, string_version):
     assert fact_is_positive_native_integer(exception_version)
     assert fact_is_avid_native_integer    (string_version)
 
-    assert 1 <= version           <= 9
-    assert 1 <= exception_version <= 8
-    assert 0 <= string_version    <= 8
+    assert 1 <= version           <= 8
+    assert 1 <= exception_version <= 2
+    assert 0 <= string_version    <= 7
 
     r = Capital_Globals(
             version           = version,

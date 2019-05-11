@@ -62,7 +62,7 @@ from    Capital.Core                    import  export
 #       debug
 #           is_some_integer : Boolean
 #
-class TRAIT_Some_Integer(object):
+class TRAIT_Integer(object):
     __slots__ = (())
 
 

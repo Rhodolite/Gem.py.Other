@@ -62,15 +62,9 @@ if __debug__:
 
 
 #
-#   Base_String - A very simple string wrapper, base class of `{Empty,Full}_String_Leaf`.
+#   String_Branch - A very simple string wrapper, base class of `{Empty,Full}_String_Leaf`.
 #
-#       NOTE: Named `Base_String` instead of `String`, since the name "String" is reserved for `interface String`.
-#
-#             (even though in the current implementation python (which does not have interfaces in python) does not
-#             actually have anything really named `interface String` -- conceptually it does, and thus the name
-#             "String" is still reserved for `interface String`).
-#
-class Base_String(
+class String_Branch(
         TRAIT_String,
 ):
     __slots__ = ((
@@ -102,9 +96,14 @@ class Base_String(
         return self.interned_s.__format__(format_specification)
 
 
-class Empty_String_Leaf(Base_String):
+class Empty_String_Leaf(
+        String_Branch,
+        #
+        #   Implements Empty_String
+        #
+):
     __slots__ = ((
-    #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Empty_Native_String`.
+    #   'interned_s',                   #   Inherited from `String_Branch`; but type changes to `Empty_Native_String`.
     ))
 
 
@@ -150,9 +149,14 @@ class Empty_String_Leaf(Base_String):
 
 
 
-class Full_String_Leaf(Base_String):
+class Full_String_Leaf(
+        String_Branch,
+        #
+        #   Implements Full_String
+        #
+):
     __slots__ = ((
-    #   'interned_s',                   #   Inherited from `Base_String`; but type changes to `Full_Native_String`.
+    #   'interned_s',                   #   Inherited from `String_Branch`; but type changes to `Full_Native_String`.
     ))
 
 

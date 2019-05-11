@@ -63,7 +63,7 @@ class Tree_Name(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Keen_Native_Integer
 
-        'symbol',                       #   Symbol
+        'symbol',                       #   Parser_Symbol
         'context',                      #   Tree_Context
     ))
 
