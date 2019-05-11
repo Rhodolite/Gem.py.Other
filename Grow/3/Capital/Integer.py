@@ -139,11 +139,11 @@ class TRAIT_Integer(object):
 #
 #       conjure_contrary_integer(v)         #   Conjure a `Contrary_Integer`.
 #
+#       conjure_integer(v)                  #   Conjure a `Integer`.
+#
 #       conjure_negative_integer(v)         #   Conjure a `Negative_Integer`.
 #
 #       conjure_positive_integer(v)         #   Conjure a `Positive_Integer`.
-#
-#       conjure_some_integer(v)             #   Conjure a `Some_Integer`.
 #
 #       zero_integer                        #   The zero integer singleton.
 #
@@ -255,12 +255,12 @@ if __debug__:
 #
 #       (imports must be after the "fact_*" functions, in case the imported file needs the "fact_*" functions).
 #
-from    Capital.Private.Integer_V8  import  zero_integer
-from    Capital.Private.Integer_V8  import  conjure_avid_integer
-from    Capital.Private.Integer_V8  import  conjure_contrary_integer
-from    Capital.Private.Integer_V8  import  conjure_integer
-from    Capital.Private.Integer_V8  import  conjure_negative_integer
-from    Capital.Private.Integer_V8  import  conjure_positive_integer
+from    Capital.Private.Integer_V1  import  zero_integer
+from    Capital.Private.Integer_V1  import  conjure_avid_integer
+from    Capital.Private.Integer_V1  import  conjure_contrary_integer
+from    Capital.Private.Integer_V1  import  conjure_integer
+from    Capital.Private.Integer_V1  import  conjure_negative_integer
+from    Capital.Private.Integer_V1  import  conjure_positive_integer
 
 
 #
@@ -292,6 +292,16 @@ export(conjure_contrary_integer)
 
 
 #
+#   conjure_integer(v) - Conjure a `Integer`, based on `v`.  Guarantees Uniqueness.
+#
+#       `v` must be a `Native_Integer` (i.e.: `int`).
+#
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
+#
+export(conjure_integer)
+
+
+#
 #   conjure_negative_integer(v) - Conjure a `Negative_Integer`, based on `v`.  Guarantees Uniqueness.
 #
 #       `v` must be a `Native_Integer` (i.e.: `int`), and less than to 0.
@@ -302,7 +312,7 @@ export(conjure_contrary_integer)
 #
 #       If `v` is positive or 0, throws a `ValueError`.
 #
-export(conjure_negative_integer
+export(conjure_negative_integer)
 
 
 #
@@ -317,16 +327,6 @@ export(conjure_negative_integer
 #       If `v` is negative or 0, throws a `ValueError`.
 #
 export(conjure_positive_integer)
-
-
-#
-#   conjure_some_integer(v) - Conjure a `Some_Integer`, based on `v`.  Guarantees Uniqueness.
-#
-#       `v` must be a `Native_Integer` (i.e.: `int`).
-#
-#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
-#
-export(conjure_some_integer)
 
 
 #

@@ -4,20 +4,7 @@
 
 
 #
-#   Capital.Temporary_Integer_V7 - Temporary Integer Implementation, Version 7.
-#
-
-
-#
-#   Differences between Versions 1..7.
-#
-#       Version 1..6:
-#
-#           Do not exist.
-#
-#       Version 7:
-#
-#           Exists.
+#   Capital.Temporary_Integer_V1 - Temporary Integer Implementation, Version 1.
 #
 
 

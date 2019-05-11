@@ -6,13 +6,6 @@
 #
 #   Capital.Private.Produce_ConjureNunber - Produce conjure number functions
 #
-#   NOTE:
-#       To understand this code please see:
-#
-#           "Capital.Private.Conjure_String_V8.py"
-#
-#       (which is extensivly commented).
-#
 
 
 #
@@ -23,32 +16,29 @@
 #   |       This code (like all good multi-threading code that properly handles errors) is quite convoluted.    |
 #   |                                                                                                           |
 #   |       You can *IGNORE* reading and understanding the rest of this file, since it is the *PRIVATE*         |
-#   |       implementation of the public `String` Interface.                                                    |
+#   |       implementation of the public `Integer` Interface.                                                   |
 #   |                                                                                                           |
-#   |       Initially, you really only need to read and understand the public `String` interface.               |
+#   |       Initially, you really only need to read and understand the public `Integer` interface.              |
 #   |                                                                                                           |
 #   +===========================================================================================================+
 #
 
 
+from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Capital.Exception               import  PREPARE_ValueError
-from    Capital.Native_String           import  intern_native_string
-from    Capital.Private.String_V7       import  empty_string
-from    Capital.Private.String_V7       import  Full_String_Leaf
 from    Capital.Temporary_None          import  temporary_none
-from    Capital.Temporary_String_V7     import  create_temporary_string
 
 
 if __debug__:
     from    Capital.Fact                import  fact_is_native_boolean
     from    Capital.Fact                import  fact_is_native_built_in_method
+    from    Capital.Fact                import  fact_is_native_function
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Fact                import  fact_is_native_type
     from    Capital.Fact                import  fact_is_not_native_none
     from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Native_String       import  fact_is_native_string
 
 
 #
@@ -84,9 +74,9 @@ if __debug__:
 #
 #           2)  fact_is_native_number   - fact routine to test for `Native_{Integer,Long,Float}`.
 #
-#           3)  lookup_number           - Lookup a number in string_cache.
+#           3)  lookup_number           - Lookup a number in number_cache.
 #
-#           4)  provide_number          - Provide a number in string_cache.
+#           4)  provide_number          - Provide a number in number_cache.
 #
 #           5)  create_temporary_number - Create routine to create a temporary "number" (temporary integer,
 #                                         temporary long, or temporary float).
@@ -180,24 +170,24 @@ def produce_conjure_X_number(
     assert fact_is_native_boolean(allow_positive)
 
     if allow_negative:
-        assert fact_is_none              (negative_value_message)
+        assert fact_is_native_none       (negative_value_message)
     else:
         assert fact_is_full_native_string(negative_value_message)
 
     if allow_zero:
-        assert fact_is_none              (zero_value_message)
+        assert fact_is_native_none       (zero_value_message)
     else:
         assert fact_is_full_native_string(zero_value_message)
 
     if allow_positive:
-        assert fact_is_none              (positive_value_message)
+        assert fact_is_native_none       (positive_value_message)
     else:
         assert fact_is_full_native_string(positive_value_message)
 
     if allow_zero:
-        assert fact_is_not_native_none(zero_nunber)
+        assert fact_is_not_native_none(zero_number)
     else:
-        assert fact_is_native_none    (zero_nunber)
+        assert fact_is_native_none    (zero_number)
 
 
     #
@@ -220,6 +210,11 @@ def produce_conjure_X_number(
     #        If `allow_positive` is `False`, then has this behavior:
     #
     #            If `v` is positive, throws a `ValueError`.
+    #
+    #   NOTE:
+    #       To understand this code please see:
+    #
+    #           `Capital.Private.ConjureString_V7.conjure_X_string` (which is extensivly commented).
     #
     @creator
     def conjure_X_number(v):
@@ -310,18 +305,19 @@ def produce_conjure_number_functions(
         Negative_Number_Type,
         Positive_Number_Type,
         zero_number,
-)
-    assert fact_is_full_string    (number_name)
-    assert fact_is_native_function(fact_is_native_number)
-    assert fact_is_native_type    (Negative_Number_Type)
-    assert fact_is_native_type    (Positive_Number_Type)
-    assert fact_is_not_native_none(zero_number)
+):
+    assert fact_is_full_native_string(number_name)
+    assert fact_is_native_function   (fact_is_native_number)
+    assert fact_is_native_function   (create_temporary_number)
+    assert fact_is_native_type       (Negative_Number_Type)
+    assert fact_is_native_type       (Positive_Number_Type)
+    assert fact_is_not_native_none   (zero_number)
 
 
     #
     #   number_cache - A cache of `{Negative,Positive}_Number_Type` (and possibly some temporary strings).
     #
-    #       All strings are stored in this as key/value pairs:
+    #       All numbers are stored in this as key/value pairs:
     #
     #           1)  The key is `{Negative,Positive}_Number_Type` or a `Temporary_{Integer,Long,Float}`
     #
@@ -371,7 +367,7 @@ def produce_conjure_number_functions(
             allow_negative = True,
             allow_zero     = True,
 
-            postive_value_message = "parameter `v` is positive; `{}` requires zero or a negative value",
+            positive_value_message = "parameter `v` is positive; `{}` requires zero or a negative value",
 
             zero_number = zero_number,
         )
@@ -390,8 +386,8 @@ def produce_conjure_number_functions(
 
             allow_negative = True,
 
-            zero_value_message    = "parameter `v` is zero; `{}` requires a negative value",
-            postive_value_message = "parameter `v` is positive; `{}` requires a negative value",
+            zero_value_message     = "parameter `v` is zero; `{}` requires a negative value",
+            positive_value_message = "parameter `v` is positive; `{}` requires a negative value",
         )
 
 
@@ -426,7 +422,7 @@ def produce_conjure_number_functions(
             Negative_Number_Type,
             Positive_Number_Type,
 
-            allow_positive = Positive,
+            allow_positive = True,
 
             negative_value_message = "parameter `v` is positive; `{}` requires a positive value",
             zero_value_message     = "parameter `v` is zero; `{}` requires a positive value",
