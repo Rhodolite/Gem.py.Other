@@ -22,11 +22,12 @@
 
 
 #
-#   Difference between Version 3 & Version 4.
+#   Differences between Version 3 & Version 4.
 #
 #       Version 3:
 #
-#           Producer function `produce_conjure_string_functions` to produce `conjure_{full,some}_string` functions.
+#           Producer function `produce_conjure_string_functions` to produce `conjure_full_string` and `conjure_string`
+#           functions.
 #
 #           The arguments to `produce_conjure_string` are:
 #

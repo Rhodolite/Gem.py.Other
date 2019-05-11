@@ -9,7 +9,7 @@
 
 
 #
-#   Difference between Version 1 & Version 2.
+#   Differences between Version 1 & Version 2.
 #
 #       Version 1:
 #
@@ -26,7 +26,7 @@ from    Capital.Core                        import  export
 from    Capital.Native_String               import  Native_String
 from    Capital.Maybe_Temporary             import  TRAIT_Maybe_Temporary_0
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
-from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
+from    Z.Parser.Produce_ConjureFullName    import  produce_conjure_full_name__with_unused_Z_parameter
 
 
 if __debug__:

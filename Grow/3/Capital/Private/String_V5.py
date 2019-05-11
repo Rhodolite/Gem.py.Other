@@ -20,7 +20,7 @@
 
 
 #
-#   Difference between Version 4 and Version 5:
+#   Differences between Version 4 and Version 5:
 #
 #       Version 4:
 #

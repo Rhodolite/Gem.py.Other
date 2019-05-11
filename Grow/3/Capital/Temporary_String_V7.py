@@ -9,7 +9,7 @@
 
 
 #
-#   Difference between Version 6 & Version 7.
+#   Differences between Version 6 & Version 7.
 #
 #       Version 6:
 #
@@ -32,22 +32,24 @@ if __debug__:
 
 
 #
-#   method__Native_String__representation - The python implemention of `repr` for `str` (i.e.: `str.__repr__`).
+#   method__Native_String__representation
+#
+#       The python implemention of `repr` for `Native_String` (i.e.: `str.__repr__`).
 #
 method__Native_String__representation = Native_String.__repr__
 
 
 #
-#   Temporary_String - Temporary String Implementation, Version 6.
+#   Temporary_String - Temporary String Implementation
 #
 class Temporary_String(
         Native_String,
         TRAIT_Maybe_Temporary_0,
         #
         #   NOTE:
-        #       Does *NOT* implement the String interface.
+        #       Does *NOT* implement the `String` interface.
         #
-        #       This is *NOT* a string, but a temporary element (that *MIGHT* be transformed to a String).
+        #       This is *NOT* a `String`, but a temporary element (that *MIGHT* be transformed to a `String`).
         #
 ):
     #

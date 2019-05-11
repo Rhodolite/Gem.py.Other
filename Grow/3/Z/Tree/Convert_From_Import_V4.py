@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Version 2, Version 3, and Version 4.
+#   Differences between Version 2, Version 3, and Version 4.
 #
 #       Version 2:
 #

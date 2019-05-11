@@ -21,7 +21,7 @@
 
 
 #
-#   Difference between Version 1 & Version 2.
+#   Differences between Version 1 & Version 2.
 #
 #       Version 1:
 #
@@ -88,7 +88,7 @@ provide_string = string_cache.setdefault
 #
 #   conjure_X_string(s, allow_empty_string = False, empty_string = None)
 #
-#       Internal helper routine for `conjure_{full,some}_string`.
+#       Internal helper routine for `conjure_full_string` and `conjure_string`.
 #
 #   PARAMETERS
 #

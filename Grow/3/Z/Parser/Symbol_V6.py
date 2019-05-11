@@ -9,7 +9,7 @@
 
 
 #
-#   Difference between Version 5 & Version 6.
+#   Differences between Version 5 & Version 6.
 #
 #       Version 5:
 #
@@ -27,7 +27,7 @@ from    Capital.Native_String               import  Native_String
 from    Capital.Maybe_Temporary             import  TRAIT_Maybe_Temporary_0
 from    Z.Parser.Module_Name                import  TRAIT_Parser_Module_Name
 from    Z.Parser.None                       import  parser_none
-from    Z.Parser.Produce_ConjureFullString  import  produce_conjure_full_name__with_unused_Z_parameter
+from    Z.Parser.Produce_ConjureFullName    import  produce_conjure_full_name__with_unused_Z_parameter
 from    Z.Parser.Symbol                     import  TRAIT_Parser_Symbol
 from    Z.Parser.Symbol_Tuple               import  TRAIT_Parser_Symbol_Tuple
 from    Z.Tree.Alias                        import  TRAIT_Tree_Module_Alias

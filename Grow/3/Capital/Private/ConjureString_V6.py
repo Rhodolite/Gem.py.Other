@@ -9,7 +9,7 @@
 
 
 #
-#   Difference between Version 5 & Version 6.
+#   Differences between Version 5 & Version 6.
 #
 #       Version 5:
 #
@@ -322,7 +322,7 @@ def produce_conjure_X_string(
 
 
 #
-#   produce_conjure_string_functions(empty_string, create_full_string)
+#   produce_conjure_string_functions(empty_string, Full_String_Type)
 #
 #       Produce `conjure_full_string` and `conjure_string` functions.
 #
@@ -351,7 +351,7 @@ def produce_conjure_string_functions(empty_string, Full_String_Type):
 
 
     #
-    #   Produce both functions, sharing `string_cache` (via `{lookup,provide}_cache`).
+    #   Produce both functions, sharing `string_cache` (via `{lookup,provide}_string`).
     #
     conjure_full_string = produce_conjure_X_string(
             'conjure_full_string', lookup_string, provide_string, Full_String_Type,

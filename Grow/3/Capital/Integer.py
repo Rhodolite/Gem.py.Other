@@ -57,7 +57,7 @@ from    Capital.Core                    import  export
 #           is_positive_integer : Boolean
 #           is_zero             : Boolean
 #
-#           native_integer_subclass : Some_Native_Integer
+#           native_integer_subclass : Native_Integer
 #
 #       debug
 #           is_some_integer : Boolean
@@ -78,11 +78,7 @@ class TRAIT_Integer(object):
 #       attribute
 #           is_zero := true
 #
-class TRAIT_Zero(object):
-    __slots__ = (())
 
-
-    is_zero = False
 
 
 #
@@ -93,11 +89,6 @@ class TRAIT_Zero(object):
 #       attribute
 #           is_avid_integer := true
 #
-class TRAIT_Avid_Integer(object):
-    __slots__ = (())
-
-
-    is_avid_integer = True
 
 
 #
@@ -108,11 +99,6 @@ class TRAIT_Avid_Integer(object):
 #       attribute
 #           is_contrary_integer := true
 #
-class TRAIT_Contrary_Integer(object):
-    __slots__ = (())
-
-
-    is_contrary_integer = True
 
 
 #
@@ -123,11 +109,6 @@ class TRAIT_Contrary_Integer(object):
 #       attribute
 #           is_negative_integer := true
 #
-class TRAIT_Negative_Integer(object):
-    __slots__ = (())
-
-
-    is_negative_integer = True
 
 
 #
@@ -138,11 +119,6 @@ class TRAIT_Negative_Integer(object):
 #       attribute
 #           is_positive_integer := true
 #
-class TRAIT_Positive_Integer(object):
-    __slots__ = (())
-
-
-    is_positive_integer = True
 
 
 
@@ -171,12 +147,12 @@ class TRAIT_Positive_Integer(object):
 #
 #       zero_integer                        #   The zero integer singleton.
 #
-#       v.native_integer_subclass           #   The `Some_Native_Integer` that `v` represents (may be a subclass of
-#                                           #   `Some_Native_Integer).
+#       v.native_integer_subclass           #   The `Native_Integer` that `v` represents (may be a subclass of
+#                                           #   `Native_Integer).
 #
 #       v.python_code()                     #   Return a `Full_Native_String` that is the python code that python will
-#                                           #   compile to a `Some_Native_Integer` with the same value as the
-#                                           #   `Some_Native_Integer` that `v` wraps.
+#                                           #   compile to a `Native_Integer` with the same value as the
+#                                           #   `Native_Integer` that `v` wraps.
 #
 
 
@@ -282,9 +258,9 @@ if __debug__:
 from    Capital.Private.Integer_V8  import  zero_integer
 from    Capital.Private.Integer_V8  import  conjure_avid_integer
 from    Capital.Private.Integer_V8  import  conjure_contrary_integer
+from    Capital.Private.Integer_V8  import  conjure_integer
 from    Capital.Private.Integer_V8  import  conjure_negative_integer
 from    Capital.Private.Integer_V8  import  conjure_positive_integer
-from    Capital.Private.Integer_V8  import  conjure_some_integer
 
 
 #
@@ -354,6 +330,6 @@ export(conjure_some_integer)
 
 
 #
-#   zero_integer - The singleton `Zero`.
+#   zero_integer - The singleton `Integer` wrapper around the `Native_Integer` (i.e.: `int`) with a value of `0`.
 #
 export(zero_integer)

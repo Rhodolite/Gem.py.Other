@@ -9,7 +9,7 @@
 
 
 #
-#   Difference between Version 1, Version 2, and Version 3.
+#   Differences between Version 1, Version 2, and Version 3.
 #
 #       Version 1:
 #

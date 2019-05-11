@@ -12,13 +12,17 @@
 
 
 #
-#   Difference between Version 1 & Version 4.
+#   Difference between Version 1, Version 2, and Version 3.
 #
-#       Version 3:
+#       Version 1:
 #
 #           `Tree_String.s` is a `Native_String`.
 #
 #       Version 2:
+#
+#           Does not exist.
+#
+#       Version 3:
 #
 #           `Tree_String.s` is a `String`.
 #

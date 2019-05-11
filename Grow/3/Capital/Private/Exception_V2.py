@@ -9,23 +9,25 @@
 
 
 #
-#   Difference between Version 1 & Version 2.
+#   NOTE:
 #
-#       Version 1:
+#       In Version 1 (this version):
 #
 #           1)  `PREPARE_AttributeError` is defined.
 #
 #           2)  `PREPARE_ValueError` is also defined, duplicating a lot of code from `PREPARE_AttributeError`.
 #
-#       Version 2:
+#       In Version 2:
 #
 #           1)  `produce_PREPARE_Exception` is defined to produce functions (closures).
 #
 #           2)  Both `PREPARE_AttributeError` and `PREPARE_ValueError` are produced, eliminating duplicated code.
+
+
 #
 #   PRODUCE FUNCTIONS AND CLOSURES.
 #
-#       See very long explanation below for an explantion of "produce" funtions and closures.
+#       See very long explanation below for an explantion of "produce" functions and closures.
 #
 
 

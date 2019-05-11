@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Versions 1..5.
+#   Differences between Versions 1..5.
 #
 #       Version 1:
 #

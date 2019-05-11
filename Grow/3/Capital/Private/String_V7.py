@@ -14,7 +14,7 @@
 
 
 #
-#   Difference between Version 6 & Version 7.
+#   Differences between Version 6 & Version 7.
 #
 #       Version 6:
 #

@@ -10,19 +10,6 @@
 #
 
 
-#
-#   Difference between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           Does not use `Convert_Zone`.
-#
-#       Version 2:
-#
-#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
-#
-
-
 from    Z.Tree.Convert_Statement_V1         import  convert_some_list_of_statements
 from    Z.Tree.Module                       import  create_Tree_Module
 from    Z.Tree.Native_AbstractSyntaxTree    import  native__compile__to__native__abstract_syntax_tree

@@ -9,7 +9,7 @@
 
 
 #
-#   Difference between Version 1..6.
+#   Differences between Version 1..6.
 #
 #       Version 1..5:
 #

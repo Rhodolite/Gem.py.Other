@@ -35,15 +35,15 @@ if __debug__:
 
 
 #
-#   StringKey - String Key Implementation, Version 5.
+#   StringKey - String Key Implementation
 #
 class Temporary_String(
         TRAIT_Maybe_Temporary_0,
         #
         #   NOTE:
-        #       Does *NOT* implement the String interface.
+        #       Does *NOT* implement the `String` interface.
         #
-        #       This is *NOT* a string, but a temporary element (that *MIGHT* be transformed to a String).
+        #       This is *NOT* a `String`, but a temporary element (that *MIGHT* be transformed to a `String`).
         #
 ):
     #

@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Versions 4..7.
+#   Differences between Versions 4..7.
 #
 #       Version 4:
 #

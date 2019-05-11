@@ -21,15 +21,12 @@
 
 
 #
-#   Difference between Version 1 & Version 2.
+#   NOTE
 #
-#       Version 1:
+#       This version has duplicate code in `conjure_full_string` and `conjure_string`.
 #
-#           Duplicate code in `conjure_full_string` and `conjure_string`.
-#
-#       Version 2:
-#
-#           Helper routine `conjure_X_string` to remove duplicate code between `conjure_{full,some}_string`.
+#       In version 2, the helper routine `conjure_X_string` is used to remove duplicate code between
+#       `conjure_full_string` and `conjure_string`.
 #
 
 

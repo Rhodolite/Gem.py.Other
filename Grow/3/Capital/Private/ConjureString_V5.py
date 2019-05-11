@@ -22,7 +22,7 @@
 
 
 #
-#   Difference between Version 4 & Version 5.
+#   Differences between Version 4 & Version 5.
 #
 #       Version 4:
 #

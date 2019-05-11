@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Versions 3..7.
+#   Differences between Versions 3..7.
 #
 #       Version 3:
 #

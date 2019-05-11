@@ -71,6 +71,36 @@ if __debug__:
 
 
 #
+#   fact_is_native_non_zero_integer(v)
+#
+#       Assert that `v` is a `Native_Integer` (i.e.: `int`), with a negative or positive value.
+#
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
+#
+if __debug__:
+    def fact_is_native_non_zero_integer(v):
+        assert type(v) is Native_Integer
+        assert v != 0
+
+        return True
+
+
+#
+#   fact_is_native_zero(v)
+#
+#       Assert that `v` is a `Native_Integer` (i.e.: `int`), with a value of 0.
+#
+#       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
+#
+if __debug__:
+    def fact_is_native_zero(v):
+        assert type(v) is Native_Integer
+        assert v == 0
+
+        return True
+
+
+#
 #   fact_is_negative_native_integer(v)
 #
 #       Assert that `v` is a `Native_Integer` (i.e.: `int`), with a negative value.

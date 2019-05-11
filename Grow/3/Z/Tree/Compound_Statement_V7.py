@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Versions 2..7.
+#   Differences between Versions 2..7.
 #
 #       Version 2:
 #

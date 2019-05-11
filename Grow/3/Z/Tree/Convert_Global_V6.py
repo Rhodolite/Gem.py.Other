@@ -11,7 +11,7 @@
 
 
 #
-#   Difference between Version 5 and Version 6.
+#   Differences between Version 5 and Version 6.
 #
 #       Version 5:
 #
