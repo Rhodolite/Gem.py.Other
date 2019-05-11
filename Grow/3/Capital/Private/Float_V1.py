@@ -18,6 +18,7 @@ from    Capital.Core                            import  export
 from    Capital.Float                           import  TRAIT_Float
 from    Capital.Maybe_Temporary                 import  TRAIT_Maybe_Temporary_0
 from    Capital.Native_Float                    import  Native_Float
+from    Capital.Number                          import  TRAIT_Number
 from    Capital.Private.Produce_ConjureNumber   import  produce_conjure_number_functions
 from    Capital.Private.Temporary_Float_V1      import  create_temporary_float
 
@@ -69,6 +70,7 @@ class Zero_Leaf(
         #   Implements Avid_Float
         #
         TRAIT_Maybe_Temporary_0,
+        TRAIT_Number,
         #
         #   Implements Zero
         #
@@ -127,6 +129,7 @@ class Negative_Float_Leaf(
         #
         #   Implements Negative_Float
         #
+        TRAIT_Number,
 ):
     __slots__ = (())
 
@@ -188,6 +191,7 @@ class Positive_Float_Leaf(
         #   Implements Avid_Float
         #
         TRAIT_Maybe_Temporary_0,
+        TRAIT_Number,
         #
         #   Implements Positive_Float
         #

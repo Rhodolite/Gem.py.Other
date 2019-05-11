@@ -35,6 +35,16 @@ if is_python_2:
     from    Capital.Native_Long         import  Native_Long
 
 
+if __debug__:
+    from    Capital.Float               import  fact_is_float
+    from    Capital.Number              import  fact_is_number
+    from    Capital.Integer             import  fact_is_integer
+
+
+if (is_python_2) and (__debug__):
+    from    Capital.Long                import  fact_is_long
+
+
 def verify_throws_value_error(f, expected):
     caught = None
 
@@ -135,6 +145,25 @@ def command_test_float():
 
 
     #
+    #   .is_float & .is_number
+    #
+    if __debug__:
+        assert minus_five.is_float
+        assert minus_five.is_number
+        assert seven     .is_float
+        assert seven     .is_number
+        assert zero      .is_float
+        assert zero      .is_number
+
+        assert fact_is_float (minus_five)
+        assert fact_is_number(minus_five)
+        assert fact_is_float (zero)
+        assert fact_is_number(zero)
+        assert fact_is_float (seven)
+        assert fact_is_number(seven)
+
+
+    #
     #   Passed
     #
     trace('Passed: Float Test')
@@ -226,6 +255,25 @@ def command_test_integer():
     )
 
     assert seven is conjure_positive_integer(7)
+
+
+    #
+    #   .is_integer & .is_number
+    #
+    if __debug__:
+        assert minus_five.is_integer
+        assert minus_five.is_number
+        assert seven     .is_integer
+        assert seven     .is_number
+        assert zero      .is_integer
+        assert zero      .is_number
+
+        assert fact_is_integer(minus_five)
+        assert fact_is_number (minus_five)
+        assert fact_is_integer(zero)
+        assert fact_is_number (zero)
+        assert fact_is_integer(seven)
+        assert fact_is_number (seven)
 
 
     #
@@ -327,6 +375,25 @@ if is_python_2:
         )
 
         assert seven is conjure_positive_long(7)
+
+
+        #
+        #   .is_long & .is_number
+        #
+        if __debug__:
+            assert minus_five.is_long
+            assert minus_five.is_number
+            assert seven     .is_long
+            assert seven     .is_number
+            assert zero      .is_long
+            assert zero      .is_number
+
+            assert fact_is_long  (minus_five)
+            assert fact_is_number(minus_five)
+            assert fact_is_long  (zero)
+            assert fact_is_number(zero)
+            assert fact_is_long  (seven)
+            assert fact_is_number(seven)
 
 
         #

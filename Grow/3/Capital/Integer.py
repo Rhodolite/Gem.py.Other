@@ -71,20 +71,9 @@ class TRAIT_Integer(object):
 
 
 #
-#   interface Zero
-#       extends
-#           Integer
-#
-#       attribute
-#           is_zero_integer := true
-#
-
-
-
-#
 #   interface Avid_Integer
 #       extends
-#           Integer, Zero
+#           Integer, Zero_Integer
 #
 #       attribute
 #           is_avid_integer := true
@@ -94,7 +83,7 @@ class TRAIT_Integer(object):
 #
 #   interface Contrary_Integer
 #       extends
-#           Integer, Zero
+#           Integer, Zero_Integer
 #
 #       attribute
 #           is_contrary_integer := true
@@ -120,6 +109,15 @@ class TRAIT_Integer(object):
 #           is_positive_integer := true
 #
 
+
+#
+#   interface Zero_Integer
+#       extends
+#           Integer
+#
+#       attribute
+#           is_zero_integer := true
+#
 
 
 #

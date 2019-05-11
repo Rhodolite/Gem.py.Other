@@ -18,6 +18,7 @@ from    Capital.Core                            import  export
 from    Capital.Long                            import  TRAIT_Long
 from    Capital.Maybe_Temporary                 import  TRAIT_Maybe_Temporary_0
 from    Capital.Native_Long                     import  Native_Long
+from    Capital.Number                          import  TRAIT_Number
 from    Capital.Private.Produce_ConjureNumber   import  produce_conjure_number_functions
 from    Capital.Private.Temporary_Long_V1       import  create_temporary_long
 from    Capital.System                          import  is_python_2
@@ -78,6 +79,7 @@ class Zero_Leaf(
         #   Implements Avid_Long
         #
         TRAIT_Maybe_Temporary_0,
+        TRAIT_Number,
         #
         #   Implements Zero
         #
@@ -136,6 +138,7 @@ class Negative_Long_Leaf(
         #
         #   Implements Negative_Long
         #
+        TRAIT_Number,
 ):
     __slots__ = (())
 
@@ -197,6 +200,7 @@ class Positive_Long_Leaf(
         #   Implements Avid_Long
         #
         TRAIT_Maybe_Temporary_0,
+        TRAIT_Number,
         #
         #   Implements Positive_Long
         #

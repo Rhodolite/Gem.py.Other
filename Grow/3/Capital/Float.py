@@ -39,20 +39,9 @@ class TRAIT_Float(object):
 
 
 #
-#   interface Zero
-#       extends
-#           Float
-#
-#       attribute
-#           is_zero_float := true
-#
-
-
-
-#
 #   interface Avid_Float
 #       extends
-#           Float, Zero
+#           Float, Zero_Float
 #
 #       attribute
 #           is_avid_float := true
@@ -62,7 +51,7 @@ class TRAIT_Float(object):
 #
 #   interface Contrary_Float
 #       extends
-#           Float, Zero
+#           Float, Zero_Float
 #
 #       attribute
 #           is_contrary_float := true
@@ -88,6 +77,15 @@ class TRAIT_Float(object):
 #           is_positive_float := true
 #
 
+
+#
+#   interface Zero_Float
+#       extends
+#           Float
+#
+#       attribute
+#           is_zero_float := true
+#
 
 
 #

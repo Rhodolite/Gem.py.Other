@@ -48,20 +48,9 @@ class TRAIT_Long(object):
 
 
 #
-#   interface Zero
-#       extends
-#           Long
-#
-#       attribute
-#           is_zero_long := true
-#
-
-
-
-#
 #   interface Avid_Long
 #       extends
-#           Long, Zero
+#           Long, Zero_Long
 #
 #       attribute
 #           is_avid_long := true
@@ -71,7 +60,7 @@ class TRAIT_Long(object):
 #
 #   interface Contrary_Long
 #       extends
-#           Long, Zero
+#           Long, Zero_Long
 #
 #       attribute
 #           is_contrary_long := true
@@ -97,6 +86,15 @@ class TRAIT_Long(object):
 #           is_positive_long := true
 #
 
+
+#
+#   interface Zero_Long
+#       extends
+#           Long
+#
+#       attribute
+#           is_zero_long := true
+#
 
 
 #
