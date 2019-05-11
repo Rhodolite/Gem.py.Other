@@ -14,7 +14,6 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Capital.Core                    import  trace
 from    Z.Tree.Comprehension            import  TRAIT_Tree_Comprehension_Clause
 
 

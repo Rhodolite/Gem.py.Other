@@ -10,7 +10,6 @@
 #
 
 
-from    Capital.Core                        import  trace
 from    Z.Tree.Argument_V1                  import  create_Tree_Keyword_Argument
 from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR

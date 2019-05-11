@@ -4,7 +4,6 @@
 
 
 from    Capital.Core                    import  creator
-from    Capital.Core                    import  trace
 
 
 #

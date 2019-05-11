@@ -10,7 +10,6 @@
 #
 
 
-from    Capital.Core                        import  trace
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_For_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_If_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Except_Statement
@@ -143,25 +142,6 @@ assert Native_AbstractSyntaxTree_Try_Finally_Statement._fields     == (('body', 
 
 
 def convert_try_finally_statement(v):
-    if 0:
-        #
-        #   Copy this disabled code into a new convert method, to trace the attributes & fields and help write the new
-        #   method.
-        #
-        #   This code was used to write most of the convert methods in the "Z/Test/Convert_*.py" files :)
-        #
-        function_name = 'convert_try_finally_statement'
-
-        trace('{}:              {!r}', function_name, v)
-        trace('{}._attributes:  {!r}', function_name, v._attributes)
-        trace('{}._fields:      {!r}', function_name, v._fields)
-
-        trace('{}.lineno        {!r}', function_name, v.lineno)
-        trace('{}.col_offset    {!r}', function_name, v.col_offset)
-
-        trace('{}.body:      {!r}', function_name, v.body)
-        trace('{}.finalbody: {!r}', function_name, v.finalbody)
-
     assert fact_is_positive_native_integer(v.lineno)
     assert fact_is_avid_native_integer    (v.col_offset)
 

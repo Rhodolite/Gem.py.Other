@@ -38,7 +38,6 @@
 
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
-from    Capital.Core                    import  trace
 from    Capital.Exception               import  PREPARE_ValueError
 from    Capital.Native_String           import  intern_native_string
 from    Capital.Private.String_V1       import  create_full_string      #   "_V2" on purpose"

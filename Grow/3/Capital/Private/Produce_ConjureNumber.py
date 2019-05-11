@@ -225,41 +225,33 @@ def produce_conjure_X_number(
         #
         assert fact_is_native_number(v)
 
+        if allow_positive:
+            pass
+        elif v > 0:
+            value_error = PREPARE_ValueError(positive_value_message, function_name)
+
+            raise value_error
+
+        if allow_negative:
+            pass
+        elif v < 0:
+            value_error = PREPARE_ValueError(negative_value_message, function_name)
+
+            raise value_error
+
         r = lookup_number(v, temporary_none)
 
         if r.definitively_not_temporary:
             return r
 
         if r is temporary_none:
-            if v > 0:
-                if allow_positive:
-                    #
-                    #   Ok, handle positive numbers below.
-                    #
-                    pass
-                else:
-                    value_error = PREPARE_ValueError(positive_value_message, function_name)
-
-                    raise value_error
-            elif v == 0:
+            if v == 0:
                 if allow_zero:
                     return zero_number
-                else:
-                    value_error = PREPARE_ValueError(positive_value_message, function_name)
 
-                    raise value_error
-            else:
-                assert v < 0
+                value_error = PREPARE_ValueError(zero_value_message, function_name)
 
-                if allow_negative:
-                    #
-                    #   Ok, handle negative numbers below.
-                    #
-                    pass
-                else:
-                    value_error = PREPARE_ValueError(negative_value_message, function_name)
-
-                    raise value_error
+                raise value_error
 
             temporary_number__maybe_duplicate = create_temporary_number(v)
 
@@ -424,7 +416,7 @@ def produce_conjure_number_functions(
 
             allow_positive = True,
 
-            negative_value_message = "parameter `v` is positive; `{}` requires a positive value",
+            negative_value_message = "parameter `v` is negative; `{}` requires a positive value",
             zero_value_message     = "parameter `v` is zero; `{}` requires a positive value",
         )
 

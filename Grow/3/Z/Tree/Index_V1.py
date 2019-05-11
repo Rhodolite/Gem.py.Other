@@ -12,7 +12,6 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Capital.Core                    import  trace
 from    Z.Tree.Index                    import  TRAIT_Tree_Index_Clause
 
 
