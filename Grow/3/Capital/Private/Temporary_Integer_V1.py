@@ -15,7 +15,7 @@ from    Capital.Maybe_Temporary         import  TRAIT_Maybe_Temporary_0
 
 
 if __debug__:
-    from    Capital.Native_Integer      import  fact_is_native_non_zero_integer
+    from    Capital.Native_Integer      import  fact_is__non_zero__native_integer
 
 
 #
@@ -63,6 +63,6 @@ class Temporary_Integer(
 @export
 @creator
 def create_temporary_integer(v):
-    assert fact_is_native_non_zero_integer(v)
+    assert fact_is__non_zero__native_integer(v)
 
     return Temporary_Integer(v)

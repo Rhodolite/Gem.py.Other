@@ -80,7 +80,7 @@ def produce_PREPARE_Exception(function_name, Exception_Class):
 
         error = Exception_Class(message)
 
-        trace('{} => {}', function_name, error)
+       #trace('{} => {}', function_name, error)
 
         return error
 

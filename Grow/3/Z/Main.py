@@ -3,7 +3,7 @@
 #
 
 
-version = 1
+version = -1
 
 
 #
@@ -108,9 +108,9 @@ def command_string():
 
 def command_development(version):
     if version == -1:
-        from    Z.Test_Integer          import  command_test_integer
+        from    Z.Test_Number           import  command_test_number
 
-        return command_test_integer()
+        return command_test_number()
 
     if version:
         return command_parse(version)

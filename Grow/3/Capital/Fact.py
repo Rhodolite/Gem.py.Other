@@ -31,6 +31,39 @@ if is_python_2:
 
 
 #
+#   fact_is_ANY_native_INTEGRAL_number(v)
+#
+#       Assert that `v` is a:
+#
+#           1)  `Native_Integer` (i.e.: `int`), or a
+#
+#           2)  `Native_Long`    (i.e: `long`).                 #   Python 2.* only
+#
+#       `v` may *NOT* be an instance of a subclass of:
+#
+#           1)  `Native_Integer` (i.e.: `int`), or
+#
+#           2)  `Native_Long` (i.e.: `long`).                   #   Python 2.* only
+#
+if __debug__:
+    if is_python_2:
+        def fact_is_ANY_native_INTEGRAL_number(v):
+            v_type = type(v)
+
+            assert (v_type is Native_Integer) or (v_type is Native_Long)
+
+            return True
+    else:
+        #
+        #   Python 3.* does not have a `Native_Long` (i.e.: `long`) type.
+        #
+        def fact_is_ANY_native_INTEGRAL_number(v):
+            assert type(v) is Native_Integer
+
+            return True
+
+
+#
 #   fact_is_ANY_native_number(v)
 #
 #       Assert that `v` is a:
@@ -192,3 +225,40 @@ if __debug__:
         assert v is not None
 
         return True
+
+
+#
+#   fact_is__non_zero__ANY_native_INTEGRAL_number(v)
+#
+#       Assert that `v` is a:
+#
+#           1)  `Native_Integer` (i.e.: `int`), or a
+#
+#           2)  `Native_Long`    (i.e: `long`).                 #   Python 2.* only
+#
+#       `v` must have negative or positive value.
+#
+#       `v` may *NOT* be an instance of a subclass of:
+#
+#           1)  `Native_Integer` (i.e.: `int`), or
+#
+#           2)  `Native_Long` (i.e.: `long`).                   #   Python 2.* only
+#
+if __debug__:
+    if is_python_2:
+        def fact_is__non_zero__ANY_native_INTEGRAL_number(v):
+            v_type = type(v)
+
+            assert (v_type is Native_Integer) or (v_type is Native_Long)
+            assert v != 0
+
+            return True
+    else:
+        #
+        #   Python 3.* does not have a `Native_Long` (i.e.: `long`) type.
+        #
+        def fact_is__non_zero__ANY_native_INTEGRAL_number(v):
+            assert type(v) is Native_Integer
+            assert v != 0
+
+            return True

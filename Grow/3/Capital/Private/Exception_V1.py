@@ -54,7 +54,7 @@ def PREPARE_AttributeError(message, *arguments):
 
     error = AttributeError(message)
 
-    trace('{} => {}', "PREPARE_AttributeError", error)
+   #trace('{} => {}', "PREPARE_AttributeError", error)
 
     return error
 
@@ -79,6 +79,6 @@ def PREPARE_ValueError(message, *arguments):
 
     error = ValueError(message)
 
-    trace('{} => {}', "PREPARE_ValueError", error)
+   #trace('{} => {}', "PREPARE_ValueError", error)
 
     return error

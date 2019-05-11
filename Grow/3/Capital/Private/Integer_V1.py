@@ -23,7 +23,7 @@ from    Capital.Private.Temporary_Integer_V1    import  create_temporary_integer
 if __debug__:
     from    Capital.Cannot                      import  raise__CANNOT__construct__ERROR
     from    Capital.Cannot                      import  raise__CANNOT__create__ERROR
-    from    Capital.Native_Integer              import  fact_is_native_zero
+    from    Capital.Native_Integer              import  fact_is_zero_native_integer
     from    Capital.Native_Integer              import  fact_is_native_integer
 
 
@@ -243,7 +243,7 @@ class Positive_Integer_Leaf(
 
 @creator
 def create_zero_integer(v):
-    assert fact_is_native_zero(v)
+    assert fact_is_zero_native_integer(v)
 
     return Zero_Leaf(v)
 

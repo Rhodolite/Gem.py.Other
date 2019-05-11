@@ -17,7 +17,7 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 
 if __debug__:
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Capital.Native_String       import  fact_is_native_string
 
