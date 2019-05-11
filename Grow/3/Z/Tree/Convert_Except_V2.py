@@ -23,7 +23,7 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -64,9 +64,9 @@ def convert_except_handler(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_none_OR_expression     (z, v.type),
-               z.convert_none_OR_expression     (z, v.name),
-               z.convert_full_list_of_statements(z, v.body),
+               z.convert_none_OR_value_expression(z, v.type),
+               z.convert_none_OR_expression      (z, v.name),
+               z.convert_full_list_of_statements (z, v.body),
            )
 
 
@@ -87,5 +87,5 @@ convert_except_clause = convert_except_handler
 #       a `Full_Native_List of Tree_Except_Clause`.
 #
 convert_full_list_of_except_clauses = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_except_clause)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_except_clause)
     )

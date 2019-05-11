@@ -12,8 +12,8 @@
 
 from    Capital.Core                        import  trace
 from    Z.Tree.Argument_V1                  import  create_Tree_Keyword_Argument
-from    Z.Tree.Convert_Expression_V1        import  convert_expression
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -37,16 +37,16 @@ def convert_keyword_argument(v):
 
     return create_Tree_Keyword_Argument(
                v.arg,
-               convert_expression(v.value),
+               convert_value_expression(v.value),
            )
 
 
 #
-#   convert_some_list_of_keywords(sequence)
+#   convert_list_of_keyword_arguments(sequence)
 #
 #       Convert `Native_List of Native_AbstractSyntaxTree_Keyword_Argument` (i.e.: `list of _ast.keyword`) to a
 #       `Native_List of Tree_Keyword_Argument`
 #
-convert_some_list_of_keyword_arguments = (
-        produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_keyword_argument)
+convert_list_of_keyword_arguments = (
+        produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_keyword_argument)
     )

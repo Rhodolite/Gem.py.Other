@@ -48,11 +48,11 @@ class Tree_From_Import_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'module',                       #   Parser_Module_Name
         'names',                        #   Full_Native_List of Tree_Symbol_Alias
-        'level',                        #   Keen_Native_Integer
+        'level',                        #   Avid_Native_Integer
     ))
 
 

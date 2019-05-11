@@ -23,8 +23,8 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -32,48 +32,50 @@ if __debug__:
 
 
 #
-#   convert_expression(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
-#
-#       Calls all the other `convert_*` pseudo methods.
-#
-def convert_expression(z, v):
-    convert_expression__function = (
-            z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function[type(v)]
-        )
-
-    return convert_expression__function(z, v)
-
-
-#
-#   convert_none_OR_expression(z, v)
+#   convert_none_OR_value_expression(z, v)
 #
 #       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a
 #       `Tree_Value_Expression`.
 #
-def convert_none_OR_expression(z, v):
+def convert_none_OR_value_expression(z, v):
     assert fact_is_convert_zone(z)
 
     if v is None:
         return None
 
-    return convert_expression(z, v)
+    return convert_value_expression(z, v)
 
 
 #
-#   convert_full_list_of_expressions(z, sequence)
+#   convert_value_expression(z, v)
+#
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
+#
+#       Calls all the other `convert_*` pseudo methods.
+#
+def convert_value_expression(z, v):
+    convert_value_expression__function = (
+            z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function[type(v)]
+        )
+
+    return convert_value_expression__function(z, v)
+
+
+#
+#   convert_full_list_of_value_expressions(z, sequence)
 #
 #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Full_Native_List of Tree_Value_Expression`.
 #
-convert_full_list_of_expressions = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
+convert_full_list_of_value_expressions = (
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_value_expression)
+    )
 
 
 #
-#   convert_some_list_of_expressions(z, sequence)
+#   convert_list_of_value_expressions(z, sequence)
 #
 #       Convert a `Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Native_List of Tree_Value_Expression`.
 #
-convert_some_list_of_expressions = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
+convert_list_of_value_expressions = produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_value_expression)

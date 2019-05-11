@@ -18,9 +18,9 @@ from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Stat
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_While_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement
 from    Z.Tree.Convert_Except_V1            import  convert_full_list_of_except_clauses
-from    Z.Tree.Convert_Expression_V1        import  convert_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
-from    Z.Tree.Convert_Statement_V1         import  convert_some_list_of_statements
+from    Z.Tree.Convert_Statement_V1         import  convert_list_of_statements
 from    Z.Tree.Convert_Target_V1            import  convert_none_OR_target
 from    Z.Tree.Convert_Target_V1            import  convert_target
 
@@ -56,9 +56,9 @@ def convert_test_statement(v, create):
                v.lineno,
                v.col_offset,
 
-               convert_expression             (v.test),
+               convert_value_expression       (v.test),
                convert_full_list_of_statements(v.body),
-               convert_some_list_of_statements(v.orelse),
+               convert_list_of_statements     (v.orelse),
            )
 
 
@@ -85,9 +85,9 @@ def convert_for_statement(v):
                v.col_offset,
 
                convert_target                 (v.target),
-               convert_expression             (v.iter),
+               convert_value_expression       (v.iter),
                convert_full_list_of_statements(v.body),
-               convert_some_list_of_statements(v.orelse),
+               convert_list_of_statements     (v.orelse),
            )
 
 
@@ -128,7 +128,7 @@ def convert_try_except_statement(v):
 
                convert_full_list_of_statements    (v.body),
                convert_full_list_of_except_clauses(v.handlers),
-               convert_some_list_of_statements    (v.orelse),
+               convert_list_of_statements         (v.orelse),
            )
 
 
@@ -211,7 +211,7 @@ def convert_with_statement(v):
                v.lineno,
                v.col_offset,
 
-               convert_expression             (v.context_expr),
+               convert_value_expression       (v.context_expr),
                convert_none_OR_target         (v.optional_vars),
                convert_full_list_of_statements(v.body),
            )

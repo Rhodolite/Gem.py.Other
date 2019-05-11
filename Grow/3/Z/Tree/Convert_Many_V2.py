@@ -51,8 +51,8 @@ def convert_many_expression(z, v, create):
                v.lineno,
                v.col_offset,
 
-               z.convert_some_list_of_expressions(z, v.elts),
-               z.convert_load_OR_store_context   (z, v.ctx),
+               z.convert_list_of_value_expressions(z, v.elts),
+               z.convert_load_OR_store_context    (z, v.ctx),
            )
 
 

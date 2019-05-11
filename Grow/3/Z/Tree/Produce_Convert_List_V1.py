@@ -14,7 +14,7 @@ if __debug__:
 
 
 #
-#   produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert)
+#   produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert)
 #
 #       Produce a `convert full_list of Native_AbstractSyntaxTree_*` function.
 #
@@ -23,7 +23,7 @@ if __debug__:
 #           Converts a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
 #           `Full_Native_List of Tree_*`.
 #
-def produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert):
+def produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert):
     #
     #   convert__full_list_of__Native_AbstractSyntaxTree_STAR(sequence)
     #
@@ -40,7 +40,7 @@ def produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert):
 
 
 #
-#   produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert)
+#   produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert)
 #
 #       Produce a `convert some_list of Native_AbstractSyntaxTree_*` function.
 #
@@ -49,7 +49,7 @@ def produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert):
 #           Converts a `Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.*`) to a
 #           `Native_List of Tree_*`.
 #
-def produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert):
+def produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert):
     #
     #   convert__some_list_of__Native_AbstractSyntaxTree_STAR(sequence)
     #

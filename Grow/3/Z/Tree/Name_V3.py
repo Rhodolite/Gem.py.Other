@@ -61,7 +61,7 @@ class Tree_Name(
     #
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'symbol',                       #   Parser_Symbol
         'context',                      #   Tree_Context

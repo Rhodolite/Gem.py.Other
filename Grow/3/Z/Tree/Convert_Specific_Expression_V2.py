@@ -76,7 +76,7 @@ def convert_value_comprehension(z, v, create):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                 (z, v.elt),
+               z.convert_value_expression           (z, v.elt),
                z.convert_full_list_of_comprehensions(z, v.generators),
            )
 
@@ -102,7 +102,7 @@ def convert_backquote_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression(z, v.value),
+               z.convert_value_expression(z, v.value),
           )
 
 
@@ -129,9 +129,9 @@ def convert_binary_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression   (z, v.left),
-               convert_binary_operator(v.op),
-               z.convert_expression   (z, v.right),
+               z.convert_value_expression(z, v.left),
+               convert_binary_operator   (v.op),
+               z.convert_value_expression(z, v.right),
           )
 
 
@@ -160,11 +160,11 @@ def convert_call_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                    (z, v.func),
-               z.convert_some_list_of_expressions      (z, v.args),
-               z.convert_some_list_of_keyword_arguments(z, v.keywords),
-               z.convert_none_OR_expression            (z, v.starargs),
-               z.convert_none_OR_expression            (z, v.kwargs),
+               z.convert_value_expression         (z, v.func),
+               z.convert_list_of_value_expressions(z, v.args),
+               z.convert_list_of_keyword_arguments(z, v.keywords),
+               z.convert_none_OR_value_expression (z, v.starargs),
+               z.convert_none_OR_value_expression (z, v.kwargs),
            )
 
 
@@ -191,9 +191,9 @@ def convert_compare_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                    (z, v.left),
+               z.convert_value_expression              (z, v.left),
                z.convert_full_list_of_compare_operators(z, v.ops),
-               z.convert_full_list_of_expressions      (z, v.comparators),
+               z.convert_full_list_of_value_expressions(z, v.comparators),
           )
 
 
@@ -250,9 +250,9 @@ def convert_if_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression(z, v.test),
-               z.convert_expression(z, v.body),
-               z.convert_expression(z, v.orelse),
+               z.convert_value_expression(z, v.test),
+               z.convert_value_expression(z, v.body),
+               z.convert_value_expression(z, v.orelse),
           )
 
 
@@ -279,7 +279,7 @@ def convert_lambda_expression(z, v):
                v.col_offset,
 
                z.convert_parameter_tuple_0(z, v.args),
-               z.convert_expression       (z, v.body),
+               z.convert_value_expression (z, v.body),
           )
 
 
@@ -329,8 +329,8 @@ def convert_logical_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_logical_operator        (z, v.op),
-               z.convert_full_list_of_expressions(z, v.values),
+               z.convert_logical_operator              (z, v.op),
+               z.convert_full_list_of_value_expressions(z, v.values),
           )
 
 
@@ -366,8 +366,8 @@ def convert_map_comprehension(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression                 (z, v.key),
-               z.convert_expression                 (z, v.value),
+               z.convert_value_expression           (z, v.key),
+               z.convert_value_expression           (z, v.value),
                z.convert_full_list_of_comprehensions(z, v.generators),
            )
 
@@ -396,8 +396,8 @@ def convert_map_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_some_list_of_expressions(z, v.keys),
-               z.convert_some_list_of_expressions(z, v.values),
+               z.convert_list_of_value_expressions(z, v.keys),
+               z.convert_list_of_value_expressions(z, v.values),
            )
 
 
@@ -466,7 +466,7 @@ def convert_set_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_some_list_of_expressions(z, v.elts),
+               z.convert_list_of_value_expressions(z, v.elts),
            )
 
 
@@ -492,8 +492,8 @@ def convert_unary_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_unary_operator(z, v.op),
-               z.convert_expression    (z, v.operand),
+               z.convert_unary_operator  (z, v.op),
+               z.convert_value_expression(z, v.operand),
           )
 
 
@@ -518,5 +518,5 @@ def convert_yield_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_none_OR_expression(z, v.value),
+               z.convert_none_OR_value_expression(z, v.value),
           )

@@ -136,8 +136,9 @@ def conjure_X_string(s, allow_empty_string = False, empty_string = None):
     #
     #   Handle an empty string here (even in release mode).
     #
-    #       Hence the assert above is "*_some_*" on purpose (even when `allow_empty_string` is `False`), so this code
-    #       can throw a `ValueError` when an `s` is `""` (instead of the assert above catching it in debug mode).
+    #       Hence the assert above is `fact_is_native_string` on purpose (even when `allow_empty_string` is `False`),
+    #       so this code can throw a `ValueError` when an `s` is `""` (instead of the assert above catching it in debug
+    #       mode).
     #
     if len(s) == 0:
         if allow_empty_string:

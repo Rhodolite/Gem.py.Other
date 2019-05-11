@@ -243,7 +243,7 @@ def produce_conjure_X_number(
                     raise value_error
             elif v == 0:
                 if allow_zero:
-                    return zero_value
+                    return zero_number
                 else:
                     value_error = PREPARE_ValueError(positive_value_message, function_name)
 
@@ -315,7 +315,7 @@ def produce_conjure_number_functions(
 
 
     #
-    #   number_cache - A cache of `{Negative,Positive}_Number_Type` (and possibly some temporary strings).
+    #   number_cache - A cache of `{Negative,Positive}_Number_Type` (and possibly `Temporary_String`).
     #
     #       All numbers are stored in this as key/value pairs:
     #

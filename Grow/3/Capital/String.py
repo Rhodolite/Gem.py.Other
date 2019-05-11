@@ -8,11 +8,10 @@
 #
 #       By "Unique" we mean is only one string for each unique value.
 #
-#       In addition to being unique, strings are currently classified into three groups:
+#       In addition to being unique, strings are currently classified into two groups:
 #
 #           empty       - The singleton `empty_string` has a value of `<''>`.
 #           full        - A string with length greater than 0.
-#           some        - Either "empty" or "full".
 #
 #       Testing for two of these groups is done with:
 #
@@ -21,7 +20,7 @@
 #
 #       In debug mode, testing can also be done for a `String` with:
 #
-#           .is_some_string
+#           .is_string
 #
 #       Testing is *NOT* done with the python `type` builtin.
 #
@@ -50,7 +49,7 @@ string_version = capital_globals.string_version
 #           native_string_subclass : Native_String
 #
 #       debug
-#           is_some_string  : Boolean
+#           is_string  : Boolean
 #
 #   FUTURE:
 #
@@ -62,7 +61,7 @@ class TRAIT_String(object):
 
 
     if __debug__:
-        is_some_string = True
+        is_string = True
 
 
 #
@@ -122,13 +121,13 @@ if string_version >= 2:
 #
 #   USAGE (debug mode):
 #
-#       s.is_some_string                    #   Test if `s` is a string.
+#       s.is_string                         #   Test if `s` is a `String`.
 #
 #       assert fact_is_empty_string(s)      #   Assert that `s` is an empty string.
 #
 #       assert fact_is_full_string(s)       #   Assert that `s` is a  full  string.
 #
-#       assert fact_is_some_string(s)       #   Assert that `s` is a        string.
+#       assert fact_is_string(s)            #   Assert that `s` is a        string.
 #
 
 
@@ -166,7 +165,7 @@ if string_version >= 2:
 #
 #   NOTE:
 #
-#       To use `s.is_some_string`, `s` must be a Capital type, so that it supports the `.is_some_string` attribute.
+#       To use `s.is_string`, `s` must be a Capital type, so that it supports the `.is_string` attribute.
 #
 #       Does *NOT* work:
 #
@@ -197,11 +196,11 @@ if __debug__:
 
 
 #
-#   fact_is_some_string(s) - Assert that `s` is a string.
+#   fact_is_string(s) - Assert that `s` is a string.
 #
 if __debug__:
-    def fact_is_some_string(s):
-        assert s.is_some_string
+    def fact_is_string(s):
+        assert s.is_string
 
         return True
 

@@ -64,8 +64,8 @@ def convert_test_statement(z, v, create):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression(z, v.test),
-               z.convert_suite     (z, v.body),
+               z.convert_value_expression(z, v.test),
+               z.convert_suite           (z, v.body),
                z.convert_suite_0   (z, v.orelse),
            )
 
@@ -94,10 +94,10 @@ def convert_for_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_target    (z, v.target),
-               z.convert_expression(z, v.iter),
-               z.convert_suite     (z, v.body),
-               z.convert_suite_0   (z, v.orelse),
+               z.convert_target          (z, v.target),
+               z.convert_value_expression(z, v.iter),
+               z.convert_suite           (z, v.body),
+               z.convert_suite_0         (z, v.orelse),
            )
 
 
@@ -212,9 +212,9 @@ def convert_with_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression    (z, v.context_expr),
-               z.convert_none_OR_target(z, v.optional_vars),
-               z.convert_suite         (z, v.body),
+               z.convert_value_expression(z, v.context_expr),
+               z.convert_none_OR_target  (z, v.optional_vars),
+               z.convert_suite           (z, v.body),
            )
 
 

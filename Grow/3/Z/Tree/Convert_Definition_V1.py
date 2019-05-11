@@ -10,8 +10,8 @@
 #
 
 
-from    Z.Tree.Convert_Decorator_V1         import  convert_some_list_of_decorators
-from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
+from    Z.Tree.Convert_Decorator_V1         import  convert_list_of_decorators
+from    Z.Tree.Convert_Expression_V1        import  convert_list_of_value_expressions
 from    Z.Tree.Convert_Parameter_V1         import  convert_parameter_tuple_0
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
 from    Z.Tree.Definition_V1                import  create_Tree_Class_Definition
@@ -52,9 +52,9 @@ def convert_class_definition(v):
                v.col_offset,
 
                v.name,
-               convert_some_list_of_expressions(v.bases),
-               convert_full_list_of_statements (v.body),
-               convert_some_list_of_decorators (v.decorator_list),
+               convert_list_of_value_expressions(v.bases),
+               convert_full_list_of_statements  (v.body),
+               convert_list_of_decorators       (v.decorator_list),
            )
 
 
@@ -84,5 +84,5 @@ def convert_function_definition(v):
                v.name,
                convert_parameter_tuple_0      (v.args),
                convert_full_list_of_statements(v.body),
-               convert_some_list_of_decorators(v.decorator_list),
+               convert_list_of_decorators     (v.decorator_list),
            )

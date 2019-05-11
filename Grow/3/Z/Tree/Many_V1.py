@@ -36,7 +36,7 @@ class Tree_Many_Expression(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'elements',                     #   Native_List of (Tree_Store_Target | Tree_Value_Expression)
         'context',                      #   Tree_Context

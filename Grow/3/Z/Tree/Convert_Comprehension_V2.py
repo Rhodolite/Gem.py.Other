@@ -25,7 +25,7 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -54,9 +54,9 @@ def convert_comprehension_clause(z, v):
     assert fact_is_native_list                                         (v.ifs)
 
     return z.create_Tree_Comprehension_Clause(
-               z.convert_target                  (z, v.target),
-               z.convert_expression              (z, v.iter),
-               z.convert_some_list_of_expressions(z, v.ifs),
+               z.convert_target                   (z, v.target),
+               z.convert_value_expression         (z, v.iter),
+               z.convert_list_of_value_expressions(z, v.ifs),
            )
 
 
@@ -67,5 +67,5 @@ def convert_comprehension_clause(z, v):
 #       (i.e.: `list of _ast.Comprehension`) to a `Full_Native_List of Tree_Comprehension_Clause`.
 #
 convert_full_list_of_comprehensions = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_comprehension_clause)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_comprehension_clause)
     )

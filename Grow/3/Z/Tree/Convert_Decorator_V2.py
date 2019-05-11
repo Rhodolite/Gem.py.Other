@@ -23,7 +23,7 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 #
@@ -35,20 +35,20 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_
 #
 #       For now (since this is a 1-1 translation of `_ast`) a decorator is simply a `Tree_Value_Expression`.
 #
-#       Hence, all we do is call `z.convert_expression`.
+#       Hence, all we do is call `z.convert_value_expression`.
 #
 #   FUTURE:
 #
 #       We will have a special class for a decorator.
 #
 def convert_decorator(z, v):
-    return z.convert_expression(z, v)
+    return z.convert_value_expression(z, v)
 
 
 #
-#   convert_some_list_of_decorators(z, v)
+#   convert_list_of_decorators(z, v)
 #
 #       Convert some `Native_List of Native_AbstractSyntaxTree_Decorator` (i.e.: `list of _ast.decorator`) to a
 #       `Native_List of Tree_Decorator`.
 #
-convert_some_list_of_decorators = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_decorator)
+convert_list_of_decorators = produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_decorator)

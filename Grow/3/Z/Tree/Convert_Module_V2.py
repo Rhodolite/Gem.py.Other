@@ -50,7 +50,7 @@ def convert_module(z, v):
     assert fact_is_native_list                          (v.body)
 
     return z.create_Tree_Module(
-               z.convert_some_list_of_statements(z, v.body),
+               z.convert_list_of_statements(z, v.body),
            )
 
 

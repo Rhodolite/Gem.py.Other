@@ -15,64 +15,68 @@
 #
 #   To avoid import loops:
 #
-#           1)  `convert_expression`,
+#           1)  `convert_value_expression`,
 #
-#           2)  `convert_full_list_of_expressions`, and
+#           2)  `convert_full_list_of_value_expressions`, and
 #
-#           3)  `convert_some_list_of_expressions`
+#           3)  `convert_list_of_value_expressions`
 #
 #   must be defined first, since lots of other modules (that we import) need to import these functions.
 #
 
 
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 #
-#   convert_expression(v)
+#   convert_none_OR_value_expression(v)
+#
+#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a
+#       `Tree_Value_Expression`.
+#
+def convert_none_OR_value_expression(v):
+    if v is None:
+        return None
+
+    return convert_value_expression(v)
+
+
+#
+#   convert_value_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
 #
 #       Calls all the other `convert_*` pseudo methods.
 #
-def convert_expression(v):
-    convert_expression__function = (
-            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function[type(v)]
+def convert_value_expression(v):
+    convert_value_expression__function = (
+            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function[type(v)]
         )
 
-    return convert_expression__function(v)
+    return convert_value_expression__function(v)
 
 
 #
-#   convert_none_OR_expression(v)
-#
-#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a
-#       `Tree_Value_Expression`.
-#
-def convert_none_OR_expression(v):
-    if v is None:
-        return None
-
-    return convert_expression(v)
-
-
-#
-#   convert_full_list_of_expressions(sequence)
+#   convert_full_list_of_value_expressions(sequence)
 #
 #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Full_Native_List of Tree_Value_Expression`.
 #
-convert_full_list_of_expressions = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
+convert_full_list_of_value_expressions = (
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_value_expression)
+    )
 
 
 #
-#   convert_some_list_of_expressions(sequence)
+#   convert_list_of_value_expressions(sequence)
 #
 #       Convert a `Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Native_List of Tree_Value_Expression`.
 #
-convert_some_list_of_expressions = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_expression)
+convert_list_of_value_expressions = (
+        produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_value_expression)
+    )
 
 
 #</order>
@@ -125,15 +129,14 @@ from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTre
 
 
 #
-#   USED BY: convert_expression (at top of file).
+#   USED BY: convert_value_expression (at top of file).
 #
-#   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
+#   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function
 #           : Map { Native_AbstractSyntaxTree_* : Function }
 #
-#       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_expression" psuedo method
-#       (actually to a function).
+#       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_value_expression" function.
 #
-map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = {
+map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function = {
         Native_AbstractSyntaxTree_Attribute_Expression    : convert_attribute_expression,
         Native_AbstractSyntaxTree_Backquote_Expression    : convert_backquote_expression,
         Native_AbstractSyntaxTree_Binary_Expression       : convert_binary_expression,

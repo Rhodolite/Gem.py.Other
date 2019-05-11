@@ -77,6 +77,6 @@ def convert_subscript_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression  (z, v.value),
-               z.convert_index_clause(z, v.slice),
+               z.convert_value_expression(z, v.value),
+               z.convert_index_clause    (z, v.slice),
            )

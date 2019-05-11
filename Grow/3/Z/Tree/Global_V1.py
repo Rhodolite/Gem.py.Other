@@ -29,7 +29,7 @@ class Tree_Global_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'names',                        #   Full_Native_List of Full_Native_String
     ))

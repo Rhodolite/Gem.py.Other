@@ -10,7 +10,7 @@
 #
 
 
-from    Z.Tree.Convert_Statement_V1         import  convert_some_list_of_statements
+from    Z.Tree.Convert_Statement_V1         import  convert_list_of_statements
 from    Z.Tree.Module                       import  create_Tree_Module
 from    Z.Tree.Native_AbstractSyntaxTree    import  native__compile__to__native__abstract_syntax_tree
 
@@ -36,7 +36,7 @@ def convert_module(v):
     assert fact_is_native_list                          (v.body)
 
     return create_Tree_Module(
-               convert_some_list_of_statements(v.body),
+               convert_list_of_statements(v.body),
            )
 
 

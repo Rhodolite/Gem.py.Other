@@ -64,7 +64,7 @@ class Zero_Leaf(
         #
         TRAIT_Integer,
         #
-        #   Implements Keen_Integer
+        #   Implements Avid_Integer
         #
         TRAIT_Maybe_Temporary_0,
         #
@@ -77,8 +77,8 @@ class Zero_Leaf(
     #
     #   Interface Integer
     #
+    is_avid_integer     = True
     is_contrary_integer = True
-    is_keen_integer     = True
     is_negative_integer = False
     is_positive_integer = False
     is_zero_integer     = True
@@ -140,8 +140,8 @@ class Negative_Integer_Leaf(
     #
     #   Interface Integer
     #
+    is_avid_integer     = False
     is_contrary_integer = True
-    is_keen_integer     = False
     is_negative_integer = True
     is_positive_integer = False
     is_zero_integer     = False
@@ -183,7 +183,7 @@ class Positive_Integer_Leaf(
         Native_Integer,
         TRAIT_Integer,
         #
-        #   Implements Keen_Integer
+        #   Implements Avid_Integer
         #
         TRAIT_Maybe_Temporary_0,
         #
@@ -205,7 +205,7 @@ class Positive_Integer_Leaf(
     #   Interface Integer
     #
     is_contrary_integer = False
-    is_keen_integer     = True
+    is_avid_integer     = True
     is_negative_integer = False
     is_positive_integer = True
     is_zero_integer     = False

@@ -85,7 +85,7 @@ class Capital_Globals(object):
     __slots__ = ((
         'version',                      #   Positive_Native_Integer
         'exception_version',            #   Positive_Native_Integer
-        'string_version',               #   Keen_Native_Integer
+        'string_version',               #   Avid_Native_Integer
     ))
 
 

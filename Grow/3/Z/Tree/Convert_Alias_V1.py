@@ -11,7 +11,7 @@
 
 
 from    Z.Tree.Alias_V1                     import  create_Tree_Alias_Clause
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -62,7 +62,7 @@ def convert_symbol_alias(v):
 #       `Full_Native_List of Tree_Alias_Clause`.
 #
 convert_full_list_of_module_aliases = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_module_alias)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_module_alias)
     )
 
 
@@ -76,5 +76,5 @@ convert_full_list_of_module_aliases = (
 #       identical to `convert_symbol_alias`).
 #
 convert_full_list_of_symbol_aliases = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_symbol_alias)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_symbol_alias)
     )

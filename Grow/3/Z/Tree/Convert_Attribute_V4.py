@@ -85,6 +85,6 @@ def convert_attribute_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression   (z, v.value),
-               z.conjure_parser_symbol(z, v.attr),
+               z.convert_value_expression(z, v.value),
+               z.conjure_parser_symbol   (z, v.attr),
           )

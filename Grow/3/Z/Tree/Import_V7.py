@@ -51,7 +51,7 @@ class Tree_Import_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'module_aliases',               #   Full_Native_List of Tree_Module_Alias
     ))

@@ -12,7 +12,7 @@
 
 from    Z.Tree.Attribute_V1                 import  create_Tree_Attribute
 from    Z.Tree.Convert_Context_V1           import  convert_delete_load_OR_store_context
-from    Z.Tree.Convert_Expression_V1        import  convert_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 
 
 if __debug__:
@@ -45,7 +45,7 @@ def convert_attribute_expression(v):
                v.lineno,
                v.col_offset,
 
-               convert_expression                  (v.value),
+               convert_value_expression            (v.value),
                v.attr,
                convert_delete_load_OR_store_context(v.ctx),
           )

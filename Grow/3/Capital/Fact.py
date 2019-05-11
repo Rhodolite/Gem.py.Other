@@ -123,7 +123,7 @@ if 0:
     #
 
     #
-    #   fact_is__native_none__OR__some_native_integer(v)
+    #   fact_is__native_none__OR__native_integer(v)
     #
     #       Assert that `v` is either:
     #
@@ -132,8 +132,8 @@ if 0:
     #           2)  a `NativeInteger` (i.e.: `int`).
     #
     if __debug__:
-        def fact_is__native_none__OR__some_native_integer(v):
-            assert (v is None) or (isinstance(v, int))
+        def fact_is__native_none__OR__native_integer(v):
+            assert (v is None) or (type(v) is int)
 
             return True
 

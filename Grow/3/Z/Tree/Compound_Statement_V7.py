@@ -70,7 +70,7 @@ class Tree_Test_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'test',                         #   Tree_Value_Expression
         'body',                         #   Tree_Statement
@@ -138,7 +138,7 @@ class Tree_For_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'target',                       #   Tree_Target
         'sequence',                     #   Tree_Value_Expression
@@ -225,7 +225,7 @@ class Tree_Try_Except_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'body',                         #   Tree_Statement
         'except_handlers',              #   Full_Native_List of Tree_Except_Handler
@@ -297,7 +297,7 @@ class Tree_Try_Finally_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'body',                         #   Tree_Statement
         'finally_body',                 #   Tree_Statement
@@ -373,7 +373,7 @@ class Tree_With_Statement(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'value',                        #   Tree_Value_Expression
         'target',                       #   None | Tree_Target

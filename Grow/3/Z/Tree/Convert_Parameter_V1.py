@@ -11,10 +11,10 @@
 
 
 from    Z.Tree.Convert_Context_V1           import  convert_parameter_context
-from    Z.Tree.Convert_Expression_V1        import  convert_some_list_of_expressions
+from    Z.Tree.Convert_Expression_V1        import  convert_list_of_value_expressions
 from    Z.Tree.Name_V1                      import  create_Tree_Name
 from    Z.Tree.Parameter_Tuple_V1           import  create_Tree_All_Parameters
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -92,10 +92,10 @@ def convert_parameter_tuple_0(v):
     assert fact_is_native_list                         (v.defaults)
 
     return create_Tree_All_Parameters(
-               convert_some_list_of_name_parameters(v.args),
-               convert_star_parameter              (v.vararg),
-               convert_map_parameter               (v.kwarg),
-               convert_some_list_of_expressions    (v.defaults),
+               convert_list_of_name_parameters  (v.args),
+               convert_star_parameter           (v.vararg),
+               convert_map_parameter            (v.kwarg),
+               convert_list_of_value_expressions(v.defaults),
            )
 
 
@@ -119,7 +119,7 @@ def convert_star_parameter(v):
 
 
 #
-#   convert_some_list_of_name_parameters(v)
+#   convert_list_of_name_parameters(v)
 #
 #       Convert a `Native_List of Native_AbstractSyntaxTree_Name` (i.e.: `list of _ast.Name`) to a
 #       `Native_List of SyntaxTree_Name`.
@@ -127,6 +127,6 @@ def convert_star_parameter(v):
 #       Each of the `Native_AbstractSyntaxTree_Name` (i.e.: `_ast.Name`) must have a context (i.e.: `.ctx` member)
 #       of type `Native_AbstractSyntaxTree_Parameter`.
 #
-convert_some_list_of_name_parameters = (
-        produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_name_parameter)
+convert_list_of_name_parameters = (
+        produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_name_parameter)
     )

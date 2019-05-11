@@ -57,9 +57,9 @@ def convert_test_statement(z, v, create):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression             (z, v.test),
+               z.convert_value_expression       (z, v.test),
                z.convert_full_list_of_statements(z, v.body),
-               z.convert_some_list_of_statements(z, v.orelse),
+               z.convert_list_of_statements     (z, v.orelse),
            )
 
 
@@ -88,9 +88,9 @@ def convert_for_statement(z, v):
                v.col_offset,
 
                z.convert_target                 (z, v.target),
-               z.convert_expression             (z, v.iter),
+               z.convert_value_expression       (z, v.iter),
                z.convert_full_list_of_statements(z, v.body),
-               z.convert_some_list_of_statements(z, v.orelse),
+               z.convert_list_of_statements     (z, v.orelse),
            )
 
 
@@ -135,7 +135,7 @@ def convert_try_except_statement(z, v):
 
                z.convert_full_list_of_statements    (z, v.body),
                z.convert_full_list_of_except_clauses(z, v.handlers),
-               z.convert_some_list_of_statements    (z, v.orelse),
+               z.convert_list_of_statements         (z, v.orelse),
            )
 
 
@@ -205,7 +205,7 @@ def convert_with_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_expression             (z, v.context_expr),
+               z.convert_value_expression       (z, v.context_expr),
                z.convert_none_OR_target         (z, v.optional_vars),
                z.convert_full_list_of_statements(z, v.body),
            )

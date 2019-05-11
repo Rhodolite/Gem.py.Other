@@ -64,7 +64,7 @@ from    Z.Tree.Operator_V1                      import  tree_positive_operator
 from    Z.Tree.Operator_V1                      import  tree_power_operator
 from    Z.Tree.Operator_V1                      import  tree_right_shift_operator
 from    Z.Tree.Operator_V1                      import  tree_subtract_operator
-from    Z.Tree.Produce_Convert_List_V1          import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1          import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -211,5 +211,5 @@ def convert_unary_operator(v):
 #       Each of the elements must be a compare operator.
 #
 convert_full_list_of_compare_operators = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_compare_operator)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_compare_operator)
     )

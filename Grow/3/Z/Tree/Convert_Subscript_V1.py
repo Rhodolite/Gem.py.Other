@@ -11,7 +11,7 @@
 
 
 from    Z.Tree.Convert_Context_V1           import  convert_delete_load_OR_store_context
-from    Z.Tree.Convert_Expression_V1        import  convert_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 from    Z.Tree.Convert_Index_V1             import  convert_index_clause
 from    Z.Tree.Subscript_V1                 import  create_Tree_Subscript_Expression
 
@@ -48,7 +48,7 @@ def convert_subscript_expression(v):
                v.lineno,
                v.col_offset,
 
-               convert_expression                  (v.value),
+               convert_value_expression            (v.value),
                convert_index_clause                (v.slice),
                convert_delete_load_OR_store_context(v.ctx),
            )

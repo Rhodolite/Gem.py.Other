@@ -60,9 +60,9 @@ def convert_class_definition(z, v):
                v.col_offset,
 
                v.name,
-               z.convert_some_list_of_expressions(z, v.bases),
-               z.convert_full_list_of_statements (z, v.body),
-               z.convert_some_list_of_decorators (z, v.decorator_list),
+               z.convert_list_of_value_expressions(z, v.bases),
+               z.convert_full_list_of_statements  (z, v.body),
+               z.convert_list_of_decorators       (z, v.decorator_list),
            )
 
 
@@ -94,5 +94,5 @@ def convert_function_definition(z, v):
                v.name,
                z.convert_parameter_tuple_0      (z, v.args),
                z.convert_full_list_of_statements(z, v.body),
-               z.convert_some_list_of_decorators(z, v.decorator_list),
+               z.convert_list_of_decorators     (z, v.decorator_list),
            )

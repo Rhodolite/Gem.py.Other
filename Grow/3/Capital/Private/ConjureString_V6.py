@@ -256,8 +256,8 @@ def produce_conjure_X_string(
             #
             #   Handle an empty string here (even in release mode).
             #
-            #       Hence the assert above is "*_some_*" on purpose, so this code can catch the empty strings instead of the
-            #       assert.
+            #       Hence the assert above is `fact_is_native_string` on purpose, so this code can catch the empty
+            #       strings instead of the assert.
             #
             if len(s) == 0:
                 if allow_empty_string:

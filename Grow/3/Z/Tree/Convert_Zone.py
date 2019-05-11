@@ -106,7 +106,7 @@ class Convert_Zone(object):
         #
         #   Argument
         #
-        'convert_some_list_of_keyword_arguments',   #   Function
+        'convert_list_of_keyword_arguments',        #   Function
 
         'create_Tree_Keyword_Argument',             #   Function
 
@@ -149,16 +149,16 @@ class Convert_Zone(object):
         #
         #   Decorator
         #
-        'convert_some_list_of_decorators',          #   Function
+        'convert_list_of_decorators',               #   Function
 
 
         #
         #   Expression
         #
-        'convert_full_list_of_expressions',         #   Function
-        'convert_some_list_of_expressions',         #   Function
-        'convert_expression',                       #   Function
-        'convert_none_OR_expression',               #   Function
+        'convert_full_list_of_value_expressions',   #   Function
+        'convert_list_of_value_expressions',        #   Function
+        'convert_none_OR_value_expression',         #   Function
+        'convert_value_expression',                 #   Function
 
         'create_Tree_Backquote_Expression',         #   Function
         'create_Tree_Binary_Expression',            #   Function
@@ -178,7 +178,7 @@ class Convert_Zone(object):
         'create_Tree_Unary_Expression',             #   Function
         'create_Tree_Yield_Expression',             #   Function
 
-        'map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function',
+        'map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function',
                                                     #    Map { Native_AbstractSyntaxTree_* : Function }
 
         #
@@ -260,7 +260,7 @@ class Convert_Zone(object):
         #
         'convert_full_list_of_except_clauses',      #   Function
         'convert_full_list_of_statements',          #   Function
-        'convert_some_list_of_statements',          #   Function
+        'convert_list_of_statements',               #   Function
         'convert_statement',                        #   Function
 
         'create_Tree_Assert_Statement',             #   Function
@@ -540,9 +540,9 @@ def fill_convert_zone(version):
     #   Argument
     #
     if argument_version == 2:
-        from    Z.Tree.Convert_Argument_V2  import  convert_some_list_of_keyword_arguments
+        from    Z.Tree.Convert_Argument_V2  import  convert_list_of_keyword_arguments
     elif argument_version == 3:
-        from    Z.Tree.Convert_Argument_V3  import  convert_some_list_of_keyword_arguments
+        from    Z.Tree.Convert_Argument_V3  import  convert_list_of_keyword_arguments
     else:
         FATAL_unknown_version('argument', argument_version)
 
@@ -686,17 +686,17 @@ def fill_convert_zone(version):
     #
     #   Decorator
     #
-    from    Z.Tree.Convert_Decorator_V2     import  convert_some_list_of_decorators
+    from    Z.Tree.Convert_Decorator_V2     import  convert_list_of_decorators
 
 
     #
     #   Expressions
     #
     if expression_version in ((2, 3)):
-        from    Z.Tree.Convert_Expression_V2    import  convert_expression
-        from    Z.Tree.Convert_Expression_V2    import  convert_full_list_of_expressions
-        from    Z.Tree.Convert_Expression_V2    import  convert_none_OR_expression
-        from    Z.Tree.Convert_Expression_V2    import  convert_some_list_of_expressions
+        from    Z.Tree.Convert_Expression_V2    import  convert_full_list_of_value_expressions
+        from    Z.Tree.Convert_Expression_V2    import  convert_list_of_value_expressions
+        from    Z.Tree.Convert_Expression_V2    import  convert_none_OR_value_expression
+        from    Z.Tree.Convert_Expression_V2    import  convert_value_expression
     else:
         FATAL_unknown_version('expression', expression_version)
 
@@ -1037,7 +1037,7 @@ def fill_convert_zone(version):
     if statement_version in ((2, 3, 4, 5, 6, 7)):
         from    Z.Tree.Convert_Statement_V2     import  convert_statement
         from    Z.Tree.Convert_Statement_V2     import  convert_full_list_of_statements
-        from    Z.Tree.Convert_Statement_V2     import  convert_some_list_of_statements
+        from    Z.Tree.Convert_Statement_V2     import  convert_list_of_statements
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -1397,12 +1397,12 @@ def fill_convert_zone(version):
     #
     #   (Used by expression)
     #
-    #   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
+    #   map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function
     #           : Map { Native_AbstractSyntaxTree_* : Function }
     #
-    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_expression" function.
+    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_value_expression" function.
     #
-    map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = {
+    map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function = {
             Native_AbstractSyntaxTree_Attribute_Expression    : convert_attribute_expression,
             Native_AbstractSyntaxTree_Backquote_Expression    : convert_backquote_expression,
             Native_AbstractSyntaxTree_Binary_Expression       : convert_binary_expression,
@@ -1674,7 +1674,7 @@ def fill_convert_zone(version):
     #
     #   Argument
     #
-    z.convert_some_list_of_keyword_arguments = convert_some_list_of_keyword_arguments
+    z.convert_list_of_keyword_arguments = convert_list_of_keyword_arguments
 
     z.create_Tree_Keyword_Argument = create_Tree_Keyword_Argument
 
@@ -1719,16 +1719,16 @@ def fill_convert_zone(version):
     #
     #   Decorator
     #
-    z.convert_some_list_of_decorators = convert_some_list_of_decorators
+    z.convert_list_of_decorators = convert_list_of_decorators
 
 
     #
     #   Expression
     #
-    z.convert_expression               = convert_expression
-    z.convert_full_list_of_expressions = convert_full_list_of_expressions
-    z.convert_none_OR_expression       = convert_none_OR_expression
-    z.convert_some_list_of_expressions = convert_some_list_of_expressions
+    z.convert_full_list_of_value_expressions = convert_full_list_of_value_expressions
+    z.convert_list_of_value_expressions      = convert_list_of_value_expressions
+    z.convert_none_OR_value_expression       = convert_none_OR_value_expression
+    z.convert_value_expression               = convert_value_expression
 
     z.create_Tree_Backquote_Expression    = create_Tree_Backquote_Expression
     z.create_Tree_Binary_Expression       = create_Tree_Binary_Expression
@@ -1748,8 +1748,8 @@ def fill_convert_zone(version):
     z.create_Tree_Unary_Expression        = create_Tree_Unary_Expression
     z.create_Tree_Yield_Expression        = create_Tree_Yield_Expression
 
-    z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function = (
-            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_expression__function
+    z.map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function = (
+            map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__function
         )
 
 
@@ -1839,7 +1839,7 @@ def fill_convert_zone(version):
     #
     z.convert_full_list_of_except_clauses = convert_full_list_of_except_clauses
     z.convert_full_list_of_statements     = convert_full_list_of_statements
-    z.convert_some_list_of_statements     = convert_some_list_of_statements
+    z.convert_list_of_statements          = convert_list_of_statements
     z.convert_statement                   = convert_statement
 
     z.create_Tree_Assert_Statement      = create_Tree_Assert_Statement

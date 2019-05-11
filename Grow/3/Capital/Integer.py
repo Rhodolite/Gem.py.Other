@@ -32,11 +32,11 @@
 #           .is_contrary_integer
 #           .is_negative_integer
 #           .is_positive_integer
-#           .is_zero
+#           .is_zero_integer
 #
-#       In debug mode, testing can also be done for a `Some_Integer` with:
+#       In debug mode, testing can also be done for a `Integer` with:
 #
-#           .is_some_integer
+#           .is_integer
 #
 #       Testing is *NOT* done with the python `type` builtin.
 #
@@ -46,7 +46,7 @@ from    Capital.Core                    import  export
 
 
 #
-#   interface Some_Integer
+#   interface Integer
 #       method
 #           python_code() => Full_Native_String
 #
@@ -55,28 +55,28 @@ from    Capital.Core                    import  export
 #           is_contrary_integer : Boolean
 #           is_negative_integer : Boolean
 #           is_positive_integer : Boolean
-#           is_zero             : Boolean
+#           is_zero_integer     : Boolean
 #
 #           native_integer_subclass : Native_Integer
 #
 #       debug
-#           is_some_integer : Boolean
+#           is_integer : Boolean
 #
 class TRAIT_Integer(object):
     __slots__ = (())
 
 
     if __debug__:
-        is_some_integer = True
+        is_integer = True
 
 
 #
 #   interface Zero
 #       extends
-#           Some_Integer
+#           Integer
 #
 #       attribute
-#           is_zero := true
+#           is_zero_integer := true
 #
 
 
@@ -84,7 +84,7 @@ class TRAIT_Integer(object):
 #
 #   interface Avid_Integer
 #       extends
-#           Some_Integer, Zero
+#           Integer, Zero
 #
 #       attribute
 #           is_avid_integer := true
@@ -94,7 +94,7 @@ class TRAIT_Integer(object):
 #
 #   interface Contrary_Integer
 #       extends
-#           Some_Integer, Zero
+#           Integer, Zero
 #
 #       attribute
 #           is_contrary_integer := true
@@ -104,7 +104,7 @@ class TRAIT_Integer(object):
 #
 #   interface Negative_Integer
 #       extends
-#           Some_Integer
+#           Integer
 #
 #       attribute
 #           is_negative_integer := true
@@ -114,7 +114,7 @@ class TRAIT_Integer(object):
 #
 #   interface Positive_Integer
 #       extends
-#           Some_Integer
+#           Integer
 #
 #       attribute
 #           is_positive_integer := true
@@ -133,7 +133,7 @@ class TRAIT_Integer(object):
 #
 #       v.is_positive_integer               #   Test if `v` is a `Positive_Integer` (greater than             0).
 #
-#       v.is_zero                           #   Test if `v` is `Zero`.
+#       v.is_zero_integer                   #   Test if `v` is the `zero_integer` singleton.
 #
 #       conjure_avid_integer(v)             #   Conjure a `Avid_Integer`.
 #
@@ -159,19 +159,19 @@ class TRAIT_Integer(object):
 #
 #   USAGE (debug mode):
 #
-#       v.is_some_integer                   #   Test if `v` is a `Some_Integer`.
+#       v.is_integer                        #   Test if `v` is an `Integer`.
 #
-#       assert fact_avid_integer(v)         #   Assert that `v` is a `Avid_Integer`.
+#       assert fact_avid_integer(v)         #   Assert that `v` is an `Avid_Integer`.
 #
-#       assert fact_is_contrary_integer(v)  #   Assert that `v` is a `Contrary_Integer`.
+#       assert fact_is_contrary_integer(v)  #   Assert that `v` is a  `Contrary_Integer`.
 #
-#       assert fact_negative_integer(v)     #   Assert that `v` is a `Negative_Integer`.
+#       assert fact_is_integer(v)           #   Assert that `v` is an `Integer`.
 #
-#       assert fact_positive_integer(v)     #   Assert that `v` is a `Positive_Integer`.
+#       assert fact_negative_integer(v)     #   Assert that `v` is a  `Negative_Integer`.
 #
-#       assert fact_is_some_integer(v)      #   Assert that `v` is a `Some_Integer`.
+#       assert fact_positive_integer(v)     #   Assert that `v` is a  `Positive_Integer`.
 #
-#       assert fact_is_zero(v)              #   Assert that `v` is the `zero_integer` singleton.
+#       assert fact_is_zero_integer(v)      #   Assert that `v` is the `zero_integer` singleton.
 #
 
 
@@ -191,7 +191,7 @@ class TRAIT_Integer(object):
 
 
 #
-#   fact_is_avid_integer(v) - Assert that `v` is a `Avid_Integer`.
+#   fact_is_avid_integer(v) - Assert that `v` is an `Avid_Integer`.
 #
 if __debug__:
     def fact_is_avid_integer(v):
@@ -206,6 +206,16 @@ if __debug__:
 if __debug__:
     def fact_is_contrary_integer(v):
         assert v.is_contrary_integer
+
+        return True
+
+
+#
+#   fact_is_integer(v) - Assert that `v` is an `Integer`.
+#
+if __debug__:
+    def fact_is_integer(v):
+        assert v.is_integer
 
         return True
 
@@ -231,21 +241,11 @@ if __debug__:
 
 
 #
-#   fact_is_some_integer(v) - Assert that `v` is a `Some_Integer`.
+#   fact_is_zero_integer(v) - Assert that `v` is the `zero_integer` singleton.
 #
 if __debug__:
-    def fact_is_some_integer(v):
-        assert v.is_some_integer
-
-        return True
-
-
-#
-#   fact_is_zero(v) - Assert that `v` is the `zero_integer` singleton.
-#
-if __debug__:
-    def fact_is_zero(v):
-        assert v.is_zero
+    def fact_is_zero_integer(v):
+        assert v.is_zero_integer
 
         return True
 

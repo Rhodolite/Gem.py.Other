@@ -66,8 +66,8 @@ def convert_keyword_parameter(z, v, value):
                v.lineno,
                v.col_offset,
 
-               z.conjure_parser_symbol(z, v.id),
-               z.convert_expression   (z, value),
+               z.conjure_parser_symbol   (z, v.id),
+               z.convert_value_expression(z, value),
            )
 
 

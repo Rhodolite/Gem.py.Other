@@ -65,7 +65,7 @@ def produce_conjure_full_string(function_name, Full_String_Type):
     assert fact_is_native_type       (Full_String_Type)
 
     #
-    #   string_cache - A cache of `Full_String_Type` (and possibly some temporary strings).
+    #   string_cache - A cache of `Full_String_Type` (and possibly `Temporary_String`).
     #
     #       All strings are stored in this as key/value pairs:
     #

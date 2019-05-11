@@ -17,15 +17,15 @@
 #       TO avoid import loops, the following have to appear *before* other imports:
 #
 #           convert_full_list_of_statements
-#           convert_some_list_of_statements
+#           convert_list_of_statements
 #           convert_statement
 #
 #       This is so other files can import the functions below from this file.
 #
 
 
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 #
@@ -50,16 +50,16 @@ def convert_statement(v):
 #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Full_Native_List of Tree_Statement`.
 #
-convert_full_list_of_statements = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)
+convert_full_list_of_statements = produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_statement)
 
 
 #
-#   convert_some_list_of_statements(sequence)
+#   convert_list_of_statements(sequence)
 #
 #       Convert a `Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Native_List of Tree_Statement`.
 #
-convert_some_list_of_statements = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)
+convert_list_of_statements = produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_statement)
 
 
 #</order>
@@ -117,8 +117,7 @@ from    Z.Tree.Native_AbstractSyntaxTree        import  Native_AbstractSyntaxTre
 #   map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function
 #           : Map { Native_AbstractSyntaxTree_* : Function }
 #
-#       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_statement" psuedo method
-#       (actually to a function).
+#       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_statement" function.
 #
 map__Native_AbstractSyntaxTree_STATEMENT__to__convert_statement__function = {
         Native_AbstractSyntaxTree_Assert_Statement      : convert_assert_statement,

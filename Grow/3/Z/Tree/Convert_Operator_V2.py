@@ -23,7 +23,7 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2          import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2          import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 #
@@ -83,5 +83,5 @@ def convert_unary_operator(z, v):
 #       Each of the elements must be a compare operator.
 #
 convert_full_list_of_compare_operators = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_compare_operator)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_compare_operator)
     )

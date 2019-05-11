@@ -32,7 +32,7 @@ class Tree_Class_Definition(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'name',                         #   Full_Native_String
         'bases',                        #   Native_List of Tree_Value_Expression
@@ -122,7 +122,7 @@ class Tree_Function_Definition(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'name',                         #   Full_Native_String
         'parameters',                   #   Tree_Parameter

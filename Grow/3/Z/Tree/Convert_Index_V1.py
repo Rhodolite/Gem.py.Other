@@ -10,13 +10,13 @@
 #
 
 
-from    Z.Tree.Convert_Expression_V1        import  convert_expression
-from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_value_expression
 from    Z.Tree.Index_V1                     import  create_Tree_Extended_Slice_Index
 from    Z.Tree.Index_V1                     import  create_Tree_Simple_Index
 from    Z.Tree.Index_V1                     import  create_Tree_Slice_Index
 from    Z.Tree.Index_V1                     import  tree_ellipses_index
-from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -74,7 +74,7 @@ def convert_simple_index(v):
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
     return create_Tree_Simple_Index(
-               convert_expression(v.value),
+               convert_value_expression(v.value),
            )
 
 
@@ -93,9 +93,9 @@ def convert_slice_index(v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.step)
 
     return create_Tree_Slice_Index(
-               convert_none_OR_expression(v.lower),
-               convert_none_OR_expression(v.upper),
-               convert_none_OR_expression(v.step),
+               convert_none_OR_value_expression(v.lower),
+               convert_none_OR_value_expression(v.upper),
+               convert_none_OR_value_expression(v.step),
            )
 
 
@@ -136,5 +136,5 @@ def convert_index_clause(v):
 #       `Full_Native_List of Tree_Index_clause`.
 #
 convert_full_list_of_index_clauses = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_index_clause)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_index_clause)
     )

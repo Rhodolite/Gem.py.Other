@@ -279,8 +279,8 @@ def produce_conjure_X_string(
             #
             #   Handle an empty string here (even in release mode).
             #
-            #       Hence the assert above is "*_some_*" on purpose, so this code can catch the empty strings instead of the
-            #       assert.
+            #       Hence the assert above is `fact_is_native_string` on purpose, so this code can catch the empty
+            #       strings instead of the assert.
             #
             if len(s) == 0:
                 if allow_empty_string:
@@ -358,7 +358,7 @@ def produce_conjure_string_functions(empty_string, Full_String_Type):
 
 
     #
-    #   string_cache - A cache of `Full_String_Type` (and possibly some temporary strings).
+    #   string_cache - A cache of `Full_String_Type` (and possibly `Temporary_String`).
     #
     #       All strings are stored in this as key/value pairs:
     #

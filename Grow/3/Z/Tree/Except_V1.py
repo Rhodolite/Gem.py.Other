@@ -33,7 +33,7 @@ class Tree_Except_Handler(
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Keen_Native_Integer
+        'column',                       #   Avid_Native_Integer
 
         'type_expression',              #   None | Tree_Value_Expression
         'name_expression',              #   None | Tree_Value_Expression

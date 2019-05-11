@@ -23,8 +23,8 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -55,13 +55,13 @@ def convert_statement(z, v):
 #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Full_Native_List of Tree_Statement`.
 #
-convert_full_list_of_statements = produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)
+convert_full_list_of_statements = produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_statement)
 
 
 #
-#   convert_some_list_of_statements(z, sequence)
+#   convert_list_of_statements(z, sequence)
 #
 #       Convert a `Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
 #       `Native_List of Tree_Statement`.
 #
-convert_some_list_of_statements = produce__convert__some_list_of__Native_AbstractSyntaxTree_STAR(convert_statement)
+convert_list_of_statements = produce__convert__list__OF__Native_AbstractSyntaxTree_STAR(convert_statement)

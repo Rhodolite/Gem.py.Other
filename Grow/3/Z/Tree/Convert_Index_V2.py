@@ -24,7 +24,7 @@
 #
 
 
-from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR
+from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
 if __debug__:
@@ -89,7 +89,7 @@ def convert_simple_index(z, v):
     assert fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.value)
 
     return z.create_Tree_Simple_Index(
-               z.convert_expression(z, v.value),
+               z.convert_value_expression(z, v.value),
            )
 
 
@@ -110,9 +110,9 @@ def convert_slice_index(z, v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.step)
 
     return z.create_Tree_Slice_Index(
-               z.convert_none_OR_expression(z, v.lower),
-               z.convert_none_OR_expression(z, v.upper),
-               z.convert_none_OR_expression(z, v.step),
+               z.convert_none_OR_value_expression(z, v.lower),
+               z.convert_none_OR_value_expression(z, v.upper),
+               z.convert_none_OR_value_expression(z, v.step),
            )
 
 
@@ -138,5 +138,5 @@ def convert_index_clause(z, v):
 #       `Full_Native_List of Tree_Index_clause`.
 #
 convert_full_list_of_index_clauses = (
-        produce__convert__full_list_of__Native_AbstractSyntaxTree_STAR(convert_index_clause)
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_index_clause)
     )
