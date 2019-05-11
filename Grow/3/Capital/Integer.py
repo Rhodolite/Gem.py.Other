@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Integer - Integer Interface.  Integer are Unique.
+#   Capital.Integer - Integer Interface.  `Integer`s are Unique.
 #
 #       By "Unique" we mean is only one integer for each unique value.
 #

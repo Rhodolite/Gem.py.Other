@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Float - Float Interface.  Float are Unique.
+#   Capital.Float - Float Interface.  `Float`s are Unique.
 #
 #       This is pretty much a copy of "Capital/Integer.py" -- See that file for comments.
 #

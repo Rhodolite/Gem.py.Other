@@ -14,8 +14,9 @@ from    Capital.Core                            import  arrange
 from    Capital.Core                            import  creator
 from    Capital.Core                            import  export
 from    Capital.Integer                         import  TRAIT_Integer
-from    Capital.Native_Integer                  import  Native_Integer
 from    Capital.Maybe_Temporary                 import  TRAIT_Maybe_Temporary_0
+from    Capital.Native_Integer                  import  Native_Integer
+from    Capital.Number                          import  TRAIT_Number
 from    Capital.Private.Produce_ConjureNumber   import  produce_conjure_number_functions
 from    Capital.Private.Temporary_Integer_V1    import  create_temporary_integer
 
@@ -67,6 +68,7 @@ class Zero_Leaf(
         #   Implements Avid_Integer
         #
         TRAIT_Maybe_Temporary_0,
+        TRAIT_Number,
         #
         #   Implements Zero
         #
@@ -125,6 +127,7 @@ class Negative_Integer_Leaf(
         #
         #   Implements Negative_Integer
         #
+        TRAIT_Number,
 ):
     __slots__ = (())
 
@@ -186,6 +189,7 @@ class Positive_Integer_Leaf(
         #   Implements Avid_Integer
         #
         TRAIT_Maybe_Temporary_0,
+        TRAIT_Number,
         #
         #   Implements Positive_Integer
         #

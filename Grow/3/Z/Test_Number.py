@@ -27,7 +27,12 @@ from    Capital.Long                    import  conjure_long
 from    Capital.Long                    import  conjure_negative_long
 from    Capital.Long                    import  conjure_positive_long
 from    Capital.Long                    import  zero_long
+from    Capital.Conjure_Number          import  conjure_number
 from    Capital.System                  import  is_python_2
+
+
+if is_python_2:
+    from    Capital.Native_Long         import  Native_Long
 
 
 def verify_throws_value_error(f, expected):
@@ -49,6 +54,15 @@ def command_test_float():
     assert zero is zero_float
 
     trace('minus_five, zero, seven: {!r}, {!r}, {!r}', minus_five, zero, seven)
+
+
+    #
+    #   conjure_number
+    #
+    assert minus_five is conjure_number(-5.5)
+    assert seven      is conjure_number(7.7)
+    assert zero       is conjure_number(0.0)
+
 
     #
     #   -5.5
@@ -135,6 +149,15 @@ def command_test_integer():
 
     trace('minus_five, zero, seven: {!r}, {!r}, {!r}', minus_five, zero, seven)
 
+
+    #
+    #   conjure_number
+    #
+    assert minus_five is conjure_number(-5)
+    assert seven      is conjure_number(7)
+    assert zero       is conjure_number(0)
+
+
     #
     #   -5
     #
@@ -220,6 +243,21 @@ if is_python_2:
         assert zero is zero_long
 
         trace('test long: minus_five, zero, seven: {!r}, {!r}, {!r}', minus_five, zero, seven)
+
+
+        #
+        #   conjure_number
+        #
+        #   NOTE:
+        #       Have to use a cast like `Native_Long(-5)` to avoid compile errors in python 3.*
+        #
+        #       Using `-5L` will cause a compile error in python 3.*
+        #
+        #       Using `-5` will cause the assert to fail, as it will return an `Integer` instead of a `Long`.
+        #
+        assert minus_five is conjure_number(Native_Long(-5))
+        assert seven      is conjure_number(Native_Long(7))
+        assert zero       is conjure_number(Native_Long(0))
 
         #
         #   -5

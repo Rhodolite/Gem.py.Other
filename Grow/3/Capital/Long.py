@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Long - Long Interface.  Long are Unique.
+#   Capital.Long - Long Interface.  `Long`s are Unique.
 #
 #       This is pretty much a copy of "Capital/Integer.py" -- See that file for comments.
 #
