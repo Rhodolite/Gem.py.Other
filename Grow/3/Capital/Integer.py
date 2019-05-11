@@ -304,7 +304,7 @@ export(conjure_integer)
 #
 #   conjure_negative_integer(v) - Conjure a `Negative_Integer`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a `Native_Integer` (i.e.: `int`), and less than to 0.
+#       `v` must be a `Native_Integer` (i.e.: `int`), and less than 0.
 #
 #       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #
@@ -318,7 +318,7 @@ export(conjure_negative_integer)
 #
 #   conjure_positive_integer(v) - Conjure a `Positive_Integer`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a `Native_Integer` (i.e.: `int`), and greater than to 0.
+#       `v` must be a `Native_Integer` (i.e.: `int`), and greater than 0.
 #
 #       `v` may *NOT* be an instance of a subclass of `Native_Integer` (i.e.: `int`).
 #

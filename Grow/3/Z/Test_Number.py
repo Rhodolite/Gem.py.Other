@@ -9,6 +9,12 @@
 
 
 from    Capital.Core                    import  trace
+from    Capital.Float                   import  conjure_avid_float
+from    Capital.Float                   import  conjure_contrary_float
+from    Capital.Float                   import  conjure_float
+from    Capital.Float                   import  conjure_negative_float
+from    Capital.Float                   import  conjure_positive_float
+from    Capital.Float                   import  zero_float
 from    Capital.Integer                 import  conjure_avid_integer
 from    Capital.Integer                 import  conjure_contrary_integer
 from    Capital.Integer                 import  conjure_integer
@@ -33,6 +39,91 @@ def verify_throws_value_error(f, expected):
         caught = e
 
     assert caught.args[0] == expected
+
+
+def command_test_float():
+    minus_five = conjure_float(-5.5)
+    seven      = conjure_float(7.7)
+    zero       = conjure_float(0.0)
+
+    assert zero is zero_float
+
+    trace('minus_five, zero, seven: {!r}, {!r}, {!r}', minus_five, zero, seven)
+
+    #
+    #   -5.5
+    #
+    assert not minus_five.is_avid_float
+    assert     minus_five.is_contrary_float
+    assert     minus_five.is_negative_float
+    assert not minus_five.is_positive_float
+    assert not minus_five.is_zero_float
+
+    verify_throws_value_error(
+        lambda: conjure_avid_float(-5.5),
+        "parameter `v` is negative; `conjure_avid_float` requires zero or a positive value",
+    )
+
+    assert minus_five is conjure_contrary_float(-5.5)
+    assert minus_five is conjure_negative_float(-5.5)
+
+    verify_throws_value_error(
+        lambda: conjure_positive_float(-5.5),
+        "parameter `v` is negative; `conjure_positive_float` requires a positive value",
+    )
+
+
+    #
+    #   0.0
+    #
+    assert     zero.is_avid_float
+    assert     zero.is_contrary_float
+    assert not zero.is_negative_float
+    assert not zero.is_positive_float
+    assert     zero.is_zero_float
+
+    assert zero is conjure_avid_float(0.0)
+    assert zero is conjure_contrary_float(0.0)
+
+    verify_throws_value_error(
+        lambda: conjure_negative_float(0.0),
+        "parameter `v` is zero; `conjure_negative_float` requires a negative value",
+    )
+
+    verify_throws_value_error(
+        lambda: conjure_positive_float(0.0),
+        "parameter `v` is zero; `conjure_positive_float` requires a positive value",
+    )
+
+
+    #
+    #   7.7
+    #
+    assert     seven.is_avid_float
+    assert not seven.is_contrary_float
+    assert not seven.is_negative_float
+    assert     seven.is_positive_float
+    assert not seven.is_zero_float
+
+    assert seven is conjure_avid_float(7.7)
+
+    verify_throws_value_error(
+        lambda: conjure_contrary_float(7.7),
+        "parameter `v` is positive; `conjure_contrary_float` requires zero or a negative value",
+    )
+
+    verify_throws_value_error(
+        lambda: conjure_negative_float(7.7),
+        "parameter `v` is positive; `conjure_negative_float` requires a negative value",
+    )
+
+    assert seven is conjure_positive_float(7.7)
+
+
+    #
+    #   Passed
+    #
+    trace('Passed: Float Test')
 
 
 def command_test_integer():
@@ -211,3 +302,5 @@ def command_test_number():
 
     if is_python_2:
         command_test_long()
+
+    command_test_float()

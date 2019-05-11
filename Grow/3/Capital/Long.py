@@ -281,7 +281,7 @@ export(conjure_long)
 #
 #   conjure_negative_long(v) - Conjure a `Negative_Long`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a `Native_Long` (i.e.: `long`), and less than to 0.
+#       `v` must be a `Native_Long` (i.e.: `long`), and less than 0.
 #
 #       `v` may *NOT* be an instance of a subclass of `Native_Long` (i.e.: `long`).
 #
@@ -295,7 +295,7 @@ export(conjure_negative_long)
 #
 #   conjure_positive_long(v) - Conjure a `Positive_Long`, based on `v`.  Guarantees Uniqueness.
 #
-#       `v` must be a `Native_Long` (i.e.: `long`), and greater than to 0.
+#       `v` must be a `Native_Long` (i.e.: `long`), and greater than 0.
 #
 #       `v` may *NOT* be an instance of a subclass of `Native_Long` (i.e.: `long`).
 #
