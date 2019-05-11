@@ -18,7 +18,7 @@ from    Z.Tree.Statement                import  TRAIT_Tree_Statement
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Native_String       import  fact_is_full_native_string
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
 
 

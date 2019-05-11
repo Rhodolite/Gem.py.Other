@@ -41,14 +41,15 @@ from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Native_Integer              import  fact_is_native_integer
-    from    Capital.Native_Integer              import  fact_is_positive_native_integer
+    from    Capital.Fact                        import  fact_is_ANY_native_number
     from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer              import  fact_is_native_integer
+    from    Capital.Native_Integer              import  fact_is_positive_native_integer
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__BINARY_OPERATOR
-    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__LOGICAL_OPERATOR
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__UNARY_OPERATOR
+    from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is__native__abstract_syntax_tree__all_parameters
     from    Z.Tree.Native_AbstractSyntaxTree    import  fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Backquote_Expression
@@ -402,7 +403,7 @@ def convert_number(v):
     assert fact_is_positive_native_integer(v.lineno)
     assert fact_is_avid_native_integer    (v.col_offset)
 
-    assert fact_is_native_integer(v.n)
+    assert fact_is_ANY_native_number(v.n)
 
     return create_Tree_Number(v.lineno, v.col_offset, v.n)
 

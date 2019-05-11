@@ -27,10 +27,10 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
+    from    Capital.Fact                import  fact_is_ANY_native_number
     from    Capital.Fact                import  fact_is_native_list
-    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
-    from    Capital.Native_Integer      import  fact_is_native_integer
+    from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
@@ -750,7 +750,7 @@ class Tree_Number(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Avid_Native_Integer
 
-        'n',                            #   Native_Integer
+        'n',                            #   Native_Float | Native_Integer | Native_Long
     ))
 
 
@@ -768,7 +768,7 @@ class Tree_Number(
     #   Interface Tree_Value_Expression
     #
     def dump_value_expression_tokens(self, f):
-        f.arrange('<number @{}:{} {}>', self.line_number, self.column, self.n)
+        f.arrange('<number @{}:{} {!r}>', self.line_number, self.column, self.n)
 
 
     #
@@ -783,7 +783,7 @@ def create_Tree_Number(line_number, column, n):
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_native_integer(n)
+    assert fact_is_ANY_native_number(n)
 
     return Tree_Number(line_number, column, n)
 

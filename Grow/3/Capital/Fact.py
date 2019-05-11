@@ -18,9 +18,55 @@
 #
 
 
-from    Capital.Types       import  Native_Function
-from    Capital.Types       import  Native_Built_In_Method
-from    Capital.Types       import  Python_Type
+from    Capital.Native_Float    import  Native_Float
+from    Capital.Native_Integer  import  Native_Integer
+from    Capital.System          import  is_python_2
+from    Capital.Types           import  Native_Built_In_Method
+from    Capital.Types           import  Native_Function
+from    Capital.Types           import  Python_Type
+
+
+if is_python_2:
+    from    Capital.Native_Long     import  Native_Long
+
+
+#
+#   fact_is_ANY_native_number(v)
+#
+#       Assert that `v` is a:
+#
+#           1)  `Native_Float`   (i.e.: `float`),
+#
+#           2)  `Native_Integer` (i.e.: `int`), or a
+#
+#           3)  `Native_Long`    (i.e: `long`).                 #   Python 2.* only
+#
+#       `v` may *NOT* be an instance of a subclass of:
+#
+#           1)  `Native_Float`   (i.e.: `float`),
+#
+#           2)  `Native_Integer` (i.e.: `int`), or
+#
+#           3)  `Native_Long` (i.e.: `long`).                   #   Python 2.* only
+#
+if __debug__:
+    if is_python_2:
+        def fact_is_ANY_native_number(v):
+            v_type = type(v)
+
+            assert (v_type is Native_Integer) or (v_type is Native_Float) or (v_type is Native_Long)
+
+            return True
+    else:
+        #
+        #   Python 3.* does not have a `Native_Long` (i.e.: `long`) type.
+        #
+        def fact_is_ANY_native_number(v):
+            v_type = type(v)
+
+            assert (v_type is Native_Integer) or (v_type is Native_Long)
+
+            return True
 
 
 #
