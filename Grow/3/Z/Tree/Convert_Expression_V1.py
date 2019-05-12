@@ -83,6 +83,7 @@ convert_list_of_value_expressions = (
 
 
 from    Z.Tree.Convert_Attribute_V1             import  convert_attribute_expression
+from    Z.Tree.Convert_Literal_V1               import  convert_number_literal
 from    Z.Tree.Convert_Literal_V1               import  convert_string_literal
 from    Z.Tree.Convert_Many_V1                  import  convert_list_expression
 from    Z.Tree.Convert_Many_V1                  import  convert_tuple_expression
@@ -98,7 +99,6 @@ from    Z.Tree.Convert_Specific_Expression_V1   import  convert_list_comprehensi
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_logical_expression
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_map_comprehension
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_map_expression
-from    Z.Tree.Convert_Specific_Expression_V1   import  convert_number
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_set_comprehension
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_set_expression
 from    Z.Tree.Convert_Specific_Expression_V1   import  convert_unary_expression
@@ -151,7 +151,7 @@ map__Native_AbstractSyntaxTree_EXPRESSION__to__convert_value_expression__functio
         Native_AbstractSyntaxTree_Map_Comprehension       : convert_map_comprehension,
         Native_AbstractSyntaxTree_Map_Expression          : convert_map_expression,
         Native_AbstractSyntaxTree_Name                    : convert_name_expression,
-        Native_AbstractSyntaxTree_Number                  : convert_number,
+        Native_AbstractSyntaxTree_Number                  : convert_number_literal,
         Native_AbstractSyntaxTree_Set_Comprehension       : convert_set_comprehension,
         Native_AbstractSyntaxTree_Set_Expression          : convert_set_expression,
         Native_AbstractSyntaxTree_String_Literal          : convert_string_literal,

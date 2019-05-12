@@ -15,7 +15,8 @@
 #           Tree_Attribute_Expression   #   See "Z/Tree/Target_V1.py"
 #           Tree_List_Expression        #   See "Z/Tree/Target_V1.py"
 #           Tree_Name                   #   See "Z/Tree/Name_V1.py"
-#           Tree_String                 #   See "Z/Tree/Literal_V1.py"
+#           Tree_Number_Literal         #   See "Z/Tree/Literal_V1.py"
+#           Tree_String_Literal         #   See "Z/Tree/Literal_V1.py"
 #           Tree_Tuple_Expression       #   See "Z/Tree/Target_V1.py"
 #
 
@@ -27,7 +28,6 @@ from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 
 if __debug__:
     from    Capital.Fact                import  fact_is_full_native_list
-    from    Capital.Fact                import  fact_is_ANY_native_number
     from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
@@ -738,54 +738,6 @@ def create_Tree_Map_Comprehension(line_number, column, key, value, generators):
     assert fact_is_full_native_list     (generators)
 
     return Tree_Map_Comprehension(line_number, column, key, value, generators)
-
-
-#
-#   Tree: Number
-#
-class Tree_Number(
-        TRAIT_Tree_Value_Expression,
-):
-    __slots__ = ((
-        'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Avid_Native_Integer
-
-        'n',                            #   Native_Float | Native_Integer | Native_Long
-    ))
-
-
-    #
-    #   Private
-    #
-    def __init__(self, line_number, column, n):
-        self.line_number = line_number
-        self.column      = column
-
-        self.n = n
-
-
-    #
-    #   Interface Tree_Value_Expression
-    #
-    def dump_value_expression_tokens(self, f):
-        f.arrange('<number @{}:{} {!r}>', self.line_number, self.column, self.n)
-
-
-    #
-    #   Public
-    #
-    def __repr__(self):
-        return arrange('<Tree_Number @{}:{} {!r}>', self.line_number, self.column, self.n)
-
-
-@creator
-def create_Tree_Number(line_number, column, n):
-    assert fact_is_positive_native_integer(line_number)
-    assert fact_is_avid_native_integer    (column)
-
-    assert fact_is_ANY_native_number(n)
-
-    return Tree_Number(line_number, column, n)
 
 
 #

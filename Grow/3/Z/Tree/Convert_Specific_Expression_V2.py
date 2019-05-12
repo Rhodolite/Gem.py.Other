@@ -28,7 +28,6 @@ from    Z.Tree.Convert_Operator_V1          import  convert_binary_operator
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_ANY_native_number
     from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_Integer              import  fact_is_positive_native_integer
@@ -51,7 +50,6 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Comprehension
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Name
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Number
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Comprehension
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
@@ -399,26 +397,6 @@ def convert_map_expression(z, v):
                z.convert_list_of_value_expressions(z, v.keys),
                z.convert_list_of_value_expressions(z, v.values),
            )
-
-
-#
-#   convert_number(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Number` (i.e.: `_ast.Num`) to a `Tree_Number`.
-#
-assert Native_AbstractSyntaxTree_Number._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Number._fields     == (('n',))
-
-
-def convert_number(z, v):
-    assert fact_is_convert_zone(z)
-
-    assert fact_is_positive_native_integer(v.lineno)
-    assert fact_is_avid_native_integer    (v.col_offset)
-
-    assert fact_is_ANY_native_number(v.n)
-
-    return z.create_Tree_Number(v.lineno, v.col_offset, v.n)
 
 
 #

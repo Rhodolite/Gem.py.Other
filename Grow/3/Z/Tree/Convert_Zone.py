@@ -171,10 +171,10 @@ class Convert_Zone(object):
         'create_Tree_Logical_Expression',           #   Function
         'create_Tree_Map_Comprehension',            #   Function
         'create_Tree_Map_Expression',               #   Function
-        'create_Tree_Number',                       #   Function
+        'create_Tree_Number_Literal',               #   Function
         'create_Tree_Set_Comprehension',            #   Function
         'create_Tree_Set_Expression',               #   Function
-        'create_Tree_String',                       #   Function
+        'create_Tree_String_Literal',               #   Function
         'create_Tree_Unary_Expression',             #   Function
         'create_Tree_Yield_Expression',             #   Function
 
@@ -510,10 +510,10 @@ def fill_convert_zone(version):
 
 
     #
-    #   Version 18: `Tree_String` uses `String`
+    #   Version 18: `Tree_Number_Literal` uses `Number`; `Tree_String_Literal` uses `String`
     #
     if version >= 18:
-        expression_version = 3          #   `Tree_String` uses `String`
+        expression_version = 3          #   `Tree_Number_Literal` uses `Number`; `Tree_String_Literal` uses `String`
 
     #
     #   Version 19 & 20: Improve `Tree_Parameter`
@@ -702,8 +702,10 @@ def fill_convert_zone(version):
 
 
     if expression_version == 2:
+        from    Z.Tree.Convert_Literal_V2               import  convert_number_literal
         from    Z.Tree.Convert_Literal_V2               import  convert_string_literal
     elif expression_version == 3:
+        from    Z.Tree.Convert_Literal_V3               import  convert_number_literal
         from    Z.Tree.Convert_Literal_V3               import  convert_string_literal
     else:
         FATAL_unknown_version('expression', expression_version)
@@ -721,7 +723,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Convert_Specific_Expression_V2   import  convert_logical_expression
         from    Z.Tree.Convert_Specific_Expression_V2   import  convert_map_comprehension
         from    Z.Tree.Convert_Specific_Expression_V2   import  convert_map_expression
-        from    Z.Tree.Convert_Specific_Expression_V2   import  convert_number
         from    Z.Tree.Convert_Specific_Expression_V2   import  convert_set_comprehension
         from    Z.Tree.Convert_Specific_Expression_V2   import  convert_set_expression
         from    Z.Tree.Convert_Specific_Expression_V2   import  convert_unary_expression
@@ -742,7 +743,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Expression_V1    import  create_Tree_Logical_Expression          #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Map_Comprehension           #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Map_Expression              #   "_V1" on purpose.
-        from    Z.Tree.Expression_V1    import  create_Tree_Number                      #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Set_Comprehension           #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Set_Expression              #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Unary_Expression            #   "_V1" on purpose.
@@ -752,9 +752,11 @@ def fill_convert_zone(version):
 
 
     if expression_version == 2:
-        from    Z.Tree.Literal_V1       import  create_Tree_String                      #   "_V1" on purpose.
+        from    Z.Tree.Literal_V1       import  create_Tree_Number_Literal              #   "_V1" on purpose.
+        from    Z.Tree.Literal_V1       import  create_Tree_String_Literal              #   "_V1" on purpose.
     elif expression_version == 3:
-        from    Z.Tree.Literal_V3       import  create_Tree_String
+        from    Z.Tree.Literal_V3       import  create_Tree_Number_Literal
+        from    Z.Tree.Literal_V3       import  create_Tree_String_Literal
     else:
         FATAL_unknown_version('expression', expression_version)
 
@@ -1417,7 +1419,7 @@ def fill_convert_zone(version):
             Native_AbstractSyntaxTree_Map_Comprehension       : convert_map_comprehension,
             Native_AbstractSyntaxTree_Map_Expression          : convert_map_expression,
             Native_AbstractSyntaxTree_Name                    : convert_name_expression,
-            Native_AbstractSyntaxTree_Number                  : convert_number,
+            Native_AbstractSyntaxTree_Number                  : convert_number_literal,
             Native_AbstractSyntaxTree_Set_Comprehension       : convert_set_comprehension,
             Native_AbstractSyntaxTree_Set_Expression          : convert_set_expression,
             Native_AbstractSyntaxTree_String_Literal          : convert_string_literal,
@@ -1741,10 +1743,10 @@ def fill_convert_zone(version):
     z.create_Tree_Logical_Expression      = create_Tree_Logical_Expression
     z.create_Tree_Map_Comprehension       = create_Tree_Map_Comprehension
     z.create_Tree_Map_Expression          = create_Tree_Map_Expression
-    z.create_Tree_Number                  = create_Tree_Number
+    z.create_Tree_Number_Literal          = create_Tree_Number_Literal
     z.create_Tree_Set_Comprehension       = create_Tree_Set_Comprehension
     z.create_Tree_Set_Expression          = create_Tree_Set_Expression
-    z.create_Tree_String                  = create_Tree_String
+    z.create_Tree_String_Literal          = create_Tree_String_Literal
     z.create_Tree_Unary_Expression        = create_Tree_Unary_Expression
     z.create_Tree_Yield_Expression        = create_Tree_Yield_Expression
 

@@ -32,7 +32,6 @@ from    Z.Tree.Expression_V1                import  create_Tree_List_Comprehensi
 from    Z.Tree.Expression_V1                import  create_Tree_Logical_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Map_Comprehension
 from    Z.Tree.Expression_V1                import  create_Tree_Map_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Number
 from    Z.Tree.Expression_V1                import  create_Tree_Set_Comprehension
 from    Z.Tree.Expression_V1                import  create_Tree_Set_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Unary_Expression
@@ -41,7 +40,6 @@ from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
 
 if __debug__:
     from    Capital.Fact                        import  fact_is_full_native_list
-    from    Capital.Fact                        import  fact_is_ANY_native_number
     from    Capital.Fact                        import  fact_is_native_list
     from    Capital.Native_Integer              import  fact_is_avid_native_integer
     from    Capital.Native_Integer              import  fact_is_native_integer
@@ -64,7 +62,6 @@ if __debug__:
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Logical_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Comprehension
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Map_Expression
-    from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Number
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Comprehension
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Set_Expression
     from    Z.Tree.Native_AbstractSyntaxTree    import  Native_AbstractSyntaxTree_Unary_Expression
@@ -388,24 +385,6 @@ def convert_map_expression(v):
                convert_list_of_value_expressions(v.keys),
                convert_list_of_value_expressions(v.values),
            )
-
-
-#
-#   convert_number(v)
-#
-#       Convert a `Native_AbstractSyntaxTree_Number` (i.e.: `_ast.Num`) to a `Tree_Number`.
-#
-assert Native_AbstractSyntaxTree_Number._attributes == (('lineno', 'col_offset'))
-assert Native_AbstractSyntaxTree_Number._fields     == (('n',))
-
-
-def convert_number(v):
-    assert fact_is_positive_native_integer(v.lineno)
-    assert fact_is_avid_native_integer    (v.col_offset)
-
-    assert fact_is_ANY_native_number(v.n)
-
-    return create_Tree_Number(v.lineno, v.col_offset, v.n)
 
 
 #
