@@ -18,6 +18,7 @@
 #
 
 
+from    Capital.Native_Complex  import  Native_Complex
 from    Capital.Native_Float    import  Native_Float
 from    Capital.Native_Integer  import  Native_Integer
 from    Capital.System          import  is_python_2
@@ -68,26 +69,35 @@ if __debug__:
 #
 #       Assert that `v` is a:
 #
-#           1)  `Native_Float`   (i.e.: `float`),
+#           1)  `Native_Complex` (i.e.: `complex`),
 #
-#           2)  `Native_Integer` (i.e.: `int`), or a
+#           2)  `Native_Float`   (i.e.: `float`),
 #
-#           3)  `Native_Long`    (i.e: `long`).                 #   Python 2.* only
+#           3)  `Native_Integer` (i.e.: `int`), or a
+#
+#           4)  `Native_Long`    (i.e: `long`).                 #   Python 2.* only
 #
 #       `v` may *NOT* be an instance of a subclass of:
 #
-#           1)  `Native_Float`   (i.e.: `float`),
+#           1)  `Native_Complex` (i.e.: `complex`),
 #
-#           2)  `Native_Integer` (i.e.: `int`), or
+#           2)  `Native_Float`   (i.e.: `float`),
 #
-#           3)  `Native_Long` (i.e.: `long`).                   #   Python 2.* only
+#           3)  `Native_Integer` (i.e.: `int`), or
+#
+#           4)  `Native_Long` (i.e.: `long`).                   #   Python 2.* only
 #
 if __debug__:
     if is_python_2:
         def fact_is_ANY_native_number(v):
             v_type = type(v)
 
-            assert (v_type is Native_Integer) or (v_type is Native_Float) or (v_type is Native_Long)
+            assert (
+                       v_type is Native_Integer
+                    or v_type is Native_Float
+                    or v_type is Native_Long
+                    or v_type is Native_Complex
+                )
 
             return True
     else:
@@ -97,7 +107,7 @@ if __debug__:
         def fact_is_ANY_native_number(v):
             v_type = type(v)
 
-            assert (v_type is Native_Integer) or (v_type is Native_Long)
+            assert (v_type is Native_Integer) or (v_type is Native_Long) or (v_type is Native_Complex)
 
             return True
 

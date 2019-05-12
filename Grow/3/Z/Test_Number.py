@@ -8,6 +8,8 @@
 #
 
 
+from    Capital.Complex                 import  conjure_complex
+from    Capital.Conjure_Number          import  conjure_number
 from    Capital.Core                    import  trace
 from    Capital.Float                   import  conjure_avid_float
 from    Capital.Float                   import  conjure_contrary_float
@@ -27,7 +29,6 @@ from    Capital.Long                    import  conjure_long
 from    Capital.Long                    import  conjure_negative_long
 from    Capital.Long                    import  conjure_positive_long
 from    Capital.Long                    import  zero_long
-from    Capital.Conjure_Number          import  conjure_number
 from    Capital.System                  import  is_python_2
 
 
@@ -36,6 +37,7 @@ if is_python_2:
 
 
 if __debug__:
+    from    Capital.Complex             import  fact_is_complex
     from    Capital.Float               import  fact_is_float
     from    Capital.Number              import  fact_is_number
     from    Capital.Integer             import  fact_is_integer
@@ -54,6 +56,47 @@ def verify_throws_value_error(f, expected):
         caught = e
 
     assert caught.args[0] == expected
+
+
+def command_test_complex():
+    minus_five = conjure_complex(-5-5j)
+    seven      = conjure_complex(7+7j)
+    zero       = conjure_complex(0j)
+
+    trace('minus_five, zero, seven: {!r}, {!r}, {!r}', minus_five, zero, seven)
+
+
+    #
+    #   conjure_number
+    #
+    assert minus_five is conjure_number(-5-5j)
+    assert seven      is conjure_number(7+7j)
+    assert zero       is conjure_number(0j)
+
+
+    #
+    #   .is_complex & .is_number
+    #
+    if __debug__:
+        assert minus_five.is_complex
+        assert minus_five.is_number
+        assert seven     .is_complex
+        assert seven     .is_number
+        assert zero      .is_complex
+        assert zero      .is_number
+
+        assert fact_is_complex (minus_five)
+        assert fact_is_number(minus_five)
+        assert fact_is_complex (zero)
+        assert fact_is_number(zero)
+        assert fact_is_complex (seven)
+        assert fact_is_number(seven)
+
+
+    #
+    #   Passed
+    #
+    trace('Passed: Complex Test')
 
 
 def command_test_float():
@@ -409,3 +452,4 @@ def command_test_number():
         command_test_long()
 
     command_test_float()
+    command_test_complex()

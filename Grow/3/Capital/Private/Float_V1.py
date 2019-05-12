@@ -245,8 +245,6 @@ class Positive_Float_Leaf(
     python_code = method__Native_Float__representation
 
 
-
-
 @creator
 def create_zero_float(v):
     assert fact_is_zero_native_float(v)

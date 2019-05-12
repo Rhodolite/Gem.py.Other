@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.Produce_ConjureNunber - Produce conjure number functions
+#   Capital.Private.Produce_ConjureNumber - Produce conjure number functions
 #
 
 
@@ -307,7 +307,7 @@ def produce_conjure_number_functions(
 
 
     #
-    #   number_cache - A cache of `{Negative,Positive}_Number_Type` (and possibly `Temporary_String`).
+    #   number_cache - A cache of `{Negative,Positive}_Number_Type` (and possibly `Temporary_{Integer,Long,Float}`).
     #
     #       All numbers are stored in this as key/value pairs:
     #
