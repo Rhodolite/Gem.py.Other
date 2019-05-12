@@ -13,19 +13,24 @@
 #
 #   Differences between Version 4 & Version 5.
 #
-#       Version 3:
-#
-#           `Tree_Store_Attribute` does not implement `Tree_Store_Target_0`.
-#
 #       Version 4:
 #
-#           `Tree_Store_Attribute`         implements `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_Attribute` does not implement `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_Attribute`    does not implement `Tree_Store_Target_0`.
+#
+#       Version 5:
+#
+#           1)  `Tree_Evaluate_Attribute`         implements `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_Attribute`            implements `Tree_Store_Target_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target_0
@@ -120,6 +125,7 @@ def create_Tree_Delete_Attribute(line_number, column, value, attribute):
 class Tree_Evaluate_Attribute(
         Tree_Attribute,
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = (())
 

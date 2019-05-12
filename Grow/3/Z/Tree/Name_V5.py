@@ -15,17 +15,22 @@
 #
 #       Version 4:
 #
-#           `Tree_Store_Name` does not implement `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_Name` does not implement `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_Name`    does not implement `Tree_Store_Target_0`.
 #
 #       Version 5:
 #
-#           `Tree_Store_Name`         implements `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_Name`         implements `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_Name`            implements `Tree_Store_Target_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
@@ -36,6 +41,7 @@ if __debug__:
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
+
 
 
 #
@@ -100,6 +106,7 @@ def create_Tree_Delete_Name(line_number, column, symbol):
 class Tree_Evaluate_Name(
         Tree_Name_Branch,
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = (())
 

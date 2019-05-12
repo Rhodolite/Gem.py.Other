@@ -15,11 +15,15 @@
 #
 #       Version 7:
 #
-#           `.target_expression` is of type `None | Tree_Store_Target`.
+#           1)  `.type_expression`   is of type `None | Tree_Value_Expression`.
+#
+#           2)  `.target_expression` is of type `None | Tree_Store_Target`.
 #
 #       Version 8:
 #
-#           `.target_expression` is of type `Tree_Store_Target_0`.
+#           1)  `.type_expression`   is of type `Tree_Value_Expression_0`.
+#
+#           2)  `.target_expression` is of type `Tree_Store_Target_0`.
 #
 
 
@@ -32,7 +36,7 @@ if __debug__:
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
+    from    Z.Tree.Expression           import  fact_is_tree_value_expression_0
     from    Z.Tree.Suite                import  fact_is_tree_suite
     from    Z.Tree.Target               import  fact_is_tree_store_target_0
 
@@ -47,7 +51,7 @@ class Tree_Except_Handler(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Avid_Native_Integer
 
-        'type_expression',              #   None | Tree_Value_Expression
+        'type_expression',              #   Tree_Value_Expression_0
         'target_expression',            #   Tree_Store_Target_0
         'body',                         #   Tree_Suite
     ))
@@ -71,7 +75,7 @@ class Tree_Except_Handler(
     def dump_except_clause_tokens(self, f):
         f.arrange('<except @{}:{}', self.line_number, self.column)
 
-        if self.type_expression is not None:
+        if self.type_expression.has_tree_value_expression:
             f.space()
             self.type_expression.dump_value_expression_tokens(f)
 
@@ -101,11 +105,11 @@ def create_Tree_Except_Handler(line_number, column, type_expression, target_expr
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is__native_none__OR__tree_value_expression(type_expression)
-    assert fact_is_tree_store_target_0                    (target_expression)
-    assert fact_is_tree_suite                             (body)
+    assert fact_is_tree_value_expression_0(type_expression)
+    assert fact_is_tree_store_target_0    (target_expression)
+    assert fact_is_tree_suite             (body)
 
-    if type_expression is None:
+    if not type_expression.has_tree_value_expression:
         assert not target_expression.has_store_target
 
     return Tree_Except_Handler(line_number, column, type_expression, target_expression, body)
