@@ -64,9 +64,9 @@ def convert_except_handler(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_none_OR_value_expression(z, v.type),
-               z.convert_store_target_0          (z, v.name),
-               z.convert_full_list_of_statements (z, v.body),
+               z.convert_value_expression_0     (z, v.type),
+               z.convert_store_target_0         (z, v.name),
+               z.convert_full_list_of_statements(z, v.body),
            )
 
 

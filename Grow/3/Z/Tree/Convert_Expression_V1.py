@@ -58,6 +58,20 @@ def convert_value_expression(v):
 
 
 #
+#   convert_value_expression_0(v)
+#
+#       1.  "Convert" `None` to `None; OR
+#
+#       2.  Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
+#
+def convert_value_expression_0(v):
+    if v is None:
+        return None
+
+    return convert_value_expression(v)
+
+
+#
 #   convert_full_list_of_value_expressions(sequence)
 #
 #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a

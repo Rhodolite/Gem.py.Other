@@ -13,7 +13,7 @@
 #
 #   interface Tree_Value_Expression
 #       documentation
-#           Interface to tree classes that represent expressions.
+#           Interface to tree classes that represent value expressions.
 #
 #       method
 #           dump_value_expression_tokens(f : Build_DumpToken)
@@ -29,24 +29,54 @@ class TRAIT_Tree_Value_Expression(object):
         is_tree_value_expression = True
 
 
+
+#
+#   interface Tree_Value_Expression_0
+#       documentation
+#           Interface to `parser_none` or tree classes that represent value expressions.
+#
+#       attribute
+#           has_tree_value_expression : Boolean
+#
+#       if has_tree_value_expression:
+#           implements Tree_Value_Expression
+#
+#       debug
+#           is_tree_value_expression_0 := true
+#
+class TRAIT_Tree_Value_Expression_0(object):
+    __slots__ = (())
+
+
+    has_tree_value_expression = True
+
+
+    if __debug__:
+        is_tree_value_expression_0 = True
+
+
 #
 #   USAGE:
 #
-#       v.is_tree_value_expression              #   Test if `v` is a tree expression.
+#       v.is_tree_value_expression                  #   Test if `v` is a `Tree_Value_Expression`.
 #
-#       v.dump_value_expression_tokens(f)       #   Dump the tokens representing the tree expression to `f`.
+#       v.is_tree_value_expression_0                #   Test if `v` is a `Tree_Value_Expression_0`.
+#
+#       v.dump_value_expression_tokens(f)           #   Dump the tokens representing the `Tree_Value_Expression` to `f`.
 #
 #       assert fact_is__native_none__OR__tree_value_expression(v)
-#                                               #   Assert that `v` is either `None` or a tree value expression.
+#                                                   #   Assert that `v` is either `None` or a tree value expression.
 #
-#       assert fact_is_tree_value_expression(v) #   Assert that `v` is a tree value expression.
+#       assert fact_is_tree_value_expression(v)     #   Assert that `v` is a `Tree_Value_Expression`.
+#
+#       assert fact_is_tree_value_expression_0(v)   #   Assert that `v` is a `Tree_Value_Expression_0`.
 #
 
 
 #
 #   fact_is__native_none__OR__tree_value_expression(v)
 #
-#       Assert that `v` is either `None` or a tree value expression.
+#       Assert that `v` is either `None` or a `Tree_Value_Expression`.
 #
 if __debug__:
     def fact_is__native_none__OR__tree_value_expression(v):
@@ -59,10 +89,20 @@ if __debug__:
 
 
 #
-#   fact_is_tree_value_expression(v) - Assert that `v` is a tree value expression.
+#   fact_is_tree_value_expression(v) - Assert that `v` is a `Tree_Value_Expression`.
 #
 if __debug__:
     def fact_is_tree_value_expression(v):
         assert v.is_tree_value_expression
+
+        return True
+
+
+#
+#   fact_is_tree_value_expression_0(v) - Assert that `v` is a `Tree_Value_Expression_0`.
+#
+if __debug__:
+    def fact_is_tree_value_expression_0(v):
+        assert v.is_tree_value_expression_0
 
         return True

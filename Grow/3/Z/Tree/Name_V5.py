@@ -33,10 +33,9 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target_0
 
 
 if __debug__:
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Parser.Symbol             import  fact_is_parser_symbol
-
 
 
 #

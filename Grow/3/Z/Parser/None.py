@@ -15,6 +15,7 @@
 from    Capital.Core                    import  creator
 from    Capital.Core                    import  export
 from    Z.Parser.Symbol                 import  TRAIT_Parser_Symbol_0
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter_0
 from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
@@ -30,6 +31,7 @@ class Parser_None(
         TRAIT_Tree_Parameter_Tuple_0,
         TRAIT_Tree_Store_Target_0,
         TRAIT_Tree_Suite_0,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = (())
 
@@ -46,6 +48,13 @@ class Parser_None(
     #
    #@replace
     has_tree_parameter = False
+
+
+    #
+    #   Interface TRAIT_Tree_Value_Expression_0
+    #
+   #@replace
+    has_tree_value_expression = False
 
 
     #

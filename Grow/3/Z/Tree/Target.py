@@ -96,7 +96,7 @@ class TRAIT_Tree_Store_Target(object):
 #           has_tree_store_target : Boolean
 #
 #       if has_tree_store_target:
-#           implemenets Tree_Store_Target
+#           implements Tree_Store_Target
 #
 #       debug
 #           is_tree_store_target_0 := true

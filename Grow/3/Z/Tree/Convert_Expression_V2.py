@@ -23,6 +23,7 @@
 #
 
 
+from    Z.Parser.None                       import  parser_none
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__list__OF__Native_AbstractSyntaxTree_STAR
 
@@ -59,6 +60,20 @@ def convert_value_expression(z, v):
         )
 
     return convert_value_expression__function(z, v)
+
+
+#
+#   convert_value_expression_0(z, v)
+#
+#       1.  Convert `None` to `Tree_Value_Expression_0` (specifically to `parser_none`); or
+#
+#       2.  Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression_0`.
+#
+def convert_value_expression_0(z, v):
+    if v is None:
+        return parser_none
+
+    return convert_value_expression(z, v)
 
 
 #
