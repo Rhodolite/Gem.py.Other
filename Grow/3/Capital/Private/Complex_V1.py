@@ -17,7 +17,6 @@ from    Capital.Core                            import  export
 from    Capital.Maybe_Temporary                 import  TRAIT_Maybe_Temporary_0
 from    Capital.Native_Complex                  import  Native_Complex
 from    Capital.Number                          import  TRAIT_Number
-from    Capital.Private.Produce_ConjureComplex  import  produce_conjure_complex
 
 
 if __debug__:
@@ -86,6 +85,25 @@ class Complex_Leaf(
     #       with the same value as the `Native_Complex` that `self` wraps.
     #
     python_code = method__Native_Complex__representation
+
+
+#
+#   Import the version of `produce_conjure_complex` names we want to use.
+#
+from    Capital.Global                  import  capital_globals
+
+
+complex_version = capital_globals.complex_version
+
+
+if complex_version == 1:
+    from    Capital.Private.Produce_ConjureComplex_V1   import  produce_conjure_complex
+elif complex_version == 2:
+    from    Capital.Private.Produce_ConjureComplex_V2   import  produce_conjure_complex
+else:
+    from    Capital.Core                import  FATAL
+
+    FATAL('Capital/Complex.py: unknown complex version: {}', complex_version)
 
 
 conjure_complex = produce_conjure_complex(Complex_Leaf)

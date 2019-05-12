@@ -8,11 +8,12 @@
 #
 
 
-version = 8                 #   1..8
+version = 9                             #   1..9
 
 
-exception_version = 1       #   1..2
-string_version    = 1       #   0..6
+complex_version   = 1                   #   1..2
+exception_version = 1                   #   1..2
+string_version    = 1                   #   0..6
 
 
 #
@@ -66,6 +67,13 @@ if version >= 8:
 
 
 #
+#   Version 9: Simplify `produce_conjure_complex`
+#
+if version >= 9:
+    complex_version = 2
+
+
+#
 #   Imports
 #
 from    Capital.Core                    import  arrange
@@ -84,34 +92,39 @@ if __debug__:
 class Capital_Globals(object):
     __slots__ = ((
         'version',                      #   Positive_Native_Integer
+        'complex_version',              #   Positive_Native_Integer
         'exception_version',            #   Positive_Native_Integer
         'string_version',               #   Avid_Native_Integer
     ))
 
 
-    def __init__(self, version, exception_version, string_version):
+    def __init__(self, version, complex_version, exception_version, string_version):
         self.version           = version
+        self.complex_version   = complex_version
         self.exception_version = exception_version
         self.string_version    = string_version
 
 
     def __repr__(self):
-        return arrange('<Capital_Globals version={} exception={} string={}>',
-                       self.version, self.exception_version, self.string_version)
+        return arrange('<Capital_Globals version={} complex={} exception={} string={}>',
+                       self.version, self.complex_version, self.exception_version, self.string_version)
 
 
 @creator
-def create_capital_globals(version, exception_version, string_version):
+def create_capital_globals(version, complex_version, exception_version, string_version):
     assert fact_is_positive_native_integer(version)
+    assert fact_is_positive_native_integer(complex_version)
     assert fact_is_positive_native_integer(exception_version)
     assert fact_is_avid_native_integer    (string_version)
 
-    assert 1 <= version           <= 8
+    assert 1 <= version           <= 9
+    assert 1 <= complex_version   <= 2
     assert 1 <= exception_version <= 2
     assert 0 <= string_version    <= 7
 
     r = Capital_Globals(
             version           = version,
+            complex_version   = complex_version,
             exception_version = exception_version,
             string_version    = string_version,
         )
@@ -123,6 +136,7 @@ def create_capital_globals(version, exception_version, string_version):
 
 capital_globals = create_capital_globals(
                       version           = version,
+                      complex_version   = complex_version,
                       exception_version = exception_version,
                       string_version    = string_version,
                   )

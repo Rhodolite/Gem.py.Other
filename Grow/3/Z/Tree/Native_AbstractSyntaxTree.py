@@ -195,8 +195,8 @@ if __debug__:
 #
 #   NOTE:
 #
-#       `_ast.arguments` (which as mentioned above are actually funtion parameters) has a `.args` member which are each
-#       a `_ast.name` with a context of `_ast.Param`.
+#       `_ast.arguments` (which as mentioned above are actually function parameters) has a `.args` member which are
+#       each a `_ast.name` with a context of `_ast.Param`.
 #
 #       So even though `_ast.arguments` and `.args` members ... are oddly named "arguments", the "context" is properly
 #       named a "parameter".

@@ -99,7 +99,7 @@ PREPARE_ValueError     = produce_PREPARE_Exception('PREPARE_ValueError',     Val
 #
 #       Produce function are named "produce_*".
 #
-#       In the code above `produce_PREPARE_Exception` is a produce funtion.
+#       In the code above `produce_PREPARE_Exception` is a produce function.
 #
 #       Each time it is called, it produces another function (using a closure), in this case a closure around
 #       `PREPARE_Exception`.

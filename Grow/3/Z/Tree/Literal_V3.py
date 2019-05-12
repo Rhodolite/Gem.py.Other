@@ -16,7 +16,7 @@
 #
 #       Version 1:
 #
-#           1)  `Tree_Number_Literal.s` is a `Native_Float | Native_Integer | Native_Long`.
+#           1)  `Tree_Number_Literal.s` is a `Native_Complex | Native_Float | Native_Integer | Native_Long`.
 #
 #           2)  `Tree_String_Literal.s` is a `Native_String`.
 #

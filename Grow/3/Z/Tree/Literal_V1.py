@@ -33,7 +33,7 @@ class Tree_Number_Literal(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Avid_Native_Integer
 
-        'n',                            #   Native_Float | Native_Integer | Native_Long
+        'n',                            #   Native_Complex | Native_Float | Native_Integer | Native_Long
     ))
 
 

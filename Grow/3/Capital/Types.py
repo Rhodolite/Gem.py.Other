@@ -34,7 +34,7 @@ Native_Built_In_Method = types.BuiltinMethodType
 
 
 #
-#   Native_Function - A native funtion (i.e.: `types.FunctionType`).
+#   Native_Function - A native function (i.e.: `types.FunctionType`).
 #
 Native_Function = types.FunctionType
 

@@ -58,7 +58,7 @@ if __debug__:
 #
 #               1)  Takes a `function_name` parameter.
 #
-#               2)  Only produces one function, the `conjure_full_string` funtion.
+#               2)  Only produces one function, the `conjure_full_string` function.
 #
 def produce_conjure_full_string(function_name, Full_String_Type):
     assert fact_is_full_native_string(function_name)

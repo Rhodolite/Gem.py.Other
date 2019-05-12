@@ -4,7 +4,7 @@
 
 
 #
-#   Capital.Private.Produce_ConjureComplex - Produce `conjure_complex` functions
+#   Capital.Private.Produce_ConjureComplex_V1 - Produce `conjure_complex` function, Version 1.
 #
 #   NOTE:
 #       The code here is a bit absurd with *TWO* producer functions, where, really, neither is needed.
@@ -12,7 +12,7 @@
 #       However, it is basically a "reduced" version of `Capital.Private.Produce_ConjureNumber` removing
 #       all the special handling for "avid", "contrary", "negative", and "positive".
 #
-#       It seemed best to just leave it as the "reduced" version, instead of simplifying it even futhur.
+#       Version 2 simplifies this to a single function.
 #
 
 
@@ -32,7 +32,6 @@
 #
 
 
-from    Capital.Core                            import  arrange
 from    Capital.Core                            import  creator
 from    Capital.Core                            import  export
 from    Capital.Exception                       import  PREPARE_ValueError
@@ -127,7 +126,7 @@ def produce_conjure_X_complex(function_name, lookup_complex, provide_complex, Co
 #
 #   produce_conjure_complex(Complex_Type)
 #
-#       Produce a `conjure_complex` funtion.
+#       Produce a `conjure_complex` function.
 #
 @export
 def produce_conjure_complex(Complex_Type):
@@ -143,7 +142,7 @@ def produce_conjure_complex(Complex_Type):
     #
     #           2)  The value is the same as the key.
     #
-    complex_cache = {}
+    complex_cache = {}                  #   Map { Complex_Type | Temporary_Complex : Complex_Type | Temporary_Complex }
 
     lookup_complex  = complex_cache.get
     provide_complex = complex_cache.setdefault
