@@ -11,7 +11,7 @@
 
 
 from    Capital.Core                        import  trace
-from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_value_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression_0
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
 from    Z.Tree.Convert_Target_V1            import  convert_store_target_0
 from    Z.Tree.Except_Clause_V1             import  create_Tree_Except_Handler
@@ -73,9 +73,9 @@ def convert_except_handler(v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_value_expression(v.type),
-               convert_store_target_0          (v.name),
-               convert_full_list_of_statements (v.body),
+               convert_value_expression_0     (v.type),
+               convert_store_target_0         (v.name),
+               convert_full_list_of_statements(v.body),
            )
 
 

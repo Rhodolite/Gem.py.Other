@@ -30,19 +30,6 @@ from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__list__OF__
 
 
 #
-#   convert_none_OR_value_expression(v)
-#
-#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a
-#       `Tree_Value_Expression`.
-#
-def convert_none_OR_value_expression(v):
-    if v is None:
-        return None
-
-    return convert_value_expression(v)
-
-
-#
 #   convert_value_expression(v)
 #
 #       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.

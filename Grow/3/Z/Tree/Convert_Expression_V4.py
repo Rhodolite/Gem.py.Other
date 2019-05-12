@@ -37,21 +37,6 @@ if __debug__:
 
 
 #
-#   convert_none_OR_value_expression(z, v)
-#
-#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a
-#       `Tree_Value_Expression`.
-#
-def convert_none_OR_value_expression(z, v):
-    assert fact_is_convert_zone(z)
-
-    if v is None:
-        return None
-
-    return convert_value_expression(z, v)
-
-
-#
 #   convert_value_expression(z, v)
 #
 #       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.

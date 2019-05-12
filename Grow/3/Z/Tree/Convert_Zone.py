@@ -157,7 +157,6 @@ class Convert_Zone(object):
         #
         'convert_full_list_of_value_expressions',   #   Function
         'convert_list_of_value_expressions',        #   Function
-        'convert_none_OR_value_expression',         #   Function
         'convert_value_expression',                 #   Function
         'convert_value_expression_0',               #   Function
 
@@ -718,13 +717,11 @@ def fill_convert_zone(version):
     if expression_version in ((2, 3)):
         from    Z.Tree.Convert_Expression_V2    import  convert_full_list_of_value_expressions
         from    Z.Tree.Convert_Expression_V2    import  convert_list_of_value_expressions
-        from    Z.Tree.Convert_Expression_V2    import  convert_none_OR_value_expression
         from    Z.Tree.Convert_Expression_V2    import  convert_value_expression
         from    Z.Tree.Convert_Expression_V2    import  convert_value_expression_0
     elif expression_version == 4:
         from    Z.Tree.Convert_Expression_V4    import  convert_full_list_of_value_expressions
         from    Z.Tree.Convert_Expression_V4    import  convert_list_of_value_expressions
-        from    Z.Tree.Convert_Expression_V4    import  convert_none_OR_value_expression
         from    Z.Tree.Convert_Expression_V4    import  convert_value_expression
         from    Z.Tree.Convert_Expression_V4    import  convert_value_expression_0
     else:
@@ -1877,7 +1874,6 @@ def fill_convert_zone(version):
     #
     z.convert_full_list_of_value_expressions = convert_full_list_of_value_expressions
     z.convert_list_of_value_expressions      = convert_list_of_value_expressions
-    z.convert_none_OR_value_expression       = convert_none_OR_value_expression
     z.convert_value_expression               = convert_value_expression
     z.convert_value_expression_0             = convert_value_expression_0
 
