@@ -11,11 +11,11 @@
 
 
 from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
-from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_value_expression
-from    Z.Tree.Index_V1                     import  create_Tree_Extended_Slice_Index
-from    Z.Tree.Index_V1                     import  create_Tree_Simple_Index
-from    Z.Tree.Index_V1                     import  create_Tree_Slice_Index
-from    Z.Tree.Index_V1                     import  tree_ellipses_index
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression_0
+from    Z.Tree.Index_Clause_V1              import  create_Tree_Extended_Slice_Index
+from    Z.Tree.Index_Clause_V1              import  create_Tree_Simple_Index
+from    Z.Tree.Index_Clause_V1              import  create_Tree_Slice_Index
+from    Z.Tree.Index_Clause_V1              import  tree_ellipses_index
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
@@ -93,9 +93,9 @@ def convert_slice_index(v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.step)
 
     return create_Tree_Slice_Index(
-               convert_none_OR_value_expression(v.lower),
-               convert_none_OR_value_expression(v.upper),
-               convert_none_OR_value_expression(v.step),
+               convert_value_expression_0(v.lower),
+               convert_value_expression_0(v.upper),
+               convert_value_expression_0(v.step),
            )
 
 

@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Except_V1 - Implementation of `Tree_Except_Clause`, Version 1.
+#   Z.Tree.Except_Clause_V1 - Implementation of `Tree_Except_Clause`, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -12,7 +12,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Tree.Except                   import  TRAIT_Tree_Except_Clause
+from    Z.Tree.Except_Clause            import  TRAIT_Tree_Except_Clause
 
 
 if __debug__:

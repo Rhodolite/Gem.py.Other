@@ -379,7 +379,7 @@ def fill_convert_zone(version):
     context_version       = 1       #   1..3, 0
     except_version        = '1'
     expression_version    = 1       #   1..4
-    index_version         = 1       #   1..2
+    index_version         = 1       #   1..3
     module_name_version   = 0       #   0, 2..3 (no version 1)
     name_version          = 1       #   1..5
     operator_version      = 1       #   1, 3    (no version 2)
@@ -546,6 +546,7 @@ def fill_convert_zone(version):
     if version >= 22:
         name_version       = 5          #   Implement & use `Tree_Value_Expression_0` & `Tree_Store_Target_0`
         expression_version = 4          #   Add `Tree_Value_Expression_0`
+        index_version      = 3          #   Use `Tree_Value_Expression_0`.
         statement_version  = 8          #   Implement & use `Tree_Value_Expression_0` & `Tree_Store_Target_0`
         target_version     = 5          #   Add `Tree_Store_Target_0`
 
@@ -595,7 +596,7 @@ def fill_convert_zone(version):
     assert 0   <= context_version       <= 3
     assert '1' == except_version        == '1'
     assert 1   <= expression_version    <= 4
-    assert 1   <= index_version         <= 2
+    assert 1   <= index_version         <= 3
     assert 0   <= module_name_version   <= 3
     assert 1   <= name_version          <= 5
     assert 1   <= operator_version      <= 3
@@ -816,7 +817,7 @@ def fill_convert_zone(version):
     #
     #   Index
     #
-    if index_version == 2:
+    if index_version in ((2, 3)):
         from    Z.Tree.Convert_Index_V2     import  convert_ellipses_index
         from    Z.Tree.Convert_Index_V2     import  convert_extended_slice_index
         from    Z.Tree.Convert_Index_V2     import  convert_index_clause
@@ -827,10 +828,15 @@ def fill_convert_zone(version):
 
 
     if index_version == 2:
-        from    Z.Tree.Index_V1         import  create_Tree_Extended_Slice_Index    #   "_V1" on purpose.
-        from    Z.Tree.Index_V1         import  create_Tree_Simple_Index            #   "_V1" on purpose.
-        from    Z.Tree.Index_V1         import  create_Tree_Slice_Index             #   "_V1" on purpose.
-        from    Z.Tree.Index_V1         import  tree_ellipses_index                 #   "_V1" on purpose.
+        from    Z.Tree.Index_Clause_V1  import  create_Tree_Extended_Slice_Index    #   "_V1" on purpose.
+        from    Z.Tree.Index_Clause_V1  import  create_Tree_Simple_Index            #   "_V1" on purpose.
+        from    Z.Tree.Index_Clause_V1  import  create_Tree_Slice_Index             #   "_V1" on purpose.
+        from    Z.Tree.Index_Clause_V1  import  tree_ellipses_index                 #   "_V1" on purpose.
+    elif index_version == 3:
+        from    Z.Tree.Index_Clause_V3  import  create_Tree_Extended_Slice_Index
+        from    Z.Tree.Index_Clause_V3  import  create_Tree_Simple_Index
+        from    Z.Tree.Index_Clause_V3  import  create_Tree_Slice_Index
+        from    Z.Tree.Index_Clause_V3  import  tree_ellipses_index
     else:
         FATAL_unknown_version('index', index_version)
 
@@ -1172,11 +1178,11 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5, 6)):
-        from    Z.Tree.Except_V1        import  create_Tree_Except_Handler                  #   "_V1" on purpose.
+        from    Z.Tree.Except_Clause_V1     import  create_Tree_Except_Handler              #   "_V1" on purpose.
     elif statement_version == 7:
-        from    Z.Tree.Except_V7        import  create_Tree_Except_Handler
+        from    Z.Tree.Except_Clause_V7     import  create_Tree_Except_Handler
     elif statement_version == 8:
-        from    Z.Tree.Except_V8        import  create_Tree_Except_Handler
+        from    Z.Tree.Except_Clause_V8     import  create_Tree_Except_Handler
     else:
         FATAL_unknown_version('statement', statement_version)
 

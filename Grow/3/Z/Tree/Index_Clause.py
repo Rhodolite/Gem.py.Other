@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Index - Interface to tree classes that represent index clauses.
+#   Z.Tree.Index_Clause - Interface to tree classes that represent index clauses.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #

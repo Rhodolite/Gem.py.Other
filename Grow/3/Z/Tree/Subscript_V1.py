@@ -19,14 +19,14 @@ from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 
 
 if __debug__:
-    from    Capital.Native_Integer              import  fact_is_avid_native_integer
+    from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Context              import  fact_is_tree_context
     from    Z.Tree.Context              import  fact_is_tree_delete_context
     from    Z.Tree.Context              import  fact_is_tree_load_context
     from    Z.Tree.Context              import  fact_is_tree_store_context
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
-    from    Z.Tree.Index                import  fact_is_tree_index_clause
+    from    Z.Tree.Index_Clause         import  fact_is_tree_index_clause
 
 
 #

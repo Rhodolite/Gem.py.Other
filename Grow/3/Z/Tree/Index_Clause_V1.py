@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Index - Implementation of `Tree_Index_Clause`, Version 1.
+#   Z.Tree.Index_Clause_V1 - Implementation of `Tree_Index_Clause`, Version 1.
 #
 #       Copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -12,7 +12,7 @@
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
-from    Z.Tree.Index                    import  TRAIT_Tree_Index_Clause
+from    Z.Tree.Index_Clause             import  TRAIT_Tree_Index_Clause
 
 
 if __debug__:
@@ -199,9 +199,6 @@ class Tree_Slice_Index(
             upper.dump_value_expression_tokens(f)
 
         if step is not None:
-            if upper is not None:
-                f.space()
-
             f.write(': ')
             step.dump_value_expression_tokens(f)
 

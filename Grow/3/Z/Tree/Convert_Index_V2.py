@@ -110,9 +110,9 @@ def convert_slice_index(z, v):
     assert fact_is___native_none___OR___ANY__native__abstract_syntax_tree__VALUE_EXPRESSION(v.step)
 
     return z.create_Tree_Slice_Index(
-               z.convert_none_OR_value_expression(z, v.lower),
-               z.convert_none_OR_value_expression(z, v.upper),
-               z.convert_none_OR_value_expression(z, v.step),
+               z.convert_value_expression_0(z, v.lower),
+               z.convert_value_expression_0(z, v.upper),
+               z.convert_value_expression_0(z, v.step),
            )
 
 

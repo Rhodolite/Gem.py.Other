@@ -60,8 +60,6 @@ def convert_number_literal(z, v):
 
     assert fact_is_ANY_native_number(v.n)
 
-    trace('z.create_Tree_Number_Literal: {}', z.create_Tree_Number_Literal.__module__)
-
     return z.create_Tree_Number_Literal(
                v.lineno,
                v.col_offset,

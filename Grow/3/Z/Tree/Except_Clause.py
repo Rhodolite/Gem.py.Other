@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Except - Interface to tree classes that represent except clauses.
+#   Z.Tree.Except_Clause - Interface to tree classes that represent except clauses.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
