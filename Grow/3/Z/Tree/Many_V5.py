@@ -17,17 +17,22 @@
 #
 #       Version 4:
 #
-#           `Tree_Store_{List,Tuple}` does not implement `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_{List,Tuple}` does not implement `Tree_Value_Expression_0`.
+#
+#           1)  `Tree_Store_{List,Tuple}`    does not implement `Tree_Store_Target_0`.
 #
 #       Version 5:
 #
-#           `Tree_Store_{List,Tuple}`         implements `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_{List,Tuple}`         implements `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_{List,Tuple}`            implements `Tree_Store_Target_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target_0
 
@@ -137,6 +142,7 @@ def create_Tree_Many_Expression(Meta, line_number, column, elements):
 class Tree_Evaluate_List(
         Tree_Many_Expression,
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
@@ -167,6 +173,7 @@ def create_Tree_Evaluate_List(line_number, column, elements):
 class Tree_Evaluate_Tuple(
         Tree_Many_Expression,
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:

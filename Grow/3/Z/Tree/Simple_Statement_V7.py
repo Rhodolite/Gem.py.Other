@@ -41,7 +41,6 @@ if __debug__:
     from    Capital.Fact                import  fact_is_native_list
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
-    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Operator             import  fact_is_tree_operator
     from    Z.Tree.Target               import  fact_is_tree_store_target
@@ -394,60 +393,3 @@ class Tree_Pass_Statement(Tree_Keyword_Statement):
 @creator
 def create_Tree_Pass_Statement(line_number, column):
     return create_Tree_Keyword_Statement(Tree_Pass_Statement, line_number, column)
-
-
-#
-#   Tree: Return Statement
-#
-class Tree_Return_Statement(
-        TRAIT_Tree_Statement,
-        TRAIT_Tree_Suite,
-        TRAIT_Tree_Suite_0,
-):
-    __slots__ = ((
-        'line_number',                  #   Positive_Native_Integer
-        'column',                       #   Avid_Native_Integer
-
-        'value',                        #   None | Tree_Value_Expression
-    ))
-
-
-    #
-    #   Private
-    #
-    def __init__(self, line_number, column, value):
-        self.line_number = line_number
-        self.column      = column
-
-        self.value = value
-
-
-    #
-    #   Interface Tree_Statement
-    #
-    def dump_statement_tokens(self, f):
-        f.arrange('<return @{}:{}', self.line_number, self.column)
-
-        if self.value is not None:
-            f.space()
-            self.value.dump_value_expression_tokens(f)
-
-        f.line('>')
-
-
-    #
-    #   Public
-    #
-    def __repr__(self):
-        return arrange('<Tree_Return_Statement @{}:{} {!r}>', self.line_number, self.column, self.value)
-
-
-
-@creator
-def create_Tree_Return_Statement(line_number, column, value):
-    assert fact_is_positive_native_integer(line_number)
-    assert fact_is_avid_native_integer    (column)
-
-    assert fact_is__native_none__OR__tree_value_expression(value)
-
-    return Tree_Return_Statement(line_number, column, value)
