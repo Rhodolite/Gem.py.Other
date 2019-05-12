@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.With_V1 - Implementation of `Tree_While_Statement`, Version 1.
+#   Z.Tree.With_Statement_V1 - Implementation of `Tree_While_Statement`, Version 1.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #

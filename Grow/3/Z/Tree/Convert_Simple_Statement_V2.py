@@ -195,9 +195,9 @@ def convert_execute_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_value_expression        (z, v.body),
-               z.convert_none_OR_value_expression(z, v.globals),
-               z.convert_none_OR_value_expression(z, v.locals),
+               z.convert_value_expression  (z, v.body),
+               z.convert_value_expression_0(z, v.globals),
+               z.convert_value_expression_0(z, v.locals),
            )
 
 

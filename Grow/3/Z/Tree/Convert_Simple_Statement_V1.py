@@ -19,11 +19,11 @@ from    Z.Tree.Convert_Operator_V1          import  convert_modify_operator
 from    Z.Tree.Convert_Target_V1            import  convert_full_list_of_delete_targets
 from    Z.Tree.Convert_Target_V1            import  convert_full_list_of_store_targets
 from    Z.Tree.Convert_Target_V1            import  convert_store_target
+from    Z.Tree.Execute_Statement_V1         import  create_Tree_Execute_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Assign_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Break_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Continue_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Delete_Statement
-from    Z.Tree.Simple_Statement_V1          import  create_Tree_Execute_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Expression_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Modify_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Pass_Statement
@@ -191,9 +191,9 @@ def convert_execute_statement(v):
                v.lineno,
                v.col_offset,
 
-               convert_value_expression        (v.body),
-               convert_none_OR_value_expression(v.globals),
-               convert_none_OR_value_expression(v.locals),
+               convert_value_expression  (v.body),
+               convert_value_expression_0(v.globals),
+               convert_value_expression_0(v.locals),
            )
 
 

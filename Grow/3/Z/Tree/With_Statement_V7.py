@@ -4,22 +4,32 @@
 
 
 #
-#   Z.Tree.With_V8 - Implementation of `Tree_While_Statement`, Version 8.
+#   Z.Tree.With_Statement_V7 - Implementation of `Tree_While_Statement`, Version 7.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Differences between Versions 7 and Version 8.
+#   Differences between Versions 2..7.
+#
+#       Version 2:
+#
+#           1)  Tree Statements implement `Tree_Statement`.
+#
+#           2)  A list of statements is stored as `Full_Native_List of Tree_Statement`.
+#
+#       Versions 3..7:
+#
+#           Do not exist.
 #
 #       Version 7:
 #
-#           `.target` is of type `None | Tree_Store_Target`.
+#           1)  Tree Statements implement `Tree_Statement`; and ...
 #
-#       Version 8:
+#               ... in addition also implement `Tree_Suite`, and `Tree_Suite_0`.
 #
-#           `.target` is of type `Tree_Store_Target_0`.
+#           2)  A list of statements is stored as `Tree_Suite`.
 #
 
 
@@ -37,7 +47,7 @@ if __debug__:
     from    Z.Tree.Expression           import  fact_is_tree_value_expression
     from    Z.Tree.Suite                import  fact_is_tree_suite
     from    Z.Tree.Suite                import  fact_is_tree_suite_0
-    from    Z.Tree.Target               import  fact_is_tree_store_target_0
+    from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
 
 
 #
@@ -53,7 +63,7 @@ class Tree_With_Statement(
         'column',                       #   Avid_Native_Integer
 
         'value',                        #   Tree_Value_Expression
-        'target',                       #   None | Tree_Store_Target
+        'target',                       #   None | Tree_Target
         'body',                         #   Tree_Statement
     ))
 
@@ -77,7 +87,7 @@ class Tree_With_Statement(
         f.arrange('<with @{}:{} ', self.line_number, self.column)
         self.value.dump_value_expression_tokens(f)
 
-        if self.target.has_store_target:
+        if self.target is not None:
             f.write(' as ')
             self.target.dump_store_target_tokens(f)
 
@@ -102,8 +112,8 @@ def create_Tree_With_Statement(line_number, column, value, target, body):
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_tree_value_expression(value)
-    assert fact_is_tree_store_target_0  (target)
-    assert fact_is_tree_suite           (body)
+    assert fact_is_tree_value_expression              (value)
+    assert fact_is__native_none__OR__tree_store_target(target)
+    assert fact_is_tree_suite                         (body)
 
     return Tree_With_Statement(line_number, column, value, target, body)
