@@ -386,7 +386,7 @@ def fill_convert_zone(version):
     parameter_version     = 1       #   1..6
     statement_version     = 1       #   1..9
     symbol_version        = 0       #   0, 2..6 (no version 1)
-    target_version        = 1       #   1..5
+    target_version        = 1       #   1..6
 
 
     #
@@ -552,9 +552,10 @@ def fill_convert_zone(version):
     #   Version 23: Add `Tree_Value_Expression_0`
     #
     if version >= 23:
-        name_version       = 6          #   `Tree_Evaluate_Name` implements `Tree_Store_Target_0`
+        name_version       = 6          #   `Tree_Evaluate_Name` implements `Tree_Value_Expression_0`
         expression_version = 4          #   Add `Tree_Value_Expression_0`
-        statement_version  = 9          #   `Tree_Except_Handler` uses `Tree_Value_Expression_0`
+        statement_version  = 9          #   Uses `Tree_Value_Expression_0`
+        target_version     = 6          #   Implement `Tree_Value_Expression_0`
 
 
     #
@@ -609,7 +610,7 @@ def fill_convert_zone(version):
     assert 1   <= parameter_version     <= 6
     assert 1   <= statement_version     <= 9
     assert 0   <= symbol_version        <= 6
-    assert 1   <= target_version        <= 5
+    assert 1   <= target_version        <= 6
 
 
     #
@@ -1318,6 +1319,10 @@ def fill_convert_zone(version):
         from    Z.Tree.Attribute_V5                 import  create_Tree_Delete_Attribute
         from    Z.Tree.Attribute_V5                 import  create_Tree_Evaluate_Attribute
         from    Z.Tree.Attribute_V5                 import  create_Tree_Store_Attribute
+    elif target_version == 6:
+        from    Z.Tree.Attribute_V6                 import  create_Tree_Delete_Attribute
+        from    Z.Tree.Attribute_V6                 import  create_Tree_Evaluate_Attribute
+        from    Z.Tree.Attribute_V6                 import  create_Tree_Store_Attribute
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -1326,7 +1331,7 @@ def fill_convert_zone(version):
         from    Z.Tree.Convert_Attribute_V2     import  convert_attribute_expression
     elif target_version == 3:
         from    Z.Tree.Convert_Attribute_V3     import  convert_attribute_expression
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         from    Z.Tree.Convert_Attribute_V4     import  convert_attribute_expression
     else:
         FATAL_unknown_version('target', target_version)
@@ -1335,7 +1340,7 @@ def fill_convert_zone(version):
     if target_version in ((2, 3)):
         from    Z.Tree.Convert_Many_V2          import  convert_list_expression
         from    Z.Tree.Convert_Many_V2          import  convert_tuple_expression
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         from    Z.Tree.Convert_Many_V4          import  convert_list_expression
         from    Z.Tree.Convert_Many_V4          import  convert_tuple_expression
     else:
@@ -1344,7 +1349,7 @@ def fill_convert_zone(version):
 
     if target_version in ((2, 3)):
         from    Z.Tree.Convert_Subscript_V2     import  convert_subscript_expression
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         from    Z.Tree.Convert_Subscript_V4     import  convert_subscript_expression
     else:
         FATAL_unknown_version('target', target_version)
@@ -1356,7 +1361,7 @@ def fill_convert_zone(version):
         from    Z.Tree.Convert_Target_V2    import  convert_full_list_of_store_targets
         from    Z.Tree.Convert_Target_V2    import  convert_store_target
         from    Z.Tree.Convert_Target_V2    import  convert_store_target_0
-    elif target_version == 5:
+    elif target_version in ((5, 6)):
         from    Z.Tree.Convert_Target_V5    import  convert_delete_target
         from    Z.Tree.Convert_Target_V5    import  convert_full_list_of_delete_targets
         from    Z.Tree.Convert_Target_V5    import  convert_full_list_of_store_targets
@@ -1370,7 +1375,7 @@ def fill_convert_zone(version):
         from    Z.Tree.Attribute_V1     import  create_Tree_Attribute           #   "_V1" on purpose.
     elif target_version == 3:
         from    Z.Tree.Attribute_V3     import  create_Tree_Attribute
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         create_Tree_Attribute = None
     else:
         FATAL_unknown_version('target', target_version)
@@ -1379,7 +1384,7 @@ def fill_convert_zone(version):
     if target_version in ((2, 3)):
         from    Z.Tree.Many_V1          import  create_Tree_List_Expression     #   "_V1" on purpose.
         from    Z.Tree.Many_V1          import  create_Tree_Tuple_Expression    #   "_V1" on purpose.
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         create_Tree_List_Expression  = None
         create_Tree_Tuple_Expression = None
     else:
@@ -1401,7 +1406,7 @@ def fill_convert_zone(version):
         from    Z.Tree.Many_V4          import  create_Tree_Evaluate_Tuple
         from    Z.Tree.Many_V4          import  create_Tree_Store_List
         from    Z.Tree.Many_V4          import  create_Tree_Store_Tuple
-    elif target_version == 5:
+    elif target_version in ((5, 6)):
         from    Z.Tree.Many_V5          import  create_Tree_Evaluate_List
         from    Z.Tree.Many_V5          import  create_Tree_Evaluate_Tuple
         from    Z.Tree.Many_V5          import  create_Tree_Store_List
@@ -1412,7 +1417,7 @@ def fill_convert_zone(version):
 
     if target_version in ((2, 3)):
         from    Z.Tree.Subscript_V1     import  create_Tree_Subscript_Expression    #   "_V1" on purpose.
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         create_Tree_Subscript_Expression = None
     else:
         FATAL_unknown_version('target', target_version)
@@ -1431,7 +1436,7 @@ def fill_convert_zone(version):
         from    Z.Tree.Subscript_V4     import  create_Tree_Delete_Subscript
         from    Z.Tree.Subscript_V4     import  create_Tree_Evaluate_Subscript
         from    Z.Tree.Subscript_V4     import  create_Tree_Store_Subscript
-    elif target_version == 5:
+    elif target_version in ((5, 6)):
         from    Z.Tree.Subscript_V5     import  create_Tree_Delete_Subscript
         from    Z.Tree.Subscript_V5     import  create_Tree_Evaluate_Subscript
         from    Z.Tree.Subscript_V5     import  create_Tree_Store_Subscript
@@ -1706,7 +1711,7 @@ def fill_convert_zone(version):
         map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_subscript__function = None
         map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_list__function             = None
         map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function            = None
-    elif target_version in ((4, 5)):
+    elif target_version in ((4, 5, 6)):
         map__Native_AbstractSyntaxTree__DELETE_LOAD_OR_STORE_CONTEXT__TO__create_attribute__function = {
                 Native_AbstractSyntaxTree_Delete_Context : create_Tree_Delete_Attribute,
                 Native_AbstractSyntaxTree_Load_Context   : create_Tree_Evaluate_Attribute,

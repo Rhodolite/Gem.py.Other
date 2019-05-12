@@ -17,11 +17,11 @@
 #
 #       Version 4:
 #
-#           `Tree_Store_{List,Tuple}` does not implement  `Tree_Store_Target_0`.
+#           `Tree_Store_{List,Tuple}` does not implement `Tree_Store_Target_0`.
 #
 #       Version 5:
 #
-#           `Tree_Store_{List,Tuple}`          implements `Tree_Store_Target_0`.
+#           `Tree_Store_{List,Tuple}`         implements `Tree_Store_Target_0`.
 #
 
 
