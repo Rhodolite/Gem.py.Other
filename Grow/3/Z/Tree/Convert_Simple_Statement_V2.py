@@ -83,8 +83,8 @@ def convert_assert_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_value_expression        (z, v.test),
-               z.convert_none_OR_value_expression(z, v.msg),
+               z.convert_value_expression  (z, v.test),
+               z.convert_value_expression_0(z, v.msg),
            )
 
 

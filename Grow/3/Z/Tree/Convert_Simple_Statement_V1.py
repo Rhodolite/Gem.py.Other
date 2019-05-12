@@ -10,14 +10,15 @@
 #
 
 
-from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
-from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_value_expression
+from    Z.Tree.Assert_Statement_V1          import  create_Tree_Assert_Statement
 from    Z.Tree.Convert_Expression_V1        import  convert_list_of_value_expressions
+from    Z.Tree.Convert_Expression_V1        import  convert_none_OR_value_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
+from    Z.Tree.Convert_Expression_V1        import  convert_value_expression_0
 from    Z.Tree.Convert_Operator_V1          import  convert_modify_operator
 from    Z.Tree.Convert_Target_V1            import  convert_full_list_of_delete_targets
 from    Z.Tree.Convert_Target_V1            import  convert_full_list_of_store_targets
 from    Z.Tree.Convert_Target_V1            import  convert_store_target
-from    Z.Tree.Simple_Statement_V1          import  create_Tree_Assert_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Assign_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Break_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Continue_Statement
@@ -88,8 +89,8 @@ def convert_assert_statement(v):
                v.lineno,
                v.col_offset,
 
-               convert_value_expression        (v.test),
-               convert_none_OR_value_expression(v.msg),
+               convert_value_expression  (v.test),
+               convert_value_expression_0(v.msg),
            )
 
 

@@ -1045,6 +1045,16 @@ def fill_convert_zone(version):
     #   Statements
     #
     if statement_version in ((2, 3, 4, 5, 6)):
+        from    Z.Tree.Assert_Statement_V1      import  create_Tree_Assert_Statement        #   "_V1" on purpose.
+    elif statement_version == 7:
+        from    Z.Tree.Assert_Statement_V7      import  create_Tree_Assert_Statement
+    elif statement_version == 8:
+        from    Z.Tree.Assert_Statement_V8      import  create_Tree_Assert_Statement
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((2, 3, 4, 5, 6)):
         from    Z.Tree.Convert_Except_V2    import  convert_full_list_of_except_clauses
     elif statement_version in ((7, 8)):
         from    Z.Tree.Convert_Except_V7    import  convert_full_list_of_except_clauses
@@ -1202,7 +1212,6 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5, 6)):
-        from    Z.Tree.Simple_Statement_V1      import  create_Tree_Assert_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Assign_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Break_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Continue_Statement      #   "_V1" on purpose.
@@ -1215,7 +1224,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Raise_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Return_Statement        #   "_V1" on purpose.
     elif statement_version in ((7, 8)):
-        from    Z.Tree.Simple_Statement_V7      import  create_Tree_Assert_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Assign_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Break_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Continue_Statement
