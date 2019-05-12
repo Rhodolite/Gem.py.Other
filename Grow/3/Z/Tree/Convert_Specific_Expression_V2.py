@@ -161,8 +161,8 @@ def convert_call_expression(z, v):
                z.convert_value_expression         (z, v.func),
                z.convert_list_of_value_expressions(z, v.args),
                z.convert_list_of_keyword_arguments(z, v.keywords),
-               z.convert_none_OR_value_expression (z, v.starargs),
-               z.convert_none_OR_value_expression (z, v.kwargs),
+               z.convert_value_expression_0       (z, v.starargs),
+               z.convert_value_expression_0       (z, v.kwargs),
            )
 
 
