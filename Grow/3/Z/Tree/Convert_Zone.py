@@ -1159,8 +1159,8 @@ def fill_convert_zone(version):
 
 
     if statement_version == 2:
-        from    Z.Tree.Definition_V1    import  create_Tree_Class_Definition        #   "_V1" on purpose.
-        from    Z.Tree.Definition_V1    import  create_Tree_Function_Definition     #   "_V1" on purpose.
+        from    Z.Tree.Definition_V1    import  create_Tree_Class_Definition                #   "_V1" on purpose.
+        from    Z.Tree.Definition_V1    import  create_Tree_Function_Definition             #   "_V1" on purpose.
     elif statement_version in ((3, 4, 5, 6)):
         from    Z.Tree.Definition_V3    import  create_Tree_Class_Definition
         from    Z.Tree.Definition_V3    import  create_Tree_Function_Definition
@@ -1172,7 +1172,7 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5, 6)):
-        from    Z.Tree.Except_V1        import  create_Tree_Except_Handler          #   "_V1" on purpose.
+        from    Z.Tree.Except_V1        import  create_Tree_Except_Handler                  #   "_V1" on purpose.
     elif statement_version == 7:
         from    Z.Tree.Except_V7        import  create_Tree_Except_Handler
     elif statement_version == 8:
@@ -1192,7 +1192,7 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3)):
-        from    Z.Tree.From_Import_V1   import  create_Tree_From_Import_Statement   #   "_V1" on purpose.
+        from    Z.Tree.From_Import_V1   import  create_Tree_From_Import_Statement           #   "_V1" on purpose.
     elif statement_version in ((4, 5, 6)):
         from    Z.Tree.From_Import_V4   import  create_Tree_From_Import_Statement
     elif statement_version in ((7, 8)):
@@ -1202,7 +1202,7 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5, 6)):
-        from    Z.Tree.Import_V1        import  create_Tree_Import_Statement        #   "_V1" on purpose.
+        from    Z.Tree.Import_V1        import  create_Tree_Import_Statement                #   "_V1" on purpose.
     elif statement_version in ((7, 8)):
         from    Z.Tree.Import_V7        import  create_Tree_Import_Statement
     else:
@@ -1210,13 +1210,23 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4)):
-        from    Z.Tree.Global_V1        import  create_Tree_Global_Statement        #   "_V1" on purpose.
+        from    Z.Tree.Global_V1        import  create_Tree_Global_Statement                #   "_V1" on purpose.
     elif statement_version == 5:
         from    Z.Tree.Global_V5        import  create_Tree_Global_Statement
     elif statement_version == 6:
         from    Z.Tree.Global_V6        import  create_Tree_Global_Statement
     elif statement_version in ((7, 8)):
         from    Z.Tree.Global_V7        import  create_Tree_Global_Statement
+    else:
+        FATAL_unknown_version('statement', statement_version)
+
+
+    if statement_version in ((2, 3, 4, 5, 6)):
+        from    Z.Tree.Print_Statement_V1   import  create_Tree_Print_Statement             #   "_V1" on purpose.
+    elif statement_version == 7:
+        from    Z.Tree.Print_Statement_V7   import  create_Tree_Print_Statement
+    elif statement_version == 8:
+        from    Z.Tree.Print_Statement_V8   import  create_Tree_Print_Statement
     else:
         FATAL_unknown_version('statement', statement_version)
 
@@ -1229,7 +1239,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Expression_Statement    #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Modify_Statement        #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Pass_Statement          #   "_V1" on purpose.
-        from    Z.Tree.Simple_Statement_V1      import  create_Tree_Print_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Raise_Statement         #   "_V1" on purpose.
         from    Z.Tree.Simple_Statement_V1      import  create_Tree_Return_Statement        #   "_V1" on purpose.
     elif statement_version in ((7, 8)):
@@ -1240,7 +1249,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Expression_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Modify_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Pass_Statement
-        from    Z.Tree.Simple_Statement_V7      import  create_Tree_Print_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Raise_Statement
         from    Z.Tree.Simple_Statement_V7      import  create_Tree_Return_Statement
     else:
@@ -1248,7 +1256,7 @@ def fill_convert_zone(version):
 
 
     if statement_version in ((2, 3, 4, 5, 6)):
-        from    Z.Tree.With_Statement_V1    import  create_Tree_With_Statement      #   "_V1" on purpose.
+        from    Z.Tree.With_Statement_V1    import  create_Tree_With_Statement              #   "_V1" on purpose.
     elif statement_version == 7:
         from    Z.Tree.With_Statement_V7    import  create_Tree_With_Statement
     elif statement_version == 8:

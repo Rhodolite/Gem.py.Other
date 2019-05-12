@@ -294,7 +294,7 @@ def convert_print_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_none_OR_value_expression (z, v.dest),
+               z.convert_value_expression_0       (z, v.dest),
                z.convert_list_of_value_expressions(z, v.values),
                v.nl,
            )
