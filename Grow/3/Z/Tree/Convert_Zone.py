@@ -541,7 +541,7 @@ def fill_convert_zone(version):
         statement_version = 7
 
     #
-    #   Version 22: Add `Tree_Delete_Target_0`
+    #   Version 22: Add `Tree_Store_Target_0`
     #
     if version >= 22:
         name_version      = 5           #   `Tree_Store_Name` implements `Tree_Store_Target_0`

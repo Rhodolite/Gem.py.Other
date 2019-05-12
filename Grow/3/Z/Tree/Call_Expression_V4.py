@@ -15,17 +15,18 @@
 #
 #       Version 1:
 #
-#           `.{star,keyword}_arguments` is of type `None | Tree_Value_Expression`.
+#           `Tree_Call_Expression` does not implement or use `Tree_Value_Expression_0`.
 #
 #       Version 8:
 #
-#           `.{star,keyword}_arguments` is of type        `Tree_Value_Expression_0`.
+#           `Tree_Call_Expression` both    implements & uses `Tree_Value_Expression_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 
 
 if __debug__:
@@ -41,6 +42,7 @@ if __debug__:
 #
 class Tree_Call_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
