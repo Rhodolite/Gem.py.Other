@@ -31,11 +31,13 @@ if __debug__:
 
 
 #
-#   convert_none_OR_target(v)
+#   convert_store_target_0(v)
 #
-#       Convert `None` to `None; OR convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Target`.
+#       1.  Convert `None` to `None; OR
 #
-def convert_none_OR_target(v):
+#       2.  convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Store_Target`.
+#
+def convert_store_target_0(v):
     if v is None:
         return None
 
@@ -62,9 +64,7 @@ map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = {
 #
 #   convert_target(v)
 #
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
-#
-#       The expression must be a "target" expression.
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_{Delete,Store}_Target`.
 #
 def convert_target(v):
     convert_target__function = (

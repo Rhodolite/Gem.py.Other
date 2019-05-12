@@ -206,6 +206,6 @@ def convert_with_statement(z, v):
                v.col_offset,
 
                z.convert_value_expression       (z, v.context_expr),
-               z.convert_none_OR_target         (z, v.optional_vars),
+               z.convert_store_target_0         (z, v.optional_vars),
                z.convert_full_list_of_statements(z, v.body),
            )

@@ -15,7 +15,7 @@
 #
 #       There are only a few targets that can appear to the left of an `=`  or in a `delete` statement:
 #
-#           Tree_Name                       #   See "Z.Tree.Name"
+#           Tree_Name                       #   See "Z/Tree/Name.py"
 #           Tree_Attribute_Expression
 #           Tree_List_Expression
 #           Tree_Subscript_Expression
@@ -88,11 +88,38 @@ class TRAIT_Tree_Store_Target(object):
 
 
 #
+#   interface Tree_Store_Target_0
+#       documentation
+#           Interface to `parser_none` or tree classes that represent "store" targets.
+#
+#       attribute
+#           has_tree_store_target : Boolean
+#
+#       if has_tree_store_target:
+#           implemenets Tree_Store_Target
+#
+#       debug
+#           is_tree_store_target_0 := true
+#
+class TRAIT_Tree_Store_Target_0(object):
+    __slots__ = (())
+
+
+    has_store_target = True
+
+
+    if __debug__:
+        is_tree_store_target_0 = True
+
+
+#
 #   USAGE:
 #
 #       v.is_tree_delete_target                 #   Test if `v` is a tree "delete" target.
 #
-#       v.is_tree_store_target                  #   Test if `v` is a tree "store" target.
+#       v.is_tree_store_target                  #   Test if `v` is a `Tree_Store_Target`.
+#
+#       v.is_tree_store_target_0                #   Test if `v` is a `Tree_Store_Target_0`.
 #
 #       v.dump_delete_target_tokens(f)          #   Dump the tokens representing the tree target (used in a delete
 #                                               #   statement) to `f`
@@ -102,7 +129,9 @@ class TRAIT_Tree_Store_Target(object):
 #
 #       assert fact_is_tree_delete_target(v)    #   Assert that `v` is a tree "delete" target.
 #
-#       assert fact_is_tree_store_target(v)     #   Assert that `v` is a tree "store" target.
+#       assert fact_is_tree_store_target(v)     #   Assert that `v` is a `Tree_Store_Target`.
+#
+#       assert fact_is_tree_store_target_0(v)   #   Assert that `v` is a `Tree_Store_Target_0`.
 #
 
 
@@ -122,10 +151,20 @@ if __debug__:
 
 
 #
-#   fact_is_tree_store_target(v) - Assert that `v` is a tree "store" target.
+#   fact_is_tree_store_target(v) - Assert that `v` is a `Tree_Store_Target`.
 #
 if __debug__:
     def fact_is_tree_store_target(v):
         assert v.is_tree_store_target
+
+        return True
+
+
+#
+#   fact_is_tree_store_target_0(v) - Assert that `v` is a `Tree_Store_Target_0`.
+#
+if __debug__:
+    def fact_is_tree_store_target_0(v):
+        assert v.is_tree_store_target_0
 
         return True

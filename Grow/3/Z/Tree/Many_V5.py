@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Many_V4 - Implementation of tree target classes (tuple & list), Version 4.
+#   Z.Tree.Many_V5 - Implementation of tree target classes (tuple & list), Version 5.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -13,30 +13,15 @@
 
 
 #
-#   Differences between Version 2, Version 3, and Version 4.
-#
-#       Version 2:
-#
-#           `Tree_List_Expression` and `Tree_Tuple_Expression` had a `.context` member which two possible values:
-#
-#               tree_load_context
-#               tree_store_context
-#
-#       Version 3:
-#
-#           Does *NOT* exist.
+#   Differences between Version 4 & Version 5.
 #
 #       Version 4:
 #
-#           Instead of `Tree_List_Expression` with a `.context` member, two classes exist instead:
+#           `Tree_Store_{List,Tuple}` does not implement  `Tree_Store_Target_0`.
 #
-#               Tree_Evaluate_List
-#               Tree_Store_List
+#       Version 5:
 #
-#           Instead of `Tree_Store_Expression` with a `.context` member, two classes exist instead:
-#
-#               Tree_Evaluate_Tuple
-#               Tree_Store_Tuple
+#           `Tree_Store_{List,Tuple}`          implements `Tree_Store_Target_0`.
 #
 
 
@@ -44,6 +29,7 @@ from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target_0
 
 
 if __debug__:
@@ -213,6 +199,7 @@ def create_Tree_Evaluate_Tuple(line_number, column, elements):
 class Tree_Store_List(
         Tree_Many_Expression,
         TRAIT_Tree_Store_Target,
+        TRAIT_Tree_Store_Target_0,
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:
@@ -243,6 +230,7 @@ def create_Tree_Store_List(line_number, column, elements):
 class Tree_Store_Tuple(
         Tree_Many_Expression,
         TRAIT_Tree_Store_Target,
+        TRAIT_Tree_Store_Target_0,
 ):
     __slots__ = ((
     #   'elements',                     #   Inherited from `Tree_Many_Expression`; but type changes to:

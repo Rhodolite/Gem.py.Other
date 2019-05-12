@@ -15,13 +15,13 @@ from    Z.Tree.Compound_Statement_V1        import  create_Tree_If_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Except_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_Try_Finally_Statement
 from    Z.Tree.Compound_Statement_V1        import  create_Tree_While_Statement
-from    Z.Tree.Compound_Statement_V1        import  create_Tree_With_Statement
 from    Z.Tree.Convert_Except_V1            import  convert_full_list_of_except_clauses
 from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
 from    Z.Tree.Convert_Statement_V1         import  convert_list_of_statements
-from    Z.Tree.Convert_Target_V1            import  convert_none_OR_target
+from    Z.Tree.Convert_Target_V1            import  convert_store_target_0
 from    Z.Tree.Convert_Target_V1            import  convert_target
+from    Z.Tree.With_V1                      import  create_Tree_With_Statement
 
 
 if __debug__:
@@ -192,6 +192,6 @@ def convert_with_statement(v):
                v.col_offset,
 
                convert_value_expression       (v.context_expr),
-               convert_none_OR_target         (v.optional_vars),
+               convert_store_target_0         (v.optional_vars),
                convert_full_list_of_statements(v.body),
            )

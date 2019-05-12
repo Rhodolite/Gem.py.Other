@@ -18,6 +18,7 @@ from    Z.Parser.Symbol                 import  TRAIT_Parser_Symbol_0
 from    Z.Tree.Parameter                import  TRAIT_Tree_Parameter_0
 from    Z.Tree.Parameter_Tuple          import  TRAIT_Tree_Parameter_Tuple_0
 from    Z.Tree.Suite                    import  TRAIT_Tree_Suite_0
+from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target_0
 
 
 #
@@ -27,6 +28,7 @@ class Parser_None(
         TRAIT_Parser_Symbol_0,
         TRAIT_Tree_Parameter_0,
         TRAIT_Tree_Parameter_Tuple_0,
+        TRAIT_Tree_Store_Target_0,
         TRAIT_Tree_Suite_0,
 ):
     __slots__ = (())
@@ -55,6 +57,13 @@ class Parser_None(
 
     def dump_parameter_tuple_tokens(self, f):
         f.line('<parameters-tuple-0>')
+
+
+    #
+    #   Interface Tree_Store_Target_0
+    #
+   #@replace
+    has_store_target = False
 
 
     #

@@ -126,7 +126,7 @@ def convert_index_clause(v):
         )
 
     return convert_index_clause__function(v)
-#</convert_target>
+#</convert_index_clause>
 
 
 #

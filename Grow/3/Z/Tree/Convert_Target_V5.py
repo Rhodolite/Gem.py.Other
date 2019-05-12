@@ -4,25 +4,30 @@
 
 
 #
-#   Z.Tree.Convert_Target_V2 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 2.
+#   Z.Tree.Convert_Target_V5 - Convert Python Abstract Syntax Tree Targets to Tree classes, Version 5.
 #
 #   See "Z/Tree/Target.py" for an explantion of what a "target" is.
 #
 
 
 #
-#   Differences between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           Does not use `Convert_Zone`.
+#   Differences between Version 2 & Version 5.
 #
 #       Version 2:
 #
-#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
+#           `convert_store_target_0` returns `None` or `Tree_Target`
+#
+#       Versions 3..4:
+#
+#           Do not exist.
+#
+#       Version 2:
+#
+#           `convert_store_target_0` returns `None` or `Tree_Target_0`.
 #
 
 
+from    Z.Parser.None                       import  parser_none
 from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
@@ -52,6 +57,20 @@ def convert_target(z, v):
 
     return convert_target__function(z, v)
 #</convert_target>
+
+
+#
+#   convert_store_target_0(z, v)
+#
+#       1)  Convert `None` to `parser_none`; or
+#
+#       2)  Convert `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Store_Target_0`.
+#
+def convert_store_target_0(z, v):
+    if v is None:
+        return parser_none
+
+    return z.convert_target(z, v)
 
 
 #
