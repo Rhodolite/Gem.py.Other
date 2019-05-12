@@ -15,7 +15,7 @@
 #
 #       Version 2:
 #
-#           `convert_store_target_0` returns `None` or `Tree_Target`
+#           `convert_store_target_0` returns `None` or `Tree_Target`.
 #
 #       Versions 3..4:
 #
@@ -23,7 +23,7 @@
 #
 #       Version 2:
 #
-#           `convert_store_target_0` returns `None` or `Tree_Target_0`.
+#           `convert_store_target_0` returns           `Tree_Target_0`.
 #
 
 

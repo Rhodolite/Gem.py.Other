@@ -4,22 +4,26 @@
 
 
 #
-#   Z.Tree.Convert_Expression_V2 - Convert Python Abstract Syntax Tree Expressions to Tree classes, Version 2.
+#   Z.Tree.Convert_Expression_V4 - Convert Python Abstract Syntax Tree Expressions to Tree classes, Version 4.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Differences between Version 1 & Version 2.
-#
-#       Version 1:
-#
-#           Does not use `Convert_Zone`.
+#   Differences between Version 2, Version 3, and Version 4.
 #
 #       Version 2:
 #
-#           All "convert" routines take a `z` parameter of type `Convert_Zone`.
+#           `convert_value_expression_0` returns `None` or `Tree_Value_Expression`.
+#
+#       Version 3:
+#
+#           Does not exist.
+#
+#       Version 4:
+#
+#           `convert_value_expression_0` returns           `Tree_Value_Expression_0`.
 #
 
 
@@ -65,13 +69,13 @@ def convert_value_expression(z, v):
 #
 #   convert_value_expression_0(z, v)
 #
-#       1.  "Convert" `None` to `None`; OR
+#       1.  Convert `None` to `Tree_Value_Expression_0` (specifically to `parser_none`); or
 #
-#       2.  Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
+#       2.  Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression_0`.
 #
 def convert_value_expression_0(z, v):
     if v is None:
-        return None
+        return parser_none
 
     return convert_value_expression(z, v)
 

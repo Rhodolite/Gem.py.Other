@@ -11,15 +11,11 @@
 
 
 #
-#   Differences between Versions 1..8:
+#   Differences between Version 7 and Version 8.
 #
-#       Version 1:
+#       Version 7:
 #
 #           `.target_expression` is of type `None | Tree_Store_Target`.
-#
-#       Versions 2..7:
-#
-#           Do not exist.
 #
 #       Version 8:
 #
@@ -33,12 +29,11 @@ from    Z.Tree.Except                   import  TRAIT_Tree_Except_Clause
 
 
 if __debug__:
-    from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Fact                import  fact_is_native_none
-    from    Capital.Fact                import  fact_is_full_native_list
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
     from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
+    from    Z.Tree.Suite                import  fact_is_tree_suite
     from    Z.Tree.Target               import  fact_is_tree_store_target_0
 
 
@@ -54,7 +49,7 @@ class Tree_Except_Handler(
 
         'type_expression',              #   None | Tree_Value_Expression
         'target_expression',            #   Tree_Store_Target_0
-        'body',                         #   Full_Native_List of Tree_Statement
+        'body',                         #   Tree_Suite
     ))
 
 
@@ -87,8 +82,7 @@ class Tree_Except_Handler(
         f.line(' {')
 
         with f.indent_2():
-            for v in self.body:
-                v.dump_statement_tokens(f)
+            self.body.dump_suite_tokens(f)
 
         f.line('}>')
 
@@ -109,7 +103,7 @@ def create_Tree_Except_Handler(line_number, column, type_expression, target_expr
 
     assert fact_is__native_none__OR__tree_value_expression(type_expression)
     assert fact_is_tree_store_target_0                    (target_expression)
-    assert fact_is_full_native_list                       (body)
+    assert fact_is_tree_suite                             (body)
 
     if type_expression is None:
         assert not target_expression.has_store_target

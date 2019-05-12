@@ -4,22 +4,26 @@
 
 
 #
-#   Z.Tree.Except_V9 - Implementation of `Tree_Except_Clause`, Version 9.
+#   Z.Tree.Except_V7 - Implementation of `Tree_Except_Clause`, Version 7.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Differences between Version 8 and Version 9.
+#   Differences between Versions 1..7:
 #
-#       Version 8:
+#       Version 1:
 #
-#           `.type_expression` is of type `None | Tree_Value_Expression`.
+#           `.body` is a `Full_Native_List of Tree_Statement`.
 #
-#       Version 8:
+#       Versions 2..6:
 #
-#           `.type_expression` is of type        `Tree_Value_Expression_0`.
+#           Do not exist.
+#
+#       Version 7:
+#
+#           `.body` is a `Tree_Suite`.
 #
 
 
@@ -32,9 +36,9 @@ if __debug__:
     from    Capital.Fact                import  fact_is_native_none
     from    Capital.Native_Integer      import  fact_is_avid_native_integer
     from    Capital.Native_Integer      import  fact_is_positive_native_integer
-    from    Z.Tree.Expression           import  fact_is_tree_value_expression_0
+    from    Z.Tree.Expression           import  fact_is__native_none__OR__tree_value_expression
+    from    Z.Tree.Target               import  fact_is__native_none__OR__tree_store_target
     from    Z.Tree.Suite                import  fact_is_tree_suite
-    from    Z.Tree.Target               import  fact_is_tree_store_target_0
 
 
 #
@@ -47,8 +51,8 @@ class Tree_Except_Handler(
         'line_number',                  #   Positive_Native_Integer
         'column',                       #   Avid_Native_Integer
 
-        'type_expression',              #   Tree_Value_Expression_0
-        'target_expression',            #   Tree_Store_Target_0
+        'type_expression',              #   None | Tree_Value_Expression
+        'target_expression',            #   None | Tree_Store_Target
         'body',                         #   Tree_Suite
     ))
 
@@ -71,11 +75,11 @@ class Tree_Except_Handler(
     def dump_except_clause_tokens(self, f):
         f.arrange('<except @{}:{}', self.line_number, self.column)
 
-        if self.type_expression.has_tree_value_expression:
+        if self.type_expression is not None:
             f.space()
             self.type_expression.dump_value_expression_tokens(f)
 
-            if self.target_expression.has_store_target:
+            if self.target_expression is not None:
                 f.write(' as ')
                 self.target_expression.dump_store_target_tokens(f)
 
@@ -101,11 +105,11 @@ def create_Tree_Except_Handler(line_number, column, type_expression, target_expr
     assert fact_is_positive_native_integer(line_number)
     assert fact_is_avid_native_integer    (column)
 
-    assert fact_is_tree_value_expression_0(type_expression)
-    assert fact_is_tree_store_target_0    (target_expression)
-    assert fact_is_tree_suite             (body)
+    assert fact_is__native_none__OR__tree_value_expression(type_expression)
+    assert fact_is__native_none__OR__tree_store_target    (target_expression)
+    assert fact_is_tree_suite                             (body)
 
-    if not type_expression.has_tree_value_expression:
-        assert not target_expression.has_store_target
+    if type_expression is None:
+        assert fact_is_native_none(target_expression)
 
     return Tree_Except_Handler(line_number, column, type_expression, target_expression, body)

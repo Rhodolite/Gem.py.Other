@@ -60,7 +60,7 @@ def convert_value_expression(v):
 #
 #   convert_value_expression_0(v)
 #
-#       1.  "Convert" `None` to `None; OR
+#       1.  "Convert" `None` to `None`; OR
 #
 #       2.  Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Value_Expression`.
 #
