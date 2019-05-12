@@ -27,39 +27,62 @@ from    Z.Tree.Produce_Convert_List_V2      import  produce__convert__full_list_
 
 
 #
+#   convert_delete_target(z, v)
+#
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Delete_Target`.
+#
+def convert_delete_target(z, v):
+    convert_delete_target__function = (
+            z.map__Native_AbstractSyntaxTree_TARGET__to__convert_delete_target__function[type(v)]
+        )
+
+    return convert_delete_target__function(z, v)
+
+
+#
+#   convert_store_target(z, v)
+#
+#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_{Delete,Store}_Target`.
+#
+def convert_store_target(z, v):
+    convert_store_target__function = (
+            z.map__Native_AbstractSyntaxTree_TARGET__to__convert_store_target__function[type(v)]
+        )
+
+    return convert_store_target__function(z, v)
+
+
+#
 #   convert_store_target_0(z, v)
 #
-#       1.  Convert `None` to `None; OR
+#       1.  "Convert" `None` to `None`; OR
 #
-#       2.  convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Store_Target`.
+#       2.  Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_Store_Target`.
 #
 def convert_store_target_0(z, v):
     if v is None:
         return None
 
-    return z.convert_target(z, v)
+    return z.convert_store_target(z, v)
 
 
 #
-#   convert_target(z, v)
-#
-#       Convert a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) to a `Tree_{Delete,Store}_Target`.
-#
-def convert_target(z, v):
-    convert_target__function = (
-            z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function[type(v)]
-        )
-
-    return convert_target__function(z, v)
-#</convert_target>
-
-
-#
-#   convert_full_list_of_targets(z, sequence)
+#   convert_full_list_of_delete_targets(sequence)
 #
 #       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
-#       `Full_Native_List of Tree_Value_Expression`.
+#       `Full_Native_List of Tree_Delete_Target`.
 #
-#       Each of the expressions must be a target expresion.
+convert_full_list_of_delete_targets = (
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_delete_target)
+    )
+
+
 #
-convert_full_list_of_targets = produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_target)
+#   convert_full_list_of_store_targets(sequence)
+#
+#       Convert a `Full_Native_List of Native_AbstractSyntaxTree_*` (i.e.: `list of _ast.AST`) to a
+#       `Full_Native_List of Tree_Store_Target`.
+#
+convert_full_list_of_store_targets = (
+        produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR(convert_store_target)
+    )

@@ -15,7 +15,7 @@
 from    Z.Tree.Comprehension_V1             import  create_Tree_Comprehension_Clause
 from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 from    Z.Tree.Convert_Expression_V1        import  convert_list_of_value_expressions
-from    Z.Tree.Convert_Target_V1            import  convert_target
+from    Z.Tree.Convert_Target_V1            import  convert_store_target
 from    Z.Tree.Produce_Convert_List_V1      import  produce__convert__full_list__OF__Native_AbstractSyntaxTree_STAR
 
 
@@ -42,7 +42,7 @@ def convert_comprehension_clause(v):
     assert fact_is_native_list                                         (v.ifs)
 
     return create_Tree_Comprehension_Clause(
-               convert_target                   (v.target),
+               convert_store_target             (v.target),
                convert_value_expression         (v.iter),
                convert_list_of_value_expressions(v.ifs),
            )

@@ -87,7 +87,7 @@ def convert_for_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_target                 (z, v.target),
+               z.convert_store_target           (z, v.target),
                z.convert_value_expression       (z, v.iter),
                z.convert_full_list_of_statements(z, v.body),
                z.convert_list_of_statements     (z, v.orelse),

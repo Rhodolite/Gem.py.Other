@@ -313,9 +313,11 @@ class Convert_Zone(object):
         #
         #   Target
         #
-        'convert_full_list_of_targets',             #   Function
+        'convert_delete_target',                    #   Function
+        'convert_full_list_of_delete_targets',      #   Function
+        'convert_full_list_of_store_targets',       #   Function
         'convert_store_target_0',                   #   Function
-        'convert_target',                           #   Function
+        'convert_store_target',                     #   Function
 
         'create_Tree_Attribute',                    #   None | Function
         'create_Tree_List_Expression',              #   None | Function
@@ -334,7 +336,10 @@ class Convert_Zone(object):
         'map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function',
                                                     #   None |  Map { Native_AbstractSyntaxTree_* : Function }
 
-        'map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function',
+        'map__Native_AbstractSyntaxTree_TARGET__to__convert_delete_target__function',
+                                                    #   Map { Native_AbstractSyntaxTree_* : Function }
+
+        'map__Native_AbstractSyntaxTree_TARGET__to__convert_store_target__function',
                                                     #   Map { Native_AbstractSyntaxTree_* : Function }
     ))
 
@@ -1301,13 +1306,17 @@ def fill_convert_zone(version):
 
 
     if target_version in ((2, 3, 4)):
-        from    Z.Tree.Convert_Target_V2    import  convert_full_list_of_targets
+        from    Z.Tree.Convert_Target_V2    import  convert_delete_target
+        from    Z.Tree.Convert_Target_V2    import  convert_full_list_of_delete_targets
+        from    Z.Tree.Convert_Target_V2    import  convert_full_list_of_store_targets
+        from    Z.Tree.Convert_Target_V2    import  convert_store_target
         from    Z.Tree.Convert_Target_V2    import  convert_store_target_0
-        from    Z.Tree.Convert_Target_V2    import  convert_target
     elif target_version == 5:
-        from    Z.Tree.Convert_Target_V5    import  convert_full_list_of_targets
+        from    Z.Tree.Convert_Target_V5    import  convert_delete_target
+        from    Z.Tree.Convert_Target_V5    import  convert_full_list_of_delete_targets
+        from    Z.Tree.Convert_Target_V5    import  convert_full_list_of_store_targets
+        from    Z.Tree.Convert_Target_V5    import  convert_store_target
         from    Z.Tree.Convert_Target_V5    import  convert_store_target_0
-        from    Z.Tree.Convert_Target_V5    import  convert_target
     else:
         FATAL_unknown_version('target', target_version)
 
@@ -1690,12 +1699,23 @@ def fill_convert_zone(version):
     #
     #   (Used by target)
     #
-    #   map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function
-    #           : Map { Native_AbstractSyntaxTree_* : Function }
+    #   1)  map__Native_AbstractSyntaxTree_TARGET__to__convert_delete_target__function
+    #               : Map { Native_AbstractSyntaxTree_* : Function }
     #
-    #       This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_target" function.
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_delete_target" function.
     #
-    map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = {
+    #   2)  map__Native_AbstractSyntaxTree_TARGET__to__convert_store_target__function
+    #               : Map { Native_AbstractSyntaxTree_* : Function }
+    #
+    #           This maps a `Native_AbstractSyntaxTree_*` (i.e.: `_ast.AST`) type to a "convert_store_target" function.
+    #
+    map__Native_AbstractSyntaxTree_TARGET__to__convert_delete_target__function = {
+            Native_AbstractSyntaxTree_Attribute_Expression : convert_attribute_expression,
+            Native_AbstractSyntaxTree_Name                 : convert_name_expression,
+            Native_AbstractSyntaxTree_Subscript_Expression : convert_subscript_expression,
+        }
+
+    map__Native_AbstractSyntaxTree_TARGET__to__convert_store_target__function = {
             Native_AbstractSyntaxTree_Attribute_Expression : convert_attribute_expression,
             Native_AbstractSyntaxTree_List_Expression      : convert_list_expression,
             Native_AbstractSyntaxTree_Name                 : convert_name_expression,
@@ -1931,9 +1951,11 @@ def fill_convert_zone(version):
     #
     #   Target
     #
-    z.convert_full_list_of_targets = convert_full_list_of_targets
-    z.convert_store_target_0       = convert_store_target_0
-    z.convert_target               = convert_target
+    z.convert_delete_target               = convert_delete_target
+    z.convert_full_list_of_delete_targets = convert_full_list_of_delete_targets
+    z.convert_full_list_of_store_targets  = convert_full_list_of_store_targets
+    z.convert_store_target_0              = convert_store_target_0
+    z.convert_store_target                = convert_store_target
 
     z.create_Tree_Attribute            = create_Tree_Attribute
     z.create_Tree_List_Expression      = create_Tree_List_Expression
@@ -1956,8 +1978,12 @@ def fill_convert_zone(version):
             map__Native_AbstractSyntaxTree__LOAD_OR_STORE_CONTEXT__TO__create_tuple__function
         )
 
-    z.map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function = (
-            map__Native_AbstractSyntaxTree_TARGET__to__convert_target__function
+    z.map__Native_AbstractSyntaxTree_TARGET__to__convert_delete_target__function = (
+            map__Native_AbstractSyntaxTree_TARGET__to__convert_delete_target__function
+        )
+
+    z.map__Native_AbstractSyntaxTree_TARGET__to__convert_store_target__function = (
+            map__Native_AbstractSyntaxTree_TARGET__to__convert_store_target__function
         )
 
 

@@ -110,8 +110,8 @@ def convert_assign_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_full_list_of_targets(z, v.targets),
-               z.convert_value_expression    (z, v.value),
+               z.convert_full_list_of_store_targets(z, v.targets),
+               z.convert_value_expression          (z, v.value),
            )
 
 
@@ -167,7 +167,7 @@ def convert_delete_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_full_list_of_targets(z, v.targets),
+               z.convert_full_list_of_delete_targets(z, v.targets),
            )
 
 
@@ -250,7 +250,7 @@ def convert_modify_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_target          (z, v.target),
+               z.convert_store_target    (z, v.target),
                z.convert_modify_operator (z, v.op),
                z.convert_value_expression(z, v.value),
            )

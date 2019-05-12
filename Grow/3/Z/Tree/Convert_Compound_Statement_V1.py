@@ -20,7 +20,7 @@ from    Z.Tree.Convert_Expression_V1        import  convert_value_expression
 from    Z.Tree.Convert_Statement_V1         import  convert_full_list_of_statements
 from    Z.Tree.Convert_Statement_V1         import  convert_list_of_statements
 from    Z.Tree.Convert_Target_V1            import  convert_store_target_0
-from    Z.Tree.Convert_Target_V1            import  convert_target
+from    Z.Tree.Convert_Target_V1            import  convert_store_target
 from    Z.Tree.With_V1                      import  create_Tree_With_Statement
 
 
@@ -83,7 +83,7 @@ def convert_for_statement(v):
                v.lineno,
                v.col_offset,
 
-               convert_target                 (v.target),
+               convert_store_target           (v.target),
                convert_value_expression       (v.iter),
                convert_full_list_of_statements(v.body),
                convert_list_of_statements     (v.orelse),
