@@ -11,7 +11,7 @@
 
 
 #
-#   Differences between Versions 7
+#   Differences between Versions 7 and Version 8
 #
 #       Version 7:
 #

@@ -1119,8 +1119,10 @@ def fill_convert_zone(version):
         FATAL_unknown_version('statement', statement_version)
 
 
-    if statement_version in ((2, 3, 4, 5, 6, 7, 8)):
+    if statement_version in ((2, 3, 4, 5, 6, 7)):
         from    Z.Tree.Except_V1        import  create_Tree_Except_Handler          #   "_V1" on purpose.
+    elif statement_version == 8:
+        from    Z.Tree.Except_V8        import  create_Tree_Except_Handler
     else:
         FATAL_unknown_version('statement', statement_version)
 
