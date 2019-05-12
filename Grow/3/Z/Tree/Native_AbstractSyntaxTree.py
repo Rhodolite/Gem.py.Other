@@ -553,6 +553,7 @@ if __debug__:
             Native_AbstractSyntaxTree_Subscript_Expression,
             Native_AbstractSyntaxTree_Tuple_Expression,
             Native_AbstractSyntaxTree_Unary_Expression,
+            Native_AbstractSyntaxTree_Yield_Expression,
         ))
 
 

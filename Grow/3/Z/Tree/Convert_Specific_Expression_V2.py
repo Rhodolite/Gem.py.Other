@@ -496,5 +496,5 @@ def convert_yield_expression(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_none_OR_value_expression(z, v.value),
+               z.convert_value_expression_0(z, v.value),
           )

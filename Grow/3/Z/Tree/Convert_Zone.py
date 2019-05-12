@@ -721,16 +721,6 @@ def fill_convert_zone(version):
         FATAL_unknown_version('expression', expression_version)
 
 
-    if expression_version == 2:
-        from    Z.Tree.Literal_V1       import  create_Tree_Number_Literal              #   "_V1" on purpose.
-        from    Z.Tree.Literal_V1       import  create_Tree_String_Literal              #   "_V1" on purpose.
-    elif expression_version in ((3, 4)):
-        from    Z.Tree.Literal_V3       import  create_Tree_Number_Literal
-        from    Z.Tree.Literal_V3       import  create_Tree_String_Literal
-    else:
-        FATAL_unknown_version('expression', expression_version)
-
-
     if expression_version in ((2, 3)):
         from    Z.Tree.Convert_Expression_V2    import  convert_full_list_of_value_expressions
         from    Z.Tree.Convert_Expression_V2    import  convert_list_of_value_expressions
@@ -791,7 +781,6 @@ def fill_convert_zone(version):
         from    Z.Tree.Expression_V1    import  create_Tree_Set_Comprehension           #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Set_Expression              #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Unary_Expression            #   "_V1" on purpose.
-        from    Z.Tree.Expression_V1    import  create_Tree_Yield_Expression            #   "_V1" on purpose.
     else:
         FATAL_unknown_version('expression', expression_version)
 
@@ -799,9 +788,20 @@ def fill_convert_zone(version):
     if expression_version == 2:
         from    Z.Tree.Literal_V1       import  create_Tree_Number_Literal              #   "_V1" on purpose.
         from    Z.Tree.Literal_V1       import  create_Tree_String_Literal              #   "_V1" on purpose.
-    elif expression_version in ((3, 4)):
+    elif expression_version == 3:
         from    Z.Tree.Literal_V3       import  create_Tree_Number_Literal
         from    Z.Tree.Literal_V3       import  create_Tree_String_Literal
+    elif expression_version == 4:
+        from    Z.Tree.Literal_V4       import  create_Tree_Number_Literal
+        from    Z.Tree.Literal_V4       import  create_Tree_String_Literal
+    else:
+        FATAL_unknown_version('expression', expression_version)
+
+
+    if expression_version in ((2, 3)):
+        from    Z.Tree.Yield_Expression_V1  import  create_Tree_Yield_Expression        #   "_V1" on purpose.
+    elif expression_version == 4:
+        from    Z.Tree.Yield_Expression_V4  import  create_Tree_Yield_Expression
     else:
         FATAL_unknown_version('expression', expression_version)
 

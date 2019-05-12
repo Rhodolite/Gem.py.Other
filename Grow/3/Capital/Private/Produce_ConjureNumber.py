@@ -343,7 +343,7 @@ def produce_conjure_number_functions(
 
             zero_number = zero_number,
         )
-    
+
     conjure_contrary_number = produce_conjure_X_number(
             arrange('conjure_contrary_{}', number_name),
 

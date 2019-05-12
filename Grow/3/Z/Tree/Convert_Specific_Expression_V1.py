@@ -36,7 +36,7 @@ from    Z.Tree.Expression_V1                import  create_Tree_Map_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Set_Comprehension
 from    Z.Tree.Expression_V1                import  create_Tree_Set_Expression
 from    Z.Tree.Expression_V1                import  create_Tree_Unary_Expression
-from    Z.Tree.Expression_V1                import  create_Tree_Yield_Expression
+from    Z.Tree.Yield_Expression_V1          import  create_Tree_Yield_Expression
 
 
 if __debug__:
@@ -477,5 +477,5 @@ def convert_yield_expression(v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_value_expression(v.value),
+               convert_value_expression_0(v.value),
           )

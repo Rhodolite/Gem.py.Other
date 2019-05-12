@@ -4,36 +4,29 @@
 
 
 #
-#   Z.Tree.Literal_V3 - Implementation of `Tree_String_Literal`, Version 3.
+#   Z.Tree.Literal_V4 - Implementation of `Tree_String_Literal`, Version 4.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
 
 
 #
-#   Difference between Version 1, Version 2, and Version 3.
-#
-#       Version 1:
-#
-#           1)  `Tree_Number_Literal.s` is a `Native_Complex | Native_Float | Native_Integer | Native_Long`.
-#
-#           2)  `Tree_String_Literal.s` is a `Native_String`.
-#
-#       Version 2:
-#
-#           Does not exist.
+#   Difference between Version 3 & Version 4.
 #
 #       Version 3:
 #
-#           1)  `Tree_Number_Literal.s` is a `Number`.
+#           `Tree_{Number,String}_Literal` do not implement `Tree_Value_Expression_0`.
 #
-#           2)  `Tree_String_Literal.s` is a `String`.
+#       Version 4:
+#
+#           `Tree_{Number,String}_Literal`        implement `Tree_Value_Expression_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 
 
 if __debug__:
@@ -48,6 +41,7 @@ if __debug__:
 #
 class Tree_Number_Literal(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -96,6 +90,7 @@ def create_Tree_Number_Literal(line_number, column, n):
 #
 class Tree_String_Literal(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer

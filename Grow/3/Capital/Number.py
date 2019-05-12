@@ -9,7 +9,6 @@
 #       A `Number` is a `Float`,   an `Integer`, or a `Long` (python 2.*).
 #
 #       A `Number` is a `Float` or an `Integer`              (python 3.*).
-#   
 #
 
 
