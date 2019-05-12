@@ -760,7 +760,7 @@ def fill_convert_zone(version):
         FATAL_unknown_version('expression', expression_version)
 
 
-    if expression_version in ((2, 3, 4)):
+    if expression_version in ((2, 3)):
         from    Z.Tree.Expression_V1    import  create_Tree_Backquote_Expression        #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Binary_Expression           #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Compare_Expression          #   "_V1" on purpose.
@@ -774,6 +774,20 @@ def fill_convert_zone(version):
         from    Z.Tree.Expression_V1    import  create_Tree_Set_Comprehension           #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Set_Expression              #   "_V1" on purpose.
         from    Z.Tree.Expression_V1    import  create_Tree_Unary_Expression            #   "_V1" on purpose.
+    elif expression_version == 4:
+        from    Z.Tree.Expression_V4    import  create_Tree_Backquote_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Binary_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Compare_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Generator_Comprehension
+        from    Z.Tree.Expression_V4    import  create_Tree_If_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Lambda_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_List_Comprehension
+        from    Z.Tree.Expression_V4    import  create_Tree_Logical_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Map_Comprehension
+        from    Z.Tree.Expression_V4    import  create_Tree_Map_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Set_Comprehension
+        from    Z.Tree.Expression_V4    import  create_Tree_Set_Expression
+        from    Z.Tree.Expression_V4    import  create_Tree_Unary_Expression
     else:
         FATAL_unknown_version('expression', expression_version)
 

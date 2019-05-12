@@ -15,17 +15,22 @@
 #
 #       Version 4:
 #
-#           `Tree_Store_Subscript` does not implement  `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_Subscript` does not implement `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_Subscript`    does not implement `Tree_Store_Target_0`.
 #
 #       Version 5:
 #
-#           `Tree_Store_Subscript`          implements `Tree_Store_Target_0`.
+#           1)  `Tree_Evaluate_Subscript`         implements `Tree_Value_Expression_0`.
+#
+#           2)  `Tree_Store_Subscript`            implements `Tree_Store_Target_0`.
 #
 
 
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 from    Z.Tree.Target                   import  TRAIT_Tree_Delete_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target
 from    Z.Tree.Target                   import  TRAIT_Tree_Store_Target_0
@@ -108,6 +113,7 @@ def create_Tree_Delete_Subscript(line_number, column, value, index):
 class Tree_Evaluate_Subscript(
         Tree_Subscript_Expression,
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = (())
 

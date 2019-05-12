@@ -4,7 +4,7 @@
 
 
 #
-#   Z.Tree.Expression_V1 - Implementation of `Tree_Value_Expression`, Version 1.
+#   Z.Tree.Expression_V4 - Implementation of `Tree_Value_Expression`, Version 4.
 #
 #       `Tree_*` classes are copies of classes from `Native_AbstractSyntaxTree_*` (i.e.: `_ast.*`) with extra methods.
 #
@@ -23,9 +23,27 @@
 #
 
 
+#
+#   Differences between Versions 1..4
+#
+#       Version 1:
+#
+#           Tree Value classes do not implement `Tree_Value_Expression_0`.
+#
+#       Versions 2..3:
+#
+#           Do not exist.
+#
+#       Version 4:
+#
+#           Tree Value classes        implement `Tree_Value_Expression_0`.
+#
+
+
 from    Capital.Core                    import  arrange
 from    Capital.Core                    import  creator
 from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression
+from    Z.Tree.Expression               import  TRAIT_Tree_Value_Expression_0
 
 
 if __debug__:
@@ -45,6 +63,7 @@ if __debug__:
 #
 class Tree_Value_Comprehension(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -106,6 +125,7 @@ def create_Tree_Value_Comprehension(Meta, line_number, column, element, generato
 #
 class Tree_Backquote_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -157,6 +177,7 @@ def create_Tree_Backquote_Expression(line_number, column, value):
 #
 class Tree_Binary_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -218,6 +239,7 @@ def create_Tree_Binary_Expression(line_number, column, left, operator, right):
 #
 class Tree_Compare_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -296,6 +318,7 @@ def create_Tree_Generator_Comprehension(line_number, column, element, generators
 #
 class Tree_If_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -357,6 +380,7 @@ def create_Tree_If_Expression(line_number, column, test, body, else_expression):
 #
 class Tree_Logical_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -423,6 +447,7 @@ def create_Tree_Logical_Expression(line_number, column, operator, values):
 #
 class Tree_Map_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -496,6 +521,7 @@ def create_Tree_Map_Expression(line_number, column, keys, values):
 #
 class Tree_Lambda_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -570,6 +596,7 @@ def create_Tree_List_Comprehension(line_number, column, element, generators):
 #
 class Tree_Map_Comprehension(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -650,6 +677,7 @@ def create_Tree_Set_Comprehension(line_number, column, element, generators):
 #
 class Tree_Set_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
@@ -711,6 +739,7 @@ def create_Tree_Set_Expression(line_number, column, values):
 #
 class Tree_Unary_Expression(
         TRAIT_Tree_Value_Expression,
+        TRAIT_Tree_Value_Expression_0,
 ):
     __slots__ = ((
         'line_number',                  #   Positive_Native_Integer
