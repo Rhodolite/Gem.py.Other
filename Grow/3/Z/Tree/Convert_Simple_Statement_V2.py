@@ -323,9 +323,9 @@ def convert_raise_statement(z, v):
                v.lineno,
                v.col_offset,
 
-               z.convert_none_OR_value_expression(z, v.type),
-               z.convert_none_OR_value_expression(z, v.inst),
-               z.convert_none_OR_value_expression(z, v.tback),
+               z.convert_value_expression_0(z, v.type),
+               z.convert_value_expression_0(z, v.inst),
+               z.convert_value_expression_0(z, v.tback),
            )
 
 

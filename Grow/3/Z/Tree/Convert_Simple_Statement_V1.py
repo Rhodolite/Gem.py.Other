@@ -21,6 +21,7 @@ from    Z.Tree.Convert_Target_V1            import  convert_full_list_of_store_t
 from    Z.Tree.Convert_Target_V1            import  convert_store_target
 from    Z.Tree.Execute_Statement_V1         import  create_Tree_Execute_Statement
 from    Z.Tree.Print_Statement_V1           import  create_Tree_Print_Statement
+from    Z.Tree.Raise_Statement_V1           import  create_Tree_Raise_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Assign_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Break_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Continue_Statement
@@ -28,7 +29,6 @@ from    Z.Tree.Simple_Statement_V1          import  create_Tree_Delete_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Expression_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Modify_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Pass_Statement
-from    Z.Tree.Simple_Statement_V1          import  create_Tree_Raise_Statement
 from    Z.Tree.Simple_Statement_V1          import  create_Tree_Return_Statement
 
 
@@ -309,9 +309,9 @@ def convert_raise_statement(v):
                v.lineno,
                v.col_offset,
 
-               convert_none_OR_value_expression(v.type),
-               convert_none_OR_value_expression(v.inst),
-               convert_none_OR_value_expression(v.tback),
+               convert_value_expression_0(v.type),
+               convert_value_expression_0(v.inst),
+               convert_value_expression_0(v.tback),
            )
 
 
